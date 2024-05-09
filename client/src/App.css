@@ -1,0 +1,22 @@
+body {
+    background-color: beige;
+}
+label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+button {
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    background: white;
+    width: 200px;
+}
+.form {
+    display: flex;
+    max-width: 50%;
+    flex-direction: column;
+    margin: 0 auto;
+}
