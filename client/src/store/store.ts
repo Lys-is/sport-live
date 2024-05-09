@@ -34,7 +34,7 @@ export default class Store {
             this.setAuth(true);
             this.setUser(response.data.user);
         } catch (e:any) {
-            console.log(e.response?.data?.message);
+            alert(e.response?.data?.message);
         }
     }
 
@@ -57,7 +57,7 @@ export default class Store {
             this.setAuth(false);
             this.setUser({} as IUser);
         } catch (e:any) {
-            console.log(e.response?.data?.message);
+            alert(e.response?.data?.message);
         }
     }
 
