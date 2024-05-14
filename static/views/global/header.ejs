@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%=title %></title>
+    <meta charset="utf-8" />
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="/static/styles/style.css" />
+    <script src="/static/script.js"></script>
+
+</head>
+<body>
+    <% if(auth) { %>
+    <header><input class="exit" type="button" value="Выход" onclick="logout()"></input></header>
+    <% } %>
