@@ -27,7 +27,7 @@ class LkController {
 
             return sendRes('partials/lk_part/profile', {user: profile}, res);
         } catch (e) {
-            next(e);
+            return res.json({message: 'Произошла ошибка'});
         }
     }
     async updateProfile(req, res) {
@@ -59,6 +59,7 @@ class LkController {
             })
             return sendRes('partials/lk_part/team', {teams}, res);
         } catch (e) {
+            console.log(e);
             return res.json({message: 'Произошла ошибка'});
         }
     }
