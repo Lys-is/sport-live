@@ -8,4 +8,4 @@ const UserSchema = new Schema({
     roles: [{type: String, ref: 'Role'}]
 })
 
-module.exports = model('User', UserSchema);
+//module.exports = model('Stadium', UserSchema);

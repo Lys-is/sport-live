@@ -1,0 +1,27 @@
+#dashboard_nav {
+    height: 100%;
+}
+
+#dashboard_nav_list {
+    width: fit-content;
+    height: 100%;
+    display: grid;
+    grid-row-gap: 10px;
+    background: #ffffff;
+}
+#dashboard_nav_list > li{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 10px;
+    background: #a5cedb;
+    padding-inline: 10px;
+    border-radius: 4px;
+    min-height: 40px;
+}
+
+
+#lk_main {
+    margin-left: 20px;
+    width: -webkit-fill-available;
+}

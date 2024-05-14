@@ -5,9 +5,18 @@ const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
 const router = require('./router/index')
 const errorMiddleware = require('./middlewares/error-middleware');
+const path = require('path');
+const socketio = require("socket.io");
+const http = require("http");
+
+const authMiddleware = require('./middlewares/auth-middleware');
 
 const PORT = process.env.PORT || 5000;
 const app = express()
+
+const server = http.createServer(app);
+
+const io = socketio(server);
 
 app.use(express.json());
 app.use(cookieParser());
@@ -15,8 +24,24 @@ app.use(cors({
     credentials: true,
     origin: process.env.CLIENT_URL
 }));
+app.use("/static", express.static(path.dirname(__dirname) + "/static"));
+app.set('view engine', 'ejs');
+app.use(errorMiddleware, authMiddleware);
+app.get('/', function (req, res) {
+    res.render('auth', {
+        title: 'Авторизация',
+        auth: req.user || false
+    });
+});
+app.get('/lk', function (req, res) {
+    console.log(req.user);
+    res.render('lk', {
+        title: 'ЛК',
+        auth: req.user || false
+    });
+});
+console.log(process.env)
 app.use('/api', router);
-app.use(errorMiddleware);
 
 const start = async () => {
     try {
@@ -24,7 +49,7 @@ const start = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
-        app.listen(PORT, () => console.log(`Server started on PORT = ${PORT}`))
+        server.listen(PORT, () => console.log(`Server started on PORT = ${PORT}`))
     } catch (e) {
         console.log(e);
     }
