@@ -23,7 +23,7 @@ class TeamsController {
     }
     async get__team_list(req, res) {
         try {
-            let teamId = req.params.id;
+            let teamId = req.query.id;
             let team = await Team.findOne({_id: teamId})
             console.log(team)
             if(!team) return res.json({message: 'Такой команды не существует'});
@@ -31,6 +31,14 @@ class TeamsController {
             console.log(players)
 
             return sendRes('partials/lk_part/team_list', {players}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__team_list_create(req, res) {
+        try {
+            return sendRes('partials/lk_part/team_list_create', {}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

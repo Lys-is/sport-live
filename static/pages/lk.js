@@ -5,23 +5,44 @@ console.log(links)
 links.forEach(link => {
     link.addEventListener('click', linkListener)
 })
+if(params.page) {
+    (async () => {
+        lk_main.innerHTML = sendFetch('/api/lk/' + params.page, null, 'GET')
+
+    })
+}
 async function linkListener(e) {
         e.preventDefault()
         let href = e.target.getAttribute('data-href')
         console.log(href)
         let res = await sendFetch('/api/lk/' + href, null, 'GET')
         lk_main.innerHTML = res;
-        inits[href]()
+        let init_href = href.slice(0, href.includes('?') ? href.lastIndexOf('/') : href.length);
+        history.replaceState({ page: 1 }, "", '?page=' + href);
+
+        console.log(init_href)
+        inits[init_href]()
         let nav_links = getA('.nav_link')
         nav_links.forEach(link => {
             link.addEventListener('click', linkListener)
         })
 }
-
+let init_decorator = (func) => {
+    links = getA('li', nav)
+    console.log(links)
+    links.forEach(link => {
+        link.addEventListener('click', linkListener)
+    })
+    func()
+}
 let inits = {
     'profile': init__profile,
     'team': init__team,
-    'team/create' : init__team_create
+    'team/create' : init__team_create,
+    'team/get__team_list': init__team_list
+}
+for(let key in inits) {
+    inits[key] = init_decorator(inits[key])
 }
 function init__profile() {
     let profileForm = get("#profile__form");
@@ -32,7 +53,7 @@ function init__profile() {
             surname: profileForm.surname.value,
             patronymic: profileForm.patronymic.value
         }
-        sendFetch("/api/lk/profile", JSON.stringify(data), "PUT")
+        sendFetch("/api/lk/get__profile", JSON.stringify(data), "PUT")
     })
 }
 
@@ -48,4 +69,8 @@ function init__team_create() {
         }
         sendFetch("/api/lk/team/create", JSON.stringify(data), "POST")
     })
+}
+
+function init__team_list() {
+    
 }

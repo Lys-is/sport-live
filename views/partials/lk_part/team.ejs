@@ -22,9 +22,9 @@
                         <%= teams[i].creator.email %>
                     </td>
                     <td class="team__item__edit">
-                        <span class="nav_link" data-href="team/admins/<%= teams[i]._id %>" class="team__item__edit__link">Админы</span>
-                        <span class="nav_link" data-href="team/get__team_list/<%= teams[i]._id %>" class="team__item__edit__link">Состав</span>
-                        <span class="nav_link" data-href="team/representative/<%= teams[i]._id %>" class="team__item__edit__link">Руководитель</span>
+                        <span class="nav_link" data-href="team/admins/?id=<%= teams[i]._id %>" class="team__item__edit__link">Админы</span>
+                        <span class="nav_link" data-href="team/get__team_list/?id=<%= teams[i]._id %>" class="team__item__edit__link">Состав</span>
+                        <span class="nav_link" data-href="team/representative/?id=<%= teams[i]._id %>" class="team__item__edit__link">Руководитель</span>
                     </td>
             </tr>
         
