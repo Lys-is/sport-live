@@ -18,7 +18,7 @@ const nav = {
             'func' : 'get__team',
             'get__create' : {},
             'post__create' : {},
-            'get__team_list/:id' : {'func': 'get__team_list'},
+            'get__team_list' : {},
             'get__team_list_create' : {},
         }
     }
