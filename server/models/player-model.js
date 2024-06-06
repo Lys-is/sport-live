@@ -7,4 +7,4 @@ const PlayerSchema = new Schema({
     team: {type: Schema.Types.ObjectId, ref: 'Team'},
 })
 
-//module.exports = model('Player', PlayerSchema);
+module.exports = model('Player', PlayerSchema);

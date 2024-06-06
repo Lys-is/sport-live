@@ -1,0 +1,39 @@
+<div class="team__wrapper">
+    <h1 class="lk_wrapper__title">Игроки</h1>
+    <span class="nav_link" data-href="team/get__team_list_create">Создать игрока</span>
+    <table class="team__table">
+    <% if (players.length > 0) { %>
+        <tr>
+            <th>Название</th>
+            <th>Дата создания</th>
+            <th>Создатель</th>
+            <th>Действия</th>
+        </tr>
+        <% for (let i = 0; i < players.length; i++) { %>
+            <tr class="team__item">
+                
+                    <td class="team__item__title">
+                        <%= players[i].name %>
+                    </td>
+                    <td class="team__item__date">
+                        <%= players[i].date %>
+                    </td>
+                    <td class="team__item__creator">
+                        <%= players[i].creator.email %>
+                    </td>
+                    <td class="team__item__edit">
+                        <span class="nav_link" data-href="team/admins/<%= players[i]._id %>" class="team__item__edit__link">Админы</span>
+                        <span class="nav_link" data-href="team/list/<%= players[i]._id %>" class="team__item__edit__link">Состав</span>
+                        <span class="nav_link" data-href="team/representative/<%= players[i]._id %>" class="team__item__edit__link">Руководитель</span>
+                    </td>
+            </tr>
+        
+        <% } %>
+    </table>
+    <%} else { %>
+        <h1 class="lk_wrapper__title">Нет команд</h1>
+    <% } %>
+    <script>
+        
+    </script>
+</div>

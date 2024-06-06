@@ -1,6 +1,6 @@
 <div class="team__wrapper">
     <h1 class="lk_wrapper__title">Команды</h1>
-    <span class="nav_link" data-href="team/create">Создать команду</span>
+    <span class="nav_link" data-href="team/get__create">Создать команду</span>
     <table class="team__table">
     <% if (teams.length > 0) { %>
         <tr>
@@ -23,7 +23,7 @@
                     </td>
                     <td class="team__item__edit">
                         <span class="nav_link" data-href="team/admins/<%= teams[i]._id %>" class="team__item__edit__link">Админы</span>
-                        <span class="nav_link" data-href="team/list<%= teams[i]._id %>" class="team__item__edit__link">Состав</span>
+                        <span class="nav_link" data-href="team/get__team_list/<%= teams[i]._id %>" class="team__item__edit__link">Состав</span>
                         <span class="nav_link" data-href="team/representative/<%= teams[i]._id %>" class="team__item__edit__link">Руководитель</span>
                     </td>
             </tr>
