@@ -6,7 +6,6 @@ const TeamSchema = new Schema({
     description: {type: String, default: ''},
     date: {type: Date, default: () => Date.now()},
     admins: [{type: Schema.Types.ObjectId, ref: 'User', required: true}],
-    players: [{type: Schema.Types.ObjectId, ref: 'Player'}],
     representativs: [{type: Schema.Types.ObjectId, ref: 'Representativ'}],
 })
 

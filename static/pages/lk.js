@@ -19,8 +19,8 @@ async function linkListener(e) {
 }
 
 let inits = {
-    profile: init__profile,
-    team: init__team,
+    'profile': init__profile,
+    'team': init__team,
     'team/create' : init__team_create
 }
 function init__profile() {

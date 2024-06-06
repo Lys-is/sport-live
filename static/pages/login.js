@@ -7,7 +7,7 @@ regForm.addEventListener('submit', (e) => {
         email: regForm.email.value,
         password: regForm.password.value
     }
-    sendFetch('/api/auth/registration', JSON.stringify(data), 'POST')
+    sendFetch('/api/auth/post_registration', JSON.stringify(data), 'POST')
 })
 loginForm.addEventListener('submit', async(e) => {
     e.preventDefault();
@@ -15,7 +15,7 @@ loginForm.addEventListener('submit', async(e) => {
         email: loginForm.email.value,
         password: loginForm.password.value
     }
-    let res = await sendFetch('/api/auth/login', JSON.stringify(data), 'POST')
+    let res = await sendFetch('/api/auth/post__login', JSON.stringify(data), 'POST')
     console.log(res)
     if(res.accessToken){
         createCookie('token', res.accessToken, 1)

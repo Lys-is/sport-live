@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", (e)=>{
 });
 
 function logout()  {
-    fetch('/api/auth/logout', {
+    fetch('/api/auth/post_logout', {
         method: 'POST'
     })
-        .then(() => window.location = '/')
+        .then(() => window.location = '/auth')
 }
 
 var params = (function oneValues() {
