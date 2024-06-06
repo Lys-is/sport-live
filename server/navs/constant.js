@@ -3,7 +3,6 @@ const Router = require('express');
 const controllers = require('../controllers');
 const nav = {
     'auth' : {
-
         'post__registration' : {},
         'post__login' : {},
         'post__logout' : {},
@@ -13,7 +12,7 @@ const nav = {
     },
     'lk' : {
         'qq': checkAuth.isAuth,
-        'get__profile' : {},
+        'profile' : {'func': 'get__profile'},
         'put__profile' : {},
         'team' : {
             'func' : 'get__team',

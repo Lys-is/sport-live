@@ -32,7 +32,7 @@ function init__profile() {
             surname: profileForm.surname.value,
             patronymic: profileForm.patronymic.value
         }
-        sendFetch("/api/lk/profile", JSON.stringify(data), "PUT")
+        sendFetch("/api/lk/put__profile", JSON.stringify(data), "PUT")
     })
 }
 
@@ -46,6 +46,6 @@ function init__team_create() {
             name: form.name.value,
             description: form.description.value
         }
-        sendFetch("/api/lk/team/create", JSON.stringify(data), "POST")
+        sendFetch("/api/lk/team/post_create", JSON.stringify(data), "POST")
     })
 }

@@ -97,7 +97,7 @@ async function sendFetch(url, data, method, headers = {'Content-Type': 'applicat
     })
     .then((res) => res.json())
     .then(res => {
-        console.log(res)
+        //console.log(res)
         if(res.message){
             alert(res.message)
             return res.message
@@ -108,7 +108,7 @@ async function sendFetch(url, data, method, headers = {'Content-Type': 'applicat
         console.log(err);
         return
     })
-    console.log(resp)
+    //console.log(resp)
     return resp
 
 }
