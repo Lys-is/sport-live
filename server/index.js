@@ -27,7 +27,8 @@ app.use(cors({
     origin: process.env.CLIENT_URL
 }));
 app.use("/static", express.static(path.dirname(__dirname) + "/static"));
-app.set('views', path.join(__dirname, '../views'))
+
+app.set('views', path.dirname(__dirname) + "/views")
 app.set('view engine', 'ejs');
 app.use(errorMiddleware, authMiddleware);
 app.use(router);
