@@ -1,0 +1,40 @@
+<div class="team__wrapper">
+    <h1 class="lk_wrapper__title">Команды</h1>
+    <span class="nav_link" data-href="team/get__create">Создать команду</span>
+    <table class="team__table">
+        <div id="calendarContainer"></div>
+    <% if (teams.length > 0) { %>
+        <tr>
+            <th>Название</th>
+            <th>Дата создания</th>
+            <th>Создатель</th>
+            <th>Действия</th>
+        </tr>
+        <% for (let i = 0; i < teams.length; i++) { %>
+            <tr class="team__item">
+                
+                    <td class="team__item__title">
+                        <%= teams[i].name %>
+                    </td>
+                    <td class="team__item__date">
+                        <%= teams[i].date %>
+                    </td>
+                    <td class="team__item__creator">
+                        <%= teams[i].creator.email %>
+                    </td>
+                    <td class="team__item__edit">
+                        <span class="nav_link" data-href="team/admins/?id=<%= teams[i]._id %>" class="team__item__edit__link">Админы</span>
+                        <span class="nav_link" data-href="team/get__team_list/?id=<%= teams[i]._id %>" class="team__item__edit__link">Состав</span>
+                        <span class="nav_link" data-href="team/representative/?id=<%= teams[i]._id %>" class="team__item__edit__link">Руководитель</span>
+                    </td>
+            </tr>
+        
+        <% } %>
+    </table>
+    <%} else { %>
+        <h1 class="lk_wrapper__title">Нет команд</h1>
+    <% } %>
+    <script>
+        
+    </script>
+</div>

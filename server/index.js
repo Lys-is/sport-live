@@ -26,11 +26,21 @@ app.use(cors({
     credentials: true,
     origin: process.env.CLIENT_URL
 }));
-app.use("/static", express.static(path.dirname(__dirname) + "/static"));
-console.dir( path.join(__dirname) + "..\\views");
+// console.log(app.get('views'));
+// app.set('views', path.join(__dirname, '/views'));
+// console.log(app.get('views'));
+app.locals.rmWhitespace = true;
 
-app.set('views', path.join(__dirname) + "..\\views")
+app.use("/static", express.static(path.dirname(__dirname) + "/static"));
+
+app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, ''));
+
+console.log(app.get('views'));
+
+
+
 app.use(errorMiddleware, authMiddleware);
 app.use(router);
 // app.get('/',checkAuthMiddleware.isNotAuth , function (req, res) {
