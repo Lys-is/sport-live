@@ -1,7 +1,7 @@
 const Team = require('../../../models/team-model');
 const Player = require('../../../models/player-model');
 
-class TeamsController {
+class PlayersController {
 
     async get__create(req, res) {
         try {
@@ -67,4 +67,4 @@ async function sendRes(path, data, res) {
     });
 }
 
-module.exports = new TeamsController();
+module.exports = new PlayersController();

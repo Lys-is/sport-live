@@ -1,11 +1,13 @@
 const Team = require('../../../models/team-model');
 const Player = require('../../../models/player-model');
+const Match = require('../../../models/match-model');
 
-class TeamsController {
+class MatchController {
 
     async get__create(req, res) {
         try {
-            return sendRes('partials/lk_part/team_create', {}, res);
+            let teams = await Team.find();
+            return sendRes('partials/lk_part/match_create', {teams}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -13,9 +15,9 @@ class TeamsController {
     }
     async post__create(req, res) {
         try {
-            let {name, description} = req.body;
-            await Team.create({creator: req.user.id, admins: req.user.id, name, description});
-            return res.json({message: 'Команда создана'});
+            let {team_1, team_2, date} = req.body;
+            await Match.create({team_1, team_2, date, creator: req.user.id});
+            return res.json({message: 'Матч создан'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -67,4 +69,4 @@ async function sendRes(path, data, res) {
     });
 }
 
-module.exports = new TeamsController();
+module.exports = new MatchController();

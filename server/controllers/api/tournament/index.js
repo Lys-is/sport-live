@@ -1,11 +1,12 @@
 const Team = require('../../../models/team-model');
 const Player = require('../../../models/player-model');
+const Tournament = require('../../../models/tournament-model');
 
 class TeamsController {
 
     async get__create(req, res) {
         try {
-            return sendRes('partials/lk_part/team_create', {}, res);
+            return sendRes('partials/lk_part/tournament_create', {}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -13,12 +14,14 @@ class TeamsController {
     }
     async post__create(req, res) {
         try {
-            let {name, description} = req.body;
-            await Team.create({creator: req.user.id, admins: req.user.id, name, description});
+            let data = req.body;
+            data.creator = req.user.id;
+            let tournament = await Tournament.create(data);
+            if(!tournament) return res.json({message: 'Команда не создана, ошибка'});
             return res.json({message: 'Команда создана'});
         } catch (e) {
             console.log(e);
-            return res.json({message: 'Произошла ошибка'});
+            return res.json({message: 'Произошла ошибка: '+ e.message});
         }
     }
     async get__team_list(req, res) {

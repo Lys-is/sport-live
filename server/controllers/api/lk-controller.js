@@ -17,6 +17,9 @@ User = require('../../models/user-model');
 class LkController {
 
     team = require('./team')
+    player = require('./player')
+    tournament = require('./tournament')
+    match = require('./match')
     async get__create(req, res) {
         try {
             return sendRes('partials/lk_part/team_create', {}, res);
@@ -35,17 +38,67 @@ class LkController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
+    async get__player(req, res) {
+        try {
+            console.log(req);
+            console.log(await Player.find());
+            let players = await Player.find({}).populate('creator team');
+            players = players.map((player) => {
+                player.date = player.date.toLocaleDateString()
+                console.log(player.date);
+                return player
+            })
+            return sendRes('partials/lk_part/player', {players}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
     async get__team(req, res) {
         try {
             console.log(req);
             console.log(await Team.find());
-            let teams = await Team.find({creator: req.user.id}).populate('creator');
+            let teams = await Team.find({}).populate('creator');
             teams = teams.map((team) => {
                 team.date = team.date.toLocaleDateString()
                 console.log(team.date);
                 return team
             })
             return sendRes('partials/lk_part/team', {teams}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__tournament(req, res) {
+        try {
+            console.log(req);
+            console.log(await Tournament.find());
+            let tournaments = await Tournament.find({creator: req.user.id}).populate('creator');
+            tournaments = tournaments.map((tournament) => {
+                tournament.date_start = tournament.date_start.toLocaleDateString()
+                tournament.date_end = tournament.date_end.toLocaleDateString()
+                //console.log(tournament.date);
+                return tournament
+            })
+            return sendRes('partials/lk_part/tournament', {tournaments}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__match(req, res) {
+        try {
+            console.log(req);
+            console.log(await Match.find({creator: req.user.id}));
+            let matches = await Match.find({creator: req.user.id}).populate('team_1 team_2');
+            matches = matches.map((match) => {
+                match.date = match.date.toLocaleDateString()
+                console.log(match.date);
+                return match
+            })
+            console.log(matches);
+            return sendRes('partials/lk_part/match', {matches}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

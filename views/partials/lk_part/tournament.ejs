@@ -1,36 +1,35 @@
 <div class="team__wrapper">
-    <h1 class="lk_wrapper__title">Команды</h1>
-    <table class="tournament__table">
-    <% if (tournament.length > 0) { %>
+    <h1 class="lk_wrapper__title">Турниры</h1>
+    <span class="nav_link" data-href="tournament/get__create">Создать турнир</span>
+    <table class="tournaments__table">
+    <% if (tournaments.length > 0) { %>
         <tr>
             <th>Название</th>
-            <th>Дата создания</th>
+            <th>Дата</th>
             <th>Создатель</th>
             <th>Действия</th>
         </tr>
-        <% for (let i = 0; i < tournament.length; i++) { %>
+        <% for (let i = 0; i < tournaments.length; i++) { %>
             <tr class="team__item">
                 
                     <td class="team__item__title">
-                        <%= tournament[i].name %>
+                        <%= tournaments[i].name %>
                     </td>
                     <td class="team__item__date">
-                        <%= tournament[i].date %>
+                        <%= tournaments[i].date_start %> до <%= tournaments[i].date_end %>
                     </td>
                     <td class="team__item__creator">
-                        <%= tournament[i].creator.email %>
+                        <%= tournaments[i].creator.email %>
                     </td>
                     <td class="team__item__edit">
-                        <span class="nav_link" data-href="team/admins/<%= tournament[i]._id %>" class="team__item__edit__link">Админы</span>
-                        <span class="nav_link" data-href="team/list<%= tournament[i]._id %>" class="team__item__edit__link">Состав</span>
-                        <span class="nav_link" data-href="team/representative/<%= tournament[i]._id %>" class="team__item__edit__link">Руководитель</span>
+                        <span class="nav_link" data-href="tournament/edit/?id=<%= tournaments[i]._id %>" class="team__item__edit__link">Редактировать</span>
                     </td>
             </tr>
         
         <% } %>
     </table>
     <%} else { %>
-        <h1 class="lk_wrapper__title">Нет команд</h1>
+        <h1 class="lk_wrapper__title">Нет турниров</h1>
     <% } %>
     <script>
         

@@ -3,6 +3,7 @@ const Router = require('express');
 const controllers = require('../controllers');
 const nav = {
     'auth' : {
+        'qq': checkAuth.isNotAuth,
         'post__registration' : {},
         'post__login' : {},
         'post__logout' : {},
@@ -20,7 +21,24 @@ const nav = {
             'post__create' : {},
             'get__team_list' : {},
             'get__team_list_create' : {},
+            'post__team_list_create' : {}
+        },
+        'player' : {
+            'func' : 'get__player',
+            'get__create' : {},
+            'post__create' : {}
+        },
+        'tournament' : {
+            'func' : 'get__tournament',
+            'get__create' : {},
+            'post__create' : {}
+        },
+        'match' : {
+            'func' : 'get__match',
+            'get__create' : {},
+            'post__create' : {}
         }
+
     }
 }
 function start(){

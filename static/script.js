@@ -22,6 +22,41 @@ document.addEventListener("DOMContentLoaded", (e)=>{
       })
     });
 });
+//Вставить перед всеми скриптами
+(function() {
+	var proto = HTMLElement.prototype,
+		addEventListener = proto.addEventListener,
+		removeEventListener = proto.removeEventListener;
+
+	proto.addEventListener = function(type, callback, useCapture) {
+		if(!this._listeners) {
+			this._listeners = {};
+		}
+		if(!(type in this._listeners)) {
+			this._listeners[type] = [];
+		}
+
+		if(this._listeners[type].indexOf(callback) === -1) {
+			this._listeners[type].push(callback);
+		}
+
+		addEventListener.call(this, type, callback, useCapture);
+	};
+
+	proto.removeEventListener = function(type, callback, useCapture) {
+		var index = this._listeners && type in this._listeners ? this._listeners[type].indexOf(callback) : -1;
+
+		if(index !== -1) {
+			this._listeners[type].splice(index, 1);
+		}
+
+		removeEventListener.call(this, type, callback, useCapture);
+	};
+
+	proto.hasEventListener = function(type) {
+		return !!(this._listeners && type in this._listeners && this._listeners[type].length || typeof this['on' + type] === 'function');
+	};
+})();
 
 function logout()  {
     fetch('/api/auth/post_logout', {
@@ -30,18 +65,23 @@ function logout()  {
         .then(() => window.location = '/auth')
 }
 
-var params = (function oneValues() {
-    var query = location.search.substr(1)
+
+function getParams(href) {
+    console.log(href)
+    var query = href.substr(1)
     query = query.split('&')
+    console.log(query)
     var params = {}
     for (let i = 0; i < query.length; i++) {
         let q = query[i].split('=')
+        console.log(q)
         if (q.length === 2) {
             params[q[0]] = q[1]
         }
     }
     return params
-}());
+}
+let params = getParams(window.location.search);
 console.log(params);
 function createCookie(name,value,days) {
     if (days) {
