@@ -38,7 +38,7 @@ app.use('*', (req, res, next) => {
 app.use("/static", express.static(path.dirname(__dirname) + "/static"));
 
 
-router.set('views', 'server/views');
+router.set('views',path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 
 console.log(app.get('views'));
