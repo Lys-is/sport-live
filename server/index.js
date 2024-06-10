@@ -30,19 +30,24 @@ app.use(cors({
 // app.set('views', path.join(__dirname, '/views'));
 // console.log(app.get('views'));
 app.locals.rmWhitespace = true;
-
+app.use('*', (req, res, next) => {
+    const { url, path: routePath }  = req;
+    console.log(req);
+     next();
+});
 app.use("/static", express.static(path.dirname(__dirname) + "/static"));
 
-app.engine('ejs', require('ejs').renderFile);
+app.set('views', './server/views');
+router.set('views', './server/views');
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, ''));
 
 console.log(app.get('views'));
-
+console.log(app);
 
 
 app.use(errorMiddleware, authMiddleware);
 app.use(router);
+
 // app.get('/',checkAuthMiddleware.isNotAuth , function (req, res) {
 //     res.render('auth', {
 //         title: 'Авторизация',

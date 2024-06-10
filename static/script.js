@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", (e)=>{
       })
     });
 });
-//Вставить перед всеми скриптами
 (function() {
 	var proto = HTMLElement.prototype,
 		addEventListener = proto.addEventListener,
@@ -59,10 +58,10 @@ document.addEventListener("DOMContentLoaded", (e)=>{
 })();
 
 function logout()  {
-    fetch('/api/auth/post_logout', {
+    fetch('/api/auth/post__logout', {
         method: 'POST'
     })
-        .then(() => window.location = '/auth')
+    .then(() => window.location = '/auth')
 }
 
 

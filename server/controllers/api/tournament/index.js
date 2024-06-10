@@ -2,11 +2,11 @@ const Team = require('../../../models/team-model');
 const Player = require('../../../models/player-model');
 const Tournament = require('../../../models/tournament-model');
 
-class TeamsController {
+class TournamentController {
 
     async get__create(req, res) {
         try {
-            return sendRes('partials/lk_part/tournament_create', {}, res);
+            return sendRes('partials/lk_part/tour/tournament_create', {}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -24,17 +24,17 @@ class TeamsController {
             return res.json({message: 'Произошла ошибка: '+ e.message});
         }
     }
-    async get__team_list(req, res) {
+    async get__edit(req, res) {
         try {
-            let teamId = req.query.id;
-            let team = await Team.findOne({_id: teamId})
-            console.log(team)
-            if(!team) return res.json({message: 'Такой команды не существует'});
-            console.log(teamId)
-            let players = await Player.find({team: teamId}).populate('team creator');
-            console.log(players)
+            let tourId = req.params.id;
+            let tournament = await Tournament.findOne({_id: tourId})
+            console.log(tournament)
+            if(!tournament) return res.json({message: 'Такой команды не существует'});
+            console.log(tourId)
+            // let players = await Player.find({team: teamId}).populate('team creator');
+            // console.log(players)
 
-            return sendRes('partials/lk_part/team_list', {players: players, team: team}, res);
+            return sendRes('partials/lk_part/tour/tournament_edit', {tournament}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -70,4 +70,4 @@ async function sendRes(path, data, res) {
     });
 }
 
-module.exports = new TeamsController();
+module.exports = new TournamentController();

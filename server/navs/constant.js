@@ -13,6 +13,7 @@ const nav = {
     },
     'lk' : {
         'qq': checkAuth.isAuth,
+        'qqRecurs': true,
         'profile' : {'func': 'get__profile'},
         'put__profile' : {},
         'team' : {
@@ -31,7 +32,8 @@ const nav = {
         'tournament' : {
             'func' : 'get__tournament',
             'get__create' : {},
-            'post__create' : {}
+            'post__create' : {},
+            'id/:id/get__edit' : {'func': 'get__edit'},
         },
         'match' : {
             'func' : 'get__match',
@@ -44,17 +46,24 @@ const nav = {
 function start(){
     const router = new Router();
 
-    function loopThroughObjRecurs(obj, parents, propExec) {
+    function loopThroughObjRecurs(obj, parents, propExec, middelware) {
         for (let k in obj) {
-            propExec(k, parents, obj[k])
+            propExec(k, parents, obj[k], middelware)
             if (typeof obj[k] === 'object') {
-              loopThroughObjRecurs(obj[k], parents.concat(k), propExec)
+                let md
+                if(middelware){
+                    md = middelware
+                }
+                if(obj[k].qqRecurs){
+                    md = obj[k].qq
+                }
+                loopThroughObjRecurs(obj[k], parents.concat(k), propExec, md)
             }
         }
       }
     loopThroughObjRecurs(nav, [], setRouts)
     
-    function setRouts(obj, parents, elem) {
+    function setRouts(obj, parents, elem, middelwareParent) {
         if(obj == 'qq' || obj == 'func'){
             return
         }
@@ -63,11 +72,14 @@ function start(){
         if(elem.func){
             constrollerLink = elem.func
         }
+        if(middelwareParent){
+            middelware = middelwareParent
+        }
         if(elem.qq){
             middelware = elem.qq
         }
-    
-        let method = obj.split('__')
+        
+        let method = elem.func ? elem.func.split('__') : obj.split('__')
         if(method.length > 1){
             method = method[0]
         }
@@ -79,7 +91,7 @@ function start(){
         let link = '/'
         if(parents.length > 0){
             now_parents.unshift('api')
-            console.log(now_parents)
+            //console.log(now_parents)
             now_parents.forEach(el => {
                 contoller = contoller[el]
             });
@@ -89,9 +101,9 @@ function start(){
         }
         link += now_parents.join('/') +'/'+ obj;
         
-        console.log(contoller, constrollerLink, link)
+       // console.log(contoller, constrollerLink, link)
         router[method](link, middelware, (req, res) => {
-            console.log(req, res)
+            //console.log(req, res)
             contoller[constrollerLink](req, res)
         }
         )

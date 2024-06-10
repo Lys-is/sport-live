@@ -31,13 +31,16 @@ class UserController {
     }
 
     async post__logout(req, res, next) {
+        console.log(req.cookies)
         try {
             const {refreshToken} = req.cookies;
+            console.log(refreshToken);
             const token = await userService.logout(refreshToken);
             res.clearCookie('refreshToken');
             return res.json(token);
         } catch (e) {
-            next(e);
+            console.log(e)
+            //next(e);
         }
     }
 
