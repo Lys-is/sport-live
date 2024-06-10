@@ -36,7 +36,7 @@ const Tournament = new Schema({
         date_end: {type: Date,default: () => Date.now()+ 1000*60*60*24*30},
         min_players: {type: Number, default: 0},
         max_players: {type: Number, default: 50},
-        contribution_type: {type: String, enum: ['none', 'team', 'personal', 'application'], default: 'all'},
+        contribution_type: {type: String, enum: ['none', 'team', 'personal', 'application'], default: 'none'},
         transfers_enable: {type: Boolean, default: true},
         application_multiple_enable: {type: Boolean, default: false},
     }
