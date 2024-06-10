@@ -8,4 +8,4 @@ const UserSchema = new Schema({
     roles: [{type: String, ref: 'Role'}]
 })
 
-//module.exports = model('Representative', UserSchema);
+module.exports = model('Representativ', UserSchema);
