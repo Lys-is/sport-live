@@ -18,7 +18,7 @@ class TournamentController {
             data.creator = req.user.id;
             let tournament = await Tournament.create(data);
             if(!tournament) return res.json({message: 'Команда не создана, ошибка'});
-            return res.json({message: 'Команда создана'});
+            return res.json({message: 'Турнир создан'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка: '+ e.message});

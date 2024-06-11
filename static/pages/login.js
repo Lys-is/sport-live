@@ -7,7 +7,7 @@ regForm.addEventListener('submit', (e) => {
         email: regForm.email.value,
         password: regForm.password.value
     }
-    sendFetch('/api/auth/post_registration', JSON.stringify(data), 'POST')
+    sendFetch('/api/auth/post__registration', JSON.stringify(data), 'POST')
 })
 loginForm.addEventListener('submit', async(e) => {
     e.preventDefault();
