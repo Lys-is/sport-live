@@ -1,10 +1,11 @@
 
-let nav = get('#dashboard_nav_list')
+let nav = get('.navbar_body')
 let lk_main = get('#lk_main')
-let links = getA('li', nav)
+let links = getA('p', nav)
 console.log(links)
 links.forEach(link => {
-    link.addEventListener('click', linkListener)
+    if(link.getAttribute('data-href'))
+        link.addEventListener('click', linkListener)
 })
 if(params.page) {
     (() => {

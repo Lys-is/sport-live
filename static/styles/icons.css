@@ -1,0 +1,81 @@
+.icon::before{
+    font: normal normal normal 14px/1 ic1;
+    width: 15px;
+    margin-right: 10px;
+}
+
+.icon2::before{
+    font: normal normal normal 14px/1 ic2;
+    width: 15px;
+    margin-right: 10px;
+}
+
+.header_icon{
+    padding-left: 0;
+}
+
+/* .header_text.icon::before{
+    font: normal normal normal 14px/1 ic1;
+    width: 15px;
+    margin-right: 10px;
+} */
+
+.icon {
+    padding-left: 15px;
+}
+
+.icon2 {
+    padding-left: 15px;
+}
+
+#navbar_profile::before{
+    content: "\f015";
+}
+
+#navbar_tournirs::before{
+    content: "\e641";
+}
+
+#navbar_matches::before{
+    content: "\e6b6";
+}
+
+#navbar_commands::before{
+    content: "\e67b";
+}
+
+#navbar_gamers::before{
+    content: "\e6eb";
+}   
+
+#navbar_reps::before{
+    content: "\e602";
+}
+
+#navbar_transfers::before{
+    content: "\e63f";
+}
+
+#navbar_judges::before{
+    content: "\e6f6";
+}
+
+#navbar_stadions::before{
+    content: "\f1ad";
+}   
+
+#navbar_seasons::before{
+    content: "\f1ea";
+}
+
+#header_account::before{
+    content: "\f007";
+}
+
+#header_hide_navbar_icon::before{
+    content: "\f0c9";
+}
+
+#header_hide_navbar_icon{
+    padding-left: 10px;
+}
