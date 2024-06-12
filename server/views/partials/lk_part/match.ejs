@@ -1,31 +1,45 @@
 <div class="team__wrapper">
     <h1 class="lk_wrapper__title">Матчи</h1>
-    <span class="nav_link" data-href="match/get__create">Создать матч</span>
-    <table class="team__table">
-        <div id="calendarContainer"></div>
+        <div class="table_container">
+            <div class="table_header">
+                <p class="table_text">Матчи</p>
+                <div class="filler"></div>
+                <input type="button" value="Сбросить фильтры" class="table_button">
+                <input type="button" value="Добавить матч" class="table_button nav_link" data-href="match/get__create">
+                <div class="filler"></div>
+                <input type="button" value="Активные" class="table_button_radio_active table_radio_active">
+                <input type="button" value="Архивные" class="table_button_radio_archive">
+            </div>
     <% if (matches.length > 0) { %>
-        <tr>
-            <th>Команда 1</th>
-            <th>Команда 2</th>
-            <th>Время</th>
-            <th>Действия</th>
-        </tr>
-        <% for (let i = 0; i < matches.length; i++) {%>
-            <tr class="team__item">
-                
-                    <td class="team__item__title">
-                        <%= matches[i].team_1.name %>
-                    </td>
-                    <td class="team__item__date">
-                        <%= matches[i].team_2.name %>
-                    </td>
-                    <td class="team__item__creator">
-                        <%= matches[i].date %>
-                    </td>
-                    <td class="team__item__edit">
-                        <span class="nav_link" data-href="match/edit/?id=<%= matches[i]._id %>" class="team__item__edit__link">Изменить</span>
-                    </td>
+        <table class="commands_table">
+            <tr id="first-row">
+                <td>№</td>
+                <td>Команда 1</td>
+                <td>Команда 2</td>
+                <td>Время</td>
+                <td>Действия</td>
+                <td></td>
             </tr>
+            <tr>
+                <td></td>
+                <td><input type="text" class="table_input_text"></td>
+                <td><input type="text" class="table_input_text"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        <% for (let i = 0; i < matches.length; i++) {%>
+            <tr>
+                <td><%= i  %></td>
+                <td><%= matches[i].team_1.name %></td>
+                <td><%= matches[i].team_2.name %></td>
+                <td><%= matches[i].date %></td>
+                <td>
+                    <span class="table_links table_links_compos nav_link"  data-href="match/edit/?id=<%= matches[i]._id %>">Изменить</span>
+                </td>
+                <td>link</td>
+            </tr>
+
         
         <% } %>
     </table>
@@ -36,3 +50,4 @@
         
     </script>
 </div>
+

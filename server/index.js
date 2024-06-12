@@ -33,7 +33,7 @@ app.locals.rmWhitespace = true;
 app.use('*', (req, res, next) => {
     const { url, path: routePath }  = req;
     console.log(req);
-     next();
+    next();
 });
 app.use("/static", express.static(path.dirname(__dirname) + "/static"));
 

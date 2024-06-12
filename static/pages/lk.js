@@ -1,10 +1,11 @@
 
-let nav = get('#dashboard_nav_list')
+let nav = get('.navbar_body')
 let lk_main = get('#lk_main')
-let links = getA('li', nav)
+let links = getA('p', nav)
 console.log(links)
 links.forEach(link => {
-    link.addEventListener('click', linkListener)
+    if(link.getAttribute('data-href'))
+        link.addEventListener('click', linkListener)
 })
 if(params.page) {
     (() => {
@@ -15,11 +16,11 @@ if(params.page) {
 async function getPage(href) {
     const baseUrl = '/api/lk/';
     const cleanedHref = href.replace(/\/\?([^=]+)=([^&]+)/g, '/$1~$2');
-    const pageUrl = `${baseUrl}${cleanedHref}`;
+    const pageUrl = `${baseUrl}${href}`;
     const initHref = cleanedHref.split('?')[0];
-
+    console.log(pageUrl);
     const response = await sendFetch(pageUrl, null, 'GET');
-    lk_main.innerHTML = response;
+    lk_main.innerHTML = response ? response : 'Страница не найдена';
 
     params.subHref = href.split('?')[1] || '';
     history.replaceState({ page: 1 }, "", `?page=${cleanedHref}`);
@@ -71,32 +72,21 @@ function init__tournament_create() {
     let form = get("#tournament_create__form");
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        let data = {
-            full_name: form.full_name.value,
-            name: form.name.value,
-            description: form.description.value,
-            date_start: form.date_start.value,
-            date_end: form.date_end.value,
-            type: form.type.options[form.type.selectedIndex].value,
-            is_site: form.is_site.checked,
-            is_calendar: form.is_calendar.checked,
-            description: form.description.value
-        }
+        let data = formGetData(form)
         sendFetch("/api/lk/tournament/post__create", JSON.stringify(data), "POST")
     })
 }
 function init__tournament_edit() {
+    let form = get("#tournament_reglament__form");
+    form.addEventListener("submit", (e) => {
     
+    })    
 }
 function init__profile() {
     let profileForm = get("#profile__form");
     profileForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        let data = {
-            name: profileForm.name.value,
-            surname: profileForm.surname.value,
-            patronymic: profileForm.patronymic.value
-        }
+        let data = formGetData(profileForm)
         sendFetch("/api/lk/put__profile", JSON.stringify(data), "PUT")
     })
 }
@@ -106,12 +96,8 @@ function init__match_create() {
     let form = get("#match_create__form");
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        let data = {
-            team_1: form.team_1.options[form.team_1.selectedIndex].value,
-            team_2: form.team_2.options[form.team_2.selectedIndex].value,
-            date: form.date.value,
+        let data = formGetData(form)
 
-        }
         sendFetch("/api/lk/match/post__create", JSON.stringify(data), "POST")
     })
 }
@@ -121,10 +107,8 @@ function init__team_create() {
     let form = get("#team_create__form");
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        let data = {
-            name: form.name.value,
-            description: form.description.value
-        }
+        let data = formGetData(form)
+
         sendFetch("/api/lk/team/post__create", JSON.stringify(data), "POST")
     })
 }
@@ -132,11 +116,8 @@ function init__team_list_create() {
     let form = get("#team_list_create__form");
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        let data = {
-            fio: form.name.value,
-            date: form.date.value,
-            teamId: getParams(params.sub_href).id
-        }
+        let data = formGetData(form)
+        data.teamId = getParams(params.sub_href).id
         console.log(data)
         sendFetch("/api/lk/team/post__team_list_create", JSON.stringify(data), "POST")
     })
@@ -146,4 +127,25 @@ function init__team_list() {
 }
 function init__player() {
     
+}
+
+
+const isCheckboxOrRadio = type => ['checkbox', 'radio'].includes(type);
+
+
+function formGetData(form) {
+    const data = {};
+
+    for (let field of form) {
+        const {name} = field;
+
+        if (name) {
+            const {type, checked, value} = field;
+
+            data[name] = isCheckboxOrRadio(type) ? checked : value;
+        }
+    }
+
+    console.log(data);
+    return data;
 }

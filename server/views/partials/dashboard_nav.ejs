@@ -1,4 +1,4 @@
-<nav id="dashboard_nav">
+<!-- <nav id="dashboard_nav">
         <ul id="dashboard_nav_list">
             <li data-href="profile">Профиль</li>
             <li data-href="tournament">Мои турниры</li>
@@ -11,4 +11,27 @@
             <li data-href="stadium">Стадионы</li>
             <li data-href="season">Сезоны</li>
         </ul>
+</nav> -->
+<nav class = "navbar navbar_min">
+    <div class="navbar_header">
+        <img src = "/static/styles/icons/logo.jpg" class = "navbar_logo" alt = "logo" height="30" width="30">
+        <h1 class = "navbar_naming">Sportlive</h1>
+    </div>
+
+    <div class="navbar_body">
+        <p class = "navbar_text navbar_selected icon" id="navbar_profile" data-href="profile">Профиль</p>
+
+        <p class = "navbar_text navbar_title" >Турниры</p>
+        <p class = "navbar_text icon2" id="navbar_tournirs" data-href="tournament">Мои турниры</p>
+        <p class = "navbar_text icon2" id="navbar_matches" data-href="match">Мои матчи</p>
+        <p class = "navbar_text icon" id="navbar_stadions" data-href="stadium">Стадионы</p>
+        <p class = "navbar_text icon" id="navbar_seasons" data-href="season">Сезоны</p>
+
+        <p class = "navbar_text navbar_title" >Участники</p>
+        <p class = "navbar_text icon2" id="navbar_commands" data-href="team">Команды</p>
+        <p class = "navbar_text icon2" id="navbar_gamers" data-href="player">Игроки</p>
+        <p class = "navbar_text icon2" id="navbar_reps" data-href="representative">Представители команд</p>
+        <p class = "navbar_text icon2" id="navbar_transfers" data-href="transfer">Трансферы</p>
+        <p class = "navbar_text icon2" id="navbar_judges" data-href="judge">Судьи</p>
+    </div>
 </nav>
