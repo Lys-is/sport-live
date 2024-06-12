@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sportlive</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="icons.css">
+</head>
+<body>
+    <nav class = "navbar navbar_min">
+        <div class="navbar_header">
+            <img src = "icons/logo.jpg" class = "navbar_logo" alt = "logo" height="30" width="30">
+            <h1 class = "navbar_naming">Sportlive</h1>
+        </div>
+
+        <div class="navbar_body">
+            <p class = "navbar_text navbar_selected icon" id="navbar_profile">Профиль</p>
+
+            <p class = "navbar_text navbar_title">Турниры</p>
+            <p class = "navbar_text icon2" id="navbar_tournirs">Мои турниры</p>
+            <p class = "navbar_text icon2" id="navbar_matches">Мои матчи</p>
+            <p class = "navbar_text icon" id="navbar_stadions">Стадионы</p>
+            <p class = "navbar_text icon" id="navbar_seasons">Сезоны</p>
+
+            <p class = "navbar_text navbar_title">Участники</p>
+            <p class = "navbar_text icon2" id="navbar_commands">Команды</p>
+            <p class = "navbar_text icon2" id="navbar_gamers">Игроки</p>
+            <p class = "navbar_text icon2" id="navbar_reps">Представители команд</p>
+            <p class = "navbar_text icon2" id="navbar_transfers">Трансферы</p>
+            <p class = "navbar_text icon2" id="navbar_judges">Судьи</p>
+        </div>
+    </nav>
+    <div class="body">
+    <header>
+        <div class="header_block header_hide_navbar">
+            <p class="header_text icon" id="header_hide_navbar_icon"></p>
+        </div>
+
+        <div class="filler"></div>
+        
+        <div class="header_block">
+            <p class="header_text">Тариф: Оплачен до <p class="header_text header_tariff_date">11.11.2020</p></p>
+        </div>
+
+        <div class="header_block">
+            <p class="header_text">Товарищеский матч</p>
+        </div>
+
+        <div class = "header_block header_icon">
+            <p class="header_text icon" id="header_account">Аккаунт</p>
+        </div>
+    </header>
+    <div class="content">
+        <div class="table_container">
+            <div class="table_header">
+                <p class="table_text">Команды</p>
+                <div class="filler"></div>
+                <input type="button" value="Сбросить фильтры" class="table_button">
+                <input type="button" value="Добавить команду" class="table_button">
+                <div class="filler"></div>
+                <input type="button" value="Активные" class="table_button_radio_active table_radio_active">
+                <input type="button" value="Архивные" class="table_button_radio_archive">
+            </div>
+            <table class="commands_table">
+                <tr id="first-row">
+                    <td>№</td>
+                    <td>Название команды</td>
+                    <td>Дата создания</td>
+                    <td>Создатель</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="text" class="table_input_text"></td>
+                    <td><input type="date" class="table_input_text"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Прыг-скок</td>
+                    <td>11-08-2020</td>
+                    <td>user</td>
+                    <td>
+                        <span class="table_links table_links_admines">Админы</span>
+                        <span class="table_links table_links_compos">Состав</span>
+                        <span class="table_links table_links_reps">Представители</span>
+                    </td>
+                    <td>link</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Беру и бегу</td>
+                    <td>09-09-2024</td>
+                    <td>user</td>
+                    <td>                        
+                        <span class="table_links table_links_admines">Админы</span>
+                        <span class="table_links table_links_compos">Состав</span>
+                        <span class="table_links table_links_reps">Представители</span>
+                    </td>
+                    <td>link</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

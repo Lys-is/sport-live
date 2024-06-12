@@ -1,36 +1,51 @@
 <div class="team__wrapper">
     <h1 class="lk_wrapper__title">Команды</h1>
-    <span class="nav_link" data-href="team/get__create">Создать команду</span>
-    <table class="team__table">
-        <div id="calendarContainer"></div>
+        <div class="table_container">
+            <div class="table_header">
+                <p class="table_text">Команды</p>
+                <div class="filler"></div>
+                <input type="button" value="Сбросить фильтры" class="table_button">
+                <input type="button" value="Добавить команду" class="table_button nav_link" data-href="team/get__create">
+                <div class="filler"></div>
+                <input type="button" value="Активные" class="table_button_radio_active table_radio_active">
+                <input type="button" value="Архивные" class="table_button_radio_archive">
+            </div>
     <% if (teams.length > 0) { %>
-        <tr>
-            <th>Название</th>
-            <th>Дата создания</th>
-            <th>Создатель</th>
-            <th>Действия</th>
-        </tr>
+            <table class="commands_table">
+                <tr id="first-row">
+                    <td>№</td>
+                    <td>Название команды</td>
+                    <td>Дата создания</td>
+                    <td>Создатель</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="text" class="table_input_text"></td>
+                    <td><input type="date" class="table_input_text"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
         <% for (let i = 0; i < teams.length; i++) { %>
-            <tr class="team__item">
-                
-                    <td class="team__item__title">
-                        <%= teams[i].name %>
-                    </td>
-                    <td class="team__item__date">
-                        <%= teams[i].date %>
-                    </td>
-                    <td class="team__item__creator">
-                        <%= teams[i].creator.email %>
-                    </td>
-                    <td class="team__item__edit">
-                        <span class="nav_link" data-href="team/admins/?id=<%= teams[i]._id %>" class="team__item__edit__link">Админы</span>
-                        <span class="nav_link" data-href="team/get__team_list/?id=<%= teams[i]._id %>" class="team__item__edit__link">Состав</span>
-                        <span class="nav_link" data-href="team/representative/?id=<%= teams[i]._id %>" class="team__item__edit__link">Руководитель</span>
-                    </td>
+
+                    <tr>
+                <td><%= i  %></td>
+                <td><%= teams[i].name %></td>
+                <td><%= teams[i].date %></td>
+                <td><%= teams[i].creator.email %></td>
+                <td>
+                    <span class="table_links table_links_admines nav_link" data-href="team/admins/?id=<%= teams[i]._id %>">Админы</span>
+                    <span class="table_links table_links_compos nav_link" data-href="team/get__team_list/?id=<%= teams[i]._id %>">Состав</span>
+                    <span class="table_links table_links_reps nav_link" data-href="team/representative/?id=<%= teams[i]._id %>">Представители</span>
+                </td>
+                <td>link</td>
             </tr>
-        
         <% } %>
-    </table>
+
+        </table>
+    </div>
     <%} else { %>
         <h1 class="lk_wrapper__title">Нет команд</h1>
     <% } %>
