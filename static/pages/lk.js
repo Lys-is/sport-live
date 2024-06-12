@@ -16,7 +16,7 @@ if(params.page) {
 async function getPage(href) {
     const baseUrl = '/api/lk/';
     const cleanedHref = href.replace(/\/\?([^=]+)=([^&]+)/g, '/$1~$2');
-    const pageUrl = `${baseUrl}${cleanedHref}`;
+    const pageUrl = `${baseUrl}${href}`;
     const initHref = cleanedHref.split('?')[0];
 
     const response = await sendFetch(pageUrl, null, 'GET');

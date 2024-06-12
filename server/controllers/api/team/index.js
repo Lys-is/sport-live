@@ -23,6 +23,7 @@ class TeamsController {
     }
     async get__team_list(req, res) {
         try {
+            console.log(req.query)
             let teamId = req.query.id;
             let team = await Team.findOne({_id: teamId})
             console.log(team)
