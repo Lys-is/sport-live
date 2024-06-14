@@ -9,7 +9,6 @@
                 <input type="button" value="Активные" class="table_button_radio_active table_radio_active">
                 <input type="button" value="Архивные" class="table_button_radio_archive">
             </div>
-    <% if (matches.length > 0) { %>
         <table class="commands_table">
             <tr id="first-row">
                 <td>№</td>
@@ -27,6 +26,7 @@
                 <td></td>
                 <td></td>
             </tr>
+        <% if (matches.length > 0) { %>
         <% for (let i = 0; i < matches.length; i++) {%>
             <tr>
                 <td><%= i  %></td>
@@ -43,6 +43,8 @@
         <% } %>
     </table>
     <%} else { %>
+    </table>
+
         <h1 class="lk_wrapper__title">Нет матчей</h1>
     <% } %>
     <script>
