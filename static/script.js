@@ -55,6 +55,8 @@ document.addEventListener("DOMContentLoaded", (e)=>{
 	proto.hasEventListener = function(type) {
 		return !!(this._listeners && type in this._listeners && this._listeners[type].length || typeof this['on' + type] === 'function');
 	};
+
+
 })();
 
 function logout()  {
@@ -306,4 +308,22 @@ function searchInit() {
       console.log(e)  
     }
     
+}
+const isCheckboxOrRadio = type => ['checkbox', 'radio'].includes(type);
+
+function formGetData(form) {
+    const data = {};
+
+    for (let field of form) {
+        const {name} = field;
+
+        if (name) {
+            const {type, checked, value} = field;
+
+            data[name] = isCheckboxOrRadio(type) ? checked : value;
+        }
+    }
+
+    console.log(data);
+    return data;
 }

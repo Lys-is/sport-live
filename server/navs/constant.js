@@ -2,8 +2,16 @@ const checkAuth = require('../middlewares/checkAuth-middleware');
 const Router = require('express');
 const controllers = require('../controllers');
 const nav = {
+    'login' : {
+        'func' : 'get__login'
+    },
+    'registration' : {
+        'func' : 'get__registration'
+    },
     'auth' : {
+        
         'qq': checkAuth.isNotAuth,
+
         'post__registration' : {},
         'post__login' : {},
         'post__logout' : {},

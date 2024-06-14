@@ -1,10 +1,28 @@
-<div class="login">
-    <form id="loginForm">
-        <h1>Вход</h1>
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" />
-        <label for="password">Пароль</label>
-        <input type="password" name="password" id="password" />
-        <input type="submit" value="Войти" />
-    </form>
+
+<div class="login_container">
+    <div class="login_content">
+        <div class="login_header">
+            <p class="page_title">Авторизация</p>
+        </div>
+        <form id="loginForm">
+            <div class="login_body">
+                <div class="form-group">
+                    <input type="email" placeholder="Email" class="text_form text" id="login_email" name="email">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Text" class="text_form text" id="login_password" name="password">
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="remember_me">
+                    <label for="remember_me" name="remember_me">Запомнить меня</label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Вход" class="button green_button">
+                </div>
+            </div>
+            <div class="login_footer">
+                <a href="/registration" class="reg_link">Регистрация</a>
+            </div>
+        </form>
+    </div>
 </div>

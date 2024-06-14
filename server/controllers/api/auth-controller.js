@@ -3,14 +3,15 @@ const {validationResult} = require('express-validator');
 const ApiError = require('../../exceptions/api-error');
 
 class UserController {
+
     async post__registration(req, res, next) {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return next(ApiError.BadRequest('Ошибка при валидации', errors.array()))
             }
-            const {email, password} = req.body;
-            const userData = await userService.registration(email, password);
+            //const {email, password} = req.body;
+            const userData = await userService.registration(req.body);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
             return res.json({message: 'Пользователь зарегистрирован'});
         } catch (e) {
@@ -74,6 +75,12 @@ class UserController {
         }
     }
 }
-
+async function sendRes(path, data, res) {
+    return res.render(path, data,
+    function(err, html) {
+        if(err) console.log(err);
+        res.json(html);
+    });
+}
 
 module.exports = new UserController();
