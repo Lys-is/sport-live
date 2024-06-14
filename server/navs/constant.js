@@ -39,6 +39,31 @@ const nav = {
             'func' : 'get__match',
             'get__create' : {},
             'post__create' : {}
+        },
+        'representative' : {
+            'func' : 'get__representative',
+            'get__create' : {},
+            'post__create' : {}
+        },
+        'stadium' : {
+            'func' : 'get__stadium',
+            'get__create' : {},
+            'post__create' : {}
+        },
+        'season' : {
+            'func' : 'get__season',
+            'get__create' : {},
+            'post__create' : {}
+        },
+        'transfer' : {
+            'func' : 'get__transfer',
+            'get__create' : {},
+            'post__create' : {}
+        },
+        'judge' : {
+            'func' : 'get__judge',
+            'get__create' : {},
+            'post__create' : {}
         }
 
     }

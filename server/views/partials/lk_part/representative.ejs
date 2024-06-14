@@ -2,33 +2,32 @@
 <div class="team__wrapper">
     <div class="table_container">
         <div class="table_header">
-            <p class="page_title">Игроки</p>
+            <p class="page_title">Представители команд</p>
             
         </div>
-<% if (players.length > 0) { %>
     <table class="commands_table">
         <tr id="first-row">
+            <td>№</td>
             <td>ФИО</td>
             <td>Дата рождения</td>
             <td>Команда</td>
-            <td>Действия</td>
             <td></td>
         </tr>
         <tr>
+            <td></td>
             <td><input type="text" class="table_input_text"></td>
             <td><input type="date" class="table_input_text"></td>
             <td></td>
             <td></td>
-            <td></td>
         </tr>
-    <% for (let i = 0; i < players.length; i++) {%>
+     <% if (representatives.length > 0) { %>
+
+    <% for (let i = 0; i < representatives.length; i++) {%>
         <tr>
-            <td><%= players[i].fio %></td>
-            <td><%= players[i].date %></td>
-            <td><%= players[i].team.name %></td>
-            <td>
-                <span class="table_links table_links_compos nav_link"  data-href="match/edit/?id=<%= players[i]._id %>">Изменить</span>
-            </td>
+            <td><%= i %></td>
+            <td><%= representatives[i].fio %></td>
+            <td><%= representatives[i].date %></td>
+            <td><%= representatives[i].team.name %></td>
             <td>link</td>
         </tr>
 
@@ -36,7 +35,8 @@
     <% } %>
 </table>
 <%} else { %>
-    <h1 class="lk_wrapper__title">Нет игроков</h1>
+</table>
+    <h1 class="lk_wrapper__title">Нет представителей</h1>
 <% } %>
 <script>
     

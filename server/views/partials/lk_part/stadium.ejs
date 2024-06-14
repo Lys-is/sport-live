@@ -1,0 +1,42 @@
+
+<div class="team__wrapper">
+    <div class="table_container">
+        <div class="table_header">
+            <p class="page_title">Стадионы</p>
+            
+        </div>
+    <table class="commands_table">
+        <tr id="first-row">
+            <td>№</td>
+            <td>Название</td>
+            <td>Адрес</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="text" class="table_input_text"></td>
+            <td><input type="date" class="table_input_text"></td>
+            <td></td>
+        </tr>
+    <% if (stadiums.length > 0) { %>
+
+    <% for (let i = 0; i < stadiums.length; i++) {%>
+        <tr>
+            <td><%= i %></td>
+            <td><%= stadiums[i].name %></td>
+            <td><%= stadiums[i].address %></td>
+            <td>link</td>
+        </tr>
+
+    
+    <% } %>
+</table>
+<%} else { %>
+    </table>
+    <h1 class="lk_wrapper__title">Нет стадионов</h1>
+<% } %>
+<script>
+    
+</script>
+</div>
+

@@ -1,0 +1,44 @@
+<div class="team__wrapper">
+        <div class="table_container">
+            <div class="table_header">
+                <p class="page_title">Сезоны</p>
+                <div class="filler"></div>
+                <input type="button" value="Сбросить фильтры" class="table_button">
+                <input type="button" value="Добавить сезон" class="table_button nav_link" data-href="season/get__create">
+                <div class="filler"></div>
+            </div>
+        <table class="commands_table">
+            <tr id="first-row">
+                <td>№</td>
+                <td>Название</td>
+                <td>Старт сезона</td>
+                <td>Окончание сезона</td>
+                <td></td>
+            </tr>
+        <% if (seasons.length > 0) { %>
+
+        <% for (let i = 0; i < seasons.length; i++) {%>
+            <tr>
+                <td><%= i  %></td>
+                <td><%= seasons[i].name %></td>
+                <td><%= seasons[i].date_start %></td>
+                <td><%= seasons[i].date_end %></td>
+                <td>
+                    <span class="table_links table_links_compos nav_link"  data-href="match/edit/?id=<%= seasons[i]._id %>">Изменить</span>
+                </td>
+                <td>link</td>
+            </tr>
+
+        
+        <% } %>
+    </table>
+    <%} else { %>
+    </table>
+
+        <h1 class="lk_wrapper__title">Нет сезонов</h1>
+    <% } %>
+    <script>
+        
+    </script>
+</div>
+

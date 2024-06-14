@@ -1,15 +1,58 @@
 <div class="profile__wrapper">
     <h1 class="lk_wrapper__title">Профиль</h1>
-    <form id="profile__form">
-        <label for="name">Имя</label>
-        <input type="text" name="name" value="<%=user.name %>">
-        <label for="surname">Фамилия</label>
-        <input type="text" name="surname" value="<%=user.surname %>">
-        <label for="patronymic">Отчество</label>
-        <input type="text" name="patronymic" value="<%=user.patronymic %>">
-        <input type="submit" value="Сохранить">
-    </form>
-    <script>
-        
-    </script>
+
+    <div class="profile_content">
+        <div class="profile_header">
+            <p class="page_title ">Настройки профиля</p>
+        </div>
+        <form id="profile__form">
+
+            <div class="profile_block">
+
+                <div class="profile_input_block">
+                    <label class="profile_label" for="profile_second_name">Фамилия</label>
+                    <input type="text" class="text_form text" id="profile_second_name" name="surname" value="<%=user.surname %>">
+                </div>
+
+                <div class="profile_input_block">
+                    <label class="profile_label" for="profile_first_name">Имя</label>
+                    <input type="text" class="text_form text" id="profile_first_name" name="name" value="<%=user.name %>">
+                </div>
+
+                <div class="profile_input_block">
+                    <label class="profile_label" for="profile_third_name">Отчество</label>
+                    <input type="text" class="text_form text" id="profile_third_name" name="patronymic" value="<%=user.patronymic %>">
+                </div>
+
+                <div class="profile_input_block"></div>
+
+                <div class="profile_input_block">
+                    <label class="profile_label" for="profile_email">Email</label>
+                    <input type="email" class="text_form text" id="profile_email" name="email" value="<%=user.email %>">
+                </div>
+
+
+
+                <div class="profile_input_block">
+                    <label class="profile_label" for="profile_nickname">Никнейм</label>
+                    <input type="text" class="text_form text" id="profile_nickname" name="nickname">
+                </div>
+
+                <div class="profile_input_block"></div>
+
+                <div class="profile_input_block">
+                    <label class="profile_label" for="profile_new_password">Новый пароль</label>
+                    <input type="password" class="text_form text" id="profile_new_password" name="password">
+                </div>
+                
+                <div class="profile_input_block">
+                    <label class="profile_label" for="profile_accept_password">Подтвердите пароль</label>
+                    <input type="password" class="text_form text" id="profile_accept_password" name="password_confirm">
+                </div>
+            </div>
+            <div class="profile_footer">
+                <input type="submit" value="Сохранить изменения" class="button green_button">
+            </div>
+        </form>
+    </div>
 </div>

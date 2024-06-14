@@ -1,14 +1,19 @@
-<div class="header__tourn">
-        <h1 class="lk_wrapper__title">Турнир <%= tournament.name %></h1>
-        <ul>
-            <li class="sub_nav_link" data-place="tourn_main" data-href="tournament/id/<%= tournament._id %>/edit">Редактировать</li>
-            <li class="sub_nav_link" data-place="tourn_main" data-href="tournament/id/<%= tournament._id %>/group">Группы/сетки</li>
-            <li class="sub_nav_link" data-place="tourn_main" data-href="tournament/id/<%= tournament._id %>/team">Команды</li>
-            <li class="sub_nav_link" data-place="tourn_main" data-href="tournament/id/<%= tournament._id %>/judge">Судьи</li>
-            <li class="sub_nav_link" data-place="tourn_main" data-href="tournament/id/<%= tournament._id %>/t_team">Сборная тура</li>
-            <li class="sub_nav_link" data-place="tourn_main" data-href="tournament/id/<%= tournament._id %>/results">Итоги</li>
-            <li class="sub_nav_link" data-place="tourn_main" data-href="tournament/id/<%= tournament._id %>/docs">Документы</li>
-            <li class="sub_nav_link" data-place="tourn_main" data-href="tournament/id/<%= tournament._id %>/pages">Страницы</li>
-            <li class="sub_nav_link" data-place="tourn_main" data-href="tournament/id/<%= tournament._id %>/widgets">Виджеты</li>
-        </ul>
+
+<div class="tournires_header">
+    <div class="tournires_header_header cool_header">
+        <p class="page_title ">Турнир: <%= tournament.full_name %></p>
+        <p>Cезон: 2024</p>
+    </div>
+
+    <div class="cool_header_block">
+        <input type="button" value="Редактировать" class="t_button active_t_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/edit">
+        <input type="button" value="Группы/сетки" class="t_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/group">
+        <input type="button" value="Команды" class="t_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/team">
+        <input type="button" value="Судьи" class="t_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/judge">
+        <input type="button" value="Сборная тура" class="t_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/t_team">
+        <input type="button" value="Итоги" class="t_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/results">
+        <input type="button" value="Документы" class="t_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/docs">
+        <input type="button" value="Страницы" class="t_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/pages">
+        <input type="button" value="Виджеты" class="t_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/widgets">
+    </div>   
 </div>

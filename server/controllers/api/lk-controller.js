@@ -38,6 +38,85 @@ class LkController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
+    async get__judge(req, res) {
+        try {
+            console.log(req);
+            console.log(await Judge.find());
+            let judges = await Judge.find({})
+            judges = judges.map((judge) => {
+                judge.date = judge.date.toLocaleDateString()
+                console.log(judge.date);
+                return judge
+            })
+            return sendRes('partials/lk_part/judge', {judges}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__representative(req, res) {
+        try {
+            console.log(await Representative.find());
+            let representatives = await Representative.find({})
+            representatives = representatives.map((representative) => {
+                representative.date = representative.date.toLocaleDateString()
+                console.log(representative.date);
+                return representative
+            })
+            return sendRes('partials/lk_part/representative', {representatives}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__season(req, res) {
+        try {
+            console.log(req);
+            console.log(await Season.find());
+            let seasons = await Season.find({})
+            seasons = seasons.map((season) => {
+                season.date = season.date.toLocaleDateString()
+                console.log(season.date);
+                return season
+            })
+            return sendRes('partials/lk_part/season', {seasons}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__stadium(req, res) {
+        try {
+            console.log(req);
+            console.log(await Stadium.find());
+            let stadiums = await Stadium.find({})
+            stadiums = stadiums.map((stadium) => {
+                stadium.date = stadium.date.toLocaleDateString()
+                console.log(stadium.date);
+                return stadium
+            })
+            return sendRes('partials/lk_part/stadium', {stadiums}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__transfer(req, res) {
+        try {
+            console.log(req);
+            console.log(await Transfer.find());
+            let transfers = await Transfer.find({})
+            transfers = transfers.map((transfer) => {
+                transfer.date = transfer.date.toLocaleDateString()
+                console.log(transfer.date);
+                return transfer
+            })
+            return sendRes('partials/lk_part/transfer', {transfers}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
     async get__player(req, res) {
         try {
             console.log(req);
