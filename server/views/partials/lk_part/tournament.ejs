@@ -1,37 +1,57 @@
-<div class="team__wrapper">
-    <h1 class="lk_wrapper__title">Турниры</h1>
-    <span class="nav_link" data-href="tournament/get__create">Создать турнир</span>
-    <table class="tournaments__table">
-    <% if (tournaments.length > 0) { %>
-        <tr>
-            <th>Название</th>
-            <th>Дата</th>
-            <th>Создатель</th>
-            <th>Действия</th>
-        </tr>
-        <% for (let i = 0; i < tournaments.length; i++) { %>
-            <tr class="team__item">
-                
-                    <td class="team__item__title">
-                        <%= tournaments[i].name %>
-                    </td>
-                    <td class="team__item__date">
-                        <%= tournaments[i].date_start %> до <%= tournaments[i].date_end %>
-                    </td>
-                    <td class="team__item__creator">
-                        <%= tournaments[i].creator.email %>
-                    </td>
-                    <td class="team__item__edit">
-                        <span class="nav_link" data-href="tournament/id/<%= tournaments[i]._id %>/get__edit" class="team__item__edit__link">Редактировать</span>
-                    </td>
-            </tr>
-        
+<div class="tournires_content">
+    <div class="tournires_header">
+        <div class="tournires_header_header">
+            <p class="page_title ">Турниры</p>
+            <input type="button" value="Добавить новый турнир" class="button green_button nav_link" data-href="tournament/get__create">
+        </div>
+
+        <div class="tournires_header_block">
+            <input type="text" value="2024" class="text_form text">
+            <input type="text" value="Название" class="text_form text double_form">
+            <input type="text" value="Все" class="text_form text">
+            
+            <input type="button" value="Найти" class="button blue_button butt_icon">
+            <input type="button" value="Сбросить фильтры" class="button red_button butt_icon">
+        </div>   
+    </div>
+    
+    <div class="tournires_body">
+        <% if (tournaments.length > 0) { %>
+            <% for (let i = 0; i < tournaments.length; i++) { %>
+
+            <div class="tournires_content_block">
+                <div class="tournires_block_header">
+                    <h1><%= tournaments[i].name %> | <%= tournaments[i].full_name %></h1>
+                    <div class="tournires_actions">
+                        <a class="nav_link" data-href="tournament/id/<%= tournaments[i]._id %>/get__edit">Редактировать</a>
+                        <a href="#">Смотреть на сайте</a>
+                    </div>
+                </div>
+                <div class="tournires_details">
+                    <p>Даты: <span>с <%= tournaments[i].date_start %> до <%= tournaments[i].date_end %></span></p>
+                    <p class="tournires_status">Статус: Приём заявок</p>
+                </div>
+                <div class="tournires_tabs">
+                    <input type="button" value="Команды" class="tournires_tab_button">
+                    <input type="button" value="Группы/сетки" class="tournires_tab_button">
+                    <input type="button" value="Судьи" class="tournires_tab_button">
+                    <input type="button" value="Сборная тура" class="tournires_tab_button">
+                    <input type="button" value="Итоги" class="tournires_tab_button">
+                    <input type="button" value="Документы" class="tournires_tab_button">
+                    <input type="button" value="Страницы" class="tournires_tab_button">
+                    <input type="button" value="Виджеты" class="tournires_tab_button">
+                </div>
+                <div class="tournires_calendar">
+                    <h2>Календарь матчей</h2>
+                    <input type="button" value="финал" class="tournires_tab_button">
+                </div>
+            </div>
+            
+            <% } %>
+        </table>
+        <%} else { %>
+            <h1 class="lk_wrapper__title">Нет турниров</h1>
         <% } %>
-    </table>
-    <%} else { %>
-        <h1 class="lk_wrapper__title">Нет турниров</h1>
-    <% } %>
-    <script>
         
-    </script>
+    </div>
 </div>

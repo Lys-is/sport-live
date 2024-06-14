@@ -1,35 +1,90 @@
-<div class="team_create__wrapper">
-    <h1 class="lk_wrapper__title">Создать турнир</h1>
+<div class="create_tournire_content">
+    <div class="create_tournire_header">
+        <p class="page_title">Создание турнира</p>
+    </div>
     <form id="tournament_create__form">
-        <label for="fio">Полное название</label>
-        <input type="text" name="full_name">
-        <label for="fio">Короткое название</label>
-        <input type="text" name="name">
-        <label >Сроки проведения</label>
-        <input type="text" name="date_start">
-        <input type="text" name="date_end">
-        <label for="type">Тип</label>
-        <select name="type">
-            <option value="1">Тип 1</option>
-            <option value="2">Тип 2</option>
-        </select>
-        <div>
-            <input type="checkbox" name="is_site" id="is_site">
-            <label for="is_site">Опубликовать на сайте</label>
-        </div>
-        <div>
-            <input type="checkbox" name="is_calendar" id="is_calendar">
-            <label for="is_calendar">В календарь на главную</label>
-        </div>
-        <label for="rang">Ранг</label>
-        <input type="text" name="rang">
+        <div class="create_tournire_body">
+            <div class="form_container">
+                <div class="image_n_textareas">
+                    <div class="image_upload">
+                    <img src="image-placeholder.png" alt="placeholder image">
+                    <p>Мин. размер: 385 x 260</p>
+                    </div>
+                    <div class="textareas_ct">
+                        <div class="form_group">
+                            <label for="rank">Ранг</label>
+                            <input type="text" id="rank" name="rank">
+                        </div>
+                        <div class="form_group">
+                            <label for="description">Описание</label>
+                            <textarea id="description" name="description"></textarea>
+                        </div>
+                        <div class="form_group">
+                            <label for="description">Таблицы и сетки</label>
+                            <textarea id="description" name="description"></textarea>
+                        </div>
+                    </div>
+                
+                </div>
 
-        <label for="description">Описание</label>
-        <textarea name="description"></textarea>
-
-        <input type="submit" value="Создать">
+                <div class="ct_form">
+                    <div class="form_group">
+                        <label for="full_name">Полное название</label>
+                        <input type="text" id="full_name" name="full_name">
+                    </div>
+                    <div class="form_group">
+                        <label for="short_name">Короткое название</label>
+                        <input type="text" id="short_name" name="name">
+                    </div>
+                    <div class="form_group">
+                        <label for="start_date">Дата начала</label>
+                        <input type="date" id="start_date" name="date_start">
+                    </div>
+                    <div class="form_group">
+                        <label for="end_date">Дата окончания</label>
+                        <input type="date" id="end_date" name="date_end">
+                    </div>
+                    <div class="form_group">
+                        <label for="type">Тип</label>
+                        <select class="select" id="type" name="type">
+                            <option value="beach">Пляжный</option>
+                            <option value="mini">Мини</option>
+                            <option value="5v5">5 на 5</option>
+                            <option value="6v6">6 на 6</option>
+                            <option value="7v7">7 на 7</option>
+                            <option value="8v8">8 на 8</option>
+                            <option value="9v9">9 на 9</option>
+                            <option value="10v10">10 на 10</option>
+                            <option value="11v11">11 на 11</option>
+                            <option value="festival">Фестивальный</option>
+                        </select>
+                    </div>
+                    <div class="form_group form_group_checkbox">
+                        <label>
+                            <input type="checkbox" name="is_site"> Опубликовать на сайте
+                        </label>
+                        <label>
+                            <input type="checkbox" name="is_calendar"> В календарь на главную
+                        </label>
+                        <label>
+                            <input type="checkbox" name="is_menu" checked=""> Отображать в главном меню
+                        </label>
+                        <label>
+                            <input type="checkbox" name="is_slider_main"> В слайдер на главную
+                        </label>
+                        <label>
+                            <input type="checkbox" name="is_display_table_main"> Отобразить таблицу на главной странице сайта
+                        </label>
+                        <label>
+                            <input type="checkbox" name="is_league_info"> Учитывать в инфографике "Лига в цифрах и фактах"
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="create_tournire_footer">
+            <input type="submit" value="Сохранить изменения" class="button green_button">
+            <input type="button" value="Отменить" class="button red_button">
+        </div>
     </form>
-    <script>
-        
-    </script>
 </div>

@@ -38,6 +38,10 @@ async function getPage(href) {
 
 async function linkListener(e) {
         e.preventDefault()
+        // links.forEach(link => {
+        //     link.classList.remove('navbar_selected')
+        // });
+        // e.target.classList.add('navbar_selected')
         let href = e.target.getAttribute('data-href')
         console.log(href)
         getPage(href)
@@ -87,6 +91,7 @@ function init__profile() {
     profileForm.addEventListener("submit", (e) => {
         e.preventDefault();
         let data = formGetData(profileForm)
+        console.log(data)
         sendFetch("/api/lk/put__profile", JSON.stringify(data), "PUT")
     })
 }

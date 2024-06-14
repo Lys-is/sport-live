@@ -1,8 +1,7 @@
 <div class="team__wrapper">
-    <h1 class="lk_wrapper__title">Матчи</h1>
         <div class="table_container">
             <div class="table_header">
-                <p class="table_text">Матчи</p>
+                <p class="page_title">Матчи</p>
                 <div class="filler"></div>
                 <input type="button" value="Сбросить фильтры" class="table_button">
                 <input type="button" value="Добавить матч" class="table_button nav_link" data-href="match/get__create">
@@ -10,7 +9,6 @@
                 <input type="button" value="Активные" class="table_button_radio_active table_radio_active">
                 <input type="button" value="Архивные" class="table_button_radio_archive">
             </div>
-    <% if (matches.length > 0) { %>
         <table class="commands_table">
             <tr id="first-row">
                 <td>№</td>
@@ -28,6 +26,7 @@
                 <td></td>
                 <td></td>
             </tr>
+        <% if (matches.length > 0) { %>
         <% for (let i = 0; i < matches.length; i++) {%>
             <tr>
                 <td><%= i  %></td>
@@ -44,6 +43,8 @@
         <% } %>
     </table>
     <%} else { %>
+    </table>
+
         <h1 class="lk_wrapper__title">Нет матчей</h1>
     <% } %>
     <script>

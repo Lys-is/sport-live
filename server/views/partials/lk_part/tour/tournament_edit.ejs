@@ -1,43 +1,66 @@
 <%- include('tour_header.ejs')%>
+<div class="cool_body">
+    <div class="cool_header_block cbh">
+        <input type="button" value="Основные настройки" class="t_button">
+        <input type="button" value="Регламент" class="t_button active_t_button">
+        <input type="button" value="Заявочная компания" class="t_button">
+        <input type="button" value="Внешний вид" class="t_button">
+        <input type="button" value="Тег" class="t_button">
+        <input type="button" value="Администраторы" class="t_button">
+    </div>
 
-<div class="team__wrapper">
-    <h1 class="lk_wrapper__title">Регламент</h1>
-    <form id="tournament_reglament__form">
-        <label>Ничьи возможны</label>
-        <input type="checkbox" name="tie_enable" <% if (tournament.reglament.tie_enable) { %>checked<% } %>>
-        <label>За победу</label> <input type="number" name="for_win" value="<%=tournament.reglament.for_win %>">
+    <div class="cool_body_content">
+        <p>Регламент</p>
+<form id="tournament_reglament__form">
+<label>
+<input type="checkbox" checked=""> Ничьи возможны
+</label>
+<div class="form-group">
+<label>За победу <input type="number" value="<%=tournament.reglament.for_win %>" name="for_win"></label>
+<label>За поражение <input type="number" value="<%=tournament.reglament.for_lose %>" name="for_lose"></label>
+</div>
+<div class="form-group">
+<label>За победу в дополнительное время <input type="number" value="<%=tournament.reglament.for_overtime_win %>" name="for_overtime_win"></label>
+<label>За победу в серии послематчевых пенальти <input type="number" value="<%=tournament.reglament.for_penalty_win %>" name="for_penalty_win"></label>
+</div>
+<div class="form-group">
+<label>За поражение в дополнительное время <input type="number" value="<%=tournament.reglament.for_overtime_lose %>" name="for_overtime_lose"></label>
+<label>За поражение в серии послематчевых пенальти <input type="number" value="<%=tournament.reglament.for_penalty_lose %>" name="for_penalty_lose"></label>
+</div>
+<div class="form-group">
+<label>За ничью <input type="number" value="<%=tournament.reglament.for_tie %>" name="for_tie"></label>
+</div>
+<div class="form-group">
+<label>Кол-во периодов в матче <input type="number" value="<%=tournament.reglament.period_count %>" name="period_count"></label>
+<label>Длительность матча в мин. <input type="number" value="<%=tournament.reglament.match_duration %>" name="match_duration"></label>
+</div>
+<div class="form-group">
+<label>Кол-во периодов дополнительного времени <input type="number" value="<%=tournament.reglament.period_count_overtime %>" name="period_count_overtime"></label>
+<label>Длительность дополнительного периода в мин. <input type="number" value="<%=tournament.reglament.overtime_duration %>" name="overtime_duration"></label>
+</div>
+<label>
+<input type="checkbox" checked=""> Учёт голов при техническом поражении
+</label>
+<div class="form-group">
+<label>Дедлайн для заявки на матч (мин.) <input type="number" value="<%=tournament.reglament.deadline_for_application %>" name="deadline_for_application"></label>
+</div>
+<div class="form-group">
+<label>Макс. игроков в основном составе <input type="number" value="<%=tournament.reglament.max_players %>" name="max_players"></label>
+<label>Макс. игроков в запасном составе <input type="number" value="<%=tournament.reglament.max_players_reserve %>" name="max_players_reserve"></label>
+</div>
+<label>
+<input type="checkbox" <% if (tournament.reglament.reserve_match_to_count_enable) { %>checked<% } %> name="reserve_match_to_count_enable"> Засчитывать запасным игру как сыгранную
+</label>
+<p>Дисквалификации</p>
+<label>
+<input type="checkbox" <% if (tournament.reglament.dq_enable) { %>checked<% } %> name="dq_enable"> Включить автоматические дисквалификации
+</label>
+    </div>
 
-        <label>За поражение</label> <input type="number" name="for_lose" value="<%=tournament.reglament.for_lose %>">
-
-        <label>За победу в дополнительное время</label> <input type="number" name="for_overtime_win" value="<%=tournament.reglament.for_overtime_win %>">
-
-        <label>За поражение в дополнительное время</label> <input type="number" name="for_overtime_lose" value="<%=tournament.reglament.for_overtime_lose %>">
-
-        <label>За победу в серии послематчевых пенальти</label> <input type="number" name="for_penalty_win" value="<%=tournament.reglament.for_penalty_win %>">
-
-        <label>За поражение в серии послематчевых пенальти</label> <input type="number" name="for_penalty_lose" value="<%=tournament.reglament.for_penalty_lose %>">
-
-        <label>За ничью</label> <input type="number" name="for_tie" value="<%=tournament.reglament.for_tie %>">
-
-        <label>Количество периодов в матче</label> <input type="number" name="period_count" value="<%=tournament.reglament.period_count %>">
-
-        <label>Количество периодов дополнительного времени</label> <input type="number" name="period_count_overtime" value="<%=tournament.reglament.period_count_overtime %>">
-
-        <label>Длительность дополнительного периода в мин.</label> <input type="number" name="overtime_duration" value="<%=tournament.reglament.overtime_duration %>">
-
-        <label>Длительность матча в мин.</label> <input type="number" name="match_duration" value="<%=tournament.reglament.match_duration %>">
-
-        <label>Учёт голов при техническом поражении</label> <input type="checkbox" name="goal_technical_lose_enable" <% if (tournament.reglament.goal_technical_lose_enable) { %>checked<% } %>>
-
-        <label>Дедлайн для заявки на матч (мин).</label> <input type="number" name="deadline_for_application" value="<%=tournament.reglament.deadline_for_application %>">
-
-        <label>Макс количество игроков в основном составе</label> <input type="number" name="max_players" value="<%=tournament.reglament.max_players %>">
-
-        <label>Макс количество игроков в запасном составе</label> <input type="number" name="max_players_reserve" value="<%=tournament.reglament.max_players_reserve %>">
-
-        <label>Засчитывать запасным игру как сыгранную</label> <input type="checkbox" name="reserve_match_to_count_enable" <% if (tournament.reglament.reserve_match_to_count_enable) { %>checked<% } %>>
-
-        <input type="submit" value="Сохранить">
-    </form>
+    <div class="create_tournire_footer">
+        <input type="button" value="Сохранить изменения" class="button green_button">
+    </div>
 
 </div>
+</form>
+

@@ -1,0 +1,43 @@
+
+<div class="team__wrapper">
+    <div class="table_container">
+        <div class="table_header">
+            <p class="page_title">Судьи</p>
+            
+        </div>
+    <table class="commands_table">
+        <tr id="first-row">
+            <td>№</td>
+            <td>ФИО</td>
+            <td>Дата рождения</td>
+            <td>В меню "О лиге"</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="text" class="table_input_text"></td>
+            <td><input type="date" class="table_input_text"></td>
+            <td><input type="text" class="table_input_text"></td>
+        </tr>
+     <% if (judges.length > 0) { %>
+
+    <% for (let i = 0; i < judges.length; i++) {%>
+        <tr>
+            <td><%= i %></td>
+            <td><%= judges[i].fio %></td>
+            <td><%= judges[i].date %></td>
+            <td><%= judges[i].team.name %></td>
+            <td>link</td>
+        </tr>
+
+    
+    <% } %>
+</table>
+<%} else { %>
+</table>
+    <h2 class="lk_wrapper__title">Нет судей</h2>
+<% } %>
+<script>
+    
+</script>
+</div>
+

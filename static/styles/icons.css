@@ -20,6 +20,17 @@
     margin-right: 10px;
 } */
 
+.butt_icon::before{
+    font: normal normal normal 14px/1 ic2;
+    width: 15px;
+    margin-right: 10px;
+}
+
+.blue_button.butt_icon::before{
+    content: "\e63f";
+    background-color: aliceblue;
+}
+
 .icon {
     padding-left: 15px;
 }

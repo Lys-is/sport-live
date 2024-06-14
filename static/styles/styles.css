@@ -11,10 +11,9 @@
 body{
     background-color: var(--body-bc);
     font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    width: 100%;
+    display:flex;
     height: 100%;
-    /* flex-direction: row; */
+    overflow: hidden;
 }
 
 :root{
@@ -33,11 +32,15 @@ body{
 .body{
     flex-grow: 1;
     height: 100%;
-    /* float: right; */
 }
 
 .filler{
     flex-grow: 1;
+}
+
+.page_title{
+    font-size: x-large;
+    font-weight: 600;
 }
 
 /* header */
@@ -81,17 +84,31 @@ header{
     visibility: hidden;
 }
 
+.content{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* overflow-x: hidden; */
+    -webkit-overflow-scrolling: touch;
+}
+
+.content_navtext{
+    margin-bottom: 30px;
+}
+
+
+
 /* nav */
 
 .navbar{
     /* position: absolute; */
     width: var(--navbar_width);
-    min-height: 100% !important;
+    height: 100% !important;
     display:flex;
     flex-direction: column;
     border-right: var(--accent-bc) 1px solid;
     margin-right: 0;
-    float: left;
+    
 }
 
 .navbar_text{
@@ -183,14 +200,14 @@ header{
     display: flex;
     height: var(--header_height);
     align-content: center;
-    height: 40px;
+    height: 50px;
 }
 
 .table_container{
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    padding: 30px 30px 0 30px;
+    padding: 20px 20px 0 0;
 }
 
 .commands_table{
@@ -216,10 +233,6 @@ table tr td:nth-child(6) {
     width: 6%;
 }
 
-table tr {
-
-}
-
 table tr td {
     text-align: center;
     border: var(--header-borders) 1px solid;
@@ -227,16 +240,12 @@ table tr td {
     padding-block: 10px;
     font-size: small;
     color: #4f4f4f;
+    background-color: var(--header-bc);
 }
 
 #first-row td {
     color: #0d0d0d;
     font-size: medium;
-}
-
-.table_text{
-    font-size: medium;
-    font-weight: 600;
 }
 
 table tr td input{
@@ -254,10 +263,25 @@ table tr td input{
     background-color: #c23030;
     color: var(--font-color);
     border-radius: 3px;
+    margin-bottom: 15px;
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.table_button:hover{
+    background-color: rgb(170, 42, 42);
 }
 
 .table_button:nth-child(even){
     background-color: #3180c5f3;
+}
+
+.table_button:nth-child(even):hover{
+    background-color: rgb(46, 117, 180);
 }
 
 .table_button_radio_active{
@@ -265,9 +289,15 @@ table tr td input{
     height: 30px;
     font-size: small;
     border: var(--header-borders) 1px solid;
-    background-color: var(--header-bc);
+    background-color: var(--body-bc);
     border-radius: 3px 0 0 0;
     align-self: flex-end;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.table_button_radio_active:hover{
+    background-color: rgb(230, 233, 238);
 }
 
 .table_button_radio_archive{
@@ -275,19 +305,22 @@ table tr td input{
     height: 30px;
     font-size: small;
     border: var(--header-borders) 1px solid;
-    background-color: var(--header-bc);
+    background-color: var(--body-bc);
     border-left: 0;
     border-bottom: 0;
     border-radius: 0 3px 0 0;
     align-self: flex-end;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.table_button_radio_archive:hover{
+    background-color: rgb(224, 228, 234);
 }
 
 .table_radio_active{
-    background-color: var(--body-bc);
+    background-color: var(--header-bc);
     border-bottom: 0;
-    margin-bottom: -1px;
-    height: 31px;
-    z-index: 20;
 }
 
 .table_links{
@@ -302,17 +335,533 @@ table tr td input{
     margin: 3px;
     margin-block: 10px;
     font-size: small;
-
+    transition: all 0.3s ease;
+    backdrop-filter: brightness(1);
+    cursor: pointer;
 }
 
 .table_links_admines{
     background-color: #278a56;
 }
 
+.table_links_admines:hover{
+    background-color: #22794b;
+}
+
 .table_links_compos{
-    background-color: #1c7474f3;
+    background-color: #1c7474;
+}
+
+.table_links_compos:hover{
+    background-color: #175e5e;
 }
 
 .table_links_reps{
     background-color: #1c406f;
 }
+
+.table_links_reps:hover{
+    background-color: #16345d;
+}
+
+/* forms */
+
+.select{
+    height: 40px;
+    font-size: small;
+    border: var(--header-borders) 1px solid;
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    background-color: #fbfbfb;
+}
+
+.double_form{
+    width: 300px !important; 
+}
+
+.button{
+    width: 170px;
+    height: 30px;
+    margin-right: 10px;
+    font-size: small;
+    border: var(--header-borders) 1px solid;
+    background-color: #727272;
+    color: var(--font-color);
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.red_button:hover{
+    background-color: #b32c2c;
+}
+
+.red_button{
+    background-color: #c23030;
+}
+
+
+.blue_button{
+    background-color: #3180c5f3;
+}  
+
+.blue_button:hover{
+    background-color: rgb(46, 117, 180);
+}
+
+.green_button{
+    background-color: #278a56;
+}
+
+.green_button:hover{
+    background-color: #237b4c;
+}
+
+.text_form {
+    border: var(--header-borders) 1px solid;
+    border-radius: 3px;
+    height: 30px;
+    width: 200px;
+    padding-inline: 15px;
+}
+
+.forms_container{
+    display: flex;
+    padding: 30px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.butt_icon{
+    padding-left: 15px;
+}
+
+.white_button{
+    background-color: #fafafa;
+    color: #0d0d0d;
+    width: 100px;
+}
+
+.white_button:hover{
+    background-color: #e0e0e0;
+}
+
+/* profile page */
+
+
+
+.profile_container{
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.profile_content{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 1000px;
+    background-color: var(--header-bc);
+    border: var(--header-borders) 1px solid;
+}
+
+.profile_header{
+    display: flex;
+    width: 100%;
+    height: 80px;
+    border-bottom: var(--header-borders) 1px solid;
+    align-items: center;
+    padding-left: 30px;
+}
+
+.profile_title{
+    font-size: medium;
+    font-weight: 600;
+}
+
+.profile_block{
+    display: flex;
+    width: 100%;
+    flex-grow: 1;
+    padding: 0px 30px 30px 30px;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.profile_footer{
+    display: flex;
+    width: 100%;
+    height: 60px;
+    border-top: var(--header-borders) 1px solid;
+    background-color: #ecececf3;
+    align-items: center;
+    padding-left: 25px;
+    justify-self: end;
+}
+
+.profile_label{
+    width: 120px;
+    
+}
+
+.profile_block .text_form{
+    width: 300px;
+
+}
+
+.profile_input_block{
+    display: flex;
+    width: 420px;
+    height: 40px;
+    margin-right: 70px;
+    margin-top: 50px;
+}
+
+/* tournires page */
+
+.tournires_container{
+    padding: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.tournires_header{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    border: var(--header-borders) 1px solid;
+    align-items: center;
+    background-color: var(--header-bc);
+}
+
+.tournires_header_header .page_title{
+    width: 300px;
+}
+
+.tournires_header * input{
+    margin: 0;
+}
+
+.tournires_header_header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding: 30px;
+    border-bottom: var(--header-borders) 1px solid;
+}
+
+.tournires_header_block{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.tournires_header_block input{
+    width: 15%;
+    margin: 0;
+}
+
+.tournires_body{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.tournires_content_block{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    border: var(--header-borders) 1px solid;
+    margin-top: 30px;
+    padding: 30px;  
+    background-color: var(--header-bc);
+    
+}
+
+.tournires_block_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.tournires_block_header h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.tournires_actions a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.tournires_actions a:hover {
+    text-decoration: underline;
+}
+
+.tournires_details {
+    margin: 10px 0;
+}
+
+.tournires_details p {
+    margin: 5px 0;
+}
+
+.tournires_status {
+    color: gray;
+}
+
+.tournires_tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tournires_tab_button {
+    flex: 1;
+    padding: 10px;
+    border: var(--header-borders) 1px solid;
+    border-radius: 3px;
+    color: rgb(18, 18, 18);
+    background-color: rgb(238, 238, 238);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tournires_tab_button:hover {
+    background-color: rgb(226, 226, 226);
+}
+
+.tournires_calendar {
+    margin-top: 20px;
+}
+
+.tournires_calendar h2 {
+    margin-bottom: 10px;
+    font-size: large;
+    font-weight: 500;
+}
+
+/* create tournire */
+
+.create_tournire_container {
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.create_tournire_content {
+    background-color: white;
+
+    border: var(--header-borders) 1px solid;
+}
+
+.create_tournire_header {
+    border-bottom: var(--header-borders) 1px solid;
+    padding: 30px;
+}
+
+.create_tournire_body {
+    display: flex;
+    padding: 30px;
+}
+
+.form_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+.image_n_textareas {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.image_upload img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.image_upload p {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #777;
+}
+
+.ct_form {
+    flex: 1 1 55%;
+}
+
+.form_group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_group label {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.form_group input[type="text"],
+.form_group input[type="date"],
+.form_group select,
+.form_group textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form_group_checkbox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.form_group_checkbox label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.form_group_checkbox input {
+    margin-right: 5px;
+}
+
+.image_upload {
+    width: 300px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.textareas_ct {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.create_tournire_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-top: var(--header-borders) 1px solid;
+    background-color: #f4f4f4;
+}
+
+/* Крутость */
+
+.t_button {
+    flex: 1;
+    height: 60px;
+    width: 11.11111111%;
+    border: none;
+    background-color: transparent;
+    font-size: small;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.t_button:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+.active_t_button {
+    background-color: rgb(39, 102, 248);
+    color: var(--font-color);
+    cursor: default;
+}
+
+.active_t_button:hover {
+    background-color: rgb(39, 102, 248);
+}
+
+.cool_header_block {
+    padding: 0%;
+    display: flex;
+    width: 100%;
+
+}
+
+.cool_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cbh{
+}
+
+.cbh .t_button{
+    width: 16.66666667%;
+    height: 40px;
+}
+
+.cool_body{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 30px;
+    background-color: var(--header-bc);
+    border: var(--header-borders) 1px solid;
+}
+
+.cool_body_content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    border-top: var(--header-borders) 1px solid;
+    padding: 30px;
+}
+
+.cool_body_content form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cool_body_content p {
+    font-size: larger;
+}
+
+/* .cool_body_content form label {
+    margin-top: 15px;
+}
+
+.cool_body_content form input {
+    margin-top: 15px;
+} */
+
+.cool_body_content form p {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+input[type=number]{
+    width: 70px;
+}
+

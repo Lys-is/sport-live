@@ -30,6 +30,7 @@ const Tournament = new Schema({
         max_players: {type: Number, default: 16},
         max_players_reserve: {type: Number, default: 10},
         reserve_match_to_count_enable: {type: Boolean, default: true},
+        dq_enable: {type: Boolean, default: false},
     },
     application_campaign : {
         date_start: {type: Date, default: () => Date.now()},
