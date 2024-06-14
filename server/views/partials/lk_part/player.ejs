@@ -5,7 +5,6 @@
             <p class="page_title">Игроки</p>
             
         </div>
-<% if (players.length > 0) { %>
     <table class="commands_table">
         <tr id="first-row">
             <td>ФИО</td>
@@ -21,6 +20,8 @@
             <td></td>
             <td></td>
         </tr>
+    <% if (players.length > 0) { %>
+
     <% for (let i = 0; i < players.length; i++) {%>
         <tr>
             <td><%= players[i].fio %></td>
@@ -36,6 +37,8 @@
     <% } %>
 </table>
 <%} else { %>
+</table>
+
     <h1 class="lk_wrapper__title">Нет игроков</h1>
 <% } %>
 <script>

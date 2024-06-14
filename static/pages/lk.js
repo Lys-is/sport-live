@@ -2,6 +2,15 @@
 let nav = get('.navbar_body')
 let lk_main = get('#lk_main')
 let links = getA('p', nav)
+let account_btn = get('#header_account');
+let logout_btn = get('#logout_btn');
+account_btn.addEventListener('click',(e)=>{
+    logout_btn.classList.toggle('active');
+    }
+)
+logout_btn.addEventListener('click',(e)=>{
+    logout()
+})
 console.log(links)
 links.forEach(link => {
     if(link.getAttribute('data-href'))
@@ -135,22 +144,5 @@ function init__player() {
 }
 
 
-const isCheckboxOrRadio = type => ['checkbox', 'radio'].includes(type);
 
 
-function formGetData(form) {
-    const data = {};
-
-    for (let field of form) {
-        const {name} = field;
-
-        if (name) {
-            const {type, checked, value} = field;
-
-            data[name] = isCheckboxOrRadio(type) ? checked : value;
-        }
-    }
-
-    console.log(data);
-    return data;
-}

@@ -14,8 +14,25 @@
             <p class="header_text">Товарищеский матч</p>
         </div>
 
-        <div class = "header_block header_icon">
+        <div class="header_block header_icon">
             <p class="header_text icon" id="header_account">Аккаунт</p>
+            <div class="logout" id="logout_btn"><p>Выйти</p></div>
         </div>
     </header>
+    <style>
+        .logout {
+            display: none;
+            position: absolute;
+            top: 32px;
+            right: 4px;
+            background: red;
+            color: white;
+            padding: 2px 20px;
+            cursor: pointer;
+        }
+        .logout.active {
+            display: block;
+            
+        }
+    </style>
     <div class="content" id="lk_main">
