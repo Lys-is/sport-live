@@ -1,66 +1,433 @@
-<%- include('tour_header.ejs')%>
 <div class="cool_body">
-    <div class="cool_header_block cbh">
-        <input type="button" value="Основные настройки" class="t_button">
-        <input type="button" value="Регламент" class="t_button active_t_button">
-        <input type="button" value="Заявочная компания" class="t_button">
-        <input type="button" value="Внешний вид" class="t_button">
-        <input type="button" value="Тег" class="t_button">
-        <input type="button" value="Администраторы" class="t_button">
+    <div class="cool_header_block cbh tour_edit_navs">
+        <input type="button" value="Основные настройки" class="t_button" data-dest="basic">
+        <input type="button" value="Регламент" class="t_button active_t_button" data-dest="reglament">
+        <input type="button" value="Заявочная компания" class="t_button" data-dest="application_campaign">
+        <input type="button" value="Внешний вид" class="t_button" data-dest="visual">
+        <input type="button" value="Тег" class="t_button" data-dest="tags">
+        <input type="button" value="Администраторы" class="t_button" data-dest="admins">
     </div>
+
+
+
+
+    <form class="tournament_edit__form" data-submit="basic">
+        <div class="create_tournire_body">
+            <div class="form_container">
+                <div class="image_n_textareas">
+                    <div class="image_upload">
+                    <img src="image-placeholder.png" alt="placeholder image">
+                    <p>Мин. размер: 385 x 260</p>
+                    </div>
+                    <div class="textareas_ct">
+                        <div class="form_group">
+                            <label for="rank">Ранг</label>
+                            <input type="text" id="rank" name="rank" value="<%= tournament.basic.rank %>">
+                        </div>
+                        <div class="form_group">
+                            <label for="description">Описание</label>
+                            <textarea id="description" name="description"><%= tournament.basic.description %></textarea>
+                        </div>
+                        <div class="form_group">
+                            <label for="description">Таблицы и сетки</label>
+                            <textarea id="description" name="tables_grids"><%= tournament.basic.tables_grids %></textarea>
+                        </div>
+                    </div>
+                
+                </div>
+
+                <div class="ct_form">
+                    <div class="form_group">
+                        <label for="full_name">Полное название</label>
+                        <input type="text" id="full_name" name="full_name" value="<%= tournament.basic.full_name %>">
+                    </div>
+                    <div class="form_group">
+                        <label for="short_name">Короткое название</label>
+                        <input type="text" id="short_name" name="name" value="<%= tournament.basic.name %>">
+                    </div>
+                    <div class="form_group">
+                        <label for="start_date">Дата начала</label>
+                        <input type="date" id="start_date" name="date_start" value="<%= tournament.basic.date_start %>">
+                    </div>
+                    <div class="form_group">
+                        <label for="end_date">Дата окончания</label>
+                        <input type="date" id="end_date" name="date_end" value="<%= tournament.basic.date_end %>">
+                    </div>
+                    <div class="form_group">
+                        <label for="type">Тип</label>
+                        <select class="select" id="type" name="type" >
+                            <%
+                            (function () {
+
+                            let options = {'beach': 'Пляжный', 'mini': 'Мини', '5v5': '5 на 5', '6v6': '6 на 6', '7v7': '7 на 7', '8v8': '8 на 8', '9v9': '9 на 9', '10v10': '10 на 10', '11v11': '11 на 11', 'festival': 'Фестивальный'};
+                            for ( let key in options )
+                            {
+                                let selected = ( key == tournament.basic.type ) ? "selected" : "";
+                                %><option value="<%= key%>" <%=selected %>><%= options[key] %></option><%
+                            }
+                            })();
+                            %>
+                        </select>
+                    </div>
+                    <div class="form_group form_group_checkbox">
+                        <label>
+                            <input type="checkbox" name="is_site" <%= tournament.basic.is_site ? 'checked' : ''%>> Опубликовать на сайте
+                        </label>
+                        <label>
+                            <input type="checkbox" name="is_calendar" <%= tournament.basic.is_calendar ? 'checked' : ''%>> В календарь на главную
+                        </label>
+                        <label>
+                            <input type="checkbox" name="is_menu" <%= tournament.basic.is_menu ? 'checked' : '' %>> Отображать в главном меню
+                        </label>
+                        <label>
+                            <input type="checkbox" name="is_slider_main" <%= tournament.basic.is_slider_main ? 'checked' : '' %>> В слайдер на главную
+                        </label>
+                        <label>
+                            <input type="checkbox" name="is_display_table_main" <%= tournament.basic.is_display_table_main ? 'checked' : '' %>> Отобразить таблицу на главной странице сайта
+                        </label>
+                        <label>
+                            <input type="checkbox" name="is_league_info" <%= tournament.basic.is_league_info ? 'checked' : '' %>> Учитывать в инфографике "Лига в цифрах и фактах"
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="create_tournire_footer">
+            <input type="submit" value="Сохранить изменения" class="button green_button">
+        </div>
+    </form>
+
+
+
+
+
+    <form id="tournament_reglament__form" class="tournament_edit__form active" data-submit="reglament">
 
     <div class="cool_body_content">
         <p>Регламент</p>
-<form id="tournament_reglament__form">
-<label>
-<input type="checkbox" checked=""> Ничьи возможны
-</label>
-<div class="form-group">
-<label>За победу <input type="number" value="<%=tournament.reglament.for_win %>" name="for_win"></label>
-<label>За поражение <input type="number" value="<%=tournament.reglament.for_lose %>" name="for_lose"></label>
-</div>
-<div class="form-group">
-<label>За победу в дополнительное время <input type="number" value="<%=tournament.reglament.for_overtime_win %>" name="for_overtime_win"></label>
-<label>За победу в серии послематчевых пенальти <input type="number" value="<%=tournament.reglament.for_penalty_win %>" name="for_penalty_win"></label>
-</div>
-<div class="form-group">
-<label>За поражение в дополнительное время <input type="number" value="<%=tournament.reglament.for_overtime_lose %>" name="for_overtime_lose"></label>
-<label>За поражение в серии послематчевых пенальти <input type="number" value="<%=tournament.reglament.for_penalty_lose %>" name="for_penalty_lose"></label>
-</div>
-<div class="form-group">
-<label>За ничью <input type="number" value="<%=tournament.reglament.for_tie %>" name="for_tie"></label>
-</div>
-<div class="form-group">
-<label>Кол-во периодов в матче <input type="number" value="<%=tournament.reglament.period_count %>" name="period_count"></label>
-<label>Длительность матча в мин. <input type="number" value="<%=tournament.reglament.match_duration %>" name="match_duration"></label>
-</div>
-<div class="form-group">
-<label>Кол-во периодов дополнительного времени <input type="number" value="<%=tournament.reglament.period_count_overtime %>" name="period_count_overtime"></label>
-<label>Длительность дополнительного периода в мин. <input type="number" value="<%=tournament.reglament.overtime_duration %>" name="overtime_duration"></label>
-</div>
-<label>
-<input type="checkbox" checked=""> Учёт голов при техническом поражении
-</label>
-<div class="form-group">
-<label>Дедлайн для заявки на матч (мин.) <input type="number" value="<%=tournament.reglament.deadline_for_application %>" name="deadline_for_application"></label>
-</div>
-<div class="form-group">
-<label>Макс. игроков в основном составе <input type="number" value="<%=tournament.reglament.max_players %>" name="max_players"></label>
-<label>Макс. игроков в запасном составе <input type="number" value="<%=tournament.reglament.max_players_reserve %>" name="max_players_reserve"></label>
-</div>
-<label>
-<input type="checkbox" <% if (tournament.reglament.reserve_match_to_count_enable) { %>checked<% } %> name="reserve_match_to_count_enable"> Засчитывать запасным игру как сыгранную
-</label>
-<p>Дисквалификации</p>
-<label>
-<input type="checkbox" <% if (tournament.reglament.dq_enable) { %>checked<% } %> name="dq_enable"> Включить автоматические дисквалификации
-</label>
+    <label>
+        <input type="checkbox" checked=""> Ничьи возможны
+    </label>
+    <div class="form-group">
+        <label>За победу <input type="number" value="<%=tournament.reglament.for_win %>" name="for_win"></label>
+        <label>За поражение <input type="number" value="<%=tournament.reglament.for_lose %>" name="for_lose"></label>
+    </div>
+    <div class="form-group">
+        <label>За победу в дополнительное время <input type="number" value="<%=tournament.reglament.for_overtime_win %>" name="for_overtime_win"></label>
+        <label>За победу в серии послематчевых пенальти <input type="number" value="<%=tournament.reglament.for_penalty_win %>" name="for_penalty_win"></label>
+    </div>
+    <div class="form-group">
+        <label>За поражение в дополнительное время <input type="number" value="<%=tournament.reglament.for_overtime_lose %>" name="for_overtime_lose"></label>
+        <label>За поражение в серии послематчевых пенальти <input type="number" value="<%=tournament.reglament.for_penalty_lose %>" name="for_penalty_lose"></label>
+    </div>
+    <div class="form-group">
+        <label>За ничью <input type="number" value="<%=tournament.reglament.for_tie %>" name="for_tie"></label>
+    </div>
+    <div class="form-group">
+        <label>Кол-во периодов в матче <input type="number" value="<%=tournament.reglament.period_count %>" name="period_count"></label>
+        <label>Длительность матча в мин. <input type="number" value="<%=tournament.reglament.match_duration %>" name="match_duration"></label>
+    </div>
+    <div class="form-group">
+        <label>Кол-во периодов дополнительного времени <input type="number" value="<%=tournament.reglament.period_count_overtime %>" name="period_count_overtime"></label>
+        <label>Длительность дополнительного периода в мин. <input type="number" value="<%=tournament.reglament.overtime_duration %>" name="overtime_duration"></label>
+    </div>
+    <label>
+        <input type="checkbox" checked=""> Учёт голов при техническом поражении
+    </label>
+    <div class="form-group">
+        <label>Дедлайн для заявки на матч (мин.) <input type="number" value="<%=tournament.reglament.deadline_for_application %>" name="deadline_for_application"></label>
+    </div>
+    <div class="form-group">
+        <label>Макс. игроков в основном составе <input type="number" value="<%=tournament.reglament.max_players %>" name="max_players"></label>
+        <label>Макс. игроков в запасном составе <input type="number" value="<%=tournament.reglament.max_players_reserve %>" name="max_players_reserve"></label>
+    </div>
+    <label>
+        <input type="checkbox" <% if (tournament.reglament.reserve_match_to_count_enable) { %> checked <% } %> name="reserve_match_to_count_enable"> Засчитывать запасным игру как сыгранную
+    </label>
+    <p>Дисквалификации</p>
+    <label>
+        <input type="checkbox" <% if (tournament.reglament.dq_enable) { %> checked <% } %> name="dq_enable"> Включить автоматические дисквалификации
+    </label>
+        </div>
+
+        <div class="create_tournire_footer">
+            <input type="submit" value="Сохранить изменения" class="button green_button">
+        </div>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form class="tournament_edit__form" data-submit="application_campaign">
+    <div class="cool_body_content">
+        <div class="form-group">
+            <label for="start-date">Дата начала заявочной компании</label>
+            <input type="date" id="start-date" name="start_date" value="<%= tournament.application_campaign.start_date %>">
+        </div>
+        <div class="form-group">
+            <label for="end-date">Дата окончания заявочной компании</label>
+            <input type="date" id="end-date" name="end_date" value="<%= tournament.application_campaign.end_date %>">
+        </div>
+        <div class="form-group">
+            <label for="min-players">Мин. игроков</label>
+            <input type="number" id="min-players" name="min_players" value="<%= tournament.application_campaign.min_players %>">
+        </div>
+        <div class="form-group">
+            <label for="max-players">Макс. игроков</label>
+            <input type="number" id="max-players" name="max_players" value="<%= tournament.application_campaign.max_players %>">
+        </div>
+        <div class="form-group">
+            <label for="fee-type">Тип взноса</label>
+            <%
+            (function () {
+            let options = {'none': 'Без взносов', 'team': 'Командные взносы', 'personal': 'Персональные взносы', 'application': 'Определяются в заявке'}
+            let selected = tournament.application_campaign.fee_type
+            %><select class="select" id="fee-type" name="fee_type" >
+                <%
+                for ( let key in options )
+                {
+                    let selected = ( key == tournament.application_campaign.fee_type ) ? "selected" : "";
+                    %><option value="<%= key%>" <%=selected %>><%= options[key] %></option><%
+                } 
+                })();
+                %>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="transitions" name="transfers_enable" <%= tournament.application_campaign.transfers_enable ? 'checked' : '' %>>
+            <label for="transitions">Переходы возможны</label>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="multiple-teams" name="application_multiple_enable" <%= tournament.application_campaign.application_multiple_enable ? 'checked' : '' %>>
+            <label for="multiple-teams">Заявка игрока от двух и более команд одновременно запрещена</label>
+        </div>
     </div>
 
     <div class="create_tournire_footer">
-        <input type="button" value="Сохранить изменения" class="button green_button">
+        <input type="submit" value="Сохранить изменения" class="button green_button">
     </div>
-
-</div>
 </form>
 
+
+
+
+
+
+
+
+
+<form class="tournament_edit__form" data-submit="visual">
+    <div class="cool_body_content">
+        <p class="bold">Основные настройки</p>
+        <div class="form-group">
+            <label for="appearence_starting_page">Стартовая страница</label>
+            <% (function () {
+                let options = {'about': 'О турнире', 'tables_and_nets': 'Таблицы и сетки', 'calendar': 'Календарь'}
+                let selected = tournament.visual.starting_page
+                %><select class="select" id="appearence_starting_page" name="starting_page" >
+                    <%
+                    for ( let key in options )
+                    {
+                        let selected = ( key == tournament.visual.starting_page ) ? "selected" : "";
+                        %><option value="<%= key%>" <%=selected %>><%= options[key] %></option><%
+                    } 
+                    })();
+                    %>
+                </select>
+        </div>
+        <% (function () {
+            let options = {'dates' : 'По датам', 'tours' : 'По турам/стадиям'}
+            let selected = tournament.visual.calendar
+            %><div class="form-group">
+                <label for="appearence_calendar">Календарь по умолчанию</label>
+                <select class="select" id="appearence_calendar" name="calendar" >
+                    <%
+                    for ( let key in options )
+                    {
+                        let selected = ( key == tournament.visual.calendar ) ? "selected" : "";
+                        %><option value="<%= key%>" <%=selected %>><%= options[key] %></option><%
+                    } 
+                    })();
+                    %>
+                </select>
+            </div>
+        <p class="bold">Цвет</p>
+        <div class="form-group">
+            <label for="appearence_color">Цвет</label>
+            <input type="color" id="appearence_color" name="color" value="<%= tournament.visual.color %>">
+        </div>
+        <p class="bold">Страница матча </p>
+        <div class="form-group">
+            <input type="checkbox" id="appearence_match_page" name="is_info_preview" <%= tournament.visual.is_info_preview ? 'checked' : '' %>>
+            <label for="appearence_match_page">Отображать инфографику в превью</label>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="appearence_match_page_wp" name="is_white_header" <%= tournament.visual.is_white_header ? 'checked' : '' %>>
+            <label for="appearence_match_page_wp">Белая шапка матча</label>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="appearence_match_page_bf" name="is_black_font" <%= tournament.visual.is_black_font ? 'checked' : '' %>>
+            <label for="appearence_match_page_bf">Черный цвет шрифта</label>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="appearence_match_page_bb" name="is_shadow_header" <%= tournament.visual.is_shadow_header ? 'checked' : '' %>>
+            <label for="appearence_match_page_bb">Затемнение фона в шапке матча</label>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="appearence_match_page_mp" name="is_manual_cover" <%= tournament.visual.is_manual_cover ? 'checked' : '' %>>
+            <label for="appearence_match_page_mp">Своя обложка матча</label>
+        </div>
+        <div class="form-group">
+            <div class="image_upload">
+                <img src="image-placeholder.png" alt="placeholder image">
+                <p>Мин. размер: 910 x 350</p>
+            </div>
+            <div class="image_upload">
+                <img src="image-placeholder.png" alt="placeholder image">
+                <p>Мин. размер: 480 x 270</p>
+            </div>
+        </div>
+        <p class="bold"> Статистика</p>
+        <div class="form-group">
+            <input type="checkbox" id="appearence_stat" name="is_global_stats" <%= tournament.visual.is_global_stats ? 'checked' : '' %>>
+            <label for="appearence_match_page_stat">Отображать общую статистику</label>
+        </div>
+        <div class="form-group">
+            <label for="appearence_stat_visual">Визуальный вид статистики</label>
+            <% (function () {
+                let options = {'all' : 'Все'}
+                let selected = tournament.visual.stats_type
+                %><select class="select" id="appearence_stat_visual" name="stats_type" >
+                    <%
+                    for ( let key in options )
+                    {
+                        let selected = ( key == tournament.visual.stats_type ) ? "selected" : "";
+                        %><option value="<%= key%>" <%=selected %>><%= options[key] %></option><%
+                    } 
+                    })();
+                    %>
+                </select>
+    
+        </div>
+        <p class="bold">Этапы</p>
+        <div class="form-group">
+            <input type="checkbox" id="appearence_stage" name="is_display_all_stages" <%= tournament.visual.is_display_all_stages ? 'checked' : '' %>>
+            <label for="appearence_stage">Отображение всех этапов на одной странице - "Календарь", "Таблицы и сетки"</label>
+        </div>
+        <p class="bold">Печатные протоколы</p>
+        <div class="form-group">
+            <label for="appearence_pre_protocol">Вариант предстартового протокола</label>
+            <% (function () {
+                let options = {'first': 'Вариант №1', 'second': 'Вариант №2', 'third': 'Вариант №3'}
+                let selected = tournament.visual.before_start_type
+                %><select class="select" id="appearence_pre_protocol" name="before_start_type" >
+                    <%
+                    for ( let key in options )
+                    {
+                        let selected = ( key == tournament.visual.before_start_type ) ? "selected" : "";
+                        %><option value="<%= key%>" <%=selected %>><%= options[key] %></option><%
+                    } 
+                    })();
+                    %>
+                </select>
+        </div>
+        <div class="form-group">
+            <label for="appearence_post_protocol">Вариант послематчевого протокола</label>
+            <% (function () {
+                let options = {'first': 'Вариант №1', 'second': 'Вариант №2', 'third': 'Вариант №3'}
+                let selected = tournament.visual.after_start_type
+                %><select class="select" id="appearence_post_protocol" name="after_start_type" >
+                    <%
+                    for ( let key in options )
+                    {
+                        let selected = ( key == tournament.visual.after_start_type ) ? "selected" : "";
+                        %><option value="<%= key%>" <%=selected %>><%= options[key] %></option><%
+                    } 
+                    })();
+                    %>
+                </select>
+        </div>
+
+        <div class="form-group">
+            <label for="appearence_vac_protocol">Вариант заявочного протокола</label>
+            <% (function () {
+                let options = {'first': 'Вариант №1', 'second': 'Вариант №2', 'third': 'Вариант №3'}
+                let selected = tournament.visual.application_type
+                %><select class="select" id="appearence_vac_protocol" name="application_type" >
+                    <%
+                    for ( let key in options )
+                    {
+                        let selected = ( key == tournament.visual.application_type ) ? "selected" : "";
+                        %><option value="<%= key%>" <%=selected %>><%= options[key] %></option><%
+                    } 
+                    })();
+                    %>
+                </select>
+        </div>
+    </div>
+
+    <div class="create_tournire_footer">
+        <input type="submit" value="Сохранить изменения" class="button green_button">
+    </div>
+    
+</form>
+
+
+
+
+
+
+<form class="tournament_edit__form" data-submit="tags">
+    <div class="cool_body_content">
+        <label for="tag_name">Имя тега</label>
+        <input type="text" id="tag_name" name="tag_name" сlass="text_form text double_form" value="<%= tournament.tags.tag_name %>">
+        <label for="full_tag_name">Полное имя тега</label>
+        <input type="text" id="full_tag_name" name="full_tag_name" сlass="text_form text double_form" value="<%= tournament.tags.full_tag_name %>">
+    </div>
+
+    <div class="create_tournire_footer">
+        <input type="button" value="Удалить" class="button red_button">
+        <div class="filler"></div>
+        <input type="button" value="Отменить" class="button white_button rejected">
+        <input type="submit" value="Сохранить изменения" class="button green_button">
+    </div>
+</form>
+<form class="tournament_edit__form" data-submit="admins">
+    <div class="cool_body_content">
+        <div class="table_header">
+            <p class="page_title">Команды</p>
+            <div class="filler"></div>
+            <input type="button" value="Сбросить фильтры" class="table_button">
+        </div>
+        <table class="commands_table cool_table">
+            <tr id="first-row">
+                <td>Имя пользователя</td>
+                <td>Фио</td>
+                <td>Email</td>
+                <td>Время регистрации</td>
+                <td>Администратор</td>
+            </tr>
+            <tr>
+                <td><input type="text" class="table_input_text"></td>
+                <td><input type="text" class="table_input_text"></td>
+                <td><input type="text" class="table_input_text"></td>
+                <td><input type="date" class="table_input_text"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="5">ничего не найдено</td>
+            </tr>                
+        </table>
+    </div>
+</form>
+</div>

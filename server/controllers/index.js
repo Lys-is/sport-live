@@ -28,6 +28,18 @@ class Constrollers {
             auth: req.user || false
         });
     }
+    async get__panel(req, res) {
+        res.render('panel', {
+            title: 'Панель управления',
+            auth: req.user || false
+        });
+    }
+    async get__table(req, res) {
+        res.render('table', {
+            title: 'Таблица',
+            auth: req.user || false
+        });
+    }
     api = require('./api')
 }
     

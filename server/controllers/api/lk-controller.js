@@ -155,8 +155,8 @@ class LkController {
             console.log(await Tournament.find());
             let tournaments = await Tournament.find({creator: req.user.id}).populate('creator');
             tournaments = tournaments.map((tournament) => {
-                tournament.date_start = tournament.date_start.toLocaleDateString()
-                tournament.date_end = tournament.date_end.toLocaleDateString()
+                // tournament.date_start = tournament.date_start.toLocaleDateString()
+                // tournament.date_end = tournament.date_end.toLocaleDateString()
                 //console.log(tournament.date);
                 return tournament
             })

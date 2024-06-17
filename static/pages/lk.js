@@ -18,18 +18,37 @@ links.forEach(link => {
 })
 if(params.page) {
     (() => {
-        console.log(params.page.replace(/\$([^\\^]+)\^([^&]*)/g, '?$1=$2'))
-        getPage(params.page.replace(/\$([^\\^]+)\^([^&]*)/g, '?$1=$2'))
+        let href = params.page.replace(/\$([^\\^]+)\^([^&]*)/g, '?$1=$2')
+        console.log(href)
+        if(!checkTournament(removeTrailingSlash(href)))
+            getPage(href)
     })()
 }
-async function getPage(href) {
+async function checkTournament(str) {
+    const regexFormatAny = /^tournament\/id\/[^\/]+$/;
+    const regexFormatAny2 = /^tournament\/id\/[^\/]+\/[^\/]+$/;
+  
+    const isFormatAny = regexFormatAny.test(str);
+    const containsAny2 = regexFormatAny2.test(str);
+    console.log({ isFormatAny, containsAny2 });
+    if(isFormatAny || containsAny2) {
+        let templateHref = str.replace(/\/id\/([^\/]+)(\/[^\/]*)?/,"/id/$1")
+        await getPage(templateHref)
+        if(containsAny2) {
+            let tour_body = get('#tour_body');
+            getPage(str, tour_body);
+        }
+    }
+    return { isFormatAny, containsAny2 };
+}
+async function getPage(href, destInHtml = lk_main) {
     const baseUrl = '/api/lk/';
     const cleanedHref = href.replace(/\/\?([^=]+)=([^&]+)/g, '/$1~$2');
     const pageUrl = `${baseUrl}${href}`;
-    const initHref = cleanedHref.split('?')[0];
+    let initHref = cleanedHref.split('?')[0];
     console.log(pageUrl);
     const response = await sendFetch(pageUrl, null, 'GET');
-    lk_main.innerHTML = response ? response : 'Страница не найдена';
+    destInHtml.innerHTML = response ? response : 'Страница не найдена';
 
     params.subHref = href.split('?')[1] || '';
     history.replaceState({ page: 1 }, "", `?page=${cleanedHref}`);
@@ -40,11 +59,13 @@ async function getPage(href) {
             link.addEventListener('click', linkListener);
         }
     });
-
-    initHref.replace(/\/id\/[^\/]+\/([^\/]+)/, "/id/$1")
-    inits[initHref]?.();
+    initHref = initHref.replace(/\/id\/[^\/]+(\/[^\/]*)?/, "/id$1")
+    console.log(removeTrailingSlash(initHref))
+    inits[removeTrailingSlash(initHref)]?.(href);
 }
-
+function removeTrailingSlash(str) {
+    return str.replace(/\/$/, '');
+  }
 async function linkListener(e) {
         e.preventDefault()
         // links.forEach(link => {
@@ -57,7 +78,6 @@ async function linkListener(e) {
 }
 let init_decorator = (func) => {
     links = getA('li', nav)
-    console.log(links)
     links.forEach(link => {
         link.addEventListener('click', linkListener)
     })
@@ -73,13 +93,30 @@ let inits = {
     'match/get__create' : init__match_create,
     'tournament': init__tournament,
     'tournament/get__create' : init__tournament_create,
-    'tournament/id/get__edit' : init__tournament_edit,
+    'tournament/id' : init__tournament_template,
+    'tournament/id/edit' : init__tournament_edit,
+    'tournament/id/group' : init__tournament_group,
     'player': init__player
 }
 for(let key in inits) {
     inits[key] = init_decorator(inits[key])
 }
 function init__tournament() {
+}
+function init__tournament_template() {
+    let tour_navs = getA('.sub_nav_link');
+    let tour_body = get('#tour_body');
+    tour_navs.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            let href = e.target.getAttribute('data-href');
+            getPage(href, tour_body);
+            tour_navs.forEach(link => {
+                link.classList.remove('active_t_button');
+            })
+            link.classList.add('active_t_button');
+        })
+    })
 }
 function init__tournament_create() {
     let form = get("#tournament_create__form");
@@ -89,11 +126,69 @@ function init__tournament_create() {
         sendFetch("/api/lk/tournament/post__create", JSON.stringify(data), "POST")
     })
 }
-function init__tournament_edit() {
-    let form = get("#tournament_reglament__form");
-    form.addEventListener("submit", (e) => {
-    
-    })    
+function init__tournament_edit(href) {
+    if(!get('#tour_body')) {
+        checkTournament(removeTrailingSlash(href))
+    }
+    console.log('init__tournament_edit')
+    let forms = getA('.tournament_edit__form');
+    let forms_dest = {
+
+    }
+    forms.forEach(form => {
+        form.addEventListener("submit", (e) => {
+            console.log(form)
+            e.preventDefault();
+            let tourId = get('#tour_body').getAttribute('data-id')
+            let data = formGetData(form)
+            data.tournamentId = tourId
+            let dest = form.getAttribute('data-submit')
+            if(!dest) {
+                alert('Неизвестная ошибка')
+                return
+            }
+            console.log(dest, data)
+            sendFetch(`/api/lk/tournament/put__edit/${dest}`, JSON.stringify(data), "PUT")
+        })
+    })
+    console.log(forms_dest)
+    let tourEditNavs = getA('.tour_edit_navs > input');
+    tourEditNavs.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            let href = e.target.getAttribute('data-dest');
+            forms.forEach(form => {
+                //console.log(href, form.getAttribute('data-submit'))
+                if(form.getAttribute('data-submit') == href) {
+                    form.classList.add('active')
+                } else {
+                    form.classList.remove('active')
+                }
+            })
+            tourEditNavs.forEach(link => {
+                if(link.getAttribute('data-dest') == href) {
+                    link.classList.add('active_t_button')
+                } else {
+                    link.classList.remove('active_t_button')
+                }
+            })
+        })
+    })
+}
+function init__tournament_group(href) {
+    if(!get('#tour_body')) {
+        checkTournament(removeTrailingSlash(href))
+    }
+    let tour_navs = getA('.sub_nav_link');
+    let tour_body = get('#tour_body');
+    tour_navs.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            let href = e.target.getAttribute('data-dest');
+            getPage(href, tour_body);
+        })
+    })
+    console.log('init__tournament_group')
 }
 function init__profile() {
     let profileForm = get("#profile__form");

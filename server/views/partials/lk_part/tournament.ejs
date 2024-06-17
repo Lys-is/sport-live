@@ -21,14 +21,14 @@
 
             <div class="tournires_content_block">
                 <div class="tournires_block_header">
-                    <h1><%= tournaments[i].name %> | <%= tournaments[i].full_name %></h1>
+                    <h1><%= tournaments[i].basic.name %> | <%= tournaments[i].basic.full_name %></h1>
                     <div class="tournires_actions">
-                        <a class="nav_link" data-href="tournament/id/<%= tournaments[i]._id %>/get__edit">Редактировать</a>
+                        <a class="nav_link" data-href="tournament/id/<%= tournaments[i]._id %>/edit">Редактировать</a>
                         <a href="#">Смотреть на сайте</a>
                     </div>
                 </div>
                 <div class="tournires_details">
-                    <p>Даты: <span>с <%= tournaments[i].date_start %> до <%= tournaments[i].date_end %></span></p>
+                    <p>Даты: <span>с <%= tournaments[i].basic.date_start %> до <%= tournaments[i].basic.date_end %></span></p>
                     <p class="tournires_status">Статус: Приём заявок</p>
                 </div>
                 <div class="tournires_tabs">

@@ -4,14 +4,24 @@ const {Schema, model} = require('mongoose');
 const Tournament = new Schema({
     creator: {type: Schema.Types.ObjectId, ref: 'User', autopopulate: true},
     admins: [{type: Schema.Types.ObjectId, ref: 'User', autopopulate: true}],
-    full_name: {type: String, unique: true},
-    name: {type: String, unique: true},
-    description: {type: String},
-    date_start: {type: Date},
-    date_end: {type: Date},
-    type: {type: String},
-    is_site: {type: Boolean, default: false},
-    is_calendar: {type: Boolean, default: false},
+    basic: {
+        img: {type: String, default: '-'},
+        full_name: {type: String},
+        name: {type: String},
+        tables_grids: {type: String},
+        rank: {type: String},
+        description: {type: String},
+        date_start: {type: String},
+        date_end: {type: String},
+        type: {type: String},
+        is_site: {type: Boolean, default: false},
+        is_calendar: {type: Boolean, default: false},
+        is_menu: {type: Boolean, default: false},
+        is_slider_main: {type: Boolean, default: false},
+        is_display_table_main: {type: Boolean, default: false},
+        is_league_info: {type: Boolean, default: false},
+    },
+
     reglament: {
         tie_enable: {type: Boolean, default: true},
         for_win: {type: Number, default: 3},
@@ -33,18 +43,41 @@ const Tournament = new Schema({
         dq_enable: {type: Boolean, default: false},
     },
     application_campaign : {
-        date_start: {type: Date, default: () => Date.now()},
-        date_end: {type: Date,default: () => Date.now()+ 1000*60*60*24*30},
+        start_date: {type: String},
+        end_date: {type: String},
         min_players: {type: Number, default: 0},
         max_players: {type: Number, default: 50},
-        contribution_type: {type: String, enum: ['none', 'team', 'personal', 'application'], default: 'none'},
+        fee_type: {type: String, enum: ['none', 'team', 'personal', 'application'], default: 'none'},
         transfers_enable: {type: Boolean, default: true},
         application_multiple_enable: {type: Boolean, default: false},
+    },
+    visual : {
+        starting_page: {type: String, default: 'about'},
+        calendar: {type: String, default: 'dates'},
+        color: {type: String, default: '#000000'},
+        is_info_preview: {type: Boolean, default: false},
+        is_white_header: {type: Boolean, default: false},
+        is_black_font: {type: Boolean, default: false},
+        is_shadow_header: {type: Boolean, default: false},
+        is_manual_cover: {type: Boolean, default: false},
+        img: {type: String, default: ''},
+        img_mobile: {type: String, default: ''},
+        is_global_stats: {type: Boolean, default: false},
+        stats_type: {type: String, default: 'all'},
+        is_display_all_stages: {type: Boolean, default: false},
+        before_start_type: {type: String, default: 'none'},
+        after_start_type: {type: String, default: 'none'},
+        application_type: {type: String, default: 'none'},
+    },
+    tags: {
+        tag_name: {type: String},
+        full_tag_name: {type: String},
     }
 })
-for(var p in Tournament.paths){
-    Tournament.path(p).required(true);
-  }
+
+// for(var p in Tournament.paths){
+//     Tournament.path(p).required(true);
+//   }
 Tournament.plugin(require('mongoose-autopopulate'));
 
 module.exports = model('Tournament', Tournament);

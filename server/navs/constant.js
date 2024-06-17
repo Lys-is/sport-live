@@ -1,7 +1,14 @@
 const checkAuth = require('../middlewares/checkAuth-middleware');
 const Router = require('express');
 const controllers = require('../controllers');
+//qq - middleware
 const nav = {
+    'panel' : {
+        'func' : 'get__panel'
+    },
+    'table' : {
+        'func' : 'get__table'
+    },
     'login' : {
         'func' : 'get__login'
     },
@@ -41,7 +48,26 @@ const nav = {
             'func' : 'get__tournament',
             'get__create' : {},
             'post__create' : {},
-            'id/:id/get__edit' : {'func': 'get__edit'},
+            'put__edit' : {
+                'basic' : { 'func' : 'put__basic' },
+                'reglament' : { 'func' : 'put__reglament' },
+                'application_campaign' : { 'func' : 'put__application_campaign' },
+                'visual' : { 'func' : 'put__visual' },
+                'tags' : { 'func' : 'put__tags' },
+                'admins' : { 'func' : 'put__admins' }
+            },
+            'id/:id/' : {'func': 'get__template'},
+            'id/:id/edit' : {'func': 'get__edit'},
+            'id/:id/group' : {'func': 'get__group'},
+            'id/:id/get__group_create' : {'func': 'get__group_create'},
+
+            'id/:id/team' : {'func': 'get__team'},
+            'id/:id/judge' : {'func': 'get__judge'},
+            'id/:id/t_team' : {'func': 'get__t_team'},
+            'id/:id/results' : {'func': 'get__results'},
+            'id/:id/docs' : {'func': 'get__docs'},
+            'id/:id/pages' : {'func': 'get__pages'},
+            'id/:id/widgets' : {'func': 'get__widgets'},
         },
         'match' : {
             'func' : 'get__match',
@@ -124,10 +150,11 @@ function start(){
         let link = '/'
         if(parents.length > 0){
             now_parents.unshift('api')
-            //console.log(now_parents)
+            //console.log(now_parents, obj)
             now_parents.forEach(el => {
                 contoller = contoller[el]
             });
+            //console.log(contoller, constrollerLink, link)
         }
         else {
             link = ''

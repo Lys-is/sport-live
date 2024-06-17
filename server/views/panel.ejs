@@ -1,0 +1,32 @@
+<%- include('global/header.ejs') %>
+
+<div id="main" style="display: block;">
+    <div>
+        <p class="page_title">Панель управления</p>
+        команда 1
+        <input type="text" name="team_1" class="standart_input">
+        <input type="color" name="team_1_color" class="standart_input">
+
+        команда 2
+        <input type="text" name="team_2" class="standart_input">
+        <input type="color" name="team_2_color" class="standart_input">
+    </div>
+    <div>
+        счёт
+        <input type="number" name="team_1_score" class="standart_input">
+        <input type="number" name="team_2_score" class="standart_input">
+    </div>
+    <div>
+        фолы
+        <input type="number" name="team_1_score_foll" class="standart_input">
+        <input type="number" name="team_2_score_foll" class="standart_input">
+    </div>
+    <div>
+        таймер
+        <input type="button" name="start_timer" value="Старт" id="start_timer">
+        <input type="text" name="timer" id="timer" class="standart_input">
+    </div>
+</div>
+<script src="/static/pages/panel.js"></script>
+
+<%- include('global/footer.ejs') %>

@@ -25,4 +25,7 @@
     margin-left: 20px;
     width: -webkit-fill-available;
     padding-block: 10px 40px;
+    /* padding-right: 10px; */
 }
+
+div#lk_main {}
