@@ -5,3 +5,7 @@ socket.on('update_data', (data) => {
     el.value = data.value
     console.log('update_data')
 })
+
+socket.on('update_event', (data) => {
+    
+})

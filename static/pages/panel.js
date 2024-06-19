@@ -1,3 +1,51 @@
+class Timer {
+
+    constructor() {
+        this.timer = null
+        this.minuts = 30
+        this.seconds = 0
+        this.is_reverse = true
+    }
+
+    reverse() {
+        this.is_reverse = !this.is_reverse
+    }
+    sendTime() {
+        let time = `${this.minuts}:${this.seconds}`
+        let data = {
+            name: 'timer',
+            value: time
+        }
+        socket.emit('new_data', data)
+    }
+    startTimer() {
+        console.log('asasas')
+        this.timer = setInterval(() => {
+            if(this.is_reverse){
+                this.seconds--
+                if(this.seconds == -1){
+                    this.minuts--
+                    this.seconds = 59
+                }
+
+            }
+            else{
+                this.seconds++
+                if(this.seconds == 60){
+                    this.minuts++
+                    this.seconds = 0
+                }
+            }
+
+            this.sendTime()
+        }, 1000)
+        
+    }
+}
+
+
+
+
 socket.emit('join_panel');
 
 let inputs = getA('.standart_input');
@@ -21,23 +69,14 @@ inputsChange.forEach(input => {
         socket.emit('new_data', data)
     })
 })
+
+
 let startTimerBtn = get('#start_timer');
 let timerInput = get('#timer');
-let timer
+let timer = new Timer();
 let minuts = 0, seconds = 0
 startTimerBtn.addEventListener('click', (e) => {
-    timer = setInterval(() => {
-        seconds++
-        if (seconds == 60) {
-            minuts++
-            seconds = 0
-        }
-        let time = `${minuts}:${seconds}`
-        let data = {
-            name: 'timer',
-            value: time
-        }
-        timerInput.value = time
-        socket.emit('new_data', data)
-    }, 1000)
+    timer.startTimer()
 })
+
+
