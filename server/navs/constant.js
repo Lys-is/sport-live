@@ -4,9 +4,11 @@ const controllers = require('../controllers');
 //qq - middleware
 const nav = {
     'panel' : {
+        'qq': checkAuth.isAuth,
         'func' : 'get__panel'
     },
     'table' : {
+        'qq': checkAuth.isAuth,
         'func' : 'get__table'
     },
     'login' : {
