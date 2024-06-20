@@ -187,11 +187,15 @@ function init__tournament_group(href) {
     let tour_navs = getA('.sub_nav_link');
     let tour_body = get('#tour_body');
     tour_navs.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            let href = e.target.getAttribute('data-dest');
-            getPage(href, tour_body);
-        })
+        if(!link.hasEventListener('click')) {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                let href = e.target.getAttribute('data-href');
+                console.log(href, e.target)
+                getPage(href, tour_body);
+            })
+        }
+        
     })
    
     console.log('init__tournament_group')
