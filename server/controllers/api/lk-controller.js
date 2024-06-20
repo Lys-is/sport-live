@@ -171,7 +171,6 @@ class LkController {
             console.log(await Match.find({creator: req.user.id}));
             let matches = await Match.find({creator: req.user.id}).populate('team_1 team_2');
             matches = matches.map((match) => {
-                match.date = match.date.toLocaleDateString()
                 console.log(match.date);
                 return match
             })
