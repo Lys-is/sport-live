@@ -60,7 +60,9 @@ class TournamentController {
         try {
             let tourId = req.params.id;
             let tournament = await Tournament.findOne({_id: tourId})
-            return sendRes('partials/lk_part/tour/tournament_group', {tournament}, res);
+            let groups = await tournament.getGroups();
+            console.log(groups)
+            return sendRes('partials/lk_part/tour/tournament_group', {tournament, groups}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -69,6 +71,14 @@ class TournamentController {
     async get__group_create(req, res) {
         try {
             return sendRes('partials/lk_part/tour/tournament_group_create', {}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__group_edit(req, res) {
+        try {
+            return sendRes('partials/lk_part/tour/tournament_group_edit', {}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

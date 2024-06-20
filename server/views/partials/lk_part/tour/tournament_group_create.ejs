@@ -2,7 +2,7 @@
     <div class="cool_header_block">
         <p class="block_title">Этап:</p>
     </div>
-    <form>
+    <form id="tournament_group_create__form">
 
         <div class="cool_body_content">
 
@@ -11,22 +11,34 @@
             <div class="form-group">
                 <div class="vert_group">
                     <label for="stage_name">Название этапа</label>
-                    <input type="text" class="text_form text" id="stage_name">
+                    <input type="text" class="text_form text" id="stage_name" name="name">
                 </div>
                 <div class="vert_group">
                     <label for="stage_type">Тип этапа</label>
-                    <select class="select select_wide" id="stage_type">
-                        <option value="Выбор">Выбор этого типа</option>
-                        <option value="...">...</option>
+                    <select class="select select_wide" id="stage_type" name="type">
+                        Один круг
+                        Два круга
+                        Три круга
+                        Четыре круга
+                        Плей-офф
+                        Свободный этап
+                        
+                        <% let options = {'1': 'Один круг', '2': 'Два круга', '3': 'Три круга', '4': 'Четыре круга', '5': 'Плей-офф', '6': 'Свободный этап'};
+
+                        for ( let key in options ) {
+                            %><option value="<%= key%>"><%= options[key] %></option><%
+                        }
+
+                         %>
                     </select>
                 </div>
                 <div class="vert_group">
                     <label for="stage_name">Игра за ... место</label>
-                    <input type="text" class="text_form text" id="stage_name">
+                    <input type="text" class="text_form text" id="stage_name" name="for_place">
                 </div>
                 <div class="vert_group">
                     <label for="stage_name">Ранг</label>
-                    <input type="text" class="text_form text" id="stage_name">
+                    <input type="text" class="text_form text" id="stage_name" name="rank">
                 </div>
             </div>
         </div>

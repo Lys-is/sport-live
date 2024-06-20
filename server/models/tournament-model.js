@@ -1,6 +1,7 @@
 const { application } = require('express');
 const {Schema, model} = require('mongoose');
-
+const Stage = require('./stage-model');
+const { configDotenv } = require('dotenv');
 const Tournament = new Schema({
     creator: {type: Schema.Types.ObjectId, ref: 'User', autopopulate: true},
     admins: [{type: Schema.Types.ObjectId, ref: 'User', autopopulate: true}],
@@ -78,6 +79,19 @@ const Tournament = new Schema({
 // for(var p in Tournament.paths){
 //     Tournament.path(p).required(true);
 //   }
+Tournament.statics.createGroup = async function (data) {
+    let tournament = this.findOne({_id: data.tournament});
+    console.log(tournament, data);
+    let group = new Stage(data);
+    return group.save();
+}
+Tournament.methods.getGroups = async function () {
+    let groups = await Stage.find({tournament: this._id});
+    return groups;
+}
+Tournament.statics.updateGroup = async function (data) {
+    
+}
 Tournament.plugin(require('mongoose-autopopulate'));
 
 module.exports = model('Tournament', Tournament);

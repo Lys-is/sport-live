@@ -17,3 +17,12 @@
         </div>
     </form>
 </div>
+<div class="cool_body">
+    <% groups.forEach((group) => { %>
+        <div class="group_block">
+            <p class="page_title"><%= group.name %></p>
+            <input type="button" value="Редактировать" class="button green_button sub_nav_link" data-dest="tournament/id/<%= tournament._id %>/get__group_edit/<%= group._id %>">
+        </div>
+
+    <% }); %>
+</div>

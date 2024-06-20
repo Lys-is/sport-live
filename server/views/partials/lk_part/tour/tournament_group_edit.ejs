@@ -1,0 +1,386 @@
+
+
+        <div class="tournires_header mt">
+            <div class="tournires_header_header cool_header wp">
+                <p class="block_stage">Этап: Финал</p>
+            </div>
+
+            <div class="cool_header_block cbh group_navs">
+                <input type="button" value="Календарь матчей" class="t_button active_t_button" data-dest="calendar">
+                <input type="button" value="Команды" class="t_button" data-dest="team">
+                <input type="button" value="Маркеры" class="t_button" data-dest="marker">
+                <input type="button" value="Начальное положение" class="t_button" data-dest="prepos">
+                <input type="button" value="Корректировка очков" class="t_button" data-dest="correction">
+                 
+                <input type="button" value="Редактировать" class="t_button" data-dest="edit">
+            </div> 
+        </div>
+        <div class="groups_body active" data-name="calendar"> 
+            <div class="cool_body">
+
+                <form>
+
+                    <div class="cool_body_content wbt">
+                        <div class="form-group">
+                            <div class="vert_group">
+                                <label for="command_name">Команда</label>
+                                <input type="text" class="text_form text" id="command_name">
+                            </div>
+                            <div class="vert_group">
+                                <label for="stage_search">Название этапа</label>
+                                <input type="text" class="text_form text" id="stage_search">
+                            </div>
+                            <div class="vert_group">
+                                <label for="stage_date">Дата этапа</label>
+                                <input type="date" class="text_form date" id="stage_date">
+                            </div>
+                            <div class="vert_group">
+                                <input type="button" value="Искать" class="button blue_button">
+                            </div>
+                            <div class="vert_group">
+                                <input type="button" value="Сбросить" class="button red_button">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="cool_body">
+                <form>
+                <div class="cool_header_block phb">
+                    <p class="block_title ">Календарь</p>
+                    <div class="filler"></div>
+                    <input type="button" value="Добавить матч" class="button green_button flex_form">
+                    <input type="button" value="Создать расписание автоматически" class="button green_button flex_form">
+                </div>
+                <div class="cool_body_content">
+                    <div class="form-group">
+                        <div class="filler"></div>
+                        <p class="block_info">Быстрое добавление матчей</p>
+                        <div class="filler"></div>
+                    </div>
+                    
+                    <div class="match_form">
+                        
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Дата</th>
+                                        <th>Время</th>
+                                        <th>Команда 1</th>
+                                        <th>Команда 2</th>
+                                        <th>Стадион</th>
+                                        <th>Тур</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="date" name="match_date" value="2024-06-01">
+                                        </td>
+                                        <td>
+                                            <input type="time" name="match_time" value="10:00" class="text_form flex_form">
+                                        </td>
+                                        <td>
+                                            <select name="team1">
+                                                <option value="-">-</option>
+                                                <!-- Add more team options here -->
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="team2">
+                                                <option value="-">-</option>
+                                                <!-- Add more team options here -->
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="stadium">
+                                                <option value="-">-</option>
+                                                <!-- Add more stadium options here -->
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="text_form text">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        
+                    </div>
+                </div>
+                <div class="create_tournire_footer">
+                        <input type="button" value="Добавить еще" class="button green_button">
+                        <div class="filler"></div>
+                        <input type="button" value="Сохранить" class="button green_button">
+                        
+                </div>
+                </form>
+            </div>
+            <div class="cool_body">
+                <form>
+                <div class="cool_header_block phb">
+                    <p class="block_title ">Календарь</p>
+                    <div class="filler"></div>
+                    <input type="button" value="Удалить расписание" class="button red_button">
+                </div>
+                
+
+                    <div class="cool_body_content">
+                        <div class="date_block">
+                            <div class="date_block_header">
+                                <p class="date_text">11.11.2020</p>
+                            </div>
+                            <div class="date_block_body">
+
+                                <p class="date_text date_time">Time</p>
+                                <div class="filler"></div>
+                                <p class="date_text">Score</p>
+                                <div class="filler"></div>
+                                <div class="s_button_group">
+                                    <input type="button" value="T" class="button white_button square">
+                                    <input type="button" value="" class="button white_button square">
+                                    <input type="button" value="" class="button white_button square">
+                                    <input type="button" value="" class="button white_button square">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="groups_body" data-name="team">
+            <div class="cool_body">
+                        
+                <form>
+                    <div class="cool_body_content wbt">
+                        <div class="form-group">
+                        <p class="tips">Отметьте команды, которые необходимо заявить</p>
+                        <div class="filler"></div>
+                        <input type="button" value="Убрать все" class="button red_button">
+                        <input type="button" value="Отметить все" class="button green_button">
+                        </div>
+                        <p class="tips">Сейчас отмечено: 1</p>
+                    </div>
+
+                    <div class="cool_body_content">
+                        <div class="form-group form_group_checkbox">
+                            <input type="checkbox" class="checkbox" id="command_first" checked>
+                            <label class="command_label" for="command_first">Команда 1</label>
+                        </div>
+                        <div class="form-group form_group_checkbox">
+                            <input type="checkbox" class="checkbox" id="command_second">
+                            <label class="command_label" for="command_second">Команда 2</label>
+                        </div>
+                    </div>
+
+                    <div class="create_tournire_footer">
+                        <div class="filler"></div>
+                        <input type="button" value="Отменить" class="button white_button">
+                        
+                        <input type="submit" value="Сохранить" class="button green_button">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="groups_body" data-name="marker">
+            <div class="cool_body">
+                        
+                <form>
+
+                    <div class="cool_body_content wbt">
+                        <div class="form-group form_group_checkbox">
+                            
+                            <label class="command_label" for="command_first_color">1 место</label>
+                            <input type="color" class="color" id="command_first_color" checked value="#00aa00">
+                        </div>
+                        <div class="form-group form_group_checkbox">
+                            <label class="command_label" for="command_second_color">2 место</label>
+                            <input type="color" class="color" id="command_second_color" value="#dd0000">
+
+                        </div>
+                    </div>
+
+                    <div class="create_tournire_footer">
+                        <div class="filler"></div>
+                        <input type="button" value="Отменить" class="button white_button">
+                        
+                        <input type="submit" value="Сохранить" class="button green_button">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="groups_body" data-name="prepos">
+            <div class="cool_body">
+                        
+                <form>
+                    <div class="cool_body_content wbt wp">
+                        <p class="tips">Важно!</p>
+                    </div>
+
+                    <div class="cool_body_content">
+                        <table class="commands_table cool_table">
+                            <tr id="first-row">
+                                <td>Ранг</td>
+                                <td>Команда</td>
+                                <td>И</td>
+                                <td>В</td>
+                                <td>Н</td>
+                                <td>П</td>
+                                <td>МЗ</td>
+                                <td>МП</td>
+                                <td>Очки</td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="flex_form"></td>
+                                <td><p class="block_stage">Команда 1</p></td>
+                                <td><input type="number" class="table_input_num"></td>
+                                <td><input type="number" class="table_input_num"></td>
+                                <td><input type="number" class="table_input_num"></td>
+                                <td><input type="number" class="table_input_num"></td>
+                                <td><input type="number" class="table_input_num"></td>
+                                <td><input type="number" class="table_input_num"></td>
+                                <td><input type="number" class="table_input_num"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="flex_form"></td>
+                                <td><p class="block_stage">Команда 2</p></td>
+                                <td><input type="number" class="table_input_num"></td>
+                                <td><input type="number" class="table_input_num"></td>
+                                <td><input type="number" class="table_input_num"></td>
+                                <td><input type="number" class="table_input_num"></td>
+                                <td><input type="number" class="table_input_num"></td>
+                                <td><input type="number" class="table_input_num"></td>
+                                <td><input type="number" class="table_input_num"></td>
+                            </tr>            
+                        </table>
+                    </div>
+
+                    <div class="create_tournire_footer">
+                        <div class="filler"></div>
+                        <input type="button" value="Отменить" class="button white_button">
+                        
+                        <input type="submit" value="Сохранить" class="button green_button">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="groups_body" data-name="correction">
+            <div class="cool_body">
+                        
+                <form>
+
+                    <div class="cool_body_content wbt">
+                        <div class="form-group">
+                            <select class="select double_form">
+                                <option value="Add">Добавить очки</option>
+                                <option value="Remove">Удалить очки</option>
+                            </select>
+                            <div class="filler"></div>
+                            <select class="select double_form">
+                                <option value="1" disabled>Выбор команды</option>
+                            </select>
+                            <div class="filler"></div>
+                            <input type="text" class="text_form text double_form" placeholder="Количество очков">
+                        </div>
+                    </div>
+
+                    <div class="create_tournire_footer">
+                        <div class="filler"></div>
+                        <input type="button" value="Отчистить" class="button white_button">
+                        
+                        <input type="submit" value="Добавить корректировку" class="button green_button flex_form">
+                        
+                    </div>
+
+                    <div class="cool_body_content">
+                        <div class="form-group">
+
+                            <table class="points_table">
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Очки</th>
+                                    <th>Пояснение</th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>Команда 1</td>
+                                    <td>5</td>
+                                    <td>...</td>
+                                    <td><input type="button" value="Удалить" class="button red_button"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="groups_body" data-name="edit">
+            <div class="cool_body">
+                        
+                <form>
+                    <div class="cool_body_content wbt">
+                        <div class="form-group">
+                            <div class="vert_group">
+                                <label class="form_label">Название этапа</label>
+                                <input type="text" class="text_form text" placeholder="Название этапа">
+                            </div>
+                            <div class="vert_group">
+                                <label class="form_label">Тип этапа</label>
+                                <select class="select text_form">
+                                    <option value="1">Один круг</option>
+                                    <option value="2">Два круга</option>
+                                    <option value="play-off">Плей-офф</option>
+                                    <option value="free">Свободный этап</option>
+                                    <option value="3">Три круга</option>
+                                    <option value="4">Четыре круга</option>
+                                </select>
+                            </div>
+                            <div class="vert_group">
+                                <label class="form_label">Игра за место</label>
+                                <input type="text" class="text_form text">
+                            </div>
+                            <div class="vert_group">
+                                <label class="form_label">Ранг</label>
+                                <input type="text" class="text_form text">
+                            </div>
+                        </div>
+                        <div class="form-group nmb">
+                            <div class="vert_group">
+                                <label class="form_label">Тип Плей-офф</label>
+                                <select class="select text_form double_form">
+                                    <option value="summ">По количеству побед</option>
+                                    <option value="wins">По сумме забитых/пропущенных матчей</option>
+                                </select>
+                            </div>
+                            
+                            <div class="vert_group">
+                                <label class="form_label">Макс. количество матчей в серии</label>
+                                <input type="text" class="text_form text double_form">
+                            </div>
+                            <div class="filler"></div>
+                            <div class="filler"></div>
+                            <div class="filler"></div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="create_tournire_footer">
+                        
+                        <input type="button" value="Удалить" class="button red_button">
+                        <div class="filler"></div>
+                        <input type="button" value="Отчистить" class="button white_button">
+                        
+                        <input type="submit" value="Сохранить" class="button green_button">
+                        
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

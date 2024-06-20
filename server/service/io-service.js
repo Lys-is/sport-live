@@ -1,7 +1,9 @@
 const socketIO = require('socket.io');
 const tokenService = require('./token-service');
 const User = require('../models/user-model');
+const controlService = require('./control-service');
 let io = null
+let controls = {}
 class IoService {
     constructor() {
     }
@@ -70,17 +72,35 @@ class IoService {
               socket.join('OnlineChat');
               
             }
+            let control = controls[socket.user._id.toString()]
+
             socket.on('join_panel', ()=>{
               console.log('_panel')
+              
+              if(!control){
+                control = new controlService(socket.user._id.toString())
+                controls[socket.user._id.toString()] = control
+              }
               socket.join(socket.user._id.toString()+'_panel');
             })
+
+
             socket.on('join_table', ()=>{
               console.log('_table')
               socket.join(socket.user._id.toString()+'_table');
             })
+
+
             socket.on('new_data', (data) => {
-                console.log(data)
-              socket.to(socket.user._id.toString()+'_table').emit('update_data', data)
+              if(!control){
+                control = new controlService(socket.user._id.toString())
+                controls[socket.user._id.toString()] = control
+              }
+                let ndata = control.setData(data)
+                console.log(data, ndata)
+                
+              socket.to(socket.user._id.toString()+'_table').emit('update_data', ndata)
+              socket.to(socket.user._id.toString()+'_panel').emit('update_data', ndata)
             })
             socket.on('message', async (txt)=>{
               try{

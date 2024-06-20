@@ -17,29 +17,35 @@ links.forEach(link => {
         link.addEventListener('click', linkListener)
 })
 if(params.page) {
-    (() => {
+    (async() => {
         let href = params.page.replace(/\$([^\\^]+)\^([^&]*)/g, '?$1=$2')
         console.log(href)
-        if(!checkTournament(removeTrailingSlash(href)))
+        if(!await checkTournament(removeTrailingSlash(href)))
             getPage(href)
     })()
 }
 async function checkTournament(str) {
     const regexFormatAny = /^tournament\/id\/[^\/]+$/;
-    const regexFormatAny2 = /^tournament\/id\/[^\/]+\/[^\/]+$/;
+    const regexFormatAny2 = /^tournament\/id\/[^\/]+\/.+$/;
   
     const isFormatAny = regexFormatAny.test(str);
     const containsAny2 = regexFormatAny2.test(str);
     console.log({ isFormatAny, containsAny2 });
     if(isFormatAny || containsAny2) {
-        let templateHref = str.replace(/\/id\/([^\/]+)(\/[^\/]*)?/,"/id/$1")
+        const regex = /^(tournament\/id\/[^\/]+)\/.+$/;
+        console.log(str)
+        let templateHref =  str.replace(regex, '$1')
+        console.log(templateHref)
         await getPage(templateHref)
         if(containsAny2) {
             let tour_body = get('#tour_body');
-            getPage(str, tour_body);
+            await getPage(str, tour_body);
         }
+        console.log('checkTournament')
+        return true
     }
-    return { isFormatAny, containsAny2 };
+    console.log('checkTournament false')
+    return false
 }
 async function getPage(href, destInHtml = lk_main) {
     const baseUrl = '/api/lk/';
@@ -59,19 +65,16 @@ async function getPage(href, destInHtml = lk_main) {
             link.addEventListener('click', linkListener);
         }
     });
-    initHref = initHref.replace(/\/id\/[^\/]+(\/[^\/]*)?/, "/id$1")
+    initHref = initHref.replace(/\/id\/[^\/]+(\/[^\/]*)?/, "/id$1").replace(/(get__group_edit).*/, '$1');
     console.log(removeTrailingSlash(initHref))
     inits[removeTrailingSlash(initHref)]?.(href);
+    return true
 }
 function removeTrailingSlash(str) {
     return str.replace(/\/$/, '');
   }
 async function linkListener(e) {
         e.preventDefault()
-        // links.forEach(link => {
-        //     link.classList.remove('navbar_selected')
-        // });
-        // e.target.classList.add('navbar_selected')
         let href = e.target.getAttribute('data-href')
         console.log(href)
         getPage(href)
@@ -96,6 +99,8 @@ let inits = {
     'tournament/id' : init__tournament_template,
     'tournament/id/edit' : init__tournament_edit,
     'tournament/id/group' : init__tournament_group,
+    'tournament/id/get__group_create' : init__tournament_group_create,
+    'tournament/id/get__group_edit' : init__tournament_group_edit,
     'player': init__player
 }
 for(let key in inits) {
@@ -188,7 +193,42 @@ function init__tournament_group(href) {
             getPage(href, tour_body);
         })
     })
+   
     console.log('init__tournament_group')
+}
+function init__tournament_group_edit() {
+    let groupDivs = getA('.groups_body');
+    let groupEditNavs = getA('.group_navs > input');
+    groupEditNavs.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            let href = e.target.getAttribute('data-dest');
+            groupDivs.forEach(div => {
+                //console.log(href, form.getAttribute('data-submit'))
+                if(div.getAttribute('data-name') == href) {
+                    div.classList.add('active')
+                } else {
+                    div.classList.remove('active')
+                }
+            })
+            groupEditNavs.forEach(link => {
+                if(link.getAttribute('data-dest') == href) {
+                    link.classList.add('active_t_button')
+                } else {
+                    link.classList.remove('active_t_button')
+                }
+            })
+        })
+    })
+}
+function init__tournament_group_create() {
+    let form = get("#tournament_group_create__form");
+    let tourId = get('#tour_body').getAttribute('data-id')
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let data = formGetData(form)
+        sendFetch(`/api/lk/tournament/id/${tourId}/group/post__create`, JSON.stringify(data), "POST")
+    })
 }
 function init__profile() {
     let profileForm = get("#profile__form");

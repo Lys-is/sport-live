@@ -58,9 +58,13 @@ const nav = {
             },
             'id/:id/' : {'func': 'get__template'},
             'id/:id/edit' : {'func': 'get__edit'},
-            'id/:id/group' : {'func': 'get__group'},
+            'id/:id/group' : {
+                'func': 'get__group',
+                'post__create' : {},
+                
+            },
+            'id/:id/get__group_edit/:group_id' : {'func': 'get__group_edit'},
             'id/:id/get__group_create' : {'func': 'get__group_create'},
-
             'id/:id/team' : {'func': 'get__team'},
             'id/:id/judge' : {'func': 'get__judge'},
             'id/:id/t_team' : {'func': 'get__t_team'},
@@ -131,6 +135,7 @@ function start(){
         if(elem.func){
             constrollerLink = elem.func
         }
+        constrollerLink = constrollerLink.replace('id/:id/', '')
         if(middelwareParent){
             middelware = middelwareParent
         }
@@ -150,11 +155,12 @@ function start(){
         let link = '/'
         if(parents.length > 0){
             now_parents.unshift('api')
-            //console.log(now_parents, obj)
+            console.log(now_parents, obj)
             now_parents.forEach(el => {
+                el = el.replace('id/:id/', '')
                 contoller = contoller[el]
             });
-            //console.log(contoller, constrollerLink, link)
+            console.log(contoller, constrollerLink, link)
         }
         else {
             link = ''

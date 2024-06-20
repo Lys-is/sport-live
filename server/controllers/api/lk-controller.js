@@ -139,7 +139,6 @@ class LkController {
             console.log(await Team.find());
             let teams = await Team.find({}).populate('creator');
             teams = teams.map((team) => {
-                team.date = team.date.toLocaleDateString()
                 console.log(team.date);
                 return team
             })

@@ -116,9 +116,20 @@ function eraseCookie(name) {
 
 
 window.onload = function(){
-    
+    console.log('onload')
+    let dataInpts = getA('input[type="date"]');
+    console.log(dataInpts)
+    dataInpts.forEach(inp => {
+        console.log(inp)
+        if(inp.value == ''){
+            inp.value = new Date().toLocaleDateString({timeZone: "Europe/Moscow"})
+            console.log(inp.value)
+        }
+    })
 }
-
+function getCurrentDate() {
+    return new Date().toLocaleDateString({timeZone: "Europe/Moscow"})
+}
 class Auth {
     setToken(token) {
         this.token = token;
@@ -327,3 +338,4 @@ function formGetData(form) {
     console.log(data);
     return data;
 }
+

@@ -5,3 +5,11 @@
 .tournament_edit__form.active {
     display: block;
 }
+
+.groups_body {
+    display: none;
+}
+
+.groups_body.active {
+    display: block;
+}

@@ -18,7 +18,7 @@ const app = express()
 
 const server = http.createServer(app);
 const router = require('./navs/constant')
-console.log(router)
+console.log(router._router.stack)
 ioService.start(server);
 //const io = socketio(server);
 app.use(express.json());

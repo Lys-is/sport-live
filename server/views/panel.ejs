@@ -1,6 +1,7 @@
 <%- include('global/header.ejs') %>
+<link rel="stylesheet" href="/static/styles/style_panel.css">
 
-<div id="main" style="display: block;">
+<!--<div id="main" style="display: block;">
     <div>
         <p class="page_title">Панель управления</p>
         команда 1
@@ -25,6 +26,316 @@
         таймер
         <input type="button" name="start_timer" value="Старт" id="start_timer">
         <input type="text" name="timer" id="timer" class="standart_input">
+    </div>
+</div> -->
+
+<div id="main" style="display: block;">
+    <div class="scorecontainer">
+        <div class="btncontainer">
+            <div class="row row-flex score-control-names">
+                <div class="team-container">
+                    <input type="text" class="data team standart_input" id="home-short" data-default="" placeholder="Хозяева" name="team1_name">
+
+                    <input type="color" class="standart_input color" data-default="#fff" data-picker="home-picker" id="home-color" value="#FF1199" name="team1_color">
+                </div>
+                <span class="score_devider"></span>
+                <div class="team-container">
+                    <input type="text" class="data team standart_input" id="away-short" data-default="" placeholder="Гости" name="team2_name">
+                    <input type="color" class="standart_input color" data-default="#fff" data-picker="away-picker" id="away-color" value="#000000" name="team2_color">
+                </div>
+                <div class="em8">
+                    <button class="reset ui-button ui-corner-all ui-widget" value="team" title="Сбросить названия и цвета комманд">
+                        <!-- Сброс -->
+                    
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" stroke-width="1.1" d="M17.08,11.15 C17.09,11.31 17.1,11.47 17.1,11.64 C17.1,15.53 13.94,18.69 10.05,18.69 C6.16,18.68 3,15.53 3,11.63 C3,7.74 6.16,4.58 10.05,4.58 C10.9,4.58 11.71,4.73 12.46,5"></path><polyline fill="none" stroke="#000" points="9.9 2 12.79 4.89 9.79 7.9"></polyline></svg>
+</button>
+
+                </div>
+            </div>
+
+            <div class="row score-control-score">
+                <span><span class="ui-spinner ui-corner-all ui-widget ui-widget-content"><input class="standart_input spinner data ui-spinner-input" id="home-score" data-default="0" value="0" size="2" aria-valuemin="0" aria-valuemax="99" aria-valuenow="0" autocomplete="off" role="spinbutton" readonly="readonly"  name="team1_score"><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="10" y1="5" x2="10" y2="14"></line><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a></span></span>
+
+                <span class="score_devider">счет</span>
+
+                <span><span class="ui-spinner ui-corner-all ui-widget ui-widget-content"><input class="standart_input spinner data ui-spinner-input" id="away-score" data-default="0" value="0" size="2" aria-valuemin="0" aria-valuemax="99" aria-valuenow="0" autocomplete="off" role="spinbutton" readonly="readonly" name="team2_score"><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only" role="button" ><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="10" y1="5" x2="10" y2="14"></line><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a></span></span>
+                <span><button class="reset ui-button ui-corner-all ui-widget" value="team-score" title="Сбросить счет матча на 0">
+                        <!-- Сброс -->
+                    
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" stroke-width="1.1" d="M17.08,11.15 C17.09,11.31 17.1,11.47 17.1,11.64 C17.1,15.53 13.94,18.69 10.05,18.69 C6.16,18.68 3,15.53 3,11.63 C3,7.74 6.16,4.58 10.05,4.58 C10.9,4.58 11.71,4.73 12.46,5"></path><polyline fill="none" stroke="#000" points="9.9 2 12.79 4.89 9.79 7.9"></polyline></svg>
+</button></span>
+            </div>
+                                <div class="row score-control-fouls" style="">
+                    <!-- <button class="plusminusbtn" id="home-plus-fouls" value='1'>+</button> -->
+                    <span><span class="ui-spinner ui-corner-all ui-widget ui-widget-content ui-spinner-disabled ui-state-disabled"><input class="standart_input spinner data ui-spinner-input" id="home-fouls" data-default="0" value="0" size="2" aria-valuemin="0" aria-valuemax="99" aria-valuenow="0" autocomplete="off" role="spinbutton" readonly="readonly" disabled=""  name="team1_foll"><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only ui-button-disabled ui-state-disabled" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="10" y1="5" x2="10" y2="14"></line><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only ui-button-disabled ui-state-disabled" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a></span></span>
+                    <div class="score_devider">
+                        фолы<input type="checkbox" class="c" id="show_fouls" value="0" title="Вкл/выкл отображение фолов" >
+                    </div>
+                    <!-- <button class="plusminusbtn" id="home-minus-fouls" value='-1'>-</button> -->
+                    <span><span class="ui-spinner ui-corner-all ui-widget ui-widget-content ui-spinner-disabled ui-state-disabled"><input class="standart_input spinner data ui-spinner-input" id="away-fouls" data-default="0" value="0" size="2" aria-valuemin="0" aria-valuemax="99" aria-valuenow="0" autocomplete="off" role="spinbutton" readonly="readonly" disabled=""  name="team2_foll"><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only ui-button-disabled ui-state-disabled" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="10" y1="5" x2="10" y2="14"></line><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only ui-button-disabled ui-state-disabled" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a></span></span>
+                    <span>
+                        <button class="reset ui-button ui-corner-all ui-widget" value="team-fouls" title="Сбросить все фолы на 0">
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" stroke-width="1.1" d="M17.08,11.15 C17.09,11.31 17.1,11.47 17.1,11.64 C17.1,15.53 13.94,18.69 10.05,18.69 C6.16,18.68 3,15.53 3,11.63 C3,7.74 6.16,4.58 10.05,4.58 C10.9,4.58 11.71,4.73 12.46,5"></path><polyline fill="none" stroke="#000" points="9.9 2 12.79 4.89 9.79 7.9"></polyline></svg>
+</button>
+                    </span>
+                </div>
+                            <!-- 				<div class="row score-control-series">
+                <span><input class="standart_input spinner data" id="home-series" data-default="0" value="0" size="2" /></span>
+                <span class="score_devider">серия</span>
+                <span><input class="standart_input spinner data" id="away-series" data-default="0" value="0" size="2" /></span>
+                <span><button class="reset" value='team-score' title="Сбросить счет серии на 0"></button></span>
+            </div> -->
+            <div class="row score-control-pen" style="display: none;">
+                <div class="home-pen">
+                    <label for="home-pen-g" title="Гол" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
+                    <input class="home-pen-radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen" value="g" data-table="little" id="home-pen-g">
+                    <label for="home-pen-0" title="-" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
+                    <input class="home-pen-radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen" value="0" data-table="little" id="home-pen-0" checked="">
+                    <label for="home-pen-d" title="Сейв" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
+                    <input class="home-pen-radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen" value="d" data-table="little" id="home-pen-d">
+                </div>
+                <div class="away-pen">
+                    <label for="away-pen-g" title="Гол" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
+                    <input class="away-pen-radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen" value="g" data-table="little" id="away-pen-g">
+                    <label for="away-pen-0" title="-" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
+                    <input class="away-pen-radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen" value="0" data-table="little" id="away-pen-0" checked="">
+                    <label for="away-pen-d" title="Сейв" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
+                    <input class="away-pen-radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen" value="d" data-table="little" id="away-pen-d">
+                </div>
+                <span>
+                    <button class="pen_reset ui-button ui-corner-all ui-widget" value="team-fouls" title="Сбросить все фолы на 0">
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" stroke-width="1.1" d="M17.08,11.15 C17.09,11.31 17.1,11.47 17.1,11.64 C17.1,15.53 13.94,18.69 10.05,18.69 C6.16,18.68 3,15.53 3,11.63 C3,7.74 6.16,4.58 10.05,4.58 C10.9,4.58 11.71,4.73 12.46,5"></path><polyline fill="none" stroke="#000" points="9.9 2 12.79 4.89 9.79 7.9"></polyline></svg>
+</button>
+                </span>
+            </div>
+            <!-- 				<div class="row score-control-hockey">
+                <div>
+                    <button class="card hockey" data-team='home' value="90">1.5</button>
+                    <button class="card hockey" data-team='home' value="120">2</button>
+                    <button class="card hockey" data-team='home' value="240">4</button>
+                    <button class="card hockey" data-team='home' value="300">5</button>
+                </div>
+                <span class="hockey_devider"></span>
+                <div>
+                    <button class="card hockey" data-team='away' value="90">1.5</button>
+                    <button class="card hockey" data-team='away' value="120">2</button>
+                    <button class="card hockey" data-team='away' value="240">4</button>
+                    <button class="card hockey" data-team='away' value="300">5</button>
+                </div>
+                <div></div>
+            </div>
+            <div class="row score-control-hockey">
+                <div class="fouls-colum home-fouls">
+                    <div class="fouls"><span>05:00</span><button class="hokkey-fouls">-</button></div>
+                </div>
+                <span class="card_devider"></span>
+                <div class="fouls-colum away-fouls">
+                    <div class="fouls"><span>05:00</span><button class="hockey-fouls">-</button></div>
+                </div>
+            </div> -->
+            <div class="row score-control-hockey">
+                <div class="fouls-colum home-fouls">
+                    <div class="fouls" style="display: none;"><input type="text" class="timerAdd" style="width: 35px;" data-id="00:00" value="00:00"><button class="hokkey-fouls ui-button ui-corner-all ui-widget">-</button></div>
+                </div>
+                <span class="card_devider"></span>
+                <div class="fouls-colum away-fouls">
+                    <div class="fouls" style="display: none;"><input type="text" class="timerAdd" style="width: 35px;" data-id="00:00" value="00:00"><button class="hockey-fouls ui-button ui-corner-all ui-widget">-</button></div>
+                </div>
+            </div>
+        </div>
+        <!-- <h5>Таймер</h5> -->
+        <!--			<legend>Таймер</legend> -->
+        <hr color="#1f1e1f" align="left">
+        <div class="row" id="timer" state="stopped">
+            <div class="row timer-control">
+                <div class="col-left">
+                    <button class="timer ui-button ui-corner-all ui-widget" id="timer-start" state="stopped">▶</button>
+                    <input class="timer standart_input" type="text" id="time" data-default="00:00" value="00:00">
+                    <button class="timer ui-button ui-corner-all ui-widget" id="timer-reset">
+                        <!-- Сброс -->
+                    
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" stroke-width="1.1" d="M17.08,11.15 C17.09,11.31 17.1,11.47 17.1,11.64 C17.1,15.53 13.94,18.69 10.05,18.69 C6.16,18.68 3,15.53 3,11.63 C3,7.74 6.16,4.58 10.05,4.58 C10.9,4.58 11.71,4.73 12.46,5"></path><polyline fill="none" stroke="#000" points="9.9 2 12.79 4.89 9.79 7.9"></polyline></svg>
+</button>
+                </div>
+                <div class="col-right" id="roundcounter" style="">
+                    <div class="title">Тайм </div>
+                    <span class="ui-spinner ui-corner-all ui-widget ui-widget-content"><input class="standart_input spinner data ui-spinner-input" id="roundnum" data-default="1" value="1" size="1" aria-valuemin="0" aria-valuemax="99" aria-valuenow="5" autocomplete="off" role="spinbutton" readonly="readonly" name="now_time"><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="10" y1="5" x2="10" y2="14"></line><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a></span>
+                </div>
+                <div class="col-right currentPenalty" style="display: none;">
+                    <div class="title">№ пенальти</div>
+                    <span class="ui-spinner ui-corner-all ui-widget ui-widget-content"><input class="spinner data ui-spinner-input" id="currentPenalty" data-default="1" value="1" size="1" aria-valuemin="0" aria-valuemax="99" aria-valuenow="6" autocomplete="off" role="spinbutton" readonly="readonly" name="now_penalty"><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="10" y1="5" x2="10" y2="14"></line><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a></span>
+                </div>
+            </div>
+            <div class="correction-container manual">
+                <div class="row-correction col-left">
+                    <button class="correction timer ui-button ui-corner-all ui-widget" value="-10">-10</button>
+                    <button class="correction timer ui-button ui-corner-all ui-widget" value="-5">-5</button>
+                    <button class="correction timer ui-button ui-corner-all ui-widget" value="-1">-1</button>
+                    <button class="correction timer ui-button ui-corner-all ui-widget" value="1">+1</button>
+                    <button class="correction timer ui-button ui-corner-all ui-widget" value="5">+5</button>
+                    <button class="correction timer ui-button ui-corner-all ui-widget" value="10">+10</button>
+                </div>
+                <div class="col-right"></div>
+            </div>
+        </div>
+        <legend>
+            <h3>Табло</h3><span class="on-air" id="air"></span>
+        </legend>
+        <div class="table-sel">
+            <label for="table-little" title="Основное" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>Малое</label>
+            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="little" id="table-little" checked="">
+            <label for="table-big" title="Большое снизу" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Большое</label>
+            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="big" id="table-big">
+                            <label for="table-mid" title="Match ID" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Матч</label>
+            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="mid" id="table-mid">
+            <label for="table-home-roster" title="Состав хозяев" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Cборная</label>
+            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="away-roster" id="table-away-roster">
+                            <!-- 				<label for="table-live" title="">Live</label>
+            <input class="radio" type="radio" name='radio' value="live" data-table="live" id="table-live"> -->
+            <label for="table-weather" title="Погода" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-disabled ui-state-disabled"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Погода</label>
+            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="weather" id="table-weather" disabled="">
+            <label for="table-pen" title="Пенальти" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Пен.</label>
+            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="pen" id="table-pen">
+            <label for="table-off" title="Убрать все табло" id="table-off-button" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Выкл</label>
+            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="off" id="table-off">
+        </div>
+        <div class="row flex-row">
+            <div class="inline">Подпись табло</div>
+            <select class="select_input label width01" data-default="Начало матча" id="label">
+                <option value="Начало матча">Начало матча</option><option value="1 тайм">1 тайм</option>
+                
+                <option value="time">Время</option>
+                <option value="Видеопросмотр">Видеопросмотр</option>
+                <option value="Тайм-аут">Тайм-аут</option>
+                <option value="Перерыв">Перерыв</option>
+                <!-- <option value='2й тайм'>2й тайм</option> -->
+                <!-- <option value='Экстратайм'>Экстратайм</option> -->
+                <option value="Конец матча">Конец матча</option>
+            </select>
+        </div>
+        <div class="row flex-row">
+            <div class="inline">Матч</div>
+            <select class="" id="match-sel">
+            <option data-homeid="1385934" data-awayid="1385936" data-tournamentid="1040622" value="4102410">20 июня 10:00 Cборная Минска-Могилевская область</option><option data-homeid="1385938" data-awayid="1385939" data-tournamentid="1040622" value="4102411">20 июня 10:45 Гродненская область- Гомельская область</option><option data-homeid="null" data-awayid="null" data-tournamentid="1040622" value="4102417">21 июня 10:45 -</option><option data-homeid="null" data-awayid="null" data-tournamentid="1040622" value="4102412">21 июня 11:30 -</option></select>
+                            <button class="sessionbtn ui-button ui-corner-all ui-widget" id="load" title="Загрузить матч">✅</button>
+        </div>
+        <hr>
+        <!-- 			<div class="controlgroup show">
+  
+            <button id="show_comment">Показать комментатора</button>
+            <button id="show_text">Показать текст</button>
+            <button id="hide_all">x</button>
+        </div> -->
+        <!-- 			<div class="controlgroup">
+            <input type="text" class="team2" id="team" data-default="" placeholder="Комманда" />
+            <input type="text" class="" id="text" data-default="" placeholder="Подпись" />
+        </div> -->
+        <div class="flex-row" style="flex-direction: column;">
+            <button id="all_reset" class="width01 ui-button ui-corner-all ui-widget"><span>Сбросить всё!<span></span></span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" stroke-width="1.1" d="M17.08,11.15 C17.09,11.31 17.1,11.47 17.1,11.64 C17.1,15.53 13.94,18.69 10.05,18.69 C6.16,18.68 3,15.53 3,11.63 C3,7.74 6.16,4.58 10.05,4.58 C10.9,4.58 11.71,4.73 12.46,5"></path><polyline fill="none" stroke="#000" points="9.9 2 12.79 4.89 9.79 7.9"></polyline></svg>
+</button>
+                        </div>
+        <details open="open">
+            <summary>Настройки</summary>
+            <div id="option">
+                <div class="flex-row">
+                    <legend class="legend-options" style="justify-content: flex-end;">
+                        <!-- <h3>Настройки</h3><span class="card_devider"> -->
+                    </legend>
+                </div>
+                <div class="row flex-row">
+                    <div class="inline">Погода</div>
+                    <input class="standart_input" type="text" id="town" data-default="" placeholder="Город для погоды">
+                    <!-- <button id="checkWeather" title="Проверить погоду">Проверить</button> -->
+                </div>
+                <div>Данные от: <span id="weatherDate">введите корректный город</span></div>
+                <div id="settings">
+                    <div class="manual flex-row" id="roundcounter1">
+                        <div class="inline ">Длит. 1 тайма</div>
+                        <select class="select_input timer width01" id="round-time">
+                            <option value="10:00">10 минут</option>
+                            <option value="15:00">15 минут</option>
+                            <option value="20:00">20 минут</option>
+                            <option value="22:00">22 минуты</option>
+                            <option selected="" value="25:00">25 минут</option>
+                            <option value="30:00">30 минут</option>
+                            <option value="35:00">35 минут</option>
+                            <option value="40:00">40 минут</option>
+                            <option value="45:00">45 минут</option>
+                            <!-- <option value='null'>Бесконечно</option> -->
+                        </select>
+                    </div>
+                    <p class="manual">
+                        <input type="checkbox" class="check_input timer" id="start-time-zero" value="0">
+                        <label for="start-time-zero">Начинать последующие таймы не с 0</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" class="check_input" id="countdown" value="0">
+                        <label for="countdown">Обратный отсчет</label>
+                        <input style="display: none;" type="checkbox" class="check_input" id="round-auto" checked="checked" value="1">
+                    </p>
+                    <p>
+                        <input type="checkbox" class="check_input" id="hideTimer" value="0">
+                        <label for="hideTimer">Не показывать таймер</label>
+                    </p>
+                </div>
+
+
+
+                <!-- <div class="row flex-row" >
+                    <div class="inline">Поток</div>
+                    <select class="" id="stream-sel">
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='4'>4</option>
+                        <option value='5'>5</option>
+                        <option value='6'>6</option>
+                        <option value='7'>7</option>
+                        <option value='8'>8</option>
+                        <option value='9'>9</option>
+                        <option value='Alex'>Alex</option>
+                        <option value='Maxter'>Maxter</option>
+                        <option value='Danik'>Даник</option>
+                        <option value='lfl'>LFL</option>
+                    </select>
+                </div> -->
+                                                            <div class="row flex-row">
+                        <div class="inline">Дизайн</div>
+                        <select class="width01" id="design">
+                            <option value="1" data-multicolor="">Базовый</option><option value="2" data-multicolor="">citychamp</option><option value="3" data-multicolor="">bamf</option><option value="4" data-multicolor="">ligagoroda</option><option value="5" data-multicolor="">spblfs</option><option selected="" value="6" data-multicolor="1">Футзал</option><option value="8" data-multicolor="">rksport8x8</option><option value="9" data-multicolor="">rksport_bamf</option><option value="10" data-multicolor="">rksport_bamf_W</option><option value="11" data-multicolor="">APL</option>							</select>
+                    </div>
+                
+                <!-- 					<button class="sessionbtn" id="load" title="Загрузить сессию">&#x1F4C2;</button>
+                    <button class="sessionbtn" id="save" title="Сохранить сессию">&#128190;</button>
+                    <button class="sessionbtn" id="delete" title="Удалить выделенную сессию">&#x267B;</button> -->
+            </div>
+        </details>
+        
     </div>
 </div>
 <script src="/static/pages/panel.js"></script>
