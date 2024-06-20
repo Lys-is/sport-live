@@ -13,7 +13,7 @@
             <div class="filler"></div>
             <input type="button" value="Обновить статистику" class="button blue_button">
             <input type="button" value="Обновить Таблицы" class="button blue_button">
-            <input type="button" value="Добавить" class="button green_button sub_nav_link" data-dest="tournament/id/<%= tournament._id %>/get__group_create" >
+            <input type="button" value="Добавить" class="button green_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/get__group_create" >
         </div>
     </form>
 </div>
@@ -21,7 +21,7 @@
     <% groups.forEach((group) => { %>
         <div class="group_block">
             <p class="page_title"><%= group.name %></p>
-            <input type="button" value="Редактировать" class="button green_button sub_nav_link" data-dest="tournament/id/<%= tournament._id %>/get__group_edit/<%= group._id %>">
+            <input type="button" value="Редактировать" class="button green_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/get__group_edit/<%= group._id %>">
         </div>
 
     <% }); %>
