@@ -14,7 +14,7 @@ class TeamsController {
     async post__create(req, res) {
         try {
             let {name, description} = req.body;
-            await Team.create({creator: req.user.id, admins: req.user.id, name, description});
+            await Team.create({creator: req.user.id, admins: req.user.id, ...req.body});
             return res.json({message: 'Команда создана'});
         } catch (e) {
             console.log(e);

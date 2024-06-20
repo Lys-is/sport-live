@@ -52,7 +52,7 @@ async function getPage(href, destInHtml = lk_main) {
     const cleanedHref = href.replace(/\/\?([^=]+)=([^&]+)/g, '/$1~$2');
     const pageUrl = `${baseUrl}${href}`;
     let initHref = cleanedHref.split('?')[0];
-    console.log(pageUrl);
+    console.log(initHref);
     const response = await sendFetch(pageUrl, null, 'GET');
     destInHtml.innerHTML = response ? response : 'Страница не найдена';
 
@@ -261,7 +261,8 @@ function init__team_create() {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         let data = formGetData(form)
-
+        console.log(getCurrentDate())
+        data.date = getCurrentDate()
         sendFetch("/api/lk/team/post__create", JSON.stringify(data), "POST")
     })
 }
