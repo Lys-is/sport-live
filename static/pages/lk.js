@@ -18,7 +18,7 @@ links.forEach(link => {
 })
 if(params.page) {
     (async() => {
-        let href = params.page.replace(/\$([^\\^]+)\^([^&]*)/g, '?$1=$2')
+        let href = params.page.replace(/\^id~(.+)/, '?id=$1')
         console.log(href)
         if(!await checkTournament(removeTrailingSlash(href)))
             getPage(href)
@@ -48,14 +48,16 @@ async function checkTournament(str) {
     return false
 }
 async function getPage(href, destInHtml = lk_main) {
+    
     const baseUrl = '/api/lk/';
-    const cleanedHref = href.replace(/\/\?([^=]+)=([^&]+)/g, '/$1~$2');
+    const cleanedHref = href.replace(/(\?id=)(.+)/, '^id~$2');
+    console.log(cleanedHref, href)
     const pageUrl = `${baseUrl}${href}`;
     let initHref = cleanedHref.split('?')[0];
     console.log(initHref);
     const response = await sendFetch(pageUrl, null, 'GET');
     destInHtml.innerHTML = response ? response : 'Страница не найдена';
-
+    
     params.subHref = href.split('?')[1] || '';
     history.replaceState({ page: 1 }, "", `?page=${cleanedHref}`);
 

@@ -1,341 +1,961 @@
 <%- include('global/header.ejs') %>
 <link rel="stylesheet" href="/static/styles/style_panel.css">
 
-<!--<div id="main" style="display: block;">
-    <div>
-        <p class="page_title">Панель управления</p>
-        команда 1
-        <input type="text" name="team_1" class="standart_input">
-        <input type="color" name="team_1_color" class="standart_input">
-
-        команда 2
-        <input type="text" name="team_2" class="standart_input">
-        <input type="color" name="team_2_color" class="standart_input">
-    </div>
-    <div>
-        счёт
-        <input type="number" name="team_1_score" class="standart_input">
-        <input type="number" name="team_2_score" class="standart_input">
-    </div>
-    <div>
-        фолы
-        <input type="number" name="team_1_score_foll" class="standart_input">
-        <input type="number" name="team_2_score_foll" class="standart_input">
-    </div>
-    <div>
-        таймер
-        <input type="button" name="start_timer" value="Старт" id="start_timer">
-        <input type="text" name="timer" id="timer" class="standart_input">
-    </div>
-</div> -->
-
-<div id="main" style="display: block;">
+<div id="main">
     <div class="scorecontainer">
-        <div class="btncontainer">
+
+        <div class="score_control_group control_group_main">			<!-- teams -->
+        <div class="controls_block btncontainer">
             <div class="row row-flex score-control-names">
                 <div class="team-container">
-                    <input type="text" class="data team standart_input" id="home-short" data-default="" placeholder="Хозяева" name="team1_name">
+                    команда 1
+                    <input type="text" class="data team" data-type="team" data-name="team_1_name">
+                    <input type="color" class="data color" data-type="color" data-name="team_1_color">
+                </div>
+                <span class="score_devider">
 
-                    <input type="color" class="standart_input color" data-default="#fff" data-picker="home-picker" id="home-color" value="#FF1199" name="team1_color">
-                </div>
-                <span class="score_devider"></span>
-                <div class="team-container">
-                    <input type="text" class="data team standart_input" id="away-short" data-default="" placeholder="Гости" name="team2_name">
-                    <input type="color" class="standart_input color" data-default="#fff" data-picker="away-picker" id="away-color" value="#000000" name="team2_color">
-                </div>
-                <div class="em8">
                     <button class="reset ui-button ui-corner-all ui-widget" value="team" title="Сбросить названия и цвета комманд">
                         <!-- Сброс -->
                     
 <svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" stroke-width="1.1" d="M17.08,11.15 C17.09,11.31 17.1,11.47 17.1,11.64 C17.1,15.53 13.94,18.69 10.05,18.69 C6.16,18.68 3,15.53 3,11.63 C3,7.74 6.16,4.58 10.05,4.58 C10.9,4.58 11.71,4.73 12.46,5"></path><polyline fill="none" stroke="#000" points="9.9 2 12.79 4.89 9.79 7.9"></polyline></svg>
 </button>
 
+                </span>
+                <div class="team-container">
+                    команда 2
+                    <input type="text" class="data team" data-type="team" data-name="team_2_name">
+                    <input type="color" class="data color" data-type="color" data-name="team_2_color">
+
+                </div>
+                <div class="em8">
+
+                    <!-- <label for="show_colors" title="Вкл/выкл цвет формы">Цвета</label>
+                    <input type="checkbox" class="storable" id="show_colors" value="0" >	 -->
                 </div>
             </div>
-
             <div class="row score-control-score">
-                <span><span class="ui-spinner ui-corner-all ui-widget ui-widget-content"><input class="standart_input spinner data ui-spinner-input" id="home-score" data-default="0" value="0" size="2" aria-valuemin="0" aria-valuemax="99" aria-valuenow="0" autocomplete="off" role="spinbutton" readonly="readonly"  name="team1_score"><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
+                <!-- <button class="plusminusbtn" id="home-plus" value='1'>+</button> -->
+                <span><span class="ui-spinner ui-corner-all ui-widget ui-widget-content">
+                    <input class="storable spinner data ui-spinner-input" id="home-score" data-type="score" data-name="team_1_score">
+                    <a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
 <svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="10" y1="5" x2="10" y2="14"></line><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
 </a><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>
 <svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
 </a></span></span>
-
-                <span class="score_devider">счет</span>
-
-                <span><span class="ui-spinner ui-corner-all ui-widget ui-widget-content"><input class="standart_input spinner data ui-spinner-input" id="away-score" data-default="0" value="0" size="2" aria-valuemin="0" aria-valuemax="99" aria-valuenow="0" autocomplete="off" role="spinbutton" readonly="readonly" name="team2_score"><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only" role="button" ><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
-<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="10" y1="5" x2="10" y2="14"></line><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
-</a><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>
-<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
-</a></span></span>
-                <span><button class="reset ui-button ui-corner-all ui-widget" value="team-score" title="Сбросить счет матча на 0">
+                <span class="score_devider"><span>счет</span><button class="reset ui-button ui-corner-all ui-widget" value="team-score" title="Сбросить счет матча на 0">
                         <!-- Сброс -->
                     
 <svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" stroke-width="1.1" d="M17.08,11.15 C17.09,11.31 17.1,11.47 17.1,11.64 C17.1,15.53 13.94,18.69 10.05,18.69 C6.16,18.68 3,15.53 3,11.63 C3,7.74 6.16,4.58 10.05,4.58 C10.9,4.58 11.71,4.73 12.46,5"></path><polyline fill="none" stroke="#000" points="9.9 2 12.79 4.89 9.79 7.9"></polyline></svg>
 </button></span>
+                <!-- <button class="plusminusbtn" id="home-minus" value='-1'>-</button> -->
+                <span><span class="ui-spinner ui-corner-all ui-widget ui-widget-content">
+                    <input class="storable spinner data ui-spinner-input" id="away-score" data-type="score" data-name="team_2_score">
+                    <a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="10" y1="5" x2="10" y2="14"></line><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>
+<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
+</a></span></span>
+
             </div>
-                                <div class="row score-control-fouls" style="">
-                    <!-- <button class="plusminusbtn" id="home-plus-fouls" value='1'>+</button> -->
-                    <span><span class="ui-spinner ui-corner-all ui-widget ui-widget-content ui-spinner-disabled ui-state-disabled"><input class="standart_input spinner data ui-spinner-input" id="home-fouls" data-default="0" value="0" size="2" aria-valuemin="0" aria-valuemax="99" aria-valuenow="0" autocomplete="off" role="spinbutton" readonly="readonly" disabled=""  name="team1_foll"><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only ui-button-disabled ui-state-disabled" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
-<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="10" y1="5" x2="10" y2="14"></line><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
-</a><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only ui-button-disabled ui-state-disabled" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>
-<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
-</a></span></span>
-                    <div class="score_devider">
-                        фолы<input type="checkbox" class="c" id="show_fouls" value="0" title="Вкл/выкл отображение фолов" >
-                    </div>
-                    <!-- <button class="plusminusbtn" id="home-minus-fouls" value='-1'>-</button> -->
-                    <span><span class="ui-spinner ui-corner-all ui-widget ui-widget-content ui-spinner-disabled ui-state-disabled"><input class="standart_input spinner data ui-spinner-input" id="away-fouls" data-default="0" value="0" size="2" aria-valuemin="0" aria-valuemax="99" aria-valuenow="0" autocomplete="off" role="spinbutton" readonly="readonly" disabled=""  name="team2_foll"><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only ui-button-disabled ui-state-disabled" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
-<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="10" y1="5" x2="10" y2="14"></line><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
-</a><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only ui-button-disabled ui-state-disabled" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>
-<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
-</a></span></span>
-                    <span>
-                        <button class="reset ui-button ui-corner-all ui-widget" value="team-fouls" title="Сбросить все фолы на 0">
-<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" stroke-width="1.1" d="M17.08,11.15 C17.09,11.31 17.1,11.47 17.1,11.64 C17.1,15.53 13.94,18.69 10.05,18.69 C6.16,18.68 3,15.53 3,11.63 C3,7.74 6.16,4.58 10.05,4.58 C10.9,4.58 11.71,4.73 12.46,5"></path><polyline fill="none" stroke="#000" points="9.9 2 12.79 4.89 9.79 7.9"></polyline></svg>
-</button>
-                    </span>
+                                <!-- 				<div class="row score-control-fouls">
+
+                <span><input class="storable spinner data" id="home-fouls" data-default="0" value="0" size="2" /></span>
+                <div class="score_devider">
+                    фолы<input type="checkbox" class="storable" id="show_fouls" value="0" title="Вкл/выкл отображение фолов">
                 </div>
+
+                <span><input class="storable spinner data" id="away-fouls" data-default="0" value="0" size="2" /></span>
+                <span>
+                    <button class="reset" value='team-fouls' title="Сбросить все фолы на 0"></button>
+                </span>
+            </div> -->
                             <!-- 				<div class="row score-control-series">
-                <span><input class="standart_input spinner data" id="home-series" data-default="0" value="0" size="2" /></span>
+                <span><input class="storable spinner data" id="home-series" data-default="0" value="0" size="2" /></span>
                 <span class="score_devider">серия</span>
-                <span><input class="standart_input spinner data" id="away-series" data-default="0" value="0" size="2" /></span>
+                <span><input class="storable spinner data" id="away-series" data-default="0" value="0" size="2" /></span>
                 <span><button class="reset" value='team-score' title="Сбросить счет серии на 0"></button></span>
             </div> -->
+
+            <!-- privilegies -->
             <div class="row score-control-pen" style="display: none;">
-                <div class="home-pen">
-                    <label for="home-pen-g" title="Гол" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
-                    <input class="home-pen-radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen" value="g" data-table="little" id="home-pen-g">
-                    <label for="home-pen-0" title="-" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
-                    <input class="home-pen-radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen" value="0" data-table="little" id="home-pen-0" checked="">
-                    <label for="home-pen-d" title="Сейв" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
-                    <input class="home-pen-radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen" value="d" data-table="little" id="home-pen-d">
-                </div>
-                <div class="away-pen">
-                    <label for="away-pen-g" title="Гол" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
-                    <input class="away-pen-radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen" value="g" data-table="little" id="away-pen-g">
-                    <label for="away-pen-0" title="-" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
-                    <input class="away-pen-radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen" value="0" data-table="little" id="away-pen-0" checked="">
-                    <label for="away-pen-d" title="Сейв" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
-                    <input class="away-pen-radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen" value="d" data-table="little" id="away-pen-d">
-                </div>
-                <span>
-                    <button class="pen_reset ui-button ui-corner-all ui-widget" value="team-fouls" title="Сбросить все фолы на 0">
+                <div class="home-pen"><div class="pen-container-home passed">
+<label for="home-pen-g-0" title="Основное" class="pen_label_g ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
+<input class="home-pen-radio-0 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-0" value="g" id="home-pen-g-0" data-index="0" data-team="home">
+
+<label for="home-pen-0-0" title="Основное" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
+<input class="home-pen-radio-0 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-0" value="0" id="home-pen-0-0" data-index="0" data-team="home">
+
+<label for="home-pen-d-0" title="Основное" class="pen_label_d ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
+<input class="home-pen-radio-0 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-0" value="d" id="home-pen-d-0" data-index="0" data-team="home">
+</div><div class="pen-container-home">
+<label for="home-pen-g-1" title="Основное" class="pen_label_g ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
+<input class="home-pen-radio-1 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-1" value="g" id="home-pen-g-1" data-index="1" data-team="home">
+
+<label for="home-pen-0-1" title="Основное" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
+<input class="home-pen-radio-1 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-1" value="0" id="home-pen-0-1" data-index="1" data-team="home">
+
+<label for="home-pen-d-1" title="Основное" class="pen_label_d ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
+<input class="home-pen-radio-1 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-1" value="d" id="home-pen-d-1" data-index="1" data-team="home">
+</div><div class="pen-container-home">
+<label for="home-pen-g-2" title="Основное" class="pen_label_g ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
+<input class="home-pen-radio-2 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-2" value="g" id="home-pen-g-2" data-index="2" data-team="home">
+
+<label for="home-pen-0-2" title="Основное" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
+<input class="home-pen-radio-2 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-2" value="0" id="home-pen-0-2" data-index="2" data-team="home">
+
+<label for="home-pen-d-2" title="Основное" class="pen_label_d ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
+<input class="home-pen-radio-2 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-2" value="d" id="home-pen-d-2" data-index="2" data-team="home">
+</div><div class="pen-container-home">
+<label for="home-pen-g-3" title="Основное" class="pen_label_g ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
+<input class="home-pen-radio-3 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-3" value="g" id="home-pen-g-3" data-index="3" data-team="home">
+
+<label for="home-pen-0-3" title="Основное" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
+<input class="home-pen-radio-3 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-3" value="0" id="home-pen-0-3" data-index="3" data-team="home">
+
+<label for="home-pen-d-3" title="Основное" class="pen_label_d ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
+<input class="home-pen-radio-3 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-3" value="d" id="home-pen-d-3" data-index="3" data-team="home">
+</div><div class="pen-container-home">
+<label for="home-pen-g-4" title="Основное" class="pen_label_g ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
+<input class="home-pen-radio-4 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-4" value="g" id="home-pen-g-4" data-index="4" data-team="home">
+
+<label for="home-pen-0-4" title="Основное" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
+<input class="home-pen-radio-4 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-4" value="0" id="home-pen-0-4" data-index="4" data-team="home">
+
+<label for="home-pen-d-4" title="Основное" class="pen_label_d ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
+<input class="home-pen-radio-4 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="home-pen-4" value="d" id="home-pen-d-4" data-index="4" data-team="home">
+</div></div>
+                <span class="score_devider">
+                    <button class="reset pen_reset ui-button ui-corner-all ui-widget" value="team-fouls" title="Сбросить">
 <svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" stroke-width="1.1" d="M17.08,11.15 C17.09,11.31 17.1,11.47 17.1,11.64 C17.1,15.53 13.94,18.69 10.05,18.69 C6.16,18.68 3,15.53 3,11.63 C3,7.74 6.16,4.58 10.05,4.58 C10.9,4.58 11.71,4.73 12.46,5"></path><polyline fill="none" stroke="#000" points="9.9 2 12.79 4.89 9.79 7.9"></polyline></svg>
 </button>
+                    <button class="pen_add ui-button ui-corner-all ui-widget" value="" title="Добавить пенальти">+</button>
                 </span>
+                <div class="away-pen"><div class="pen-container-away">
+<label for="away-pen-g-0" title="Основное" class="pen_label_g ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
+<input class="away-pen-radio-0 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-0" value="g" id="away-pen-g-0" data-index="0" data-team="away">
+
+<label for="away-pen-0-0" title="Основное" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
+<input class="away-pen-radio-0 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-0" value="0" id="away-pen-0-0" data-index="0" data-team="away">
+
+<label for="away-pen-d-0" title="Основное" class="pen_label_d ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
+<input class="away-pen-radio-0 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-0" value="d" id="away-pen-d-0" data-index="0" data-team="away">
+</div><div class="pen-container-away passed">
+<label for="away-pen-g-1" title="Основное" class="pen_label_g ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
+<input class="away-pen-radio-1 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-1" value="g" id="away-pen-g-1" data-index="1" data-team="away">
+
+<label for="away-pen-0-1" title="Основное" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
+<input class="away-pen-radio-1 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-1" value="0" id="away-pen-0-1" data-index="1" data-team="away">
+
+<label for="away-pen-d-1" title="Основное" class="pen_label_d ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
+<input class="away-pen-radio-1 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-1" value="d" id="away-pen-d-1" data-index="1" data-team="away">
+</div><div class="pen-container-away passed">
+<label for="away-pen-g-2" title="Основное" class="pen_label_g ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
+<input class="away-pen-radio-2 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-2" value="g" id="away-pen-g-2" data-index="2" data-team="away">
+
+<label for="away-pen-0-2" title="Основное" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
+<input class="away-pen-radio-2 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-2" value="0" id="away-pen-0-2" data-index="2" data-team="away">
+
+<label for="away-pen-d-2" title="Основное" class="pen_label_d ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
+<input class="away-pen-radio-2 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-2" value="d" id="away-pen-d-2" data-index="2" data-team="away">
+</div><div class="pen-container-away passed">
+<label for="away-pen-g-3" title="Основное" class="pen_label_g ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
+<input class="away-pen-radio-3 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-3" value="g" id="away-pen-g-3" data-index="3" data-team="away">
+
+<label for="away-pen-0-3" title="Основное" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
+<input class="away-pen-radio-3 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-3" value="0" id="away-pen-0-3" data-index="3" data-team="away">
+
+<label for="away-pen-d-3" title="Основное" class="pen_label_d ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
+<input class="away-pen-radio-3 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-3" value="d" id="away-pen-d-3" data-index="3" data-team="away">
+</div><div class="pen-container-away">
+<label for="away-pen-g-4" title="Основное" class="pen_label_g ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гол</label>
+<input class="away-pen-radio-4 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-4" value="g" id="away-pen-g-4" data-index="4" data-team="away">
+
+<label for="away-pen-0-4" title="Основное" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>●</label>
+<input class="away-pen-radio-4 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-4" value="0" id="away-pen-0-4" data-index="4" data-team="away">
+
+<label for="away-pen-d-4" title="Основное" class="pen_label_d ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Сейв</label>
+<input class="away-pen-radio-4 radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="away-pen-4" value="d" id="away-pen-d-4" data-index="4" data-team="away">
+</div></div>
             </div>
-            <!-- 				<div class="row score-control-hockey">
-                <div>
-                    <button class="card hockey" data-team='home' value="90">1.5</button>
-                    <button class="card hockey" data-team='home' value="120">2</button>
-                    <button class="card hockey" data-team='home' value="240">4</button>
-                    <button class="card hockey" data-team='home' value="300">5</button>
-                </div>
-                <span class="hockey_devider"></span>
-                <div>
-                    <button class="card hockey" data-team='away' value="90">1.5</button>
-                    <button class="card hockey" data-team='away' value="120">2</button>
-                    <button class="card hockey" data-team='away' value="240">4</button>
-                    <button class="card hockey" data-team='away' value="300">5</button>
-                </div>
-                <div></div>
-            </div>
-            <div class="row score-control-hockey">
-                <div class="fouls-colum home-fouls">
-                    <div class="fouls"><span>05:00</span><button class="hokkey-fouls">-</button></div>
-                </div>
-                <span class="card_devider"></span>
-                <div class="fouls-colum away-fouls">
-                    <div class="fouls"><span>05:00</span><button class="hockey-fouls">-</button></div>
-                </div>
-            </div> -->
-            <div class="row score-control-hockey">
-                <div class="fouls-colum home-fouls">
-                    <div class="fouls" style="display: none;"><input type="text" class="timerAdd" style="width: 35px;" data-id="00:00" value="00:00"><button class="hokkey-fouls ui-button ui-corner-all ui-widget">-</button></div>
-                </div>
-                <span class="card_devider"></span>
-                <div class="fouls-colum away-fouls">
-                    <div class="fouls" style="display: none;"><input type="text" class="timerAdd" style="width: 35px;" data-id="00:00" value="00:00"><button class="hockey-fouls ui-button ui-corner-all ui-widget">-</button></div>
-                </div>
-            </div>
-        </div>
-        <!-- <h5>Таймер</h5> -->
-        <!--			<legend>Таймер</legend> -->
-        <hr color="#1f1e1f" align="left">
-        <div class="row" id="timer" state="stopped">
+
+        </div>			<!-- Timer -->
+        <div class="controls_block" id="timer" state="stopped">
+
             <div class="row timer-control">
                 <div class="col-left">
                     <button class="timer ui-button ui-corner-all ui-widget" id="timer-start" state="stopped">▶</button>
-                    <input class="timer standart_input" type="text" id="time" data-default="00:00" value="00:00">
+                    <input class="timer storable" type="text" id="time" data-default="00:00" value="00:00">
                     <button class="timer ui-button ui-corner-all ui-widget" id="timer-reset">
                         <!-- Сброс -->
                     
 <svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" stroke-width="1.1" d="M17.08,11.15 C17.09,11.31 17.1,11.47 17.1,11.64 C17.1,15.53 13.94,18.69 10.05,18.69 C6.16,18.68 3,15.53 3,11.63 C3,7.74 6.16,4.58 10.05,4.58 C10.9,4.58 11.71,4.73 12.46,5"></path><polyline fill="none" stroke="#000" points="9.9 2 12.79 4.89 9.79 7.9"></polyline></svg>
 </button>
                 </div>
-                <div class="col-right" id="roundcounter" style="">
-                    <div class="title">Тайм </div>
-                    <span class="ui-spinner ui-corner-all ui-widget ui-widget-content"><input class="standart_input spinner data ui-spinner-input" id="roundnum" data-default="1" value="1" size="1" aria-valuemin="0" aria-valuemax="99" aria-valuenow="5" autocomplete="off" role="spinbutton" readonly="readonly" name="now_time"><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
-<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="10" y1="5" x2="10" y2="14"></line><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
-</a><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>
-<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
-</a></span>
-                </div>
-                <div class="col-right currentPenalty" style="display: none;">
-                    <div class="title">№ пенальти</div>
-                    <span class="ui-spinner ui-corner-all ui-widget ui-widget-content"><input class="spinner data ui-spinner-input" id="currentPenalty" data-default="1" value="1" size="1" aria-valuemin="0" aria-valuemax="99" aria-valuenow="6" autocomplete="off" role="spinbutton" readonly="readonly" name="now_penalty"><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-up ui-corner-tr ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-n"></span><span class="ui-button-icon-space"> </span>
-<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="10" y1="5" x2="10" y2="14"></line><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
-</a><a tabindex="-1" aria-hidden="true" class="ui-button ui-widget ui-spinner-button ui-spinner-down ui-corner-br ui-button-icon-only" role="button"><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>
-<svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle><line fill="none" stroke="#000" x1="5" y1="10" x2="14" y2="10"></line></svg>
-</a></span>
+                <div class="col-right" id="roundcounter">
+
+
+
+
+                    <!-- <div class="title">Сценарий</div> -->
+                    <!-- <button class="plusminusbtn" id="round-plus" value='1'>+</button> -->
+                    <input class="storable spinnerNO data" id="roundnum" data-default="1" value="1" size="1" style="display:none">
+                    <!-- <div class="inline red start" id='air'></div> -->
+                    <!-- <button class="plusminusbtn" id="round-minus" value='-1'>-</button> -->
                 </div>
             </div>
             <div class="correction-container manual">
                 <div class="row-correction col-left">
-                    <button class="correction timer ui-button ui-corner-all ui-widget" value="-10">-10</button>
-                    <button class="correction timer ui-button ui-corner-all ui-widget" value="-5">-5</button>
-                    <button class="correction timer ui-button ui-corner-all ui-widget" value="-1">-1</button>
-                    <button class="correction timer ui-button ui-corner-all ui-widget" value="1">+1</button>
-                    <button class="correction timer ui-button ui-corner-all ui-widget" value="5">+5</button>
-                    <button class="correction timer ui-button ui-corner-all ui-widget" value="10">+10</button>
+                    <button class="correction timer ui-button ui-corner-all ui-widget" value="10">-10</button>
+                    <button class="correction timer ui-button ui-corner-all ui-widget" value="5">-5</button>
+                    <button class="correction timer ui-button ui-corner-all ui-widget" value="1">-1</button>
+                    <button class="correction timer ui-button ui-corner-all ui-widget" value="-1">+1</button>
+                    <button class="correction timer ui-button ui-corner-all ui-widget" value="-5">+5</button>
+                    <button class="correction timer ui-button ui-corner-all ui-widget" value="-10">+10</button>
                 </div>
                 <div class="col-right"></div>
             </div>
-        </div>
-        <legend>
-            <h3>Табло</h3><span class="on-air" id="air"></span>
-        </legend>
-        <div class="table-sel">
-            <label for="table-little" title="Основное" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>Малое</label>
-            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="little" id="table-little" checked="">
-            <label for="table-big" title="Большое снизу" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Большое</label>
-            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="big" id="table-big">
-                            <label for="table-mid" title="Match ID" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Матч</label>
-            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="mid" id="table-mid">
-            <label for="table-home-roster" title="Состав хозяев" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Cборная</label>
-            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="away-roster" id="table-away-roster">
-                            <!-- 				<label for="table-live" title="">Live</label>
-            <input class="radio" type="radio" name='radio' value="live" data-table="live" id="table-live"> -->
-            <label for="table-weather" title="Погода" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-disabled ui-state-disabled"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Погода</label>
-            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="weather" id="table-weather" disabled="">
-            <label for="table-pen" title="Пенальти" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Пен.</label>
-            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="pen" id="table-pen">
-            <label for="table-off" title="Убрать все табло" id="table-off-button" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Выкл</label>
-            <input class="radio ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="radio" value="away-roster" data-table="off" id="table-off">
-        </div>
-        <div class="row flex-row">
-            <div class="inline">Подпись табло</div>
-            <select class="select_input label width01" data-default="Начало матча" id="label">
-                <option value="Начало матча">Начало матча</option><option value="1 тайм">1 тайм</option>
-                
-                <option value="time">Время</option>
-                <option value="Видеопросмотр">Видеопросмотр</option>
-                <option value="Тайм-аут">Тайм-аут</option>
-                <option value="Перерыв">Перерыв</option>
-                <!-- <option value='2й тайм'>2й тайм</option> -->
-                <!-- <option value='Экстратайм'>Экстратайм</option> -->
-                <option value="Конец матча">Конец матча</option>
+
+            
+
+        </div>			<!-- Signature -->
+        <div class="controls_block flex-row">
+            <div class="inline">Сценарий</div>
+            <button class="button_scene_prev ui-button ui-corner-all ui-widget">◀</button>
+            <select class="storable label width01" data-default="begin" name="label" id="label">
+                <option value="begin">Начало матча</option>
+                <option value="time1">1-й ТАЙМ</option>
+                <option value="break">Перерыв</option>
+                <option value="time2">2-й ТАЙМ</option>
+                <!-- <option value='overtime'>Овертайм</option>-->
+                <option value="pen">Пенальти</option>
+                <option value="end" selected="selected">Конец матча</option>
             </select>
+            <button class="button_scene_next ui-button ui-corner-all ui-widget disabled">▶</button>
+        </div>	
+
+        <!-- Tables -->
+        <div class="controls_block">
+            <legend style="display:none">
+                <h3><!--Табло--></h3><span class="on-air" id="air"></span>
+            </legend>
+            <div class="table-sel flex_wrap_fill">
+                <label for="table-little" title="Основное" graphene_button="" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank ui-state-hover"></span><span class="ui-checkboxradio-icon-space"> </span>Малое</label>
+                <input class="storable radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="table" value="little" data-table="little" id="table-little">
+                <label for="table-big" title="Большое снизу" graphene_button="" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Нижнее</label>
+                <input class="storable radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="table" value="big" data-table="big" id="table-big">
+                <!-- 				<label for="table-refs" title="Плашка судьи">Ref</label>
+                <input class="radio" type="radio" name='radio' value="refs" data-table="refs" id="table-refs"> -->
+                
+                <label for="table-mid" title="Match ID" graphene_button="" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Заявка</label>
+                <input class="storable radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="table" value="mid" data-table="mid" id="table-mid">
+                <!--
+                <label for="table-both-roster" title="Состав обеих команд">Составы</label>
+                <input class="radiobutton" type="radio" name='table' value="both-roster" data-table="both-roster" id="table-both-roster">
+-->
+                <label for="table-home-roster" title="Состав хозяев" graphene_button="" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label ui-checkboxradio-checked ui-state-active"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Хозяева</label>
+                <input class="storable radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="table" value="home-roster" data-table="home-roster" id="table-home-roster" checked="checked">
+                <label for="table-away-roster" title="Состав гостей" graphene_button="" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Гости</label>
+                <input class="storable radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="table" value="away-roster" data-table="away-roster" id="table-away-roster">
+
+                <label for="table-stats" title="Статистика" graphene_button="" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Статистика</label>
+                <input class="storable radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="table" value="stats" data-table="stats" id="table-stats">
+
+                <label for="table-pen" title="Пенальти" graphene_button="" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Пенальти</label>
+                <input class="storable radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="table" value="pen" data-table="pen" id="table-pen">
+                <label for="table-off" title="Убрать все табло" id="table-off-button" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-checkboxradio-radio-label"><span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span><span class="ui-checkboxradio-icon-space"> </span>Выкл</label>
+                <input class="storable radiobutton ui-checkboxradio ui-helper-hidden-accessible" type="radio" name="table" value="off" data-table="off" id="table-off">
+            </div>
+        </div><div class="controls_block" id="refs_block">
+<div class="flex-row">  
+    <button js_event_button="" class="ui-button ui-corner-all ui-widget" data-team="home" data-event="little_coach" graphene_button="">Тренер хоз мал</button>
+    <button js_event_button="" class="ui-button ui-corner-all ui-widget" data-team="home" data-event="big_coach" graphene_button="">Тренер хоз бол</button>
+    <button js_event_button="" class="ui-button ui-corner-all ui-widget" data-team="away" data-event="little_coach" graphene_button="">Тренер гос мал</button>
+    <button js_event_button="" class="ui-button ui-corner-all ui-widget" data-team="away" data-event="big_coach" graphene_button="">Тренер гос бол</button>    
+</div>
+</div>
+
+
+<div class="controls_block" id="extra_fields_block">
+<div class="flex-row">
+<button class="keyvalue_key ui-button ui-corner-all ui-widget" js_event_button="" data-event="event_ref" id="button_show_ref" graphene_button="">Показать судей</button>
+        <button class="keyvalue_key ui-button ui-corner-all ui-widget" js_event_button="" data-event="event_commentator" id="button_show_commentator" graphene_button="">Комментатора(ов)</button>
+</div>
+<div class="row keyvalue_grid">
+
+        <input class="storable keyvalue_input" id="ref" value="" style="display:none">
+        <span>Комментатор 1</span>
+        <input class="storable keyvalue_input" id="commentator" value="">  
+        <span>Комментатор 2</span>
+        <input class="storable_extra keyvalue_input" id="extra_commentator" value="">  
+        <!--
+        <label class="keyvalue_key">Тренер хозяев</label>
+        <input class="storable_extra keyvalue_input" id="extra_home_coach" value="">
+
+        <label class="keyvalue_key">Тренер Гостей</label>
+        <input class="storable_extra keyvalue_input" id="extra_away_coach" value="">
+-->
+
+
+
+        <label class="keyvalue_key">Название<br>чемпионата</label>
+        <textarea class="storable_extra keyvalue_input" id="extra_tournament" value=""></textarea>           
+
+<!--    
+        <label class="keyvalue_key">Название лиги</label>
+        <input class="storable keyvalue_input" id="tournament" value="">
+
+        <label class="keyvalue_key">Тур</label>
+        <input class="storable keyvalue_input" id="tour" value="">
+
+        <label class="keyvalue_key">Стадион</label>
+        <input class="storable keyvalue_input" id="stadium" value="">
+-->
+</div>
+
+
+
+
+</div>			<!-- Tables -->
+        <div class="controls_block" id="players_swap">
+
+            <div class="players_swap_table flex_wrap_fill">
+                <div class="players_swap_col home">
+                    <legend class="players_swap_header">Замена хозяев</legend>
+
+                    <div class="players_swap_form">
+                        <select class="players_swap_select home out"><option data-num="7" data-name="Валгузова Анастасия">7 Валгузова Анастасия</option><option data-num="10" data-name="Черняева Мария">10 Черняева Мария</option><option data-num="17" data-name="Смирнова Александра">17 Смирнова Александра</option><option data-num="22" data-name="Сергиенко Алина">22 Сергиенко Алина</option><option data-num="24" data-name="Сухова Софья">24 Сухова Софья</option><option data-num="25" data-name="Федорова Анастасия">25 Федорова Анастасия</option><option data-num="33" data-name="Федосова Злата">33 Федосова Злата</option><option data-num="34" data-name="Доильницына Луиза">34 Доильницына Луиза</option><option data-num="35" data-name="Шеина Анна">35 Шеина Анна</option><option data-num="44" data-name="Махнева Снежана">44 Махнева Снежана</option><option data-num="77" data-name="Шанова Анастасия">77 Шанова Анастасия</option><option data-num="78" data-name="Комкова Вероника">78 Комкова Вероника</option><option data-num="88" data-name="Морева Валерия">88 Морева Валерия</option><option data-num="90" data-name="Целуйко Ольга">90 Целуйко Ольга</option></select>
+                        <span class="swap_to_label">замена на:</span>
+                        <select class="players_swap_select home in"><option data-num="7" data-name="Валгузова Анастасия">7 Валгузова Анастасия</option><option data-num="10" data-name="Черняева Мария">10 Черняева Мария</option><option data-num="17" data-name="Смирнова Александра">17 Смирнова Александра</option><option data-num="22" data-name="Сергиенко Алина">22 Сергиенко Алина</option><option data-num="24" data-name="Сухова Софья">24 Сухова Софья</option><option data-num="25" data-name="Федорова Анастасия">25 Федорова Анастасия</option><option data-num="33" data-name="Федосова Злата">33 Федосова Злата</option><option data-num="34" data-name="Доильницына Луиза">34 Доильницына Луиза</option><option data-num="35" data-name="Шеина Анна">35 Шеина Анна</option><option data-num="44" data-name="Махнева Снежана">44 Махнева Снежана</option><option data-num="77" data-name="Шанова Анастасия">77 Шанова Анастасия</option><option data-num="78" data-name="Комкова Вероника">78 Комкова Вероника</option><option data-num="88" data-name="Морева Валерия">88 Морева Валерия</option><option data-num="90" data-name="Целуйко Ольга">90 Целуйко Ольга</option></select>
+                        <button class="players_swap_button ui-button ui-corner-all ui-widget" data-team="home" data-event="little_players_swap" graphene_button="">Показ малое</button>
+                        <button class="players_swap_button ui-button ui-corner-all ui-widget" data-team="home" data-event="big_players_swap" graphene_button="">Показ большое</button>
+                    </div>
+
+                </div>
+
+                <div class="players_swap_col away">
+                    <legend class="players_swap_header">Замена гостей</legend>
+
+                    <div class="players_swap_form">
+                        <select class="players_swap_select away out"><option data-num="1" data-name="Верещак Анна">1 Верещак Анна</option><option data-num="8" data-name="Семина Варвара">8 Семина Варвара</option><option data-num="9" data-name="Загороднева Алина">9 Загороднева Алина</option><option data-num="13" data-name="Шкитина Анастасия">13 Шкитина Анастасия</option><option data-num="16" data-name="Колесникова Надежда">16 Колесникова Надежда</option><option data-num="17" data-name="Белолипецкая Стефания">17 Белолипецкая Стефания</option><option data-num="19" data-name="Васильева Софья">19 Васильева Софья</option><option data-num="26" data-name="Дувакина Мария">26 Дувакина Мария</option><option data-num="36" data-name="Долматова Екатерина">36 Долматова Екатерина</option><option data-num="44" data-name="Чешева Анастасия">44 Чешева Анастасия</option><option data-num="47" data-name="Безбабных Арина">47 Безбабных Арина</option><option data-num="67" data-name="Турусина Виктория">67 Турусина Виктория</option><option data-num="71" data-name="Дудкина Елизавета">71 Дудкина Елизавета</option><option data-num="77" data-name="Гончарова Валентина">77 Гончарова Валентина</option></select>
+                        <span class="swap_to_label">замена на:</span>
+                        <select class="players_swap_select away in"><option data-num="1" data-name="Верещак Анна">1 Верещак Анна</option><option data-num="8" data-name="Семина Варвара">8 Семина Варвара</option><option data-num="9" data-name="Загороднева Алина">9 Загороднева Алина</option><option data-num="13" data-name="Шкитина Анастасия">13 Шкитина Анастасия</option><option data-num="16" data-name="Колесникова Надежда">16 Колесникова Надежда</option><option data-num="17" data-name="Белолипецкая Стефания">17 Белолипецкая Стефания</option><option data-num="19" data-name="Васильева Софья">19 Васильева Софья</option><option data-num="26" data-name="Дувакина Мария">26 Дувакина Мария</option><option data-num="36" data-name="Долматова Екатерина">36 Долматова Екатерина</option><option data-num="44" data-name="Чешева Анастасия">44 Чешева Анастасия</option><option data-num="47" data-name="Безбабных Арина">47 Безбабных Арина</option><option data-num="67" data-name="Турусина Виктория">67 Турусина Виктория</option><option data-num="71" data-name="Дудкина Елизавета">71 Дудкина Елизавета</option><option data-num="77" data-name="Гончарова Валентина">77 Гончарова Валентина</option></select>
+                        <button class="players_swap_button ui-button ui-corner-all ui-widget" data-team="away" data-event="little_players_swap" graphene_button="">Показ малое</button>
+                        <button class="players_swap_button ui-button ui-corner-all ui-widget" data-team="away" data-event="big_players_swap" graphene_button="">Показ большое</button>
+                    </div>		
+                </div>					
+
+            </div>
         </div>
-        <div class="row flex-row">
-            <div class="inline">Матч</div>
-            <select class="" id="match-sel">
-            <option data-homeid="1385934" data-awayid="1385936" data-tournamentid="1040622" value="4102410">20 июня 10:00 Cборная Минска-Могилевская область</option><option data-homeid="1385938" data-awayid="1385939" data-tournamentid="1040622" value="4102411">20 июня 10:45 Гродненская область- Гомельская область</option><option data-homeid="null" data-awayid="null" data-tournamentid="1040622" value="4102417">21 июня 10:45 -</option><option data-homeid="null" data-awayid="null" data-tournamentid="1040622" value="4102412">21 июня 11:30 -</option></select>
-                            <button class="sessionbtn ui-button ui-corner-all ui-widget" id="load" title="Загрузить матч">✅</button>
+<div class="controls_block" id="weather_block">
+<div class="flex-row">
+        <button class="keyvalue_key graphene_button ui-button ui-corner-all ui-widget" js_event_button="" data-ev_noclone="true" data-event="event_weather" id="button_show_ref">Показать погоду</button>
+</div>
+<div class="row">
+    <div class="weather_block_params">
+        <div class="weather_param">
+            <span>Темп</span>
+            <input class="storable_extra keyvalue_input" id="extra_weather_temp" value="">  
         </div>
-        <hr>
-        <!-- 			<div class="controlgroup show">
-  
-            <button id="show_comment">Показать комментатора</button>
-            <button id="show_text">Показать текст</button>
-            <button id="hide_all">x</button>
-        </div> -->
-        <!-- 			<div class="controlgroup">
-            <input type="text" class="team2" id="team" data-default="" placeholder="Комманда" />
-            <input type="text" class="" id="text" data-default="" placeholder="Подпись" />
-        </div> -->
-        <div class="flex-row" style="flex-direction: column;">
-            <button id="all_reset" class="width01 ui-button ui-corner-all ui-widget"><span>Сбросить всё!<span></span></span>
+        <div class="weather_param">
+            <span>Влажность</span>
+            <input class="storable_extra keyvalue_input" id="extra_weather_humidity" value=""> 
+        </div>
+        <div class="weather_param">
+            <span>Ветер</span>
+            <input class="storable_extra keyvalue_input" id="extra_weather_winter" value=""> 	
+        </div>		
+    </div>
+    <div class="keyvalue_grid">
+        <span>Локация</span>
+        <input class="storable_extra keyvalue_input" id="extra_location" value="">  
+    </div>
+</div>
+</div></div><div class="score_control_group control_group_players">	<div id="module_titles_main">
+
+    <div id="content">
+        <div class="inline red start" id="air"></div>
+        <div class="">
+            <div class="players_list_home">
+                <div>
+                    <table style="display:inline-table;" id="players_table_home">
+                        <caption class="home-name">Луч</caption>
+                        <tbody>
+                            <tr>
+                                <th>Имя</th>									
+                                <th>мал</th>
+                                <th>бол</th>										
+                                <th>мал</th>
+                                <th>бол</th>
+                                <th>мал</th>
+                                <th>бол</th>
+                            </tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="6064" data-photo="null" data-num="7" data-name="Валгузова Анастасия" data-team="home" data-role="undefined" data-event_id="player_info_0">Валгузова Анастасия</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="6064" data-photo="null" data-num="7" data-name="Валгузова Анастасия" data-team="home" data-role="undefined" data-event_id="player_goal_0"><num>7</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="6064" data-photo="null" data-num="7" data-name="Валгузова Анастасия" data-team="home" data-role="undefined" data-event_id="player_goal_0"><num>7</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="6064" data-photo="null" data-num="7" data-name="Валгузова Анастасия" data-team="home" data-role="undefined" data-event_id="player_yellow_0"><num>7</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="6064" data-photo="null" data-num="7" data-name="Валгузова Анастасия" data-team="home" data-role="undefined" data-event_id="player_yellow_0"><num>7</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="6064" data-photo="null" data-num="7" data-name="Валгузова Анастасия" data-team="home" data-role="undefined" data-event_id="player_red_0"><num>7</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="6064" data-photo="null" data-num="7" data-name="Валгузова Анастасия" data-team="home" data-role="undefined" data-event_id="player_red_0"><num>7</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="6035" data-photo="null" data-num="10" data-name="Черняева Мария" data-team="home" data-role="undefined" data-event_id="player_info_1">Черняева Мария</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="6035" data-photo="null" data-num="10" data-name="Черняева Мария" data-team="home" data-role="undefined" data-event_id="player_goal_1"><num>10</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="6035" data-photo="null" data-num="10" data-name="Черняева Мария" data-team="home" data-role="undefined" data-event_id="player_goal_1"><num>10</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="6035" data-photo="null" data-num="10" data-name="Черняева Мария" data-team="home" data-role="undefined" data-event_id="player_yellow_1"><num>10</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="6035" data-photo="null" data-num="10" data-name="Черняева Мария" data-team="home" data-role="undefined" data-event_id="player_yellow_1"><num>10</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="6035" data-photo="null" data-num="10" data-name="Черняева Мария" data-team="home" data-role="undefined" data-event_id="player_red_1"><num>10</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="6035" data-photo="null" data-num="10" data-name="Черняева Мария" data-team="home" data-role="undefined" data-event_id="player_red_1"><num>10</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="8428" data-photo="null" data-num="17" data-name="Смирнова Александра" data-team="home" data-role="undefined" data-event_id="player_info_2">Смирнова Александра</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="8428" data-photo="null" data-num="17" data-name="Смирнова Александра" data-team="home" data-role="undefined" data-event_id="player_goal_2"><num>17</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="8428" data-photo="null" data-num="17" data-name="Смирнова Александра" data-team="home" data-role="undefined" data-event_id="player_goal_2"><num>17</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="8428" data-photo="null" data-num="17" data-name="Смирнова Александра" data-team="home" data-role="undefined" data-event_id="player_yellow_2"><num>17</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="8428" data-photo="null" data-num="17" data-name="Смирнова Александра" data-team="home" data-role="undefined" data-event_id="player_yellow_2"><num>17</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="8428" data-photo="null" data-num="17" data-name="Смирнова Александра" data-team="home" data-role="undefined" data-event_id="player_red_2"><num>17</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="8428" data-photo="null" data-num="17" data-name="Смирнова Александра" data-team="home" data-role="undefined" data-event_id="player_red_2"><num>17</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="10143" data-photo="null" data-num="22" data-name="Сергиенко Алина" data-team="home" data-role="undefined" data-event_id="player_info_3">Сергиенко Алина</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="10143" data-photo="null" data-num="22" data-name="Сергиенко Алина" data-team="home" data-role="undefined" data-event_id="player_goal_3"><num>22</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="10143" data-photo="null" data-num="22" data-name="Сергиенко Алина" data-team="home" data-role="undefined" data-event_id="player_goal_3"><num>22</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="10143" data-photo="null" data-num="22" data-name="Сергиенко Алина" data-team="home" data-role="undefined" data-event_id="player_yellow_3"><num>22</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="10143" data-photo="null" data-num="22" data-name="Сергиенко Алина" data-team="home" data-role="undefined" data-event_id="player_yellow_3"><num>22</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="10143" data-photo="null" data-num="22" data-name="Сергиенко Алина" data-team="home" data-role="undefined" data-event_id="player_red_3"><num>22</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="10143" data-photo="null" data-num="22" data-name="Сергиенко Алина" data-team="home" data-role="undefined" data-event_id="player_red_3"><num>22</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="9992" data-photo="null" data-num="24" data-name="Сухова Софья" data-team="home" data-role="undefined" data-event_id="player_info_4">Сухова Софья</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="9992" data-photo="null" data-num="24" data-name="Сухова Софья" data-team="home" data-role="undefined" data-event_id="player_goal_4"><num>24</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="9992" data-photo="null" data-num="24" data-name="Сухова Софья" data-team="home" data-role="undefined" data-event_id="player_goal_4"><num>24</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="9992" data-photo="null" data-num="24" data-name="Сухова Софья" data-team="home" data-role="undefined" data-event_id="player_yellow_4"><num>24</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="9992" data-photo="null" data-num="24" data-name="Сухова Софья" data-team="home" data-role="undefined" data-event_id="player_yellow_4"><num>24</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="9992" data-photo="null" data-num="24" data-name="Сухова Софья" data-team="home" data-role="undefined" data-event_id="player_red_4"><num>24</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="9992" data-photo="null" data-num="24" data-name="Сухова Софья" data-team="home" data-role="undefined" data-event_id="player_red_4"><num>24</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="6040" data-photo="null" data-num="25" data-name="Федорова Анастасия" data-team="home" data-role="undefined" data-event_id="player_info_5">Федорова Анастасия</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="6040" data-photo="null" data-num="25" data-name="Федорова Анастасия" data-team="home" data-role="undefined" data-event_id="player_goal_5"><num>25</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="6040" data-photo="null" data-num="25" data-name="Федорова Анастасия" data-team="home" data-role="undefined" data-event_id="player_goal_5"><num>25</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="6040" data-photo="null" data-num="25" data-name="Федорова Анастасия" data-team="home" data-role="undefined" data-event_id="player_yellow_5"><num>25</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="6040" data-photo="null" data-num="25" data-name="Федорова Анастасия" data-team="home" data-role="undefined" data-event_id="player_yellow_5"><num>25</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="6040" data-photo="null" data-num="25" data-name="Федорова Анастасия" data-team="home" data-role="undefined" data-event_id="player_red_5"><num>25</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="6040" data-photo="null" data-num="25" data-name="Федорова Анастасия" data-team="home" data-role="undefined" data-event_id="player_red_5"><num>25</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="9995" data-photo="null" data-num="33" data-name="Федосова Злата" data-team="home" data-role="undefined" data-event_id="player_info_6">Федосова Злата</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="9995" data-photo="null" data-num="33" data-name="Федосова Злата" data-team="home" data-role="undefined" data-event_id="player_goal_6"><num>33</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="9995" data-photo="null" data-num="33" data-name="Федосова Злата" data-team="home" data-role="undefined" data-event_id="player_goal_6"><num>33</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="9995" data-photo="null" data-num="33" data-name="Федосова Злата" data-team="home" data-role="undefined" data-event_id="player_yellow_6"><num>33</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="9995" data-photo="null" data-num="33" data-name="Федосова Злата" data-team="home" data-role="undefined" data-event_id="player_yellow_6"><num>33</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="9995" data-photo="null" data-num="33" data-name="Федосова Злата" data-team="home" data-role="undefined" data-event_id="player_red_6"><num>33</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="9995" data-photo="null" data-num="33" data-name="Федосова Злата" data-team="home" data-role="undefined" data-event_id="player_red_6"><num>33</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="12632" data-photo="null" data-num="34" data-name="Доильницына Луиза" data-team="home" data-role="undefined" data-event_id="player_info_7">Доильницына Луиза</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="12632" data-photo="null" data-num="34" data-name="Доильницына Луиза" data-team="home" data-role="undefined" data-event_id="player_goal_7"><num>34</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="12632" data-photo="null" data-num="34" data-name="Доильницына Луиза" data-team="home" data-role="undefined" data-event_id="player_goal_7"><num>34</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="12632" data-photo="null" data-num="34" data-name="Доильницына Луиза" data-team="home" data-role="undefined" data-event_id="player_yellow_7"><num>34</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="12632" data-photo="null" data-num="34" data-name="Доильницына Луиза" data-team="home" data-role="undefined" data-event_id="player_yellow_7"><num>34</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="12632" data-photo="null" data-num="34" data-name="Доильницына Луиза" data-team="home" data-role="undefined" data-event_id="player_red_7"><num>34</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="12632" data-photo="null" data-num="34" data-name="Доильницына Луиза" data-team="home" data-role="undefined" data-event_id="player_red_7"><num>34</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="8067" data-photo="null" data-num="35" data-name="Шеина Анна" data-team="home" data-role="undefined" data-event_id="player_info_8">Шеина Анна</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="8067" data-photo="null" data-num="35" data-name="Шеина Анна" data-team="home" data-role="undefined" data-event_id="player_goal_8"><num>35</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="8067" data-photo="null" data-num="35" data-name="Шеина Анна" data-team="home" data-role="undefined" data-event_id="player_goal_8"><num>35</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="8067" data-photo="null" data-num="35" data-name="Шеина Анна" data-team="home" data-role="undefined" data-event_id="player_yellow_8"><num>35</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="8067" data-photo="null" data-num="35" data-name="Шеина Анна" data-team="home" data-role="undefined" data-event_id="player_yellow_8"><num>35</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="8067" data-photo="null" data-num="35" data-name="Шеина Анна" data-team="home" data-role="undefined" data-event_id="player_red_8"><num>35</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="8067" data-photo="null" data-num="35" data-name="Шеина Анна" data-team="home" data-role="undefined" data-event_id="player_red_8"><num>35</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="2160" data-photo="null" data-num="44" data-name="Махнева Снежана" data-team="home" data-role="undefined" data-event_id="player_info_9">Махнева Снежана</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="2160" data-photo="null" data-num="44" data-name="Махнева Снежана" data-team="home" data-role="undefined" data-event_id="player_goal_9"><num>44</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="2160" data-photo="null" data-num="44" data-name="Махнева Снежана" data-team="home" data-role="undefined" data-event_id="player_goal_9"><num>44</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="2160" data-photo="null" data-num="44" data-name="Махнева Снежана" data-team="home" data-role="undefined" data-event_id="player_yellow_9"><num>44</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="2160" data-photo="null" data-num="44" data-name="Махнева Снежана" data-team="home" data-role="undefined" data-event_id="player_yellow_9"><num>44</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="2160" data-photo="null" data-num="44" data-name="Махнева Снежана" data-team="home" data-role="undefined" data-event_id="player_red_9"><num>44</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="2160" data-photo="null" data-num="44" data-name="Махнева Снежана" data-team="home" data-role="undefined" data-event_id="player_red_9"><num>44</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="8210" data-photo="null" data-num="77" data-name="Шанова Анастасия" data-team="home" data-role="undefined" data-event_id="player_info_10">Шанова Анастасия</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="8210" data-photo="null" data-num="77" data-name="Шанова Анастасия" data-team="home" data-role="undefined" data-event_id="player_goal_10"><num>77</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="8210" data-photo="null" data-num="77" data-name="Шанова Анастасия" data-team="home" data-role="undefined" data-event_id="player_goal_10"><num>77</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="8210" data-photo="null" data-num="77" data-name="Шанова Анастасия" data-team="home" data-role="undefined" data-event_id="player_yellow_10"><num>77</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="8210" data-photo="null" data-num="77" data-name="Шанова Анастасия" data-team="home" data-role="undefined" data-event_id="player_yellow_10"><num>77</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="8210" data-photo="null" data-num="77" data-name="Шанова Анастасия" data-team="home" data-role="undefined" data-event_id="player_red_10"><num>77</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="8210" data-photo="null" data-num="77" data-name="Шанова Анастасия" data-team="home" data-role="undefined" data-event_id="player_red_10"><num>77</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="6451" data-photo="null" data-num="78" data-name="Комкова Вероника" data-team="home" data-role="undefined" data-event_id="player_info_11">Комкова Вероника</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="6451" data-photo="null" data-num="78" data-name="Комкова Вероника" data-team="home" data-role="undefined" data-event_id="player_goal_11"><num>78</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="6451" data-photo="null" data-num="78" data-name="Комкова Вероника" data-team="home" data-role="undefined" data-event_id="player_goal_11"><num>78</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="6451" data-photo="null" data-num="78" data-name="Комкова Вероника" data-team="home" data-role="undefined" data-event_id="player_yellow_11"><num>78</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="6451" data-photo="null" data-num="78" data-name="Комкова Вероника" data-team="home" data-role="undefined" data-event_id="player_yellow_11"><num>78</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="6451" data-photo="null" data-num="78" data-name="Комкова Вероника" data-team="home" data-role="undefined" data-event_id="player_red_11"><num>78</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="6451" data-photo="null" data-num="78" data-name="Комкова Вероника" data-team="home" data-role="undefined" data-event_id="player_red_11"><num>78</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="6073" data-photo="null" data-num="88" data-name="Морева Валерия" data-team="home" data-role="undefined" data-event_id="player_info_12">Морева Валерия</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="6073" data-photo="null" data-num="88" data-name="Морева Валерия" data-team="home" data-role="undefined" data-event_id="player_goal_12"><num>88</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="6073" data-photo="null" data-num="88" data-name="Морева Валерия" data-team="home" data-role="undefined" data-event_id="player_goal_12"><num>88</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="6073" data-photo="null" data-num="88" data-name="Морева Валерия" data-team="home" data-role="undefined" data-event_id="player_yellow_12"><num>88</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="6073" data-photo="null" data-num="88" data-name="Морева Валерия" data-team="home" data-role="undefined" data-event_id="player_yellow_12"><num>88</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="6073" data-photo="null" data-num="88" data-name="Морева Валерия" data-team="home" data-role="undefined" data-event_id="player_red_12"><num>88</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="6073" data-photo="null" data-num="88" data-name="Морева Валерия" data-team="home" data-role="undefined" data-event_id="player_red_12"><num>88</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="9905" data-photo="null" data-num="90" data-name="Целуйко Ольга" data-team="home" data-role="undefined" data-event_id="player_info_13">Целуйко Ольга</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="9905" data-photo="null" data-num="90" data-name="Целуйко Ольга" data-team="home" data-role="undefined" data-event_id="player_goal_13"><num>90</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="9905" data-photo="null" data-num="90" data-name="Целуйко Ольга" data-team="home" data-role="undefined" data-event_id="player_goal_13"><num>90</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="9905" data-photo="null" data-num="90" data-name="Целуйко Ольга" data-team="home" data-role="undefined" data-event_id="player_yellow_13"><num>90</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="9905" data-photo="null" data-num="90" data-name="Целуйко Ольга" data-team="home" data-role="undefined" data-event_id="player_yellow_13"><num>90</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="9905" data-photo="null" data-num="90" data-name="Целуйко Ольга" data-team="home" data-role="undefined" data-event_id="player_red_13"><num>90</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="9905" data-photo="null" data-num="90" data-name="Целуйко Ольга" data-team="home" data-role="undefined" data-event_id="player_red_13"><num>90</num></button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <div class="players_list_away">
+                <table style="display:inline-table;" id="players_table_away">
+                    <caption class="away-name">Динамо-Синара</caption>
+                    <tbody>
+                        <tr>
+                                <th>Имя</th>									
+                                <th>мал</th>
+                                <th>бол</th>										
+                                <th>мал</th>
+                                <th>бол</th>
+                                <th>мал</th>
+                                <th>бол</th>
+                        </tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="8425" data-photo="null" data-num="1" data-name="Верещак Анна" data-team="away" data-role="undefined" data-event_id="player_info_0">Верещак Анна</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="8425" data-photo="null" data-num="1" data-name="Верещак Анна" data-team="away" data-role="undefined" data-event_id="player_goal_0"><num>1</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="8425" data-photo="null" data-num="1" data-name="Верещак Анна" data-team="away" data-role="undefined" data-event_id="player_goal_0"><num>1</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="8425" data-photo="null" data-num="1" data-name="Верещак Анна" data-team="away" data-role="undefined" data-event_id="player_yellow_0"><num>1</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="8425" data-photo="null" data-num="1" data-name="Верещак Анна" data-team="away" data-role="undefined" data-event_id="player_yellow_0"><num>1</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="8425" data-photo="null" data-num="1" data-name="Верещак Анна" data-team="away" data-role="undefined" data-event_id="player_red_0"><num>1</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="8425" data-photo="null" data-num="1" data-name="Верещак Анна" data-team="away" data-role="undefined" data-event_id="player_red_0"><num>1</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="14560" data-photo="null" data-num="8" data-name="Семина Варвара" data-team="away" data-role="undefined" data-event_id="player_info_1">Семина Варвара</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="14560" data-photo="null" data-num="8" data-name="Семина Варвара" data-team="away" data-role="undefined" data-event_id="player_goal_1"><num>8</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="14560" data-photo="null" data-num="8" data-name="Семина Варвара" data-team="away" data-role="undefined" data-event_id="player_goal_1"><num>8</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="14560" data-photo="null" data-num="8" data-name="Семина Варвара" data-team="away" data-role="undefined" data-event_id="player_yellow_1"><num>8</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="14560" data-photo="null" data-num="8" data-name="Семина Варвара" data-team="away" data-role="undefined" data-event_id="player_yellow_1"><num>8</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="14560" data-photo="null" data-num="8" data-name="Семина Варвара" data-team="away" data-role="undefined" data-event_id="player_red_1"><num>8</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="14560" data-photo="null" data-num="8" data-name="Семина Варвара" data-team="away" data-role="undefined" data-event_id="player_red_1"><num>8</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="12275" data-photo="null" data-num="9" data-name="Загороднева Алина" data-team="away" data-role="undefined" data-event_id="player_info_2">Загороднева Алина</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="12275" data-photo="null" data-num="9" data-name="Загороднева Алина" data-team="away" data-role="undefined" data-event_id="player_goal_2"><num>9</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="12275" data-photo="null" data-num="9" data-name="Загороднева Алина" data-team="away" data-role="undefined" data-event_id="player_goal_2"><num>9</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="12275" data-photo="null" data-num="9" data-name="Загороднева Алина" data-team="away" data-role="undefined" data-event_id="player_yellow_2"><num>9</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="12275" data-photo="null" data-num="9" data-name="Загороднева Алина" data-team="away" data-role="undefined" data-event_id="player_yellow_2"><num>9</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="12275" data-photo="null" data-num="9" data-name="Загороднева Алина" data-team="away" data-role="undefined" data-event_id="player_red_2"><num>9</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="12275" data-photo="null" data-num="9" data-name="Загороднева Алина" data-team="away" data-role="undefined" data-event_id="player_red_2"><num>9</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="5019" data-photo="null" data-num="13" data-name="Шкитина Анастасия" data-team="away" data-role="undefined" data-event_id="player_info_3">Шкитина Анастасия</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="5019" data-photo="null" data-num="13" data-name="Шкитина Анастасия" data-team="away" data-role="undefined" data-event_id="player_goal_3"><num>13</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="5019" data-photo="null" data-num="13" data-name="Шкитина Анастасия" data-team="away" data-role="undefined" data-event_id="player_goal_3"><num>13</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="5019" data-photo="null" data-num="13" data-name="Шкитина Анастасия" data-team="away" data-role="undefined" data-event_id="player_yellow_3"><num>13</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="5019" data-photo="null" data-num="13" data-name="Шкитина Анастасия" data-team="away" data-role="undefined" data-event_id="player_yellow_3"><num>13</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="5019" data-photo="null" data-num="13" data-name="Шкитина Анастасия" data-team="away" data-role="undefined" data-event_id="player_red_3"><num>13</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="5019" data-photo="null" data-num="13" data-name="Шкитина Анастасия" data-team="away" data-role="undefined" data-event_id="player_red_3"><num>13</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="5616" data-photo="null" data-num="16" data-name="Колесникова Надежда" data-team="away" data-role="undefined" data-event_id="player_info_4">Колесникова Надежда</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="5616" data-photo="null" data-num="16" data-name="Колесникова Надежда" data-team="away" data-role="undefined" data-event_id="player_goal_4"><num>16</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="5616" data-photo="null" data-num="16" data-name="Колесникова Надежда" data-team="away" data-role="undefined" data-event_id="player_goal_4"><num>16</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="5616" data-photo="null" data-num="16" data-name="Колесникова Надежда" data-team="away" data-role="undefined" data-event_id="player_yellow_4"><num>16</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="5616" data-photo="null" data-num="16" data-name="Колесникова Надежда" data-team="away" data-role="undefined" data-event_id="player_yellow_4"><num>16</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="5616" data-photo="null" data-num="16" data-name="Колесникова Надежда" data-team="away" data-role="undefined" data-event_id="player_red_4"><num>16</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="5616" data-photo="null" data-num="16" data-name="Колесникова Надежда" data-team="away" data-role="undefined" data-event_id="player_red_4"><num>16</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="9726" data-photo="null" data-num="17" data-name="Белолипецкая Стефания" data-team="away" data-role="undefined" data-event_id="player_info_5">Белолипецкая Стефания</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="9726" data-photo="null" data-num="17" data-name="Белолипецкая Стефания" data-team="away" data-role="undefined" data-event_id="player_goal_5"><num>17</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="9726" data-photo="null" data-num="17" data-name="Белолипецкая Стефания" data-team="away" data-role="undefined" data-event_id="player_goal_5"><num>17</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="9726" data-photo="null" data-num="17" data-name="Белолипецкая Стефания" data-team="away" data-role="undefined" data-event_id="player_yellow_5"><num>17</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="9726" data-photo="null" data-num="17" data-name="Белолипецкая Стефания" data-team="away" data-role="undefined" data-event_id="player_yellow_5"><num>17</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="9726" data-photo="null" data-num="17" data-name="Белолипецкая Стефания" data-team="away" data-role="undefined" data-event_id="player_red_5"><num>17</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="9726" data-photo="null" data-num="17" data-name="Белолипецкая Стефания" data-team="away" data-role="undefined" data-event_id="player_red_5"><num>17</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="12272" data-photo="null" data-num="19" data-name="Васильева Софья" data-team="away" data-role="undefined" data-event_id="player_info_6">Васильева Софья</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="12272" data-photo="null" data-num="19" data-name="Васильева Софья" data-team="away" data-role="undefined" data-event_id="player_goal_6"><num>19</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="12272" data-photo="null" data-num="19" data-name="Васильева Софья" data-team="away" data-role="undefined" data-event_id="player_goal_6"><num>19</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="12272" data-photo="null" data-num="19" data-name="Васильева Софья" data-team="away" data-role="undefined" data-event_id="player_yellow_6"><num>19</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="12272" data-photo="null" data-num="19" data-name="Васильева Софья" data-team="away" data-role="undefined" data-event_id="player_yellow_6"><num>19</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="12272" data-photo="null" data-num="19" data-name="Васильева Софья" data-team="away" data-role="undefined" data-event_id="player_red_6"><num>19</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="12272" data-photo="null" data-num="19" data-name="Васильева Софья" data-team="away" data-role="undefined" data-event_id="player_red_6"><num>19</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="5153" data-photo="null" data-num="26" data-name="Дувакина Мария" data-team="away" data-role="undefined" data-event_id="player_info_7">Дувакина Мария</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="5153" data-photo="null" data-num="26" data-name="Дувакина Мария" data-team="away" data-role="undefined" data-event_id="player_goal_7"><num>26</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="5153" data-photo="null" data-num="26" data-name="Дувакина Мария" data-team="away" data-role="undefined" data-event_id="player_goal_7"><num>26</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="5153" data-photo="null" data-num="26" data-name="Дувакина Мария" data-team="away" data-role="undefined" data-event_id="player_yellow_7"><num>26</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="5153" data-photo="null" data-num="26" data-name="Дувакина Мария" data-team="away" data-role="undefined" data-event_id="player_yellow_7"><num>26</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="5153" data-photo="null" data-num="26" data-name="Дувакина Мария" data-team="away" data-role="undefined" data-event_id="player_red_7"><num>26</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="5153" data-photo="null" data-num="26" data-name="Дувакина Мария" data-team="away" data-role="undefined" data-event_id="player_red_7"><num>26</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="9815" data-photo="null" data-num="36" data-name="Долматова Екатерина" data-team="away" data-role="undefined" data-event_id="player_info_8">Долматова Екатерина</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="9815" data-photo="null" data-num="36" data-name="Долматова Екатерина" data-team="away" data-role="undefined" data-event_id="player_goal_8"><num>36</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="9815" data-photo="null" data-num="36" data-name="Долматова Екатерина" data-team="away" data-role="undefined" data-event_id="player_goal_8"><num>36</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="9815" data-photo="null" data-num="36" data-name="Долматова Екатерина" data-team="away" data-role="undefined" data-event_id="player_yellow_8"><num>36</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="9815" data-photo="null" data-num="36" data-name="Долматова Екатерина" data-team="away" data-role="undefined" data-event_id="player_yellow_8"><num>36</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="9815" data-photo="null" data-num="36" data-name="Долматова Екатерина" data-team="away" data-role="undefined" data-event_id="player_red_8"><num>36</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="9815" data-photo="null" data-num="36" data-name="Долматова Екатерина" data-team="away" data-role="undefined" data-event_id="player_red_8"><num>36</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="12277" data-photo="null" data-num="44" data-name="Чешева Анастасия" data-team="away" data-role="undefined" data-event_id="player_info_9">Чешева Анастасия</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="12277" data-photo="null" data-num="44" data-name="Чешева Анастасия" data-team="away" data-role="undefined" data-event_id="player_goal_9"><num>44</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="12277" data-photo="null" data-num="44" data-name="Чешева Анастасия" data-team="away" data-role="undefined" data-event_id="player_goal_9"><num>44</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="12277" data-photo="null" data-num="44" data-name="Чешева Анастасия" data-team="away" data-role="undefined" data-event_id="player_yellow_9"><num>44</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="12277" data-photo="null" data-num="44" data-name="Чешева Анастасия" data-team="away" data-role="undefined" data-event_id="player_yellow_9"><num>44</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="12277" data-photo="null" data-num="44" data-name="Чешева Анастасия" data-team="away" data-role="undefined" data-event_id="player_red_9"><num>44</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="12277" data-photo="null" data-num="44" data-name="Чешева Анастасия" data-team="away" data-role="undefined" data-event_id="player_red_9"><num>44</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="4528" data-photo="null" data-num="47" data-name="Безбабных Арина" data-team="away" data-role="undefined" data-event_id="player_info_10">Безбабных Арина</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="4528" data-photo="null" data-num="47" data-name="Безбабных Арина" data-team="away" data-role="undefined" data-event_id="player_goal_10"><num>47</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="4528" data-photo="null" data-num="47" data-name="Безбабных Арина" data-team="away" data-role="undefined" data-event_id="player_goal_10"><num>47</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="4528" data-photo="null" data-num="47" data-name="Безбабных Арина" data-team="away" data-role="undefined" data-event_id="player_yellow_10"><num>47</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="4528" data-photo="null" data-num="47" data-name="Безбабных Арина" data-team="away" data-role="undefined" data-event_id="player_yellow_10"><num>47</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="4528" data-photo="null" data-num="47" data-name="Безбабных Арина" data-team="away" data-role="undefined" data-event_id="player_red_10"><num>47</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="4528" data-photo="null" data-num="47" data-name="Безбабных Арина" data-team="away" data-role="undefined" data-event_id="player_red_10"><num>47</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="5633" data-photo="null" data-num="67" data-name="Турусина Виктория" data-team="away" data-role="undefined" data-event_id="player_info_11">Турусина Виктория</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="5633" data-photo="null" data-num="67" data-name="Турусина Виктория" data-team="away" data-role="undefined" data-event_id="player_goal_11"><num>67</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="5633" data-photo="null" data-num="67" data-name="Турусина Виктория" data-team="away" data-role="undefined" data-event_id="player_goal_11"><num>67</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="5633" data-photo="null" data-num="67" data-name="Турусина Виктория" data-team="away" data-role="undefined" data-event_id="player_yellow_11"><num>67</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="5633" data-photo="null" data-num="67" data-name="Турусина Виктория" data-team="away" data-role="undefined" data-event_id="player_yellow_11"><num>67</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="5633" data-photo="null" data-num="67" data-name="Турусина Виктория" data-team="away" data-role="undefined" data-event_id="player_red_11"><num>67</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="5633" data-photo="null" data-num="67" data-name="Турусина Виктория" data-team="away" data-role="undefined" data-event_id="player_red_11"><num>67</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="9935" data-photo="null" data-num="71" data-name="Дудкина Елизавета" data-team="away" data-role="undefined" data-event_id="player_info_12">Дудкина Елизавета</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="9935" data-photo="null" data-num="71" data-name="Дудкина Елизавета" data-team="away" data-role="undefined" data-event_id="player_goal_12"><num>71</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="9935" data-photo="null" data-num="71" data-name="Дудкина Елизавета" data-team="away" data-role="undefined" data-event_id="player_goal_12"><num>71</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="9935" data-photo="null" data-num="71" data-name="Дудкина Елизавета" data-team="away" data-role="undefined" data-event_id="player_yellow_12"><num>71</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="9935" data-photo="null" data-num="71" data-name="Дудкина Елизавета" data-team="away" data-role="undefined" data-event_id="player_yellow_12"><num>71</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="9935" data-photo="null" data-num="71" data-name="Дудкина Елизавета" data-team="away" data-role="undefined" data-event_id="player_red_12"><num>71</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="9935" data-photo="null" data-num="71" data-name="Дудкина Елизавета" data-team="away" data-role="undefined" data-event_id="player_red_12"><num>71</num></button></td></tr><tr>
+      <td><div data-event="player_info" data-header="Игрок" class=" players-name " data-id="2255" data-photo="null" data-num="77" data-name="Гончарова Валентина" data-team="away" data-role="undefined" data-event_id="player_info_13">Гончарова Валентина</div></td>
+      <td><button data-event_group="event_little" data-event="little_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="2255" data-photo="null" data-num="77" data-name="Гончарова Валентина" data-team="away" data-role="undefined" data-event_id="player_goal_13"><num>77</num></button></td>                   
+      <td><button data-event_group="event_big" data-event="big_player_goal" data-header="Гол" class="title-button uk-button-goal uk-button  
+        uk-button ${team}-event" data-id="2255" data-photo="null" data-num="77" data-name="Гончарова Валентина" data-team="away" data-role="undefined" data-event_id="player_goal_13"><num>77</num></button></td>  
+
+
+      <td><button data-event_group="event_little" data-event="little_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="2255" data-photo="null" data-num="77" data-name="Гончарова Валентина" data-team="away" data-role="undefined" data-event_id="player_yellow_13"><num>77</num></button></td>
+      <td><button data-event_group="event_big" data-event="big_player_yellow" data-header="Желтая карточка" class="title-button uk-button-yellow-card     
+        uk-button ${team}-event" data-id="2255" data-photo="null" data-num="77" data-name="Гончарова Валентина" data-team="away" data-role="undefined" data-event_id="player_yellow_13"><num>77</num></button></td>
+
+      <td><button data-event_group="event_little" data-event="little_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="2255" data-photo="null" data-num="77" data-name="Гончарова Валентина" data-team="away" data-role="undefined" data-event_id="player_red_13"><num>77</num></button></td>
+
+      <td><button data-event_group="event_big" data-event="big_player_red" data-header="Красная карточка" class="title-button uk-button-red-card        
+        uk-button ${team}-event" data-id="2255" data-photo="null" data-num="77" data-name="Гончарова Валентина" data-team="away" data-role="undefined" data-event_id="player_red_13"><num>77</num></button></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+    
+</div></div><div class="score_control_group control_group_options">
+        <div class="controls_block" id="matches">
+            <div class="row flex-row">
+                <div class="inline">Матч</div>
+                <select id="match_select_joinsport"></select>
+                <input class="storable_extra" type="hidden" id="extra_match_joinsport">
+            </div>	
+            <div class="row flex-row">
+                <button class="ui-button ui-corner-all ui-widget" id="load_matches_joinsport" title="Обновить список матчей">Обновить список</button>
+                <button class="ui-button ui-corner-all ui-widget" id="apply_matches_joinsport" title="Загрузить в поток данные выделенного матча. ВНИМАНИЕ: если текущий матч отличается, данные будут сброшены в начальное состояние.">Загрузить матч</button>
+            </div>
+
+        </div>
+
+        <div class="controls_block" id="option">
+            <div class="flex-row">
+                <legend class="legend-options">
+                    <h3>Настройки</h3><!-- <span class="card_devider"> -->
+                    <button id="all_reset" class="width01 ui-button ui-corner-all ui-widget"><span>Сбросить всё!<span></span></span>
 <svg class="svg-button-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" stroke-width="1.1" d="M17.08,11.15 C17.09,11.31 17.1,11.47 17.1,11.64 C17.1,15.53 13.94,18.69 10.05,18.69 C6.16,18.68 3,15.53 3,11.63 C3,7.74 6.16,4.58 10.05,4.58 C10.9,4.58 11.71,4.73 12.46,5"></path><polyline fill="none" stroke="#000" points="9.9 2 12.79 4.89 9.79 7.9"></polyline></svg>
 </button>
-                        </div>
-        <details open="open">
-            <summary>Настройки</summary>
-            <div id="option">
-                <div class="flex-row">
-                    <legend class="legend-options" style="justify-content: flex-end;">
-                        <!-- <h3>Настройки</h3><span class="card_devider"> -->
-                    </legend>
-                </div>
-                <div class="row flex-row">
-                    <div class="inline">Погода</div>
-                    <input class="standart_input" type="text" id="town" data-default="" placeholder="Город для погоды">
-                    <!-- <button id="checkWeather" title="Проверить погоду">Проверить</button> -->
-                </div>
-                <div>Данные от: <span id="weatherDate">введите корректный город</span></div>
-                <div id="settings">
-                    <div class="manual flex-row" id="roundcounter1">
-                        <div class="inline ">Длит. 1 тайма</div>
-                        <select class="select_input timer width01" id="round-time">
-                            <option value="10:00">10 минут</option>
-                            <option value="15:00">15 минут</option>
-                            <option value="20:00">20 минут</option>
-                            <option value="22:00">22 минуты</option>
-                            <option selected="" value="25:00">25 минут</option>
-                            <option value="30:00">30 минут</option>
-                            <option value="35:00">35 минут</option>
-                            <option value="40:00">40 минут</option>
-                            <option value="45:00">45 минут</option>
-                            <!-- <option value='null'>Бесконечно</option> -->
-                        </select>
-                    </div>
-                    <p class="manual">
-                        <input type="checkbox" class="check_input timer" id="start-time-zero" value="0">
-                        <label for="start-time-zero">Начинать последующие таймы не с 0</label>
-                    </p>
-                    <p>
-                        <input type="checkbox" class="check_input" id="countdown" value="0">
-                        <label for="countdown">Обратный отсчет</label>
-                        <input style="display: none;" type="checkbox" class="check_input" id="round-auto" checked="checked" value="1">
-                    </p>
-                    <p>
-                        <input type="checkbox" class="check_input" id="hideTimer" value="0">
-                        <label for="hideTimer">Не показывать таймер</label>
-                    </p>
-                </div>
+                                        </legend>
+            </div>	
 
+            <div class="row" style="display:none">
+                <div class="manual flex-row" id="roundcounter1">
+                    <div class="inline ">Длит.</div>
+                    <select class="storable timer width01" name="round-time" id="round-time">
+                                                    <option value="5:00"> 5 минут</option>
 
+                        <option value="15:00">15 минут</option>
+                        <option value="20:00">20 минут</option>
+                        <option value="25:00">25 минут</option>
 
-                <!-- <div class="row flex-row" >
-                    <div class="inline">Поток</div>
-                    <select class="" id="stream-sel">
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                        <option value='4'>4</option>
-                        <option value='5'>5</option>
-                        <option value='6'>6</option>
-                        <option value='7'>7</option>
-                        <option value='8'>8</option>
-                        <option value='9'>9</option>
-                        <option value='Alex'>Alex</option>
-                        <option value='Maxter'>Maxter</option>
-                        <option value='Danik'>Даник</option>
-                        <option value='lfl'>LFL</option>
+                        <option value="200:00" selected="selected">200 минут</option>							
+                        <!--
+                        <option value='22:00'>22 минуты</option>
+                        <option selected value='25:00'>25 минут</option>
+                        <option value='30:00'>30 минут</option>
+                        <option value='35:00'>35 минут</option>
+                        <option value='40:00'>40 минут</option>
+                        <option value='45:00'>45 минут</option> -->
+                        <option value="null">Бесконечно</option>
                     </select>
-                </div> -->
-                                                            <div class="row flex-row">
-                        <div class="inline">Дизайн</div>
-                        <select class="width01" id="design">
-                            <option value="1" data-multicolor="">Базовый</option><option value="2" data-multicolor="">citychamp</option><option value="3" data-multicolor="">bamf</option><option value="4" data-multicolor="">ligagoroda</option><option value="5" data-multicolor="">spblfs</option><option selected="" value="6" data-multicolor="1">Футзал</option><option value="8" data-multicolor="">rksport8x8</option><option value="9" data-multicolor="">rksport_bamf</option><option value="10" data-multicolor="">rksport_bamf_W</option><option value="11" data-multicolor="">APL</option>							</select>
-                    </div>
-                
-                <!-- 					<button class="sessionbtn" id="load" title="Загрузить сессию">&#x1F4C2;</button>
-                    <button class="sessionbtn" id="save" title="Сохранить сессию">&#128190;</button>
-                    <button class="sessionbtn" id="delete" title="Удалить выделенную сессию">&#x267B;</button> -->
+                </div>
+                <!-- <p class="manual"> -->
+                <p style="display: flex;">
+                    <input type="checkbox" class="storable timer" id="start-time-zero" value="1">
+                    <label for="start-time-zero">Начинать последующие таймы не с 0</label>
+                </p>
+                <p style="display: flex;">
+                    <input type="checkbox" class="storable" name="countdown" id="countdown" value="0" checked="checked">
+                    <label for="countdown">Обратный отсчет</label>
+                    <input style="display: none;" type="checkbox" class="storable" id="round-auto" checked="checked" value="1">
+                </p>
             </div>
-        </details>
-        
+        </div>
+        <div class="controls_block" id="controls_misc">			
+            <div class="row flex-row" style="display: flex; justify-content: center;">
+                <button id="reload_score" class="ui-button ui-corner-all ui-widget"><span>Перезагрузить табло</span></button>
+            </div>	
+        </div>	</div>
     </div>
 </div>
 <script src="/static/pages/panel.js"></script>
