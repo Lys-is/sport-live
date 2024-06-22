@@ -321,17 +321,29 @@ function searchInit() {
     
 }
 const isCheckboxOrRadio = type => ['checkbox', 'radio'].includes(type);
-
+const isDatalist = field => field.list;
 function formGetData(form) {
     const data = {};
-
     for (let field of form) {
         const {name} = field;
-
         if (name) {
             const {type, checked, value} = field;
-
-            data[name] = isCheckboxOrRadio(type) ? checked : value;
+            let datalist = isDatalist(field);
+            console.log(datalist)
+            if (datalist) {
+                let options = [...datalist.options];
+                console.log(options)
+                let selectedEl = options.filter(el => field.value == el.value)[0];
+                console.log(selectedEl)
+                data[name] = selectedEl.getAttribute('data-value')
+            }
+            else if(isCheckboxOrRadio(type)) {
+                data[name] = checked
+            }
+            else {
+                data[name] = value
+            }
+            //data[name] = isCheckboxOrRadio(type) ? checked : value;
         }
     }
 
@@ -339,3 +351,19 @@ function formGetData(form) {
     return data;
 }
 
+function addClass(elem, className) {
+    elem.classList.add(className)
+}
+function delClass(elem, className) {
+    elem.classList.remove(className)
+}
+
+function getRealValue(ele){
+    var dl=ele.list.options;
+    for (var x=0;x<dl.length;x++){
+      if (dl[x].value==ele.value){
+        ele.value=dl[x].dataset.value;
+        return dl[x].dataset.value;
+      }
+    }
+  }

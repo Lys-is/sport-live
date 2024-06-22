@@ -3,7 +3,12 @@
     <div class="table_container">
         <div class="table_header">
             <p class="page_title">Игроки</p>
-            
+            <div class="filler"></div>
+            <input type="button" value="Сбросить фильтры" class="table_button">
+            <input type="button" value="Добавить игрока" class="table_button nav_link" data-href="player/get__create">
+            <div class="filler"></div>
+            <input type="button" value="Активные" class="table_button_radio_active table_radio_active">
+            <input type="button" value="Архивные" class="table_button_radio_archive">
         </div>
     <table class="commands_table">
         <tr id="first-row">
@@ -25,7 +30,7 @@
     <% for (let i = 0; i < players.length; i++) {%>
         <tr>
             <td><%= players[i].fio %></td>
-            <td><%= players[i].date %></td>
+            <td><%= players[i].birthday %></td>
             <td><%= players[i].team.name %></td>
             <td>
                 <span class="table_links table_links_compos nav_link"  data-href="match/edit/?id=<%= players[i]._id %>">Изменить</span>
