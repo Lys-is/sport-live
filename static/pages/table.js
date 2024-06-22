@@ -25,7 +25,7 @@ function setData(data) {
         setScoreboard(data.scoreboard)
     }
 }
-
+switchDiv('big')
 
 function switchDiv(type) {
     scrollTo(0, 0)

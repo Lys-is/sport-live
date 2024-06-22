@@ -1,7 +1,7 @@
 <%- include('global/header.ejs') %>
 <link rel="stylesheet" href="/static/styles/style_panel.css">
 
-    <div class="content-container">
+    <!-- <div class="content-container">
         <div class="main-container">
             <div class="block">
                 <div class="h-group">
@@ -139,6 +139,599 @@
         <div class="buttons-container"></div>
     </div>
 
+
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="content-container">
+        <div class="column-container">
+            <div class="block">
+                <div class="h-group center">
+                    <p class="first">Матч</p>
+                </div>
+                <div class="h-group">
+                    <select name="match" id="match" class="text-form full-form">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <div class="h-group">
+                    <input type="button" value="Обновить список" class="full-form" name="match-button-refresh">
+                    <input type="button" value="Применить выделенный" class="full-form" name="match-button-accept">
+                </div>
+            </div>
+            
+
+            <div class="block">
+                <div class="h-group centered">
+                    <p class="first">Вариация табло</p>
+                </div>
+                <div class="h-group wrap half-form-container">
+                    <input type="button" value="Малое" class="selected" name="small-vis">
+                    <input type="button" value="Большое" class="" name="big-vis">
+                    <input type="button" value="Матч" class="" name="match-vis">
+                    <input type="button" value="Сборная 1" class="" name="group-vis">
+                    <input type="button" value="Сборная 2" class="" name="mog-vis">
+                    <input type="button" value="Пенальти" class="" name="pen-vis">
+                    <input type="button" value="Погода" class="" name="weather-vis">
+                    <input type="button" value="Выкл" class="" name="off-vis">
+                </div>
+                <div class="h-group">
+                        <label for="panel-style" class="inline-form-label small-text nowrap">Стиль табло</label>
+                        <select name="panel-style" id="panel-style" class="text-form full-form">
+                            <option value="1">style1</option>
+                            <option value="2">style2</option>
+                            <option value="3">style3</option>
+                            <option value="4">style4</option>
+                            <option value="5">style5</option>
+                            <option value="6">style6</option>
+                            <option value="7">style7</option>
+                            <option value="8">style8</option>
+                        </select>
+                </div>
+            </div>
+            <div class="block">
+                <div class="h-group center">
+                    <p class="first">Настройки погоды</p>
+                </div>
+                <div class="h-group">
+                    <div class="v-group">
+                        <label for="weather-temp" class="inline-form-label small-text nowrap">Температура</label>
+                        <label for="weather-temp" class="inline-form-label small-text nowrap">Влажность</label>
+                        <label for="weather-wind" class="inline-form-label small-text nowrap">Скорость</label>
+                        <label for="weather-location" class="inline-form-label small-text nowrap">Локация</label>
+                        
+                    </div>
+                    <div class="v-group">
+                        <input type="text" name="weather-temp" id="weather-temp" class="text-form full-form">
+                        <input type="text" name="weather-humidity" id="weather-humidity" class="text-form full-form">
+                        <input type="text" name="weather-wind" id="weather-wind" class="text-form full-form">
+                        <input type="text" name="weather-location" id="weather-location" class="text-form full-form">
+                    </div>
+                </div>
+            </div>
+            <div class="block">
+                <div class="h-group center">
+                    <p class="first">Сценарий</p>
+                </div>
+                <div class="h-group">
+                    <select name="scenarios" id="scenarios" class="text-form full-form">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+            </div>
+            
+
+            <div class="block">
+                <div class="h-group center">
+                    <p class="first">Сброс и перезагрузка</p>
+                </div>
+                <div class="h-group">
+                    <input type="button" value="Сбросить все" class="full-form red" name="reset-all">
+                    <input type="button" value="Перезагрузить табло" class="full-form yellow" name="refresh-all">
+                </div>
+            </div>
+            
+        </div>
+        <div class="column-container">
+            <div class="block">
+                <div class="h-group center">
+                    <p class="first">Команды</p>
+                </div>
+                <div class="h-group">
+                    <div class="v-group">
+                        <lable for="team1">Команда 1</lable>
+                        <input type="text" id="team1" class="text-form full-form" name="team1" value="Комманда 1">
+                        <input type="color" id="team1" class="full-form" name="team1_color" value="#ee7733" data-type="score">
+                    </div>
+
+                    <div class="v-group">
+                        <lable for="team1">Команда 2</lable>
+                        <input type="text" id="team1" class="text-form full-form" name="team2" value="Комманда 2">
+                        <input type="color" id="team1" class=" full-form" name="team2_color" value="#3333ff" data-type="score">
+                    </div>
+                </div>
+
+                <div class="h-group">
+                    <input type="button" value="Сбросить" class="full-form" name="reset-teams">
+                </div>
+
+            </div>
+
+            <div class="block">
+                <div class="h-group centered">
+                    <p class="first">Счет</p>
+                </div>
+
+                <div class="h-group">
+                    <div class="h-group score_div" data-team="1">
+                        <input type="button" value="-" class="circle-button" name="minus">
+                        <input type="number" value="0" class="text-form small-form" name="team1" data-type="score">
+                        <input type="button" value="+" class="circle-button" name="plus">
+                    </div>
+
+                    <div class="h-group score_div" data-team="2">
+                        <input type="button" value="-" class="circle-button" name="minus">
+                        <input type="number" value="0" class="text-form small-form" name="team2" data-type="score">
+                        <input type="button" value="+" class="circle-button" name="plus">
+                    </div>
+                </div>
+                <div class="h-group">
+                    <input type="button" value="Сбросить" class="full-form" name="reset-teams">
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="h-group center">
+                    <p class="first">Пенальти</p>
+                </div>
+                <div class="h-group bigger-gap">
+                    <div class="h-group">
+                        <input type="button" value="ГОЛ" class="square40 flex-form" name="gol-pen1">
+                        <input type="button" value="" class="square40 redo-icon" name="pass-pen1">
+                        <input type="button" value="CЭЙВ" class="square40 flex-form" name="save-pen1">
+                    </div>
+
+                    <div class="h-group">
+                        <input type="button" value="ГОЛ" class="square40 flex-form" name="gol-pen1">
+                        <input type="button" value="" class="square40 redo-icon" name="pass-pen1">
+                        <input type="button" value="CЭЙВ" class="square40 flex-form" name="save-pen1">
+                    </div>
+                </div>
+
+                <div class="h-group bigger-gap">
+                    <div class="h-group ">
+                        <input type="button" value="ГОЛ" class="square40 flex-form" name="gol-pen1">
+                        <input type="button" value="" class="square40 redo-icon" name="pass-pen1">
+                        <input type="button" value="CЭЙВ" class="square40 flex-form" name="save-pen1">
+                    </div>
+
+                    <div class="h-group">
+                        <input type="button" value="ГОЛ" class="square40 flex-form" name="gol-pen1">
+                        <input type="button" value="" class="square40 redo-icon" name="pass-pen1">
+                        <input type="button" value="CЭЙВ" class="square40 flex-form" name="save-pen1">
+                    </div>
+                </div>
+
+                <div class="h-group bigger-gap">
+                    <input type="button" value="Сбросить" class="full-form" name="reset-pen">
+                    <input type="button" value="Добавить пенальти" class="full-form" name="add-pen">
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="h-group center">
+                    <p class="first">Таймер</p>
+                </div>
+                <div class="h-group">
+                    <!-- для иконки паузы поменять класс на pause-icon -->
+                    <input type="button" value="" class="square40 play-icon" name="play-timer">
+                    <p class="time">00:00</p>
+                    <input type="button" value="" class="square40 redo-icon" name="play-timer">
+                </div>
+
+                <div class="h-group">
+                    <input type="button" value="-10" class="square40" name="timer-minus10">
+                    <input type="button" value="-5" class="square40" name="timer-minus5">
+                    <input type="button" value="-1" class="square40" name="timer-minus1">
+                    <input type="button" value="1" class="square40" name="timer-plus1">
+                    <input type="button" value="5" class="square40" name="timer-plus5">
+                    <input type="button" value="10" class="square40" name="timer-plus10">
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="column-container">
+            <div class="block">
+                <div class="h-group centered">
+                    <p class="first">Показать тренера</p>
+                </div>
+                    <div class="h-group half-form-container wrap">
+                        <input type="button" value="Тренер 1 большой" name="trainer1-big-teams">
+                        <input type="button" value="Тренер 1 маленький" name="trainer1-small-teams">
+
+                        <input type="button" value="Тренер 2 большой" name="trainer2-big-teams">
+                        <input type="button" value="Тренер 2 маленький" name="trainer2-small-teams">
+
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="h-group center">
+                        <p class="first">Показ судей</p>
+                    </div>
+                    <div class="h-group space-between">
+                        <input type="button" value="Показать судей" name="judges">
+                        <input type="button" value="Комментатор(ов)" name="commentator">
+                    </div>
+                    <div class="h-group">
+                        <label for="comm1" class="inline-form-label small-text nowrap">Комментатор 1</label>
+                        <input type="text" name="comm1" id="comm1" class="text-form full-form">
+                    </div>
+                    <div class="h-group">
+                        <label for="comm1" class="inline-form-label small-text nowrap">Комментатор 2</label>
+                        <input type="text" name="comm2" id="comm2" class="text-form full-form">
+                    </div>
+                    <div class="h-group centered">
+                        <label for="champ-name" class="small-text">Название чемпионата</label>
+                        <input type="text" name="champ-name" id="champ-name" class="text-form full-form double-height-form">
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="h-group center">
+                        <p class="first">Замены команд</p>
+                    </div>
+                    <div class="h-group">
+                        <div class="v-group">
+                            <lable for="team1-replace" class="small-text">Замена команды 1</lable>
+                            <select id="team1-replace" class="text-form full-form" name="team1-replace">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                            <lable for="team1-replace-by" class="small-text">Замена на</lable>
+                            <select id="team1-replace-by" class="text-form full-form" name="team1-replace-by">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                            <input type="button" value="Показать малое" class="full-form" name="team1-replace-button-small">
+                            <input type="button" value="Показать большое" class="full-form" name="team1-replace-button-big">
+                        </div>
+                        <div class="v-group">
+                            <lable for="team2-replace" class="small-text">Замена команды 2</lable>
+                            <select id="team2-replace" class="text-form full-form" name="team2-replace">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                            <lable for="team2-replace-by" class="small-text">Замена на</lable>
+                            <select id="team2-replace-by" class="text-form full-form" name="team2-replace-by">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                            <input type="button" value="Показать малое" class="full-form" name="team2-replace-button-small">
+                            <input type="button" value="Показать большое" class="full-form" name="team2-replace-button-big">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        <div class="column-container">
+            <div class="block">
+                <div class="h-group center">
+                    <p class="first">Команда 1</p>
+                </div>
+                <table>
+                    <tr>
+                        <th>имя</th>
+                        <th>мал</th>
+                        <th>бол</th>
+                        <th>мал</th>
+                        <th>бол</th>
+                        <th>мал</th>
+                        <th>бол</th>
+                    </tr>
+                    <tr>
+                        <td>Вещак Анна</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Вещак Анна</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Вещак Анна</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Вещак Анна</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Вещак Анна</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="block">
+                <div class="h-group center">
+                    <p class="first">Команда 2</p>
+                </div>
+                <table>
+                    <tr>
+                        <th>имя</th>
+                        <th>мал</th>
+                        <th>бол</th>
+                        <th>мал</th>
+                        <th>бол</th>
+                        <th>мал</th>
+                        <th>бол</th>
+                    </tr>
+                    <tr>
+                        <td>Вещак Анна</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Вещак Анна</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Вещак Анна</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Вещак Анна</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Вещак Анна</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                    <tr>
+                        <td>Скибиди Туалеты</td>
+                        <td><input type="button" value="1" class="square30" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" name="pers1_6"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+    </div>
 <script src="/static/pages/panel.js"></script>
 
 <%- include('global/footer.ejs') %>

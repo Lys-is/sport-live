@@ -75,10 +75,10 @@
 // startTimerBtn.addEventListener('click', (e) => {
 //     timer.startTimer()
 // })
-let play = get('#play');
-play.addEventListener('click', (e) => {
-    socket.emit('play_timer');
-})
+// let play = get('#play');
+// play.addEventListener('click', (e) => {
+//     socket.emit('play_timer');
+// })
 
 socket.emit('join_panel');
 let textInpts = getA('input[type="text"], input[type="color"], input[type="number"]');
