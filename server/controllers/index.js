@@ -35,9 +35,11 @@ class Constrollers {
         });
     }
     async get__table(req, res) {
+
         res.render('table', {
             title: 'Таблица',
-            auth: req.user || false
+            auth: req.user || false,
+            style: 'style_2'
         });
     }
     api = require('./api')
