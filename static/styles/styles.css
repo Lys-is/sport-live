@@ -120,6 +120,13 @@ header{
     display: flex;
     align-items: center;
     color: var(--font-color);
+    background-color: #00000000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.navbar_text:hover{
+    background-color: #00000030;
 }
 
 .navbar_naming{
@@ -214,6 +221,7 @@ header{
     border-collapse: collapse;
     width: 100%;
     height: 100%;
+    margin-bottom: 30px;
 }
 
 table tr td:first-child {
@@ -1771,4 +1779,8 @@ textarea { resize: vertical; }
 .black .cool_body,
 .black .create_tournire_content {
     background-color: rgb(40, 54, 61) !important;
+}
+
+.label_gap .form-group {
+    margin-bottom: 20px;
 }

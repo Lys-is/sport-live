@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+    <div class="content-container">
+        <div class="main-container">
+            <div class="block">
+                <div class="h-group">
+                    <div class="v-group">
+                        <lable for="team1">Команда 1</lable>
+                        <input type="text" id="team1" class="text-form full-form" name="team1" value="Комманда 1">
+                        <input type="color" id="team1" class="full-form" name="team_color1" value="#ee7733" >
+                    </div>
+
+                    <div class="v-group">
+                        <lable for="team1">Команда 2</lable>
+                        <input type="text" id="team1" class="text-form full-form" name="team2" value="Комманда 2">
+                        <input type="color" id="team1" class=" full-form" name="team_color2" value="#3333ff" >
+                    </div>
+                </div>
+
+                <div class="h-group">
+                    <input type="button" value="Сбросить" class="full-form" name="reset-teams">
+                </div>
+
+                <div class="h-group centered">
+                    <p>Счет</p>
+                </div>
+
+                <div class="h-group">
+                    <div class="h-group">
+                        <input type="button" value="-" class="circle-button" name="minus1">
+                        <input type="text" value="0" class="text-form small-form" name="score1">
+                        <input type="button" value="+" class="circle-button" name="plus1">
+                    </div>
+
+                    <div class="h-group">
+                        <input type="button" value="-" class="circle-button" name="minus2">
+                        <input type="text" value="0" class="text-form small-form" name="score2">
+                        <input type="button" value="+" class="circle-button" name="plus2">
+                    </div>
+                </div>
+                <div class="h-group">
+                    <input type="button" value="Сбросить" class="full-form" name="reset-teams">
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="h-group">
+                    <input type="button" value="" class="square40 play-icon" name="play-timer">
+                    <p class="time">00:00</p>
+                    <input type="button" value="" class="square40 redo-icon" name="play-timer">
+                </div>
+
+                <div class="h-group">
+                    <input type="button" value="-10" class="square40" name="timer-minus10">
+                    <input type="button" value="-5" class="square40" name="timer-minus5">
+                    <input type="button" value="-1" class="square40" name="timer-minus1">
+                    <input type="button" value="1" class="square40" name="timer-plus1">
+                    <input type="button" value="5" class="square40" name="timer-plus5">
+                    <input type="button" value="10" class="square40" name="timer-plus10">
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="h-group space-between">
+                    <label for="scenarios" class="inline-form-label">Сценарий</label>
+                    <select name="scenarios" id="scenarios" class="text-form fixed-half">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="h-group centered">
+                    <p class="first">Табло</p>
+                </div>
+                <div class="h-group wrap half-form-container">
+                    <input type="button" value="Малое" class="selected" name="small-vis">
+                    <input type="button" value="Большое" class="" name="big-vis">
+                    <input type="button" value="Матч" class="" name="match-vis">
+                    <input type="button" value="Сборная 1" class="" name="group-vis">
+                    <input type="button" value="Сборная 2" class="" name="mog-vis">
+                    <input type="button" value="Пенальти" class="" name="pen-vis">
+                    <input type="button" value="Выкл" class="" name="off-vis">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="show-main-container">
+            <div class="block">
+                <div class="h-group half-form-container wrap">
+                    <input type="button" value="Тренер 1 большой" name="trainer1-big-teams">
+                    <input type="button" value="Тренер 1 маленький" name="trainer1-small-teams">
+
+                    <input type="button" value="Тренер 2 большой" name="trainer2-big-teams">
+                    <input type="button" value="Тренер 2 маленький" name="trainer2-small-teams">
+
+                </div>
+            </div>
+
+            <div class="block">
+
+                <div class="h-group space-between">
+                    <input type="button" value="Показать судей" name="judges">
+                    <input type="button" value="Комментатор(ов)" name="commentator">
+                </div>
+                <div class="h-group">
+                    <label for="comm1" class="inline-form-label small-text nowrap">Комментатор 1</label>
+                    <input type="text" name="comm1" id="comm1" class="text-form full-form">
+                </div>
+                <div class="h-group">
+                    <label for="comm1" class="inline-form-label small-text nowrap">Комментатор 2</label>
+                    <input type="text" name="comm2" id="comm2" class="text-form full-form">
+                </div>
+                <div class="h-group centered">
+                    <label for="champ-name" class="small-text">Название чемпионата</label>
+                    <input type="text" name="champ-name" id="champ-name" class="text-form full-form double-height-form">
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="h-group centered">
+                    <input type="button" value="Сохранить" name="save">
+                </div>
+            </div>
+        </div>
+        
+        <div class="players-container"></div>
+        <div class="buttons-container"></div>
+    </div>
+</body>
+</html>

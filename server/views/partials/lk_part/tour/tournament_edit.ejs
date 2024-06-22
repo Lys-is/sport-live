@@ -103,11 +103,13 @@
 
     <form id="tournament_reglament__form" class="tournament_edit__form active" data-submit="reglament">
 
-    <div class="cool_body_content">
+    <div class="cool_body_content label_gap">
         <p>Регламент</p>
-    <label>
-        <input type="checkbox" checked=""> Ничьи возможны
-    </label>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" checked=""> Ничьи возможны
+            </label>
+        </div>
     <div class="form-group">
         <label>За победу <input type="number" value="<%=tournament.reglament.for_win %>" name="for_win"></label>
         <label>За поражение <input type="number" value="<%=tournament.reglament.for_lose %>" name="for_lose"></label>
@@ -131,9 +133,11 @@
         <label>Кол-во периодов дополнительного времени <input type="number" value="<%=tournament.reglament.period_count_overtime %>" name="period_count_overtime"></label>
         <label>Длительность дополнительного периода в мин. <input type="number" value="<%=tournament.reglament.overtime_duration %>" name="overtime_duration"></label>
     </div>
-    <label>
-        <input type="checkbox" checked=""> Учёт голов при техническом поражении
-    </label>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" checked=""> Учёт голов при техническом поражении
+        </label>
+    </div>
     <div class="form-group">
         <label>Дедлайн для заявки на матч (мин.) <input type="number" value="<%=tournament.reglament.deadline_for_application %>" name="deadline_for_application"></label>
     </div>
@@ -169,7 +173,7 @@
 
 
 <form class="tournament_edit__form" data-submit="application_campaign">
-    <div class="cool_body_content">
+    <div class="cool_body_content label_gap">
         <div class="form-group">
             <label for="start-date">Дата начала заявочной компании</label>
             <input type="date" id="start-date" name="start_date" value="<%= tournament.application_campaign.start_date %>">
@@ -227,7 +231,7 @@
 
 
 <form class="tournament_edit__form" data-submit="visual">
-    <div class="cool_body_content">
+    <div class="cool_body_content label_gap">
         <p class="bold">Основные настройки</p>
         <div class="form-group">
             <label for="appearence_starting_page">Стартовая страница</label>
@@ -390,9 +394,9 @@
 <form class="tournament_edit__form" data-submit="tags">
     <div class="cool_body_content">
         <label for="tag_name">Имя тега</label>
-        <input type="text" id="tag_name" name="tag_name" сlass="text_form text double_form" value="<%= tournament.tags.tag_name %>">
-        <label for="full_tag_name">Полное имя тега</label>
-        <input type="text" id="full_tag_name" name="full_tag_name" сlass="text_form text double_form" value="<%= tournament.tags.full_tag_name %>">
+        <input type="text" id="tag_name" name="tag_name" class="text_form big_form" value="<%= tournament.tags.tag_name %>">
+        <label for="full_tag_name" class="mt">Полное имя тега</label>
+        <input type="text" id="full_tag_name" name="full_tag_name" class="text_form big_form" value="<%= tournament.tags.full_tag_name %>">
     </div>
 
     <div class="create_tournire_footer">
@@ -405,7 +409,7 @@
 <form class="tournament_edit__form" data-submit="admins">
     <div class="cool_body_content">
         <div class="table_header">
-            <p class="page_title">Команды</p>
+            <p class="page_title nm">Команды</p>
             <div class="filler"></div>
             <input type="button" value="Сбросить фильтры" class="table_button">
         </div>
