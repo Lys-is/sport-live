@@ -12,6 +12,7 @@ const PlayerSchema = new Schema({
     ampl: {type: String},
     num: {type: Number, default: 0},
     socials: {type: String},
+    mobile: {type: String},
 })
 PlayerSchema.pre('save', function(next) {
     if(!this.team)

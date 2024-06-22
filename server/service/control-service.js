@@ -100,7 +100,7 @@ class Control {
         this.userId = userId
         this.match = null
         this.timer = new Timer()
-        this.scoreBoard = new Scoreboard()
+        this.scoreboard = new Scoreboard()
         this.tablo = new Tablo()
     }
     set setMatch(match) {
@@ -126,7 +126,7 @@ class Control {
                     this.tablo.type = data[key]
                     break
                 case 'score':
-                    this.scoreBoard.changeScore(data[key])
+                    this.scoreboard.changeScore(data[key])
                     break
                 case 'team1_name':
                     this.team1_name = data[key]

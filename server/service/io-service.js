@@ -107,7 +107,14 @@ function startPanel(controls, socket) {
 
             socket.on('join_table', ()=>{
               console.log('_table')
+              if(!control){
+                control = new controlService(socket.user._id.toString())
+                controls[socket.user._id.toString()] = control
+              }
+              console.log(control)
               socket.join(socket.user._id.toString()+'_table');
+              let data = "control.getData()"
+              socket.emit('start', control)
             })
 
 
