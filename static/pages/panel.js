@@ -75,22 +75,66 @@
 // startTimerBtn.addEventListener('click', (e) => {
 //     timer.startTimer()
 // })
-
+// let play = get('#play');
+// play.addEventListener('click', (e) => {
+//     socket.emit('play_timer');
+// })
 
 socket.emit('join_panel');
-let inputs = getA('.standart_input');
-console.log(inputs)
+let textInpts = getA('input[type="text"], input[type="color"], input[type="number"]');
+console.log(textInpts)
 
-inputs.forEach(input => {
-        input.addEventListener('input', (e) => {
-            let data = {}
-            let name = e.target.name,
-            value = e.target.value
-            data[name] = value
-            socket.emit('new_data', data)
-        })
+textInpts.forEach(input => {
+        let fTimer;
+        function f(e) {
+            if(fTimer) {
+                clearTimeout(fTimer);
+            }
+            fTimer = setTimeout(function() {
+                fTimer = void 0;
+                console.log('dfsdfsdf')
+                standartListener(e);
+            }.bind(this), 500);
+        }
+        input.addEventListener('input', f)
 
 })
+let scoreDivs = getA('.score_div');
+
+scoreDivs.forEach(div => {
+    let plus_minus = getA('input[type="button"]', div),
+    score = get('input[type="number"]', div);
+    console.log(plus_minus, score)
+    plus_minus.forEach(btn => btn.addEventListener('click', listener))
+    function listener(e) {
+        let name = e.target.name;
+        if(name == 'plus') {
+            score.value = +score.value + 1
+        }
+        else if(name == 'minus') {
+            score.value = +score.value - 1
+        }
+        let data = {
+            score: {}
+        }
+        data.score[score.name] = score.value
+        socket.emit('new_data', data)
+    }
+})
+function standartListener(e) {
+    let data = {}
+    let name = e.target.name,
+    value = e.target.value
+    if(e.target.getAttribute('data-type') == 'score') {
+        data.score = {}
+        data.score[name] = value
+    }
+    else
+        data[name] = value
+    console.log(data)
+    socket.emit('new_data', data)
+}
+
 function sendTime() {
     let time = `${minuts}:${seconds}`
     let data = {

@@ -1,8 +1,10 @@
 const Match = require('../models/match-model');
+const getBrightness = require('getbrightness')
+
 class Timer {
     constructor() {
         this.timerId = null
-        this.minuts = 30
+        this.minuts = 0
         this.seconds = 0
         this.is_reverse = false
         this.now_time = 0
@@ -33,8 +35,8 @@ class Timer {
         }
         socket.emit('new_data', data)
     }
-    startTimer() {
-        console.log('asasas')
+    playTimer(socket) {
+        console.log(socket)
         this.timerId = setInterval(() => {
             if(this.is_reverse){
                 this.seconds--
@@ -56,10 +58,13 @@ class Timer {
                     this.clearTimer()
                 }
             }
-
-            this.sendTime()
+            //this.send(socket)
+            //this.toRoom('new_data', {name: 'timer', value: `${this.minuts}:${this.seconds}`})
         }, 1000)
         
+    }
+    send(socket){
+        socket.to(socket.user._id.toString()).emit('timer', {name: 'timer', value: `${this.minuts}:${this.seconds}`})
     }
 }
 class Scoreboard {
@@ -69,13 +74,18 @@ class Scoreboard {
         this.team2 = 0
         this.team1_foll = 0
         this.team2_foll = 0
-        this.team1_color = 'red'
-        this.team2_color = 'blue'
+        this.team1_color = '#fb7528'
+        this.team2_color = '#2525cb'
         this.team1_penalty = ''
         this.team2_penalty = ''
+        this.team1_font_color = 'white'
+        this.team2_font_color = 'white'
     }
 
-    set changeScore(score) {
+    changeScore(score) {
+        console.log(score)
+        console.log(this.team2_color)
+        console.log(getBrightness(this.team2_color))
         this.team1 = score.team1 ? score.team1 : this.team1
         this.team2 = score.team2 ? score.team2 : this.team2
         this.team1_foll = score.team1_foll ? score.team1_foll : this.team1_foll
@@ -84,7 +94,10 @@ class Scoreboard {
         this.team2_color = score.team2_color ? score.team2_color : this.team2_color
         this.team1_penalty = score.team1_penalty ? score.team1_penalty : this.team1_penalty
         this.team2_penalty = score.team2_penalty ? score.team2_penalty : this.team2_penalty
+        this.team1_font_color = getBrightness(this.team1_color) > 0.5 ? 'black' : 'white'
+        this.team2_font_color = getBrightness(this.team2_color) > 0.5 ? 'black' : 'white'
     }
+    
 }
 class Tablo {
     // type = mid | bif | match | wheater | penalty | off
@@ -128,12 +141,13 @@ class Control {
                 case 'score':
                     this.scoreboard.changeScore(data[key])
                     break
-                case 'team1_name':
+                case 'team1':
                     this.team1_name = data[key]
                     break
-                case 'team2_name':
+                case 'team2':
                     this.team2_name = data[key]
-                    break   
+                    break
+                
             }
         }
         return this
