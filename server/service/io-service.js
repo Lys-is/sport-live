@@ -91,43 +91,57 @@ class IoService {
     }
     
 }
-function startPanel(controls, socket) {
-  let control = controls[socket.user._id.toString()]
 
+
+function startPanel(controls, socket) {
+  let userId = socket.user._id.toString()
+
+  function newControlService() {
+    return new controlService(userId)
+  }
+  let control = controls[socket.user._id.toString()]
             socket.on('join_panel', ()=>{
               console.log('_panel')
-              
               if(!control){
-                control = new controlService(socket.user._id.toString())
-                controls[socket.user._id.toString()] = control
+                control = newControlService()
+                controls[userId] = control
               }
-              socket.join(socket.user._id.toString()+'_panel');
+              socket.join(userId);
             })
 
 
             socket.on('join_table', ()=>{
               console.log('_table')
               if(!control){
-                control = new controlService(socket.user._id.toString())
-                controls[socket.user._id.toString()] = control
+                control = newControlService()
+                controls[userId] = control
               }
               console.log(control)
-              socket.join(socket.user._id.toString()+'_table');
+              socket.join(userId);
+              console.log('control')
               let data = "control.getData()"
               socket.emit('start', control)
+              console.log(data)
             })
+            
+            socket.on('play_timer', ()=>{
+              if(!control){
+                control = newControlService()
+                controls[userId] = control
+              }
+              control.timer.playTimer(socket)
 
-
+            })
             socket.on('new_data', (data) => {
               if(!control){
-                control = new controlService(socket.user._id.toString())
-                controls[socket.user._id.toString()] = control
+                control = newControlService()
+                controls[userId] = control
               }
-                let ndata = control.setData(data)
-                console.log(data, ndata)
+                control.setData(data)
+                console.log(data, control)
                 
-              socket.to(socket.user._id.toString()+'_table').emit('update_data', ndata)
-              socket.to(socket.user._id.toString()+'_panel').emit('update_data', ndata)
+              socket.to(userId).emit('update_data', control)
+              //io.to(userId).emit('update_data', control)
             })
 }
  module.exports = new IoService();

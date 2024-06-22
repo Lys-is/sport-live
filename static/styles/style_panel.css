@@ -160,14 +160,14 @@ input[type="button"]:hover {
 }
 
 .play-icon {
-    background: url('play.png') no-repeat !important;
+    background: url('icons/play.png') no-repeat !important;
     background-position: center;
     background-position: 10px 8px !important;
     background-size: 20px 20px !important;
 }
 
 .redo-icon {
-    background: url('redo.png') no-repeat !important;
+    background: url('icons/redo.png') no-repeat !important;
     background-position: center;
     background-position: 10px 8px !important;
     background-size: 20px 20px !important;

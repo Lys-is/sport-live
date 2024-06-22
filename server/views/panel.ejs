@@ -8,13 +8,13 @@
                     <div class="v-group">
                         <lable for="team1">Команда 1</lable>
                         <input type="text" id="team1" class="text-form full-form" name="team1" value="Комманда 1">
-                        <input type="color" id="team1" class="full-form" name="team_color1" value="#ee7733" >
+                        <input type="color" id="team1" class="full-form" name="team1_color" value="#ee7733" data-type="score">
                     </div>
 
                     <div class="v-group">
                         <lable for="team1">Команда 2</lable>
                         <input type="text" id="team1" class="text-form full-form" name="team2" value="Комманда 2">
-                        <input type="color" id="team1" class=" full-form" name="team_color2" value="#3333ff" >
+                        <input type="color" id="team1" class=" full-form" name="team2_color" value="#3333ff" data-type="score">
                     </div>
                 </div>
 
@@ -27,16 +27,16 @@
                 </div>
 
                 <div class="h-group">
-                    <div class="h-group">
-                        <input type="button" value="-" class="circle-button" name="minus1">
-                        <input type="text" value="0" class="text-form small-form" name="score1">
-                        <input type="button" value="+" class="circle-button" name="plus1">
+                    <div class="h-group score_div" data-team="1">
+                        <input type="button" value="-" class="circle-button" name="minus">
+                        <input type="number" value="0" class="text-form small-form" name="team1" data-type="score">
+                        <input type="button" value="+" class="circle-button" name="plus">
                     </div>
 
-                    <div class="h-group">
-                        <input type="button" value="-" class="circle-button" name="minus2">
-                        <input type="text" value="0" class="text-form small-form" name="score2">
-                        <input type="button" value="+" class="circle-button" name="plus2">
+                    <div class="h-group score_div" data-team="2">
+                        <input type="button" value="-" class="circle-button" name="minus">
+                        <input type="number" value="0" class="text-form small-form" name="team2" data-type="score">
+                        <input type="button" value="+" class="circle-button" name="plus">
                     </div>
                 </div>
                 <div class="h-group">
@@ -46,7 +46,7 @@
 
             <div class="block">
                 <div class="h-group">
-                    <input type="button" value="" class="square40 play-icon" name="play-timer">
+                    <input type="button" value="" id="play" class="square40 play-icon" name="play-timer">
                     <p class="time">00:00</p>
                     <input type="button" value="" class="square40 redo-icon" name="play-timer">
                 </div>

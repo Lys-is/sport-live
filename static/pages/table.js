@@ -1,14 +1,11 @@
 socket.emit('join_table');
 
 socket.on('update_data', (data) => {
-    console.log(data)
-    let el = get(`input[name="${data.name}"]`);
-    el.value = data.value
-    console.log('update_data')
+    setData(data)
 })
 
-socket.on('update_event', (data) => {
-    
+socket.on('timer', (data) => {
+    console.log(data.value)
 })
 socket.on('start', (data) => {
   console.log(data)
@@ -19,6 +16,7 @@ let n_div = ''
 console.log(base_divs)
 
 function setData(data) {
+    console.log(data)
     setNames(data)
     if(data.type) {
         switchDiv(data.type)
@@ -48,16 +46,17 @@ function switchDiv(type) {
 
 
 function setScoreboard(scoreboard) {
-    getA('.var-home-score').forEach(el => el.innerHTML = scoreboard.team1+1)
-    getA('.var-away-score').forEach(el => el.innerHTML = scoreboard.team2-1)
+    getA('.var-home-score').forEach(el => el.innerHTML = scoreboard.team1)
+    getA('.var-away-score').forEach(el => el.innerHTML = scoreboard.team2)
+    getA('.var-homeColor').forEach(el => {el.style.background = scoreboard.team1_color; el.style.color = scoreboard.team1_font_color})
+    getA('.var-awayColor').forEach(el => {el.style.background = scoreboard.team2_color; el.style.color = scoreboard.team2_font_color})
+    getA('.var-homeTextColor').forEach(el => el.style.color = scoreboard.team1_font_color)
+    getA('.var-awayTextColor').forEach(el => el.style.color = scoreboard.team2_font_color)
 }
 
 
 function setNames(data) {
-    if(data.team1_name) {
         getA('.var-home, .home-team, .var-home-short').forEach(el => el.innerHTML = data.team1_name);
-    if(data.team2_name) {
         getA('.var-away, .away-team, .var-away-short').forEach(el => el.innerHTML = data.team2_name);
-    }
-    }
+    
 }
