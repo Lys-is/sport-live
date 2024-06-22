@@ -72,7 +72,27 @@ class IoService {
               socket.join('OnlineChat');
               
             }
-            let control = controls[socket.user._id.toString()]
+            if(socket.user){
+              startPanel(controls, socket)
+            }
+            
+            socket.on('message', async (txt)=>{
+              try{
+                if(!socket.user)
+                  throw "reg_err"
+                
+
+              }
+              catch(e){
+                console.log(e)
+              }
+            })
+          })
+    }
+    
+}
+function startPanel(controls, socket) {
+  let control = controls[socket.user._id.toString()]
 
             socket.on('join_panel', ()=>{
               console.log('_panel')
@@ -102,20 +122,5 @@ class IoService {
               socket.to(socket.user._id.toString()+'_table').emit('update_data', ndata)
               socket.to(socket.user._id.toString()+'_panel').emit('update_data', ndata)
             })
-            socket.on('message', async (txt)=>{
-              try{
-                if(!socket.user)
-                  throw "reg_err"
-                
-
-              }
-              catch(e){
-                console.log(e)
-              }
-            })
-          })
-    }
-    
 }
-
  module.exports = new IoService();
