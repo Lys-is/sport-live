@@ -1069,6 +1069,19 @@ border: 1px solid dimgrey;padding: 0.2rem;/* box-sizing: content-box; */}
 	border-radius: 50%;
 	/* box-shadow:0px 2px 2px -1px black; */
 	background: #696969cc;
+	margin-right: 10px;
+}
+
+.mt {
+	margin-top: 10px;
+}
+
+#timer {
+	margin-top: 10px;
+}
+
+.score-title {
+	font-size: large;
 }
 
 .ui-spinner a.ui-spinner-button:hover{
@@ -1645,3 +1658,15 @@ html {
 	border: 1px solid #06af08 !important;
 }
 
+.mb {
+	margin-bottom: 20px;
+}
+
+.score-form {
+	width: 40px;
+	height: 20px;
+	background-color: #000;
+	border-radius: 5px;
+	border: 0;
+	margin-right: 10px;
+}
