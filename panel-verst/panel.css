@@ -1,7 +1,6 @@
 body {
     background-color: gray;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    width: 1680px;
 
 }
 
@@ -10,14 +9,35 @@ body {
 }
 
 .content-container{
-    display: flex;
+    display: grid;
+    grid-template-columns: 400px 400px 400px 400px;
     align-items: flex-start;
     flex-direction: row;
     gap: 10px;
 }
 
+@media (max-width: 1670px) {
+    .content-container{
+        grid-template-columns: 400px 400px 400px;
+        grid-template-rows: auto auto;
+    }
+}
+
+@media (max-width: 1250px) {
+    .content-container{
+        grid-template-columns: 400px 400px;
+        grid-template-rows: auto auto;
+    }
+}
+
+@media (max-width: 825px) {
+    .content-container{
+        grid-template-columns: 400px;
+        grid-template-rows: auto auto auto auto;
+    }
+}
+
 .column-container{
-    grid-area: a;
     width: 400px;
     display: flex;
     align-items: center;
