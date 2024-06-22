@@ -92,6 +92,8 @@ header{
     -webkit-overflow-scrolling: touch;
 }
 
+
+
 .content_navtext{
     margin-bottom: 30px;
 }
@@ -134,12 +136,13 @@ header{
     justify-content: center;
     font-size: larger;
     color: var(--font-color);
-    margin-left: 15px;
+    margin-top: 10px;
+
 }
 
 .navbar_logo{
-    width: 20px;
-    height: 20px;
+    width: 100px;
+    height: 100px;
     align-self: center;
 }
 
@@ -153,7 +156,16 @@ header{
 .navbar_body{
     flex-grow: 1;
     background-color: var(--nav-bc);
-    padding-top: 15px;
+}
+
+.navbar_footer{
+    height: 180px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--nav-bc);
 }
 
 .navbar_header{
@@ -176,6 +188,18 @@ header{
     margin-bottom: -15px;
     background-color: rgb(40, 54, 61);
 }
+
+.navbar_mini .navbar_logo {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 0;
+    justify-self: end;
+}
+
+.navbar_mini .navbar_footer{
+    height: 50px;
+}
+
 
 .navbar_mini{
     width: 45px !important;
