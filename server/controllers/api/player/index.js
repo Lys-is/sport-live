@@ -5,7 +5,8 @@ class PlayersController {
 
     async get__create(req, res) {
         try {
-            return sendRes('partials/lk_part/team_create', {}, res);
+            let teams = await Team.find();
+            return sendRes('partials/lk_part/player_create', {teams}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -13,9 +14,11 @@ class PlayersController {
     }
     async post__create(req, res) {
         try {
-            let {name, description} = req.body;
-            await Team.create({creator: req.user.id, admins: req.user.id, name, description});
-            return res.json({message: 'Команда создана'});
+            let data = req.body;
+            data.creator = req.user.id;
+            let player = await Player.create(data);
+            if(!player) return res.json({message: 'Игрок не создан, ошибка'});
+            return res.json({message: 'Игрок создан'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

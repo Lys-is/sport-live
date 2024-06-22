@@ -1,0 +1,86 @@
+
+
+<div class="create_tournire_container">
+    <form id="player_create__form">
+    <p class="content_navtext">Главная &gt; Игроки &gt; Создание игрока</p>
+    <div class="create_tournire_content">
+        <div class="create_tournire_header">
+            <p class="page_title">Игрок</p>
+        </div>
+        <div class="create_tournire_body">
+            <div class="form_container">
+                <div class="image_n_textareas">
+                    <div class="image_upload">
+                    <img src="icons/Face.jpeg" alt="placeholder image">
+                    <p>Мин. размер: 320 x 320</p>
+                    </div>
+                    <div class="textareas_ct">
+                        <div class="form_group">
+                            <label for="description">Биография</label>
+                            <textarea id="description" name="description"></textarea>
+                        </div>
+                        <div class="form_group">
+                            <label for="ampl">Позиция</label>
+                            <select id="ampl" name="ampl"> 
+                                <option value="1">Вратарь</option>
+                                <option value="2">Защитник</option>
+                                <option value="3">Полузащитник</option>
+                                <option value="4">Нападающий</option>
+                                <option value="5">Универсал</option>
+                            </select>
+                        </div>
+                        <div class="form_group">
+                            <label for="num">Игровой номер</label>
+                            <input type="text" id="num" name="num"> 
+                        </div>
+                    </div>
+
+                
+                </div>
+
+                <div class="ct_form">
+                    <div class="form_group">
+                        <label for="full_name">ФИО</label>
+                        <input type="text" id="fio" name="fio">
+                    </div>
+                    <div class="form_group">
+                        <label for="team">Команда</label>
+                        <input type="text" list="team" name="team">
+                        <datalist id="team">
+                            <% for (let i = 0; i < teams.length; i++) { %>
+                                <option value="<%= teams[i].name %>" data-value="<%= teams[i]._id %>"></option>
+                            <% } %>
+                        </datalist>
+                    </div>
+                    
+                    <div class="form_group">
+                        <label for="birthday">Дата рождения</label>
+                        <input type="date" id="birthday" name="birthday">
+                    </div>
+                    <div class="form_group">
+                        <label for="position">Место рождения</label>
+                        <input type="text" id="position" name="position">
+                    </div>
+                    <div class="form_group">
+                        <label for="mobile">Телефон</label>
+                        <input type="text" id="mobile" name="mobile">
+                    </div>
+                    <div class="form_group">
+                        <label for="socials">Соц. cети</label>
+                        <input type="text" id="socials" name="socials">
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="create_tournire_footer">
+            <div class="filler"></div>
+            <input type="button" value="Отменить" class="button white_button">
+            <input type="submit" value="Создать" class="button green_button">
+        </div>
+    </div>
+</form>
+</div>

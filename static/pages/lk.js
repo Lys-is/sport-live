@@ -13,13 +13,33 @@ logout_btn.addEventListener('click',(e)=>{
 })
 console.log(links)
 links.forEach(link => {
-    if(link.getAttribute('data-href'))
-        link.addEventListener('click', linkListener)
+    let href = link.getAttribute('data-href')
+    if(href)
+        link.addEventListener('click', (e) => {    
+            linkListener(e);
+            changeNav(e);    
+       })
 })
+function changeNav(e, href) {
+    if(e){
+        href = e.target.getAttribute('data-href')
+    }
+    href = href.split('/')[0]
+    console.log(params, href)
+    links.forEach(link => {
+        if(link.getAttribute('data-href') != href)
+            link.classList.remove('navbar_selected')
+        else
+            link.classList.add('navbar_selected')
+    })
+    
+
+}
 if(params.page) {
     (async() => {
         let href = params.page.replace(/\^id~(.+)/, '?id=$1')
         console.log(href)
+        changeNav(null, href)
         if(!await checkTournament(removeTrailingSlash(href)))
             getPage(href)
     })()
@@ -57,7 +77,7 @@ async function getPage(href, destInHtml = lk_main) {
     console.log(initHref);
     const response = await sendFetch(pageUrl, null, 'GET');
     destInHtml.innerHTML = response ? response : 'Страница не найдена';
-    
+
     params.subHref = href.split('?')[1] || '';
     history.replaceState({ page: 1 }, "", `?page=${cleanedHref}`);
 
@@ -82,9 +102,10 @@ async function linkListener(e) {
         getPage(href)
 }
 let init_decorator = (func) => {
-    links = getA('li', nav)
-    links.forEach(link => {
-        link.addEventListener('click', linkListener)
+    let n_links = getA('li', nav)
+    n_links.forEach(link => {
+        if(!link.hasEventListener('click'))
+            link.addEventListener('click', linkListener)
     })
     return func
 }
@@ -103,7 +124,8 @@ let inits = {
     'tournament/id/group' : init__tournament_group,
     'tournament/id/get__group_create' : init__tournament_group_create,
     'tournament/id/get__group_edit' : init__tournament_group_edit,
-    'player': init__player
+    'player': init__player,
+    'player/get__create' : init__player_create
 }
 for(let key in inits) {
     inits[key] = init_decorator(inits[key])
@@ -284,7 +306,14 @@ function init__team_list() {
 function init__player() {
     
 }
-
+function init__player_create() {
+    let form = get("#player_create__form");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let data = formGetData(form)
+        sendFetch("/api/lk/player/post__create", JSON.stringify(data), "POST")
+    })
+}
 
 
 
