@@ -1,6 +1,8 @@
 body {
     background-color: gray;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
 
 }
 
@@ -19,6 +21,7 @@ body {
 @media (max-width: 1670px) {
     .content-container{
         grid-template-columns: 400px 400px 400px;
+        justify-items: center;
         grid-template-rows: auto auto;
     }
 }
