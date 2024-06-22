@@ -140,7 +140,7 @@ function startPanel(controls, socket) {
                 control.setData(data)
                 console.log(data, control)
                 
-              socket.to(userId).emit('update_data', control)
+              io.to(userId).emit('update_data', control)
               //io.to(userId).emit('update_data', control)
             })
 }
