@@ -291,8 +291,8 @@ body:after {
 	flex-direction: column-reverse;
 	align-items: center;
 	/*align-content: space-between;*/
-	bottom: 0px;
-	/*left: 50%;*/
+	bottom: 42px;
+	/* left: 50%; */
 	width: 100%;
 	height: 500px;
 	position: absolute;

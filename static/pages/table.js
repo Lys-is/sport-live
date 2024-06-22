@@ -15,6 +15,7 @@ socket.on('start', (data) => {
   setData(data)
 })
 let base_divs = getA('.big, .mid, .little, .little-ploff, .home-roster, .away-roster, .pen, .refs, .weather')
+let n_div = ''
 console.log(base_divs)
 
 function setData(data) {
@@ -29,10 +30,20 @@ function setData(data) {
 
 
 function switchDiv(type) {
+    scrollTo(0, 0)
+    console.log(type)
     base_divs.forEach(div => {
         div.style.display = 'none'
     })
-    get(`.${type}`).style.display = 'block'
+    if(type == 'pen') {
+        getA(`.${n_div}`).forEach(div => div.style.display = 'block')
+    }
+    else {
+        n_div = type
+    }
+    console.log(n_div)
+    getA(`.${type}`).forEach(div => div.style.display = 'block')
+    
 }
 
 
@@ -44,9 +55,9 @@ function setScoreboard(scoreboard) {
 
 function setNames(data) {
     if(data.team1_name) {
-        getA('.var-home, .home-team').forEach(el => el.innerHTML = data.team1_name);
+        getA('.var-home, .home-team, .var-home-short').forEach(el => el.innerHTML = data.team1_name);
     if(data.team2_name) {
-        getA('.var-away, .away-team').forEach(el => el.innerHTML = data.team2_name);
+        getA('.var-away, .away-team, .var-away-short').forEach(el => el.innerHTML = data.team2_name);
     }
     }
 }
