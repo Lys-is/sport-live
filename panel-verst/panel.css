@@ -13,7 +13,8 @@ body {
 
     grid-template-areas: 
                 "a b c"
-                "a b d";
+                "a b c"
+                "e b d";
 
     gap: 10px;
 }

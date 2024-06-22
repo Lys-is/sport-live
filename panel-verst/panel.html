@@ -10,6 +10,9 @@
     <div class="content-container">
         <div class="main-container">
             <div class="block">
+                <div class="h-group center">
+                    <p class="first">Команды</p>
+                </div>
                 <div class="h-group">
                     <div class="v-group">
                         <lable for="team1">Команда 1</lable>
@@ -28,8 +31,11 @@
                     <input type="button" value="Сбросить" class="full-form" name="reset-teams">
                 </div>
 
+            </div>
+
+            <div class="block">
                 <div class="h-group centered">
-                    <p>Счет</p>
+                    <p class="first">Счет</p>
                 </div>
 
                 <div class="h-group">
@@ -51,6 +57,9 @@
             </div>
 
             <div class="block">
+                <div class="h-group center">
+                    <p class="first">Таймер</p>
+                </div>
                 <div class="h-group">
                     <input type="button" value="" class="square40 play-icon" name="play-timer">
                     <p class="time">00:00</p>
@@ -68,9 +77,11 @@
             </div>
 
             <div class="block">
-                <div class="h-group space-between">
-                    <label for="scenarios" class="inline-form-label">Сценарий</label>
-                    <select name="scenarios" id="scenarios" class="text-form fixed-half">
+                <div class="h-group center">
+                    <p class="first">Сценарий</p>
+                </div>
+                <div class="h-group">
+                    <select name="scenarios" id="scenarios" class="text-form full-form">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -96,6 +107,7 @@
                     <input type="button" value="Сборная 1" class="" name="group-vis">
                     <input type="button" value="Сборная 2" class="" name="mog-vis">
                     <input type="button" value="Пенальти" class="" name="pen-vis">
+                    <input type="button" value="Погода" class="" name="weather-vis">
                     <input type="button" value="Выкл" class="" name="off-vis">
                 </div>
             </div>
@@ -104,6 +116,9 @@
 
         <div class="show-main-container">
             <div class="block">
+                <div class="h-group centered">
+                <p class="first">Показать тренера</p>
+                </div>
                 <div class="h-group half-form-container wrap">
                     <input type="button" value="Тренер 1 большой" name="trainer1-big-teams">
                     <input type="button" value="Тренер 1 маленький" name="trainer1-small-teams">
@@ -115,7 +130,9 @@
             </div>
 
             <div class="block">
-
+                <div class="h-group center">
+                    <p class="first">Показ судей</p>
+                </div>
                 <div class="h-group space-between">
                     <input type="button" value="Показать судей" name="judges">
                     <input type="button" value="Комментатор(ов)" name="commentator">
@@ -135,10 +152,66 @@
             </div>
 
             <div class="block">
-                <div class="h-group centered">
-                    <input type="button" value="Сохранить" name="save">
+                <div class="h-group center">
+                    <p class="first">Замены команд</p>
+                </div>
+                <div class="h-group">
+                    <div class="v-group">
+                        <lable for="team1-replace" class="small-text">Замена команды 1</lable>
+                        <select id="team1-replace" class="text-form full-form" name="team1-replace">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <lable for="team1-replace-by" class="small-text">Замена на</lable>
+                        <select id="team1-replace-by" class="text-form full-form" name="team1-replace-by">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <input type="button" value="Показать малое" class="full-form" name="team1-replace-button-small">
+                        <input type="button" value="Показать большое" class="full-form" name="team1-replace-button-big">
+                    </div>
+                    <div class="v-group">
+                        <lable for="team2-replace" class="small-text">Замена команды 2</lable>
+                        <select id="team2-replace" class="text-form full-form" name="team2-replace">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <lable for="team2-replace-by" class="small-text">Замена на</lable>
+                        <select id="team2-replace-by" class="text-form full-form" name="team2-replace-by">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <input type="button" value="Показать малое" class="full-form" name="team2-replace-button-small">
+                        <input type="button" value="Показать большое" class="full-form" name="team2-replace-button-big">
+                    </div>
                 </div>
             </div>
+
+            <div class="block">
+                <div class="h-group center">
+                    <p class="first">Погода</p>
+                </div>
+                <div class="h-group">
+                    <div class="v-group">
+                        <label for="weather-temp" class="inline-form-label small-text nowrap">Температура</label>
+                        <label for="weather-temp" class="inline-form-label small-text nowrap">Влажность</label>
+                        <label for="weather-wind" class="inline-form-label small-text nowrap">Скорость</label>
+                        <label for="weather-location" class="inline-form-label small-text nowrap">Локация</label>
+                        
+                    </div>
+                    <div class="v-group">
+                        <input type="text" name="weather-temp" id="weather-temp" class="text-form full-form">
+                        <input type="text" name="weather-humidity" id="weather-humidity" class="text-form full-form">
+                        <input type="text" name="weather-wind" id="weather-wind" class="text-form full-form">
+                        <input type="text" name="weather-location" id="weather-location" class="text-form full-form">
+                    </div>
+                </div>
+            </div>
+
         </div>
         
         <div class="players-container"></div>
