@@ -39,7 +39,7 @@ class Constrollers {
         res.render('table', {
             title: 'Таблица',
             auth: req.user || false,
-            style: 'style_1'
+            style: 'style_2'
         });
     }
     api = require('./api')
