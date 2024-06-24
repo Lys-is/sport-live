@@ -4,7 +4,6 @@
         <input type="button" value="Регламент" class="t_button active_t_button" data-dest="reglament">
         <input type="button" value="Заявочная компания" class="t_button" data-dest="application_campaign">
         <input type="button" value="Внешний вид" class="t_button" data-dest="visual">
-        <input type="button" value="Тег" class="t_button" data-dest="tags">
         <input type="button" value="Администраторы" class="t_button" data-dest="admins">
     </div>
 
@@ -21,17 +20,10 @@
                     </div>
                     <div class="textareas_ct">
                         <div class="form_group">
-                            <label for="rank">Ранг</label>
-                            <input type="text" id="rank" name="rank" value="<%= tournament.basic.rank %>">
-                        </div>
-                        <div class="form_group">
                             <label for="description">Описание</label>
                             <textarea id="description" name="description"><%= tournament.basic.description %></textarea>
                         </div>
-                        <div class="form_group">
-                            <label for="description">Таблицы и сетки</label>
-                            <textarea id="description" name="tables_grids"><%= tournament.basic.tables_grids %></textarea>
-                        </div>
+                        
                     </div>
                 
                 </div>
@@ -84,9 +76,6 @@
                         </label>
                         <label>
                             <input type="checkbox" name="is_display_table_main" <%= tournament.basic.is_display_table_main ? 'checked' : '' %>> Отобразить таблицу на главной странице сайта
-                        </label>
-                        <label>
-                            <input type="checkbox" name="is_league_info" <%= tournament.basic.is_league_info ? 'checked' : '' %>> Учитывать в инфографике "Лига в цифрах и фактах"
                         </label>
                     </div>
                 </div>
@@ -190,23 +179,7 @@
             <label for="max-players">Макс. игроков</label>
             <input type="number" id="max-players" name="max_players" value="<%= tournament.application_campaign.max_players %>">
         </div>
-        <div class="form-group">
-            <label for="fee-type">Тип взноса</label>
-            <%
-            (function () {
-            let options = {'none': 'Без взносов', 'team': 'Командные взносы', 'personal': 'Персональные взносы', 'application': 'Определяются в заявке'}
-            let selected = tournament.application_campaign.fee_type
-            %><select class="select" id="fee-type" name="fee_type" >
-                <%
-                for ( let key in options )
-                {
-                    let selected = ( key == tournament.application_campaign.fee_type ) ? "selected" : "";
-                    %><option value="<%= key%>" <%=selected %>><%= options[key] %></option><%
-                } 
-                })();
-                %>
-            </select>
-        </div>
+
         <div class="form-group">
             <input type="checkbox" id="transitions" name="transfers_enable" <%= tournament.application_campaign.transfers_enable ? 'checked' : '' %>>
             <label for="transitions">Переходы возможны</label>
@@ -328,56 +301,7 @@
             <input type="checkbox" id="appearence_stage" name="is_display_all_stages" <%= tournament.visual.is_display_all_stages ? 'checked' : '' %>>
             <label for="appearence_stage">Отображение всех этапов на одной странице - "Календарь", "Таблицы и сетки"</label>
         </div>
-        <p class="bold">Печатные протоколы</p>
-        <div class="form-group">
-            <label for="appearence_pre_protocol">Вариант предстартового протокола</label>
-            <% (function () {
-                let options = {'first': 'Вариант №1', 'second': 'Вариант №2', 'third': 'Вариант №3'}
-                let selected = tournament.visual.before_start_type
-                %><select class="select" id="appearence_pre_protocol" name="before_start_type" >
-                    <%
-                    for ( let key in options )
-                    {
-                        let selected = ( key == tournament.visual.before_start_type ) ? "selected" : "";
-                        %><option value="<%= key%>" <%=selected %>><%= options[key] %></option><%
-                    } 
-                    })();
-                    %>
-                </select>
-        </div>
-        <div class="form-group">
-            <label for="appearence_post_protocol">Вариант послематчевого протокола</label>
-            <% (function () {
-                let options = {'first': 'Вариант №1', 'second': 'Вариант №2', 'third': 'Вариант №3'}
-                let selected = tournament.visual.after_start_type
-                %><select class="select" id="appearence_post_protocol" name="after_start_type" >
-                    <%
-                    for ( let key in options )
-                    {
-                        let selected = ( key == tournament.visual.after_start_type ) ? "selected" : "";
-                        %><option value="<%= key%>" <%=selected %>><%= options[key] %></option><%
-                    } 
-                    })();
-                    %>
-                </select>
-        </div>
-
-        <div class="form-group">
-            <label for="appearence_vac_protocol">Вариант заявочного протокола</label>
-            <% (function () {
-                let options = {'first': 'Вариант №1', 'second': 'Вариант №2', 'third': 'Вариант №3'}
-                let selected = tournament.visual.application_type
-                %><select class="select" id="appearence_vac_protocol" name="application_type" >
-                    <%
-                    for ( let key in options )
-                    {
-                        let selected = ( key == tournament.visual.application_type ) ? "selected" : "";
-                        %><option value="<%= key%>" <%=selected %>><%= options[key] %></option><%
-                    } 
-                    })();
-                    %>
-                </select>
-        </div>
+        
     </div>
 
     <div class="create_tournire_footer">

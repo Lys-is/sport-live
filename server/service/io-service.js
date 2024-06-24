@@ -113,14 +113,21 @@ function startPanel(controls, socket) {
             socket.on('join_table', ()=>{
               console.log('_table')
               if(!control){
+                console.log('new_control')
                 control = newControlService()
                 controls[userId] = control
               }
               console.log(control)
+              console.log(userId)
               socket.join(userId);
               console.log('control')
               let data = "control.getData()"
-              socket.emit('start', control)
+              try {
+                socket.emit('start', control.getData)
+
+              } catch (e) {
+                console.log(e)
+              }
               console.log(data)
             })
             
@@ -129,8 +136,25 @@ function startPanel(controls, socket) {
                 control = newControlService()
                 controls[userId] = control
               }
-              control.timer.playTimer(socket)
+              control.timer.playTimer(socket, userId)
 
+            })
+            socket.on('match', async (data)=>{
+              if(!control){
+                control = newControlService()
+                controls[userId] = control
+              }
+              await control.setMatch(data)
+              io.to(userId).emit('update_data', control.getData)
+
+            })
+            socket.on('notify', (data)=>{
+              if(!control){
+                control = newControlService()
+                controls[userId] = control
+              }
+              console.log(data)
+              io.to(userId).emit('new_notify', data)
             })
             socket.on('new_data', (data) => {
               if(!control){
@@ -138,9 +162,15 @@ function startPanel(controls, socket) {
                 controls[userId] = control
               }
                 control.setData(data)
-                console.log(data, control)
+                console.log(data, control.getData)
                 
-              io.to(userId).emit('update_data', control)
+                try{
+                  io.to(userId).emit('update_data', control.getData)
+                }
+                catch(e){
+                  console.log(e)
+                }
+              //io.to(userId).emit('update_data', control)
               //io.to(userId).emit('update_data', control)
             })
 }

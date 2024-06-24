@@ -44,7 +44,9 @@ const nav = {
         'player' : {
             'func' : 'get__player',
             'get__create' : {},
-            'post__create' : {}
+            'post__create' : {},
+            'get__edit' : {},
+            'put__edit' : {}
         },
         'tournament' : {
             'func' : 'get__tournament',

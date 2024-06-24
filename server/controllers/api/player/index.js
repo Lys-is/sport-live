@@ -40,6 +40,28 @@ class PlayersController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
+    async get__edit(req, res) {
+        try {
+            let player = await Player.findOne({_id: req.query.id})
+            let teams = await Team.find();
+            return sendRes('partials/lk_part/player_edit', {player, teams}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async put__edit(req, res) {
+        try {
+            const {playerId} = req.body;
+            let player = await Player.findOne({_id: playerId});
+            if(!player) return res.json({message: 'Такого игрока не существует'});
+            player = await Player.updateOne({_id: playerId}, req.body);
+            return res.json({message: 'Игрок обновлен'});
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
     async get__team_list_create(req, res) {
         try {
             return sendRes('partials/lk_part/team_list_create', {}, res);

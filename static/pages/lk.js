@@ -32,7 +32,6 @@ function changeNav(e, href) {
         else
             link.classList.add('navbar_selected')
     })
-    
 
 }
 if(params.page) {
@@ -70,7 +69,7 @@ async function checkTournament(str) {
 async function getPage(href, destInHtml = lk_main) {
     
     const baseUrl = '/api/lk/';
-    const cleanedHref = href.replace(/(\?id=)(.+)/, '^id~$2');
+    const cleanedHref = href.replace(/(\?id=)(.+)/, '^id~$2')
     console.log(cleanedHref, href)
     const pageUrl = `${baseUrl}${href}`;
     let initHref = cleanedHref.split('?')[0];
@@ -87,7 +86,8 @@ async function getPage(href, destInHtml = lk_main) {
             link.addEventListener('click', linkListener);
         }
     });
-    initHref = initHref.replace(/\/id\/[^\/]+(\/[^\/]*)?/, "/id$1").replace(/(get__group_edit).*/, '$1');
+    initHref = initHref.replace(/\/id\/[^\/]+(\/[^\/]*)?/, "/id$1").replace(/(get__group_edit).*/, '$1').split('/^id~')[0];
+    console.log(initHref)
     console.log(removeTrailingSlash(initHref))
     inits[removeTrailingSlash(initHref)]?.(href);
     return true
@@ -101,6 +101,17 @@ async function linkListener(e) {
         console.log(href)
         getPage(href)
 }
+let hidNav = get('.header_hide_navbar')
+let navDiv = get('.navbar')
+hidNav.addEventListener('click', (e) => {
+    navDiv.classList.toggle('navbar_mini')
+})
+
+
+
+
+
+
 let init_decorator = (func) => {
     let n_links = getA('li', nav)
     n_links.forEach(link => {
@@ -125,7 +136,8 @@ let inits = {
     'tournament/id/get__group_create' : init__tournament_group_create,
     'tournament/id/get__group_edit' : init__tournament_group_edit,
     'player': init__player,
-    'player/get__create' : init__player_create
+    'player/get__create' : init__player_create,
+    'player/get__edit' : init__player_edit
 }
 for(let key in inits) {
     inits[key] = init_decorator(inits[key])
@@ -315,5 +327,13 @@ function init__player_create() {
     })
 }
 
+function init__player_edit() {
+    let form = get("#player_edit__form");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let data = formGetData(form)
+        sendFetch("/api/lk/player/put__edit", JSON.stringify(data), "PUT")
+    })
+}
 
 

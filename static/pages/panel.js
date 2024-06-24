@@ -75,12 +75,104 @@
 // startTimerBtn.addEventListener('click', (e) => {
 //     timer.startTimer()
 // })
-// let play = get('#play');
-// play.addEventListener('click', (e) => {
-//     socket.emit('play_timer');
-// })
+let table_1 = get('#table_team_1'),
+    table_2 = get('#table_team_2');
+let play = get('#play');
+play.addEventListener('click', (e) => {
+    socket.emit('play_timer');
+})
+let match = get('#match');
+match.addEventListener('change', (e) => {
+    socket.emit('match', e.target.value);
+})
+socket.on('connect', () => {
+    console.log(socket.id)
+    socket.emit('join_panel');
+});
+socket.on('update_data', (data) => {
+    console.log(data)
+    let tableHTML = `<tbody>
+                    <tr>
+                        <th>имя</th>
+                        <th>мал</th>
+                        <th>бол</th>
+                        <th>мал</th>
+                        <th>бол</th>
+                        <th>мал</th>
+                        <th>бол</th>
+                    </tr>`;
+    let playerHTML = `<tr data-id="{{id}}" data-name="{{name}}">
+                        <td>{{name}}</td>
+                        <td><input type="button" value="1" class="square30" data-type="goal_s" name="pers1_1"></td>
+                        <td><input type="button" value="1" class="square30" data-type="goal_b" name="pers1_2"></td>
+                        <td><input type="button" value="1" class="square30 yellow" data-type="yellow_s" name="pers1_3"></td>
+                        <td><input type="button" value="1" class="square30 yellow" data-type="yellow_b" name="pers1_4"></td>
+                        <td><input type="button" value="1" class="square30 red" data-type="red_s" name="pers1_5"></td>
+                        <td><input type="button" value="1" class="square30 red" data-type="red_b" name="pers1_6"></td>
+                    </tr>`;
+    if(data.match) {
+        table_1.innerHTML = tableHTML
+        table_2.innerHTML = tableHTML
+        console.log(getA('.data_team_1'))
+        getA('.data_team_1').forEach(el => {
+            console.log(el)
+            if(el.localName == 'input')
+                el.setAttribute('readonly', true)
+            else
+                el.innerHTML = data.match.team_1.name
+        })
+        getA('.data_team_2').forEach(el => {
+            if(el.localName == 'input')
+                el.setAttribute('readonly', true)
+            else
+                el.innerHTML = data.match.team_2.name
+        })
 
-socket.emit('join_panel');
+        data.players_1.forEach(player => {
+            table_1.innerHTML += playerHTML.replace('{{id}}', player._id).replaceAll('{{name}}', player.fio)
+        })
+        table_1.innerHTML += '</tbody>'
+
+        data.players_2.forEach(player => {
+            table_2.innerHTML += playerHTML.replace('{{id}}', player._id).replaceAll('{{name}}', player.fio)
+        })
+        table_2.innerHTML += '</tbody>'
+
+        getA('.square30').forEach(el => {
+            el.addEventListener('click', playerNotifyListener)
+        })
+
+    }
+})
+function playerNotifyListener(e) {
+    console.log(e.target)
+    let player = e.target.closest('tr').getAttribute('data-name')
+    let type = e.target.getAttribute('data-type').split('_')
+    let txt = '', title = ''
+    if(type[0] == 'goal') {
+        txt = 'Игрок ' + player + ' забил гол'
+        title = 'Гоооооол'
+    }
+    else if(type[0] == 'yellow') {
+        txt = 'Игрок ' + player + ' получил жёлтую карту'
+        title = 'Жёлтая карта'
+        type[0] = 'yellow-card'
+    }
+    else if(type[0] == 'red') {
+        txt = 'Игрок ' + player + ' получил красную карту'
+        title = 'Красная карта'
+        type[0] = 'red-card'
+    }
+    
+    let data = {
+        type: type[0],
+        size : type[1],
+        text: txt,
+        title: title,
+    }
+    socket.emit('notify', data)
+}
+console.log(socket.id)
 let textInpts = getA('input[type="text"], input[type="color"], input[type="number"]');
 console.log(textInpts)
 

@@ -1,4 +1,4 @@
-
+let Match = require('../models/match-model');
 class Constrollers {
     async auth(req, res, next) {
         res.render('auth', {
@@ -29,9 +29,11 @@ class Constrollers {
         });
     }
     async get__panel(req, res) {
+        let matches = await Match.find({});
         res.render('panel', {
             title: 'Панель управления',
-            auth: req.user || false
+            auth: req.user || false,
+            matches
         });
     }
     async get__table(req, res) {

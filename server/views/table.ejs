@@ -15,10 +15,12 @@
 <%- include('score_styles/' + style + '/visualizer.ejs') %>
 <link rel="stylesheet" href="/static/score_styles/<%= style %>/style.css">
 
-<script src="/static/pages/table.js"></script>
+<script type="text/javascript" defer  src="/static/pages/table.js"></script>
 <style>
     body {
         background: url('/static/img/bg_footbal.png');
     }
 </style>
+<%- include('score_styles/notifications/notification.ejs') %>
+<link rel="stylesheet" href="/static/styles/notification.css">
 <%- include('global/footer.ejs') %>

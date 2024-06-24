@@ -1,9 +1,32 @@
-socket.emit('join_table');
+
+socket.on('connect', () => {
+    socket.emit('join_table');
+    console.log(socket.id)
+
+})
 
 socket.on('update_data', (data) => {
     setData(data)
 })
+socket.on('new_notify', (data) => {
+    console.log('fdf')
+    console.log(data)
+    let div
+    if(data.size == 's'){
+        div = get('.mini-notification')
+    }
+    else{
+        div = get('.notification')
+    }
 
+    getA('.notification_title').forEach(el => el.innerHTML = data.title)
+    getA('.notification_message').forEach(el => el.innerHTML = data.text)
+    getA('.notification_img').forEach(el => el.className = 'notification_img '+data.type)
+    div.classList.remove('disabled')
+    setTimeout(() => {
+        div.classList.add('disabled')
+    }, 5000)
+})
 socket.on('timer', (data) => {
     console.log(data.value)
 })

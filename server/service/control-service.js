@@ -1,5 +1,44 @@
 const Match = require('../models/match-model');
+const Player = require('../models/player-model');
 const getBrightness = require('getbrightness')
+const timestore = require('timestore')
+
+let timers = new timestore.Timestore()
+
+function startTimer(socket, timer, userId) {
+    let time = `${timer.minuts}:${timer.seconds}`
+    let timerId = timers.setInterval(userId.toString(), timerCallback, 1000)
+    console.log(timerId)
+    function timerCallback() {
+        if(timer.is_reverse){
+            timer.seconds--
+            if(timer.seconds == -1){
+                timer.minuts--
+                timer.seconds = 59
+            }
+            if(timer.minuts <= 0) {
+                timer.clearTimer()
+            }
+        }
+        else{
+            timer.seconds++
+            if(timer.seconds == 60){
+                timer.minuts++
+                timer.seconds = 0
+            }
+            if(timer.minuts >= timer.max_time) {
+                timer.clearTimer()
+            }
+        }
+        timer.send(socket)
+        //timer.toRoom('new_data', {name: 'timer', value: `${this.minuts}:${this.seconds}`})
+    }
+    return userId.toString()
+}
+
+function pauseTimer(timer) {
+    timers.clearInterval(timer.timerId)
+}
 
 class Timer {
     constructor() {
@@ -14,7 +53,7 @@ class Timer {
         this.is_null_start = false
     }
     clearTimer() {
-        clearInterval(this.timerId)
+        pauseTimer(this)
     }
     reverse(type) {
         this.is_reverse = type
@@ -35,34 +74,15 @@ class Timer {
         }
         socket.emit('new_data', data)
     }
-    playTimer(socket) {
-        console.log(socket)
-        this.timerId = setInterval(() => {
-            if(this.is_reverse){
-                this.seconds--
-                if(this.seconds == -1){
-                    this.minuts--
-                    this.seconds = 59
-                }
-                if(this.minuts <= 0) {
-                    this.clearTimer()
-                }
-            }
-            else{
-                this.seconds++
-                if(this.seconds == 60){
-                    this.minuts++
-                    this.seconds = 0
-                }
-                if(this.minuts >= this.max_time) {
-                    this.clearTimer()
-                }
-            }
-            //this.send(socket)
-            //this.toRoom('new_data', {name: 'timer', value: `${this.minuts}:${this.seconds}`})
-        }, 1000)
+    playTimer(socket, userId) {
+        console.log(this)
+        this.timerId = startTimer(socket, this, userId)
         
     }
+    // startTimer(socket) {
+    //     this.is_null_start = false
+    //     this.playTimer(socket)
+    // }
     send(socket){
         socket.to(socket.user._id.toString()).emit('timer', {name: 'timer', value: `${this.minuts}:${this.seconds}`})
     }
@@ -114,12 +134,18 @@ class Control {
         this.match = null
         this.timer = new Timer()
         this.scoreboard = new Scoreboard()
-        this.tablo = new Tablo()
+        //this.tablo = new Tablo()
     }
-    set setMatch(match) {
+    async setMatch(matchId) {
+        console.log(matchId)
+        let match = await Match.findOne({_id: matchId})
+        let players_1 = await Player.find({team: match.team_1._id}),
+            players_2 = await Player.find({team: match.team_2._id})
         this.match = match
         this.team1_name = match.team_1.name
         this.team2_name = match.team_2.name
+        this.players_1 = players_1
+        this.players_2 = players_2
     }
     setData(data) {
         console.log(data)
@@ -131,9 +157,6 @@ class Control {
                     break
                 case 'stage':
                     this.timer.changeStage(data[key])
-                    break
-                case 'match':
-                    this.setMatch = data[key]
                     break
                 case 'tablo':
                     this.tablo.type = data[key]
@@ -154,7 +177,26 @@ class Control {
     }
 
     get getData() {
-        return this
+        let data = {}
+        function recurse(data, obj) {
+            console.log(data)
+            for(let key in obj) {
+                console.log(key)
+                if(typeof obj[key] !== 'function') {
+                    data[key] = obj[key]
+                }
+                else if(typeof obj[key] === 'object') {
+                    recurse(data[key], obj[key])
+                }
+            }
+        }
+        try {
+            //recurse(data, this)
+        } catch (error) {
+            console.log(error)
+        }
+        //recurse(data, this)
+        return JSON.parse(JSON.stringify(this))
     }
 }
 

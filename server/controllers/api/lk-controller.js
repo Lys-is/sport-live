@@ -122,10 +122,6 @@ class LkController {
             console.log(req);
             console.log(await Player.find());
             let players = await Player.find({}).populate('creator team');
-            players = players.map((player) => {
-                console.log(player.date);
-                return player
-            })
             return sendRes('partials/lk_part/player', {players}, res);
         } catch (e) {
             console.log(e);

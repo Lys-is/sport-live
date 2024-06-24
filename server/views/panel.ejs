@@ -169,6 +169,13 @@
                 </div>
                 <div class="h-group">
                     <select name="match" id="match" class="text-form full-form">
+                    <% matches.forEach(match => {
+                    %>
+                        <option value="<%= match._id %>"><%= match.team_1.name %> - <%= match.team_2.name %></option>
+                    <%
+                    }); %>
+                    </select>
+                    <select name="match" id="match" class="text-form full-form">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -263,14 +270,14 @@
                 </div>
                 <div class="h-group">
                     <div class="v-group">
-                        <lable for="team1">Команда 1</lable>
-                        <input type="text" id="team1" class="text-form full-form" name="team1" value="Комманда 1">
+                        <lable for="team1" class="data_team_1">Команда 1</lable>
+                        <input type="text" id="team1" class="text-form full-form data_team_1" name="team1" value="Комманда 1">
                         <input type="color" id="team1" class="full-form" name="team1_color" value="#ee7733" data-type="score">
                     </div>
 
                     <div class="v-group">
-                        <lable for="team1">Команда 2</lable>
-                        <input type="text" id="team1" class="text-form full-form" name="team2" value="Комманда 2">
+                        <lable for="team1" class="data_team_2">Команда 2</lable>
+                        <input type="text" id="team1" class="text-form full-form data_team_2" name="team2" value="Комманда 2">
                         <input type="color" id="team1" class=" full-form" name="team2_color" value="#3333ff" data-type="score">
                     </div>
                 </div>
@@ -348,7 +355,7 @@
                 </div>
                 <div class="h-group">
                     <!-- для иконки паузы поменять класс на pause-icon -->
-                    <input type="button" value="" class="square40 play-icon" name="play-timer">
+                    <input type="button" value="" class="square40 play-icon" id="play" name="play-timer">
                     <p class="time">00:00</p>
                     <input type="button" value="" class="square40 redo-icon" name="play-timer">
                 </div>
@@ -447,9 +454,9 @@
         <div class="column-container">
             <div class="block">
                 <div class="h-group center">
-                    <p class="first">Команда 1</p>
+                    <p class="first data_team_1">Команда 1</p>
                 </div>
-                <table>
+                <table id="table_team_1">
                     <tr>
                         <th>имя</th>
                         <th>мал</th>
@@ -589,9 +596,9 @@
             </div>
             <div class="block">
                 <div class="h-group center">
-                    <p class="first">Команда 2</p>
+                    <p class="first data_team_2">Команда 2</p>
                 </div>
-                <table>
+                <table id="table_team_2">
                     <tr>
                         <th>имя</th>
                         <th>мал</th>
@@ -732,6 +739,6 @@
         </div>
         
     </div>
-<script src="/static/pages/panel.js"></script>
+<script type="text/javascript" defer src="/static/pages/panel.js"></script>
 
 <%- include('global/footer.ejs') %>
