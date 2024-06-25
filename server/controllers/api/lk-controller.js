@@ -20,6 +20,7 @@ class LkController {
     player = require('./player')
     tournament = require('./tournament')
     match = require('./match')
+    representative = require('./representative')
     async get__create(req, res) {
         try {
             return sendRes('partials/lk_part/team_create', {}, res);
@@ -58,11 +59,6 @@ class LkController {
         try {
             console.log(await Representative.find());
             let representatives = await Representative.find({})
-            representatives = representatives.map((representative) => {
-                representative.date = representative.date.toLocaleDateString()
-                console.log(representative.date);
-                return representative
-            })
             return sendRes('partials/lk_part/representative', {representatives}, res);
         } catch (e) {
             console.log(e);

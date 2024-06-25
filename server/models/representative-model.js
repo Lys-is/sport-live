@@ -1,11 +1,14 @@
 const {Schema, model} = require('mongoose');
 
-const UserSchema = new Schema({
-    email: {type: String, unique: true, required: true},
-    password: {type: String, required: true},
-    isActivated: {type: Boolean, default: false},
-    activationLink: {type: String},
-    roles: [{type: String, ref: 'Role'}]
+const RepresentativSchema = new Schema({
+    creator: {type: Schema.Types.ObjectId, ref: 'User', required: true, autopopulate: true},
+    fio: {type: String, required: true},
+    birthday: {type: String},
+    team: {type: Schema.Types.ObjectId, ref: 'Team', autopopulate: true},
+    number: {type: String},
+    img: {type: String},
+    socials: {type: String},
+    mobile: {type: String},
 })
-
-module.exports = model('Representativ', UserSchema);
+RepresentativSchema.plugin(require('mongoose-autopopulate'));
+module.exports = model('Representativ', RepresentativSchema);

@@ -137,7 +137,8 @@ let inits = {
     'tournament/id/get__group_edit' : init__tournament_group_edit,
     'player': init__player,
     'player/get__create' : init__player_create,
-    'player/get__edit' : init__player_edit
+    'player/get__edit' : init__player_edit,
+    'representative/get__create' : init__representative_create,
 }
 for(let key in inits) {
     inits[key] = init_decorator(inits[key])
@@ -335,5 +336,11 @@ function init__player_edit() {
         sendFetch("/api/lk/player/put__edit", JSON.stringify(data), "PUT")
     })
 }
-
-
+function init__representative_create() {
+    let form = get("#representative_create__form");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let data = formGetData(form)
+        sendFetch("/api/lk/representative/post__create", JSON.stringify(data), "POST")
+    })
+}

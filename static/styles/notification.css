@@ -63,6 +63,7 @@
     width:  100%;
     font-size: 10px;
     align-items: center;
+    justify-content: space-between;
 }
 
 .mini-notification_header .img{

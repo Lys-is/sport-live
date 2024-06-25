@@ -5,9 +5,9 @@ const timestore = require('timestore')
 
 let timers = new timestore.Timestore()
 
-function startTimer(socket, timer, userId) {
+function startTimer(io, timer, userId) {
     let time = `${timer.minuts}:${timer.seconds}`
-    let timerId = timers.setInterval(userId.toString(), timerCallback, 1000)
+    let timerId = timers.setInterval(userId, timerCallback, 1000)
     console.log(timerId)
     function timerCallback() {
         if(timer.is_reverse){
@@ -30,7 +30,7 @@ function startTimer(socket, timer, userId) {
                 timer.clearTimer()
             }
         }
-        timer.send(socket)
+        timer.send(io, userId)
         //timer.toRoom('new_data', {name: 'timer', value: `${this.minuts}:${this.seconds}`})
     }
     return userId.toString()
@@ -66,25 +66,20 @@ class Timer {
         this.now_time = stages.now_time ? stages.now_time : this.now_time
         this.now_penalty = stages.now_penalty ? stages.now_penalty : this.now_penalty
     }
-    get getTime() {
-        let time = `${this.minuts}:${this.seconds}`
-        let data = {
-            name: 'timer',
-            value: time
-        }
-        socket.emit('new_data', data)
-    }
-    playTimer(socket, userId) {
+
+    playTimer(io, userId) {
         console.log(this)
-        this.timerId = startTimer(socket, this, userId)
+        this.timerId = startTimer(io, this, userId)
         
     }
     // startTimer(socket) {
     //     this.is_null_start = false
     //     this.playTimer(socket)
     // }
-    send(socket){
-        socket.to(socket.user._id.toString()).emit('timer', {name: 'timer', value: `${this.minuts}:${this.seconds}`})
+    send(io, userId) {
+        let min = this.minuts < 10 ? `0${this.minuts}` : this.minuts
+        let sec = this.seconds < 10 ? `0${this.seconds}` : this.seconds
+        io.to(userId).emit('timer', {name: 'timer', value: `${min}:${sec}`})
     }
 }
 class Scoreboard {
@@ -96,8 +91,10 @@ class Scoreboard {
         this.team2_foll = 0
         this.team1_color = '#fb7528'
         this.team2_color = '#2525cb'
-        this.team1_penalty = ''
-        this.team2_penalty = ''
+        this.penalty = [{
+            team1: '',
+            team2: '',
+        }]
         this.team1_font_color = 'white'
         this.team2_font_color = 'white'
     }
@@ -112,29 +109,29 @@ class Scoreboard {
         this.team2_foll = score.team2_foll ? score.team2_foll : this.team2_foll
         this.team1_color = score.team1_color ? score.team1_color : this.team1_color
         this.team2_color = score.team2_color ? score.team2_color : this.team2_color
-        this.team1_penalty = score.team1_penalty ? score.team1_penalty : this.team1_penalty
-        this.team2_penalty = score.team2_penalty ? score.team2_penalty : this.team2_penalty
+        this.penalty = score.penalty ? score.penalty : this.penalty
         this.team1_font_color = getBrightness(this.team1_color) > 0.5 ? 'black' : 'white'
         this.team2_font_color = getBrightness(this.team2_color) > 0.5 ? 'black' : 'white'
     }
     
 }
 class Tablo {
-    // type = mid | bif | match | wheater | penalty | off
+    // type = little | mid | big  | wheater | penalty | off
     constructor() {
-        this.type = 'mid'
+        this.type = 'little'
     }
 }
 class Control {
 
-    constructor(userId) {
+    constructor(userId, style) {
         this.team1_name = 'Команда 1'
         this.team2_name = 'Команда 2'
         this.userId = userId
         this.match = null
         this.timer = new Timer()
         this.scoreboard = new Scoreboard()
-        //this.tablo = new Tablo()
+        this.tablo = new Tablo()
+        this.style = style
     }
     async setMatch(matchId) {
         console.log(matchId)

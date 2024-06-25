@@ -1,7 +1,7 @@
 const ApiError = require('../exceptions/api-error');
 const tokenService = require('../service/token-service');
 
-module.exports = function (req, res, next) {
+module.exports = async function (req, res, next) {
     try {
 
 
@@ -10,7 +10,7 @@ module.exports = function (req, res, next) {
             return next();
         }
 
-        const userData = tokenService.validateRefreshToken(accessToken);
+        const userData = await tokenService.validateRefreshToken(accessToken);
         console.log(userData);
         if (!userData) {
             return next();

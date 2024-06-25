@@ -85,12 +85,16 @@ const nav = {
         'representative' : {
             'func' : 'get__representative',
             'get__create' : {},
-            'post__create' : {}
+            'post__create' : {},
+            'get__edit' : {},
+            'put__edit' : {}
         },
         'stadium' : {
             'func' : 'get__stadium',
             'get__create' : {},
-            'post__create' : {}
+            'post__create' : {},
+            'get__edit' : {},
+            'put__edit' : {}
         },
         'season' : {
             'func' : 'get__season',
@@ -100,12 +104,16 @@ const nav = {
         'transfer' : {
             'func' : 'get__transfer',
             'get__create' : {},
-            'post__create' : {}
+            'post__create' : {},
+            'get__edit' : {},
+            'put__edit' : {}
         },
         'judge' : {
             'func' : 'get__judge',
             'get__create' : {},
-            'post__create' : {}
+            'post__create' : {},
+            'get__edit' : {},
+            'put__edit' : {}
         }
 
     }

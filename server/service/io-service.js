@@ -7,34 +7,6 @@ let controls = {}
 class IoService {
     constructor() {
     }
-    toRoom(room, emit, data){
-        console.log(room, emit, data)
-
-      //  io.to(room).emit(emit, data)
-
-        let emitData = {
-            room: room,
-            emit: emit,
-            data: data
-        }
-        let env_servers = process.env.ENV_SERVERS.split(',');
-
-        env_servers.forEach(server => {
-          if(!server.includes(process.env.NOW_HOST)) {
-            console.log(server)
-            request.post(
-              `${server}/api/socket`,
-              { json: { emitData: emitData } },
-              function (error, response, body) {
-                  if (!error && response.statusCode == 200) {
-                      console.log(body);
-                  }
-              }
-          );
-          }
-
-        })
-    }
     sendToRoom(room, emit, data){
         io.to(room).emit(emit, data)
     }
@@ -56,24 +28,23 @@ class IoService {
               const userToken = await tokenService.validateRefreshToken(cookies['refreshToken'])
               console.log(userToken)
               let user = await User.findOne({_id: userToken.id})
-              if (!user) 
+              if (!user) {
+                console.log('no user')
                 socket.user = false
+              }
               else{
                 socket.user = user
                 console.log(socket.user._id.toString())
                 socket.join(socket.user._id.toString())
+                startPanel(controls, socket)
+
               }
             }
             catch(e){
               socket.user = false
               console.log(e)
             }
-            finally {
-              socket.join('OnlineChat');
-              
-            }
             if(socket.user){
-              startPanel(controls, socket)
             }
             
             socket.on('message', async (txt)=>{
@@ -95,11 +66,11 @@ class IoService {
 
 function startPanel(controls, socket) {
   let userId = socket.user._id.toString()
-
+  console.log(userId)
   function newControlService() {
-    return new controlService(userId)
+    return new controlService(userId, socket.user.tablo_style)
   }
-  let control = controls[socket.user._id.toString()]
+    let control = controls[userId]
             socket.on('join_panel', ()=>{
               console.log('_panel')
               if(!control){
@@ -107,6 +78,7 @@ function startPanel(controls, socket) {
                 controls[userId] = control
               }
               socket.join(userId);
+              socket.emit('update_data', control.getData)
             })
 
 
@@ -136,7 +108,7 @@ function startPanel(controls, socket) {
                 control = newControlService()
                 controls[userId] = control
               }
-              control.timer.playTimer(socket, userId)
+              control.timer.playTimer(io, userId)
 
             })
             socket.on('match', async (data)=>{
@@ -148,6 +120,13 @@ function startPanel(controls, socket) {
               io.to(userId).emit('update_data', control.getData)
 
             })
+            socket.on('style', async (data)=>{
+                control.style = data.style
+                socket.user.tablo_style = data.style
+                await socket.user.save()
+                io.to(userId).emit('update_style')
+                io.to(userId).emit('update_data', control.getData)
+              })
             socket.on('notify', (data)=>{
               if(!control){
                 control = newControlService()
