@@ -26,11 +26,15 @@ class IoService {
               }
               var cookies = parseCookies();
               const userToken = await tokenService.validateRefreshToken(cookies['refreshToken'])
-              console.log(userToken)
-              let user = await User.findOne({_id: userToken.id})
+              let user
+              console.log(socket.request)
+              if(userToken)
+                user = await User.findOne({_id: userToken.id})
+
               if (!user) {
                 console.log('no user')
                 socket.user = false
+                startPanel(controls, socket)
               }
               else{
                 socket.user = user
@@ -65,7 +69,10 @@ class IoService {
 
 
 function startPanel(controls, socket) {
-  let userId = socket.user._id.toString()
+  let userId = ''
+    if(socket.user)
+      userId = socket.user._id.toString()
+
   console.log(userId)
   function newControlService() {
     return new controlService(userId, socket.user.tablo_style)
@@ -82,9 +89,10 @@ function startPanel(controls, socket) {
             })
 
 
-            socket.on('join_table', ()=>{
+            socket.on('join_table', (tableId)=>{
               console.log('_table')
               if(!control){
+                userId = tableId
                 console.log('new_control')
                 control = newControlService()
                 controls[userId] = control

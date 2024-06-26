@@ -1,12 +1,12 @@
 let testConnect = setInterval(() => {
     if (socket.connected) {
         clearInterval(testConnect)
-        socket.emit('join_table');
+        socket.emit('join_table', tableId);
     }
 }, 200)
 socket.on('connect', () => {
     console.log(socket.id)
-    socket.emit('join_table');
+    socket.emit('join_table', tableId);
 
 })
 

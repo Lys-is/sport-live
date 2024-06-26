@@ -7,8 +7,7 @@ const nav = {
         'qq': checkAuth.isAuth,
         'func' : 'get__panel'
     },
-    'table' : {
-        'qq': checkAuth.isAuth,
+    'table/:id' : {
         'func' : 'get__table'
     },
     'login' : {

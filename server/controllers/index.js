@@ -1,4 +1,5 @@
 let Match = require('../models/match-model');
+let User = require('../models/user-model');
 class Constrollers {
     async auth(req, res, next) {
         res.render('auth', {
@@ -37,11 +38,13 @@ class Constrollers {
         });
     }
     async get__table(req, res) {
-        console.log(req.user);
+        let userAd = await User.findById(req.params.id);
+        console.log(userAd.tablo_style);
         res.render('table', {
+            id: req.params.id,
             title: 'Таблица',
-            auth: req.user || false,
-            style: req.user.tablo_style || 'style_1'
+            auth: userAd || false,
+            style: userAd.tablo_style || 'style_1'
         });
     }
     api = require('./api')
