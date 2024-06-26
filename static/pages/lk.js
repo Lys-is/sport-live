@@ -139,6 +139,7 @@ let inits = {
     'player/get__create' : init__player_create,
     'player/get__edit' : init__player_edit,
     'representative/get__create' : init__representative_create,
+    'judge/get__create' : init__judge_create,
 }
 for(let key in inits) {
     inits[key] = init_decorator(inits[key])
@@ -342,5 +343,14 @@ function init__representative_create() {
         e.preventDefault();
         let data = formGetData(form)
         sendFetch("/api/lk/representative/post__create", JSON.stringify(data), "POST")
+    })
+}
+
+function init__judge_create() {
+    let form = get("#judge_create__form");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let data = formGetData(form)
+        sendFetch("/api/lk/judge/post__create", JSON.stringify(data), "POST")
     })
 }

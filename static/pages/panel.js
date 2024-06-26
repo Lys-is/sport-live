@@ -280,5 +280,11 @@ function setMatch(data, team) {
         el.addEventListener('click', playerNotifyListener)
     })
 
+    playerTables['select_'+team].forEach(el => {
+        el.innerHTML = ''
 
+        data['players_'+team].forEach(player => {
+            el.innerHTML += `<option value="${player._id}">${player.fio}</option>`
+        })
+    })
 }

@@ -3,29 +3,31 @@
     <div class="table_container">
         <div class="table_header">
             <p class="page_title">Судьи</p>
-            
+            <div class="filler"></div>
+            <input type="button" value="Сбросить фильтры" class="table_button">
+            <input type="button" value="Добавить судью" class="table_button nav_link" data-href="judge/get__create">
         </div>
     <table class="commands_table">
         <tr id="first-row">
             <td>№</td>
             <td>ФИО</td>
             <td>Дата рождения</td>
-            <td>В меню "О лиге"</td>
+            <td></td>
         </tr>
         <tr>
             <td></td>
             <td><input type="text" class="table_input_text"></td>
-            <td><input type="date" class="table_input_text"></td>
             <td><input type="text" class="table_input_text"></td>
+            <td></td>
+
         </tr>
      <% if (judges.length > 0) { %>
 
     <% for (let i = 0; i < judges.length; i++) {%>
         <tr>
-            <td><%= i %></td>
+            <td><%= i + 1%></td>
             <td><%= judges[i].fio %></td>
-            <td><%= judges[i].date %></td>
-            <td><%= judges[i].team.name %></td>
+            <td><%= judges[i].birthday %></td>
             <td>link</td>
         </tr>
 
