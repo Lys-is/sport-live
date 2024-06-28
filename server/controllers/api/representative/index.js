@@ -46,27 +46,7 @@ class RepresentativeController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
-    async get__team_list_create(req, res) {
-        try {
-            return sendRes('partials/lk_part/team_list_create', {}, res);
-        } catch (e) {
-            console.log(e);
-            return res.json({message: 'Произошла ошибка'});
-        }
-    }
-    async post__team_list_create(req, res) {
-        try {
-            let {fio, date, teamId} = req.body;
-            let team = await Team.findOne({_id: teamId});
-            if(!team) return res.json({message: 'Такой команды не существует'});
-            let player = await Player.create({fio, date, team: teamId, creator: req.user.id});
-            console.log(player);
-            return res.json({message: 'Игрок создан'});
-        } catch (e) {
-            console.log(e);
-            return res.json({message: 'Произошла ошибка'});
-        }
-    }
+    
 }
 async function sendRes(path, data, res) {
     return res.render(path, data,

@@ -46,8 +46,9 @@ const nav = {
             'get__edit' : {},
             'put__edit' : {},
             'get__team_list' : {},
-            'get__team_list_create' : {},
-            'post__team_list_create' : {}
+            'put__team_list' : {},
+            'get__team_representative' : {},
+            'put__team_representative' : {}
         },
         'player' : {
             'func' : 'get__player',

@@ -130,6 +130,7 @@ let inits = {
     'team/get__create' : init__team_create,
     'team/get__team_list': init__team_list,
     'team/get__team_list_create' : init__team_list_create,
+    'team/get__team_representative' : init__team_representative,
     'match': init__match,
     'match/get__create' : init__match_create,
     'tournament': init__tournament,
@@ -327,7 +328,21 @@ function init__team_list_create() {
     })
 }
 function init__team_list() {
-    
+    let form = get("#player_add__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        console.log(data)
+        sendFetch("/api/lk/team/put__team_list", JSON.stringify(data), "PUT")
+    })
+}
+function init__team_representative() {
+    let form = get("#team_representative__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        sendFetch("/api/lk/team/put__team_representative", JSON.stringify(data), "PUT")
+    })
 }
 function init__team_edit() {
     let form = get("#team_edit__form");
