@@ -39,6 +39,26 @@ body{
     -webkit-overflow-scrolling: touch;
 }
 
+@media (max-width: 800px) {
+    .body{
+        min-width: 800px;
+
+    }
+
+    input{
+        width: auto !important;
+    }
+    input[type="text"], input[type="number"], select{
+        width: 100px !important;
+    }
+
+    .table_header{
+        height: 80px !important;
+        align-items: center;
+    }
+
+}
+
 .filler{
     flex-grow: 1;
 }
