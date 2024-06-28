@@ -18,7 +18,7 @@ body{
 
 :root{
     --header_height: 30px;
-    --navbar_width: 190px;
+    --navbar_width: 190px !important;
 
     --body-bc: rgb(236, 240, 245);
     --nav-bc: rgb(38, 50, 56);
@@ -56,6 +56,13 @@ body{
         height: 80px !important;
         align-items: center;
     }
+
+    table {
+        font-size: smaller !important;
+
+    }
+
+    
 
 }
 
@@ -137,8 +144,22 @@ header{
     
 }
 
+.navbar_mini .navbar_text,
+.navbar_mini .navbar_selected,
+.navbar_mini #navbar_profile{
+    width: 100%;    
+}
+
+.navbar_selected, #navbar_profile, .navbar_text {
+    width: 190px;
+
+}
+
+.navbar_selected, #navbar_profile {
+    transition: width 0s ease !important;
+}
+
 .navbar_text{
-    width: 100%;
     margin: 0;
     padding-left: 35px;
     font-size: small;
@@ -180,7 +201,7 @@ header{
 .navbar_body{
     flex-grow: 1;
     background-color: var(--nav-bc);
-    padding-right: 10px;
+
 }
 
 .navbar_footer{
