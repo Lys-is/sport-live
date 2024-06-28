@@ -1,25 +1,167 @@
-<div class="team_create__wrapper">
-    <h1 class="lk_wrapper__title">Создать матч</h1>
-    <form id="match_create__form">
-        <label for="name">Команда 1</label>
-        <select name="team_1" id="team_1">
-            <% for (let i = 0; i < teams.length; i++) { %>
-                <option value="<%= teams[i]._id %>"><%= teams[i].name %></option>
-            <% } %>
-        </select>
+<div class="tournires_container">
+    <p class="content_navtext">Главная > Календарь матчей > Добавление матча</p>
+    <div class = "tournires_content">
+        <form id="match_create__form">
+        <div class="cool_body">
+            <div class="cool_header_block green create_match_header">
+                    <p class="page_title ">Протокол матча</p>
+            </div>
+            <div class="cool_body_content">
+                <div class="form-group">
+                    <input type="text" list="team" name="team" placeholder="Выберите команду">
+                    <datalist id="team">
+                        <% for (let i = 0; i < teams.length; i++) { %>
+                            <option value="<%= teams[i].name %>" data-value="<%= teams[i]._id %>"></option>
+                        <% } %>
+                    </datalist>
+                    <input type="number" name="team_1_score" placeholder="Счёт">
 
-        <label for="name">Команда 2</label>
-        <select name="team_2" id="team_2">
-            <% for (let i = 0; i < teams.length; i++) { %>
-                <option value="<%= teams[i]._id %>"><%= teams[i].name %></option>
-            <% } %>
-        </select>
-        <label for="description">Дата</label>
-        <input type="date" name="date" >
+                    <div class="filler"></div>
+                    <input type="button" value="vs" class="button white_button square">
+                    <div class="filler"></div>
+                    <input type="number" name="team_2_score" placeholder="Счёт">
+                    <input type="text" list="team_2" name="team_2" placeholder="Выберите команду">
+                    <datalist id="team_2">
+                        <% for (let i = 0; i < teams.length; i++) { %>
+                            <option value="<%= teams[i].name %>" data-value="<%= teams[i]._id %>"></option>
+                        <% } %>
+                    </datalist>
+                    
+                </div>
+                <div class="form-group form_group_checkbox mt">
+                    <div class="filler"></div>
+                    <label>
+                        <input type="checkbox" name="publish_site"> Дополнительное время
+                    </label>
+                    <label>
+                        <input type="checkbox" name="publish_site"> Пенальти
+                    </label>
+                    <label>
+                        <input type="checkbox" name="publish_site"> Техническая победа
+                    </label>
+                    <div class="filler"></div>
+                </div>
+            </div>
+            <div class="create_tournire_footer">
+                <div class="form-group">
+                </div>
+                <div class="vert_group">
+                    <label for="tour_num">Турнир</label>
+                    <input type="text" list="tournament" name="tournament">
+                    <datalist id="tournament">
+                        <% for (let i = 0; i < tournaments.length; i++) { %>
+                            <option value="<%= tournaments[i].basic.name %>" data-value="<%= tournaments[i]._id %>"></option>
+                        <% } %>
+                    </datalist>
+                </div>
+                <div class="vert_group">
+                    <label for="start_date">Дата</label>
+                    <input type="date" class="text_form date" id="start_date">
+                </div>
+                <div class="vert_group">
+                    <label for="start_time">Время начала</label>
+                    <input type="time" class="text_form date" id="start_time">
+                </div>
+            </div>
+        </div>
 
-        <input type="submit" value="Создать">
-    </form>
-    <script>
-        
-    </script>
-</div>
+        <div class="cool_body">
+            <div class="cool_header_block create_match_header">
+                    <p class="page_title">Cостав судей</p>
+                    
+                    
+            </div>
+            <div class="cool_body_content">
+                <table class="commands_table cool_table">
+                    <tr id="first-row">
+                        <td>Cудья</td>
+                        <td>Позиция</td>
+                        <td>Действие</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="table_footer"><input type="button" value="Добавить запись" class="button white_button flex_form"></td>
+                    </tr>                
+                </table>
+            </div>
+        </div>
+
+        <div class="cool_body">
+            <div class="cool_header_block create_match_header ">
+            <p class="page_title">Отчет о матче</p>
+            </div>
+            <div class="cool_body_content">
+                <p class="nm">Команда какиша</p>
+                <table class="commands_table players-create-match mt">
+                    <tr>
+                        <th>#</th>
+                        <th>ФИО</th>
+                        <th>Красные карточки</th>
+                        <th>Желтые карточки</th>
+                        <th>Передачи</th>
+                        <th>Голы</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            Писька Пискович
+                        </td>
+                        <td>
+                            <input type="checkbox" class="checkbox">
+                        </td>
+                        <td>                                            
+                            <input type="checkbox" class="checkbox">
+                        </td>
+                        <td>
+                            <input type="number" class="text_form big_form" value="0">
+                        </td>
+                        <td>
+                            <input type="number" class="text_form big_form" value="0">
+                        </td>
+
+                    </tr>
+                </table>
+                <p class="">Команда какиша</p>
+                <table class="commands_table players-create-match mt">
+                    <tr>
+                        <th>#</th>
+                        <th>ФИО</th>
+                        <th>Красные карточки</th>
+                        <th>Желтые карточки</th>
+                        <th>Передачи</th>
+                        <th>Голы</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            Писька Пискович
+                        </td>
+                        <td>
+                            <input type="checkbox" class="checkbox">
+                        </td>
+                        <td>                                            
+                            <input type="checkbox" class="checkbox">
+                        </td>
+                        <td>
+                            <input type="number" class="text_form big_form" value="0">
+                        </td>
+                        <td>
+                            <input type="number" class="text_form big_form" value="0">
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="cool_body">
+            <div class="cool_header_block create_match_header">
+            <input type="button" value="Отменить" class="button red_button">
+            <input type="submit" value="Сохранить" class="button green_button">
+            <div class="filler"></div>
+            <input type="button" value="Сохранить и выйти" class="button green_button">
+            </div>
+        </div>
+        </div>
+
+        </form>
+    </div>

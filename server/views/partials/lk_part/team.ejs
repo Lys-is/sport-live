@@ -11,7 +11,7 @@
             </div>
     <% if (teams.length > 0) { %>
             <table class="commands_table">
-                <tr id="first-row">
+                <tr id="first-row" >
                     <td>№</td>
                     <td>Название команды</td>
                     <td>Дата создания</td>
@@ -19,10 +19,10 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr class="table_filter">
                     <td></td>
-                    <td><input type="text" class="table_input_text"></td>
-                    <td><input type="date" class="table_input_text"></td>
+                    <td><input type="text" data-filter="name" class="table_input_text"></td>
+                    <td><input type="date" data-filter="date" class="table_input_text"></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -35,7 +35,7 @@
                 <td><%= teams[i].date %></td>
                 <td><%= teams[i].creator.email %></td>
                 <td>
-                    <span class="table_links table_links_admines nav_link" data-href="team/admins/?id=<%= teams[i]._id %>">Админы</span>
+                    <span class="table_links table_links_admines nav_link" data-href="team/admins/?id=<%= teams[i]._id %>">Тренеры</span>
                     <span class="table_links table_links_compos nav_link" data-href="team/get__team_list/?id=<%= teams[i]._id %>">Состав</span>
                     <span class="table_links table_links_reps nav_link" data-href="team/representative/?id=<%= teams[i]._id %>">Представители</span>
                     <span class="table_links table_links_reps nav_link" data-href="team/get__edit/?id=<%= teams[i]._id %>">Изменить</span>

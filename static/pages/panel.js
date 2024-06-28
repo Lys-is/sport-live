@@ -60,6 +60,22 @@ match.addEventListener('change', (e) => {
     socket.emit('match', e.target.value);
 })
 let style = get('#panel-style');
+let replaceBtns = getA('.replace_btn');
+replaceBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        let type = e.target.getAttribute('data-type').split('__')
+        let player1 = get(`#${type[0]}-replace`),
+        player2 = get(`#${type[0]}-replace-by`)
+        let txt = `Замена ${player1.options[player1.selectedIndex].innerHTML}<br> на ${player2.options[player2.selectedIndex].innerHTML}`
+        let data = {
+            type: 'change',
+            size : type[1],
+            text: txt,
+            title: 'Замена игрока',
+        }
+        socket.emit('notify', data)
+    })
+})
 style.addEventListener('change', (e) => {
     let data = {
         style: e.target.value
@@ -161,9 +177,10 @@ function setPenalty(penalty) {
 }
 function playerNotifyListener(e) {
     console.log(e.target)
-    let player = e.target.closest('tr').getAttribute('data-name')
+    let playerTr = e.target.closest('tr')
+    let player = playerTr.getAttribute('data-name')
     let type = e.target.getAttribute('data-type').split('_')
-    let txt = '', title = ''
+    let txt = '', title = '', img = ''
     if(type[0] == 'goal') {
         txt = 'Игрок ' + player + ' забил гол'
         title = 'Гоооооол'
@@ -178,12 +195,15 @@ function playerNotifyListener(e) {
         title = 'Красная карта'
         type[0] = 'red-card'
     }
-    
+    if(type[1] == 'b') {
+        img = `{{img_player}}`
+    }
     let data = {
         type: type[0],
         size : type[1],
-        text: txt,
+        text: img+txt,
         title: title,
+        playerId: playerTr.getAttribute('data-id'),
     }
     socket.emit('notify', data)
 }

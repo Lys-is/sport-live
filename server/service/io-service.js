@@ -1,6 +1,7 @@
 const socketIO = require('socket.io');
 const tokenService = require('./token-service');
 const User = require('../models/user-model');
+const Player = require('../models/player-model');
 const controlService = require('./control-service');
 let io = null
 let controls = {}
@@ -149,10 +150,19 @@ function startPanel(controls, socket) {
                 io.to(userId).emit('update_style')
                 sendData()
               })
-            socket.on('notify', (data)=>{
+            socket.on('notify', async (data)=>{
               if(!control){
                 control = newControlService()
                 controls[userId] = control
+              }
+              if(data.text.includes('{{img_player}}')){
+                let player = await Player.findOne({_id: data.playerId})
+                console.log(player)
+                if(player.img)
+                 data.text = data.text.replace('{{img_player}}', `<img src="${player.img}" class="notify_img">`)
+                else {
+                  data.text = data.text.replace('{{img_player}}', '')
+                }
               }
               console.log(data)
               io.to(userId).emit('new_notify', data)
