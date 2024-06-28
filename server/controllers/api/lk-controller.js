@@ -11,8 +11,8 @@ Stadium = require('../../models/stadium-model'),
 Team = require('../../models/team-model'),
 Tournament = require('../../models/tournament-model'),
 Transfer = require('../../models/transfer-model'),
-User = require('../../models/user-model');
-
+User = require('../../models/user-model'),
+League = require('../../models/league-model');
 
 class LkController {
 
@@ -104,6 +104,26 @@ class LkController {
                 return transfer
             })
             return sendRes('partials/lk_part/transfer', {transfers}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__league(req, res) {
+        try {
+            let league = await League.findOne({creator: req.user.id});
+            if(!league)
+                league = await League.create({creator: req.user.id, name: req.user.name});
+            return sendRes('partials/lk_part/league', {league}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async put__league(req, res) {
+        try {
+            await League.findOneAndUpdate({creator: req.user.id}, req.body);
+            return res.json({message: 'Лига обновлена'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

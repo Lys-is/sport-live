@@ -175,13 +175,17 @@ header{
 
 .navbar_header{
     display: flex;
-    height: var(--header_height);
-    align-content: center;
+    min-height: var(--header_height);
     background-color: rgb(43, 58, 66);
     border-bottom: var(--accent-bc) 1px solid;
-    justify-content: center;
+    align-items: center;
+    color: var(--font-color);
+    padding-inline: 10px;
+    overflow-wrap: anywhere;
 }
-
+.navbar_header > img{
+    margin-right: 10px;
+}
 .navbar_selected{
     background-color: var(--accent-bc) !important;
     padding-left: 10px !important;
@@ -517,10 +521,11 @@ table tr td input{
 .profile_content{
     display: flex;
     flex-direction: column;
-    width: 70%;
-    height: 1000px;
+    width: 90%;
+    /* height: 1000px; */
     background-color: var(--header-bc);
     border: var(--header-borders) 1px solid;
+    margin: 0 auto;
 }
 
 .profile_header{
@@ -539,7 +544,7 @@ table tr td input{
 
 .profile_block{
     display: flex;
-    width: 100%;
+    width: 45%;
     flex-grow: 1;
     padding: 0px 30px 30px 30px;
     flex-wrap: wrap;
@@ -747,7 +752,9 @@ table tr td input{
 
 .image_upload img {
     max-width: 100%;
+    max-height: 200px;
     border-radius: 5px;
+    background: #d5d5d5;
 }
 
 .image_upload p {
@@ -799,12 +806,16 @@ table tr td input{
 }
 
 .image_upload {
-    width: 300px;
+    min-width: 300px;
+    max-width: 420px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-height: 100px;
+    margin-block: 10px;
+    /* background: #d5d5d5; */
 }
 
 .textareas_ct {

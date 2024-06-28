@@ -40,6 +40,7 @@ class UserService {
     }
 
     async login(email, password) {
+        console.log(email, password);
         const user = await UserModel.findOne({email})
         if (!user) {
             throw ApiError.BadRequest('Пользователь с таким email не найден')

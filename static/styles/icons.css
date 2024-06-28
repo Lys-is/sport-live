@@ -74,7 +74,9 @@
 #navbar_stadions::before{
     content: "\f1ad";
 }   
-
+#navbar_league::before{
+    content: "\f1d0";
+}
 #navbar_seasons::before{
     content: "\f1ea";
 }

@@ -123,6 +123,7 @@ let init_decorator = (func) => {
     return func
 }
 let inits = {
+    'league': init__league,
     'profile': init__profile,
     'team': init__team,
     'team/get__edit' : init__team_edit,
@@ -164,11 +165,19 @@ function init__tournament_template() {
         })
     })
 }
+function init__league() {
+    let form = get("#league_edit__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        sendFetch("/api/lk/put__league", JSON.stringify(data), "PUT")
+    })
+}
 function init__tournament_create() {
     let form = get("#tournament_create__form");
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let data = formGetData(form)
+        let data = await formGetData(form)
         sendFetch("/api/lk/tournament/post__create", JSON.stringify(data), "POST")
     })
 }
@@ -182,11 +191,11 @@ function init__tournament_edit(href) {
 
     }
     forms.forEach(form => {
-        form.addEventListener("submit", (e) => {
+        form.addEventListener("submit", async (e) => {
             console.log(form)
             e.preventDefault();
             let tourId = get('#tour_body').getAttribute('data-id')
-            let data = formGetData(form)
+            let data = await formGetData(form)
             data.tournamentId = tourId
             let dest = form.getAttribute('data-submit')
             if(!dest) {
@@ -269,17 +278,17 @@ function init__tournament_group_edit() {
 function init__tournament_group_create() {
     let form = get("#tournament_group_create__form");
     let tourId = get('#tour_body').getAttribute('data-id')
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let data = formGetData(form)
+        let data = await formGetData(form)
         sendFetch(`/api/lk/tournament/id/${tourId}/group/post__create`, JSON.stringify(data), "POST")
     })
 }
 function init__profile() {
     let profileForm = get("#profile__form");
-    profileForm.addEventListener("submit", (e) => {
+    profileForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let data = formGetData(profileForm)
+        let data = await formGetData(profileForm)
         console.log(data)
         sendFetch("/api/lk/put__profile", JSON.stringify(data), "PUT")
     })
@@ -288,9 +297,9 @@ function init__match() {
 }
 function init__match_create() {
     let form = get("#match_create__form");
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let data = formGetData(form)
+        let data = await formGetData(form)
 
         sendFetch("/api/lk/match/post__create", JSON.stringify(data), "POST")
     })
@@ -299,9 +308,9 @@ function init__team() {
 }
 function init__team_create() {
     let form = get("#team_create__form");
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let data = formGetData(form)
+        let data = await formGetData(form)
         console.log(getCurrentDate())
         data.date = getCurrentDate()
         sendFetch("/api/lk/team/post__create", JSON.stringify(data), "POST")
@@ -309,10 +318,10 @@ function init__team_create() {
 }
 function init__team_list_create() {
     let form = get("#team_list_create__form");
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let data = formGetData(form)
-        data.teamId = getParams(params.sub_href).id
+        let data = await formGetData(form)
+        data.teamId = await getParams(params.sub_href).id
         console.log(data)
         sendFetch("/api/lk/team/post__team_list_create", JSON.stringify(data), "POST")
     })
@@ -350,18 +359,18 @@ function init__player_create() {
 }
 function init__representative_create() {
     let form = get("#representative_create__form");
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let data = formGetData(form)
+        let data = await formGetData(form)
         sendFetch("/api/lk/representative/post__create", JSON.stringify(data), "POST")
     })
 }
 
 function init__judge_create() {
     let form = get("#judge_create__form");
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let data = formGetData(form)
+        let data = await formGetData(form)
         sendFetch("/api/lk/judge/post__create", JSON.stringify(data), "POST")
     })
 }
