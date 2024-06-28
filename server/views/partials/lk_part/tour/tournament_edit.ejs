@@ -14,10 +14,11 @@
         <div class="create_tournire_body">
             <div class="form_container">
                 <div class="image_n_textareas">
-                    <div class="image_upload">
-                    <img src="image-placeholder.png" alt="placeholder image">
-                    <p>Мин. размер: 385 x 260</p>
-                    </div>
+                    <label class="image_upload">
+                        <input type="file" class="image_input" name="img" id="image" accept="image/*">
+                        <img src="<%= tournament.basic.img %>" class="image_preview" alt="placeholder image">
+                        <p>Мин. размер: 320 x 320</p>
+                    </label>
                     <div class="textareas_ct">
                         <div class="form_group">
                             <label for="description">Описание</label>
@@ -265,14 +266,16 @@
             <label for="appearence_match_page_mp">Своя обложка матча</label>
         </div>
         <div class="form-group">
-            <div class="image_upload">
-                <img src="image-placeholder.png" alt="placeholder image">
-                <p>Мин. размер: 910 x 350</p>
-            </div>
-            <div class="image_upload">
-                <img src="image-placeholder.png" alt="placeholder image">
+            <label class="image_upload">
+                <input type="file" class="image_input" name="img" id="image" accept="image/*">
+                <img src="<%= tournament.visual.img %>" class="image_preview" alt="placeholder image">
+                <p>Мин. размер:  910 x 350</p>
+            </label>
+            <label class="image_upload">
+                <input type="file" class="image_input" name="img" id="image" accept="image/*">
+                <img src="<%= tournament.visual.img_min %>" class="image_preview" alt="placeholder image">
                 <p>Мин. размер: 480 x 270</p>
-            </div>
+            </label>
         </div>
         <p class="bold"> Статистика</p>
         <div class="form-group">

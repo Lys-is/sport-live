@@ -1,5 +1,6 @@
 let Match = require('../models/match-model');
 let User = require('../models/user-model');
+let League = require('../models/league-model');
 class Constrollers {
     async auth(req, res, next) {
         res.render('auth', {
@@ -9,8 +10,10 @@ class Constrollers {
         });
     }
     async lk(req, res, next) {
+        let league = await League.findOne({creator: req.user.id});
         res.render('lk', {
             title: 'ЛК',
+            league: league || false,
             auth: req.user || false
         });
     }

@@ -1,16 +1,16 @@
 let regForm = get('#regForm'),
 loginForm = get('#loginForm');
 if(regForm){
-    regForm.addEventListener('submit', (e) => {
+    regForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        let data = formGetData(regForm)
+        let data = await formGetData(regForm)
         sendFetch('/api/auth/post__registration', JSON.stringify(data), 'POST')
     })
 }
 else if(loginForm){
     loginForm.addEventListener('submit', async(e) => {
         e.preventDefault();
-        let data = formGetData(loginForm)
+        let data = await formGetData(loginForm)
         let res = await sendFetch('/api/auth/post__login', JSON.stringify(data), 'POST')
         console.log(res)
         if(res.accessToken){

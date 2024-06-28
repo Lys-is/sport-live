@@ -1,0 +1,33 @@
+<div class="profile__wrapper">
+    <div class="profile_content">
+        <div class="profile_header">
+            <p class="page_title ">Настройки лиги</p>
+        </div>
+        <form id="league_edit__form">
+
+            <div class="profile_block">
+                <div class="profile_input_block">
+                    <label class="profile_label" for="profile_first_name">Название</label>
+                    <input type="text" class="text_form text" id="profile_first_name" name="name" value="<%=league.name %>">
+                </div>
+
+                <div class="textareas_ct">
+                    <div class="form_group">
+                        <label for="description">Описание</label>
+                        <textarea id="description" name="description"><%= league.description %></textarea>
+                    </div>
+                </div>
+
+                <label class="image_upload">
+                    <input type="file" class="image_input" name="img" id="image" accept="image/*">
+                    <img src="<%= league.img %>" class="image_preview" alt="">
+                    <p>Мин. размер: 320 x 320</p>
+                </label>
+
+            </div>
+            <div class="profile_footer">
+                <input type="submit" value="Сохранить изменения" class="button green_button">
+            </div>
+        </form>
+    </div>
+</div>

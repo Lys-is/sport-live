@@ -30,7 +30,9 @@ const nav = {
         'qq': checkAuth.isAuth,
         'qqRecurs': true,
         'profile' : {'func': 'get__profile'},
+        'league' : {'func': 'get__league'},
         'put__profile' : {},
+        'put__league' : {},
         'team' : {
             'func' : 'get__team',
             'get__create' : {},

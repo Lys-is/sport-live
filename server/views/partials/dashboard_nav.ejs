@@ -13,11 +13,20 @@
         </ul>
 </nav> -->
 <nav class = "navbar">
+    <% if (league) { %>
+     
+    <div class="navbar_header">
+        <img src="<%= league.img %>" alt="logo" height="25" width="25">
+        <p><%= league.name  %></p>
+    </div>
+    <% } %>
 
     <div class="navbar_body ">
+
         <p class = "navbar_text navbar_selected icon" id="navbar_profile" data-href="profile">Профиль</p>
 
         <p class = "navbar_text navbar_title" >Турниры</p>
+        <p class = "navbar_text icon" id="navbar_league" data-href="league">Моя лига</p>
         <p class = "navbar_text icon2" id="navbar_tournirs" data-href="tournament">Мои турниры</p>
         <p class = "navbar_text icon2" id="navbar_matches" data-href="match">Календарь игр</p>
 
