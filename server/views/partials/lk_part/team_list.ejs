@@ -5,7 +5,6 @@
             <div class="filler"></div>
             <input type="button" value="Сбросить фильтры" class="table_button">
             <input type="button" value="Добавить игрока" class="table_button nav_link" data-href="player/get__create">
-            <input type="button" value="Добавить существующего игрока" class="table_button nav_link green_button flex_form" data-href="">
             <div class="filler"></div>
             <input type="button" value="Активные" class="table_button_radio_active table_radio_active">
             <input type="button" value="Архивные" class="table_button_radio_archive">
@@ -41,8 +40,27 @@
     
     <% } %>
 </table>
+<div class="cool_body">
+    <div class="cool_body_content wbt">
+        <p class="page_title nm">Добавить существующего игрока</p>
+    </div>
+    <div class="cool_body_content">
+        <div class="form-group">
+            <select class="select double_form" id="add_player_to_team" name="add_player_to_team" >
+                <option value="red">Красный</option>
+                <option value="blue">Синий</option>
+            </select>
+            <div class="filler"></div>
+            <p class="nm">Что-то</p>
+            <div class="filler"></div>
+            <input type="button" value="Добавить" class="button green_button double_form">
+        </div>
+    </div>
+</div>
 <%} else { %>
 </table>
+
+
 
     <h1 class="lk_wrapper__title">Нет игроков</h1>
 <% } %>
