@@ -33,16 +33,15 @@ body{
     flex-grow: 1;
     height: 100%;
     width: 100%;
-    min-width: 1200px;
     overflow: auto;
-    overflow-x: scroll;
-    -webkit-overflow-scrolling: touch;
+
 }
 
 @media (max-width: 800px) {
     .body{
         min-width: auto !important;
-
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
     }
 
     input{
