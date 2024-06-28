@@ -6,7 +6,7 @@ const UserSchema = new Schema({
     isActivated: {type: Boolean, default: false},
     activationLink: {type: String},
     roles: [{type: String, ref: 'Role'}],
-    league: {type: String},
+    address: {type: String, required: true},
     tablo_style: {type: String, default: 'style_1'}
 })
 

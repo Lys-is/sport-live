@@ -9,17 +9,17 @@
 
                 <div class="profile_input_block">
                     <label class="profile_label" for="profile_second_name">Фамилия</label>
-                    <input type="text" class="text_form text" id="profile_second_name" name="surname" value="<%=user.surname %>">
+                    <input type="text" class="text_form text" id="profile_second_name" name="surname" value="<%=profile.surname %>">
                 </div>
 
                 <div class="profile_input_block">
                     <label class="profile_label" for="profile_first_name">Имя</label>
-                    <input type="text" class="text_form text" id="profile_first_name" name="name" value="<%=user.name %>">
+                    <input type="text" class="text_form text" id="profile_first_name" name="name" value="<%=profile.name %>">
                 </div>
 
                 <div class="profile_input_block">
                     <label class="profile_label" for="profile_third_name">Отчество</label>
-                    <input type="text" class="text_form text" id="profile_third_name" name="patronymic" value="<%=user.patronymic %>">
+                    <input type="text" class="text_form text" id="profile_third_name" name="patronymic" value="<%=profile.patronymic %>">
                 </div>
 
                 <div class="profile_input_block"></div>
@@ -31,6 +31,10 @@
 
 
 
+                <div class="profile_input_block">
+                    <label class="profile_label" for="profile_nickname">Адрес сайта</label>
+                    <input type="text" class="text_form text" id="profile_nickname" name="address" value="<%=user.address %>">
+                </div>
                 <div class="profile_input_block">
                     <label class="profile_label" for="profile_nickname">Никнейм</label>
                     <input type="text" class="text_form text" id="profile_nickname" name="nickname">

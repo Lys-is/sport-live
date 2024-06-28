@@ -1,8 +1,14 @@
 const checkAuth = require('../middlewares/checkAuth-middleware');
 const Router = require('express');
 const controllers = require('../controllers');
+const getFans = require('../middlewares/getFans-middleware');
 //qq - middleware
 const nav = {
+    'fans/:address' : {
+        'func' : 'get__fans',
+        'qq': getFans,
+        'qqRecurs': true
+    },
     'panel/:id' : {
         'func' : 'get__panel'
     },

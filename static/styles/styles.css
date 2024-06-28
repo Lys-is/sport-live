@@ -1913,3 +1913,44 @@ textarea { resize: vertical; }
 .label_gap .form-group {
     margin-bottom: 20px;
 }
+
+table.players-create-match tr td:nth-child(6){
+    border-right: 1px solid #b8b8b8 !important;
+    width: 15%;
+}
+
+.players-create-match td:nth-child(1){
+    width: 5%;
+    border-left: 1px solid #b8b8b8 !important;
+}
+
+.players-create-match td:nth-child(2){
+    width: 35%;
+}
+
+.players-create-match td:nth-child(3){
+    width: 15%;
+}
+
+.players-create-match td:nth-child(4){
+    width: 15%;
+}
+
+.players-create-match td:nth-child(5){
+    width: 15%;
+    line-height: normal;
+}
+
+.players-create-match td {
+    border-right:0;
+    border-left: 0;
+}
+
+.players-create-match{
+    border: 0;
+}
+
+.checkbox{
+    width: 30px;
+    height: 30px;
+}

@@ -113,7 +113,7 @@ class LkController {
         try {
             let league = await League.findOne({creator: req.user.id});
             if(!league)
-                league = await League.create({creator: req.user.id, name: req.user.name});
+                league = await League.create({creator: req.user.id, name: req.user.name, address: req.user._id});
             return sendRes('partials/lk_part/league', {league}, res);
         } catch (e) {
             console.log(e);
@@ -191,7 +191,7 @@ class LkController {
                 profile = await UserD.create({creator: req.user.id});
             console.log(profile);
 
-            return sendRes('partials/lk_part/profile', {user: profile}, res);
+            return sendRes('partials/lk_part/profile', {user: req.user, profile: profile}, res);
         } catch (e) {
             return res.json({message: 'Произошла ошибка'});
         }
@@ -204,6 +204,7 @@ class LkController {
             }
             const {...data} = req.body;
             console.log(data);
+            await User.updateOne({_id: req.user.id}, data);
             await UserD.updateOne({creator: req.user.id}, data);
             return res.json({message: 'Профиль обновлен'});
         }

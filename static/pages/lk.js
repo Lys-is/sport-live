@@ -78,7 +78,7 @@ async function getPage(href, destInHtml = lk_main) {
     destInHtml.innerHTML = response ? response : 'Страница не найдена';
 
     params.subHref = href.split('?')[1] || '';
-    history.replaceState({ page: 1 }, "", `?page=${cleanedHref}`);
+    history.pushState({ page: 1 }, "", `?page=${cleanedHref}`);
 
     const navLinks = getA('.nav_link');
     navLinks.forEach(link => {
@@ -392,3 +392,14 @@ function setImgListener(){
         })
     })
 }
+
+
+
+// window.addEventListener('popstate', function(event){
+//     event.preventDefault();
+//     if(event.state){
+//         console.log(event.state)
+//         console.log(location)
+//         getPage(getParams(location.search).page)
+//     }
+// });

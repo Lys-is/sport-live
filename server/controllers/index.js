@@ -24,7 +24,12 @@ class Constrollers {
             auth: req.user || false
         });
     }
-
+    async get__fans(req, res) {
+        let league = req.fans_league
+        res.render('fans/fans_o_lige', {
+            league
+        })
+    }
     async get__registration(req, res, next) {
         res.render('auth', {
             type: 'registration',
