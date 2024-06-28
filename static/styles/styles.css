@@ -63,7 +63,7 @@ body{
     }
 
     .content {
-        transform: scale(0.4) !important;
+        transform: scale(0.45) !important;
         transform-origin: top left !important;
         min-width: 800px !important;
     }
@@ -71,9 +71,10 @@ body{
     header {
         height: auto !important;
         width: 100% !important;
-        min-width: 320px;
+        min-width: 360px;
         flex-wrap: wrap !important;
         justify-content: space-between !important;
+        border-collapse: collapse;
 
     }
 
