@@ -8,6 +8,7 @@ body {
 
 *{
     box-sizing: border-box;
+    color: #000;
 }
 
 .content-container{
@@ -36,11 +37,26 @@ body {
     }
 }
 
-@media (max-width: 825px) {
+@media (max-width: 900px) {
     .content-container{
-        grid-template-columns: 400px;
+        grid-template-columns: 300px;
         grid-template-rows: auto auto auto auto;
     }
+    .column-container{
+        width: 350px !important;
+    }
+
+
+
+    div {
+        flex-wrap: wrap !important;
+    }
+}
+
+input[type="color"] {
+    height: 30px;
+    border-radius: 0;
+    appearance: none;
 }
 
 .column-container{
