@@ -21,6 +21,29 @@ class TeamsController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
+    async get__edit(req, res) {
+        try {
+            let teamId = req.query.id;
+            let team = await Team.findOne({_id: teamId});
+            if(!team) return res.json({message: 'Такой команды не существует'});
+            return sendRes('partials/lk_part/team_edit', {team}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async put__edit(req, res) {
+        try {
+            let teamId = req.body.teamId;
+            let team = await Team.findOne({_id: teamId});
+            if(!team) return res.json({message: 'Такой команды не существует'});
+            await Team.updateOne({_id: teamId}, req.body);
+            return res.json({message: 'Команда обновлена'});
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
     async get__team_list(req, res) {
         try {
             console.log(req.query)

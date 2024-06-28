@@ -69,19 +69,26 @@ class IoService {
 
 
 function startPanel(controls, socket) {
-  let userId = ''
-    if(socket.user)
-      userId = socket.user._id.toString()
+  let userId = '',
+  user = socket.user
+  if(user)
+    userId = socket.user._id.toString()
 
   console.log(userId)
+  function sendData() {
+    io.to(userId).emit('update_data', control.getData)
+
+  }
   function newControlService() {
-    return new controlService(userId, socket.user.tablo_style)
+    return new controlService(userId, user.tablo_style, io)
   }
     let control = controls[userId]
-            socket.on('join_panel', ()=>{
-              console.log('_panel')
+            socket.on('join_panel', async (tableId)=>{
+              console.log('_panel', control)
               if(!control){
-                control = newControlService()
+                userId = tableId
+                user = await User.findOne({_id: userId})
+                control = controls[userId] ? controls[userId] : newControlService()
                 controls[userId] = control
               }
               socket.join(userId);
@@ -89,12 +96,14 @@ function startPanel(controls, socket) {
             })
 
 
-            socket.on('join_table', (tableId)=>{
+            socket.on('join_table', async (tableId)=>{
               console.log('_table')
               if(!control){
                 userId = tableId
+                user = await User.findOne({_id: userId})
+
                 console.log('new_control')
-                control = newControlService()
+                control = controls[userId] ? controls[userId] : newControlService()
                 controls[userId] = control
               }
               console.log(control)
@@ -112,28 +121,33 @@ function startPanel(controls, socket) {
             })
             
             socket.on('play_timer', ()=>{
-              if(!control){
-                control = newControlService()
-                controls[userId] = control
-              }
               control.timer.playTimer(io, userId)
+
+            })
+            socket.on('clear_timer', ()=>{
+              control.timer.clearTimer()
+              io.to(userId).emit('timer', control.timer.timeData)
+            })
+            socket.on('change_timer', (val)=>{
+              console.log(val, control.timer)
+              control.timer.changeTimer(val)
+              io.to(userId).emit('timer', control.timer.timeData)
 
             })
             socket.on('match', async (data)=>{
               if(!control){
-                control = newControlService()
+                control = controls[userId] ? controls[userId] : newControlService()
                 controls[userId] = control
               }
               await control.setMatch(data)
-              io.to(userId).emit('update_data', control.getData)
-
+              sendData()
             })
             socket.on('style', async (data)=>{
                 control.style = data.style
                 socket.user.tablo_style = data.style
                 await socket.user.save()
                 io.to(userId).emit('update_style')
-                io.to(userId).emit('update_data', control.getData)
+                sendData()
               })
             socket.on('notify', (data)=>{
               if(!control){
@@ -152,7 +166,7 @@ function startPanel(controls, socket) {
                 console.log(data, control.getData)
                 
                 try{
-                  io.to(userId).emit('update_data', control.getData)
+                  sendData()
                 }
                 catch(e){
                   console.log(e)

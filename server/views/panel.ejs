@@ -1,6 +1,8 @@
 <%- include('global/header.ejs') %>
 <link rel="stylesheet" href="/static/styles/style_panel.css">
-
+<script >
+    let tableId = '<%= id %>'
+</script>
     <!-- <div class="content-container">
         <div class="main-container">
             <div class="block">
@@ -205,26 +207,7 @@
                         </select>
                 </div>
             </div>
-            <div class="block">
-                <div class="h-group center">
-                    <p class="first">Настройки погоды</p>
-                </div>
-                <div class="h-group">
-                    <div class="v-group">
-                        <label for="weather-temp" class="inline-form-label small-text nowrap">Температура</label>
-                        <label for="weather-temp" class="inline-form-label small-text nowrap">Влажность</label>
-                        <label for="weather-wind" class="inline-form-label small-text nowrap">Скорость</label>
-                        <label for="weather-location" class="inline-form-label small-text nowrap">Локация</label>
-                        
-                    </div>
-                    <div class="v-group">
-                        <input type="text" name="weather-temp" id="weather-temp" class="text-form full-form">
-                        <input type="text" name="weather-humidity" id="weather-humidity" class="text-form full-form">
-                        <input type="text" name="weather-wind" id="weather-wind" class="text-form full-form">
-                        <input type="text" name="weather-location" id="weather-location" class="text-form full-form">
-                    </div>
-                </div>
-            </div>
+           
             <div class="block">
                 <div class="h-group center">
                     <p class="first">Сценарий</p>
@@ -346,10 +329,10 @@
                     <!-- для иконки паузы поменять класс на pause-icon -->
                     <input type="button" value="" class="square40 play-icon" id="play" name="play-timer">
                     <p class="time">00:00</p>
-                    <input type="button" value="" class="square40 redo-icon" name="play-timer">
+                    <input type="button" value="" class="square40 redo-icon" id="clear_timer" name="play-timer">
                 </div>
 
-                <div class="h-group">
+                <div class="h-group" id="change_timer">
                     <input type="button" value="-10" class="square40" name="timer-minus10">
                     <input type="button" value="-5" class="square40" name="timer-minus5">
                     <input type="button" value="-1" class="square40" name="timer-minus1">

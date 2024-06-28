@@ -11,10 +11,11 @@
         <div class="create_tournire_body">
             <div class="form_container">
                 <div class="image_n_textareas">
-                    <div class="image_upload">
-                    <img src="icons/Face.jpeg" alt="placeholder image">
-                    <p>Мин. размер: 320 x 320</p>
-                    </div>
+                    <label class="image_upload">
+                        <input type="file" class="image_input" name="img" id="image" accept="image/*">
+                        <img src="<%= player.img %>" class="image_preview" alt="placeholder image">
+                        <p>Мин. размер: 320 x 320</p>
+                    </label>
                     <div class="textareas_ct">
                         <div class="form_group">
                             <label for="description">Биография</label>

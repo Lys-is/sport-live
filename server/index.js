@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 //const router = require('./router/index')
 const errorMiddleware = require('./middlewares/error-middleware');
 const path = require('path');
@@ -21,7 +22,8 @@ const router = require('./navs/constant')
 console.log(router._router.stack)
 ioService.start(server);
 //const io = socketio(server);
-app.use(express.json());
+app.use(bodyParser.json({ limit: "50mb" }))
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(cookieParser());
 app.use(cors({
     credentials: true,
@@ -33,7 +35,6 @@ app.use(cors({
 app.locals.rmWhitespace = true;
 app.use('*', (req, res, next) => {
     const { url, path: routePath }  = req;
-    console.log(req);
     next();
 });
 app.use("/static", express.static(path.dirname(__dirname) + "/static"));

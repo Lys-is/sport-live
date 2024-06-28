@@ -102,7 +102,9 @@ class TournamentController {
     }
     async get__team(req, res) {
         try {
-            return sendRes('partials/lk_part/tour/tournament_teams', {}, res);
+            let teams = await Team.find({});
+
+            return sendRes('partials/lk_part/tour/tournament_teams', {teams}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

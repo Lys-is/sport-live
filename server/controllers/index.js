@@ -31,10 +31,13 @@ class Constrollers {
     }
     async get__panel(req, res) {
         let matches = await Match.find({});
+        let userAd = await User.findById(req.params.id);
         res.render('panel', {
+            id: req.params.id,
             title: 'Панель управления',
-            auth: req.user || false,
-            matches
+            auth: userAd || false,
+            matches,
+
         });
     }
     async get__table(req, res) {

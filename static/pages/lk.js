@@ -90,6 +90,7 @@ async function getPage(href, destInHtml = lk_main) {
     console.log(initHref)
     console.log(removeTrailingSlash(initHref))
     inits[removeTrailingSlash(initHref)]?.(href);
+    setImgListener()
     return true
 }
 function removeTrailingSlash(str) {
@@ -118,11 +119,13 @@ let init_decorator = (func) => {
         if(!link.hasEventListener('click'))
             link.addEventListener('click', linkListener)
     })
+   
     return func
 }
 let inits = {
     'profile': init__profile,
     'team': init__team,
+    'team/get__edit' : init__team_edit,
     'team/get__create' : init__team_create,
     'team/get__team_list': init__team_list,
     'team/get__team_list_create' : init__team_list_create,
@@ -317,24 +320,32 @@ function init__team_list_create() {
 function init__team_list() {
     
 }
+function init__team_edit() {
+    let form = get("#team_edit__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        sendFetch("/api/lk/team/put__edit", JSON.stringify(data), "PUT")
+    })
+}
 function init__player() {
     
 }
 function init__player_create() {
     let form = get("#player_create__form");
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let data = formGetData(form)
+        let data = await formGetData(form)
         sendFetch("/api/lk/player/post__create", JSON.stringify(data), "POST")
     })
 }
 
-function init__player_edit() {
+ function init__player_edit() {
     let form = get("#player_edit__form");
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let data = formGetData(form)
-        sendFetch("/api/lk/player/put__edit", JSON.stringify(data), "PUT")
+        let data = await formGetData(form)
+        await sendFetch("/api/lk/player/put__edit", JSON.stringify(data), "PUT")
     })
 }
 function init__representative_create() {
@@ -352,5 +363,23 @@ function init__judge_create() {
         e.preventDefault();
         let data = formGetData(form)
         sendFetch("/api/lk/judge/post__create", JSON.stringify(data), "POST")
+    })
+}
+
+
+
+
+function setImgListener(){
+    let imgsLabels = getA('.image_upload')
+    imgsLabels.forEach(label => {
+        let preview = get('.image_preview', label),
+        input = get('.image_input', label)
+
+        input.addEventListener('change', async (e) => {
+            input.setAttribute('changed', 'true')
+            console.log(e.target.files[0])
+            let base64 = await getBase64(e.target.files[0])
+            preview.src = base64
+        })
     })
 }

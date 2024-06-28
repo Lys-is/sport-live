@@ -21,54 +21,23 @@
                         </div>
                         </td>
                 </tr>
-                <tr>
+                <% if (teams) {
+                    teams.forEach((team) => {
+                        %>
+                        <tr>
                     <td>
-                        <img src="icons/team.jpg" alt="team" height="80" width="80" class="ml img_t">
+                        <img src="<%=team.img ? team.img : '/static/styles/icons/logo.jpg'%>" alt="team" height="80" width="80" class="ml img_t">
                     </td>
-                    <td><p class="nm">Команда 1</p></td>
+                    <td><p class="nm"><%=team.name%></p></td>
                     <td>            
                         <input type="button" value="Выбрать команду" class="button green_button ">
                         <input type="button" value="Печать" class="button blue_button mst">
                     </td>
-                    <td>
-                        <div class="form-group ml">
-                            <p class="counter bb">0</p>
-                            <p class="counter_text b ml">Заявлено</p>
-                        </div>  
-                        <div class="form-group ml">
-                            <p class="counter gb">0</p>
-                            <p class="counter_text g ml">Подтверждено</p>
-                        </div> 
-                        <div class="form-group ml">
-                            <p class="counter">0</p>
-                            <p class="counter_text ml">Ожидают</p>
-                        </div> 
-                    </td>
                 </tr>
-                <tr>
-                    <td>
-                        <img src="icons/team.jpg" alt="team" height="80" width="80" class="ml img_t">
-                    </td>
-                    <td><p class="nm">Команда 1</p></td>
-                    <td>            
-                        <input type="button" value="Выбрать команду" class="button green_button ">
-                        <input type="button" value="Печать" class="button blue_button mst">
-                    </td>
-                    <td>
-                        <div class="form-group ml">
-                            <p class="counter bb">0</p>
-                            <p class="counter_text b ml">Заявлено</p>
-                        </div>  
-                        <div class="form-group ml">
-                            <p class="counter gb">0</p>
-                            <p class="counter_text g ml">Подтверждено</p>
-                        </div> 
-                        <div class="form-group ml">
-                            <p class="counter">0</p>
-                            <p class="counter_text ml">Ожидают</p>
-                        </div> 
-                    </td>
-                </tr>
+                <%
+                    })
+                } %>
+                
             </table>
             
         </div>

@@ -2,11 +2,9 @@ const Match = require('../models/match-model');
 const Player = require('../models/player-model');
 const getBrightness = require('getbrightness')
 const timestore = require('timestore')
-
 let timers = new timestore.Timestore()
-
 function startTimer(io, timer, userId) {
-    let time = `${timer.minuts}:${timer.seconds}`
+    
     let timerId = timers.setInterval(userId, timerCallback, 1000)
     console.log(timerId)
     function timerCallback() {
@@ -37,9 +35,12 @@ function startTimer(io, timer, userId) {
 }
 
 function pauseTimer(timer) {
-    timers.clearInterval(timer.timerId)
+    timers.toggleInterval(timer.timerId)
 }
-
+function deleteTimer(timer) {
+    timers.clearInterval(timer.timerId)
+    timer.timerId = null
+}
 class Timer {
     constructor() {
         this.timerId = null
@@ -53,14 +54,16 @@ class Timer {
         this.is_null_start = false
     }
     clearTimer() {
-        pauseTimer(this)
+        deleteTimer(this)
+        this.minuts = 0
+        this.seconds = 0
+    }
+    changeTimer(sec) {
+        sec = +sec
+        this.seconds += sec
     }
     reverse(type) {
         this.is_reverse = type
-    }
-    set changeTimer(time) {
-        this.minuts = time.minuts
-        this.seconds = time.seconds
     }
     set changeStage(stages) {
         this.now_time = stages.now_time ? stages.now_time : this.now_time
@@ -69,17 +72,44 @@ class Timer {
 
     playTimer(io, userId) {
         console.log(this)
-        this.timerId = startTimer(io, this, userId)
+        if(!this.timerId)
+            this.timerId = startTimer(io, this, userId)
+        else 
+            pauseTimer(this)
+
         
     }
     // startTimer(socket) {
     //     this.is_null_start = false
     //     this.playTimer(socket)
     // }
-    send(io, userId) {
+    get timeData() {
+        console.log(this.seconds)
+        this.seconds = +this.seconds
+        this.minuts = +this.minuts
+        if(this.seconds < 0) {
+            console.log(Math.floor(this.seconds / 60))
+            this.minuts += Math.floor(this.seconds / 60)
+            this.seconds = Math.abs(60*(Math.floor(this.seconds / 60)) - this.seconds)
+        }
+        if(this.seconds > 59) {
+            this.minuts += Math.floor(this.seconds / 60)
+            this.seconds = this.seconds % 60
+        }
+        if(this.minuts < 0) {
+            this.minuts = 0
+            this.seconds = 0
+        }
+        if(this.minuts >= this.max_time) {
+            this.minuts = this.max_time
+            this.seconds = 0
+        }
         let min = this.minuts < 10 ? `0${this.minuts}` : this.minuts
         let sec = this.seconds < 10 ? `0${this.seconds}` : this.seconds
-        io.to(userId).emit('timer', {name: 'timer', value: `${min}:${sec}`})
+        return {name: 'timer', value: `${min}:${sec}`}
+    }
+    send(io, userId) {
+        io.to(userId).emit('timer', this.timeData)
     }
 }
 class Scoreboard {

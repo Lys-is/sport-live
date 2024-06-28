@@ -1,0 +1,71 @@
+<!-- <div class="team_create__wrapper">
+    <h1 class="lk_wrapper__title">Создать команду</h1>
+    <form id="team_create__form">
+        <label for="name">Название</label>
+        <input type="text" name="name" >
+        <label for="description">Описание</label>
+        <input type="text" name="description" >
+
+        <input type="submit" value="Создать">
+    </form>
+    <script>
+        
+    </script>
+</div> -->
+<div class="create_tournire_container">
+    <form id="team_edit__form">
+        <input type="hidden" name="teamId" value="<%= team._id %>">
+
+    <p class="content_navtext">Главная &gt; Команды &gt; Изменить</p>
+    <div class="create_tournire_content">
+        <div class="create_tournire_header">
+            <p class="page_title">Создание Команды</p>
+        </div>
+        <div class="create_tournire_body">
+            <div class="form_container">
+                <div class="image_n_textareas">
+                    <label class="image_upload">
+                        <input type="file" class="image_input" name="img" id="image" accept="image/*">
+                        <img src="<%= team.img %>" class="image_preview" alt="placeholder image">
+                        <p>Мин. размер: 320 x 320</p>
+                    </label>
+                    <label class="image_upload">
+                        <input type="file" class="image_input" name="img_min" id="image" accept="image/*">
+                        <img src="<%= team.img_min %>" class="image_preview" alt="placeholder image">
+                        <p>Мин. размер: 910 x 610</p>
+                    </label>
+
+                
+                </div>
+
+                <div class="ct_form">
+                    <div class="form_group">
+                        <label for="name">Название</label>
+                        <input type="text" id="name" name="name" value="<%= team.name %>">
+                    </div>
+                    <div class="form_group">
+                        <label for="website">Сайт команды</label>
+                        <input type="text" id="website" name="website" value="<%= team.website %>">
+                    </div>
+                    <div class="form_group">
+                        <label for="social">Профиль в соц. сети</label>
+                        <input type="text" id="social" name="social" value="<%= team.social %>">
+                    </div>
+                    <div class="textareas_ct">
+                        <div class="form_group">
+                            <label for="description">Описание</label>
+                            <textarea id="description" name="description"><%= team.description %></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="create_tournire_footer">
+            <div class="filler"></div>
+            <input type="button" value="Отменить" class="button white_button">
+            <input type="submit" value="Обновить" class="button green_button">
+        </div>
+    </div>
+</form>
+</div>

@@ -3,8 +3,7 @@ const Router = require('express');
 const controllers = require('../controllers');
 //qq - middleware
 const nav = {
-    'panel' : {
-        'qq': checkAuth.isAuth,
+    'panel/:id' : {
         'func' : 'get__panel'
     },
     'table/:id' : {
@@ -36,6 +35,8 @@ const nav = {
             'func' : 'get__team',
             'get__create' : {},
             'post__create' : {},
+            'get__edit' : {},
+            'put__edit' : {},
             'get__team_list' : {},
             'get__team_list_create' : {},
             'post__team_list_create' : {}

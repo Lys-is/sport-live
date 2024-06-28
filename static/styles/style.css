@@ -13,3 +13,6 @@
 .groups_body.active {
     display: block;
 }
+.image_input {
+    display: none;
+}

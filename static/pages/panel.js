@@ -30,7 +30,7 @@ let html = {
 let testConnect = setInterval(() => {
     if (socket.connected) {
         clearInterval(testConnect)
-        socket.emit('join_panel');
+        socket.emit('join_panel', tableId);
     }
 }, 200)
 let playerTables ={
@@ -43,8 +43,17 @@ let variations_tablo = getA('.tablo_variation > input');
 
 let play = get('#play');
 play.addEventListener('click', (e) => {
-    console.log(socket.id)
     socket.emit('play_timer');
+})
+let clearTimer = get('#clear_timer');
+clearTimer.addEventListener('click', (e) => {
+    socket.emit('clear_timer');
+})
+let changeTimer = getA('#change_timer > input');
+changeTimer.forEach(input => {
+    input.addEventListener('click', (e) => {
+        socket.emit('change_timer',  e.target.value);
+    })
 })
 let match = get('#match');
 match.addEventListener('change', (e) => {
@@ -59,11 +68,11 @@ style.addEventListener('change', (e) => {
 })
 socket.on('connect', () => {
     console.log(socket.id)
-    socket.emit('join_panel');
+    socket.emit('join_panel', tableId);
 });
 socket.on('reconnect', () => {
     console.log(socket.id)
-    socket.emit('join_panel');
+    socket.emit('join_panel', tableId);
 });
 socket.on('timer', (data) => {
     get('.time').innerHTML = data.value

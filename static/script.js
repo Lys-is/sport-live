@@ -322,7 +322,8 @@ function searchInit() {
 }
 const isCheckboxOrRadio = type => ['checkbox', 'radio'].includes(type);
 const isDatalist = field => field.list;
-function formGetData(form) {
+const isFile = type => ['file'].includes(type);
+async function formGetData(form) {
     const data = {};
     for (let field of form) {
         const {name} = field;
@@ -339,6 +340,10 @@ function formGetData(form) {
             }
             else if(isCheckboxOrRadio(type)) {
                 data[name] = checked
+            }
+            else if(isFile(type)) {
+                if(field.getAttribute('changed'))
+                data[name] = await getBase64(field.files[0])
             }
             else {
                 data[name] = value
@@ -367,3 +372,22 @@ function getRealValue(ele){
       }
     }
   }
+function getBase64(file) {
+    if(!file) return ''
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
+//     var reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = function () {
+//       console.log(reader.result);
+//       return reader.result
+//     };
+//     reader.onerror = function (error) {
+//       console.log('Error: ', error);
+//     };
+//  }
