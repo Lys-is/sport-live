@@ -161,6 +161,7 @@ header{
 .navbar_body{
     flex-grow: 1;
     background-color: var(--nav-bc);
+    padding-right: 10px;
 }
 
 .navbar_footer{
