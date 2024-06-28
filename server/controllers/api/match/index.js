@@ -1,13 +1,14 @@
 const Team = require('../../../models/team-model');
 const Player = require('../../../models/player-model');
 const Match = require('../../../models/match-model');
-
+const Tournament = require('../../../models/tournament-model');
 class MatchController {
 
     async get__create(req, res) {
         try {
             let teams = await Team.find();
-            return sendRes('partials/lk_part/match_create', {teams}, res);
+            let tournaments = await Tournament.find();
+            return sendRes('partials/lk_part/match_create', {teams, tournaments}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
