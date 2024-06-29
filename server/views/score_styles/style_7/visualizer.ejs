@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+
+	<div class="flexstart">
+		<div class="little">
+			<div id="top-container">
+				<div class="col">
+					<div class="top-anim-1">
+						<div id="top-luch-logo"></div>
+						<div class="timer">
+							<div class="timer-wrap">
+								<div class="time var-time">00:00</div>
+							</div>
+							<div class="time-no"><span class="var-roundnum">1</span><sup class="var-ordinal">ый</sup></div>
+						</div>
+					</div>
+					<div class="top-bynex top-anim-2"></div>
+				</div>
+				<div class="info">
+					<div class="row">
+						<div class="col top-anim-logo-a">
+							<div class="team-a-logo var-homeColor" style="background-color: rgb(85, 85, 85); color: rgb(255, 255, 255);"><img class="home-logo" src="https://st.joinsport.io/team/1385934/logo/6672b20874dec.png"></div>
+						</div>
+						<div class="col top-anim-3 margin-left">
+							<div class="team-a var-homeColor var-home_abc" style="background-color: rgb(85, 85, 85); color: rgb(255, 255, 255);"></div>
+							<div class="team-a-goals var-home-score var-homeColor" style="background-color: rgb(85, 85, 85); color: rgb(255, 255, 255);">0</div>
+						</div>
+
+
+						<div class="col top-anim-logo-b">
+							<div class="team-b-logo var-awayColor" style="background-color: rgb(255, 0, 0); color: rgb(255, 255, 255);"><img class="away-logo" src="https://st.joinsport.io/team/1385936/logo/6672b28ee7926.png"></div>
+						</div>
+						<div class="col top-anim-4 margin-left">
+							<div class="team-b var-awayColor var-away_abc" style="background-color: rgb(255, 0, 0); color: rgb(255, 255, 255);"></div>
+							<div class="team-b-goals var-away-score var-awayColor" style="background-color: rgb(255, 0, 0); color: rgb(255, 255, 255);">0</div>
+						</div>
+					</div>
+					<div class="row fouls-container" style="display: none;">
+						<div class="row fouls top-anim-5">
+							<div class="fouls-a var-home-fouls">0</div>
+							<div class="fouls-txt">Фолы</div>
+							<div class="fouls-b var-away-fouls">0</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="maxline top-anim-5"></div>
+
+			<div class="bynex-adv"></div>
+		</div>
+
+	</div>
+	<div class="big" id="bottom-scor-container" style="display: block;">
+		<div id="goals-container">
+			<table cellpadding="0" cellspacing="0" border="0" id="goals-table">
+				<tbody><tr>
+					<td style="width: 600px;" valign="bottom">
+						<div class="goals-home"></div>
+					</td>
+					<td style="width: 600px;" valign="bottom">
+						<div class="goals-away"></div>
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+		<div id="bottom-row-0"><p style="font-size: 35px; margin:0; margin-top:5px">binex</p></div>
+		<div id="bottom-row-1">
+			<div id="home-logo"><img class="home-logo" src="https://st.joinsport.io/team/1385934/logo/6672b20874dec.png" width="87px" height="87px"></div>
+			<div class="var-home" id="big-home-team-name">Cборная Минска</div>
+			<div id="big-score">
+				<div id="score-txt"><span class="var-home-score">0</span> - <span class="var-away-score">0</span></div>
+				<div id="big-series">
+					<!-- <div class="var-home-series" id="big-series-home">0</div> -->
+					<div id="big-series-txt" style="display: none;">в серии</div>
+					<!-- <div class="var-away-series" id="big-series-away">0</div> -->
+				</div>
+			</div>
+			<div class="var-away" id="big-away-team-name">Могилевская область</div>
+			<div id="away-logo"><img class="away-logo" src="https://st.joinsport.io/team/1385936/logo/6672b28ee7926.png" width="87px" height="87px"></div>
+		</div>
+		<div id="bottom-row-2">
+			<div id="penalties-home">
+				<div class="pen" style="display: block;">
+					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+				</div>
+			</div>
+			<div id="match-info">
+				<div class="var-label" style="display: none;">Начало матча</div>
+				<div class="pen" style="display: block;">
+					<div class="var-penalties-home" style="display: inline-block;margin-right: 90px;">0</div>Пенальти<div style="display: inline-block;margin-left: 90px;" class="var-penalties-away">0</div>
+				</div>
+			</div>
+			<div id="penalties-away">
+				<div class="pen" style="display: block;">
+					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+				</div>
+			</div>
+		</div>
+		<!-- 		<div id="bottom-row-3">
+
+
+			<div id="additional-txt">Счет в серии 0-2</div>
+
+
+			</div> -->
+	</div>
+
+	<div class="mid" id="matchid-container">
+		<table cellpadding="0" cellspacing="0" border="0" id="main-table">
+			<tbody><tr>
+				<td id="matchid-home-logo" align="center">
+					<div class="logo-bg">
+						<img class="home-logo" src="https://st.joinsport.io/team/1385934/logo/6672b20874dec.png" width="195px" height="195px">
+					</div>
+				</td>
+				<td></td>
+				<td id="matchid-away-logo" align="center">
+					<div class="logo-bg">
+						<img class="away-logo" src="https://st.joinsport.io/team/1385936/logo/6672b28ee7926.png" width="195px" height="195px">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td id="matchid-home-teamname" class="var-home">Cборная Минска</td>
+				<td id="mid-col">
+					<!-- <span class='var-tour'>5</span>-<span class='var-tour-ordinal'>й</span> тур -->
+				</td>
+				<td id="matchid-away-teamname" class="var-away">Могилевская область</td>
+			</tr>
+			<tr>
+				<td colspan="3" align="center">
+					<table cellpadding="0" cellspacing="0" border="0" id="matchid-date-venue">
+						<tbody><tr>
+							<td id="matchid-time"><span class="var-match-date">20.06.2024</span><br><span class="var-match-time">10:00</span></td>
+							<td id="matchid-venue" class="var-stadium">Спорткомплекс «Виктория» (Гродно)</td>
+						</tr>
+					</tbody></table>
+				</td>
+			</tr>
+		</tbody></table>
+	</div>
+	<div class="refs" id="ref-container">
+		<div class="referees ref-animation">
+			<div class="ref-flex">
+				<div class="ev-player"><img class="ev-player-img" src="https://app.skore.tech/themes/bamf/img/ref.svg?1694680080" alt="ref"></div>
+				<div class="ev-txt">
+					<div class="ev-line-1"><span class="ev-name var-ref-pervyj-suda-name"></span></div>
+					<div class="ev-line-2"><span class="ev-add-txt var-ref-0-position">Первый судья</span></div>
+				</div>
+			</div>
+			<div class="ref-flex">
+				<div class="ev-player"><img class="ev-player-img" src="https://app.skore.tech/themes/bamf/img/ref.svg?1694680080" alt="ref"></div>
+				<div class="ev-txt">
+					<div class="ev-line-1"><span class="ev-name var-ref-vtoroj-suda-name"></span></div>
+					<div class="ev-line-2"><span class="ev-add-txt">Второй судья</span></div>
+				</div>
+			</div>
+			<div class="ref-flex">
+				<div class="ev-player"><img class="ev-player-img" src="https://app.skore.tech/themes/bamf/img/ref.svg?1694680080" alt="ref"></div>
+				<div class="ev-txt">
+					<div class="ev-line-1"><span class="ev-name var-ref-tretij-suda-name"></span></div>
+					<div class="ev-line-2"><span class="ev-add-txt">Третий судья</span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="roster-container home-roster">
+		<div class="roster-main-div">
+			<div class="start-15 var-roster-home"></div>
+			<div class="start-5">
+				<div class="line-1">
+					<div class="line">
+						<span><img class="player-img var-home-photo-1"></span>
+						<span class="name-start-5 var-home-start-1"></span>
+					</div>
+				</div>
+				<div class="line-2">
+					<div class="line">
+						<span><img class="player-img var-home-photo-2"></span>
+						<span class="name-start-5 var-home-start-2"></span>
+					</div>
+					<div class="line">
+						<span><img class="player-img var-home-photo-3"></span>
+						<span class="name-start-5 var-home-start-3"></span>
+					</div>
+				</div>
+				<div class="line-3">
+					<div class="line">
+						<span><img class="player-img var-home-photo-4"></span>
+						<span class="name-start-5 var-home-start-4"></span>
+					</div>
+					<div class="line">
+						<span><img class="player-img var-home-photo-5"></span>
+						<span class="name-start-5 var-home-start-5"></span>
+					</div>
+				</div>
+			</div>
+			<div class="roster-logo">
+				<img class="home-logo" width="230px" height="230px" alt="logo" src="https://st.joinsport.io/team/1385934/logo/6672b20874dec.png">
+				<div class="roster-teamname var-home">Cборная Минска</div>
+				<div class="roster-coach"><span class="var-homeCoach"></span></div>
+			</div>
+		</div>
+	</div>
+	<div class="roster-container away-roster">
+		<div class="roster-main-div">
+			<div class="start-15 var-roster-away"></div>
+			<div class="start-5">
+				<div class="line-1">
+					<div class="line">
+						<span><img class="player-img var-away-photo-1"></span>
+						<span class="name-start-5 var-away-start-1"></span>
+					</div>
+				</div>
+				<div class="line-2">
+					<div class="line">
+						<span><img class="player-img var-away-photo-2"></span>
+						<span class="name-start-5 var-away-start-2"></span>
+					</div>
+					<div class="line">
+						<span><img class="player-img var-away-photo-3"></span>
+						<span class="name-start-5 var-away-start-3"></span>
+					</div>
+				</div>
+				<div class="line-3">
+					<div class="line">
+						<span><img class="player-img var-away-photo-4"></span>
+						<span class="name-start-5 var-away-start-4"></span>
+					</div>
+					<div class="line">
+						<span><img class="player-img var-away-photo-5"></span>
+						<span class="name-start-5 var-away-start-5"></span>
+					</div>
+				</div>
+			</div>
+			<div class="roster-logo">
+				<img class="away-logo" width="230px" height="230px" alt="logo" src="https://st.joinsport.io/team/1385936/logo/6672b28ee7926.png">
+				<div class="roster-teamname var-away">Могилевская область</div>
+				<div class="roster-coach"><span class="var-awayCoach"></span></div>
+			</div>
+		</div>
+	</div>
+	<div class="event-container" id="test" style="position: absolute; bottom: 210px;">
+		<div class="ev-flex">
+			<div class="ev-player"><img class="ev-player-img" src="/img/photo_thumb.png" alt="palyer"></div>
+			<div class="ev-txt">
+				<div class="ev-line-1"><span class="ev-name">Жигалко Владимир</span></div>
+				<div class="ev-line-2"><span class="ev-add-txt">Столица</span></div>
+			</div>
+			<div class="ev-icon">
+				<div class="ev-logo"></div>
+				<div class="ev-goal"></div>
+				<div class="ev-yellow"></div>
+				<div class="ev-red"></div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="weather_wrapper">
+		<div class="weather">
+			<div class="weatherCard">
+				<div class="currentTemp">
+					<span class="temp"></span>
+					<span class="location var-town"></span>
+				</div>
+				<div class="currentWeather">
+					<span class="conditions"></span>
+					<div class="info-w">
+						<span class="rain"></span>
+						<span class="wind"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script>
+		const block = document.querySelector("#bottom-scor-container")
+		const testBlock = document.getElementById("test");
+		const resizewatcher = new ResizeObserver(entries => {
+			for (const entry of entries) {
+				if (entry.contentRect.width == 0) {
+					testBlock.style.position = "absolute";
+					testBlock.style.bottom = "50px";
+				} else {
+					testBlock.style.position = "absolute";
+					testBlock.style.bottom = "210px";
+				}
+			}
+		})
+		resizewatcher.observe(block)
+	</script>
+
+
+</body>
+</html>

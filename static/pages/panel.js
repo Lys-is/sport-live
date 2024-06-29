@@ -95,6 +95,7 @@ socket.on('timer', (data) => {
     get('.time').innerHTML = data.value
     console.log(data.value)
 })
+let addPen = get('#add-pen')
 
 socket.on('update_data', (data) => {
     style.value = data.style
@@ -358,3 +359,7 @@ function couchNotify(num, team, type, data) {
     }
     socket.emit('notify', dta)
 }
+
+addPen.addEventListener('click', (e) => {
+    
+})

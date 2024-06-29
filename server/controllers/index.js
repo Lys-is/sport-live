@@ -39,7 +39,7 @@ class Constrollers {
     }
     async get__panel(req, res) {
         console.log(req.params);
-        let matches = await Match.find({});
+        let matches = await Match.find({creator: req.params.id})
         let userAd = await User.findById(req.params.id);
         res.render('panel', {
             id: req.params.id,
