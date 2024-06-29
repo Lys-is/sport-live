@@ -5,7 +5,7 @@ body {
     height: 100vh;
     padding: 0;
     margin: 0;
-    min-width: 1200px;
+
 }
 
 header {
@@ -118,6 +118,28 @@ h2 {
     margin-top: 40px;
     margin-bottom: 50px;
     align-items: start;
+}
+
+@media (max-width: 800px) {
+    .grid-body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: "b"
+            "a";
+        padding-inline: 5%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content-nav table,
+    .content-nav .social-share{
+        display: none;
+    }
+
+    .content-body{
+        transform: scale(0.5);
+        transform-origin: top left;
+    }
 }
 
 
@@ -287,7 +309,11 @@ thead {
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: 400px;
 }
+
+
+
 
 .nav-menu-item {
     width: 100%;
