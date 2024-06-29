@@ -1,6 +1,7 @@
 const Team = require('../../../models/team-model');
 const Player = require('../../../models/player-model');
 const Representative = require('../../../models/representative-model');
+const Couch = require('../../../models/couch-model');
 class TeamsController {
 
     async get__create(req, res) {
@@ -75,9 +76,35 @@ class TeamsController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
-    async get__team_representative(req, res) {
+    async get__team_couch(req, res) {
         try {
             console.log(req.query)
+            let teamId = req.query.id;
+            let team = await Team.findOne({_id: teamId})
+            if(!team) return res.json({message: 'Такой команды не существует'});
+            let couches = await Couch.find({team: teamId}).populate('team creator');
+            let couchesAll = await Couch.find()
+            return sendRes('partials/lk_part/team_couch', {couches, team, couchesAll}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async put__team_couch(req, res) {
+        try {
+            let teamId = req.body.teamId;
+            let team = await Team.findOne({_id: teamId});
+            if(!team) return res.json({message: 'Такой команды не существует'});
+            if(!req.user._id.equals(team.creator._id)) return res.json({message: 'Вы не являетесь создателем команды'});
+            await Couch.updateOne({_id: req.body.couchId}, {team: teamId});
+            return res.json({message: 'Тренер добавлен'});
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__team_representative(req, res) {
+        try {
             let teamId = req.query.id;
             let team = await Team.findOne({_id: teamId})
             if(!team) return res.json({message: 'Такой команды не существует'});

@@ -59,6 +59,7 @@ let match = get('#match');
 match.addEventListener('change', (e) => {
     socket.emit('match', e.target.value);
 })
+let couchDiv = get('#couches')
 let style = get('#panel-style');
 let replaceBtns = getA('.replace_btn');
 replaceBtns.forEach(btn => {
@@ -108,6 +109,7 @@ socket.on('update_data', (data) => {
         })
     }
     if(data.match) {
+        couchDiv.innerHTML = ''
         setMatch(data, 1)
         setMatch(data, 2)
     }
@@ -316,4 +318,43 @@ function setMatch(data, team) {
             el.innerHTML += `<option value="${player._id}">${player.fio}</option>`
         })
     })
+
+    if(data['couch_'+team]) {
+        console.log(data['couch_'+team])
+        couchDiv.innerHTML += '<h3>Тренеры команды '+data['team'+team+'_name']+'</h3>'
+        data['couch_'+team].forEach((couch, i) => {
+            console.log(couch)
+            couchDiv.innerHTML += `<input type="button" data-number="${i}"  data-type="s_${team}" value="${couch.fio} (маленький)"</input>`
+            couchDiv.innerHTML += `<input type="button"  data-number="${i}"   data-type="b_${team}" value="${couch.fio} (большой)" </input>`
+        })
+        couchDiv.innerHTML += '</br>'
+    }
+ 
+    
+    getA('input', couchDiv).forEach(input => {
+        input.addEventListener('click', (e) => {
+            let type = e.target.getAttribute('data-type').split('_')[0]
+            let team = e.target.getAttribute('data-type').split('_')[1]
+            let number = e.target.getAttribute('data-number')
+            couchNotify(number, team, type, data)
+        })
+    })
+
+}      
+
+function couchNotify(num, team, type, data) {
+    let title = 'Тренер команды '+data['team'+team+'_name']
+    let txt = data['couch_'+team][num].fio
+    let img = ''
+    if(type == 'b') {
+        img = `{{img_couch}}`
+    }
+    let dta = {
+        type: 'couch',
+        size : type,
+        text: img+txt,
+        title: title,
+        couchId: data['couch_'+team][num]._id,
+    }
+    socket.emit('notify', dta)
 }

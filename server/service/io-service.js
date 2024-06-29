@@ -2,6 +2,7 @@ const socketIO = require('socket.io');
 const tokenService = require('./token-service');
 const User = require('../models/user-model');
 const Player = require('../models/player-model');
+const Couch = require('../models/couch-model');
 const controlService = require('./control-service');
 let io = null
 let controls = {}
@@ -162,6 +163,15 @@ function startPanel(controls, socket) {
                  data.text = data.text.replace('{{img_player}}', `<img src="${player.img}" class="notify_img">`)
                 else {
                   data.text = data.text.replace('{{img_player}}', '')
+                }
+              }
+              if(data.text.includes('{{img_couch}}')){
+                let couch = await Couch.findOne({_id: data.couchId})
+                console.log(couch)
+                if(couch.img)
+                 data.text = data.text.replace('{{img_couch}}', `<img src="${couch.img}" class="notify_img">`)
+                else {
+                  data.text = data.text.replace('{{img_couch}}', '')
                 }
               }
               console.log(data)

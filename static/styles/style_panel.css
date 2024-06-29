@@ -220,6 +220,7 @@ input[type="button"]:hover {
 
 .half-form-container input{
     width: 179PX;
+    overflow-wrap: anywhere;
 }
 
 .selected {

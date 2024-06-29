@@ -40,6 +40,23 @@ class TournamentController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
+    async put__team(req, res) {
+        try {
+            let tourId = req.body.tournamentId;
+            console.log(tourId)
+            let tournament = await Tournament.findOne({_id: tourId})
+            console.log(tournament)
+            if(!tournament) return res.json({message: 'Такого турнира не существует'});
+            let team = await Team.findOne({_id: req.body.teamId});
+            if(!team) return res.json({message: 'Такой команды не существует'});
+            tournament.teams.push(req.body.teamId);
+            await tournament.save();
+            return res.json({message: 'Обновлено'});
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
     async get__edit(req, res) {
         try {
             let tourId = req.params.id;
@@ -102,7 +119,11 @@ class TournamentController {
     }
     async get__team(req, res) {
         try {
-            let teams = await Team.find({});
+            let tourId = req.params.id;
+            let tournament = await Tournament.findOne({_id: tourId})
+            let chooseTeams = tournament.teams;
+            console.log(chooseTeams)
+            let teams = await Team.find( { $nor: [{_id: {$in: chooseTeams}}] });
 
             return sendRes('partials/lk_part/tour/tournament_teams', {teams}, res);
         } catch (e) {

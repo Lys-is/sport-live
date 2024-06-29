@@ -7,9 +7,7 @@
                 <div class="filler"></div>
                 <input type="button" value="Незаявленные" class="table_button_radio_active table_radio_active nm">
                 <input type="button" value="Подтвержденные" class="table_button_radio_archive middle_tbra nm">
-                <input type="button" value="Черновики" class="table_button_radio_archive middle_tbra nm">
-                <input type="button" value="Ожидают подтверждения" class="table_button_radio_archive middle_tbra nm flex_form">
-                <input type="button" value="Исключения" class="table_button_radio_archive nm">
+
             </div>
             <table class="commands_table fath">
                 <tr id="first-row">
@@ -30,8 +28,7 @@
                     </td>
                     <td><p class="nm"><%=team.name%></p></td>
                     <td>            
-                        <input type="button" value="Выбрать команду" class="button green_button ">
-                        <input type="button" value="Печать" class="button blue_button mst">
+                        <input type="button" value="Выбрать команду" data-id="<%=team._id%>" class="button green_button team_add" >
                     </td>
                 </tr>
                 <%

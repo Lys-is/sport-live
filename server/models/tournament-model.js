@@ -5,6 +5,7 @@ const { configDotenv } = require('dotenv');
 const Tournament = new Schema({
     creator: {type: Schema.Types.ObjectId, ref: 'User', autopopulate: true},
     admins: [{type: Schema.Types.ObjectId, ref: 'User', autopopulate: true}],
+    teams: [{type: Schema.Types.ObjectId, ref: 'Team', autopopulate: true}],
     basic: {
         img: {type: String, default: '-'},
         full_name: {type: String},

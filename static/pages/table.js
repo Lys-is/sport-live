@@ -76,6 +76,14 @@ function setData(data) {
     if(data.scoreboard) {
         setScoreboard(data.scoreboard)
     }
+    if(data.match) {
+        getA('.home-logo').forEach(el => {
+            el.src = data.match.team_1.img ? data.match.team_1.img : '/static/styles/icons/logo.jpg'
+        })
+        getA('.away-logo').forEach(el => {
+            el.src = data.match.team_2.img ? data.match.team_2.img : '/static/styles/icons/logo.jpg'
+        })
+    }
 }
 
 function switchDiv(type) {
@@ -108,6 +116,7 @@ function setScoreboard(scoreboard) {
     if(scoreboard.penalty && scoreboard.penalty.length > 0) {
         setPenalty(scoreboard.penalty)
     }
+    
 
 }
 let penaltyHTML = `<div class="penaltie" style="background-color: var(--pen-{{penalty.type}});"></div>`

@@ -1,5 +1,6 @@
 const Match = require('../models/match-model');
 const Player = require('../models/player-model');
+const Couch = require('../models/couch-model');
 const getBrightness = require('getbrightness')
 const timestore = require('timestore')
 let timers = new timestore.Timestore()
@@ -167,12 +168,16 @@ class Control {
         console.log(matchId)
         let match = await Match.findOne({_id: matchId})
         let players_1 = await Player.find({team: match.team_1._id}),
-            players_2 = await Player.find({team: match.team_2._id})
+            players_2 = await Player.find({team: match.team_2._id}),
+            couch_1 = await Couch.find({team: match.team_1._id}),
+            couch_2 = await Couch.find({team: match.team_2._id})
         this.match = match
         this.team1_name = match.team_1.name
         this.team2_name = match.team_2.name
         this.players_1 = players_1
         this.players_2 = players_2
+        this.couch_1 = couch_1
+        this.couch_2 = couch_2
     }
     setData(data) {
         console.log(data)

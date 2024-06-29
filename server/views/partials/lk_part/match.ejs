@@ -15,6 +15,7 @@
                 <td>Команда 1</td>
                 <td>Команда 2</td>
                 <td>Время</td>
+                <td>Счёт</td>
                 <td>Действия</td>
                 <td></td>
             </tr>
@@ -22,6 +23,7 @@
                 <td></td>
                 <td><input type="text" class="table_input_text"></td>
                 <td><input type="text" class="table_input_text"></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -33,8 +35,9 @@
                 <td><%= matches[i].team_1.name %></td>
                 <td><%= matches[i].team_2.name %></td>
                 <td><%= matches[i].date %></td>
+                <td><%= (matches[i].team_1_score || matches[i].team_2_score) ? `${matches[i].team_1_score}:${matches[i].team_2_score}` : '-:-'%></td>
                 <td>
-                    <span class="table_links table_links_compos nav_link"  data-href="match/edit/?id=<%= matches[i]._id %>">Изменить</span>
+                    <span class="table_links table_links_compos nav_link"  data-href="match/get__edit/?id=<%= matches[i]._id %>">Изменить</span>
                 </td>
                 <td>link</td>
             </tr>
