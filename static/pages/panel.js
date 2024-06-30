@@ -1,4 +1,5 @@
 let test = true
+let global_data = {}
 let html = {
     table: `<tbody>
                 <tr>
@@ -62,6 +63,9 @@ match.addEventListener('change', (e) => {
 let couchDiv = get('#couches')
 let style = get('#panel-style');
 let replaceBtns = getA('.replace_btn');
+let showJudges = get('#show_judges'),
+showCommentators = get('#show_commentators');
+
 replaceBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
         let type = e.target.getAttribute('data-type').split('__')
@@ -95,9 +99,11 @@ socket.on('timer', (data) => {
     get('.time').innerHTML = data.value
     console.log(data.value)
 })
-let addPen = get('#add-pen')
+let addPen = get('#add-pen'),
+    resetPen = get('#reset-pen')
 
 socket.on('update_data', (data) => {
+    global_data = data
     style.value = data.style
     console.log(data)
     if(data.tablo) {
@@ -136,7 +142,6 @@ function setPenalty(penalty) {
         tempHTML = tempHTML.replaceAll('{{selected_clear}}','').replaceAll('{{selected_defeat}}','').replaceAll('{{selected_goal}}','')
         tempHTML += `</div>`
         div.innerHTML += tempHTML
-        console.log(tempHTML)
     })
     let penDif = 5-penalty.length 
     console.log(penDif)
@@ -151,12 +156,51 @@ function setPenalty(penalty) {
             div.innerHTML += tempHTML
         }
     }
+    startPenaltys()
+
+}
+addPen.addEventListener('click', (e) => {
+    let div = get('#penalty_div')
+
+    let currLemgth = getA('.h-group.bigger-gap', div).length
+    let tempHTML = ''
+        tempHTML += `<div class="h-group bigger-gap" data-index="${currLemgth }">`
+        tempHTML += html.penalty.replace('{{selected_clear}}', 'selected').replace('{{team}}', '1')
+        tempHTML += html.penalty.replace('{{selected_clear}}', 'selected').replace('{{team}}', '2')
+
+        tempHTML += `</div>`
+        div.innerHTML += tempHTML
+        let nPenalty = global_data.scoreboard.penalty
+        nPenalty.push({team1: 'clear', team2: 'clear'})
+        let data ={
+            score: {
+                penalty: nPenalty
+            }
+        }
+        socket.emit('new_data', data)
+        startPenaltys()
+
+})
+resetPen.addEventListener('click', (e) => {
+    let nPenalty = []
+    for(let i = 0; i < 5; i++) {
+        nPenalty.push({team1: 'clear', team2: 'clear'})
+    }
+    let data ={
+        score: {
+            penalty: nPenalty
+        }
+    }
+    console.log(data)
+    socket.emit('new_data', data)
+})
+function startPenaltys() {
     getA('.penalty_box > input').forEach(box => {
         box.addEventListener('click', (e) => {
             let index = e.target.closest('.h-group.bigger-gap').getAttribute('data-index')
             let team = e.target.closest('.penalty_box').getAttribute('data-team')
             let type = e.target.getAttribute('data-type')
-            let nPenalty = penalty
+            let nPenalty = global_data.scoreboard.penalty
             for(let i = 0; i <= index; i++) {
                 if(!nPenalty[i]) {
                     nPenalty[i] = {
@@ -176,7 +220,6 @@ function setPenalty(penalty) {
             socket.emit('new_data', data)
         })
     })
-
 }
 function playerNotifyListener(e) {
     console.log(e.target)
@@ -360,6 +403,48 @@ function couchNotify(num, team, type, data) {
     socket.emit('notify', dta)
 }
 
-addPen.addEventListener('click', (e) => {
+
+
+
+showJudges.addEventListener('click', (e) => {
+    let title = 'Судьи матча'
+    let txt = ""
+    if(global_data.match){
+        global_data.match.judges.forEach((judge, i) => {
+            txt += `Судья ${i+1} ${judge.fio} <br>`
+        })
+    }
+
+    let dta = {
+        type: 'couch',
+        size : 'b',
+        text: txt,
+        title: title,
+    }
+    socket.emit('notify', dta)
+})
+
+showCommentators.addEventListener('click', (e) => {
+    let title = ''
+    let txt = ""
+    let commentators = [get('#comm1').value, get('#comm2').value].filter(el => el)
+    if(!commentators.length) return
+    
+    if(commentators.length == 1) {
+        title = 'Комментатор матча'
+        txt += `${commentators[0]}`
+    }
+    else {
+        title = 'Комментаторы матча'
+        txt += `${commentators[0]} и ${commentators[1]}`
+    }
+
+    let dta = {
+        type: 'couch',
+        size : 'b',
+        text: txt,
+        title: title,
+    }
+    socket.emit('notify', dta)
     
 })

@@ -85,11 +85,9 @@ class Timer {
     //     this.playTimer(socket)
     // }
     get timeData() {
-        console.log(this.seconds)
         this.seconds = +this.seconds
         this.minuts = +this.minuts
         if(this.seconds < 0) {
-            console.log(Math.floor(this.seconds / 60))
             this.minuts += Math.floor(this.seconds / 60)
             this.seconds = Math.abs(60*(Math.floor(this.seconds / 60)) - this.seconds)
         }
