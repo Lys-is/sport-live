@@ -25,8 +25,10 @@ function changeNav(e, href) {
         href = e.target.getAttribute('data-href')
     }
     href = href.split('/')[0]
+    href = href.split('&')[0]
     console.log(params, href)
     links.forEach(link => {
+        console.log(link.getAttribute('data-href'), href)
         if(link.getAttribute('data-href') != href)
             link.classList.remove('navbar_selected')
         else
@@ -38,6 +40,10 @@ if(params.page) {
     (async() => {
         let href = params.page.replace(/\^id~(.+)/, '?id=$1')
         console.log(href)
+        for(let key in params) {
+            if(key.includes('filter'))
+                href += `&${key}=${params[key]}`
+        }
         changeNav(null, href)
         if(!await checkTournament(removeTrailingSlash(href)))
             getPage(href)
@@ -71,14 +77,14 @@ async function getPage(href, destInHtml = lk_main) {
     const baseUrl = '/api/lk/';
     const cleanedHref = href.replace(/(\?id=)(.+)/, '^id~$2')
     console.log(cleanedHref, href)
-    const pageUrl = `${baseUrl}${href}`;
+    const pageUrl = `${baseUrl}${href.replace('&', '?')}`;
     let initHref = cleanedHref.split('?')[0];
     console.log(initHref);
     const response = await sendFetch(pageUrl, null, 'GET');
     destInHtml.innerHTML = response ? response : 'Страница не найдена';
 
     params.subHref = href.split('?')[1] || '';
-    history.pushState({ page: 1 }, "", `?page=${cleanedHref}`);
+    history.replaceState({ page: 1 }, "", `?page=${cleanedHref}`);
 
     const navLinks = getA('.nav_link');
     navLinks.forEach(link => {
@@ -91,6 +97,7 @@ async function getPage(href, destInHtml = lk_main) {
     console.log(removeTrailingSlash(initHref))
     inits[removeTrailingSlash(initHref)]?.(href);
     setImgListener()
+    init__filter()
     return true
 }
 function removeTrailingSlash(str) {
@@ -512,3 +519,73 @@ function setImgListener(){
 //         getPage(getParams(location.search).page)
 //     }
 // });
+
+
+function hex2text(hex_string)
+{
+    const hex = hex_string.toString(); // конвертируем в строку
+    let out = '';
+
+    // i += 2 - так в шестнадцатеричном виде число представлено двумя символами
+    for (let i = 0; i < hex.length; i += 2)
+    {
+        // код символа в шестнадцетиричном представлении
+        const charCode = parseInt(hex.substr(i, 2), 16);
+        out += String.fromCharCode(charCode);
+    }
+
+    return out;
+}
+
+
+
+function init__filter() {
+
+    let filter_div = get(".filter");
+    if(!filter_div) return
+    let filters = getA("input", filter_div);
+    console.log(params.get)
+    let prms = params.get
+    for(let param in prms) {
+        console.log(param)
+        if(param.includes('filter')) {
+            console.log(param)
+            console.log(param.replace('filter_', ''))
+            get(`input[name="${param.replace('filter_', '')}"]`, filter_div).value = decodeURI(prms[param])
+
+        }
+    }
+    filters.forEach(filter => {
+        
+        filter.addEventListener("change", (e) => {
+            setFilter(filters);
+        });
+    });
+    let clear_btn = get("#clear_filters");
+    clear_btn.addEventListener("click", (e) => {
+        filters.forEach(filter => {
+            filter.value = "";
+        })
+        setFilter(filters);
+    })
+}    
+function setFilter(filters) {
+    let currHref = location.href
+    let indx = currHref.indexOf('&filter')
+    if(indx != -1) {
+        currHref = currHref.split('&filter')[0]
+
+    }
+    console.log()
+    let newHref = currHref
+    filters.forEach(filter => {
+        if(filter.value)
+            newHref += `&filter_${filter.name}=${filter.value}`
+    })
+
+    console.log({currHref, indx})
+    history.replaceState({ page: 1 }, "", newHref);
+    //location.reload()
+
+    getPage(newHref.split('?page=')[1])
+}

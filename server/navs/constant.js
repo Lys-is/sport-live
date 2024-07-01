@@ -190,18 +190,15 @@ function start(){
         let link = '/'
         if(parents.length > 0){
             now_parents.unshift('api')
-            console.log(now_parents, obj)
             now_parents.forEach(el => {
                 el = el.replace('id/:id/', '')
                 contoller = contoller[el]
             });
-            console.log(contoller, constrollerLink, link)
         }
         else {
             link = ''
         }
         link += now_parents.join('/') +'/'+ obj;
-        console.log(link)
        // console.log(contoller, constrollerLink, link)
         router[method](link, middelware, (req, res) => {
             //console.log(req, res)

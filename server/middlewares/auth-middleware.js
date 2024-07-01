@@ -18,8 +18,15 @@ module.exports = async function (req, res, next) {
 
         req.user = userData;
         console.log(req.user);
+        let query = req.query;
+        console.log(query);
+  
         next();
     } catch (e) {
         return next(ApiError.UnauthorizedError());
     }
 };
+
+
+
+

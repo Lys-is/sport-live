@@ -67,23 +67,57 @@ function logout()  {
 }
 
 
-function getParams(href) {
-    console.log(href)
-    var query = href.substr(1)
-    query = query.split('&')
-    console.log(query)
-    var params = {}
-    for (let i = 0; i < query.length; i++) {
-        let q = query[i].split('=')
-        console.log(q)
-        if (q.length === 2) {
-            params[q[0]] = q[1]
-        }
+// function getParams(href = window.location.href) {
+//     console.log(href)
+//     var query = href.substr(1)
+//     query = query.split('&')
+//     console.log(query)
+//     var params = {}
+//     for (let i = 0; i < query.length; i++) {
+//         let q = query[i].split('=')
+//         console.log(q)
+//         if (q.length === 2) {
+//             params[q[0]] = q[1]
+//         }
+//     }
+//     return params
+// }
+
+const params = getParams();
+
+// Определяем геттер для params, который вызывает getParams()
+Object.defineProperty(params, 'get', {
+  get: function() {
+    return getParams();
+  },
+  enumerable: true // Делаем свойство перечисляемым (можно опустить, так как по умолчанию true)
+});
+params.get
+function getParams(href = window.location.href) {
+    // Ищем символ вопроса в строке запроса
+    const questionMarkIndex = href.indexOf('?');
+    if (questionMarkIndex === -1) {
+      // Если символ вопроса не найден, возвращаем пустой объект
+      return {};
     }
-    return params
-}
-let params = getParams(window.location.search);
-console.log(params);
+  
+    // Вырезаем строку запроса после символа вопроса
+    const queryString = href.substring(questionMarkIndex + 1);
+  
+    // Разделяем строку запроса на массив параметров
+    const queryParams = new URLSearchParams(queryString);
+  
+    // Инициализируем объект для хранения параметров
+    const params = {};
+  
+    // Перебираем все параметры и добавляем их в объект params
+    queryParams.forEach((value, key) => {
+      params[key] = value;
+    });
+  
+    return params;
+  }
+
 function createCookie(name,value,days) {
     if (days) {
         var date = new Date();

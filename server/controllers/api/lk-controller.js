@@ -14,7 +14,7 @@ Transfer = require('../../models/transfer-model'),
 User = require('../../models/user-model'),
 League = require('../../models/league-model'),
 Couch = require('../../models/couch-model');
-
+const dbService = require('../../service/db-service');
 class LkController {
 
     team = require('./team')
@@ -179,11 +179,13 @@ class LkController {
     }
     async get__match(req, res) {
         try {
-            console.log(req);
-            console.log(await Match.find({creator: req.user.id}));
-            let matches = await Match.find({creator: req.user.id}).populate('team_1 team_2');
+            console.log(req.filter);
+            let tournaments = await Tournament.find({creator: req.user.id}).select('basic.name _id');
+            let teams = await Team.find().select('name _id');
+            req.query.creator = req.user.id
+            let matches = await dbService.getAggregate(Match, req);
             console.log(matches);
-            return sendRes('partials/lk_part/match', {matches}, res);
+            return sendRes('partials/lk_part/match', {matches, tournaments, teams}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
