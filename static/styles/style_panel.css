@@ -39,11 +39,51 @@ body {
 
 @media (max-width: 900px) {
     .content-container{
-        grid-template-columns: 300px;
+        grid-template-columns: 700px;
         grid-template-rows: auto auto auto auto;
+        transform: scale(0.5);
+        transform-origin: top;
+
     }
     .column-container{
-        width: 350px !important;
+        width: 700px !important;
+
+    }
+
+    .h-group .h-group{
+        flex-wrap: wrap !important;
+        width: 320px !important;
+    }
+
+    .h-group {
+        width: auto !important;
+    }
+
+    .full-form{
+        width: auto !important;
+
+    }
+
+    .half-form-container input {
+        width: auto !important;
+    }
+
+    #penalty_div {
+        height: auto !important;
+    }
+
+    .block {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding-block: 15px !important;
+    }
+
+    label {
+        width: 150px;
+    }
+    
+    .square40 {
+        font-size: 12px;
     }
 
 
