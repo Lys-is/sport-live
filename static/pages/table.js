@@ -49,7 +49,8 @@ socket.on('new_notify', (data) => {
 })
 let timerDivs = {
     s: get('#top-timer'),
-    b: get('#info')
+    b: get('#info'),
+    c: get('.var-time')
 }
 socket.on('timer', (data) => {
     Object.keys(timerDivs).forEach(key => {
@@ -75,6 +76,14 @@ function setData(data) {
     }
     if(data.scoreboard) {
         setScoreboard(data.scoreboard)
+    }
+    if(data.match) {
+        getA('.home-logo').forEach(el => {
+            el.src = data.match.team_1.img ? data.match.team_1.img : '/static/styles/icons/logo.jpg'
+        })
+        getA('.away-logo').forEach(el => {
+            el.src = data.match.team_2.img ? data.match.team_2.img : '/static/styles/icons/logo.jpg'
+        })
     }
 }
 
@@ -108,13 +117,14 @@ function setScoreboard(scoreboard) {
     if(scoreboard.penalty && scoreboard.penalty.length > 0) {
         setPenalty(scoreboard.penalty)
     }
+    
 
 }
 let penaltyHTML = `<div class="penaltie" style="background-color: var(--pen-{{penalty.type}});"></div>`
 function setPenalty(penalty) {
 
-    let team1 = get('.penalties-home')
-    let team2 = get('.penalties-away')
+    let team1 = get('.penalties-home') ? get('.penalties-home') : get('#penalties-home')
+    let team2 = get('.penalties-away') ? get('.penalties-away') : get('#penalties-away')
         team1.innerHTML = ''
     team2.innerHTML = ''
     penalty.forEach((el, i) => {

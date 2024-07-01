@@ -8,7 +8,7 @@
             </div>
             <div class="cool_body_content">
                 <div class="form-group">
-                    <input type="text" list="team" name="team" placeholder="Выберите команду">
+                    <input type="text" list="team" name="team_1" placeholder="Выберите команду">
                     <datalist id="team">
                         <% for (let i = 0; i < teams.length; i++) { %>
                             <option value="<%= teams[i].name %>" data-value="<%= teams[i]._id %>"></option>
@@ -31,13 +31,13 @@
                 <div class="form-group form_group_checkbox mt">
                     <div class="filler"></div>
                     <label>
-                        <input type="checkbox" name="publish_site"> Дополнительное время
+                        <input type="checkbox" name="is_overtime"> Дополнительное время
                     </label>
                     <label>
-                        <input type="checkbox" name="publish_site"> Пенальти
+                        <input type="checkbox" name="is_penalty"> Пенальти
                     </label>
                     <label>
-                        <input type="checkbox" name="publish_site"> Техническая победа
+                        <input type="checkbox" name="is_tech_win"> Техническая победа
                     </label>
                     <div class="filler"></div>
                 </div>
@@ -56,111 +56,26 @@
                 </div>
                 <div class="vert_group">
                     <label for="start_date">Дата</label>
-                    <input type="date" class="text_form date" id="start_date">
+                    <input type="date" name="date" class="text_form date" id="start_date">
                 </div>
                 <div class="vert_group">
                     <label for="start_time">Время начала</label>
-                    <input type="time" class="text_form date" id="start_time">
+                    <input type="time" name="time" class="text_form date" id="start_time">
                 </div>
             </div>
         </div>
 
-        <div class="cool_body">
-            <div class="cool_header_block create_match_header">
-                    <p class="page_title">Cостав судей</p>
-                    
-                    
-            </div>
-            <div class="cool_body_content">
-                <table class="commands_table cool_table">
-                    <tr id="first-row">
-                        <td>Cудья</td>
-                        <td>Позиция</td>
-                        <td>Действие</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" class="table_footer"><input type="button" value="Добавить запись" class="button white_button flex_form"></td>
-                    </tr>                
-                </table>
-            </div>
-        </div>
+        
 
-        <div class="cool_body">
-            <div class="cool_header_block create_match_header ">
-            <p class="page_title">Отчет о матче</p>
-            </div>
-            <div class="cool_body_content">
-                <p class="nm">Команда какиша</p>
-                <table class="commands_table players-create-match mt">
-                    <tr>
-                        <th>#</th>
-                        <th>ФИО</th>
-                        <th>Красные карточки</th>
-                        <th>Желтые карточки</th>
-                        <th>Передачи</th>
-                        <th>Голы</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>
-                            Писька Пискович
-                        </td>
-                        <td>
-                            <input type="checkbox" class="checkbox">
-                        </td>
-                        <td>                                            
-                            <input type="checkbox" class="checkbox">
-                        </td>
-                        <td>
-                            <input type="number" class="text_form big_form" value="0">
-                        </td>
-                        <td>
-                            <input type="number" class="text_form big_form" value="0">
-                        </td>
-
-                    </tr>
-                </table>
-                <p class="">Команда какиша</p>
-                <table class="commands_table players-create-match mt">
-                    <tr>
-                        <th>#</th>
-                        <th>ФИО</th>
-                        <th>Красные карточки</th>
-                        <th>Желтые карточки</th>
-                        <th>Передачи</th>
-                        <th>Голы</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>
-                            Писька Пискович
-                        </td>
-                        <td>
-                            <input type="checkbox" class="checkbox">
-                        </td>
-                        <td>                                            
-                            <input type="checkbox" class="checkbox">
-                        </td>
-                        <td>
-                            <input type="number" class="text_form big_form" value="0">
-                        </td>
-                        <td>
-                            <input type="number" class="text_form big_form" value="0">
-                        </td>
-
-                    </tr>
-                </table>
-            </div>
-        </div>
+        
 
         <div class="cool_body">
             <div class="cool_header_block create_match_header">
             <input type="button" value="Отменить" class="button red_button">
-            <input type="submit" value="Сохранить" class="button green_button">
             <div class="filler"></div>
-            <input type="button" value="Сохранить и выйти" class="button green_button">
+
+            <input type="submit" value="Сохранить" class="button green_button">
             </div>
-        </div>
         </div>
 
         </form>

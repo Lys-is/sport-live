@@ -131,12 +131,15 @@ let inits = {
     'team/get__team_list': init__team_list,
     'team/get__team_list_create' : init__team_list_create,
     'team/get__team_representative' : init__team_representative,
+    'team/get__team_couch' : init__team_couch,
     'match': init__match,
     'match/get__create' : init__match_create,
+    'match/get__edit' : init__match_edit,
     'tournament': init__tournament,
     'tournament/get__create' : init__tournament_create,
     'tournament/id' : init__tournament_template,
     'tournament/id/edit' : init__tournament_edit,
+    'tournament/id/team' : init__tournament_team,
     'tournament/id/group' : init__tournament_group,
     'tournament/id/get__group_create' : init__tournament_group_create,
     'tournament/id/get__group_edit' : init__tournament_group_edit,
@@ -144,6 +147,7 @@ let inits = {
     'player/get__create' : init__player_create,
     'player/get__edit' : init__player_edit,
     'representative/get__create' : init__representative_create,
+    'couch/get__create' : init__couch_create,
     'judge/get__create' : init__judge_create,
 }
 for(let key in inits) {
@@ -231,6 +235,19 @@ function init__tournament_edit(href) {
         })
     })
 }
+function init__tournament_team(){
+    let tourId = get('#tour_body').getAttribute('data-id');
+    let addBtns = getA('.team_add');
+    addBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            let data = {
+                tournamentId: tourId,
+                teamId: e.target.getAttribute('data-id')
+            }
+            sendFetch('/api/lk/tournament/put__team', JSON.stringify(data), 'PUT')
+        })
+    })
+}
 function init__tournament_group(href) {
     if(!get('#tour_body')) {
         checkTournament(removeTrailingSlash(href))
@@ -305,6 +322,67 @@ function init__match_create() {
         sendFetch("/api/lk/match/post__create", JSON.stringify(data), "POST")
     })
 }
+function init__match_edit() {
+    let saveBtn = get("#match__submit");
+    saveBtn.addEventListener("click", async (e) => {
+        sendForm();
+    })
+
+        let judgeForm = get("#match_judges__form");
+        judgeForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            let dataJudge = await formGetData(judgeForm)
+            let matchId = get('#matchId').value
+            dataJudge.matchId = matchId
+            console.log(dataJudge)
+            sendFetch("/api/lk/match/put__judge", JSON.stringify(dataJudge), "PUT")
+
+        })
+
+        
+
+    async function sendForm() {
+        let formEdit = get("#match_edit__form");
+        
+            if(!formEdit.checkValidity()) return
+            let dataEdit = await formGetData(formEdit)
+            console.log(dataEdit)
+            sendFetch("/api/lk/match/put__edit", JSON.stringify(dataEdit), "PUT")
+
+        
+        let resultForm = get("#match_results__form");
+            let dataResult_1 = [], dataResult_2 = [];
+            let table_1 = get("#team_1_results"),
+                table_2 = get("#team_2_results")
+            getA('.res_row', table_1).forEach(row => {
+                dataResult_1[row.getAttribute('data-index')] = {
+                    red: get('input[name="red"', row).value,
+                    yellow: get('input[name="yellow"', row).value,
+                    transits: get('input[name="transits"', row).value,
+                    goals: get('input[name="goals"', row).value
+                }
+            })
+            getA('.res_row', table_2).forEach(row => {
+                dataResult_2[row.getAttribute('data-index')] = {
+                    red: get('input[name="red"', row).value,
+                    yellow: get('input[name="yellow"', row).value,
+                    transits: get('input[name="transits"', row).value,
+                    goals: get('input[name="goals"', row).value
+                }
+            })
+            console.log(dataResult_1)
+            let matchId = get('#matchId').value
+            let dataResult = {
+                matchId,
+                team_1: dataResult_1,
+                team_2: dataResult_2
+            }
+            console.log(dataResult)
+            sendFetch("/api/lk/match/put__results", JSON.stringify(dataResult), "PUT")
+        
+    }
+}
 function init__team() {
 }
 function init__team_create() {
@@ -344,6 +422,14 @@ function init__team_representative() {
         sendFetch("/api/lk/team/put__team_representative", JSON.stringify(data), "PUT")
     })
 }
+function init__team_couch() {
+    let form = get("#team_couch__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        sendFetch("/api/lk/team/put__team_couch", JSON.stringify(data), "PUT")
+    })
+}
 function init__team_edit() {
     let form = get("#team_edit__form");
     form.addEventListener("submit", async (e) => {
@@ -378,6 +464,14 @@ function init__representative_create() {
         e.preventDefault();
         let data = await formGetData(form)
         sendFetch("/api/lk/representative/post__create", JSON.stringify(data), "POST")
+    })
+}
+function init__couch_create() {
+    let form = get("#couch_create__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        sendFetch("/api/lk/couch/post__create", JSON.stringify(data), "POST")
     })
 }
 

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="visualizer.css">
+</head>
+<body>
+	<div class="little" id="main" style="display: block;">
+		<div id="container">
+			<div id="scoreboard">
+				<div id="home-team-color" class="var-homeColor" style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);"></div>
+				<div>
+					<div id="home-team">
+						<div class="var-home-short">Cборная Минска</div>
+					</div>
+					<div class="pen" style="display: block;">
+						<div class="penalties-home">
+							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+						</div>
+					</div>
+				</div>
+				<div id="tablo">
+					<div id="fouls" class="fouls fouls-container" style="display: none;">
+						<div id="left"></div>
+						<div id="home-fouls" class="var-home-fouls">0</div>
+						<div id="fouls-divider">Фолы</div>
+						<div id="away-fouls" class="var-away-fouls">0</div>
+						<div id="right"></div>
+					</div>
+					<div id="score">
+						<div id="score-home" class="var-home-score">0</div>
+						<div id="divider">&nbsp;-&nbsp;</div>
+						<div id="score-away" class="var-away-score">0</div>
+					</div>
+				</div>
+				<div>
+					<div id="away-team">
+						<div class="var-away-short">Могилевская область</div>
+					</div>
+					<div class="pen" style="display: block;">
+						<div class="penalties-away">
+							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
+						</div>
+					</div>
+				</div>
+				<div id="away-team-color" class="var-awayColor" style="background-color: rgb(255, 17, 153); color: rgb(255, 255, 255);"></div>
+				<div id="timer">
+					<div class="var-time">00:00</div>
+				</div>
+				<div id="period">
+					<div class="roundnum"><span>1</span> <span>Т</span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="mid">
+		<div id="middle">
+			<div id="matchid">
+				<div class="line-1">
+					<div class="mid-home-team var-home">Cборная Минска</div>
+					<div class="vs">
+						<div>vs</div>
+					</div>
+					<div class="mid-away-team var-away">Могилевская область</div>
+				</div>
+				<div id="line-2">
+					<div id="line-3">
+						<div class="logo"><img class="home-logo" src="https://st.joinsport.io/team/1385934/logo/6672b20874dec.png"></div>
+						<div id="tour">
+							<div id="tour-num" class="var-tour">2</div>
+							<div id="tour-txt">Тур</div>
+						</div>
+						<div class="logo"><img class="away-logo" src="https://st.joinsport.io/team/1385936/logo/6672b28ee7926.png"></div>
+					</div>
+					<div id="line-4">
+						<div id="venue" class="var-stadium">Спорткомплекс «Виктория» (Гродно)</div>
+						<div id="date-time"><span class="var-match-date-text">20 июня</span><span class="var-match-time">10:00</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="big">
+		<div class="big">
+			<div id="big-container">
+				<div class="line-1">
+					<div class="transform-left" id="logo-home"><img class="home-logo" src="https://st.joinsport.io/team/1385934/logo/6672b20874dec.png"></div>
+					<div class="mid-home-team transform-left">
+						<div class="var-home">Cборная Минска</div>
+					</div>
+					<div id="top-bar">
+						<div id="top-info">
+							<div id="big-left"></div>
+							<div id="info" class="var-label">Начало матча</div>
+							<div id="big-right"></div>
+						</div>
+						<div class="vsbig">
+							<div class="biginfo">
+								<div class="score-big var-home-score">0</div>
+								<div class="score-big">-</div>
+								<div class="score-big var-away-score">0</div>
+							</div>
+						</div>
+					</div>
+					<div class="mid-away-team transform-right">
+						<div class="var-away">Могилевская область</div>
+					</div>
+					<div class="transform-right" id="logo-away"><img class="away-logo" src="https://st.joinsport.io/team/1385936/logo/6672b28ee7926.png"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="home-roster">
+		<div class="home-away">
+			<div id="home-roster">
+				<div class="roster-line-1">
+					<div class="roster-top">
+						<div class="var-tournament">Cпартакиада 2024</div>
+					</div>
+				</div>
+				<div id="roster-line-2">
+					<div id="line-3">
+						<div class="start-15 var-roster-home"></div>
+						<div class="start5">
+							<div class="start5-gk">
+								<div id="start5-home-gk">
+									<span><img src="img/p1.jpg" class="player-photo var-home-photo-1"></span>
+									<span class="name">
+										<span class="name-start-5 var-home-start-1"></span>
+									</span>
+								</div>
+							</div>
+							<div class="start5-line2">
+								<div id="start5-home-player2">
+									<span><img src="img/p2.jpg" class="player-photo var-home-photo-2"></span>
+									<span class="name">
+										<span class="name-start-5 var-home-start-2"></span>
+									</span>
+								</div>
+								<div id="start5-home-player3">
+									<span><img src="img/p3.jpg" class="player-photo var-home-photo-3"></span>
+									<span class="name">
+										<span class="name-start-5 var-home-start-3"></span>
+									</span>
+								</div>
+							</div>
+							<div class="start5-line3">
+								<div id="start5-home-player4">
+									<span><img src="img/p4.jpg" class="player-photo var-home-photo-4"></span>
+									<span class="name">
+										<span class="name-start-5 var-home-start-4"></span>
+									</span>
+								</div>
+								<div id="start5-home-player5">
+									<span><img src="img/p5.jpg" class="player-photo var-home-photo-5"></span>
+									<span class="name">
+										<span class="name-start-5 var-home-start-5"></span>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="logo-team">
+							<div class="logo-roster"><img class="home-logo" src="https://st.joinsport.io/team/1385934/logo/6672b20874dec.png"></div>
+							<div class="roster-team-name"><span class="var-home">Cборная Минска</span></div>
+							<div class="staff var-homeCoach"></div>
+							<!-- <div class="staff-name">Александр Черник</div>	-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="away-roster">
+		<div class="home-away">
+			<div id="away-roster">
+				<div class="roster-line-1">
+					<div class="roster-top">
+						<div class="var-tournament">Cпартакиада 2024</div>
+					</div>
+				</div>
+				<div id="roster-line-2">
+					<div id="line-3">
+						<div class="start-15 var-roster-away"></div>
+						<div class="start5">
+							<div class="start5-gk">
+								<div id="start5-home-gk">
+									<span><img src="img/p1.jpg" class="player-photo var-away-photo-1"></span>
+									<span class="name">
+										<span class="name-start-5 var-away-start-1"></span>
+									</span>
+								</div>
+							</div>
+							<div class="start5-line2">
+								<div id="start5-home-player2">
+									<span><img src="img/p2.jpg" class="player-photo var-away-photo-2"></span>
+									<span class="name">
+										<span class="name-start-5 var-away-start-2"></span>
+									</span>
+								</div>
+								<div id="start5-home-player3">
+									<span><img src="img/p3.jpg" class="player-photo var-away-photo-3"></span>
+									<span class="name">
+										<span class="name-start-5 var-away-start-3"></span>
+									</span>
+								</div>
+							</div>
+							<div class="start5-line3">
+								<div id="start5-home-player4">
+									<span><img src="img/p4.jpg" class="player-photo var-away-photo-4"></span>
+									<span class="name">
+										<span class="name-start-5 var-away-start-4"></span>
+									</span>
+								</div>
+								<div id="start5-home-player5">
+									<span><img src="img/p5.jpg" class="player-photo var-away-photo-5"></span>
+									<span class="name">
+										<span class="name-start-5 var-away-start-5"></span>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="logo-team">
+							<div class="logo-roster"><img class="away-logo" src="https://st.joinsport.io/team/1385936/logo/6672b28ee7926.png"></div>
+							<div class="roster-team-name"><span class="var-away">Могилевская область</span></div>
+							<div class="staff var-awayCoach"></div>
+							<!-- <div class="staff-name">Александр Черник</div>	-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="refs">
+		<div class="title">
+			<div class="ref">
+				<div class="icon"><img class="svg" src=" /themes/join_2/img/ref.svg"></div>
+				<div class="txt">
+					<div class="var-ref-pervyj-suda-name">Анатолий Устюжанин</div>
+					<div class="txt-info var-ref-0-position">Первый судья</div>
+				</div>
+			</div>
+			<div class="ref">
+				<div class="icon"><img class="svg" src=" /themes/join_2/img/ref.svg"></div>
+				<div class="txt">
+					<div class="var-ref-vtoroj-suda-name">Анатолий Устюжанин</div>
+					<div class="txt-info">Второй судья</div>
+				</div>
+			</div>
+			<div class="ref">
+				<div class="icon"><img class="svg" src=" /themes/join_2/img/ref.svg"></div>
+				<div class="txt">
+					<div class="var-ref-tretij-suda-name">Анатолий Устюжанин</div>
+					<div class="txt-info">Третий судья</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="event-container" style="position: absolute; bottom: 50px;">
+		<div class="ev-flex">
+			<div class="event-data">
+				<div class="icon"><img class="svg ev-player-img" src="/img/photo_thumb.png" alt="palyer"></div>
+				<div class="txt">
+					<div class=""><span class="ev-name">Анатолий Устюжанин</span></div>
+					<div class="txt-info"><span class="ev-add-txt">Первый судья</span></div>
+				</div>
+			</div>
+			<div class="ev-icon">
+				<div class="ev-logo"></div>
+				<div class="ev-goal"></div>
+				<div class="ev-yellow"></div>
+				<div class="ev-red"></div>
+			</div>
+		</div>
+	</div>
+	<!-- 	<div class="var-container">
+		<div class="var">
+			<div class="var-event-data">
+				<div class="var-icon">
+					<div></div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+	<div id="weather_wrapper">
+		<div class="weather">
+			<div class="weatherCard">
+				<div class="currentTemp">
+					<span class="temp"></span>
+					<span class="location var-town"></span>
+				</div>
+				<div class="currentWeather">
+					<span class="conditions"></span>
+					<div class="info">
+						<span class="rain"></span>
+						<span class="wind"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	let blueCard = false;
+	const server = {"url":"https:\/\/app.skore.tech","port":":8443"};
+const serverStream = '525';
+let designId = 6;
+</script>	<script src="/dev/js/jquery-3.5.1.min.js"></script>
+	<script src="https://app.skore.tech/js/locale.js?1695418020	"> </script>
+	<script src="https://app.skore.tech/js/style-scoreboard_join.js?1718280996"> </script>
+
+
+</body>
+</html>

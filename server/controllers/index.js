@@ -38,7 +38,8 @@ class Constrollers {
         });
     }
     async get__panel(req, res) {
-        let matches = await Match.find({});
+        console.log(req.params);
+        let matches = await Match.find({creator: req.params.id})
         let userAd = await User.findById(req.params.id);
         res.render('panel', {
             id: req.params.id,
@@ -49,15 +50,25 @@ class Constrollers {
         });
     }
     async get__table(req, res) {
-        let userAd = await User.findById(req.params.id);
-        console.log(userAd.tablo_style);
-        res.render('table', {
-            id: req.params.id,
-            title: 'Таблица',
-            auth: userAd || false,
-            style: userAd.tablo_style || 'style_1'
-        });
-    }
+        try{
+            console.log(req);
+            if(!req.params.id || req.params.id == 'undefined') return
+            let userAd = await User.findById(req.params.id);
+            console.log(userAd);
+            console.log(userAd.tablo_style);
+            res.render('table', {
+                id: req.params.id,
+                title: 'Таблица',
+                auth: userAd || false,
+                style: userAd.tablo_style || 'style_1'
+            });
+        }
+        catch(e){
+            console.log(e);
+            res.send('Произошла ошибка');
+        }
+        }
+        
     api = require('./api')
 }
     

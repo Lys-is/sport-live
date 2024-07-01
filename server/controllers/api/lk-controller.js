@@ -12,7 +12,8 @@ Team = require('../../models/team-model'),
 Tournament = require('../../models/tournament-model'),
 Transfer = require('../../models/transfer-model'),
 User = require('../../models/user-model'),
-League = require('../../models/league-model');
+League = require('../../models/league-model'),
+Couch = require('../../models/couch-model');
 
 class LkController {
 
@@ -22,6 +23,7 @@ class LkController {
     match = require('./match')
     representative = require('./representative')
     judge = require('./judge')
+    couch = require('./couch')
     async get__create(req, res) {
         try {
             return sendRes('partials/lk_part/team_create', {}, res);
@@ -56,6 +58,15 @@ class LkController {
             console.log(await Representative.find());
             let representatives = await Representative.find({})
             return sendRes('partials/lk_part/representative', {representatives}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__couch(req, res) {
+        try {
+            let couches = await Couch.find({})
+            return sendRes('partials/lk_part/couch', {couches}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -171,10 +182,6 @@ class LkController {
             console.log(req);
             console.log(await Match.find({creator: req.user.id}));
             let matches = await Match.find({creator: req.user.id}).populate('team_1 team_2');
-            matches = matches.map((match) => {
-                console.log(match.date);
-                return match
-            })
             console.log(matches);
             return sendRes('partials/lk_part/match', {matches}, res);
         } catch (e) {

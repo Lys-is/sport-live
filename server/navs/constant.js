@@ -48,7 +48,9 @@ const nav = {
             'get__team_list' : {},
             'put__team_list' : {},
             'get__team_representative' : {},
-            'put__team_representative' : {}
+            'put__team_representative' : {},
+            'get__team_couch' : {},
+            'put__team_couch' : {},
         },
         'player' : {
             'func' : 'get__player',
@@ -69,6 +71,7 @@ const nav = {
                 'tags' : { 'func' : 'put__tags' },
                 'admins' : { 'func' : 'put__admins' }
             },
+            'put__team' : {},
             'id/:id/' : {'func': 'get__template'},
             'id/:id/edit' : {'func': 'get__edit'},
             'id/:id/group' : {
@@ -89,7 +92,18 @@ const nav = {
         'match' : {
             'func' : 'get__match',
             'get__create' : {},
-            'post__create' : {}
+            'post__create' : {},
+            'get__edit' : {},
+            'put__edit' : {},
+            'put__results':{},
+            'put__judge':{},
+        },
+        'couch' : {
+            'func' : 'get__couch',
+            'get__create' : {},
+            'post__create' : {},
+            'get__edit' : {},
+            'put__edit' : {}
         },
         'representative' : {
             'func' : 'get__representative',
@@ -187,7 +201,7 @@ function start(){
             link = ''
         }
         link += now_parents.join('/') +'/'+ obj;
-        
+        console.log(link)
        // console.log(contoller, constrollerLink, link)
         router[method](link, middelware, (req, res) => {
             //console.log(req, res)

@@ -204,6 +204,11 @@
                         <select name="panel-style" id="panel-style" class="text-form full-form">
                             <option value="style_1">style1</option>
                             <option value="style_2">style2</option>
+                            <option value="style_3">style3</option>
+                            <option value="style_4">style4</option>
+                            <option value="style_5">style5</option>
+                            <option value="style_6">style6</option>
+                            <option value="style_7">style7</option>
                         </select>
                 </div>
             </div>
@@ -316,8 +321,8 @@
                     </div>
                 </div>
                 <div class="h-group bigger-gap">
-                    <input type="button" value="Сбросить" class="full-form" name="reset-pen">
-                    <input type="button" value="Добавить пенальти" class="full-form" name="add-pen">
+                    <input type="button" value="Сбросить" class="full-form" name="reset-pen" id="reset-pen">
+                    <input type="button" value="Добавить пенальти" id="add-pen" class="full-form" name="add-pen">
                 </div>
             </div>
 
@@ -350,9 +355,9 @@
                 <div class="h-group centered">
                     <p class="first">Показать тренера</p>
                 </div>
-                    <div class="h-group half-form-container wrap">
-                        <input type="button" value="Тренер 1 бол." name="trainer1-big-teams">
-                        <input type="button" value="Тренер 1 мал." name="trainer1-small-teams">
+                    <div class="h-group half-form-container wrap" id="couches">
+                        <input type="button" value="Тренер 1 большой" name="trainer1-big-teams">
+                        <input type="button" value="Тренер 1 маленький" name="trainer1-small-teams">
 
                         <input type="button" value="Тренер 2 бол." name="trainer2-big-teams">
                         <input type="button" value="Тренер 2 мал." name="trainer2-small-teams">
@@ -365,8 +370,8 @@
                         <p class="first">Показ судей</p>
                     </div>
                     <div class="h-group space-between">
-                        <input type="button" value="Показать судей" name="judges">
-                        <input type="button" value="Комментатор(ов)" name="commentator">
+                        <input type="button" value="Показать судей" name="judges" id="show_judges">
+                        <input type="button" value="Комментатор(ов)" name="commentator" id="show_commentators">
                     </div>
                     <div class="h-group">
                         <label for="comm1" class="inline-form-label small-text nowrap">Комментатор 1</label>

@@ -1,0 +1,77 @@
+<div class="team__wrapper">
+    <div class="table_container">
+        <div class="table_header">
+            <p class="page_title">Тренеры</p>
+            <div class="filler"></div>
+            <input type="button" value="Сбросить фильтры" class="table_button">
+            <input type="button" value="Добавить тренера" class="table_button nav_link" data-href="couch/get__create">
+            <div class="filler"></div>
+            <input type="button" value="Активные" class="table_button_radio_active table_radio_active">
+            <input type="button" value="Архивные" class="table_button_radio_archive">
+        </div>
+    <table class="commands_table">
+        <tr id="first-row">
+            <td>ФИО</td>
+            <td>Дата рождения</td>
+            <td>Команда</td>
+            <td>Действия</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><input type="text" class="table_input_text"></td>
+            <td><input type="date" class="table_input_text"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+    <% if (couches.length > 0) { %>
+
+    <% for (let i = 0; i < couches.length; i++) { %>
+        <tr>
+            <td><%= couches[i].fio %></td>
+            <td><%= couches[i].birthday %></td>
+            <td><%= couches[i].team.name %></td>
+            <td>
+                <span class="table_links table_links_compos nav_link"  data-href="couch/get__edit/?id=<%= couches[i]._id %>">Изменить</span>
+            </td>
+            <td>link</td>
+        </tr>
+
+    
+    <% } %>
+    </table>
+    <% } else { %>
+    </table>
+
+
+        <h1 class="lk_wrapper__title">Нет тренеров</h1>
+    <% } %>
+<div class="cool_body">
+    <div class="cool_body_content wbt">
+        <p class="page_title nm">Добавить существующего тренера</p>
+    </div>
+    <div class="cool_body_content">
+        <form id="team_couch__form">
+            <div class="form-group">
+                <input type="hidden" name="teamId" value="<%= team._id %>">
+                <input type="text" list="couch" name="couchId">
+                <datalist id="couch">
+                    <% for (let i = 0; i < couchesAll.length; i++) { %>
+                        <option value="<%= couchesAll[i].fio %>" data-value="<%= couchesAll[i]._id %>"></option>
+                    <% } %>
+                </datalist>
+                <div class="filler"></div>
+                <p class="nm"></p>
+                <div class="filler"></div>
+                <input type="submit" value="Добавить" class="button green_button double_form">
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    
+</script>
+</div>
+

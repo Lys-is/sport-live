@@ -161,7 +161,12 @@
     background-position: center;
     
 }
-
+.notify_img {
+    width: auto;
+    height: 90px;
+    justify-self: end;
+    margin-right: 10px;
+}
 .goal {
     background-image: url("/static/styles/icons/goal.svg");
     filter: invert(var(--invert-header-color));
