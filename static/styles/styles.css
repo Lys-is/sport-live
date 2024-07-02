@@ -594,6 +594,23 @@ table tr td input{
     height: 300px !important;
 }
 
+
+.square40_butt input {
+    width: 40px !important;
+    height: 40px !important;
+    margin: 0 !important;
+}
+
+.square40_butt {
+    gap: 15px;
+}
+
+.num {
+    margin: 0 !important;
+    font-weight: 500 !important;
+    font-size: normal !important;
+}
+
 /* profile page */
 
 
@@ -625,6 +642,14 @@ table tr td input{
 .profile_title{
     font-size: medium;
     font-weight: 600;
+}
+
+.ended {
+    justify-content: end;
+}
+
+.np {
+    padding: 0 !important;
 }
 
 .profile_block{
