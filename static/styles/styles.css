@@ -609,6 +609,7 @@ table tr td input{
     margin: 0 !important;
     font-weight: 500 !important;
     font-size: normal !important;
+    text-align: center;
 }
 
 /* profile page */

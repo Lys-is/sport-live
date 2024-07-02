@@ -3,13 +3,12 @@
             <div class="table_header">
                 <p class="page_title">Команды</p>
                 <div class="filler"></div>
-                <input type="button" value="Сбросить фильтры" class="table_button">
+                <input type="button" value="Сбросить фильтры" class="table_button"  id="clear_filters">
                 <input type="button" value="Добавить команду" class="table_button nav_link" data-href="team/get__create">
                 <div class="filler"></div>
                 <input type="button" value="Активные" class="table_button_radio_active table_radio_active">
                 <input type="button" value="Архивные" class="table_button_radio_archive">
             </div>
-    <% if (teams.length > 0) { %>
             <table class="commands_table">
                 <tr id="first-row" >
                     <td>№</td>
@@ -19,34 +18,40 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr class="table_filter">
+                <tr class="filter">
                     <td></td>
-                    <td><input type="text" data-filter="name" class="table_input_text"></td>
-                    <td><input type="date" data-filter="date" class="table_input_text"></td>
+                    <td><input type="text" name="name" class="table_input_text"></td>
+                    <td><input type="date" name="date" class="table_input_text"></td>
                     <td></td>
                     <td></td>
                     <td></td>
                 </tr>
-        <% for (let i = 0; i < teams.length; i++) { %>
+        <% if (teams.length > 0) { %>
 
-            <tr>
-                <td><%= i + 1 %></td>
-                <td><%= teams[i].name %></td>
-                <td><%= teams[i].date %></td>
-                <td><%= teams[i].creator.email %></td>
-                <td>
-                    <span class="table_links table_links_admines nav_link" data-href="team/get__team_couch/?id=<%= teams[i]._id %>">Тренеры</span>
-                    <span class="table_links table_links_compos nav_link" data-href="team/get__team_list/?id=<%= teams[i]._id %>">Состав</span>
-                    <span class="table_links table_links_reps nav_link" data-href="team/get__team_representative/?id=<%= teams[i]._id %>">Представители</span>
-                    <span class="table_links table_links_reps nav_link" data-href="team/get__edit/?id=<%= teams[i]._id %>">Изменить</span>
-                </td>
-                <td>link</td>
-            </tr>
-        <% } %>
+            <% for (let i = 0; i < teams.length; i++) { %>
 
-        </table>
-    </div>
+                <tr>
+                    <td><%= i + 1 %></td>
+                    <td><%= teams[i].name %></td>
+                    <td><%= teams[i].date %></td>
+                    <td><%= teams[i].creator.email %></td>
+                    <td>
+                        <span class="table_links table_links_admines nav_link" data-href="team/get__team_couch/?id=<%= teams[i]._id %>">Тренеры</span>
+                        <span class="table_links table_links_compos nav_link" data-href="team/get__team_list/?id=<%= teams[i]._id %>">Состав</span>
+                        <span class="table_links table_links_reps nav_link" data-href="team/get__team_representative/?id=<%= teams[i]._id %>">Представители</span>
+                        <span class="table_links table_links_reps nav_link" data-href="team/get__edit/?id=<%= teams[i]._id %>">Изменить</span>
+                    </td>
+                    <td>link</td>
+                </tr>
+
+            <% } %>
+            </table>
+
     <%} else { %>
+        </table>
         <h1 class="lk_wrapper__title">Нет команд</h1>
     <% } %>
+    <%- include('pagination.ejs') %>
+</div>
+
 </div>

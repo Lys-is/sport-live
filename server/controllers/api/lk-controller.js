@@ -56,8 +56,10 @@ class LkController {
     async get__representative(req, res) {
         try {
             console.log(await Representative.find());
-            let representatives = await Representative.find({})
-            return sendRes('partials/lk_part/representative', {representatives}, res);
+            let teams = await Team.find({}).select('name _id');
+            let representatives = await dbService.getAggregate(Representative, req);
+            let total = await Representative.countDocuments({});
+            return sendRes('partials/lk_part/representative', {representatives, teams, total}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -65,8 +67,10 @@ class LkController {
     }
     async get__couch(req, res) {
         try {
-            let couches = await Couch.find({})
-            return sendRes('partials/lk_part/couch', {couches}, res);
+            let teams = await Team.find({}).select('name _id');
+            let couches = await dbService.getAggregate(Couch, req);
+            let total = await Couch.countDocuments({});
+            return sendRes('partials/lk_part/couch', {couches, teams, total}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -144,8 +148,11 @@ class LkController {
         try {
             console.log(req);
             console.log(await Player.find());
-            let players = await Player.find({}).populate('creator team');
-            return sendRes('partials/lk_part/player', {players}, res);
+            let teams = await Team.find().select('name _id');
+            let players = await dbService.getAggregate(Player, req);
+            let total = await Player.countDocuments({}) ;
+
+            return sendRes('partials/lk_part/player', {players, teams, total}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -153,14 +160,15 @@ class LkController {
     }
     async get__team(req, res) {
         try {
-            console.log(req);
-            console.log(await Team.find());
-            let teams = await Team.find({}).populate('creator');
-            teams = teams.map((team) => {
-                console.log(team.date);
-                return team
-            })
-            return sendRes('partials/lk_part/team', {teams}, res);
+
+            // let teams = await Team.find({})
+            // teams = teams.map((team) => {
+            //     console.log(team.date);
+            //     return team
+            // })
+            let teams = await dbService.getAggregate(Team, req);
+            let total = await Team.countDocuments({});
+            return sendRes('partials/lk_part/team', {teams, total}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -168,10 +176,12 @@ class LkController {
     }
     async get__tournament(req, res) {
         try {
+            req.query['creator'] = req.user.id
             console.log(req);
-            console.log(await Tournament.find());
-            let tournaments = await Tournament.find({creator: req.user.id}).populate('creator');
-            return sendRes('partials/lk_part/tournament', {tournaments}, res);
+
+            let tournaments = await dbService.getAggregate(Tournament, req);
+            let total = await Tournament.countDocuments({creator: req.user.id});
+            return sendRes('partials/lk_part/tournament', {tournaments, total}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -179,13 +189,14 @@ class LkController {
     }
     async get__match(req, res) {
         try {
-            console.log(req.filter);
+            console.log(req);
             let tournaments = await Tournament.find({creator: req.user.id}).select('basic.name _id');
             let teams = await Team.find().select('name _id');
-            req.query.creator = req.user.id
+            req.query['creator'] = req.user.id
             let matches = await dbService.getAggregate(Match, req);
-            console.log(matches);
-            return sendRes('partials/lk_part/match', {matches, tournaments, teams}, res);
+            let total = await Match.countDocuments({creator: req.user.id});
+            console.log(matches, total);
+            return sendRes('partials/lk_part/match', {matches, tournaments, teams, total}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

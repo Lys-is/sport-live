@@ -541,7 +541,9 @@ function hex2text(hex_string)
 
 function init__filter() {
 
+
     let filter_div = get(".filter");
+    console.log(filter_div)
     if(!filter_div) return
     let filters = getA("input", filter_div);
     console.log(params.get)
@@ -554,6 +556,7 @@ function init__filter() {
             get(`input[name="${param.replace('filter_', '')}"]`, filter_div).value = decodeURI(prms[param])
 
         }
+
     }
     filters.forEach(filter => {
         
@@ -568,20 +571,55 @@ function init__filter() {
         })
         setFilter(filters);
     })
+
+    let pagination_div = get("#pagination");
+    if(!pagination_div) return
+
+    let pagePlus = get("#page_plus"),
+    pageMinus = get("#page_minus"),
+    pageNum = get("#page_num");
+
+    if(prms.page_n) {
+        pageNum.innerHTML = prms.page_n
+    }
+
+
+    let total = +pagination_div.getAttribute("data-total");
+    console.log(total)
+    let pageSize = +pagination_div.getAttribute("data-page-size") || 10;
+    if((+pageNum.innerHTML) * pageSize >= total ) pagePlus.setAttribute("disabled", "true");
+    if((+pageNum.innerHTML <= 1)) pageMinus.setAttribute("disabled", "true");
+
+    pagePlus.addEventListener("click", (e) => {
+        let page = +pageNum.innerHTML;
+        page++;
+        setFilter(filters, page);
+    });
+    pageMinus.addEventListener("click", (e) => {
+        console.log(pageNum.innerHTML)
+        let page = +pageNum.innerHTML;
+        page--;
+
+        setFilter(filters, page);
+    });
+
 }    
-function setFilter(filters) {
+function setFilter(filters, page) {
     let currHref = location.href
     let indx = currHref.indexOf('&filter')
     if(indx != -1) {
         currHref = currHref.split('&filter')[0]
 
     }
+    currHref = currHref.split('&page_n')[0]
+
     console.log()
     let newHref = currHref
     filters.forEach(filter => {
         if(filter.value)
             newHref += `&filter_${filter.name}=${filter.value}`
     })
+    if(page && !isNaN(page)) newHref += `&page_n=${page}`
 
     console.log({currHref, indx})
     history.replaceState({ page: 1 }, "", newHref);

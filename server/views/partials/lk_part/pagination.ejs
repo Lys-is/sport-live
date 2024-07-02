@@ -1,0 +1,12 @@
+<% 
+let page_size = process.env.PAGE_SIZE
+if(total > page_size) { %>
+    <div class="cool_body_content wbt np" id="pagination" data-total="<%= total %>" data-page-size="<%= page_size %>">
+        <div class="form-group square40_butt ended">
+            <input type="button" value="&lt" class="button white_button prev" id="page_minus">
+            <p class="num" id="page_num">1</p>
+            <input type="button" value="&gt" class="button white_button next" id="page_plus">
+        </div>
+    </div>
+
+<% } %>
