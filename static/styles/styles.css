@@ -575,6 +575,14 @@ table tr td input{
     gap: 10px;
     flex-wrap: wrap;
 }
+ 
+.gap {
+    gap: 20px;
+}
+
+.double_gap {
+    gap: 40px;
+}
 
 .butt_icon{
     padding-left: 15px;
