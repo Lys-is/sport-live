@@ -3,6 +3,8 @@ const tokenService = require('./token-service');
 const User = require('../models/user-model');
 const Player = require('../models/player-model');
 const Couch = require('../models/couch-model');
+const Commentator = require('../models/commentator-model');
+const Judge = require('../models/judge-model');
 const controlService = require('./control-service');
 let io = null
 let controls = {}
@@ -71,128 +73,82 @@ class IoService {
 
 
 function startPanel(controls, socket) {
-  let userId = '',
-  user = socket.user
-  if(user)
-    userId = socket.user._id.toString()
+  const userId = socket.user?._id.toString() || '';
+  const control = controls[userId] || new controlService(userId, socket.user?.tablo_style, io);
+  controls[userId] = control;
 
-  console.log(userId)
-  function sendData() {
-    io.to(userId).emit('update_data', control.getData)
+  socket.join(userId);
 
+  socket.on('join_panel', async (tableId) => {
+    const user = await User.findOne({ _id: tableId });
+    socket.emit('update_data', control.getData);
+  });
+
+  socket.on('join_table', async (tableId) => {
+    const user = await User.findOne({ _id: tableId });
+    socket.join(tableId);
+    socket.emit('start', control.getData);
+  });
+
+  socket.on('play_timer', () => {
+    control.timer.playTimer(io, userId);
+  });
+
+  socket.on('clear_timer', () => {
+    control.timer.clearTimer();
+    io.to(userId).emit('timer', control.timer.timeData);
+  });
+
+  socket.on('change_timer', (val) => {
+    control.timer.changeTimer(val);
+    io.to(userId).emit('timer', control.timer.timeData);
+  });
+
+  socket.on('match', async (data) => {
+    await control.setMatch(data);
+    io.to(userId).emit('update_data', control.getData);
+  });
+
+  socket.on('style', async (data) => {
+    control.style = data.style;
+    socket.user.tablo_style = data.style;
+    await socket.user.save();
+    io.to(userId).emit('update_style');
+    io.to(userId).emit('update_data', control.getData);
+  });
+
+  socket.on('notify', async (data) => {
+    await replaceImg(data);
+    console.log(data)
+    await io.to(userId).emit('new_notify', data);
+  });
+
+  socket.on('new_data', (data) => {
+    control.setData(data);
+
+    io.to(userId).emit('update_data', control.getData);
+  });
+}
+
+async function replaceImg(data) {
+  try {
+    await Promise.all(data.ids.map(async (id, i) => {
+      const model = { Player, Couch, Commentator, Judge }[data.model];
+      const type = data.model.toLowerCase();
+      const dta = await model.findOne({ _id: id }).select('img');
+      if (dta.img) {
+        console.log('dta.img')
+        data.text = data.text.replace(`{{${type}_img__${i}}}`, `<img src="${dta.img}" class="notify_img">`);
+      } else {
+        console.log('!dta.img', i)
+        data.text = data.text.replace(`{{${type}_img__${i}}}`, '');
+      }
+    }));
+    console.log(data)
+    return data;
+  } catch (error) {
+    console.log(error)
   }
-  function newControlService() {
-    return new controlService(userId, user.tablo_style, io)
-  }
-    let control = controls[userId]
-            socket.on('join_panel', async (tableId)=>{
-              console.log('_panel', control)
-              if(!control){
-                userId = tableId
-                user = await User.findOne({_id: userId})
-                control = controls[userId] ? controls[userId] : newControlService()
-                controls[userId] = control
-              }
-              socket.join(userId);
-              socket.emit('update_data', control.getData)
-            })
-
-
-            socket.on('join_table', async (tableId)=>{
-              console.log('_table')
-              if(!control){
-                userId = tableId
-                user = await User.findOne({_id: userId})
-
-                console.log('new_control')
-                control = controls[userId] ? controls[userId] : newControlService()
-                controls[userId] = control
-              }
-              console.log(control)
-              console.log(userId)
-              socket.join(userId);
-              console.log('control')
-              let data = "control.getData()"
-              try {
-                socket.emit('start', control.getData)
-
-              } catch (e) {
-                console.log(e)
-              }
-              console.log(data)
-            })
-            
-            socket.on('play_timer', ()=>{
-              control.timer.playTimer(io, userId)
-
-            })
-            socket.on('clear_timer', ()=>{
-              control.timer.clearTimer()
-              io.to(userId).emit('timer', control.timer.timeData)
-            })
-            socket.on('change_timer', (val)=>{
-              console.log(val, control.timer)
-              control.timer.changeTimer(val)
-              io.to(userId).emit('timer', control.timer.timeData)
-
-            })
-            socket.on('match', async (data)=>{
-              if(!control){
-                control = controls[userId] ? controls[userId] : newControlService()
-                controls[userId] = control
-              }
-              await control.setMatch(data)
-              sendData()
-            })
-            socket.on('style', async (data)=>{
-                control.style = data.style
-                socket.user.tablo_style = data.style
-                await socket.user.save()
-                io.to(userId).emit('update_style')
-                sendData()
-              })
-            socket.on('notify', async (data)=>{
-              if(!control){
-                control = newControlService()
-                controls[userId] = control
-              }
-              if(data.text.includes('{{img_player}}')){
-                let player = await Player.findOne({_id: data.playerId})
-                console.log(player)
-                if(player.img)
-                 data.text = data.text.replace('{{img_player}}', `<img src="${player.img}" class="notify_img">`)
-                else {
-                  data.text = data.text.replace('{{img_player}}', '')
-                }
-              }
-              if(data.text.includes('{{img_couch}}')){
-                let couch = await Couch.findOne({_id: data.couchId})
-                console.log(couch)
-                if(couch.img)
-                 data.text = data.text.replace('{{img_couch}}', `<img src="${couch.img}" class="notify_img">`)
-                else {
-                  data.text = data.text.replace('{{img_couch}}', '')
-                }
-              }
-              console.log(data)
-              io.to(userId).emit('new_notify', data)
-            })
-            socket.on('new_data', (data) => {
-              if(!control){
-                control = newControlService()
-                controls[userId] = control
-              }
-                control.setData(data)
-                console.log(data, control.getData)
-                
-                try{
-                  sendData()
-                }
-                catch(e){
-                  console.log(e)
-                }
-              //io.to(userId).emit('update_data', control)
-              //io.to(userId).emit('update_data', control)
-            })
+  
 }
  module.exports = new IoService();

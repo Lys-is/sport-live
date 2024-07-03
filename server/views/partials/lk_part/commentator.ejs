@@ -2,10 +2,10 @@
 <div class="team__wrapper">
     <div class="table_container">
         <div class="table_header">
-            <p class="page_title">Судьи</p>
+            <p class="page_title">Комментаторы</p>
             <div class="filler"></div>
             <input type="button" value="Сбросить фильтры" class="table_button" id="clear_filters">
-            <input type="button" value="Добавить судью" class="table_button nav_link" data-href="judge/get__create">
+            <input type="button" value="Добавить комментатора" class="table_button nav_link" data-href="commentator/get__create">
         </div>
     <table class="commands_table">
         <tr id="first-row">
@@ -21,13 +21,13 @@
             <td></td>
 
         </tr>
-     <% if (judges.length > 0) { %>
+     <% if (commentators.length > 0) { %>
 
-    <% for (let i = 0; i < judges.length; i++) {%>
+    <% for (let i = 0; i < commentators.length; i++) {%>
         <tr>
             <td><%= i + 1%></td>
-            <td><%= judges[i].fio %></td>
-            <td><%= judges[i].birthday %></td>
+            <td><%= commentators[i].fio %></td>
+            <td><%= commentators[i].birthday %></td>
             <td>link</td>
         </tr>
 
@@ -39,6 +39,5 @@
     <h2 class="lk_wrapper__title">Нет судей</h2>
 <% } %>
 <%- include('pagination.ejs') %>
-
 </div>
 

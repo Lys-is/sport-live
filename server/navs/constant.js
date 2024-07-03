@@ -93,10 +93,11 @@ const nav = {
             'func' : 'get__match',
             'get__create' : {},
             'post__create' : {},
-            'get__edit' : {},
+            'id/:id/get__edit' : {'func': 'get__edit'},
             'put__edit' : {},
             'put__results':{},
             'put__judge':{},
+            'put__commentator':{}
         },
         'couch' : {
             'func' : 'get__couch',
@@ -137,8 +138,19 @@ const nav = {
             'post__create' : {},
             'get__edit' : {},
             'put__edit' : {}
-        }
-
+        },
+        'commentator' : {
+            'func' : 'get__commentator',
+            'get__create' : {},
+            'post__create' : {},
+            'get__edit' : {},
+            'put__edit' : {}
+        },
+        'style' : {
+            'func' : 'get__style',
+        },
+        'post__style' : {},
+        'get__style_by_id'  : {}
     }
 }
 function start(){
@@ -199,7 +211,7 @@ function start(){
             link = ''
         }
         link += now_parents.join('/') +'/'+ obj;
-       // console.log(contoller, constrollerLink, link)
+        console.log(contoller, constrollerLink, link)
         router[method](link, middelware, (req, res) => {
             //console.log(req, res)
             contoller[constrollerLink](req, res)

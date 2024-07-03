@@ -12,7 +12,7 @@
 			<div id="scoreboard">
 				<div id="home-team-color" class="var-homeColor" style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);"></div>
 				<div>
-					<div id="home-team">
+					<div id="home-team" class="color_accent">
 						<div class="var-home-short">Cборная Минска</div>
 					</div>
 					<div class="pen" style="display: block;">
@@ -25,7 +25,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="tablo">
+				<div id="tablo" class="color_accent_2">
 					<div id="fouls" class="fouls fouls-container" style="display: none;">
 						<div id="left"></div>
 						<div id="home-fouls" class="var-home-fouls">0</div>
@@ -40,7 +40,7 @@
 					</div>
 				</div>
 				<div>
-					<div id="away-team">
+					<div id="away-team" class="color_accent">
 						<div class="var-away-short">Могилевская область</div>
 					</div>
 					<div class="pen" style="display: block;">
@@ -54,10 +54,10 @@
 					</div>
 				</div>
 				<div id="away-team-color" class="var-awayColor" style="background-color: rgb(255, 17, 153); color: rgb(255, 255, 255);"></div>
-				<div id="timer">
+				<div id="timer" class="color_accent">
 					<div class="var-time">00:00</div>
 				</div>
-				<div id="period">
+				<div id="period" class="color_accent_2">
 					<div class="roundnum"><span>1</span> <span>Т</span></div>
 				</div>
 			</div>
@@ -94,17 +94,17 @@
 		<div class="big">
 			<div id="big-container">
 				<div class="line-1">
-					<div class="transform-left" id="logo-home"><img class="home-logo" src="https://st.joinsport.io/team/1385934/logo/6672b20874dec.png"></div>
-					<div class="mid-home-team transform-left">
+					<div class="transform-left color_accent" id="logo-home"><img class="home-logo" src="https://st.joinsport.io/team/1385934/logo/6672b20874dec.png"></div>
+					<div class="mid-home-team transform-left color_accent" >
 						<div class="var-home">Cборная Минска</div>
 					</div>
 					<div id="top-bar">
-						<div id="top-info">
-							<div id="big-left"></div>
+						<div id="top-info" class="color_accent">
+							<div id="big-left" class="border_color_accent_bottom"></div>
 							<div id="info" class="var-label">Начало матча</div>
-							<div id="big-right"></div>
+							<div id="big-right" class="border_color_accent_bottom"></div>
 						</div>
-						<div class="vsbig">
+						<div class="vsbig border_color_accent_2">
 							<div class="biginfo">
 								<div class="score-big var-home-score">0</div>
 								<div class="score-big">-</div>
@@ -112,10 +112,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="mid-away-team transform-right">
+					<div class="mid-away-team transform-right color_accent">
 						<div class="var-away">Могилевская область</div>
 					</div>
-					<div class="transform-right" id="logo-away"><img class="away-logo" src="https://st.joinsport.io/team/1385936/logo/6672b28ee7926.png"></div>
+					<div class="transform-right color_accent" id="logo-away"><img class="away-logo" src="https://st.joinsport.io/team/1385936/logo/6672b28ee7926.png"></div>
 				</div>
 			</div>
 		</div>
@@ -124,11 +124,11 @@
 		<div class="home-away">
 			<div id="home-roster">
 				<div class="roster-line-1">
-					<div class="roster-top">
+					<div class="roster-top color_accent">
 						<div class="var-tournament">Cпартакиада 2024</div>
 					</div>
 				</div>
-				<div id="roster-line-2">
+				<div id="roster-line-2" class="color_main">
 					<div id="line-3">
 						<div class="start-15 var-roster-home"></div>
 						<div class="start5">
@@ -171,7 +171,7 @@
 						</div>
 						<div class="logo-team">
 							<div class="logo-roster"><img class="home-logo" src="https://st.joinsport.io/team/1385934/logo/6672b20874dec.png"></div>
-							<div class="roster-team-name"><span class="var-home">Cборная Минска</span></div>
+							<div class="roster-team-name color_accent"><span class="var-home">Cборная Минска</span></div>
 							<div class="staff var-homeCoach"></div>
 							<!-- <div class="staff-name">Александр Черник</div>	-->
 						</div>
@@ -184,11 +184,11 @@
 		<div class="home-away">
 			<div id="away-roster">
 				<div class="roster-line-1">
-					<div class="roster-top">
+					<div class="roster-top color_accent">
 						<div class="var-tournament">Cпартакиада 2024</div>
 					</div>
 				</div>
-				<div id="roster-line-2">
+				<div id="roster-line-2" class="color_main">
 					<div id="line-3">
 						<div class="start-15 var-roster-away"></div>
 						<div class="start5">
@@ -309,15 +309,3 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	let blueCard = false;
-	const server = {"url":"https:\/\/app.skore.tech","port":":8443"};
-const serverStream = '525';
-let designId = 6;
-</script>	<script src="/dev/js/jquery-3.5.1.min.js"></script>
-	<script src="https://app.skore.tech/js/locale.js?1695418020	"> </script>
-	<script src="https://app.skore.tech/js/style-scoreboard_join.js?1718280996"> </script>
-
-
-</body>
-</html>

@@ -14,8 +14,48 @@
         let tableId = '<%= id %>'
     </script>
 
-<%- include('score_styles/' + style + '/visualizer.ejs') %>
-<link rel="stylesheet" href="/static/score_styles/<%= style %>/style.css">
+<% 
+let style_panel = style
+
+let css = ''
+
+if(style_panel.includes('__id')){
+    let ss = styles.find(el => el._id == style_panel.replace('__id', ''))
+    console.log(ss, styles)
+    style_panel = ss.based
+    css = `
+    .bgleft, .bgright, .goals-home, .goals-away, .roster-main-div, .color_main {
+        background: ${ss.color_main} !important;
+    }
+    #match-info, #top-match-info, .color_accent {
+        background: ${ss.color_accent} !important;
+    }
+    .color_accent_2 {
+        background: ${ss.color_accent_2} !important;
+    }
+    .border_color_accent {
+        border-color: ${ss.color_accent} !important;
+    }
+    .border_color_accent_bottom {
+        border-bottom-color: ${ss.color_accent} !important;
+    }
+    .border_color_accent_2 {
+        border-color: ${ss.color_accent_2} !important;
+    }
+    .roster-main-div {
+        border-color: ${ss.color_accent} !important;
+    }
+    `
+}
+
+%>
+<%- include('score_styles/' + style_panel + '/visualizer.ejs') %>
+
+<style>
+    <%=css%>
+</style>
+
+<link rel="stylesheet" href="/static/score_styles/<%= style_panel %>/style.css">
 
 <script type="text/javascript" defer  src="/static/pages/table.js"></script>
 

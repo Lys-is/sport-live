@@ -11,7 +11,7 @@ const PlayerResultsSchema = new Schema({
 const MatchSchema = new Schema({
     creator: {type: Schema.Types.ObjectId, ref: 'User', required: true, autopopulate: true},
     date: {type: String, required: true},
-    time: {type: String, required: true},
+    time: {type: String},
     is_overtime: {type: Boolean, default: false},
     is_penalty: {type: Boolean, default: false},
     is_tech_win: {type: Boolean, default: false},
@@ -22,6 +22,7 @@ const MatchSchema = new Schema({
     team_2_score: {type: Number, default: 0},
     status: {type: String, default: 'Не начат'},
     judges: [{type: Schema.Types.ObjectId, ref: 'Judge', autopopulate: true}],
+    commentators: [{type: Schema.Types.ObjectId, ref: 'Commentator', autopopulate: true}],
     results_1: [PlayerResultsSchema],
     results_2: [PlayerResultsSchema],
 })

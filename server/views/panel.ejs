@@ -193,10 +193,9 @@
                     <input type="button" value="Малое" data-type="little" class="selected" name="small-vis">
                     <input type="button" value="Большое" class="" data-type="big" name="big-vis">
                     <input type="button" value="Матч" class="" data-type="mid" name="match-vis">
-                    <input type="button" value="Сборная 1" class="" name="group-vis">
-                    <input type="button" value="Сборная 2" class="" name="mog-vis">
+                    <input type="button" value="Сборная 1" class="" data-type="home-roster" name="group-vis">
+                    <input type="button" value="Сборная 2" class="" data-type="away-roster" name="mog-vis">
                     <input type="button" value="Пенальти" class="" data-type="pen" name="pen-vis">
-                    <input type="button" value="Погода" class="" name="weather-vis">
                     <input type="button" value="Выкл" class="" data-type="off" name="off-vis">
                 </div>
                 <div class="h-group">
@@ -209,6 +208,10 @@
                             <option value="style_5">style5</option>
                             <option value="style_6">style6</option>
                             <option value="style_7">style7</option>
+                            <% styles.forEach(style => { %>
+                                <option value="<%= style._id %>__id"><%= style.name %></option>
+                            <% })
+                            %>
                         </select>
                 </div>
             </div>
@@ -353,7 +356,7 @@
         <div class="column-container">
             <div class="block">
                 <div class="h-group centered">
-                    <p class="first">Показать тренера</p>
+                    <p class="first">Показ тренера</p>
                 </div>
                     <div class="h-group half-form-container wrap" id="couches">
                         <input type="button" value="Тренер 1 большой" name="trainer1-big-teams">
@@ -372,14 +375,6 @@
                     <div class="h-group space-between">
                         <input type="button" value="Показать судей" name="judges" id="show_judges">
                         <input type="button" value="Комментатор(ов)" name="commentator" id="show_commentators">
-                    </div>
-                    <div class="h-group">
-                        <label for="comm1" class="inline-form-label small-text nowrap">Комментатор 1</label>
-                        <input type="text" name="comm1" id="comm1" class="text-form full-form">
-                    </div>
-                    <div class="h-group">
-                        <label for="comm1" class="inline-form-label small-text nowrap">Комментатор 2</label>
-                        <input type="text" name="comm2" id="comm2" class="text-form full-form">
                     </div>
                     <div class="h-group centered">
                         <label for="champ-name" class="small-text">Название чемпионата</label>

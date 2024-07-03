@@ -226,6 +226,7 @@ function playerNotifyListener(e) {
     let playerTr = e.target.closest('tr')
     let player = playerTr.getAttribute('data-name')
     let type = e.target.getAttribute('data-type').split('_')
+    let ids = [playerTr.getAttribute('data-id')]
     let txt = '', title = '', img = ''
     if(type[0] == 'goal') {
         txt = 'Игрок ' + player + ' забил гол'
@@ -242,14 +243,15 @@ function playerNotifyListener(e) {
         type[0] = 'red-card'
     }
     if(type[1] == 'b') {
-        img = `{{img_player}}`
+        img = `<div>{{player_img__${0}}}`
     }
     let data = {
         type: type[0],
         size : type[1],
         text: img+txt,
         title: title,
-        playerId: playerTr.getAttribute('data-id'),
+        ids,
+        model: 'Player',
     }
     socket.emit('notify', data)
 }
@@ -387,11 +389,14 @@ function setMatch(data, team) {
 }      
 
 function couchNotify(num, team, type, data) {
-    let title = 'Тренер команды '+data['team'+team+'_name']
+
+    let title = 'Тренер команды '+data['team'+team+'_name'] + '</div>'
     let txt = data['couch_'+team][num].fio
     let img = ''
+    let ids = [data['couch_'+team][num]._id]
+
     if(type == 'b') {
-        img = `{{img_couch}}`
+        img = `<div>{{couch_img__${0}}}`
     }
     let dta = {
         type: 'couch',
@@ -399,6 +404,8 @@ function couchNotify(num, team, type, data) {
         text: img+txt,
         title: title,
         couchId: data['couch_'+team][num]._id,
+        ids: ids,
+        model: 'Couch',
     }
     socket.emit('notify', dta)
 }
@@ -409,42 +416,71 @@ function couchNotify(num, team, type, data) {
 showJudges.addEventListener('click', (e) => {
     let title = 'Судьи матча'
     let txt = ""
+    let ids = []
     if(global_data.match){
-        global_data.match.judges.forEach((judge, i) => {
-            txt += `Судья ${i+1} ${judge.fio} <br>`
+        let arrJudges = global_data.match.judges
+
+        arrJudges.forEach((commentator, i) => {
+            txt += `<div>{{judge_img__${i}}}Судья ${commentator.fio} </div>`
         })
+        ids = arrJudges.map(el => el._id)
+        console.log(ids)
     }
 
     let dta = {
-        type: 'couch',
+        type: 'judge',
         size : 'b',
         text: txt,
         title: title,
+        ids: ids,
+        model: 'Judge',
     }
     socket.emit('notify', dta)
 })
 
 showCommentators.addEventListener('click', (e) => {
-    let title = ''
+    let title = 'Комментаторы матча'
     let txt = ""
-    let commentators = [get('#comm1').value, get('#comm2').value].filter(el => el)
-    if(!commentators.length) return
-    
-    if(commentators.length == 1) {
-        title = 'Комментатор матча'
-        txt += `${commentators[0]}`
-    }
-    else {
-        title = 'Комментаторы матча'
-        txt += `${commentators[0]} и ${commentators[1]}`
+    let ids = []
+    if(global_data.match){
+        let arrCommentators = global_data.match.commentators
+
+        arrCommentators.forEach((commentator, i) => {
+            txt += `<div>{{commentator_img__${i}}}Комментатор ${commentator.fio} </div>`
+        })
+        ids = arrCommentators.map(el => el._id)
+        console.log(ids)
     }
 
     let dta = {
-        type: 'couch',
+        type: 'commentator',
         size : 'b',
         text: txt,
         title: title,
+        ids: ids,
+        model: 'Commentator',
     }
     socket.emit('notify', dta)
+    // let title = ''
+    // let txt = ""
+    // let commentators = [get('#comm1').value, get('#comm2').value].filter(el => el)
+    // if(!commentators.length) return
+    
+    // if(commentators.length == 1) {
+    //     title = 'Комментатор матча'
+    //     txt += `${commentators[0]}`
+    // }
+    // else {
+    //     title = 'Комментаторы матча'
+    //     txt += `${commentators[0]} и ${commentators[1]}`
+    // }
+
+    // let dta = {
+    //     type: 'couch',
+    //     size : 'b',
+    //     text: txt,
+    //     title: title,
+    // }
+    // socket.emit('notify', dta)
     
 })

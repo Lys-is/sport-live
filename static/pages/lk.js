@@ -58,8 +58,9 @@ async function checkTournament(str) {
     console.log({ isFormatAny, containsAny2 });
     if(isFormatAny || containsAny2) {
         const regex = /^(tournament\/id\/[^\/]+)\/.+$/;
+        const regex2 = /^(match\/id\/[^\/]+)\/.+$/;
         console.log(str)
-        let templateHref =  str.replace(regex, '$1')
+        let templateHref =  str.replace(regex, '$1').replace(regex2, '$1');
         console.log(templateHref)
         await getPage(templateHref)
         if(containsAny2) {
@@ -141,7 +142,7 @@ let inits = {
     'team/get__team_couch' : init__team_couch,
     'match': init__match,
     'match/get__create' : init__match_create,
-    'match/get__edit' : init__match_edit,
+    'match/id/get__edit' : init__match_edit,
     'tournament': init__tournament,
     'tournament/get__create' : init__tournament_create,
     'tournament/id' : init__tournament_template,
@@ -156,6 +157,8 @@ let inits = {
     'representative/get__create' : init__representative_create,
     'couch/get__create' : init__couch_create,
     'judge/get__create' : init__judge_create,
+    'commentator/get__create' : init__commentator_create,
+    'style' : init__style
 }
 for(let key in inits) {
     inits[key] = init_decorator(inits[key])
@@ -330,21 +333,27 @@ function init__match_create() {
     })
 }
 function init__match_edit() {
+    let matchId = get('#matchId').value
+
     let saveBtn = get("#match__submit");
     saveBtn.addEventListener("click", async (e) => {
         sendForm();
     })
-
+        let commentatorForm = get("#match_commentators__form"); 
+        commentatorForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            let dataCommentator = await formGetData(commentatorForm)
+            dataCommentator.matchId = matchId
+            console.log(dataCommentator)
+            sendFetch("/api/lk/match/put__commentator", JSON.stringify(dataCommentator), "PUT")
+        })
         let judgeForm = get("#match_judges__form");
         judgeForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-
             let dataJudge = await formGetData(judgeForm)
-            let matchId = get('#matchId').value
             dataJudge.matchId = matchId
             console.log(dataJudge)
             sendFetch("/api/lk/match/put__judge", JSON.stringify(dataJudge), "PUT")
-
         })
 
         
@@ -358,7 +367,6 @@ function init__match_edit() {
             sendFetch("/api/lk/match/put__edit", JSON.stringify(dataEdit), "PUT")
 
         
-        let resultForm = get("#match_results__form");
             let dataResult_1 = [], dataResult_2 = [];
             let table_1 = get("#team_1_results"),
                 table_2 = get("#team_2_results")
@@ -379,7 +387,6 @@ function init__match_edit() {
                 }
             })
             console.log(dataResult_1)
-            let matchId = get('#matchId').value
             let dataResult = {
                 matchId,
                 team_1: dataResult_1,
@@ -490,7 +497,33 @@ function init__judge_create() {
         sendFetch("/api/lk/judge/post__create", JSON.stringify(data), "POST")
     })
 }
-
+function init__commentator_create() {
+    let form = get("#commentator_create__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        sendFetch("/api/lk/commentator/post__create", JSON.stringify(data), "POST")
+    })
+}
+function init__style() {
+    let option = get('#style_select');
+    let form = get("#style__form");
+    option.addEventListener('change', async (e) => {
+        let id = option.value
+        let data = await sendFetch(`/api/lk/get__style_by_id?id=${id}`)
+        data = data.style
+        for(let key in data){
+            console.log(key)
+            if(form[key])
+                form[key].value = data[key]
+        }
+    })
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        sendFetch("/api/lk/post__style", JSON.stringify(data), "POST")
+    })
+}
 
 
 

@@ -14,15 +14,15 @@
 			<div id="top-container">
 				<div class="col">
 					<div class="top-anim-1">
-						<div id="top-luch-logo"></div>
-						<div class="timer">
+						<div id="top-luch-logo" class="color_main"></div>
+						<div class="timer color_main">
 							<div class="timer-wrap">
 								<div class="time var-time">00:00</div>
 							</div>
 							<div class="time-no"><span class="var-roundnum">1</span><sup class="var-ordinal">ый</sup></div>
 						</div>
 					</div>
-					<div class="top-bynex top-anim-2"></div>
+					<div class="top-bynex top-anim-2 color_accent"></div>
 				</div>
 				<div class="info">
 					<div class="row">
@@ -59,21 +59,9 @@
 
 	</div>
 	<div class="big" id="bottom-scor-container" style="display: block;">
-		<div id="goals-container">
-			<table cellpadding="0" cellspacing="0" border="0" id="goals-table">
-				<tbody><tr>
-					<td style="width: 600px;" valign="bottom">
-						<div class="goals-home"></div>
-					</td>
-					<td style="width: 600px;" valign="bottom">
-						<div class="goals-away"></div>
-					</td>
-				</tr>
-			</tbody></table>
-		</div>
-		<div id="bottom-row-0"><p style="font-size: 35px; margin:0; margin-top:5px">binex</p></div>
-		<div id="bottom-row-1">
-			<div id="home-logo"><img class="home-logo" src="https://st.joinsport.io/team/1385934/logo/6672b20874dec.png" width="87px" height="87px"></div>
+	
+		<div id="bottom-row-1" class="color_main">
+			<div id="home-logo" class="color_accent"><img class="home-logo" src="https://st.joinsport.io/team/1385934/logo/6672b20874dec.png" width="87px" height="87px"></div>
 			<div class="var-home" id="big-home-team-name">Cборная Минска</div>
 			<div id="big-score">
 				<div id="score-txt"><span class="var-home-score">0</span> - <span class="var-away-score">0</span></div>
@@ -84,11 +72,12 @@
 				</div>
 			</div>
 			<div class="var-away" id="big-away-team-name">Могилевская область</div>
-			<div id="away-logo"><img class="away-logo" src="https://st.joinsport.io/team/1385936/logo/6672b28ee7926.png" width="87px" height="87px"></div>
+			<div id="away-logo" class="color_accent"><img class="away-logo" src="https://st.joinsport.io/team/1385936/logo/6672b28ee7926.png" width="87px" height="87px"></div>
 		</div>
-		<div id="bottom-row-2">
-			<div id="penalties-home">
-				<div class="pen" style="display: block;">
+		<div id="bottom-row-2" class="color_accent">
+			<div class="pen" style="display: block;">
+
+				<div id="penalties-home">
 					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
 					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
 					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
@@ -102,8 +91,9 @@
 					<div class="var-penalties-home" style="display: inline-block;margin-right: 90px;">0</div>Пенальти<div style="display: inline-block;margin-left: 90px;" class="var-penalties-away">0</div>
 				</div>
 			</div>
-			<div id="penalties-away">
-				<div class="pen" style="display: block;">
+			<div class="pen" style="display: block;">
+
+				<div id="penalties-away">
 					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
 					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
 					<div class="penaltie" style="background-color: var(--pen-clear);"></div>
@@ -291,25 +281,3 @@
 		</div>
 	</div>
 
-
-
-	<script>
-		const block = document.querySelector("#bottom-scor-container")
-		const testBlock = document.getElementById("test");
-		const resizewatcher = new ResizeObserver(entries => {
-			for (const entry of entries) {
-				if (entry.contentRect.width == 0) {
-					testBlock.style.position = "absolute";
-					testBlock.style.bottom = "50px";
-				} else {
-					testBlock.style.position = "absolute";
-					testBlock.style.bottom = "210px";
-				}
-			}
-		})
-		resizewatcher.observe(block)
-	</script>
-
-
-</body>
-</html>

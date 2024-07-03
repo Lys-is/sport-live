@@ -13,6 +13,8 @@ Tournament = require('../../models/tournament-model'),
 Transfer = require('../../models/transfer-model'),
 User = require('../../models/user-model'),
 League = require('../../models/league-model'),
+Style = require('../../models/style-model'),
+Commentator = require('../../models/commentator-model'),
 Couch = require('../../models/couch-model');
 const dbService = require('../../service/db-service');
 class LkController {
@@ -24,6 +26,7 @@ class LkController {
     representative = require('./representative')
     judge = require('./judge')
     couch = require('./couch')
+    commentator = require('./commentator')
     async get__create(req, res) {
         try {
             return sendRes('partials/lk_part/team_create', {}, res);
@@ -45,9 +48,20 @@ class LkController {
     async get__judge(req, res) {
         try {
             console.log(req);
-            console.log(await Judge.find());
-            let judges = await Judge.find({})
-            return sendRes('partials/lk_part/judge', {judges}, res);
+            let judges = await dbService.getAggregate(Judge, req);
+            let total = await Judge.countDocuments({});
+            return sendRes('partials/lk_part/judge', {judges, total}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__commentator(req, res) {
+        try {
+            console.log(req);
+            let commentators = await dbService.getAggregate(Commentator, req);
+            let total = await Commentator.countDocuments({});
+            return sendRes('partials/lk_part/commentator', {commentators, total}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -233,9 +247,50 @@ class LkController {
             res.json({message: 'Произошла ошибка'});
         }
     }
-
-
-    
+    async get__style(req, res) {
+        try {
+            let styles = await Style.find({creator: req.user.id});
+            return sendRes('partials/lk_part/style', {styles}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async post__style(req, res) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.BadRequest('Ошибка при валидации', errors.array()))
+            }
+            const {...data} = req.body;
+            console.log(data);
+            if(data.style_id && !data.style_name_new){
+                let style = await Style.findById(data.style_id);
+                if(!style)
+                    return res.json({message: 'Такого стиля нет'});
+                style = await Style.findByIdAndUpdate(data.style_id, data);
+                return res.json({message: 'Стиль обновлен', style});
+            }
+            if(data.style_name_new){
+                let style = await Style.create({...data, name: data.style_name_new ,  creator: req.user.id});
+                return res.json({message: 'Стиль создан', style});
+            }
+            return res.json({message: 'Стиль создан'});
+        }
+        catch(e){
+            console.log(e);
+            res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__style_by_id(req, res) {
+        try {
+            let style = await Style.findById(req.query.id);
+            return res.json({style});
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
     
 }
 

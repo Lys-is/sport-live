@@ -1296,7 +1296,8 @@ div.referees .ev-player-img {
 }
 
 .roster-logo img {
-    margin-bottom: 0px;    
+    margin-bottom: 0px;
+    margin: 0 auto;
 }
 
 .player {

@@ -480,7 +480,8 @@ body {
     height: 40px;
     width: 1200px;
     margin: auto;
-
+    display: flex;
+    justify-content: center;
 }
 
 #bottom-row-3 {

@@ -1,0 +1,71 @@
+
+<div class="team__wrapper">
+    <div class="table_container">
+        
+
+    <div class="cool_body">
+        <form id="style__form">
+        <div class="cool_body_content wbt cbh">
+            <div class="form-group">
+            <p class="cool_title nm">Стиль табло</p>
+            <div class="filler"></div>
+            <label class="label" for="style">Выберите стиль</label>
+            <select class="select text_form" id="style_select" name="style_id">
+                <option selected="true" disabled="disabled">Выберите стиль</option>
+                <% if(styles) { 
+                    styles.forEach(style => {
+                    %>
+                    <option value="<%= style.id %>"><%= style.name %></option>
+                    <% })
+                    } %>
+            </select>
+            </div>
+        </div> 
+        <div class="cool_body_content double_gap">
+            <label class="label" for="style">Выберите основу дизайна</label>
+            <select class="select text_form" name="based">
+                <option value="style_1">Стиль 1</option>
+                <option value="style_2">Стиль 2</option>
+                <option value="style_3">Стиль 3</option>
+                <option value="style_4">Стиль 4</option>
+                <option value="style_5">Стиль 5</option>
+                <option value="style_6">Стиль 6</option>
+                <option value="style_7">Стиль 7</option>
+            </select>
+            <div class="form-group">
+                <label class="label" for="color1">Цвет основной</label>
+                <input type="color" class="input" id="color1" name="color_main">
+            </div>
+
+            <div class="form-group">
+                <label class="label" for="color2">Цвет акцентный</label>
+                <input type="color" class="input" id="color2" name="color_accent">
+            </div>
+            <div class="form-group">
+                <label class="label" for="accentColor">Цвет акцентный 2</label>
+                <input type="color" class="input" id="accentColor" name="color_accent_2">
+            </div>
+
+            <div class="form-group gap">
+                <label class="label" for="fontFile">Загрузить шрифт</label>
+                <input type="file" class="input" id="fontFile">
+            </div>
+            <div class="form-group">
+                <label class="label" for="fontName">Сохранить отдельно как:</label>
+                <input type="text" class="text_form" id="fontName" placeholder="Название стиля" name="style_name_new">   
+            </div>
+        </div>
+
+        <div class="cool_body_content">
+            <div class="form-group">
+                <div class="filler"></div>
+                <input type="submit" value="Сохранить" class="button green_button">
+            </div>
+        </div>
+        </form>
+    </div>
+
+
+</div>
+
+</div>

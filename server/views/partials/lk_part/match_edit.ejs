@@ -68,13 +68,13 @@
         </div>
     </form>
         <div class="cool_body">
-            <div class="cool_header_block create_match_header">
-                    <p class="page_title">Cостав судей</p>
+            <div class="cool_header_block create_match_header ">
+                    <p class="page_title">Cостав судей и комментаторов</p>
                     
                     
             </div>
             <div class="cool_body_content">
-                <table class="commands_table cool_table">
+                <table class="commands_table cool_table mb">
                     <tr id="first-row">
                         <td>Cудья</td>
                         <td></td>
@@ -98,7 +98,7 @@
                 <form id="match_judges__form">
                     <div class="form-group">
                         <input type="hidden" name="judgeId" value="<%= match._id %>">
-                        <input type="text" list="couch" name="judgeId">
+                        <input type="text" list="couch" class="nm" name="judgeId">
                         <datalist id="couch">
                             <% for (let i = 0; i < judges.length; i++) { %>
                                 <option value="<%= judges[i].fio %>" data-value="<%= judges[i]._id %>"></option>
@@ -107,7 +107,45 @@
                         <div class="filler"></div>
                         <p class="nm"></p>
                         <div class="filler"></div>
-                        <input type="submit" value="Добавить" class="button green_button double_form" id="match_judges__submit">
+                        <input type="submit" value="Добавить" class="button green_button double_form nm" id="match_judges__submit">
+                    </div>
+                </form>
+                <div style="margin-block: 20px;"></div>
+                <table class="commands_table cool_table mb">
+                    <tr id="first-row">
+                        <td>Комментатор</td>
+                        <td></td>
+                        <td>Действие</td>
+                        <td></td>
+
+                    </tr>
+                    <%= match.commentators.length %>
+                    <% if(match.commentators.length > 0)
+                        for (let i = 0; i < match.commentators.length; i++) { %>
+                            <tr>
+                                <td><%= match.commentators[i].fio %></td>
+                                <td></td>
+                                <td>
+                                    <span class="table_links table_links_compos nav_link"  data-href="judge/get__edit/?id=<%= match.commentators[i]._id %>">Изменить</span>
+                                </td>
+                                <td>link</td>
+                            </tr>
+                        <% } %>
+              
+                </table>
+                <form id="match_commentators__form">
+                    <div class="form-group">
+                        <input type="hidden" name="matchId" value="<%= match._id %>">
+                        <input type="text" list="commentators" class="nm" name="commentatorId">
+                        <datalist id="commentators">
+                            <% for (let i = 0; i < commentators.length; i++) { %>
+                                <option value="<%= commentators[i].fio %>" data-value="<%= commentators[i]._id %>"></option>
+                            <% } %>
+                        </datalist>
+                        <div class="filler"></div>
+                        <p class="nm"></p>
+                        <div class="filler"></div>
+                        <input type="submit" value="Добавить" class="button green_button double_form nm">
                     </div>
                 </form>
             </div>

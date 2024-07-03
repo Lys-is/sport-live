@@ -45,7 +45,7 @@
                 <td><%= (matches[i].team_1_score || matches[i].team_2_score) ? `${matches[i].team_1_score}:${matches[i].team_2_score}` : '-:-'%></td>
                 <td><%= matches[i].tournament?.basic.name %></td>
                 <td>
-                    <span class="table_links table_links_compos nav_link"  data-href="match/get__edit/?id=<%= matches[i]._id %>">Изменить</span>
+                    <span class="table_links table_links_compos nav_link"  data-href="match/id/<%= matches[i]._id %>/get__edit/">Изменить</span>
                 </td>
             </tr>
 

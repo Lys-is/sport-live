@@ -750,9 +750,8 @@ body:after {
 	background: url("img/midbg-5.svg");
 	background-size: cover;
 	border-radius: 25px;
-	
 	transform: translateX(-150%);
-  	animation: ani-2 1s forwards;	
+	animation: ani-2 1s forwards;
 }
 
 @keyframes ani-2 {

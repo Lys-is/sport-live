@@ -284,6 +284,7 @@ sup {
 	font-weight: 700;
 	text-transform: uppercase;
 	width: 365px;
+	z-index: 1;
 }
 
 .vs {

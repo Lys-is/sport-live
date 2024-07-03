@@ -1,6 +1,7 @@
 let Match = require('../models/match-model');
 let User = require('../models/user-model');
 let League = require('../models/league-model');
+let Style = require('../models/style-model');
 class Constrollers {
     async auth(req, res, next) {
         res.render('auth', {
@@ -41,12 +42,14 @@ class Constrollers {
         console.log(req.params);
         let matches = await Match.find({creator: req.params.id})
         let userAd = await User.findById(req.params.id);
+        let styles = await Style.find({creator: userAd._id});
+
         res.render('panel', {
             id: req.params.id,
             title: 'Панель управления',
             auth: userAd || false,
             matches,
-
+            styles
         });
     }
     async get__table(req, res) {
@@ -54,13 +57,13 @@ class Constrollers {
             console.log(req);
             if(!req.params.id || req.params.id == 'undefined') return
             let userAd = await User.findById(req.params.id);
-            console.log(userAd);
-            console.log(userAd.tablo_style);
+            let styles = await Style.find({creator: userAd._id});
             res.render('table', {
                 id: req.params.id,
                 title: 'Таблица',
                 auth: userAd || false,
-                style: userAd.tablo_style || 'style_1'
+                style: userAd.tablo_style || 'style_1',
+                styles
             });
         }
         catch(e){

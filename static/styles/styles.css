@@ -162,8 +162,7 @@ header{
 
 .content{
     width: 100%;
-    height: 100%;
-
+    /* height: 100%; */
     padding: 15px;
 }
 
@@ -339,7 +338,7 @@ header{
     border-collapse: collapse;
     width: 100%;
     height: 100%;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
 }
 
 table tr td:first-child {
@@ -611,6 +610,7 @@ table tr td input{
 
 .square40_butt {
     gap: 15px;
+    margin-top: 15px;
 }
 
 .num {
@@ -703,7 +703,7 @@ table tr td input{
 
 .tournires_container{
     padding: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 300px;
     width: 100%;
 }
 
@@ -719,6 +719,10 @@ table tr td input{
 
 .tournires_header_header .page_title{
     width: 300px;
+}
+
+.mb {
+    margin-bottom: 15px !important;
 }
 
 .tournires_header * input{
@@ -751,8 +755,8 @@ table tr td input{
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
-    overflow-y: scroll;
+
+
 }
 
 .tournires_content_block{
