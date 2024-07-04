@@ -77,8 +77,7 @@ class LkController {
         try {
             req.query['creator'] = req.user.id
 
-            console.log(await Representative.find());
-            let teams = await Team.find({}).select('name _id');
+            let teams = await Team.find({creator: req.user.id}).select('name _id');
             let representatives = await dbService.getAggregate(Representative, req);
             let total = await Representative.countDocuments({creator: req.user.id});
             return sendRes('partials/lk_part/representative', {representatives, teams, total}, res);
@@ -91,7 +90,7 @@ class LkController {
         try {
             req.query['creator'] = req.user.id
 
-            let teams = await Team.find({}).select('name _id');
+            let teams = await Team.find({creator: req.user.id}).select('name _id');
             let couches = await dbService.getAggregate(Couch, req);
             let total = await Couch.countDocuments({creator: req.user.id});
             return sendRes('partials/lk_part/couch', {couches, teams, total}, res);
@@ -103,7 +102,6 @@ class LkController {
     async get__season(req, res) {
         try {
             console.log(req);
-            console.log(await Season.find());
             let seasons = await Season.find({})
             seasons = seasons.map((season) => {
                 season.date = season.date.toLocaleDateString()
@@ -168,7 +166,7 @@ class LkController {
 
             console.log(req);
             console.log(await Player.find());
-            let teams = await Team.find().select('name _id');
+            let teams = await Team.find({creator: req.user.id}).select('name _id');
             let players = await dbService.getAggregate(Player, req);
             let total = await Player.countDocuments({creator: req.user.id}) ;
 
@@ -213,7 +211,7 @@ class LkController {
         try {
             console.log(req);
             let tournaments = await Tournament.find({creator: req.user.id}).select('basic.name _id');
-            let teams = await Team.find().select('name _id');
+            let teams = await Team.find({creator: req.user.id}).select('name _id');
             req.query['creator'] = req.user.id
             let matches = await dbService.getAggregate(Match, req);
             let total = await Match.countDocuments({creator: req.user.id});

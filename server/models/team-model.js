@@ -8,7 +8,6 @@ const TeamSchema = new Schema({
     social: {type: String, default: ''},
     date: {type: String, required: true},
     img: {type: String},
-    img_min: {type: String},
     admins: [{type: Schema.Types.ObjectId, ref: 'User', required: true, autopopulate: true}],
     representativs: [{type: Schema.Types.ObjectId, ref: 'Representativ', autopopulate: true}],
 })

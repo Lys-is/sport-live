@@ -1,6 +1,7 @@
 let Match = require('../models/match-model');
 let User = require('../models/user-model');
 let League = require('../models/league-model');
+const UserD = require('../models/userD-model');
 let Style = require('../models/style-model');
 
 class Constrollers {
@@ -13,11 +14,13 @@ class Constrollers {
     }
     async lk(req, res, next) {
         let league = await League.findOne({creator: req.user.id});
+        let profile = await UserD.findOne({creator: req.user.id});
         res.render('lk', {
             title: 'ЛК',
             league: league || false,
             auth: req.user || false,
-            isAdmin: req.user.isAdmin
+            isAdmin: req.user.isAdmin,
+            profile
         });
     }
     async get__login(req, res, next) {
@@ -41,12 +44,24 @@ class Constrollers {
         });
     }
     async get__panel(req, res) {
-        console.log(req.params);
         let matches = await Match.find({creator: req.params.id})
         let userAd = await User.findById(req.params.id);
         let styles = await Style.find({creator: userAd._id});
 
         res.render('panel', {
+            id: req.params.id,
+            title: 'Панель управления',
+            auth: userAd || false,
+            matches,
+            styles
+        });
+    }
+    async get__panel_players(req, res) {
+        let matches = await Match.find({creator: req.params.id})
+        let userAd = await User.findById(req.params.id);
+        let styles = await Style.find({creator: userAd._id});
+
+        res.render('panel_players', {
             id: req.params.id,
             title: 'Панель управления',
             auth: userAd || false,

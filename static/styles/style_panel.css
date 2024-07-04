@@ -2,8 +2,7 @@ body {
     background-color: gray;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     display: flex;
-    padding: 15px;
-
+    /* padding: 15px; */
 }
 
 *{
@@ -12,10 +11,10 @@ body {
 }
 
 .content-container{
-    display: grid;
+    display: flex;
     grid-template-columns: 400px 400px 400px 400px;
     align-items: flex-start;
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
 }
 
@@ -41,27 +40,26 @@ body {
     .content-container{
         grid-template-columns: 700px;
         grid-template-rows: auto auto auto auto;
-        transform: scale(0.5);
-        transform-origin: top;
-
+        /* transform: scale(0.5); */
+        /* transform-origin: top; */
     }
     .column-container{
-        width: 700px !important;
-
+        width: 100% !important;
     }
 
     .h-group .h-group{
-        flex-wrap: wrap !important;
-        width: 320px !important;
+        /* flex-wrap: nowrap!important; */
+        /* min-width: 148px !important; */
+        width: -webkit-fill-available;
+        min-width: 150px;
     }
 
     .h-group {
-        width: auto !important;
+        /* width: auto !important; */
     }
 
     .full-form{
-        width: auto !important;
-
+        /* width: auto !important; */
     }
 
     .half-form-container input {
@@ -69,12 +67,15 @@ body {
     }
 
     #penalty_div {
-        height: auto !important;
+        /* height: auto !important; */
+        /* max-width: 100%; */
+        /* width: 70%; */
+        margin: 0 auto;
     }
 
     .block {
         flex-direction: row;
-        flex-wrap: wrap;
+        /* flex-wrap: wrap; */
         padding-block: 15px !important;
     }
 
@@ -89,7 +90,7 @@ body {
 
 
     div {
-        flex-wrap: wrap !important;
+        /* flex-wrap: wrap !important; */
     }
 }
 
@@ -100,7 +101,7 @@ input[type="color"] {
 }
 
 .column-container{
-    width: 400px;
+    width: 500px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -123,10 +124,13 @@ input[type="color"] {
 
 .h-group{
     display: flex;
-    width: 100%;
+    width: auto;
     align-content: center;
     justify-content: center;
     gap: 10px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
 }
 
 .text-form {
@@ -184,7 +188,7 @@ input[type="button"]:hover {
 
 .block {
     margin: 0;
-    width: 100%;
+    width: -webkit-fill-available;
     padding: 15px;
     padding-block: 25px;
     border-bottom: black 1px solid;
@@ -259,7 +263,6 @@ input[type="button"]:hover {
 }
 
 .half-form-container input{
-    width: 179PX;
     overflow-wrap: anywhere;
 }
 
@@ -305,4 +308,9 @@ table th:first-child, table td:first-child {
 
 .yellow {
     background-color: #ffcc0093 !important;
+}
+
+#couches h3 {
+    width: 100%;
+    text-align: center;
 }

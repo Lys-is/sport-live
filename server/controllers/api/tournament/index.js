@@ -21,7 +21,7 @@ class TournamentController {
             data.basic = req.body;
             let tournament = await Tournament.create(data);
             if(!tournament) return res.json({message: 'Команда не создана, ошибка'});
-            return res.json({message: 'Турнир создан'});
+            return res.json({message: 'Турнир создан', redirect: '/lk?page=tournament/id/'+ tournament._id+'/edit'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка: '+ e.message});
@@ -123,7 +123,7 @@ class TournamentController {
             let tournament = await Tournament.findOne({_id: tourId})
             let chooseTeams = tournament.teams;
             console.log(chooseTeams)
-            let teams = await Team.find( { $nor: [{_id: {$in: chooseTeams}}] });
+            let teams = await Team.find( {creator: req.user.id, $nor: [{_id: {$in: chooseTeams}}] });
 
             return sendRes('partials/lk_part/tour/tournament_teams', {teams}, res);
         } catch (e) {

@@ -6,10 +6,16 @@
 
         <div class="filler"></div>
         <div class="header_block">
-            <a href="/panel/<%= auth._id %>" class="header_text">Панель управления</a>
+            <a href="/panel/<%= auth._id %>" class="header_text">Панель</a>
+        </div>
+        <div class="header_block">
+            <a href="/panel_players/<%= auth._id %>" class="header_text">Игроки</a>
         </div>
         <div class="header_block">
             <a href="/table/<%= auth._id  %>" class="header_text">Табло</a>
+        </div>
+        <div class="header_block">
+            <a href="/lk?page=style" class="header_text">Стили</a>
         </div>
         <div class="header_block">
             <p class="header_text">Тариф: Оплачен до <p class="header_text header_tariff_date">11.11.2020</p></p>

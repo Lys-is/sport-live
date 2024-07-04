@@ -197,7 +197,10 @@ async function sendFetch(url, data, method, headers = {'Content-Type': 'applicat
         //console.log(res)
         if(res.message){
             alert(res.message)
-            return res.message
+           // return res.message
+        }
+        if(res.redirect){
+            window.location = res.redirect
         }
         return res
     })
@@ -264,12 +267,23 @@ function setAutoMainResize(){
 }
 
 function get(selector,  element = document) {
-    return element.querySelector(selector);
+    let el = element.querySelector(selector);
+    if (el) return el;
+    else {
+        console.log('no element' + selector)
+        return null
+    }
 }
 
 function getA(selector, element = document) {
-    return element.querySelectorAll(selector);
+    let el = element.querySelectorAll(selector);
+    if (el) return el;
+    else {
+        console.log('no element' + selector)
+        return null
+    }
 }
+
 
 
 function input_file_text(inp){
@@ -375,12 +389,9 @@ async function formGetData(form) {
         if (name) {
             const {type, checked, value} = field;
             let datalist = isDatalist(field);
-            console.log(datalist)
             if (datalist) {
                 let options = [...datalist.options];
-                console.log(options)
                 let selectedEl = options.filter(el => field.value == el.value)[0];
-                console.log(selectedEl)
                 if(selectedEl)
                     data[name] = selectedEl.getAttribute('data-value')
             }

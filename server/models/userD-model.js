@@ -5,7 +5,8 @@ const UserDSchema = new Schema({
     name: {type: String, default: ''},
     surname: {type: String, default: ''},
     patronymic: {type: String, default: ''},
-    nickname: {type: String, default: ''},
+    site_img: {type: String, default: '/static/styles/icons/logo.jpg'},
+    site_name: {type: String, default: 'Sportlive'},
 })
 
 module.exports = model('UserD', UserDSchema);

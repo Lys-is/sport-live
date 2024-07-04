@@ -99,6 +99,8 @@ async function getPage(href, destInHtml = lk_main) {
     inits[removeTrailingSlash(initHref)]?.(href);
     setImgListener()
     init__filter()
+    changeNav(null, href)
+
     return true
 }
 function removeTrailingSlash(str) {
@@ -530,7 +532,7 @@ function init__style() {
         data = data.style
         for(let key in data){
             console.log(key)
-            if(form[key]){}
+            if(form[key])
                 form[key].value = data[key]
         }
     })

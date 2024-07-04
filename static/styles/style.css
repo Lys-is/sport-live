@@ -32,3 +32,6 @@ input:disabled {
     /* padding-bottom: 100%; */
     padding: 10px;
 }
+.top_nav {
+    margin-bottom: auto !important;
+}

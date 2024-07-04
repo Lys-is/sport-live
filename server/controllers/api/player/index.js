@@ -5,7 +5,7 @@ class PlayersController {
 
     async get__create(req, res) {
         try {
-            let teams = await Team.find();
+            let teams = await Team.find({creator: req.user.id}).select('name _id');
             return sendRes('partials/lk_part/player_create', {teams}, res);
         } catch (e) {
             console.log(e);
@@ -43,7 +43,7 @@ class PlayersController {
     async get__edit(req, res) {
         try {
             let player = await Player.findOne({_id: req.query.id})
-            let teams = await Team.find();
+            let teams = await Team.find({creator: req.user.id});
             return sendRes('partials/lk_part/player_edit', {player, teams}, res);
         } catch (e) {
             console.log(e);

@@ -13,7 +13,7 @@ class UserController {
             //const {email, password} = req.body;
             const userData = await userService.registration(req.body);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
-            return res.json({message: 'Пользователь зарегистрирован'});
+            return res.json({message: 'Пользователь зарегистрирован', redirect: '/login'});
         } catch (e) {
             return res.json({message: e.message})
         }

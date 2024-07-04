@@ -15,8 +15,8 @@ class TeamsController {
     async post__create(req, res) {
         try {
             let {name, description} = req.body;
-            await Team.create({creator: req.user.id, admins: req.user.id, ...req.body});
-            return res.json({message: 'Команда создана'});
+            let team = await Team.create({creator: req.user.id, admins: req.user.id, ...req.body});
+            return res.json({message: 'Команда создана', redirect: `lk?page=team/get__team_list/^id~${team._id}`});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -55,7 +55,7 @@ class TeamsController {
             console.log(teamId)
             let players = await Player.find({team: teamId}).populate('team creator');
             console.log(players)
-            let playersAll = await Player.find()
+            let playersAll = await Player.find({creator: req.user.id})
             return sendRes('partials/lk_part/team_list', {players: players, team: team, playersAll}, res);
         } catch (e) {
             console.log(e);
@@ -83,7 +83,7 @@ class TeamsController {
             let team = await Team.findOne({_id: teamId})
             if(!team) return res.json({message: 'Такой команды не существует'});
             let couches = await Couch.find({team: teamId}).populate('team creator');
-            let couchesAll = await Couch.find()
+            let couchesAll = await Couch.find({creator: req.user.id})
             return sendRes('partials/lk_part/team_couch', {couches, team, couchesAll}, res);
         } catch (e) {
             console.log(e);
@@ -109,7 +109,7 @@ class TeamsController {
             let team = await Team.findOne({_id: teamId})
             if(!team) return res.json({message: 'Такой команды не существует'});
             let representatives = await Representative.find({team: teamId}).populate('team creator');
-            let representativesAll = await Representative.find()
+            let representativesAll = await Representative.find({creator: req.user.id})
             return sendRes('partials/lk_part/team_representative', {representatives, team, representativesAll}, res);
         } catch (e) {
             console.log(e);

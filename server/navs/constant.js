@@ -12,6 +12,9 @@ const nav = {
     'panel/:id' : {
         'func' : 'get__panel'
     },
+    'panel_players/:id' : {
+        'func' : 'get__panel_players'
+    },
     'table/:id' : {
         'func' : 'get__table'
     },
@@ -215,7 +218,7 @@ function start(){
             link = ''
         }
         link += now_parents.join('/') +'/'+ obj;
-        console.log(contoller, constrollerLink, link)
+        //console.log(contoller, constrollerLink, link)
         router[method](link, middelware, (req, res) => {
             //console.log(req, res)
             contoller[constrollerLink](req, res)

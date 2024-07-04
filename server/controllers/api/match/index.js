@@ -8,9 +8,9 @@ class MatchController {
 
     async get__create(req, res) {
         try {
-            let teams = await Team.find();
-            let tournaments = await Tournament.find();
-            let judges = await Judge.find();
+            let teams = await Team.find({creator: req.user.id});
+            let tournaments = await Tournament.find({creator: req.user.id});
+            let judges = await Judge.find({creator: req.user.id});
             return sendRes('partials/lk_part/match_create', {teams, tournaments, judges}, res);
         } catch (e) {
             console.log(e);
@@ -39,10 +39,10 @@ class MatchController {
             if(!match.results_1 || !match.results_2) 
                 await match.setPlayerResults();
             console.log(matchId)
-            let teams = await Team.find();
-            let tournaments = await Tournament.find();
-            let judges = await Judge.find();
-            let commentators = await Commentator.find();
+            let teams = await Team.find({creator: req.user.id});
+            let tournaments = await Tournament.find({creator: req.user.id});
+            let judges = await Judge.find({creator: req.user.id});
+            let commentators = await Commentator.find({creator: req.user.id});
             return sendRes('partials/lk_part/match_edit', {match, teams, tournaments, judges, commentators}, res);
         } catch (e) {
             console.log(e);

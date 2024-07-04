@@ -23,7 +23,7 @@ class RepresentativeController {
             player.team = data.team_to;
             await player.save();
             let transfer = await Transfer.create(data);
-            return res.json({message: 'Трансфер создан'});
+            return res.json({message: 'Трансфер создан', redirect: '/lk?page=transfer'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -32,7 +32,7 @@ class RepresentativeController {
     async get__edit(req, res) {
         try {
             let player = await Representative.findOne({_id: req.query.id})
-            let teams = await Team.find();
+            let teams = await Team.find({creator: req.user.id});
             return sendRes('partials/lk_part/player_edit', {player, teams}, res);
         } catch (e) {
             console.log(e);
