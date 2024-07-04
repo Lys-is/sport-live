@@ -113,6 +113,8 @@ function buildAggregatePipeline(filters, pageNumber = 1, pageSize = process.env.
 function getModelName(value) {
     baseCollectionMapping = {
         'creator': 'user',
+        'team_from': 'team',
+        'team_to': 'team',
     }
     let models =  mongoose.modelNames()
     const checker = value =>

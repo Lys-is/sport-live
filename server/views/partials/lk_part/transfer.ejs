@@ -16,12 +16,12 @@
             <td>В команду</td>
             <td>Дата трансфера</td>
         </tr>
-        <tr>
+        <tr class="filter">
             <td></td>
-            <td><input type="text" class="table_input_text"></td>
-            <td><input type="text" class="table_input_text"></td>
-            <td><input type="text" class="table_input_text"></td>
-            <td><input type="date" class="table_input_text"></td>
+            <td><input type="text" class="table_input_text" name="player.fio"></td>
+            <td><input type="text" class="table_input_text" name="team_from.name"></td>
+            <td><input type="text" class="table_input_text" name="team_to.name"></td>
+            <td><input type="date" class="table_input_text" name="date"></td>
         </tr>
      <% if (transfers.length > 0) { %>
 
@@ -41,8 +41,6 @@
 </table>
     <h2 class="lk_wrapper__title">Нет трансферов</h2>
 <% } %>
-<script>
-    
-</script>
+<%- include('pagination.ejs') %>
 </div>
 

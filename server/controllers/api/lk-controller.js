@@ -134,8 +134,9 @@ class LkController {
 
             console.log(req);
             console.log(await Transfer.find());
-            let transfers = await Transfer.find({})
-            return sendRes('partials/lk_part/transfer', {transfers}, res);
+            let transfers = await dbService.getAggregate(Transfer, req);
+            let total = await Transfer.countDocuments({creator: req.user.id});
+            return sendRes('partials/lk_part/transfer', {transfers, total}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
