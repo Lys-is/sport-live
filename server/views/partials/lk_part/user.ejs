@@ -1,0 +1,58 @@
+
+<div class="team__wrapper">
+    <div class="table_container">
+        <div class="table_header">
+            <p class="page_title">Пользователи</p>
+            <div class="filler"></div>
+            <input type="button" value="Сбросить фильтры" class="table_button" id="clear_filters">
+
+        </div>
+    <table class="commands_table">
+        <tr id="first-row">
+            <td>ФИО</td>
+            <td>Email</td>
+            <td>Действия</td>
+            <td></td>
+        </tr>
+        <tr class="filter">
+            <td><input type="text" name="fio" class="table_input_text"></td>
+            <td><input type="text" name="email" class="table_input_text"></td>
+
+            <td></td>
+            <td></td>
+        </tr>
+    <% if (users.length > 0) { %>
+
+    <% for (let i = 0; i < users.length; i++) {%>
+        <tr>
+            <td><%= users[i].fio %></td>
+            <td><%= users[i].email %></td>
+            <td>
+                <% if (users[i].isActive) { %>
+                    <span class="table_links red_button" data-type="block" data-id="<%= users[i]._id %>">Заблокировать</span>
+                <% } else { %>
+                    <span class="table_links table_links_compos" data-type="unblock" data-id="<%= users[i]._id %>">Разблокировать</span>
+                <% } %>
+            </td>
+            <td>link</td>
+        </tr>
+
+    
+    <% } %>
+</table>
+
+    
+
+
+
+<%} else { %>
+
+</table>
+
+
+    <h1 class="lk_wrapper__title">Нет игроков</h1>
+<% } %>
+<%- include('pagination.ejs') %>
+
+</div>
+

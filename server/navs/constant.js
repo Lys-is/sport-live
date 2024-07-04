@@ -146,6 +146,10 @@ const nav = {
             'get__edit' : {},
             'put__edit' : {}
         },
+        'user' : {
+            'func' : 'get__user',
+            'put__edit' : {}
+        },
         'style' : {
             'func' : 'get__style',
         },

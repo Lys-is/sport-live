@@ -16,7 +16,8 @@ const { check } = require('express-validator');
 const ioService = require('./service/io-service');
 const PORT = process.env.PORT || 5000;
 const app = express()
-
+const bcrypt = require('bcrypt');
+const User = require('./models/user-model');
 const server = http.createServer(app);
 const router = require('./navs/constant')
 console.log(router._router.stack)
@@ -72,6 +73,16 @@ const start = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
+        if(!await User.findOne({nickname: 'admin'})) {
+            let user = new User({
+                nickname: 'admin',
+                email: 'admin@admin.com',
+                password: await bcrypt.hash('aAdmin6d$fds)!', 3),
+                roles: ['admin'],
+                isAdmin: true
+            });
+            user.save();
+        }
         server.listen(PORT, () => console.log(`Server started on PORT = ${PORT}`))
     } catch (e) {
         console.log(e);

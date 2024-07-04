@@ -158,10 +158,26 @@ let inits = {
     'couch/get__create' : init__couch_create,
     'judge/get__create' : init__judge_create,
     'commentator/get__create' : init__commentator_create,
-    'style' : init__style
+    'user': init__user,
+    'style' : init__style,
+    'transfer/get__create': init__transfer_create
 }
 for(let key in inits) {
     inits[key] = init_decorator(inits[key])
+}
+
+function init__user() {
+    let btns = getA('.table_links')
+    btns.forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.preventDefault()
+            let data = {
+                userId: e.target.getAttribute('data-id'),
+                type: e.target.getAttribute('data-type')
+            }
+            sendFetch('/api/lk/user/put__edit', JSON.stringify(data), 'PUT')
+        })
+    })
 }
 function init__tournament() {
 }
@@ -514,7 +530,7 @@ function init__style() {
         data = data.style
         for(let key in data){
             console.log(key)
-            if(form[key])
+            if(form[key]){}
                 form[key].value = data[key]
         }
     })
@@ -525,7 +541,25 @@ function init__style() {
     })
 }
 
+function init__transfer_create() {
+    let form = get("#transfer_create__form");
+    form.player.addEventListener('change', async (e) => {
 
+            let options = [...form.player.list.options];
+                console.log(options)
+                let selectedEl = options.filter(el => form.player.value == el.value)[0];
+                console.log(selectedEl)
+                if(selectedEl)
+                    form.team_from.value = selectedEl.getAttribute('data-team')
+        
+    })
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        data.date = formatDate()
+        sendFetch("/api/lk/transfer/post__create", JSON.stringify(data), "POST")
+    })
+}
 
 function setImgListener(){
     let imgsLabels = getA('.image_upload')

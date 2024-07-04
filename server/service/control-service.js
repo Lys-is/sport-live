@@ -153,8 +153,8 @@ class Tablo {
 class Control {
 
     constructor(userId, style) {
-        this.team1_name = 'Команда 1'
-        this.team2_name = 'Команда 2'
+        this.team1_name = 'Хозяева'
+        this.team2_name = 'Гости'
         this.userId = userId
         this.match = null
         this.timer = new Timer()

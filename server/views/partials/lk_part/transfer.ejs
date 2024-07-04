@@ -3,7 +3,10 @@
     <div class="table_container">
         <div class="table_header">
             <p class="page_title">Трансферы</p>
-            
+            <div class="filler"></div>
+            <input type="button" value="Сбросить фильтры" class="table_button"  id="clear_filters">
+            <input type="button" value="Создать трансфер" class="table_button nav_link" data-href="transfer/get__create">
+
         </div>
     <table class="commands_table">
         <tr id="first-row">
@@ -11,28 +14,24 @@
             <td>ФИО</td>
             <td>Из команды</td>
             <td>В команду</td>
-            <td>Статус</td>
-            <td>Дата запроса трансфера</td>
-            <td>Дата принятия трансфера</td>
+            <td>Дата трансфера</td>
         </tr>
         <tr>
             <td></td>
             <td><input type="text" class="table_input_text"></td>
             <td><input type="text" class="table_input_text"></td>
             <td><input type="text" class="table_input_text"></td>
-            <td><input type="text" class="table_input_text"></td>
-            <td><input type="date" class="table_input_text"></td>
             <td><input type="date" class="table_input_text"></td>
         </tr>
      <% if (transfers.length > 0) { %>
 
     <% for (let i = 0; i < transfers.length; i++) {%>
         <tr>
-            <td><%= i %></td>
-            <td><%= transfers[i].fio %></td>
+            <td><%= i+1 %></td>
+            <td><%= transfers[i].player.fio %></td>
+            <td><%= transfers[i].team_from.name %></td>
+            <td><%= transfers[i].team_to.name %></td>
             <td><%= transfers[i].date %></td>
-            <td><%= transfers[i].team.name %></td>
-            <td>link</td>
         </tr>
 
     

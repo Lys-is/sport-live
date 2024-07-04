@@ -222,10 +222,11 @@
                 </div>
                 <div class="h-group">
                     <select name="scenarios" id="scenarios" class="text-form full-form">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                        <option value="1">Начало матча</option>
+                        <option value="2">1 тайм</option>
+                        <option value="3">Перерыв</option>
+                        <option value="4">2 тайм</option>
+                        <option value="5">Конец матча</option>
                     </select>
                 </div>
             </div>
@@ -249,14 +250,14 @@
                 </div>
                 <div class="h-group">
                     <div class="v-group">
-                        <lable for="team1" class="data_team_1">Команда 1</lable>
-                        <input type="text" id="team1" class="text-form full-form data_team_1" name="team1" value="Комманда 1">
+                        <lable for="team1" class="data_team_1">Хозяева</lable>
+                        <input type="text" id="team1" class="text-form full-form data_team_1" name="team1" value="Хозяева">
                         <input type="color" id="team1" class="full-form" name="team1_color" value="#ee7733" data-type="score">
                     </div>
 
                     <div class="v-group">
-                        <lable for="team1" class="data_team_2">Команда 2</lable>
-                        <input type="text" id="team1" class="text-form full-form data_team_2" name="team2" value="Комманда 2">
+                        <lable for="team1" class="data_team_2">Гости</lable>
+                        <input type="text" id="team1" class="text-form full-form data_team_2" name="team2" value="Гости">
                         <input type="color" id="team1" class=" full-form" name="team2_color" value="#3333ff" data-type="score">
                     </div>
                 </div>
@@ -401,7 +402,7 @@
                                 <option value="3">3</option>
                             </select>
                             <input type="button" value="Показать малое" class="replace_btn" data-type="team1__s" class="full-form" name="team1-replace-button-small">
-                            <input type="button" value="Показать большое" class="replace_btn" data-type="team2__b"  name="team1-replace-button-big">
+                            <input type="button" value="Показать большое" class="replace_btn" data-type="team1__b"  name="team1-replace-button-big">
                         </div>
                         <div class="v-group">
                             <lable for="team2-replace" class="small-text data_team_2" data-type="replace">Замена команды 2</lable>

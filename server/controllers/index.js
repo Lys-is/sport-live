@@ -2,6 +2,7 @@ let Match = require('../models/match-model');
 let User = require('../models/user-model');
 let League = require('../models/league-model');
 let Style = require('../models/style-model');
+
 class Constrollers {
     async auth(req, res, next) {
         res.render('auth', {
@@ -15,7 +16,8 @@ class Constrollers {
         res.render('lk', {
             title: 'ЛК',
             league: league || false,
-            auth: req.user || false
+            auth: req.user || false,
+            isAdmin: req.user.isAdmin
         });
     }
     async get__login(req, res, next) {

@@ -27,6 +27,8 @@ class LkController {
     judge = require('./judge')
     couch = require('./couch')
     commentator = require('./commentator')
+    user = require('./user')
+    transfer = require('./transfer')
     async get__create(req, res) {
         try {
             return sendRes('partials/lk_part/team_create', {}, res);
@@ -47,9 +49,11 @@ class LkController {
     }
     async get__judge(req, res) {
         try {
+            req.query['creator'] = req.user.id
+
             console.log(req);
             let judges = await dbService.getAggregate(Judge, req);
-            let total = await Judge.countDocuments({});
+            let total = await Judge.countDocuments({creator: req.user.id});
             return sendRes('partials/lk_part/judge', {judges, total}, res);
         } catch (e) {
             console.log(e);
@@ -58,9 +62,11 @@ class LkController {
     }
     async get__commentator(req, res) {
         try {
+            req.query['creator'] = req.user.id
+
             console.log(req);
             let commentators = await dbService.getAggregate(Commentator, req);
-            let total = await Commentator.countDocuments({});
+            let total = await Commentator.countDocuments({creator: req.user.id});
             return sendRes('partials/lk_part/commentator', {commentators, total}, res);
         } catch (e) {
             console.log(e);
@@ -69,10 +75,12 @@ class LkController {
     }
     async get__representative(req, res) {
         try {
+            req.query['creator'] = req.user.id
+
             console.log(await Representative.find());
             let teams = await Team.find({}).select('name _id');
             let representatives = await dbService.getAggregate(Representative, req);
-            let total = await Representative.countDocuments({});
+            let total = await Representative.countDocuments({creator: req.user.id});
             return sendRes('partials/lk_part/representative', {representatives, teams, total}, res);
         } catch (e) {
             console.log(e);
@@ -81,9 +89,11 @@ class LkController {
     }
     async get__couch(req, res) {
         try {
+            req.query['creator'] = req.user.id
+
             let teams = await Team.find({}).select('name _id');
             let couches = await dbService.getAggregate(Couch, req);
-            let total = await Couch.countDocuments({});
+            let total = await Couch.countDocuments({creator: req.user.id});
             return sendRes('partials/lk_part/couch', {couches, teams, total}, res);
         } catch (e) {
             console.log(e);
@@ -111,11 +121,7 @@ class LkController {
             console.log(req);
             console.log(await Stadium.find());
             let stadiums = await Stadium.find({})
-            stadiums = stadiums.map((stadium) => {
-                stadium.date = stadium.date.toLocaleDateString()
-                console.log(stadium.date);
-                return stadium
-            })
+
             return sendRes('partials/lk_part/stadium', {stadiums}, res);
         } catch (e) {
             console.log(e);
@@ -124,14 +130,11 @@ class LkController {
     }
     async get__transfer(req, res) {
         try {
+            req.query['creator'] = req.user.id
+
             console.log(req);
             console.log(await Transfer.find());
             let transfers = await Transfer.find({})
-            transfers = transfers.map((transfer) => {
-                transfer.date = transfer.date.toLocaleDateString()
-                console.log(transfer.date);
-                return transfer
-            })
             return sendRes('partials/lk_part/transfer', {transfers}, res);
         } catch (e) {
             console.log(e);
@@ -160,11 +163,13 @@ class LkController {
     }
     async get__player(req, res) {
         try {
+            req.query['creator'] = req.user.id
+
             console.log(req);
             console.log(await Player.find());
             let teams = await Team.find().select('name _id');
             let players = await dbService.getAggregate(Player, req);
-            let total = await Player.countDocuments({}) ;
+            let total = await Player.countDocuments({creator: req.user.id}) ;
 
             return sendRes('partials/lk_part/player', {players, teams, total}, res);
         } catch (e) {
@@ -180,8 +185,10 @@ class LkController {
             //     console.log(team.date);
             //     return team
             // })
+            req.query['creator'] = req.user.id
+
             let teams = await dbService.getAggregate(Team, req);
-            let total = await Team.countDocuments({});
+            let total = await Team.countDocuments({creator: req.user.id});
             return sendRes('partials/lk_part/team', {teams, total}, res);
         } catch (e) {
             console.log(e);
@@ -291,6 +298,20 @@ class LkController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
+
+    async get__user(req, res) {
+        try {
+            if(!req.user.isAdmin)
+                return res.json({message: 'Нет доступа'});
+            let users = await dbService.getAggregate(User, req);
+            let total = await User.countDocuments({});
+            console.log(users, total);  
+            return sendRes('partials/lk_part/user', {users, total}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
     
 }
 
@@ -302,50 +323,6 @@ async function sendRes(path, data, res) {
     });
 }
 
-function formatDate(date, type) {
-    let args = {
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-    }
-    switch(type){
-        case 'days': args = {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-        }
-        break;
-        case 'hours': args = {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: 'numeric',
-        }
-        break;
 
-        case 'minuts': args = {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: 'numeric',
-            minute: '2-digit',
-        }
-        break;
-        case 'full': args = {
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-            hour: 'numeric',
-            minute: '2-digit',
-            timeZoneName: "short",
-
-        }
-        break;
-
-    }
-    let formatter = new Intl.DateTimeFormat("ru", args);
-
-    return formatter.format(date)
-}
 
 module.exports = new LkController();

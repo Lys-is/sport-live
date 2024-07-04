@@ -1,0 +1,54 @@
+
+
+<div class="create_transfer_container">
+    <form id="transfer_create__form">
+    <p class="content_navtext">Главная &gt; Трансферы &gt; Создание трансфера</p>
+    <div class="create_tournire_content">
+        <div class="create_tournire_header">
+            <p class="page_title">Трансфер</p>
+        </div>
+        <div class="create_tournire_body">
+            <div class="form_container">
+                <div class="ct_form">
+                    <div class="form_group">
+                        <label for="full_name">Игрок</label>
+                        <input type="text" list="player" name="player">
+                        <datalist id="player">
+                            <% for (let i = 0; i < players.length; i++) { %>
+                                <option data-team="<%= players[i].team?.name %>" value="<%= players[i].fio %>" data-value="<%= players[i]._id %>"></option>
+                            <% } %>
+                        </datalist>
+                    </div>
+                    
+                    <div class="form_group">
+                        <label for="team">Из команды</label>
+                        <input type="text" list="team" name="team_from">
+                        <datalist id="team">
+                            <% for (let i = 0; i < teams.length; i++) { %>
+                                <option value="<%= teams[i].name %>" data-value="<%= teams[i]._id %>"></option>
+                            <% } %>
+                        </datalist>
+                    </div>
+                    <input type="hidden" name="date">
+                    <div class="form_group">
+                        <label for="team">В команду</label>
+                        <input type="text" list="team" name="team_to">
+                        <datalist id="team">
+                            <% for (let i = 0; i < teams.length; i++) { %>
+                                <option value="<%= teams[i].name %>" data-value="<%= teams[i]._id %>"></option>
+                            <% } %>
+                        </datalist>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="create_tournire_footer">
+            <div class="filler"></div>
+            <input type="button" value="Отменить" class="button white_button">
+            <input type="submit" value="Создать" class="button green_button">
+        </div>
+    </div>
+</form>
+</div>

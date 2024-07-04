@@ -26,3 +26,9 @@ input:disabled {
     background-color: transparent;
     cursor: no-drop;
 }
+.image_preview::after {
+    content: "Загрузить изображение";
+    display: block;
+    /* padding-bottom: 100%; */
+    padding: 10px;
+}

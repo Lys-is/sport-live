@@ -40,6 +40,10 @@
         <p class = "navbar_text icon2" id="navbar_transfers" data-href="transfer">Трансферы</p>
         <p class = "navbar_text icon2" id="navbar_judges" data-href="judge">Судьи</p>
         <p class = "navbar_text icon2" id="navbar_judges" data-href="commentator">Комментаторы</p>
+        <% if(isAdmin) { %>
+            <br>
+            <p class = "navbar_text icon2" id="navbar_reps" data-href="user">Пользователи</p>
+        <% } %>
     </div>
     <div class="navbar_footer">
         <img src = "/static/styles/icons/logo.jpg" class = "navbar_logo" alt = "logo" height="30" width="30">
