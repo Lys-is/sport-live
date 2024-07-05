@@ -55,7 +55,7 @@ class TeamsController {
             console.log(teamId)
             let players = await Player.find({team: teamId}).populate('team creator');
             console.log(players)
-            let playersAll = await Player.find({creator: req.user.id})
+            let playersAll = await Player.find({creator: req.user.id, status_doc: {$ne: 'deleted'}})
             return sendRes('partials/lk_part/team_list', {players: players, team: team, playersAll}, res);
         } catch (e) {
             console.log(e);
@@ -83,7 +83,7 @@ class TeamsController {
             let team = await Team.findOne({_id: teamId})
             if(!team) return res.json({message: 'Такой команды не существует'});
             let couches = await Couch.find({team: teamId}).populate('team creator');
-            let couchesAll = await Couch.find({creator: req.user.id})
+            let couchesAll = await Couch.find({creator: req.user.id, status_doc: {$ne: 'deleted'}})
             return sendRes('partials/lk_part/team_couch', {couches, team, couchesAll}, res);
         } catch (e) {
             console.log(e);
@@ -109,7 +109,7 @@ class TeamsController {
             let team = await Team.findOne({_id: teamId})
             if(!team) return res.json({message: 'Такой команды не существует'});
             let representatives = await Representative.find({team: teamId}).populate('team creator');
-            let representativesAll = await Representative.find({creator: req.user.id})
+            let representativesAll = await Representative.find({creator: req.user.id, status_doc: {$ne: 'deleted'}})
             return sendRes('partials/lk_part/team_representative', {representatives, team, representativesAll}, res);
         } catch (e) {
             console.log(e);

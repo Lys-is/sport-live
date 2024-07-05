@@ -13,6 +13,8 @@ const PlayerSchema = new Schema({
     num: {type: Number, default: 0},
     socials: {type: String},
     mobile: {type: String},
+    status_doc: {type: String, default: 'active', enum: ['active', 'deleted']},
+
 })
 PlayerSchema.pre('save', function(next) {
     if(!this.team)

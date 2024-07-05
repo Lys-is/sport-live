@@ -42,6 +42,7 @@ const nav = {
         'league' : {'func': 'get__league'},
         'put__profile' : {},
         'put__league' : {},
+        'put__del' : {},
         'team' : {
             'func' : 'get__team',
             'get__create' : {},
@@ -75,6 +76,7 @@ const nav = {
                 'admins' : { 'func' : 'put__admins' }
             },
             'put__team' : {},
+            'delete__team' : {},
             'id/:id/' : {'func': 'get__template'},
             'id/:id/edit' : {'func': 'get__edit'},
             'id/:id/group' : {
@@ -85,6 +87,7 @@ const nav = {
             'id/:id/get__group_edit/:group_id' : {'func': 'get__group_edit'},
             'id/:id/get__group_create' : {'func': 'get__group_create'},
             'id/:id/team' : {'func': 'get__team'},
+            'id/:id/team_in' : {'func': 'get__team_in'},
             'id/:id/judge' : {'func': 'get__judge'},
             'id/:id/t_team' : {'func': 'get__t_team'},
             'id/:id/results' : {'func': 'get__results'},
@@ -95,6 +98,8 @@ const nav = {
         'match' : {
             'func' : 'get__match',
             'get__create' : {},
+            'get__create_calendar' : {},
+            'post__create_calendar' : {},
             'post__create' : {},
             'id/:id/get__edit' : {'func': 'get__edit'},
             'put__edit' : {},
@@ -157,7 +162,8 @@ const nav = {
             'func' : 'get__style',
         },
         'post__style' : {},
-        'get__style_by_id'  : {}
+        'get__style_by_id'  : {},
+        'get__tournament_by_id'  : {},
     }
 }
 function start(){

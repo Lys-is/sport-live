@@ -6,8 +6,8 @@
                 <input type="button" value="Сбросить фильтры" class="table_button"  id="clear_filters">
                 <input type="button" value="Добавить команду" class="table_button nav_link" data-href="team/get__create">
                 <div class="filler"></div>
-                <input type="button" value="Активные" class="table_button_radio_active table_radio_active" data-name="active">
-                <input type="button" value="Архивные" class="table_button_radio_archive" data-name="archive">
+                <input type="button" value="Активные" class="table_status table_button_radio_active table_radio_active" data-name="active">
+                <input type="button" value="Архивные" class="table_status table_button_radio_archive" data-name="deleted">
             </div>
             <table class="commands_table">
                 <tr id="first-row" >
@@ -36,10 +36,15 @@
                     <td><%= teams[i].date %></td>
                     <td><%= teams[i].creator.email %></td>
                     <td>
-                        <span class="table_links table_links_admines nav_link" data-href="team/get__team_couch/?id=<%= teams[i]._id %>">Тренеры</span>
-                        <span class="table_links table_links_compos nav_link" data-href="team/get__team_list/?id=<%= teams[i]._id %>">Состав</span>
-                        <span class="table_links table_links_reps nav_link" data-href="team/get__team_representative/?id=<%= teams[i]._id %>">Представители</span>
-                        <span class="table_links table_links_reps nav_link" data-href="team/get__edit/?id=<%= teams[i]._id %>">Изменить</span>
+                        <% if(teams[i].status_doc == "active") { %>
+                            <span class="table_links table_links_admines nav_link" data-href="team/get__team_couch/?id=<%= teams[i]._id %>">Тренеры</span>
+                            <span class="table_links table_links_compos nav_link" data-href="team/get__team_list/?id=<%= teams[i]._id %>">Состав</span>
+                            <span class="table_links table_links_reps nav_link" data-href="team/get__team_representative/?id=<%= teams[i]._id %>">Представители</span>
+                            <span class="table_links table_links_reps nav_link" data-href="team/get__edit/?id=<%= teams[i]._id %>">Изменить</span>
+                            <span class="table_links table_links_del" data-id="<%= teams[i]._id %>" data-model="Team">В архив</span>
+                        <% } else { %>
+                            <span class="table_links table_links_del" data-id="<%= teams[i]._id %>" data-model="Team">Из архива</span>
+                        <% } %>
                     </td>
                     <td>link</td>
                 </tr>

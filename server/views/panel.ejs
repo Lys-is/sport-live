@@ -173,7 +173,7 @@
                     <select name="match" id="match" class="text-form full-form">
                     <% matches.forEach(match => {
                     %>
-                        <option value="<%= match._id %>"><%= match.team_1.name %> - <%= match.team_2.name %></option>
+                        <option value="<%= match._id %>"><%= match.team_1.name %> - <%= match.team_2.name %> | <%= match.date %></option>
                     <%
                     }); %>
                     </select>

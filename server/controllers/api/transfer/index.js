@@ -5,8 +5,8 @@ class RepresentativeController {
 
     async get__create(req, res) {
         try {
-            let teams = await Team.find({creator: req.user.id}).select('name _id');
-            let players = await Player.find({creator: req.user.id}).select('fio _id team');
+            let teams = await Team.find({creator: req.user.id, status_doc: {$ne: 'deleted'}}).select('name _id');
+            let players = await Player.find({creator: req.user.id, status_doc: {$ne: 'deleted'}}).select('fio _id team');
             console.log(teams, players);
             return sendRes('partials/lk_part/transfer_create', {teams, players}, res);
         } catch (e) {
@@ -32,7 +32,7 @@ class RepresentativeController {
     async get__edit(req, res) {
         try {
             let player = await Representative.findOne({_id: req.query.id})
-            let teams = await Team.find({creator: req.user.id});
+            let teams = await Team.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
             return sendRes('partials/lk_part/player_edit', {player, teams}, res);
         } catch (e) {
             console.log(e);

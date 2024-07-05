@@ -5,9 +5,10 @@
                 <div class="filler"></div>
                 <input type="button" value="Сбросить фильтры" class="table_button" id="clear_filters">
                 <input type="button" value="Добавить матч" class="table_button nav_link" data-href="match/get__create">
+                <input type="button" value="Создать календарь" class="table_button nav_link" data-href="match/get__create_calendar" style="background-color: #3180c5f3;">
                 <div class="filler"></div>
-                <input type="button" value="Активные" class="table_button_radio_active table_radio_active">
-                <input type="button" value="Архивные" class="table_button_radio_archive">
+                <input type="button" value="Активные" class="table_status table_button_radio_active table_radio_active" data-name="active">
+                <input type="button" value="Архивные" class="table_status table_button_radio_archive" data-name="deleted">
             </div>
         <table class="commands_table">
             <tr id="first-row">
@@ -38,14 +39,20 @@
         <% if (matches.length > 0) { %>
         <% for (let i = 0; i < matches.length; i++) {%>
             <tr>
-                <td><%= i + 1 %></td>
+                <td><%= i + 1  %></td>
                 <td><%= matches[i].team_1.name %></td>
                 <td><%= matches[i].team_2.name %></td>
                 <td><%= matches[i].date %></td>
                 <td><%= (matches[i].team_1_score || matches[i].team_2_score) ? `${matches[i].team_1_score}:${matches[i].team_2_score}` : '-:-'%></td>
                 <td><%= matches[i].tournament?.basic.name %></td>
                 <td>
-                    <span class="table_links table_links_compos nav_link"  data-href="match/id/<%= matches[i]._id %>/get__edit/">Изменить</span>
+                    <% if(matches[i].status_doc == "active") { %>
+                        <span class="table_links table_links_compos nav_link"  data-href="match/id/<%= matches[i]._id %>/get__edit/">Изменить</span>
+                        <span class="table_links table_links_del" data-id="<%= matches[i]._id %>" data-model="Match">В архив</span>
+                    <% } else { %>
+                        <span class="table_links table_links_del" data-id="<%= matches[i]._id %>" data-model="Match">Из архива</span>
+                    <% } %>
+
                 </td>
             </tr>
 

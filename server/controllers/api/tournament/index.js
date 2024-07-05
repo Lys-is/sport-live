@@ -1,8 +1,10 @@
 const Team = require('../../../models/team-model');
 const Player = require('../../../models/player-model');
+const Judge = require('../../../models/judge-model');
 const Tournament = require('../../../models/tournament-model');
 const editController = require('./edit-controller');
 const groupController = require('./group-controller');
+const dbService = require('../../../service/db-service');
 class TournamentController {
     put__edit = editController
     group = groupController
@@ -57,6 +59,23 @@ class TournamentController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
+    async delete__team(req, res) {
+        try {
+            let tourId = req.body.tournamentId;
+            console.log(tourId)
+            let tournament = await Tournament.findOne({_id: tourId})
+            console.log(tournament)
+            if(!tournament) return res.json({message: 'Такого турнира не существует'});
+            let team = await Team.findOne({_id: req.body.teamId});
+            if(!team) return res.json({message: 'Такой команды не существует'});
+            tournament.teams = tournament.teams.filter(t => t._id != req.body.teamId);
+            await tournament.save();
+            return res.json({message: 'Обновлено'});
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
     async get__edit(req, res) {
         try {
             let tourId = req.params.id;
@@ -103,7 +122,10 @@ class TournamentController {
     }
     async get__judge(req, res) {
         try {
-            return sendRes('partials/lk_part/tour/tournament_judge', {}, res);
+            let tourId = req.params.id;
+            let tournament = await Tournament.findOne({_id: tourId})
+            let judges = await Judge.find({creator: req.user.id});
+            return sendRes('partials/lk_part/tour/tournament_judge', {tournament, judges}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -125,7 +147,19 @@ class TournamentController {
             console.log(chooseTeams)
             let teams = await Team.find( {creator: req.user.id, $nor: [{_id: {$in: chooseTeams}}] });
 
-            return sendRes('partials/lk_part/tour/tournament_teams', {teams}, res);
+            return sendRes('partials/lk_part/tour/tournament_teams', {tournament, teams}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__team_in(req, res) {
+        try {
+            let tourId = req.params.id;
+            let tournament = await Tournament.findOne({_id: tourId})
+            let teams = tournament.teams;
+            console.log(teams)
+            return sendRes('partials/lk_part/tour/tournament_teams_in', {tournament, teams}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

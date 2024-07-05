@@ -202,6 +202,9 @@ async function sendFetch(url, data, method, headers = {'Content-Type': 'applicat
         if(res.redirect){
             window.location = res.redirect
         }
+        if(res.reload){
+            window.location.reload()
+        }
         return res
     })
     .catch(err => {
@@ -212,36 +215,6 @@ async function sendFetch(url, data, method, headers = {'Content-Type': 'applicat
     return resp
 
 }
-
-// const checkAuth = async () => {
-//     let data = [];
-//     let status;
-//     await fetch('/api/auth/check', { 
-//         method: 'POST', 
-//         headers: new Headers({
-//           'Authorization': 'Bearer ' + token,
-//           'Content-Type': 'application/json'
-//         })
-        
-//       })
-//       .then(res => {status = res.status; return res.json()})
-//       .then(response => {data = response;})
-//     if(status == 200) 
-//         login(data.message)
-// };
-// //checkAuth();
-// function login (name) {
-//     let authBtn = document.querySelector('.menu_elem.authentication');
-//     if(!authBtn)
-//         return
-//     authBtn.innerHTML = ''
-//     let span = document.createElement('span');
-//     span.classList.add('nickname')
-//     span.innerHTML = '#'+name;
-//     authBtn.append(span);
-//     authBtn.href = '/lk'
-// }
-
 
 
 

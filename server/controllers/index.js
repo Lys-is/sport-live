@@ -44,7 +44,7 @@ class Constrollers {
         });
     }
     async get__panel(req, res) {
-        let matches = await Match.find({creator: req.params.id})
+        let matches = await Match.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
         let userAd = await User.findById(req.params.id);
         let styles = await Style.find({creator: userAd._id});
 
@@ -57,7 +57,7 @@ class Constrollers {
         });
     }
     async get__panel_players(req, res) {
-        let matches = await Match.find({creator: req.params.id})
+        let matches = await Match.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
         let userAd = await User.findById(req.params.id);
         let styles = await Style.find({creator: userAd._id});
 

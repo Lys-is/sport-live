@@ -14,5 +14,4 @@ const TeamSchema = new Schema({
     status_doc: {type: String, default: 'active', enum: ['active', 'deleted']},
 })
 TeamSchema.plugin(require('mongoose-autopopulate'));
-
 module.exports = model('Team', TeamSchema);

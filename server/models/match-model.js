@@ -25,6 +25,8 @@ const MatchSchema = new Schema({
     commentators: [{type: Schema.Types.ObjectId, ref: 'Commentator', autopopulate: true}],
     results_1: [PlayerResultsSchema],
     results_2: [PlayerResultsSchema],
+    status_doc: {type: String, default: 'active', enum: ['active', 'deleted']},
+
 })
 MatchSchema.methods.setPlayerResults = async function(results) {
     if(results){

@@ -7,6 +7,8 @@ const CommentatorModel = new Schema({
     img: {type: String},
     socials: {type: String},
     mobile: {type: String},
+    status_doc: {type: String, default: 'active', enum: ['active', 'deleted']},
+
 })
 
 module.exports = model('Commentator', CommentatorModel);

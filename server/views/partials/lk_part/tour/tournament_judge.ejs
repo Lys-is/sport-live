@@ -9,16 +9,22 @@
                 <input type="button" value="Заявленные" class="table_button_radio_archive middle_tbra nm">
             </div>
             <table class="commands_table fath">
-                <tbody><tr>
-                    <td>
-                        <div class="form-group">
-                            <p class="nm ml">Судья</p>
-                            <div class="filler"></div>
-                            <input type="button" value="Заявить" class="button green_button">
-                        </div>
-                    </td>
-                </tr>
-            </tbody></table>
+                <tbody>
+                    <% for (let i = 0; i < judges.length; i++) { %>
+                        <tr>
+                            <td>
+
+                                <div class="form-group">
+                                    <p class="nm ml"><%= judges[i].fio %></p>
+                                    <div class="filler"></div>
+                                    <input type="button" value="Заявить" data-id="<%= judges[i]._id %>"  class="button green_button">
+                                </div>
+
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
             
         </div>
 

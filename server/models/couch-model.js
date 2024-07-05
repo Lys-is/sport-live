@@ -9,6 +9,8 @@ const СouchSchema = new Schema({
     img: {type: String},
     socials: {type: String},
     mobile: {type: String},
+    status_doc: {type: String, default: 'active', enum: ['active', 'deleted']},
+
 })
 СouchSchema.plugin(require('mongoose-autopopulate'));
 module.exports = model('Сouch', СouchSchema);

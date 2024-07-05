@@ -28,7 +28,6 @@ function changeNav(e, href) {
     href = href.split('&')[0]
     console.log(params, href)
     links.forEach(link => {
-        console.log(link.getAttribute('data-href'), href)
         if(link.getAttribute('data-href') != href)
             link.classList.remove('navbar_selected')
         else
@@ -42,6 +41,10 @@ if(params.page) {
         console.log(href)
         for(let key in params) {
             if(key.includes('filter'))
+                href += `&${key}=${params[key]}`
+            if(key =='page_n')
+                href += `&${key}=${params[key]}`
+            if(key =='status')
                 href += `&${key}=${params[key]}`
         }
         changeNav(null, href)
@@ -64,10 +67,17 @@ async function checkTournament(str) {
         console.log(templateHref)
         await getPage(templateHref)
         if(containsAny2) {
+            console.log('containsAny2', str)
             let tour_body = get('#tour_body');
             await getPage(str, tour_body);
+            let tour_navs = getA('.sub_nav_link');
+            tour_navs.forEach(link => {
+                link.classList.remove('active_t_button');
+            })
+            get(`.sub_nav_link[data-href="${str.split('_')[0]}"]`).classList.add('active_t_button');
         }
         console.log('checkTournament')
+
         return true
     }
     console.log('checkTournament false')
@@ -84,7 +94,7 @@ async function getPage(href, destInHtml = lk_main) {
     const response = await sendFetch(pageUrl, null, 'GET');
     destInHtml.innerHTML = response ? response : 'Страница не найдена';
 
-    params.subHref = href.split('?')[1] || '';
+    params.subHref = href.split('?')[1] || href;
     history.replaceState({ page: 1 }, "", `?page=${cleanedHref}`);
 
     const navLinks = getA('.nav_link');
@@ -93,14 +103,23 @@ async function getPage(href, destInHtml = lk_main) {
             link.addEventListener('click', linkListener);
         }
     });
+    let defLinks = getA('.def_link');
+    defLinks.forEach(link => {
+        if (!link.hasEventListener('click')) {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                location.href = e.target.getAttribute('data-href')
+
+            });
+        }
+    });
     initHref = initHref.replace(/\/id\/[^\/]+(\/[^\/]*)?/, "/id$1").replace(/(get__group_edit).*/, '$1').split('/^id~')[0];
     console.log(initHref)
-    console.log(removeTrailingSlash(initHref))
     inits[removeTrailingSlash(initHref)]?.(href);
     setImgListener()
     init__filter()
     changeNav(null, href)
-
+    initDel(params.subHref)
     return true
 }
 function removeTrailingSlash(str) {
@@ -144,12 +163,14 @@ let inits = {
     'team/get__team_couch' : init__team_couch,
     'match': init__match,
     'match/get__create' : init__match_create,
+    'match/get__create_calendar' : init__match_create_calendar,
     'match/id/get__edit' : init__match_edit,
     'tournament': init__tournament,
     'tournament/get__create' : init__tournament_create,
     'tournament/id' : init__tournament_template,
     'tournament/id/edit' : init__tournament_edit,
     'tournament/id/team' : init__tournament_team,
+    'tournament/id/team_in' : init__tournament_team_in,
     'tournament/id/group' : init__tournament_group,
     'tournament/id/get__group_create' : init__tournament_group_create,
     'tournament/id/get__group_edit' : init__tournament_group_edit,
@@ -273,6 +294,19 @@ function init__tournament_team(){
                 teamId: e.target.getAttribute('data-id')
             }
             sendFetch('/api/lk/tournament/put__team', JSON.stringify(data), 'PUT')
+        })
+    })
+}
+function init__tournament_team_in(){
+    let tourId = get('#tour_body').getAttribute('data-id');
+    let addBtns = getA('.team_add');
+    addBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            let data = {
+                tournamentId: tourId,
+                teamId: e.target.getAttribute('data-id')
+            }
+            sendFetch('/api/lk/tournament/delete__team', JSON.stringify(data), 'DELETE')
         })
     })
 }
@@ -416,8 +450,42 @@ function init__match_edit() {
         
     }
 }
+function init__match_create_calendar() {
+    let tour;
+    let form = get("#match_create_calendar__form");
+    form.tournamentId.addEventListener('change', async (e) => {
+        let data = await formGetData(form)
+        console.log(data)
+        tour = await sendFetch(`/api/lk/get__tournament_by_id?id=${data.tournamentId}`)
+        console.log(tour)
+        setTip()
+    })
+    form.circles.addEventListener('change', async (e) => {
+        if(tour) {
+           setTip()
+        }
+    })
+    function setTip() {
+        let teamCount = tour.teams.length
+        let matchCount = ((teamCount*(teamCount-1))/2) * form.circles.value
+        let txt = `Матчей будет создано: ${matchCount}<br/>`
+        // if(teamCount % 2 != 0)
+        //     txt += 'Нечётное количество команд. Некоторые команды не имеют пары.'
+        get('#tip').innerHTML = txt
+    }
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        data.date = formatDate()
+        sendFetch("/api/lk/match/post__create_calendar", JSON.stringify(data), "POST")
+    })
+}
+function count_match(teamCount) {
+    return ((teamCount*(teamCount-1))/2)
+}
+
 function init__team() {
-    
+
 }
 function init__team_create() {
     let form = get("#team_create__form");
@@ -611,12 +679,18 @@ function hex2text(hex_string)
 
 
 function init__filter() {
-
+    let filter_data = {
+        filters: null,
+        page: 1,
+        status: 'active'
+    }
 
     let filter_div = get(".filter");
     console.log(filter_div)
     if(!filter_div) return
     let filters = getA("input", filter_div);
+    filter_data.filters = filters
+
     console.log(params.get)
     let prms = params.get
     for(let param in prms) {
@@ -632,15 +706,38 @@ function init__filter() {
     filters.forEach(filter => {
         
         filter.addEventListener("change", (e) => {
-            setFilter(filters);
+            filter_data['filters'] = filters
+            setFilter(filter_data);
         });
     });
+    let status_btns = getA(".table_status");
+    if(status_btns.length > 0) {
+        status_btns.forEach(btn => {
+            console.log(btn, prms.status)
+            filter_data.status = prms.status || 'active'
+            if(prms.status == btn.getAttribute("data-name")) btn.classList.add("table_radio_active");
+            else btn.classList.remove("table_radio_active");
+            btn.addEventListener("click", (e) => {
+                filter_data.filters = filters
+                filter_data.status = e.target.getAttribute("data-name")
+                setFilter(filter_data)
+
+            });
+        })
+        if(!prms.status) {
+            
+            status_btns[0].classList.add("table_radio_active");
+        }
+    }
     let clear_btn = get("#clear_filters");
     clear_btn.addEventListener("click", (e) => {
         filters.forEach(filter => {
             filter.value = "";
         })
-        setFilter(filters);
+        filter_data.status = 'active'
+        filter_data.page = 1
+        filter_data.filters = filters
+        setFilter(filter_data);
     })
 
     let pagination_div = get("#pagination");
@@ -651,6 +748,7 @@ function init__filter() {
     pageNum = get("#page_num");
 
     if(prms.page_n) {
+        filter_data.page = prms.page_n
         pageNum.innerHTML = prms.page_n
     }
 
@@ -664,26 +762,30 @@ function init__filter() {
     pagePlus.addEventListener("click", (e) => {
         let page = +pageNum.innerHTML;
         page++;
-        setFilter(filters, page);
+        filter_data.page = page
+        setFilter(filter_data);
     });
     pageMinus.addEventListener("click", (e) => {
         console.log(pageNum.innerHTML)
         let page = +pageNum.innerHTML;
         page--;
-
-        setFilter(filters, page);
+        filter_data.page = page
+        setFilter(filter_data);
     });
 
 }    
-function setFilter(filters, page) {
+function setFilter(data) {
+    console.log(data)
+    let {filters, page, status} = data
     let currHref = location.href
+    currHref = currHref.split('&status')[0]
+    currHref = currHref.split('&page_n')[0]
+
     let indx = currHref.indexOf('&filter')
     if(indx != -1) {
         currHref = currHref.split('&filter')[0]
 
     }
-    currHref = currHref.split('&page_n')[0]
-
     console.log()
     let newHref = currHref
     filters.forEach(filter => {
@@ -691,10 +793,25 @@ function setFilter(filters, page) {
             newHref += `&filter_${filter.name}=${filter.value}`
     })
     if(page && !isNaN(page)) newHref += `&page_n=${page}`
-
+    if(status) newHref += `&status=${status}`
     console.log({currHref, indx})
     history.replaceState({ page: 1 }, "", newHref);
     //location.reload()
 
     getPage(newHref.split('?page=')[1])
+}
+
+
+function initDel () {
+    let btns = getA('.table_links_del')
+    btns.forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.preventDefault()
+            let data = {
+                id: e.target.getAttribute('data-id'),
+                model: e.target.getAttribute('data-model')
+            }
+            sendFetch('/api/lk/put__del', JSON.stringify(data), 'PUT')
+        })
+    })
 }

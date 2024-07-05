@@ -26,7 +26,7 @@ class CommentatorController {
     async get__edit(req, res) {
         try {
             let player = await Representative.findOne({_id: req.query.id})
-            let teams = await Team.find({creator: req.user.id});
+            let teams = await Team.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
             return sendRes('partials/lk_part/player_edit', {player, teams}, res);
         } catch (e) {
             console.log(e);

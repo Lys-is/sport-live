@@ -1,0 +1,41 @@
+
+
+<div class="create_transfer_container">
+    <form id="match_create_calendar__form">
+    <p class="content_navtext">Главная &gt; Матчи &gt; Создание календаря</p>
+    <div class="create_tournire_content">
+        <div class="create_tournire_header">
+            <p class="page_title">Календарь</p>
+        </div>
+        <div class="create_tournire_body">
+            <div class="form_container">
+                <div class="ct_form">
+                    <div class="form_group">
+                        <label for="full_name">Турнир</label>
+                        <input type="text" list="tournament" name="tournamentId" required>
+                        <datalist id="tournament">
+                            <% for (let i = 0; i < tournaments.length; i++) { %>
+                                <option value="<%= tournaments[i].basic.full_name %>" data-value="<%= tournaments[i]._id %>"></option>
+                            <% } %>
+                        </datalist>
+                    </div>
+             
+                    <div class="form_group">
+                        <label for="team">Количество кругов</label>
+                        <input type="number" min="1"name="circles" value="1" required>
+                    </div>
+                    <input type="hidden" name="date">
+                    <div class="form_group">
+                        <p class="form_label" id="tip"> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="create_tournire_footer">
+            <div class="filler"></div>
+            <input type="button" value="Отменить" class="button white_button">
+            <input type="submit" value="Создать" class="button green_button">
+        </div>
+    </div>
+</form>
+</div>

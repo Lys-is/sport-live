@@ -4,14 +4,86 @@ const Match = require('../../../models/match-model');
 const Tournament = require('../../../models/tournament-model');
 const Judge = require('../../../models/judge-model');
 const Commentator = require('../../../models/commentator-model');
+const team = require('../team');
 class MatchController {
 
     async get__create(req, res) {
         try {
-            let teams = await Team.find({creator: req.user.id});
-            let tournaments = await Tournament.find({creator: req.user.id});
-            let judges = await Judge.find({creator: req.user.id});
+            let teams = await Team.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
+            let tournaments = await Tournament.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
+            let judges = await Judge.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
             return sendRes('partials/lk_part/match_create', {teams, tournaments, judges}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__create_calendar(req, res) {
+        try {
+            let teams = await Team.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
+            let tournaments = await Tournament.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
+            return sendRes('partials/lk_part/match_create_calendar', {teams, tournaments}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async post__create_calendar(req, res) {
+        
+        try {
+            let data = req.body;
+            data.creator = req.user.id;
+            let match_teams = {};
+            function pushTeams(t1, t2, circle) {
+                let n_circle = match_teams[circle]
+                if(!n_circle){
+                    match_teams[circle] = [];
+                    n_circle = match_teams[circle];
+                }
+                if(n_circle.includes(`${t1}_${t2}`) || n_circle.includes(`${t2}_${t1}`)) return;
+                n_circle.push(`${t1}_${t2}`);
+            }
+
+
+
+            let tournament = await Tournament.findOne({_id: data.tournamentId});
+            if(!tournament) return res.json({message: 'Такого турнира не существует'});
+            if(!tournament.creator.equals(req.user.id)) return res.json({message: 'Турнир не принадлежит вам'});
+            if(!data.circles) data.circles = 1;
+
+            const teams = [...new Set(tournament.teams.map(t => {return {id: t._id, name:  t.name}}))]
+            console.log(teams)
+            for(let i = 0; i < data.circles; i++) {
+                for(let j = 0; j < teams.length; j++) {
+                    for(let k = 0; k < teams.length; k++) {
+                        if(k != j)
+                            pushTeams(j, k, i);
+                    }
+                    
+                }
+            }
+            console.log(match_teams)
+            let sd
+            for(let key in match_teams) {
+                sd = await Promise.all(match_teams[key].map(async t => {
+                    let [t1, t2] = t.split('_');
+                    console.log(t1, t2)
+                    let matchData = {
+                        creator: req.user.id,
+                        team_1: teams[t1].id,
+                        team_2: teams[t2].id,
+                        tournament: data.tournamentId,
+                        date: data.date
+                    }
+                    console.log(teams[t1].name, teams[t2].name)
+                    let match = await Match.create(matchData);
+                    if(!match) return res.json({message: 'Матч не создан, ошибка'});
+                    return match;
+                }))
+
+            }
+            console.log(sd)
+            return res.json({message: 'Матчи созданы'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -39,10 +111,10 @@ class MatchController {
             if(!match.results_1 || !match.results_2) 
                 await match.setPlayerResults();
             console.log(matchId)
-            let teams = await Team.find({creator: req.user.id});
-            let tournaments = await Tournament.find({creator: req.user.id});
-            let judges = await Judge.find({creator: req.user.id});
-            let commentators = await Commentator.find({creator: req.user.id});
+            let teams = await Team.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
+            let tournaments = await Tournament.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
+            let judges = await Judge.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
+            let commentators = await Commentator.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
             return sendRes('partials/lk_part/match_edit', {match, teams, tournaments, judges, commentators}, res);
         } catch (e) {
             console.log(e);

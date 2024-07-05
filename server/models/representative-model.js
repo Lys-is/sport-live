@@ -9,6 +9,8 @@ const RepresentativSchema = new Schema({
     img: {type: String},
     socials: {type: String},
     mobile: {type: String},
+    status_doc: {type: String, default: 'active', enum: ['active', 'deleted']},
+
 })
 RepresentativSchema.plugin(require('mongoose-autopopulate'));
 module.exports = model('Representativ', RepresentativSchema);
