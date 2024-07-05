@@ -73,18 +73,30 @@ class IoService {
 
 
 function startPanel(controls, socket) {
-  const userId = socket.user?._id.toString() || '';
-  const control = controls[userId] || new controlService(userId, socket.user?.tablo_style, io);
-  controls[userId] = control;
+  let userId
+  let control
+  if(socket.user){
+    userId = socket.user._id.toString()
+    control = controls[userId] || new controlService(userId, socket.user.tablo_style, io);
+    controls[userId] = control;
+  }
+  
+  
 
   socket.join(userId);
 
   socket.on('join_panel', async (tableId) => {
-    const user = await User.findOne({ _id: tableId });
+    userId = tableId
+    control = controls[userId] || new controlService(userId, socket.user.tablo_style, io);
+    controls[userId] = control;
+    socket.join(userId);
     socket.emit('update_data', control.getData);
   });
 
   socket.on('join_table', async (tableId) => {
+    userId = tableId
+    control = controls[userId] || new controlService(userId, socket.user.tablo_style, io);
+    controls[userId] = control;
     const user = await User.findOne({ _id: tableId });
     socket.join(tableId);
     socket.emit('start', control.getData);

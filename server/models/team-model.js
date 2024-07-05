@@ -11,6 +11,7 @@ const TeamSchema = new Schema({
     color: {type: String},
     admins: [{type: Schema.Types.ObjectId, ref: 'User', required: true, autopopulate: true}],
     representativs: [{type: Schema.Types.ObjectId, ref: 'Representativ', autopopulate: true}],
+    status_doc: {type: String, default: 'active', enum: ['active', 'deleted']},
 })
 TeamSchema.plugin(require('mongoose-autopopulate'));
 

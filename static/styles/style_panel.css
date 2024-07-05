@@ -199,7 +199,12 @@ input[type="button"]:hover {
     display: flex;
     flex-direction: column;
 }
-
+.block.play {
+    background: #295432;
+}
+.block.pause {
+    background: #4d2424;
+}
 .time{
     margin: 0;
     text-align: center;

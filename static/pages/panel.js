@@ -101,10 +101,20 @@ socket.on('reconnect', () => {
 });
 socket.on('timer', (data) => {
     get('.time').innerHTML = data.value
-    if(data.status == 'pause') 
+    let block = play.closest('.block')
+    console.log(block)
+    if(data.status == 'pause') {
         play.classList.replace('pause-icon', 'play-icon')
-    else if(data.status == 'play') 
+        block.classList = 'block pause'
+    }
+    else if(data.status == 'play') {
         play.classList.replace('play-icon', 'pause-icon')
+        block.classList = 'block play'
+    }
+    else if(data.status == 'stop') {
+        play.classList.replace('pause-icon', 'play-icon')
+        block.classList = 'block'
+    }
     console.log(data.value)
 })
 let addPen = get('#add-pen'),

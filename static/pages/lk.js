@@ -417,6 +417,7 @@ function init__match_edit() {
     }
 }
 function init__team() {
+    
 }
 function init__team_create() {
     let form = get("#team_create__form");

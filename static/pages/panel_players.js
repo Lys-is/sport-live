@@ -51,12 +51,21 @@ replaceBtns?.forEach(btn => {
         let type = e.target.getAttribute('data-type').split('__')
         let player1 = get(`#${type[0]}-replace`),
         player2 = get(`#${type[0]}-replace-by`)
+        
         let txt = `Замена ${player1.options[player1.selectedIndex].innerHTML}<br> на ${player2.options[player2.selectedIndex].innerHTML}`
+        if(type[1] == 'b') {
+            txt = `<div>{{player_img__${0}}} ${player1.options[player1.selectedIndex].innerHTML} на </div> <div>{{player_img__${1}}} ${player2.options[player2.selectedIndex].innerHTML}</div>`
+        }
+
+
+        let ids = [player1.options[player1.selectedIndex].value, player2.options[player2.selectedIndex].value]
         let data = {
             type: 'change',
             size : type[1],
             text: txt,
             title: 'Замена игрока',
+            ids: ids,
+            model: 'Player',
         }
         socket.emit('notify', data)
     })

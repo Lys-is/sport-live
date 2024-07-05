@@ -62,13 +62,13 @@ class Timer {
         this.max_time = 20
         this.is_not_display = false
         this.is_null_start = false
-        this.status = 'pause'
+        this.status = 'stop'
     }
     clearTimer() {
         deleteTimer(this)
         this.minuts = 0
         this.seconds = 0
-        this.status = 'pause'
+        this.status = 'stop'
 
     }
     changeTimer(sec) {
