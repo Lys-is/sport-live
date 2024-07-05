@@ -36,7 +36,16 @@ function startTimer(io, timer, userId) {
 }
 
 function pauseTimer(timer) {
-    timers.toggleInterval(timer.timerId)
+    if(timer.status == 'pause') {
+        timer.status = 'play'
+        timers.resumeInterval(timer.timerId)
+    }
+    else if(timer.status == 'play') {
+        timer.status = 'pause'
+        timers.pauseInterval(timer.timerId)
+    }
+    // let a = timers.toggleInterval(timer.timerId)
+    // console.log(a)
 }
 function deleteTimer(timer) {
     timers.clearInterval(timer.timerId)
@@ -53,11 +62,14 @@ class Timer {
         this.max_time = 20
         this.is_not_display = false
         this.is_null_start = false
+        this.status = 'pause'
     }
     clearTimer() {
         deleteTimer(this)
         this.minuts = 0
         this.seconds = 0
+        this.status = 'pause'
+
     }
     changeTimer(sec) {
         sec = +sec
@@ -73,8 +85,10 @@ class Timer {
 
     playTimer(io, userId) {
         console.log(this)
-        if(!this.timerId)
+        if(!this.timerId){
             this.timerId = startTimer(io, this, userId)
+            this.status = 'play'
+        }
         else 
             pauseTimer(this)
 
@@ -105,7 +119,7 @@ class Timer {
         }
         let min = this.minuts < 10 ? `0${this.minuts}` : this.minuts
         let sec = this.seconds < 10 ? `0${this.seconds}` : this.seconds
-        return {name: 'timer', value: `${min}:${sec}`}
+        return {name: 'timer', value: `${min}:${sec}`, status: this.status}
     }
     send(io, userId) {
         io.to(userId).emit('timer', this.timeData)
@@ -120,10 +134,10 @@ class Scoreboard {
         this.team2_foll = 0
         this.team1_color = '#fb7528'
         this.team2_color = '#2525cb'
-        this.penalty = [{
+        this.penalty = Array(5).fill({
             team1: '',
             team2: '',
-        }]
+        })
         this.team1_font_color = 'white'
         this.team2_font_color = 'white'
     }
@@ -173,7 +187,8 @@ class Control {
         this.team1_name = match.team_1.name
         this.team2_name = match.team_2.name
         this.players_1 = players_1
-        this.players_2 = players_2
+        this.players_2 = players_2 
+        this.scoreboard.changeScore({team1_color: match.team_1.color, team2_color: match.team_2.color})
         this.couch_1 = couch_1
         this.couch_2 = couch_2
     }

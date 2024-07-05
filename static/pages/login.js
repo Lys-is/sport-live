@@ -19,3 +19,4 @@ else if(loginForm){
         window.location.href = '/lk?page=profile';
     })
 }
+initMasks()

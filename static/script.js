@@ -449,3 +449,42 @@ function getBase64(file) {
 //       console.log('Error: ', error);
 //     };
 //  }
+
+
+
+function initMasks(){
+    let tel_inputs = getA('.tel_input')
+    let emailInputs = getA('.email_input')
+    let telegrammInputs = getA('.telegramm_input')
+    let telMask = {
+        mask: '+{7}(000) 000-00-00'
+    };
+    tel_inputs.forEach(element => {
+        IMask(element, telMask);
+
+        element.addEventListener('input', (e) => {
+            let regex = /^\+7\(\d{3}\) \d{3}-\d{2}-\d{2}$/
+            if(regex.test(element.value)){
+                element.setCustomValidity("")
+            }
+            else {
+                element.setCustomValidity("Tel invalid")
+            }
+        })
+    })
+    
+    emailInputs.forEach(element => {
+        element.addEventListener('input', (e) => {
+            let regex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/ 
+
+        if(regex.test(element.value)){
+            element.setCustomValidity("")
+        }
+        else {
+            element.setCustomValidity("Email invalid")
+        }
+        })
+        
+    })
+    
+}

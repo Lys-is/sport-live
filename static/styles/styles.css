@@ -45,10 +45,10 @@ body{
     }
 
     input{
-        width: auto !important;
+        /* width: auto !important; */
     }
     input[type="text"], input[type="number"], select{
-        width: 100px !important;
+        /* width: 100px !important; */
     }
 
     .table_header{
@@ -62,9 +62,9 @@ body{
     }
 
     .content {
-        transform: scale(0.45) !important;
+        /* transform: scale(0.45) !important; */
         transform-origin: top left !important;
-        min-width: 800px !important;
+        /* min-width: 800px !important; */
     }
 
     header {
@@ -1189,8 +1189,10 @@ input[type=color] {
 }
 
 .reg{
-    width: 600px;
-    height: 500px;
+    /* width: 600px; */
+    width: -webkit-fill-available;
+    max-width: 600px;
+    height: auto;
 }
 
 .reg form{

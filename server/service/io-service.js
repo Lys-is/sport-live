@@ -92,6 +92,8 @@ function startPanel(controls, socket) {
 
   socket.on('play_timer', () => {
     control.timer.playTimer(io, userId);
+    io.to(userId).emit('timer', control.timer.timeData);
+
   });
 
   socket.on('clear_timer', () => {

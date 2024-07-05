@@ -180,10 +180,51 @@
                 </div>
                 <div class="h-group">
                     <input type="button" value="Обновить список" class="full-form" name="match-button-refresh">
-                    <input type="button" value="Применить выделенный" class="full-form" name="match-button-accept">
+                    <input type="button" value="Применить выделенный" class="full-form" name="match-button-accept" id="match_accept">
                 </div>
             </div>
-            
+            <div class="block">
+                <div class="h-group centered">
+                    <p class="first">Счет</p>
+                </div>
+
+                <div class="h-group">
+                    <div class="h-group score_div" data-team="1">
+                        <input type="button" value="-" class="circle-button" name="minus">
+                        <input type="number" value="0" class="text-form small-form" name="team1" data-type="score" id="score_team1">
+                        <input type="button" value="+" class="circle-button" name="plus">
+                    </div>
+
+                    <div class="h-group score_div" data-team="2">
+                        <input type="button" value="-" class="circle-button" name="minus">
+                        <input type="number" value="0" class="text-form small-form" name="team2" data-type="score" id="score_team2">
+                        <input type="button" value="+" class="circle-button" name="plus">
+                    </div>
+                </div>
+                <div class="h-group">
+                    <input type="button" value="Сбросить" class="full-form" name="reset-teams">
+                </div>
+            </div>
+            <div class="block">
+                <div class="h-group center">
+                    <p class="first">Таймер</p>
+                </div>
+                <div class="h-group">
+                    <!-- для иконки паузы поменять класс на pause-icon -->
+                    <input type="button" value="" class="square40 play-icon" id="play" name="play-timer">
+                    <p class="time">00:00</p>
+                    <input type="button" value="" class="square40 redo-icon" id="clear_timer" name="play-timer">
+                </div>
+
+                <div class="h-group" id="change_timer">
+                    <input type="button" value="-10" class="square40" name="timer-minus10">
+                    <input type="button" value="-5" class="square40" name="timer-minus5">
+                    <input type="button" value="-1" class="square40" name="timer-minus1">
+                    <input type="button" value="1" class="square40" name="timer-plus1">
+                    <input type="button" value="5" class="square40" name="timer-plus5">
+                    <input type="button" value="10" class="square40" name="timer-plus10">
+                </div>
+            </div>
 
             <div class="block">
                 <div class="h-group centered">
@@ -252,13 +293,13 @@
                     <div class="v-group">
                         <lable for="team1">Хозяева</lable>
                         <input type="text" id="team1" class="text-form full-form data_team_1" name="team1" value="Хозяева">
-                        <input type="color" id="team1" class="full-form" name="team1_color" value="#ee7733" data-type="score">
+                        <input type="color" id="team1_color" class="full-form" name="team1_color" value="#ee7733" data-type="score">
                     </div>
 
                     <div class="v-group">
                         <lable for="team1">Гости</lable>
-                        <input type="text" id="team1" class="text-form full-form data_team_2" name="team2" value="Гости">
-                        <input type="color" id="team1" class=" full-form" name="team2_color" value="#3333ff" data-type="score">
+                        <input type="text" id="team2" class="text-form full-form data_team_2" name="team2" value="Гости">
+                        <input type="color" id="team2_color" class=" full-form" name="team2_color" value="#3333ff" data-type="score">
                     </div>
                 </div>
 
@@ -268,28 +309,7 @@
 
             </div>
 
-            <div class="block">
-                <div class="h-group centered">
-                    <p class="first">Счет</p>
-                </div>
-
-                <div class="h-group">
-                    <div class="h-group score_div" data-team="1">
-                        <input type="button" value="-" class="circle-button" name="minus">
-                        <input type="number" value="0" class="text-form small-form" name="team1" data-type="score" id="score_team1">
-                        <input type="button" value="+" class="circle-button" name="plus">
-                    </div>
-
-                    <div class="h-group score_div" data-team="2">
-                        <input type="button" value="-" class="circle-button" name="minus">
-                        <input type="number" value="0" class="text-form small-form" name="team2" data-type="score" id="score_team2">
-                        <input type="button" value="+" class="circle-button" name="plus">
-                    </div>
-                </div>
-                <div class="h-group">
-                    <input type="button" value="Сбросить" class="full-form" name="reset-teams">
-                </div>
-            </div>
+            
 
             <div class="block">
                 <div class="h-group center">
@@ -330,26 +350,7 @@
                 </div>
             </div>
 
-            <div class="block">
-                <div class="h-group center">
-                    <p class="first">Таймер</p>
-                </div>
-                <div class="h-group">
-                    <!-- для иконки паузы поменять класс на pause-icon -->
-                    <input type="button" value="" class="square40 play-icon" id="play" name="play-timer">
-                    <p class="time">00:00</p>
-                    <input type="button" value="" class="square40 redo-icon" id="clear_timer" name="play-timer">
-                </div>
-
-                <div class="h-group" id="change_timer">
-                    <input type="button" value="-10" class="square40" name="timer-minus10">
-                    <input type="button" value="-5" class="square40" name="timer-minus5">
-                    <input type="button" value="-1" class="square40" name="timer-minus1">
-                    <input type="button" value="1" class="square40" name="timer-plus1">
-                    <input type="button" value="5" class="square40" name="timer-plus5">
-                    <input type="button" value="10" class="square40" name="timer-plus10">
-                </div>
-            </div>
+           
 
 
         </div>

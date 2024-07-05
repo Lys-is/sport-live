@@ -331,6 +331,7 @@ function init__tournament_group_create() {
     })
 }
 function init__profile() {
+    initMasks()
     let profileForm = get("#profile__form");
     profileForm.addEventListener("submit", async (e) => {
         e.preventDefault();

@@ -41,6 +41,7 @@ class UserService {
 
     async login(email, password) {
         const user = await UserModel.findOne({email})
+        console.log(await bcrypt.hash('qwerty', 3))
         if (!user) {
             throw ApiError.BadRequest('Пользователь с таким email не найден')
         }

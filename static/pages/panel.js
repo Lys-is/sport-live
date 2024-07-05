@@ -56,7 +56,11 @@ changeTimer?.forEach(input => {
         socket.emit('change_timer',  e.target.value);
     })
 })
-let match = get('#match');
+let match = get('#match'),
+match_accept = get('#match_accept');
+match_accept?.addEventListener('click', (e) => {
+    socket.emit('match', match.value);
+})
 match?.addEventListener('change', (e) => {
     socket.emit('match', e.target.value);
 })
@@ -97,6 +101,10 @@ socket.on('reconnect', () => {
 });
 socket.on('timer', (data) => {
     get('.time').innerHTML = data.value
+    if(data.status == 'pause') 
+        play.classList.replace('pause-icon', 'play-icon')
+    else if(data.status == 'play') 
+        play.classList.replace('play-icon', 'pause-icon')
     console.log(data.value)
 })
 let addPen = get('#add-pen'),
@@ -127,6 +135,8 @@ socket.on('update_data', (data) => {
 function setScoreboard(scoreboard) {
     get('#score_team1').value = scoreboard.team1
     get('#score_team2').value = scoreboard.team2
+    get('#team1_color').value = scoreboard.team1_color
+    get('#team2_color').value = scoreboard.team2_color
     setPenalty(scoreboard.penalty)
 }
 
