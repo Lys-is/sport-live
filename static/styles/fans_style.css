@@ -125,27 +125,7 @@ h2 {
     align-items: start;
 }
 
-@media (max-width: 800px) {
-    .grid-body {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-        grid-template-areas: "b"
-            "a";
-        padding-inline: 5%;
-        justify-content: center;
-        align-items: center;
-    }
 
-    .content-nav table,
-    .content-nav .social-share{
-        display: none;
-    }
-
-    .content-body{
-        transform: scale(0.5);
-        transform-origin: top left;
-    }
-}
 
 
 
@@ -268,6 +248,96 @@ thead {
         grid-template-columns: 400px;
     }
 }
+
+@media (max-width: 800px) {
+    .grid-body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: "b"
+            "a";
+        padding-inline: 5%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content-nav table,
+    .content-nav .social-share{
+        display: none;
+    }
+
+    .content-body{
+
+        transform-origin: center top;
+        width: 180%;
+        transform: scale(0.5);
+    }
+
+    .content-header {
+        padding-inline: 5%;
+    }
+
+    header {
+        display: flex;
+        width: 100%;
+        font-size: 16px;
+        gap: 0px;
+        padding-top: 0;
+    }
+
+    .logo {
+    width: 60px;
+    height: 60px;
+    margin-inline: 10px;
+    align-self: center;
+    margin-left: 20px;
+    }   
+
+    h1 {
+        margin: 0;
+
+        margin-block: 0 !important;
+
+    }
+
+    .naming {
+        align-self: flex-start;
+    }
+
+    nav {
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        padding: 0;
+        color: #fff;
+        margin-block: 10px;
+        align-self: flex-start;
+
+        width: auto;
+        font-size: 10px;
+        width: 90%;
+        gap: 10px;
+        text-wrap: nowrap;
+    }
+
+    header > .h_flex {
+        width: 100%;
+    }
+
+    .nav-links{
+        padding-inline: 5px !important;
+        width: 33% !important;
+        z-index: 10002 !important;
+    }
+
+    .w160{
+        display: none;
+    }
+    .content{
+        margin-top: 90px;
+    }
+
+}
+
 .tournament-block {
     background-color: #fff;
     width: 100%;
