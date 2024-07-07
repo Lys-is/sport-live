@@ -3,6 +3,7 @@ let User = require('../models/user-model');
 let League = require('../models/league-model');
 const UserD = require('../models/userD-model');
 let Style = require('../models/style-model');
+const Tournament = require('../models/tournament-model');
 
 class Constrollers {
     async auth(req, res, next) {
@@ -12,6 +13,7 @@ class Constrollers {
             auth: req.user || false
         });
     }
+
     async lk(req, res, next) {
         let league = await League.findOne({creator: req.user.id});
         let profile = await UserD.findOne({creator: req.user.id});
@@ -32,8 +34,35 @@ class Constrollers {
     }
     async get__fans(req, res) {
         let league = req.fans_league
+       // await Tournament.updateMany({}, {'status_doc': 'active'})
         res.render('fans/fans_o_lige', {
-            league
+            league,
+            title: 'О лиге',
+            page_title: 'О лиге'
+        })
+    }
+    async get__fans_tournaments(req, res) {
+        let league = req.fans_league;
+        let userAd = await User.findById(league.creator);
+        let tournaments = await Tournament.find({creator: userAd._id, status_doc: {$ne: 'deleted'}})
+
+        res.render('fans/fans_tournaments', {
+            league,
+            tournaments,
+            title: 'Турниры',
+            page_title: 'Турниры',
+            compareDates
+        })
+    }
+    async get__fans_members(req, res) {
+        let league = req.fans_league
+        let userAd = await User.findById(league.creator);
+        let tournaments = await Tournament.find({creator: userAd._id, status_doc: {$ne: 'deleted'}})
+        res.render('fans/fans_members', {
+            league,
+            tournaments,
+            title: 'Участники',
+            page_title: 'Участники'
         })
     }
     async get__registration(req, res, next) {
@@ -92,4 +121,25 @@ class Constrollers {
     api = require('./api')
 }
     
+
+
+let compareDates = (from, to) => { 
+
+    if (!from || !to) {
+        return 'Неопределено';
+    }
+    let dateNow = new Date();
+    let dateFrom = new Date(from);
+    let dateTo = new Date(to);
+    if(dateNow > dateFrom && dateNow < dateTo) {
+        return 'Идёт';
+    }
+    else if(dateNow > dateTo) {
+        return 'Завершён';
+    }
+    else if(dateNow < dateFrom) {
+        return 'Не начат';
+    }
+    return 'Неопределено';
+}
 module.exports = new Constrollers()

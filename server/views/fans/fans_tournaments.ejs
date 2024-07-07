@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <div class="h_flex">
-            <img src="../lk/icons/team.jpg" alt="logo" class="logo" width="100" height="100">
-            <div class="v_flex">
-            <div class="naming">
-                <h1>Сайт болельшиков</h1>
-            </div>
-            <nav>
-                <a class="nav-links" href="bolelshiki_o_lige.html">О лиге</a>
-                <a class="nav-links selected">Турниры</a>
-                <a class="nav-links" href="bolelshiki_members.html">Участники</a>
-            </nav>
-            </div>
-            <div class="w160"></div>
-        </div>
-    </header>
+<%- include('fans_header.ejs') %>
     <div class="content">
         <div class="content-header">
             
@@ -37,15 +13,17 @@
         </div>
         <div class="content-body body-background">
             <div class="grid-block">
-                <div class="tournament-block">
-                    <img src="../lk/icons/team.jpg" alt="logo" class="logo" width="200" height="200">
-                    <p class="p-title">Товарищеский матч</p>
+                <% for (let i = 0; i < tournaments.length; i++) { %>
+                <div class="tournament-block fans_link" data-href="tournament/id/<%= tournaments[i]._id %>">
+                    <img src="<%= tournaments[i].basic.img || '/static/styles/icons/logo.jpg'%>" alt="logo" class="logo" width="200" height="200">
+                    <p class="p-title"><%= tournaments[i].basic.full_name %></p>
                     <div class="h_flex space-between">
-                        <p class="p-small">01.03.2022-05.03.2022</p>
-                        <p class="p-small">2 команды</p>
-                        <p class="p-small">Завершён</p>
+                        <p class="p-small"><%= tournaments[i].basic.date_start %> - <%= tournaments[i].basic.date_end %></p>
+                        <p class="p-small">Команд: <%= tournaments[i].teams.length %></p>
+                        <p class="p-small"><%= compareDates(tournaments[i].basic.date_start ,tournaments[i].basic.date_end) %></p>
                     </div>
                 </div>
+                <% } %>
             </div>
         </div>
         <div class="content-header">
@@ -249,37 +227,7 @@
 
 
             </div>
-            <div class="content-body body-background">
-                <table class="calendar-match-table">
-                    <tr>
-                        <th colspan="5">1 ИЮНЯ</th>
-                    </tr>     
-                    <tr>
-                        <td>
-                            <div class="v_flex">
-                                <p>19:00</p>
-                                <p>ФОК ТУЛГУ</p>
-                            </div>
-                        </td>  
-                        <td>
-                            <div class="h_flex">
-                                <p>Команда 1</p>
-                                <img src="../lk/icons/team.jpg" class="" width="70" height="70">
-                            </div>
-                        </td>  
-                        
-                        <td>-:-</td>  
-                        <td>                          
-                            <div class="h_flex">
-                                <img src="../lk/icons/team.jpg" class="" width="70" height="70">
-                                <p>Команда 2</p>
-                            </div>
-                        </td>
-
-                        <td> 1 тур </td>
-                    </tr>        
-                </table>
-            </div>
+            
         </div>
 
 
@@ -710,5 +658,4 @@
 
 
     </div>
-</body>
-</html>
+    <%- include('fans_footer.ejs') %>

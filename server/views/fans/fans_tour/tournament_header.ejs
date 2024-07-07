@@ -1,0 +1,12 @@
+<div class="content-header">
+            
+    <div class="h_flex">
+
+        <h2><%= tournament.basic.full_name %></h2>
+    </div>
+    <div class="h_flex">
+        <p class="p-small"><%= tournament.basic.date_start %> - <%= tournament.basic.date_end %></p>
+        <p class="p-small">Команд: <%= tournament.teams.length %></p>
+        <p class="p-small"><%= compareDates(tournament.basic.date_start ,tournament.basic.date_end) %></p>
+    </div>
+</div>

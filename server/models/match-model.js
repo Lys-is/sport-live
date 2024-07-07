@@ -11,7 +11,7 @@ const PlayerResultsSchema = new Schema({
 const MatchSchema = new Schema({
     creator: {type: Schema.Types.ObjectId, ref: 'User', required: true, autopopulate: true},
     date: {type: String, required: true},
-    time: {type: String},
+    time: {type: String, default: '00:00'},
     is_overtime: {type: Boolean, default: false},
     is_penalty: {type: Boolean, default: false},
     is_tech_win: {type: Boolean, default: false},
@@ -26,6 +26,7 @@ const MatchSchema = new Schema({
     results_1: [PlayerResultsSchema],
     results_2: [PlayerResultsSchema],
     status_doc: {type: String, default: 'active', enum: ['active', 'deleted']},
+    circle: {type: Number, default: 1},
 
 })
 MatchSchema.methods.setPlayerResults = async function(results) {

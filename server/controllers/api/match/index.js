@@ -73,7 +73,8 @@ class MatchController {
                         team_1: teams[t1].id,
                         team_2: teams[t2].id,
                         tournament: data.tournamentId,
-                        date: data.date
+                        date: tournament.basic.date_start || data.date,
+                        circle: +key+1
                     }
                     console.log(teams[t1].name, teams[t2].name)
                     let match = await Match.create(matchData);

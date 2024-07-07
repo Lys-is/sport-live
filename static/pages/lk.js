@@ -52,6 +52,8 @@ if(params.page) {
             getPage(href)
     })()
 }
+else
+    getPage('profile')
 async function checkTournament(str) {
     const regexFormatAny = /^tournament\/id\/[^\/]+$/;
     const regexFormatAny2 = /^tournament\/id\/[^\/]+\/.+$/;

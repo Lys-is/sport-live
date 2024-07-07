@@ -51,21 +51,11 @@ console.log(app);
 app.use(errorMiddleware, authMiddleware);
 app.use(router);
 
-// app.get('/',checkAuthMiddleware.isNotAuth , function (req, res) {
-//     res.render('auth', {
-//         title: 'Авторизация',
-//         auth: req.user || false
-//     });
-// });
-// app.get('/lk', checkAuthMiddleware.isAuth, function (req, res) {
-//     console.log(req.user);
-//     res.render('lk', {
-//         title: 'ЛК',
-//         auth: req.user || false
-//     });
-// });
-// console.log(process.env)
-// app.use('/api', router);
+app.get('/', authMiddleware, (req, res) => {
+    res.redirect('/lk');
+})
+
+
 
 const start = async () => {
     try {

@@ -1,0 +1,19 @@
+<%- include('tournament_header.ejs') %>
+<div class="grid-body">
+    <%- include('tournament_nav.ejs') %>
+    <div class="content-body body-background">
+        <h3 class="bmt">Будущие матчи</h3>
+        <div class="grid-player match">
+            <% futureMatches.forEach(match => { %>
+                <div class="comming-match">
+                    <p class="p-title"><%= tournament.basic.full_name %></p>
+                    <div class="comming-match-block">
+                        <p class=" dark-blue"><%= match.format_min %></p>
+                        <a href="#">- <%= match.team_1.name %></a>
+                        <a href="#">- <%= match.team_2.name %></a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>

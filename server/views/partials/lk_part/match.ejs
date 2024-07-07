@@ -29,9 +29,9 @@
                 <td><input type="text" list="teams" class="table_input_text" name="team_2.name"></td>
                 <td><input type="date" class="table_input_text" name="date"></td>
                 <td></td>
-                <td><input type="text" list="tournament" class="table_input_text" name="tournament.basic.name">
+                <td><input type="text" list="tournament" class="table_input_text" name="tournament.basic.full_name">
                     <datalist id="tournament">
-                        <% tournaments.forEach((el) => { %><option data-id="<%= el._id %>" value="<%= el.basic.name %>"><% }) %>
+                        <% tournaments.forEach((el) => { %><option data-id="<%= el._id %>" value="<%= el.basic.full_name %>"><% }) %>
                     </datalist>
                 </td>
                 <td></td>
@@ -44,7 +44,7 @@
                 <td><%= matches[i].team_2.name %></td>
                 <td><%= matches[i].date %></td>
                 <td><%= (matches[i].team_1_score || matches[i].team_2_score) ? `${matches[i].team_1_score}:${matches[i].team_2_score}` : '-:-'%></td>
-                <td><%= matches[i].tournament?.basic.name %></td>
+                <td><%= matches[i].tournament?.basic.full_name %></td>
                 <td>
                     <% if(matches[i].status_doc == "active") { %>
                         <span class="table_links table_links_compos nav_link"  data-href="match/id/<%= matches[i]._id %>/get__edit/">Изменить</span>

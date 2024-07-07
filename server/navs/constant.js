@@ -4,10 +4,32 @@ const controllers = require('../controllers');
 const getFans = require('../middlewares/getFans-middleware');
 //qq - middleware
 const nav = {
+    'fans' : {
+    },
     'fans/:address' : {
         'func' : 'get__fans',
         'qq': getFans,
-        'qqRecurs': true
+        'qqRecurs': true,
+        'tournament/id/:id' : {
+            'func' : 'get__tournament',
+        },
+        'calendar/id/:id' : {
+            'func' : 'get__calendar'
+        },
+        'tables/id/:id' : {
+            'func' : 'get__tables'
+        },
+        'team/id/:id' : {
+            'func' : 'get__team'
+        }
+    },
+    'fans_tournaments/:address' : {
+        'func' : 'get__fans_tournaments',
+        'qq': getFans
+    },
+    'fans_members/:address' : {
+        'func' : 'get__fans_members',
+        'qq': getFans
     },
     'panel/:id' : {
         'func' : 'get__panel'

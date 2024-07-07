@@ -2,14 +2,14 @@ body {
     font-family: Arial, sans-serif;
     background-color: #efefef;
     color: rgb(19, 19, 19);
-    height: 100vh;
+    height: 100%;
     padding: 0;
     margin: 0;
-
+    /* overflow: hidden; */
 }
 
 header {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -19,6 +19,7 @@ header {
     font-size: 20px;
     margin: 0;
     padding-top: 30px;
+    z-index: 10000;
 } 
 
 .logo {
@@ -511,13 +512,12 @@ a {
 }
 
 .comming-match {
-    width: 300px;
+    width: 100%;
     height: 250px;
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: space-between;
-
     background-color: #fafafa;
 }
 
@@ -698,12 +698,12 @@ a {
     width: 35%;
 }
 
-.chahmatka-effect tr:nth-child(even) td:nth-child(3){
+td.no_cell{
     background-color: #a3c5ef;
 }
 
 .chahmatka-effect tr:nth-child(odd) td:nth-child(4){
-    background-color: #a3c5ef;
+    /* background-color: #a3c5ef; */
 }
 
 .player-block {

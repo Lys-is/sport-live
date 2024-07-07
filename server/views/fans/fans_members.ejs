@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <div class="h_flex">
-            <img src="../lk/icons/team.jpg" alt="logo" class="logo" width="100" height="100">
-            <div class="v_flex">
-            <div class="naming">
-                <h1>Сайт болельшиков</h1>
-            </div>
-            <nav>
-                <a class="nav-links" href="bolelshiki_o_lige.html">О лиге</a>
-                <a class="nav-links" href="bolelshiki_tournaments.html">Турниры</a>
-                <a class="nav-links selected">Участники</a>
-            </nav>
-            </div>
-            <div class="w160"></div>
-        </div>
-    </header>
+<%- include('fans_header.ejs') %>
     <div class="content">
         <div class="content-header less-padding">
             
@@ -48,16 +24,23 @@
                 <div class="filler"></div>
                 <input type="button" class="search-button" value="Сбросить">
             </div>
-            <div class="grid-player member">
-                <div class="player-block">
-                    <img src="../lk/icons/team.jpg" class="" width="200" height="200">
-                    <p>Команда 1</p>
-                </div>
-                <div class="player-block">
-                    <img src="../lk/icons/team.jpg" class="" width="200" height="200">
-                    <p>Команда 2</p>
-                </div>
-                
+            <div class="grid-player">
+                <% let teamsSet = new Set()
+                    tournaments.forEach(tournament => {
+                    tournament.teams.forEach(team => { 
+                    let s = teamsSet.has(team._id.toString())
+                    if(!s) {
+
+                    teamsSet.add(team._id.toString())
+                    %>
+                    <div class="player-block fans_link" data-href="team/id/<%= team._id %>">
+                        <img src="<%= team.img || '/static/styles/icons/logo.jpg'%>" class="" width="200" height="200">
+                        <p><%= team.name %></p>
+                    </div>
+                    <% }
+                }) %>
+
+                <% }) %>
             </div>
         </div>
 
@@ -1014,5 +997,4 @@
 
         
     </div>
-</body>
-</html>
+    <%- include('fans_footer.ejs') %>

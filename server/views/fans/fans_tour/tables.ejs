@@ -1,0 +1,145 @@
+<%- include('tournament_header.ejs') %>
+<div class="grid-body">
+    <%- include('tournament_nav.ejs') %>
+    <div class="content-body body-background">
+        <div class="h_flex table-header">
+            <input type="button" class="selected-table-button" value="Таблица">
+            <input type="button" class="" value="Шахматка">
+            <input type="button" class="" value="Форма">
+        </div>
+        <% let teams = tournament.teams %>
+        <table class="nets-table">
+            <tr>
+                <th>#</th>
+                <th>Команда</th>
+                <th>И</th>
+                <th>В</th>
+                <th>Н</th>
+                <th>П</th>
+                <th>МЗ-МП</th>
+                <th>О</th>
+                <th>Форма</th>
+            </tr>
+            <% 
+            for(let i = 0; i < teams.length; i++) {
+                let team_matches = previusMatches.filter(match => match.team_1.id == teams[i].id || match.team_2.id == teams[i].id);
+
+                team_matches = team_matches.map(match => {
+                    if(match.team_2.id == teams[i].id) {
+                        let tmp = match.team_1;
+                        match.team_1 = match.team_2;
+                        match.team_2 = tmp;
+                        tmp = match.team_1_score;
+                        match.team_1_score = match.team_2_score;
+                        match.team_2_score = tmp;
+                        return match
+                    }
+                    else
+                        return match
+                });
+            let count_matches = team_matches.length,
+                count_wins = team_matches.filter(match => match.team_1_score > match.team_2_score).length,
+                count_draws = team_matches.filter(match => match.team_1_score == match.team_2_score).length,
+                count_losses = team_matches.filter(match => match.team_1_score < match.team_2_score).length,
+                count_goals = team_matches.reduce((acc, match) => acc + match.team_1_score + match.team_2_score, 0),
+                count_missed = team_matches.reduce((acc, match) => acc + match.team_1_score - match.team_2_score, 0),
+                count_points = count_wins*tournament.reglament.for_win + count_draws*tournament.reglament.for_tie - count_losses*tournament.reglament.for_lose
+                
+            %>
+            <tr>
+                <td><%= i+1 %></td>
+                <td>
+                    <div class="h_flex">
+                        <img src="<%= teams[i].img || '/static/styles/icons/logo.jpg'%>" class="" width="70" height="70">
+                        <p><%= teams[i].name %></p>
+                    </div>
+                </td>
+                <td><%= count_matches %></td>
+                <td><%= count_wins %></td>
+                <td><%= count_draws %></td></td>
+                <td><%= count_losses %></td>
+                <td><%= count_goals %>-<%= count_missed %></td>
+                <td><%= count_points %></td>
+                <td></td>
+            </tr>
+            <% } %>
+        </table>
+
+        <div class="h50"></div>
+
+        <div class="h_flex table-header">
+            <input type="button" class="" value="Таблица">
+            <input type="button" class="selected-table-button" value="Шахматка">
+            <input type="button" class="" value="Форма">
+        </div>
+        <table class="nets-table chahmatka chahmatka-effect">
+            <tr>
+                <th>#</th>
+                <th>Команда</th>
+                <% for(let i = 0; i < teams.length; i++) { %>
+                    <th><%= i+1 %></th>
+                <% } %>
+            </tr>
+            <% for(let i = 0; i < teams.length; i++) { %>
+               
+            <tr>
+                <td><%= i+1 %></td>
+                <td>
+                    <div class="h_flex">
+                        <img src="<%= teams[i].img || '/static/styles/icons/logo.jpg'%>" class="" width="70" height="70">
+                        <p><%= teams[i].name %></p>
+                    </div>
+                </td>
+                <% for(let j = 0; j < teams.length; j++) { %>
+                    <% let match = previusMatches.find(match => {
+                        if(((match.team_1.id == teams[i].id) && (match.team_2.id == teams[j].id)) || ((match.team_2.id == teams[i].id) && (match.team_1.id == teams[j].id)))
+                            return match
+                    })
+
+                    if(!match || i == j) { %>
+                        <td class="no_cell"></td>
+                    <% }
+                    else {
+                    
+                    let team_1 = teams[i].id == match.team_1.id ? 'team_1' : 'team_2'
+                    let team_2 = teams[i].id == match.team_1.id ? 'team_2' : 'team_1'
+                    %>
+                        <td><%= match[`${team_1}_score`] || match[`${team_2}_score`] ? `${match[`${team_1}_score`]}:${match[`${team_2}_score`]}`: '-:-' %></td>
+                    <% }
+                } %>
+            </tr>
+            <% } %>      
+        </table>
+
+
+        <div class="h50"></div>
+
+        <div class="h_flex table-header">
+            <input type="button" class="" value="Таблица">
+            <input type="button" class="" value="Шахматка">
+            <input type="button" class="selected-table-button" value="Форма">
+        </div>
+        <table class="nets-table chahmatka">
+            <tr>
+                <th>#</th>
+                <th>Команда</th>
+                <th>Форма</th>
+            </tr>
+            <% for(let i = 0; i < teams.length; i++) { %>
+            <tr>
+                <td><%= i+1 %></td>
+                <td>
+                    <div class="h_flex">
+                        <img src="<%= teams[i].img || '/static/styles/icons/logo.jpg'%>" class="" width="70" height="70">
+                        <p><%= teams[i].name %></p>
+                    </div>
+                </td>
+                <td style="opacity: 1;<%= teams[i].color ? `background-color: ${teams[i].color}` : '' %>"></td>
+            </tr>
+            <% } %>
+            
+        </table>
+
+
+    </div>
+</div>

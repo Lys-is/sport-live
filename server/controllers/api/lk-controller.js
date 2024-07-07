@@ -206,7 +206,7 @@ class LkController {
     async get__match(req, res) {
         try {
             console.log(req);
-            let tournaments = await Tournament.find({creator: req.user.id, status_doc: {$ne: 'deleted'}}).select('basic.name _id');
+            let tournaments = await Tournament.find({creator: req.user.id, status_doc: {$ne: 'deleted'}}).select('basic.full_name _id');
             let teams = await Team.find({creator: req.user.id, status_doc: {$ne: 'deleted'}}).select('name _id');
             req.query['creator'] = req.user.id
             let [matches, total] = await dbService.getAggregate(Match, req);
