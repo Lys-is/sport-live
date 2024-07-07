@@ -58,6 +58,10 @@ nav {
     width: 100%;
 }
 
+span.v_flex {
+    width: auto !important;
+}
+
 .hidden {
     content: none;
 
@@ -829,6 +833,10 @@ select.nav-select{
     margin-block: 0 !important;
 }
 
+.pb {
+    padding-block: 20px;
+}
+
 .dark-gray {
     color: #e8e8e8 !important;
     background-color: #686868 !important;
@@ -888,3 +896,47 @@ select.nav-select{
     margin-block: 5px;
 }
 
+.match-background {
+    background-image: url('soc1.png');
+}
+
+.grid-match-composition {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    padding-top: 30px;
+
+
+    width: 100%;
+    
+}
+.nmp * p {
+    margin: 0;
+    margin-block: 5px;
+}
+
+.grid-match-composition > div:nth-child(even) {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid #686868;
+    border-right: 0;
+    border-left: 0;
+    flex-direction: row-reverse;
+    padding-right: 10px;
+}
+.grid-match-composition > div:nth-child(odd) {
+    display: flex;
+
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid #686868;
+    border-left: 0;
+    padding-left: 10px;
+}
+
+.grid-match-composition > div:nth-child(n+3) {
+    border-top: 0;
+}
