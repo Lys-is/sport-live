@@ -265,12 +265,14 @@ thead {
         display: none;
     }
 
-    .content-body{
+    .content{
 
-        transform-origin: center top;
-        width: 180%;
+        transform-origin: left top;
+        width: 200%;
         transform: scale(0.5);
     }
+
+
 
     .content-header {
         padding-inline: 5%;
