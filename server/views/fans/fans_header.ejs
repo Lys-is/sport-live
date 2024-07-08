@@ -18,6 +18,7 @@
             <div class="v_flex">
             <div class="naming">
                 <h1><%= league.name %></h1>
+                <h1><%= league.creator + ' - создатель' + league.creator.name %></h1>
             </div>
             <nav>
                 <a class="nav-links <%= ((page_title || title) == 'О лиге') ? 'selected' : '' %>" href="/fans/<%= league.address %>">О лиге</a>
