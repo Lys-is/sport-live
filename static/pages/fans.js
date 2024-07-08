@@ -15,6 +15,7 @@ async function standartLinkListener(e) {
     let href = el.getAttribute('data-href');
     getPage(href);
 }
+let member_hrefs = getA('.small_buttons > input');
 
 async function getPage(href) {
     let initHref = href.split('?')[0];
@@ -27,6 +28,7 @@ async function getPage(href) {
     history.replaceState({ page: 1 }, "", `?page=${initHref}`);
 
     const navLinks = getA('.fans_link');
+    console.log(navLinks)
     navLinks.forEach(link => {
         if (!link.hasEventListener('click')) {
             link.addEventListener('click', linkListener);

@@ -70,7 +70,7 @@ class TeamsController {
             console.log(req.user, team.creator)
             if(!req.user._id.equals(team.creator._id)) return res.json({message: 'Вы не являетесь создателем команды'});
             await Player.updateOne({_id: req.body.playerId}, {team: teamId});
-            return res.json({message: 'Игрок добавлен'});
+            return res.json({message: 'Игрок добавлен', reload: true});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -97,7 +97,7 @@ class TeamsController {
             if(!team) return res.json({message: 'Такой команды не существует'});
             if(!req.user._id.equals(team.creator._id)) return res.json({message: 'Вы не являетесь создателем команды'});
             await Couch.updateOne({_id: req.body.couchId}, {team: teamId});
-            return res.json({message: 'Тренер добавлен'});
+            return res.json({message: 'Тренер добавлен', reload: true});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -124,7 +124,7 @@ class TeamsController {
             console.log(req.user, team.creator)
             if(!req.user._id.equals(team.creator._id)) return res.json({message: 'Вы не являетесь создателем команды'});
             await Representative.updateOne({_id: req.body.representativeId}, {team: teamId});
-            return res.json({message: 'Представитель добавлен'});
+            return res.json({message: 'Представитель добавлен', reload: true});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

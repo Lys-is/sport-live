@@ -30,7 +30,14 @@ const nav = {
         },
         'roster_team/id/:id' : {
             'func' : 'get__roster_team'
+        },
+        'players' : {
+            'func' : 'get__players'
+        },
+        'player:id/:id' : {
+            'func' : 'get__player'
         }
+
     },
     'fans_tournaments/:address' : {
         'func' : 'get__fans_tournaments',

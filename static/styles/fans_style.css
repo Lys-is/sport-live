@@ -620,7 +620,7 @@ a {
     align-items: start;
     padding: 30px;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
 }
 
 .calendar-match-table {
@@ -792,7 +792,6 @@ td.no_cell{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     background-color: #fafafa;
     cursor: pointer;
 }
@@ -950,7 +949,7 @@ select.nav-select{
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding-right: 0;
 }
 

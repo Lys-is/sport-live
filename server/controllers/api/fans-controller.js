@@ -4,6 +4,7 @@ const Tournament = require('../../models/tournament-model');
 const Match = require('../../models/match-model');
 const Team = require('../../models/team-model');
 const Player = require('../../models/player-model');
+const PlayerResult = require('../../models/playerResult-model');
 
 class FansController {
     async get__tournament(req, res) {
@@ -85,6 +86,8 @@ class FansController {
         try {
             const {id} = req.params;
             const team = await Team.findById(id);
+            // await Match.deleteMany()
+            // await PlayerResult.deleteMany()
             if(!team || !team.creator.equals(req.fans_league.creator)) {
                 return res.json({message: 'Команда не найдена'});
             }
@@ -137,7 +140,9 @@ class FansController {
             let previusMatches = await getPreviousMatches(matches);
             
             let players = await Player.find({team: id}).populate('team creator');
-            return sendRes('fans/fans_members/roster', {team, players, previusMatches, getTeamData}, res);
+            let playersResult = await getPlayersResult(players);
+            console.log(playersResult)
+            return sendRes('fans/fans_members/roster', {team, players, playersResult, previusMatches, getTeamData}, res);
         
         }
         catch (e) {
@@ -145,6 +150,47 @@ class FansController {
             return res.json({message: 'Произошла ошибка'});
         
         }   
+    }
+    async get__players(req, res) {
+        try {
+            console.log(req.fans_league)
+            let tournaments = await Tournament.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}})
+            console.log(tournaments)
+            let matches = await Match.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}}).select('results_1 results_2 date time');
+            // await Promise.all(tournaments.map(async tournament => {
+            //     matches.concat(await Match.find({tournament: tournament.id, status_doc: {$ne: 'deleted'}}).select('results_1 results_2 date time'));
+            // }))
+            
+            let previusMatches = await getPreviousMatches(matches);
+            let playersResult ={}
+
+            let players = await Player.find({creator: req.fans_league.creator._id}).populate('team creator');
+            previusMatches.map(match => {
+                if(match.results_1) {
+                    match.results_1.map(result => {
+                        if(!playersResult[result.player.id]) playersResult[result.player.id] = [];
+                        playersResult[result.player.id].push(result)
+                    })
+                }
+                if(match.results_2) {
+                    match.results_2.map(result => {
+                        if(!playersResult[result.player.id]) playersResult[result.player.id] = [];
+                        playersResult[result.player.id].push(result)
+                    })
+                }
+            })
+
+            console.log(playersResult)
+            return sendRes('fans/fans_members/players', {players, playersResult, previusMatches, getTeamData}, res);
+        
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        
+        }   
+    }
+    async get__player(req, res) {
     }
 
 }
@@ -157,7 +203,19 @@ async function sendRes(path, data, res) {
     });
 }
 
-
+async function getPlayersResult(players) {
+    try {
+        let results = {};
+        await Promise.all(players.map(async(item) => {
+                results[item._id] = await PlayerResult.find({player: item._id, is_active: true}).populate('player team match');
+            })
+        )
+        return results
+    } catch (e) {
+        console.error(e);
+        return {}
+    }
+}
 
 async function getFutureMatches(matches) {
     try {

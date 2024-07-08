@@ -79,6 +79,7 @@ class MatchController {
                     console.log(teams[t1].name, teams[t2].name)
                     let match = await Match.create(matchData);
                     if(!match) return res.json({message: 'Матч не создан, ошибка'});
+                    await match.setPlayerResults();
                     return match;
                 }))
 
@@ -106,7 +107,7 @@ class MatchController {
     async get__edit(req, res) {
         try {
             let matchId = req.params.id;
-            let match = await Match.findOne({_id: matchId})
+            let match = await Match.findOne({_id: matchId}).populate('results_2.player');
             console.log(match)
             if(!match) return res.json({message: 'Такого матча не существует'});
             if(!match.results_1 || !match.results_2) 
@@ -145,7 +146,7 @@ class MatchController {
             if(!match) return res.json({message: 'Такого матча не существует'});
             console.log(matchId)
             await match.setPlayerResults(req.body);
-            return res.status(200).end();
+            return res.status(200).json();
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

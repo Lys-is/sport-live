@@ -427,6 +427,7 @@ function init__match_edit() {
                 table_2 = get("#team_2_results")
             getA('.res_row', table_1).forEach(row => {
                 dataResult_1[row.getAttribute('data-index')] = {
+                    is_active: get('input[name="is_active"', row).checked,
                     red: get('input[name="red"', row).value,
                     yellow: get('input[name="yellow"', row).value,
                     transits: get('input[name="transits"', row).value,
@@ -435,6 +436,7 @@ function init__match_edit() {
             })
             getA('.res_row', table_2).forEach(row => {
                 dataResult_2[row.getAttribute('data-index')] = {
+                    is_active: get('input[name="is_active"', row).checked,
                     red: get('input[name="red"', row).value,
                     yellow: get('input[name="yellow"', row).value,
                     transits: get('input[name="transits"', row).value,
