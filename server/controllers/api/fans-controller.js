@@ -164,7 +164,7 @@ class FansController {
             let previusMatches = await getPreviousMatches(matches);
             let playersResult ={}
 
-            let players = await Player.find({creator: req.fans_league.creator._id}).populate('team creator');
+            let players = await Player.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}}).populate('team creator');
             previusMatches.map(match => {
                 if(match.results_1) {
                     match.results_1.map(result => {
@@ -180,7 +180,7 @@ class FansController {
                 }
             })
 
-            console.log(playersResult)
+            console.log(players)
             return sendRes('fans/fans_members/players', {players, playersResult, previusMatches, getTeamData}, res);
         
         }
