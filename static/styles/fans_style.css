@@ -172,6 +172,7 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     color: #fff;
+    z-index: 10002;
 }
 
 .nav-links:hover {
@@ -481,7 +482,11 @@ a {
     color: #efefef;
     padding: 10px;
 }
-
+.dark-red {
+    background-color: #9c1919;
+    color: #efefef;
+    padding: 10px;
+}
 .centered {
     justify-content: center;
     align-items: center;

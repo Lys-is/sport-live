@@ -1,0 +1,60 @@
+<%- include('members_header.ejs') %>
+<div class="grid-body">
+    <%- include('team_nav.ejs') %>
+    <div class="content-body body-background">
+        <div class="h_flex white">
+            <img src="<%= team.img || '/static/styles/icons/logo.jpg'%>" class="" width="200" height="200">
+            <div class="v_flex left">
+                <h2 class="nm-top"><%= team.name %></h2>
+                <p class="">Последние матчи:</p>
+                <%- include('../last_matches.ejs') %>
+            </div>
+        </div>
+        <div class="h_flex white mt pi">
+            <p class="p-title">Календарь матчей</p>
+            <div class="filler"></div>
+            <select class="big-select">
+                <option>Все время</option>
+                <option>2024</option>
+            </select>
+        </div>
+        <% let setByTour = new Set(matches.map(m => m.tournament ? m.tournament.basic.full_name : 'Без турнира')); 
+        setByTour.forEach(tour => {
+            %>
+            <table class="calendar-match-table mt">
+            <% %>
+            <tr>
+                <th colspan="4" id="raspis_title"><%= tour %></th>
+            </tr>
+            <% matches.filter(m => m.tournament ? m.tournament.basic.full_name == tour : (tour == 'Без турнира') ? true : false).forEach(match => {
+                %>
+                <tr>
+                <td>
+                    <div class="v_flex">
+                        <p><%= match.format_min %></p>
+                        <p></p>
+                    </div>
+                </td>  
+                <td>
+                    <div class="h_flex">
+                        <p><%= match.team_1.name %></p>
+                        <img src="<%= match.team_1.img || '/static/styles/icons/logo.jpg' %>" class="" width="70" height="70">
+                    </div>
+                </td>  
+                
+                <td><%= (match.team_1_score || match.team_2_score) ? `${match.team_1_score}:${match.team_2_score}` : '-:-' %></td>  
+                <td>                          
+                    <div class="h_flex">
+                        <img src="<%= match.team_2.img || '/static/styles/icons/logo.jpg' %>" class="" width="70" height="70">
+                        <p><%= match.team_2.name %></p>
+                    </div>
+                </td>
+
+            </tr>
+            <% }) %>
+        </table>
+        <% }) %>
+        
+        
+    </div>
+</div>

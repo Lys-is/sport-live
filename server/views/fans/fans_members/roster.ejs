@@ -1,0 +1,96 @@
+<%- include('members_header.ejs') %>
+<div class="grid-body">
+    <%- include('team_nav.ejs') %>
+    <div class="content-body body-background">
+        <div class="h_flex white">
+            <img src="<%= team.img || '/static/styles/icons/logo.jpg' %>" class="" width="200" height="200">
+            <div class="v_flex left">
+                <h2 class="nm-top">Команда 1</h2>
+                <p class="">Последние матчи:</p>
+                <%- include('../last_matches.ejs') %>
+
+            </div>
+        </div>
+        <div class="h_flex white mt padding">
+
+            <select class="big-select">
+                <option>Активные</option>
+                <option>Ушедшие</option>
+            </select>
+            <div class="filler"></div>
+            <select class="big-select">
+                <option>Игроки</option>
+                <option>Представители</option>
+            </select>
+        </div>
+        <div class="grid-player players">
+            <div class="player-block">
+                <img src="../lk/icons/Face.jpeg" class="" width="200" height="200">
+                <div class="comming-match-block">
+                    <div class="v_flex left np">
+                        <p class="nm-block">Игрок 1</p>
+                        <p class="nm-block">Фамилия</p>
+                    </div>
+
+
+                    <div class="h_flex">
+                        <p class="nm-block">Игр:</p>
+                        <div class="filler"></div>
+                        <p class="dark-blue circle nm-block">1</p>
+                    </div>
+                    <div class="h_flex">
+                        <p class="nm-block">Голов:</p>
+                        <div class="filler"></div>
+                        <p class="dark-blue circle nm-block">0</p>
+                    </div>
+                    <p class="nm-block p-small">Вратарь</p>
+                </div>
+            </div>
+            <div class="player-block">
+                <img src="../lk/icons/Face.jpeg" class="" width="200" height="200">
+                <div class="comming-match-block">
+                    <div class="v_flex left np">
+                        <p class="nm-block">Игрок 1</p>
+                        <p class="nm-block">Фамилия</p>
+                    </div>
+
+
+                    <div class="h_flex">
+                        <p class="nm-block">Игр:</p>
+                        <div class="filler"></div>
+                        <p class="dark-blue circle nm-block">1</p>
+                    </div>
+                    <div class="h_flex">
+                        <p class="nm-block">Голов:</p>
+                        <div class="filler"></div>
+                        <p class="dark-blue circle nm-block">0</p>
+                    </div>
+                    <p class="nm-block p-small">Вратарь</p>
+                </div>
+            </div>
+            <div class="player-block">
+                <img src="../lk/icons/Face.jpeg" class="" width="200" height="200">
+                <div class="comming-match-block">
+                    <div class="v_flex left np">
+                        <p class="nm-block">Игрок 1</p>
+                        <p class="nm-block">Фамилия</p>
+                    </div>
+
+
+                    <div class="h_flex">
+                        <p class="nm-block">Игр:</p>
+                        <div class="filler"></div>
+                        <p class="dark-blue circle nm-block">1</p>
+                    </div>
+                    <div class="h_flex">
+                        <p class="nm-block">Голов:</p>
+                        <div class="filler"></div>
+                        <p class="dark-blue circle nm-block">0</p>
+                    </div>
+                    <p class="nm-block p-small">Вратарь</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

@@ -19,10 +19,12 @@
     "express-validator": "^7.1.0",
     "getbrightness": "^1.1.0",
     "jsonwebtoken": "^9.0.2",
+    "lru-cache": "^10.4.0",
     "mongodb": "^6.7.0",
     "mongoose": "^8.4.1",
     "mongoose-autopopulate": "^1.1.0",
     "nodemailer": "^6.9.13",
+    "semver": "^7.6.2",
     "socket.io": "^4.7.5",
     "timestore": "^1.2.0",
     "uuid": "^10.0.0"

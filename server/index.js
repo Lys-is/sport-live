@@ -20,6 +20,9 @@ const bcrypt = require('bcrypt');
 const User = require('./models/user-model');
 const server = http.createServer(app);
 const router = require('./navs/constant')
+let ejs = require('ejs');
+const { LRUCache } = require('lru-cache')
+
 console.log(router._router.stack)
 ioService.start(server);
 //const io = socketio(server);
@@ -43,6 +46,7 @@ app.use("/static", express.static(path.dirname(__dirname) + "/static"));
 
 router.set('views',path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
+app.set('view cache', true);
 
 console.log(app.get('views'));
 console.log(app);
@@ -59,6 +63,7 @@ app.get('/', authMiddleware, (req, res) => {
 
 const start = async () => {
     try {
+        
         await mongoose.connect(process.env.DB_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true
@@ -74,6 +79,11 @@ const start = async () => {
             user.save();
         }
         server.listen(PORT, () => console.log(`Server started on PORT = ${PORT}`))
+        console.log(LRUCache)
+        ejs.cache = new LRUCache({
+            max: 100, //Maximum
+            maxAge: 60 * 10 * 10
+        });
     } catch (e) {
         console.log(e);
     }

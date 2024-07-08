@@ -47,7 +47,10 @@ const inits = {
     'tournament/id' : init__tournament,
     'calendar/id' : init__calendar,
     'tables/id' : init__tables,
-    'teams/id' : init__teams
+    'teams/id' : init__teams,
+    'team/id' : init__team,
+    'calendar_team/id' : init__calendar_team,
+    'roster_team/id' : init__roster_team
 }
 
 
@@ -63,6 +66,15 @@ async function init__tables () {
 }
 async function init__teams () {
     changeTourNav('teams');
+}
+async function init__team () {
+    changeTourNav('team');
+}
+async function init__calendar_team () {
+    changeTourNav('calendar_team');
+}
+async function init__roster_team () {
+    changeTourNav('roster_team');
 }
 function changeTourNav(name) {
     let navs = getA('.content-nav > .nav-menu-item');

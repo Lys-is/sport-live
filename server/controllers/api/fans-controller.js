@@ -3,6 +3,7 @@ const User = require('../../models/user-model');
 const Tournament = require('../../models/tournament-model');
 const Match = require('../../models/match-model');
 const Team = require('../../models/team-model');
+const Player = require('../../models/player-model');
 
 class FansController {
     async get__tournament(req, res) {
@@ -14,6 +15,8 @@ class FansController {
                 return res.json({message: 'Турнир не найден'});
             }
             let matches = await Match.find({tournament: id, status_doc: {$ne: 'deleted'}}).sort({date: 'asc'});
+            matches = sortMatches(matches);
+
             let futureMatches = await getFutureMatches(matches);
             futureMatches = await getDates(futureMatches);
             console.log(futureMatches)
@@ -51,10 +54,26 @@ class FansController {
             if(!tournament || !tournament.creator.equals(req.fans_league.creator)) {
                 return res.json({message: 'Турнир не найден'});
             }
-            let matches = await Match.find({tournament: id, status_doc: {$ne: 'deleted'}}).sort({date: 'asc'});
+            let matches = await Match.find({tournament: id, status_doc: {$ne: 'deleted'}})
             let previusMatches = await getPreviousMatches(matches);
             console.log(previusMatches)
-            return sendRes('fans/fans_tour/tables', {tournament, previusMatches, compareDates}, res);
+            return sendRes('fans/fans_tour/tables', {tournament, previusMatches, compareDates, getTeamData}, res);
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        
+        }   
+    }
+    async get__teams(req, res) {
+        try {
+            const {id} = req.params;
+            const tournament = await Tournament.findById(id);
+            if(!tournament || !tournament.creator.equals(req.fans_league.creator)) {
+                return res.json({message: 'Турнир не найден'});
+            }
+            return sendRes('fans/fans_tour/teams', {tournament, compareDates}, res);
+        
         }
         catch (e) {
             console.log(e);
@@ -69,8 +88,56 @@ class FansController {
             if(!team || !team.creator.equals(req.fans_league.creator)) {
                 return res.json({message: 'Команда не найдена'});
             }
-            let matches = await Match.find({team: id, status_doc: {$ne: 'deleted'}}).sort({date: 'asc'});
-            return sendRes('fans/fans_members/team', {team}, res);
+            let matches = await Match.find({$or: [{'team_1': id}, {'team_2': id}], status_doc: {$ne: 'deleted'}})
+            matches = sortMatches(matches);
+            matches = await getDates(matches);
+            
+            let previusMatches = await getPreviousMatches(matches);
+            let futureMatches = await getFutureMatches(matches);
+            return sendRes('fans/fans_members/team', {team, matches, previusMatches, getTeamData}, res);
+        
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        
+        }   
+    }
+    async get__calendar_team(req, res) {
+        try {
+            const {id} = req.params;
+            const team = await Team.findById(id);
+            if(!team || !team.creator.equals(req.fans_league.creator)) {
+                return res.json({message: 'Команда не найдена'});
+            }
+            let matches = await Match.find({$or: [{'team_1': id}, {'team_2': id}], status_doc: {$ne: 'deleted'}})
+            matches = sortMatches(matches);
+            matches = await getDates(matches);
+            console.log(matches)
+            let previusMatches = await getPreviousMatches(matches);
+            return sendRes('fans/fans_members/calendar', {team, matches, previusMatches, getTeamData}, res);
+        
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        
+        }   
+    }
+    async get__roster_team(req, res) {
+        try {
+            const {id} = req.params;
+            const team = await Team.findById(id);
+            if(!team || !team.creator.equals(req.fans_league.creator)) {
+                return res.json({message: 'Команда не найдена'});
+            }
+            let matches = await Match.find({$or: [{'team_1': id}, {'team_2': id}], status_doc: {$ne: 'deleted'}})
+            matches = sortMatches(matches);
+            matches = await getDates(matches);
+            let previusMatches = await getPreviousMatches(matches);
+            
+            let players = await Player.find({team: id}).populate('team creator');
+            return sendRes('fans/fans_members/roster', {team, players, previusMatches, getTeamData}, res);
         
         }
         catch (e) {
@@ -89,12 +156,13 @@ async function sendRes(path, data, res) {
         res.json(html);
     });
 }
+
+
+
 async function getFutureMatches(matches) {
     try {
         return futureMatches = matches.filter((item) => {
-            console.log(item)
-            console.log(new Date(`${item.date} ${item.time || '00:00'}`))
-            return true
+            //return true
             return new Date(`${item.date} ${item.time || '00:00'}`) > Date.now() 
         })
     } catch (e) {
@@ -104,8 +172,9 @@ async function getFutureMatches(matches) {
 }
 async function getPreviousMatches(matches) {
     try {
+
         return previusMatches = matches.filter((item) => {
-            return true
+            //return true
             return new Date(`${item.date} ${item.time || '00:00'}`) < Date.now() 
         })
     } catch (e) {
@@ -118,7 +187,6 @@ async function getDates(matches) {
         return matches.map((item) => {
 
             let date = new Date(`${item.date} ${item.time || '00:00'}`)
-            console.log(date)
             return {...item._doc, format_min: formatDate(date, 'minuts'), format_only_day: formatDate(date, 'only_days')};
         })
     } catch (e) {
@@ -126,11 +194,71 @@ async function getDates(matches) {
         return matches
     }
 }
-let compareDates = (from, to) => { 
-
-    if (!from || !to) {
-        return 'Неопределено';
+let getTeamData = (team, matches) => {
+    let teamData = {
+        count_matches: matches.length,
+        count_wins: 0,
+        count_goals: 0,
+        count_tournaments_set: new Set(),
+        results: []
     }
+    //previusMatches = previusMatches.sort((a, b) => a.time.localeCompare(b.time));
+    for(let i = 0; (i < matches.length); i++) {
+        if(matches[i].tournament)
+            teamData.count_tournaments_set.add(matches[i].tournament.id)
+        
+    }
+    let results = matches.map(match => {
+        let data = {
+            id: match.id,
+        }
+        if(team.id == match.team_2.id && team.id != match.team_1.id) {
+            data.team_1 = match.team_2;
+            data.team_2 = match.team_1;
+            data.team_1_score = match.team_2_score;
+            data.team_2_score = match.team_1_score;
+            return data;
+        }
+        data.team_1 = match.team_1;
+        data.team_2 = match.team_2;
+        data.team_1_score = match.team_1_score;
+        data.team_2_score = match.team_2_score;
+        return data
+        
+        });
+        results = results.map(match => {
+            let data = {
+                id: match.id,
+                result: (match.team_1_score > match.team_2_score ? 'В'  : (match.team_1_score < match.team_2_score ? 'П' : 'Н')),
+                goals: match.team_1_score
+            }
+            return data
+        });
+        teamData.results = results
+
+    teamData.count_wins = results.filter(match => match.result == 'В').length
+    teamData.count_goals = results.reduce((acc, match) => acc + match.goals, 0)
+    return teamData
+}
+const sortMatches = (matches) => {
+    return matches.sort(function (a, b) {
+        let af = a.date;
+        let bf = b.date;
+        let as = new Date(af + ' ' + a?.time || '00:00').getTime();
+        let bs = new Date(bf + ' ' + b?.time || '00:00').getTime();
+    
+        if (af == bf) {
+            return (as > bs) ? -1 : (as < bs) ? 1 : 0;
+        } else {
+            return (af > bf) ? -1 : 1;
+        }
+    });
+}
+
+const compareDates = (from, to) => { 
+    if (!from || !to) 
+        return 'Неопределено';
+    
     let dateNow = new Date();
     let dateFrom = new Date(from);
     let dateTo = new Date(to);

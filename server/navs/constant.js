@@ -19,8 +19,17 @@ const nav = {
         'tables/id/:id' : {
             'func' : 'get__tables'
         },
+        'teams/id/:id' : {
+            'func' : 'get__teams'
+        },
         'team/id/:id' : {
             'func' : 'get__team'
+        },
+        'calendar_team/id/:id' : {
+            'func' : 'get__calendar_team'
+        },
+        'roster_team/id/:id' : {
+            'func' : 'get__roster_team'
         }
     },
     'fans_tournaments/:address' : {
