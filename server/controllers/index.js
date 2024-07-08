@@ -44,7 +44,7 @@ class Constrollers {
     async get__fans_tournaments(req, res) {
         let league = req.fans_league;
         let userAd = await User.findById(league.creator);
-        let tournaments = await Tournament.find({creator: userAd._id, status_doc: {$ne: 'deleted'}})
+        let tournaments = await Tournament.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}})
 
         res.render('fans/fans_tournaments', {
             league,
