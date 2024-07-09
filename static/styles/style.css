@@ -35,3 +35,7 @@ input:disabled {
 .top_nav {
     margin-bottom: auto !important;
 }
+
+img[src=""] {
+    display: none;
+}
