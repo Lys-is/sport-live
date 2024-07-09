@@ -150,7 +150,7 @@ class LkController {
     async put__league(req, res) {
         try {
             await League.findOneAndUpdate({creator: req.user.id}, req.body);
-            return res.json({message: 'Лига обновлена'});
+            return res.json({message: 'Лига обновлена', reload: true});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

@@ -20,6 +20,7 @@ class RepresentativeController {
             return res.json({message: 'Судья создан'});
         } catch (e) {
             console.log(e);
+            if(e.codeName == 'BSONObjectTooLarge') return res.json({message: 'Превышен лимит вводимых данных'});
             return res.json({message: 'Произошла ошибка'});
         }
     }
