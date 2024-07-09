@@ -15,6 +15,7 @@ async function standartLinkListener(e) {
     let href = el.getAttribute('data-href');
     getPage(href);
 }
+let member_hrefs = getA('.small_buttons > input');
 
 async function getPage(href) {
     let initHref = href.split('?')[0];
@@ -27,6 +28,7 @@ async function getPage(href) {
     history.replaceState({ page: 1 }, "", `?page=${initHref}`);
 
     const navLinks = getA('.fans_link');
+    console.log(navLinks)
     navLinks.forEach(link => {
         if (!link.hasEventListener('click')) {
             link.addEventListener('click', linkListener);
@@ -47,7 +49,10 @@ const inits = {
     'tournament/id' : init__tournament,
     'calendar/id' : init__calendar,
     'tables/id' : init__tables,
-    'teams/id' : init__teams
+    'teams/id' : init__teams,
+    'team/id' : init__team,
+    'calendar_team/id' : init__calendar_team,
+    'roster_team/id' : init__roster_team
 }
 
 
@@ -63,6 +68,15 @@ async function init__tables () {
 }
 async function init__teams () {
     changeTourNav('teams');
+}
+async function init__team () {
+    changeTourNav('team');
+}
+async function init__calendar_team () {
+    changeTourNav('calendar_team');
+}
+async function init__roster_team () {
+    changeTourNav('roster_team');
 }
 function changeTourNav(name) {
     let navs = getA('.content-nav > .nav-menu-item');

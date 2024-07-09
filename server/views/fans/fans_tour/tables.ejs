@@ -21,28 +21,34 @@
                 <th>Форма</th>
             </tr>
             <% 
+            let filter = (teamId, matches) => matches.filter(match => match.team_1.id == teamId || match.team_2.id == teamId);
             for(let i = 0; i < teams.length; i++) {
-                let team_matches = previusMatches.filter(match => match.team_1.id == teams[i].id || match.team_2.id == teams[i].id);
+                let team_matches = filter(teams[i].id, previusMatches);
 
                 team_matches = team_matches.map(match => {
-                    if(match.team_2.id == teams[i].id) {
-                        let tmp = match.team_1;
-                        match.team_1 = match.team_2;
-                        match.team_2 = tmp;
-                        tmp = match.team_1_score;
-                        match.team_1_score = match.team_2_score;
-                        match.team_2_score = tmp;
-                        return match
+                    let data = {
+                        id: match.id,
                     }
-                    else
-                        return match
+                    if(teams[i].id == match.team_2.id && teams[i].id != match.team_1.id) {
+                        data.team_1 = match.team_2;
+                        data.team_2 = match.team_1;
+                        data.team_1_score = match.team_2_score;
+                        data.team_2_score = match.team_1_score;
+                        return data;
+                    }
+                    data.team_1 = match.team_1;
+                    data.team_2 = match.team_2;
+                    data.team_1_score = match.team_1_score;
+                    data.team_2_score = match.team_2_score;
+                    return data
+        
                 });
             let count_matches = team_matches.length,
                 count_wins = team_matches.filter(match => match.team_1_score > match.team_2_score).length,
                 count_draws = team_matches.filter(match => match.team_1_score == match.team_2_score).length,
                 count_losses = team_matches.filter(match => match.team_1_score < match.team_2_score).length,
-                count_goals = team_matches.reduce((acc, match) => acc + match.team_1_score + match.team_2_score, 0),
-                count_missed = team_matches.reduce((acc, match) => acc + match.team_1_score - match.team_2_score, 0),
+                count_goals = team_matches.reduce((acc, match) => acc + match.team_1_score, 0),
+                count_missed = team_matches.reduce((acc, match) => acc + match.team_2_score, 0),
                 count_points = count_wins*tournament.reglament.for_win + count_draws*tournament.reglament.for_tie - count_losses*tournament.reglament.for_lose
                 
             %>
@@ -72,6 +78,13 @@
             <input type="button" class="selected-table-button" value="Шахматка">
             <input type="button" class="" value="Форма">
         </div>
+        <% 
+            let setByCircle = new Set(previusMatches.map(m => m.circle || 'Вне круга'));
+            setByCircle.forEach(circle => {
+                let matchesByCircle = previusMatches.filter(match => match.circle ? match.circle == circle : circle == 'Вне круга');
+                %>
+                    <p> Круг: <%= circle %></p>
+                
         <table class="nets-table chahmatka chahmatka-effect">
             <tr>
                 <th>#</th>
@@ -80,36 +93,38 @@
                     <th><%= i+1 %></th>
                 <% } %>
             </tr>
-            <% for(let i = 0; i < teams.length; i++) { %>
-               
-            <tr>
-                <td><%= i+1 %></td>
-                <td>
-                    <div class="h_flex">
-                        <img src="<%= teams[i].img || '/static/styles/icons/logo.jpg'%>" class="" width="70" height="70">
-                        <p><%= teams[i].name %></p>
-                    </div>
-                </td>
-                <% for(let j = 0; j < teams.length; j++) { %>
-                    <% let match = previusMatches.find(match => {
-                        if(((match.team_1.id == teams[i].id) && (match.team_2.id == teams[j].id)) || ((match.team_2.id == teams[i].id) && (match.team_1.id == teams[j].id)))
-                            return match
-                    })
-
-                    if(!match || i == j) { %>
-                        <td class="no_cell"></td>
-                    <% }
-                    else {
-                    
-                    let team_1 = teams[i].id == match.team_1.id ? 'team_1' : 'team_2'
-                    let team_2 = teams[i].id == match.team_1.id ? 'team_2' : 'team_1'
+            <%
+                for(let i = 0; i < teams.length; i++) { 
+                    let matches = filter(teams[i].id, matchesByCircle);
                     %>
-                        <td><%= match[`${team_1}_score`] || match[`${team_2}_score`] ? `${match[`${team_1}_score`]}:${match[`${team_2}_score`]}`: '-:-' %></td>
-                    <% }
-                } %>
-            </tr>
-            <% } %>      
+                    <tr>
+                        <td><%= i+1 %></td>
+                        <td>
+                            <div class="h_flex">
+                                <img src="<%= teams[i].img || '/static/styles/icons/logo.jpg'%>" class="" width="70" height="70">
+                                <p><%= teams[i].name %></p>
+                            </div>
+                        </td>
+                        <% for(let j = 0; j < teams.length; j++) { %>
+
+                            <% let match = filter(teams[j].id, matches)[0];
+                            //let match = previusMatches.find(match => ((match.team_1.id == teams[i].id) && (match.team_2.id == teams[j].id)) || ((match.team_2.id == teams[i].id) && (match.team_1.id == teams[j].id)))
+                            if(!match || i == j) { %>
+                                <td class="no_cell"></td>
+                            <% }
+                            else {
+                            
+                            let team_1 = teams[i].id == match.team_1.id ? 'team_1' : 'team_2'
+                            let team_2 = teams[i].id == match.team_1.id ? 'team_2' : 'team_1'
+                            %>
+
+                                <td><%= match[`${team_1}_score`] || match[`${team_2}_score`] ? `${match[`${team_1}_score`]}:${match[`${team_2}_score`]}`: '-:-' %></td>
+                            <% }
+                        } %>
+                    </tr>
+                    <% } %>      
         </table>
+        <% }) %>      
 
 
         <div class="h50"></div>
@@ -125,16 +140,34 @@
                 <th>Команда</th>
                 <th>Форма</th>
             </tr>
-            <% for(let i = 0; i < teams.length; i++) { %>
+            <% for(let i = 0; i < teams.length; i++) {
+                let team = teams[i]%>
             <tr>
                 <td><%= i+1 %></td>
                 <td>
                     <div class="h_flex">
-                        <img src="<%= teams[i].img || '/static/styles/icons/logo.jpg'%>" class="" width="70" height="70">
-                        <p><%= teams[i].name %></p>
+                        <img src="<%= team.img || '/static/styles/icons/logo.jpg'%>" class="" width="70" height="70">
+                        <p><%= team.name %></p>
                     </div>
                 </td>
-                <td style="opacity: 1;<%= teams[i].color ? `background-color: ${teams[i].color}` : '' %>"></td>
+                <td><div class="h_flex">
+                    <% 
+                    let classes = {
+                        'В': 'dark-blue nm-block',
+                        'П': 'dark-red nm-block',
+                        'Н': 'dark-gray nm-block'
+                    }
+                    let team_matches = filter(team.id, previusMatches);
+
+                    let data = getTeamData(team, team_matches)
+                    %>
+                    <%
+                    for (let j = 0; (j < team_matches.length&& j < 7); j++) { %>
+                        <p class="<%= classes[data.results[j].result] %>"><%= data.results[j].result %></p>
+
+                    <% } %>
+
+                </div></td>
             </tr>
             <% } %>
             

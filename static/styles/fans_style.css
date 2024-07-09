@@ -32,7 +32,9 @@ header {
 h1 {
     margin: 0;
 }
-
+img[src=""] {
+    display: none;
+}
 nav {
     display: flex;
     justify-content: center;
@@ -156,6 +158,7 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     color: #fff;
+    z-index: 10002;
 }
 
 .nav-links:hover {
@@ -557,7 +560,11 @@ a {
     color: #efefef;
     padding: 10px;
 }
-
+.dark-red {
+    background-color: #9c1919;
+    color: #efefef;
+    padding: 10px;
+}
 .centered {
     justify-content: center;
     align-items: center;
@@ -615,7 +622,7 @@ a {
     align-items: start;
     padding: 30px;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
 }
 
 .calendar-match-table {
@@ -787,7 +794,6 @@ td.no_cell{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     background-color: #fafafa;
     cursor: pointer;
 }
@@ -945,7 +951,7 @@ select.nav-select{
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding-right: 0;
 }
 

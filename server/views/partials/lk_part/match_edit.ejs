@@ -162,6 +162,7 @@
                     <tr>
                         <th>#</th>
                         <th>ФИО</th>
+                        <th>Активный</th>
                         <th>Красные карточки</th>
                         <th>Желтые карточки</th>
                         <th>Передачи</th>
@@ -171,7 +172,8 @@
                         for (let i = 0; i < match.results_1.length; i++) { %>
                             <tr data-index="<%= i %>" class="res_row">
                                 <td><%= i+1 %></td>
-                                <td><%= match.results_1[i].player.fio %></td>
+                                <td><%= match.results_1[i].player_fio %></td>
+                                <td><input type="checkbox" name="is_active" <%= match.results_1[i].is_active  ? 'checked' : '' %>></td>
                                 <td><input type="number" name="red" value="<%= match.results_1[i].red %>"></td>
                                 <td><input type="number" name="yellow" value="<%= match.results_1[i].yellow %>"></td>
                                 <td><input type="number" name="transits" value="<%= match.results_1[i].transits %>"></td>
@@ -185,6 +187,7 @@
                     <tr>
                         <th>#</th>
                         <th>ФИО</th>
+                        <th>Активный</th>
                         <th>Красные карточки</th>
                         <th>Желтые карточки</th>
                         <th>Передачи</th>
@@ -194,7 +197,8 @@
                         for (let i = 0; i < match.results_2.length; i++) { %>
                             <tr data-index="<%= i %>" class="res_row">
                                 <td><%= i+1 %></td>
-                                <td><%= match.results_2[i].player.fio %></td>
+                                <td><%= match.results_2[i].player_fio %></td>
+                                <td><input type="checkbox" name="is_active" <%= match.results_2[i].is_active ? 'checked' : '' %>> </td>
                                 <td><input type="number" name="red" value="<%= match.results_2[i].red %>"></td>
                                 <td><input type="number" name="yellow" value="<%= match.results_2[i].yellow %>"></td>
                                 <td><input type="number" name="transits" value="<%= match.results_2[i].transits %>"></td>

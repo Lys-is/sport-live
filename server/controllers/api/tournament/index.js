@@ -81,7 +81,8 @@ class TournamentController {
             let tourId = req.params.id;
             let tournament = await Tournament.findOne({_id: tourId})
             console.log(tournament)
-            if(!tournament) return res.json({message: 'Такой команды не существует'});
+            if(!tournament) return res.json({message: 'Такого турнира не существует'});
+            if(!tournament.creator.equals(req.user.id)) return res.json({message: 'Ошибка доступа'});
             console.log(tourId)
             // let players = await Player.find({team: teamId}).populate('team creator');
             // console.log(players)
@@ -92,6 +93,7 @@ class TournamentController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
+    
     async get__group(req, res) {
         try {
             let tourId = req.params.id;

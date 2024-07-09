@@ -1,22 +1,6 @@
 <%- include('fans_header.ejs') %>
     <div class="content">
-        <div class="content-header less-padding">
-            
-            <div class="h_flex">
-                <h2>Участники</h2>
-                <div class="filler"></div>
-                <div class="h_flex table-header small_buttons">
-                <input type="button" value="Команды" class="selected-table-button">
-                <input type="button" value="Игроки" class="">
-                <input type="button" value="Судьи" class="">
-                </div>
-                <div class="filler"></div>
-                <select class="big-select">
-                    <option>2024</option>
-                    <option>2023</option>
-                </select>
-            </div>
-        </div>
+        <%- include('fans_members/members_header.ejs') %>
         <div class="content-body body-background members-body">
             <div class="h_flex">
                 <input type="text" class="search-form" placeholder="Поиск по названию">
@@ -27,24 +11,24 @@
             <div class="grid-player">
                 <% let teamsSet = new Set()
                     tournaments.forEach(tournament => {
-                    tournament.teams.forEach(team => { 
-                    let s = teamsSet.has(team._id.toString())
-                    if(!s) {
+                        tournament.teams.forEach(team => { 
+                        let s = teamsSet.has(team._id.toString())
+                        if(!s) {
 
-                    teamsSet.add(team._id.toString())
-                    %>
-                    <div class="player-block fans_link" data-href="team/id/<%= team._id %>">
-                        <img src="<%= team.img || '/static/styles/icons/logo.jpg'%>" class="" width="200" height="200">
-                        <p><%= team.name %></p>
-                    </div>
-                    <% }
-                }) %>
+                        teamsSet.add(team._id.toString())
+                        %>
+                        <div class="player-block fans_link" data-href="team/id/<%= team._id %>">
+                            <img src="<%= team.img || '/static/styles/icons/logo.jpg'%>" class="" width="200" height="200">
+                            <p><%= team.name %></p>
+                        </div>
+                        <% }
+                    }) %>
 
                 <% }) %>
             </div>
         </div>
 
-        <div class="content-header less-padding">
+        <!--<div class="content-header less-padding">
             
             <div class="h_flex">
                 <h2>Участники</h2>
@@ -989,7 +973,7 @@
             </div> 
             
 
-        </div>
+        </div> -->
         
 
        

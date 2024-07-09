@@ -1,0 +1,17 @@
+
+                <div class="h_flex">
+                    <% 
+                    let classes = {
+                        'В': 'dark-blue nm-block',
+                        'П': 'dark-red nm-block',
+                        'Н': 'dark-gray nm-block'
+                    }
+                    let data = getTeamData(team, previusMatches)
+                    
+                    for (let i = 0; (i < previusMatches.length && i < 5); i++) { %>
+                        <p class="<%= classes[data.results[i].result] %>"><%= data.results[i].result %></p>
+
+                    <% } %>
+
+                </div>
+            

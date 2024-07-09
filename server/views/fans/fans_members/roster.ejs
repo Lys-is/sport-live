@@ -1,0 +1,64 @@
+<%- include('members_header.ejs') %>
+<div class="grid-body">
+    <%- include('team_nav.ejs') %>
+    <div class="content-body body-background">
+        <div class="h_flex white">
+            <img src="<%= team.img || '/static/styles/icons/logo.jpg' %>" class="" width="200" height="200">
+            <div class="v_flex left">
+                <h2 class="nm-top">Команда 1</h2>
+                <p class="">Последние матчи:</p>
+                <%- include('../last_matches.ejs') %>
+
+            </div>
+        </div>
+        <div class="h_flex white mt padding">
+
+            <select class="big-select">
+                <option>Активные</option>
+                <option>Ушедшие</option>
+            </select>
+            <div class="filler"></div>
+            <select class="big-select">
+                <option>Игроки</option>
+                <option>Представители</option>
+            </select>
+        </div>
+        <div class="grid-player players">
+            <% let apmls = {
+                '1': 'Вратарь',
+                '2': 'Защитник',
+                '3': 'Полузащитник',
+                '4': 'Нападающий',
+                '5': 'Универсал',
+            }
+                players.forEach(player => { %>
+
+            <div class="player-block">
+                <img src="<%= player.img || '/static/styles/icons/logo.jpg' %>" class="" width="200" height="200">
+                <div class="comming-match-block">
+                    <div class="v_flex left np">
+                        <p class="nm-block">Игрок <%= player.num %></p>
+                        <p class="nm-block"><%= player.fio %></p>
+                    </div>
+
+
+                    <div class="h_flex">
+                        <p class="nm-block">Игр:</p>
+                        <div class="filler"></div>
+                        <p class="dark-blue circle nm-block"><%= playersResult[player._id].length %></p>
+                    </div>
+                    <div class="h_flex">
+                        <p class="nm-block">Голов:</p>
+                        <div class="filler"></div>
+                        <p class="dark-blue circle nm-block"><%= playersResult[player._id].reduce((s, p) => s + p.goals, 0) %></p>
+                    </div>
+                    <p class="nm-block p-small"><%= player.ampl ? apmls[player.ampl] : '' %></p>
+                </div>
+            </div>
+
+            <% }) %>
+            
+        </div>
+        
+    </div>
+</div>

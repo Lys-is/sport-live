@@ -4,8 +4,8 @@ const fansController = require('./fans-controller');
 const { team } = require('./team');
 
 module.exports = {
-    auth: authController,
-    lk: lkController,
+    'auth': authController,
+    'lk': lkController,
     'fans/:address': fansController,
     
 }

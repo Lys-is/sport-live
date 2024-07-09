@@ -5,6 +5,9 @@ const { ObjectId } = require('mongodb');
 
 class DbService {
    async getAggregate(schema, req) {
+    console.log(schema)
+      if(!schema)
+        return [[], 0]
        // await schema.updateMany({}, {status_doc: 'active'})
         let filter = getFilters(req, schema);
         let aggregate = buildAggregatePipeline(filter, req.page_n),
@@ -55,7 +58,7 @@ function getFilters(req, schema) {
         }
         //console.log(schema)
         
-        if(!filter.status_doc && schema.schema.paths.status_doc) {
+        if(!filter.status_doc && schema.schema?.paths.status_doc) {
             filter.status_doc = 'active'
         }
         //console.log(req)
