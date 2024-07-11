@@ -15,6 +15,7 @@ User = require('../../models/user-model'),
 League = require('../../models/league-model'),
 Style = require('../../models/style-model'),
 Commentator = require('../../models/commentator-model'),
+Doc = require('../../models/doc-model'),
 Couch = require('../../models/couch-model');
 const dbService = require('../../service/db-service');
 const { default: mongoose } = require('mongoose');
@@ -30,6 +31,7 @@ class LkController {
     commentator = require('./commentator')
     user = require('./user')
     transfer = require('./transfer')
+    guide = require('./guide')
     async get__create(req, res) {
         try {
             return sendRes('partials/lk_part/team_create', {}, res);
@@ -157,6 +159,7 @@ class LkController {
         }
     }
     async get__player(req, res) {
+
         try {
             req.query['creator'] = req.user.id
 
@@ -316,7 +319,26 @@ class LkController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
-
+    async get__guide(req, res) {
+        try {
+            let guides = await Doc.find({type: 'guide', status_doc: {$ne: 'deleted'}});
+            return sendRes('partials/lk_part/guide', {guides}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__guide_admin(req, res) {
+        try {
+            if(!req.user.isAdmin) return res.json({message: 'Нет доступа'});
+            let guides = await Doc.find({type: 'guide'});
+            return sendRes('partials/lk_part/guide_admin', {guides}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+                
+    }
     async put__del(req, res) {
         try {
             let data = req.body;

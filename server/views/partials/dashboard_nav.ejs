@@ -29,6 +29,7 @@
         <p class = "navbar_text icon" id="navbar_league" data-href="league">Моя лига</p>
         <p class = "navbar_text icon2" id="navbar_tournirs" data-href="tournament">Мои турниры</p>
         <p class = "navbar_text icon2" id="navbar_matches" data-href="match">Календарь игр</p>
+        <p class = "navbar_text icon2" id="navbar_judges" data-href="guide">Справочники</p>
 
 
         <p class = "navbar_text navbar_title" >Участники</p>
@@ -42,10 +43,12 @@
         <% if(isAdmin) { %>
             <br>
             <p class = "navbar_text icon2" id="navbar_reps" data-href="user">Пользователи</p>
+            <p class = "navbar_text icon2" id="navbar_judges" data-href="guide_admin">Справочники</p>
+
         <% } %>
     </div>
     <div class="navbar_footer">
-        <img src = "<%= profile.site_img ? profile.site_img : '/static/styles/icons/logo.jpg' %>" class = "navbar_logo" alt = "logo" height="30" width="30">
-        <h1 class = "navbar_naming"><%= profile.site_name ? profile.site_name : 'Sportlive' %></h1>
+        <img src = "<%= profile?.site_img ? profile?.site_img : '/static/styles/icons/logo.jpg' %>" class = "navbar_logo" alt = "logo" height="30" width="30">
+        <h1 class = "navbar_naming"><%= profile?.site_name ? profile.site_name : 'Sportlive' %></h1>
     </div>
 </nav>

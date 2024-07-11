@@ -1,0 +1,37 @@
+<div class="tournires_content">
+    <div class="tournires_header">
+        <div class="tournires_header_header">
+            <p class="page_title ">Справочники</p>
+            <input type="button" value="Добавить новый справочник" class="button green_button nav_link" data-href="guide/get__create">
+
+        </div>
+
+        
+    </div>
+    
+    <div class="tournires_body">
+        <% if (guides.length > 0) { %>
+            <% for (let i = 0; i < guides.length; i++) { %>
+
+            <div class="tournires_content_block">
+                <div class="tournires_block_header">
+                    <h1><%= guides[i].name %></h1>
+                </div>
+                <div class="tournires_actions">
+
+                    <a class="nav_link" data-href="guide/id/<%= guides[i]._id %>">Смотреть</a>
+                    <a class="table_links_del" data-id="<%= guides[i]._id %>" data-model="Doc" style="background-color: unset"><%= guides[i].status_doc == 'active' ? 'В архив' : 'Из архива' %></a>
+                </div>
+                <!-- <div class="tournires_calendar">
+                    <h2>Календарь матчей</h2>
+                    <input type="button" value="финал" class="tournires_tab_button">
+                </div> -->
+            </div>
+            
+            <% } %>
+        </table>
+        <%} else { %>
+            <h1 class="lk_wrapper__title">Нет справочников</h1>
+        <% } %>
+    </div>
+</div>

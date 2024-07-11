@@ -129,7 +129,8 @@ function removeTrailingSlash(str) {
   }
 async function linkListener(e) {
         e.preventDefault()
-        let href = e.target.getAttribute('data-href')
+        let nav = e.target.closest('*[data-href]')
+        let href = nav.getAttribute('data-href')
         console.log(href)
         getPage(href)
 }
@@ -176,6 +177,7 @@ let inits = {
     'tournament/id/group' : init__tournament_group,
     'tournament/id/get__group_create' : init__tournament_group_create,
     'tournament/id/get__group_edit' : init__tournament_group_edit,
+    'tournament/id/docs_create' : init__tournament_docs_create,
     'player': init__player,
     'player/get__create' : init__player_create,
     'player/get__edit' : init__player_edit,
@@ -185,7 +187,8 @@ let inits = {
     'commentator/get__create' : init__commentator_create,
     'user': init__user,
     'style' : init__style,
-    'transfer/get__create': init__transfer_create
+    'transfer/get__create': init__transfer_create,
+    'guide/get__create': init__guide_create,
 }
 for(let key in inits) {
     inits[key] = init_decorator(inits[key])
@@ -637,6 +640,30 @@ function init__transfer_create() {
     })
 }
 
+function init__tournament_docs_create() {
+    let tourId = get('#tour_body').getAttribute('data-id')
+    let form = get("#tournament_docs_create__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        let html = await readDocxContents(form.doc_file.files[0])
+        data.doc = html
+        data.tournament = tourId
+        //get('#tour_body').innerHTML = html
+        sendFetch("/api/lk/tournament/post__docs_create", JSON.stringify(data), "POST")
+    })
+}
+function init__guide_create() {
+
+    let form = get("#guide_create__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        let html = await readDocxContents(form.doc_file.files[0])
+        data.doc = html
+        sendFetch("/api/lk/guide/post__create", JSON.stringify(data), "POST")
+    })
+}
 function setImgListener(){
     let imgsLabels = getA('.image_upload')
     imgsLabels.forEach(label => {
@@ -651,6 +678,7 @@ function setImgListener(){
         })
     })
 }
+
 
 
 
@@ -680,7 +708,38 @@ function hex2text(hex_string)
     return out;
 }
 
+function readDocxContents(file) {
 
+  
+    if (file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = async function (e) {
+            const arrayBuffer = e.target.result;
+      
+            // Convert the ArrayBuffer to a Uint8Array
+            const uint8Array = new Uint8Array(arrayBuffer);
+      
+            // Convert the Uint8Array to a binary string
+            const binaryString = uint8Array.reduce((acc, value) => acc + String.fromCharCode(value), '');
+      
+            // Parse the DOCX contents using mammoth.js
+            let res = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer }, {includeDefaultStyleMap: true})
+              .then(result => result.value )
+              .catch(error => {
+                console.error('Error parsing DOCX:', error);
+              });
+              resolve(res)
+          };
+      
+          reader.readAsArrayBuffer(file);
+    });
+  
+      
+    } else {
+      alert('Please select a DOCX file.');
+    }
+  }
 
 function init__filter() {
     let filter_data = {

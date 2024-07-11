@@ -88,6 +88,7 @@
  img {
    display: block;
    max-width: 100%;
+   height: -webkit-fill-available;
  }
  
  /**

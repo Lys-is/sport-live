@@ -34,7 +34,7 @@ const nav = {
         'players' : {
             'func' : 'get__players'
         },
-        'player:id/:id' : {
+        'player/id/:id' : {
             'func' : 'get__player'
         }
 
@@ -130,6 +130,8 @@ const nav = {
             'id/:id/t_team' : {'func': 'get__t_team'},
             'id/:id/results' : {'func': 'get__results'},
             'id/:id/docs' : {'func': 'get__docs'},
+            'id/:id/docs_create' : {'func': 'get__docs_create'},
+            'post__docs_create' : {},
             'id/:id/pages' : {'func': 'get__pages'},
             'id/:id/widgets' : {'func': 'get__widgets'},
         },
@@ -198,6 +200,16 @@ const nav = {
         },
         'style' : {
             'func' : 'get__style',
+        },
+        'guide' : {
+            'func' : 'get__guide',
+            'get__create' : {},
+            'id/:id/' : {'func': 'get__single_guide'},
+           // 'admin' : {'func': 'get__guide_admin'},
+            'post__create' : {},
+        },
+        'guide_admin' : {
+            'func' : 'get__guide_admin',
         },
         'post__style' : {},
         'get__style_by_id'  : {},

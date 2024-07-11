@@ -9,7 +9,7 @@ if(prms['page']) {
     getPage(prms['page'])
 }
 
-async function standartLinkListener(e) {
+function standartLinkListener(e) {
     e.preventDefault();
     let el = e.target.closest('.fans_link');
     let href = el.getAttribute('data-href');
@@ -18,6 +18,7 @@ async function standartLinkListener(e) {
 let member_hrefs = getA('.small_buttons > input');
 
 async function getPage(href) {
+    if(!href) location.href = location.pathname;
     let initHref = href.split('?')[0];
     const baseUrl = `/api/fans/${leagueId}/`;
     const pageUrl = `${baseUrl}${href.replace('&', '?')}`;
@@ -31,7 +32,7 @@ async function getPage(href) {
     console.log(navLinks)
     navLinks.forEach(link => {
         if (!link.hasEventListener('click')) {
-            link.addEventListener('click', linkListener);
+            link.addEventListener('click', standartLinkListener);
         }
     });
 
@@ -52,7 +53,9 @@ const inits = {
     'teams/id' : init__teams,
     'team/id' : init__team,
     'calendar_team/id' : init__calendar_team,
-    'roster_team/id' : init__roster_team
+    'roster_team/id' : init__roster_team,
+    'players' : init__players,
+    'player/id' : init__player
 }
 
 
@@ -78,12 +81,25 @@ async function init__calendar_team () {
 async function init__roster_team () {
     changeTourNav('roster_team');
 }
+async function init__players () {
+    changeMembersNav('players');
+}
+async function init__player () {
+    changeMembersNav('players');
+}
 function changeTourNav(name) {
     let navs = getA('.content-nav > .nav-menu-item');
     navs.forEach(nav => {
         nav.classList.remove('selected');
     })
     get(`.content-nav > .nav-menu-item[data-name="${name}"]`).classList.add('selected');
+}
+function changeMembersNav(name) {
+    let navs = getA('.members_header > .fans_link');
+    navs.forEach(nav => {
+        nav.classList.remove('selected-table-button');
+    })
+    get(`.members_header > .fans_link[data-href="${name}"]`).classList.add('selected-table-button');
 }
 function initNav(nowHref) {
     let nowPage = nowHref.split('/')[0];

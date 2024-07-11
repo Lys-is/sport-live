@@ -26,7 +26,6 @@
                     c_pass = 0,
                     c_yellow = 0,
                     c_red = 0;
-
                 if(playersResult[player._id] && playersResult[player._id].length) {
                     c_matches = playersResult[player._id].length;
                     c_goals = playersResult[player._id].reduce((s, p) => s + p.goals, 0);
@@ -39,7 +38,7 @@
                 
                 %>
 
-            <tr class="clickable-tr">
+            <tr class="clickable-tr fans_link" data-href="player/id/<%= player._id %>">
                 <td><%= i + 1 %></td>
                 <td>
                     <div class="h_flex">

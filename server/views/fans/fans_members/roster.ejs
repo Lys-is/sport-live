@@ -5,7 +5,7 @@
         <div class="h_flex white">
             <img src="<%= team.img || '/static/styles/icons/logo.jpg' %>" class="" width="200" height="200">
             <div class="v_flex left">
-                <h2 class="nm-top">Команда 1</h2>
+                <h2 class="nm-top"><%= team.name %></h2>
                 <p class="">Последние матчи:</p>
                 <%- include('../last_matches.ejs') %>
 
@@ -33,7 +33,7 @@
             }
                 players.forEach(player => { %>
 
-            <div class="player-block">
+            <div class="player-block fans_link" data-href="player/id/<%= player._id %>">
                 <img src="<%= player.img || '/static/styles/icons/logo.jpg' %>" class="" width="200" height="200">
                 <div class="comming-match-block">
                     <div class="v_flex left np">

@@ -5,6 +5,9 @@ const Tournament = require('../../../models/tournament-model');
 const editController = require('./edit-controller');
 const groupController = require('./group-controller');
 const dbService = require('../../../service/db-service');
+const mammoth = require("mammoth")
+const fs = require('fs')
+const Readable = require('stream').Readable
 class TournamentController {
     put__edit = editController
     group = groupController
@@ -135,7 +138,32 @@ class TournamentController {
     }
     async get__docs(req, res) {
         try {
-            return sendRes('partials/lk_part/tour/tournament_docs', {}, res);
+            return sendRes('partials/lk_part/tour/tournament_docs', {tourId: req.params.id}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__docs_create(req, res) {
+        try {
+            return sendRes('partials/lk_part/tour/tournament_docs_create', {}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async post__docs_create(req, res) {
+        try {
+            let data = req.body;
+            let tourId = data.tournament;
+            data.creator = req.user.id;
+            let tournament = await Tournament.findOne({_id: tourId});
+            if(!tournament) return res.json({message: 'Такого турнира не существует'});
+            if(!tournament.creator.equals(req.user.id)) return res.json({message: 'Ошибка доступа'});
+            
+            //tournament.docs.push(data);
+            //await tournament.save();
+            return res.json({message: 'Обновлено'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

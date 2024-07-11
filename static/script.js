@@ -356,34 +356,41 @@ const isCheckboxOrRadio = type => ['checkbox', 'radio'].includes(type);
 const isDatalist = field => field.list;
 const isFile = type => ['file'].includes(type);
 async function formGetData(form) {
-    const data = {};
-    for (let field of form) {
-        const {name} = field;
-        if (name) {
-            const {type, checked, value} = field;
-            let datalist = isDatalist(field);
-            if (datalist) {
-                let options = [...datalist.options];
-                let selectedEl = options.filter(el => field.value == el.value)[0];
-                if(selectedEl)
-                    data[name] = selectedEl.getAttribute('data-value')
+    try {
+        const data = {};
+        for (let field of form) {
+            const {name} = field;
+            if (name) {
+                const {type, checked, value} = field;
+                let datalist = isDatalist(field);
+                if (datalist) {
+                    let options = [...datalist.options];
+                    let selectedEl = options.filter(el => field.value == el.value)[0];
+                    if(selectedEl)
+                        data[name] = selectedEl.getAttribute('data-value')
+                }
+                else if(isCheckboxOrRadio(type)) {
+                    data[name] = checked
+                }
+                else if(isFile(type)) {
+                    if(field.getAttribute('changed'))
+                    data[name] = await getBase64(field.files[0])
+                }
+                else {
+                    data[name] = value
+                }
+                //data[name] = isCheckboxOrRadio(type) ? checked : value;
             }
-            else if(isCheckboxOrRadio(type)) {
-                data[name] = checked
-            }
-            else if(isFile(type)) {
-                if(field.getAttribute('changed'))
-                data[name] = await getBase64(field.files[0])
-            }
-            else {
-                data[name] = value
-            }
-            //data[name] = isCheckboxOrRadio(type) ? checked : value;
         }
+        console.log(data);
+        return data;
+    } catch (e) {
+        console.log(e)
+        alert(e.message || 'Произошла ошибка при получении данных формы');
+        return null;
     }
 
-    console.log(data);
-    return data;
+    
 }
 
 
@@ -404,7 +411,12 @@ function getRealValue(ele){
     }
   }
 function getBase64(file) {
+    let max_size = 8*1024*1024
     if(!file) return ''
+    if(file.size > max_size) {
+        alert(`Файл слишком большой. Максимальный размер - ${(max_size/(1024 * 1024)).toFixed(3)} МБ`)
+        throw new Error('Too big file')
+    }
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);

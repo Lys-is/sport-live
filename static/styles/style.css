@@ -26,16 +26,26 @@ input:disabled {
     background-color: transparent;
     cursor: no-drop;
 }
+.image_preview {
+    cursor: pointer;
+}
 .image_preview::after {
     content: "Загрузить изображение";
     display: block;
     /* padding-bottom: 100%; */
     padding: 10px;
+    visibility: visible;
+    background: gainsboro;
+    
+}
+.image_preview:hover::after {
+    background: #c9c8c8;
 }
 .top_nav {
     margin-bottom: auto !important;
 }
 
 img[src=""] {
-    display: none;
+    /* display: none; */
+    visibility: hidden;
 }

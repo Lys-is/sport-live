@@ -191,6 +191,22 @@ class FansController {
         }   
     }
     async get__player(req, res) {
+        try {
+            let player = await Player.findById(req.params.id);
+            if(!player || !player.creator.equals(req.fans_league.creator)) {
+                return res.json({message: 'Игрок не найден'});
+            }
+            let results = await PlayerResult.find({player: req.params.id, is_active: true}).populate('player team match');
+            console.log(results)
+            return sendRes('fans/fans_members/player', {player, results}, res);
+        
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        
+        }
+            //let total = await Player.countDocuments({creator: req.user.id}) ;
     }
 
 }
