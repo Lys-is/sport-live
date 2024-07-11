@@ -20,6 +20,8 @@
 
 /* TOP SCOREBOARD CSS */
 
+
+
 body {
     /* background: url("img/foot_bg2.jpg"); */
     background-color: transparent;
@@ -38,7 +40,7 @@ body {
 .refs,
 .weather {
 
-    display: none; 
+    /* display: none;  */
 }
 
 #container {
@@ -844,15 +846,18 @@ body {
 #penalties-home {
     display: inline-block;
     position: relative;
-    top: 10px;
     right: 80px;
+    background: #ccc;
+    padding-top: 5px;
+
 }
 
 #penalties-away {
     display: inline-block;
     position: relative;
-    top: 10px;
     left: 80px;
+    background: #ccc;
+    padding-top: 5px;
 }
 
 .penaltie {

@@ -20,7 +20,14 @@
 
 /* TOP SCOREBOARD CSS */
 
-body {/* background: url("img/foot_bg2.jpg"); */background-color: transparent;margin: 0;display: flex;justify-content: center;zoom: 1;}
+body {
+/*    background: url("img/foot_bg2.jpg");*/
+    background-color: transparent;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    zoom: 1;
+}
 
 /*.big,
 .mid,
@@ -38,7 +45,10 @@ body {/* background: url("img/foot_bg2.jpg"); */background-color: transparent;ma
 .away-roster,
 .pen,
 .refs,
-.weather {display: none;}
+.weather {
+
+    /* display: none;  */
+}
 
 #container {
     margin-left: auto;
@@ -132,9 +142,8 @@ body {/* background: url("img/foot_bg2.jpg"); */background-color: transparent;ma
     margin: auto;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    margin-top: 5px;
 }
 
 #top-home-logo {
@@ -180,7 +189,7 @@ body {/* background: url("img/foot_bg2.jpg"); */background-color: transparent;ma
     line-height: 25px;
     text-transform: uppercase;
     text-align: center;
-    margin-right: 10px;
+    margin-right: 30px;
 }
 #top-away-team-name {
     z-index: 99;
@@ -191,7 +200,7 @@ body {/* background: url("img/foot_bg2.jpg"); */background-color: transparent;ma
     text-transform: uppercase;
     text-align: center;
     justify-content: flex-end;
-    margin-left: 10px;
+    margin-left: 30px;
 }
 
 .logo-rk {
@@ -1296,8 +1305,7 @@ div.referees .ev-player-img {
 }
 
 .roster-logo img {
-    margin-bottom: 0px;
-    margin: 0 auto;
+    margin-bottom: 0px;    
 }
 
 .player {

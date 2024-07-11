@@ -17,6 +17,84 @@
 
 /* Small Scoreboard */
 
+#top-row-2 {
+    background-color: transparent;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+#penalties-home {
+    display: inline-block;
+    position: relative;
+    right: 40px;
+    background: #ccc;
+    height: 30px;
+
+}
+
+#penalties-away {
+    display: inline-block;
+    position: relative;
+    left: 40px;
+    background: #ccc;
+    height: 30px;
+
+}
+#match-info {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-top: 0px;
+
+    width: 330px;
+    height: 25px;
+    background-color: #6d237f;
+    display: inline-block;
+    position: relative;
+
+}
+
+.penalties-home, .penalties-away {
+	display: flex !important; 
+	flex-direction: row;
+	height: 20px;
+	background: #ccc;
+	align-items: center;
+	justify-content: center;
+	color: #FFFFFF;
+	font-size: 20px;
+	font-weight: 400;
+
+
+	
+}
+
+.big .penalties-home, .big .penalties-away {
+	padding-top: 10px;}
+	
+#bottom-row-2 {
+    height: 40px;
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+
+}
+
+.penaltie {
+	height: 18px;
+	width: 18px;
+	border-radius: 50%;
+	background: #ff0000;
+	margin-top: 4px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 body {
 	background-color: transparent;
 	font-family: 'Inter', sans-serif;

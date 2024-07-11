@@ -11,6 +11,31 @@
 
 /* Small Scoreboard */
 
+#top-row-2 {
+    background-color: transparent;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#match-info {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-top: 0px;
+    padding-top: 5px;
+    width: 330px;
+    height: 25px;
+    background-color: var(--pen-goal);
+    display: inline-block;
+    position: relative;
+    border-radius: 0 0 10px 10px;
+}
+
 body {
 	background-color: transparent;
 	font-family: 'Romic';

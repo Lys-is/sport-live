@@ -69,7 +69,7 @@ body {
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    margin-top: 80px;
+
     margin-left: 80px;
     font-family: 'Exo 2', sans-serif;
 }
@@ -638,18 +638,34 @@ body {
     display: none;
 }
 
+.little #penalties-home,
+.little #penalties-away {
+    flex-direction: column;
+}
+#top-row-2 {
+    background-color: #cacaca;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 80px;
+    margin-top: 80px;
+}
+
 #penalties-home {
     display: inline-block;
     position: relative;
-    top: 10px;
-    right: 80px;
+    top: 4px;
+
 }
 
 #penalties-away {
     display: inline-block;
     position: relative;
-    top: 10px;
-    left: 80px;
+    top: 4px;
+    margin-left: 15px;
+
 }
 
 .penaltie {

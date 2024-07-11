@@ -47,7 +47,7 @@ body {
 .refs,
 .weather {
 
-    display: none; 
+    /* display: none;  */
 }
 
 #container {
@@ -142,9 +142,8 @@ body {
     margin: auto;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    margin-top: 5px;
 }
 
 #top-home-logo {
@@ -190,7 +189,7 @@ body {
     line-height: 25px;
     text-transform: uppercase;
     text-align: center;
-    margin-right: 10px;
+    margin-right: 30px;
 }
 #top-away-team-name {
     z-index: 99;
@@ -201,7 +200,7 @@ body {
     text-transform: uppercase;
     text-align: center;
     justify-content: flex-end;
-    margin-left: 10px;
+    margin-left: 30px;
 }
 
 .logo-rk {
