@@ -136,6 +136,7 @@ body {
     justify-content: space-around;
     align-items: center;
     margin-top: 5px;
+    flex-wrap: nowrap;
 }
 
 #top-home-logo {
@@ -674,7 +675,6 @@ body {
 #penalties-away {
     display: inline-block;
     position: relative;
-
     left: 70px;
     background: #ccc;
     padding-top: 10px;

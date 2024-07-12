@@ -7,8 +7,8 @@
                 <input type="button" value="Добавить судью" class="table_button nav_link top_nav" data-href="judge/get__create">
 
                 <div class="filler"></div>
-                <input type="button" value="Незаявленные" class="table_button_radio_active table_radio_active nm def_link" data-href="/lk?page=tournament/id/<%= tournament._id %>/judge">
-                <input type="button" value="Подтвержденные" class="table_button_radio_archive middle_tbra nm def_link"  data-href="/lk?page=tournament/id/<%= tournament._id %>/judge_in">
+                <input type="button" value="Незаявленные" class="table_button_radio_active  nm def_link" data-href="/lk?page=tournament/id/<%= tournament._id %>/judge">
+                <input type="button" value="Подтвержденные" class="table_button_radio_archive table_radio_active middle_tbra nm def_link"  data-href="/lk?page=tournament/id/<%= tournament._id %>/judge_in">
 
             </div>
             <table class="commands_table fath">
@@ -22,7 +22,7 @@
                     </td>
                     <td><p class="nm"><%=judge.fio%></p></td>
                     <td>            
-                        <input type="button" value="Добавить" data-type="judge" data-id="<%=judge._id%>" class="button green_button judge_add" >
+                        <input type="button" value="Убрать судью" data-type="judge" data-id="<%=judge._id%>" class="button red_button judge_add" >
                     </td>
                 </tr>
                 <%
@@ -45,11 +45,12 @@
                                     <input type="button" value="Добавить комментатора" class="table_button nav_link top_nav" data-href="commentator/get__create">
                     
                                     <div class="filler"></div>
-                                    <input type="button" value="Незаявленные" class="table_button_radio_active table_radio_active nm def_link" data-href="/lk?page=tournament/id/<%= tournament._id %>/judge">
-                                    <input type="button" value="Подтвержденные" class="table_button_radio_archive middle_tbra nm def_link"  data-href="/lk?page=tournament/id/<%= tournament._id %>/judge_in">
+                                    <input type="button" value="Незаявленные" class="table_button_radio_active  nm def_link" data-href="/lk?page=tournament/id/<%= tournament._id %>/judge">
+                                    <input type="button" value="Подтвержденные" class="table_button_radio_archive table_radio_active middle_tbra nm def_link"  data-href="/lk?page=tournament/id/<%= tournament._id %>/judge_in">
                     
                                 </div>
                                 <table class="commands_table fath">
+
                                     <% if (commentators) {
                                         commentators.forEach((commentator) => {
                                             %>
@@ -59,7 +60,7 @@
                                         </td>
                                         <td><p class="nm"><%=commentator.name%></p></td>
                                         <td>            
-                                            <input type="button" value="Добавить" data-type="commentator" data-id="<%=commentator._id%>" class="button green_button judge_add" >
+                                            <input type="button" value="Убрать комментатора" data-type="commentator" data-id="<%=commentator._id%>" class="button red_button judge_add" >
                                         </td>
                                     </tr>
                                     <%

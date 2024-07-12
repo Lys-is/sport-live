@@ -4,6 +4,7 @@ const Judge = require('../../../models/judge-model');
 const Tournament = require('../../../models/tournament-model');
 const editController = require('./edit-controller');
 const groupController = require('./group-controller');
+const Commentator = require('../../../models/commentator-model');
 const dbService = require('../../../service/db-service');
 const mammoth = require("mammoth")
 const fs = require('fs')
@@ -79,6 +80,56 @@ class TournamentController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
+    async put__judge(req, res) {
+        try {
+            let tourId = req.body.tournamentId;
+            console.log(tourId)
+            let tournament = await Tournament.findOne({_id: tourId})
+            if(!tournament) return res.json({message: 'Такого турнира не существует'});
+            if(req.body.type == 'judge'){
+                let judge = await Judge.findOne({_id: req.body.teamId});
+                if(!judge) return res.json({message: 'Такого судьи не существует'});
+                tournament.judges.push(req.body.teamId);
+                await tournament.save();
+                return res.json({message: 'Обновлено'});
+            }
+            else if(req.body.type == 'commentator'){
+                let commentator = await Commentator.findOne({_id: req.body.teamId});
+                if(!commentator) return res.json({message: 'Такого комментатора не существует'});
+                tournament.commentators.push(req.body.teamId);
+                await tournament.save();
+                return res.json({message: 'Обновлено'});
+            }
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async delete__judge(req, res) {
+        try {
+            let tourId = req.body.tournamentId;
+            let tournament = await Tournament.findOne({_id: tourId})
+            if(!tournament) return res.json({message: 'Такого турнира не существует'});
+            if(req.body.type == 'judge'){
+                let judge = await Judge.findOne({_id: req.body.teamId});
+                if(!judge) return res.json({message: 'Такого судьи не существует'});
+                tournament.judges = tournament.judges.filter(t => t._id != req.body.teamId);
+                await tournament.save();
+                return res.json({message: 'Обновлено'});
+            }
+            else if(req.body.type == 'commentator'){
+                let commentator = await Commentator.findOne({_id: req.body.teamId});
+                if(!commentator) return res.json({message: 'Такого комментатора не существует'});
+                tournament.commentators = tournament.commentators.filter(t => t._id != req.body.teamId);
+                await tournament.save();
+                return res.json({message: 'Обновлено'});
+            }
+            else return res.json({message: 'Такого типа команды не существует'});
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
     async get__edit(req, res) {
         try {
             let tourId = req.params.id;
@@ -129,8 +180,25 @@ class TournamentController {
         try {
             let tourId = req.params.id;
             let tournament = await Tournament.findOne({_id: tourId})
-            let judges = await Judge.find({creator: req.user.id});
-            return sendRes('partials/lk_part/tour/tournament_judge', {tournament, judges}, res);
+            let chooseJudges = tournament.judges;
+            let chooseCommentators = tournament.commentators;
+
+            let judges = await Judge.find({creator: req.user.id, $nor: [{_id: {$in: chooseJudges}}] });
+            let commentators = await Commentator.find({creator: req.user.id, $nor: [{_id: {$in: chooseCommentators}}] });
+
+            return sendRes('partials/lk_part/tour/tournament_judge', {tournament, judges, commentators}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__judge_in(req, res) {
+        try {
+            let tourId = req.params.id;
+            let tournament = await Tournament.findOne({_id: tourId})
+            let judges = tournament.judges;
+            let commentators = tournament.commentators;
+            return sendRes('partials/lk_part/tour/tournament_judge_in', {tournament, judges, commentators}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

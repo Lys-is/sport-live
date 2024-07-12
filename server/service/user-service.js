@@ -29,7 +29,16 @@ class UserService {
 
         return {...tokens, user: userDto}
     }
-
+    async updatePassword(user, password) {
+        try {
+            const hashPassword = await bcrypt.hash(password, 3);
+            user.password = hashPassword
+            await user.save();
+        } catch (e) {
+            console.log(e);
+            throw e
+        }
+    }
     async activate(activationLink) {
         const user = await UserModel.findOne({activationLink})
         if (!user) {

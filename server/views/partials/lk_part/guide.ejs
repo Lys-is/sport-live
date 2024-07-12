@@ -1,5 +1,5 @@
-<div class="tournires_content">
-    <div class="tournires_header">
+<div class="cool_body">
+    <div class="cool_body_header">
         <div class="tournires_header_header">
             <p class="page_title ">Справочники</p>
         </div>
@@ -11,11 +11,13 @@
         <% if (guides.length > 0) { %>
             <% for (let i = 0; i < guides.length; i++) { %>
 
-            <div class="tournires_content_block nav_link" data-href="guide/id/<%= guides[i]._id %>" style="cursor: pointer;">
+            <div class="cool_body_content">
                 <div class="tournires_block_header " >
                     <h1><%= guides[i].name %></h1>
                 </div>
-               
+                <div class="tournires_actions">
+                    <a class="nav_link" data-href="guide/id/<%= guides[i]._id %>">Смотреть</a>
+                </div>
                 <!-- <div class="tournires_calendar">
                     <h2>Календарь матчей</h2>
                     <input type="button" value="финал" class="tournires_tab_button">

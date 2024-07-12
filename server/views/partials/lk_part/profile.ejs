@@ -39,15 +39,6 @@
                 <div class="profile_input_block"></div>
 
                 <div class="profile_input_block">
-                    <label class="profile_label" for="profile_new_password">Новый пароль</label>
-                    <input type="password" class="text_form text" id="profile_new_password">
-                </div>
-                
-                <div class="profile_input_block">
-                    <label class="profile_label" for="profile_accept_password">Подтвердите пароль</label>
-                    <input type="password" class="text_form text" id="profile_accept_password">
-                </div>
-                <div class="profile_input_block">
                     <label class="profile_label" for="site_name">Название сайта</label>
                     <input type="text" class="text_form text" id="site_name" name="site_name" value="<%= profile.site_name %>">
                 </div>
@@ -59,6 +50,30 @@
             </div>
             <div class="profile_footer">
                 <input type="submit" value="Сохранить изменения" class="button green_button">
+            </div>
+        </form>
+    </div>
+    <div class="profile_content">
+        <div class="profile_header">
+            <p class="page_title ">Обновить пароль</p>
+        </div>
+        <form id="password__form">
+
+            <div class="profile_block">
+
+                <div class="profile_input_block">
+                    <label class="profile_label" for="profile_new_password">Новый пароль</label>
+                    <input type="password" class="text_form text" id="profile_new_password" name="password">
+                </div>
+                
+                <div class="profile_input_block">
+                    <label class="profile_label" for="profile_accept_password">Подтвердите пароль</label>
+                    <input type="password" class="text_form text" id="profile_accept_password" name="password_confirm">
+                </div>
+        
+            </div>
+            <div class="profile_footer">
+                <input type="submit" value="Обновить пароль" class="button green_button">
             </div>
         </form>
     </div>

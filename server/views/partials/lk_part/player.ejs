@@ -13,6 +13,7 @@
     <table class="commands_table">
         <tr id="first-row">
             <td>ФИО</td>
+            <td>Фото</td>
             <td>Дата рождения</td>
             <td>Команда</td>
             <td>Действия</td>
@@ -20,6 +21,7 @@
         </tr>
         <tr class="filter">
             <td><input type="text" name="fio" class="table_input_text"></td>
+            <td></td>
             <td><input type="date" name="birthday" class="table_input_text"></td>
             <datalist id="teams">
                 <% teams.forEach((el) => { %><option data-id="<%= el._id %>" value="<%= el.name %>"><% }) %>
@@ -33,6 +35,12 @@
     <% for (let i = 0; i < players.length; i++) {%>
         <tr>
             <td><%= players[i].fio %></td>
+            <td><% if(players[i].img){
+                %>
+                <img class="table_img" src="<%= players[i].img %>" alt="Фото">
+                
+                <% }    %>        
+            </td>
             <td><%= players[i].birthday %></td>
             <td><%= players[i].team.name %></td>
             <td>

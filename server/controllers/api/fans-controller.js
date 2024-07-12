@@ -5,6 +5,8 @@ const Match = require('../../models/match-model');
 const Team = require('../../models/team-model');
 const Player = require('../../models/player-model');
 const PlayerResult = require('../../models/playerResult-model');
+const Commentator = require('../../models/commentator-model');
+const Judge = require('../../models/judge-model');
 
 class FansController {
     async get__tournament(req, res) {
@@ -207,6 +209,46 @@ class FansController {
         
         }
             //let total = await Player.countDocuments({creator: req.user.id}) ;
+    }
+    async get__judges(req, res) {
+        try {
+            let judges = await Judge.find({creator: req.user.id})
+            return sendRes('fans/fans_members/judges', {judges}, res);
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__judge (req, res) {
+        try {
+            let judge = await Judge.findById(req.params.id)
+            return sendRes('fans/fans_members/judge', {judge}, res);
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__commentators(req, res) {
+        try {
+            let commentators = await Commentator.find({creator: req.user.id})
+            return sendRes('fans/fans_members/commentators', {commentators}, res);
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__commentator (req, res) {
+        try {
+            let commentator = await Commentator.findById(req.params.id)
+            return sendRes('fans/fans_members/commentator', {commentator}, res);
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
     }
 
 }

@@ -80,10 +80,10 @@ const start = async () => {
         }
         server.listen(PORT, () => console.log(`Server started on PORT = ${PORT}`))
         console.log(LRUCache)
-        ejs.cache = new LRUCache({
-            max: 100, //Maximum
-            maxAge: 60 * 10 * 10
-        });
+        // ejs.cache = new LRUCache({
+        //     max: 100, //Maximum
+        //     maxAge: 60 * 10 * 10
+        // });
     } catch (e) {
         console.log(e);
     }

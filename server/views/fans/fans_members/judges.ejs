@@ -1,0 +1,33 @@
+<%- include('members_header.ejs') %>
+    <div class="content-body body-background members-body">
+        <div class="h_flex">
+            <input type="text" class="search-form" placeholder="Поиск по названию">
+            <input type="button" class="search-button" value="Найти">
+            <div class="filler"></div>
+            <input type="button" class="search-button" value="Сбросить">
+        </div>
+
+
+        <table class="nets-table mt">
+            <tbody><tr>
+                <th>#</th>
+                <th>Судья</th>
+
+            </tr>     
+            <% judges.forEach((judge, i) => {
+                
+                %>
+
+            <tr class="clickable-tr fans_link" data-href="judge/id/<%= judge._id %>">
+                <td><%= i + 1 %></td>
+                <td>
+                    <div class="h_flex">
+                        <img src="<%= judge.img || '/static/styles/icons/logo.jpg' %>" class="" width="50" height="50">
+                        <%= judge.fio %>
+                    </div>
+                </td>
+            </tr>     
+            <% }) %>
+        </tbody></table>
+
+    </div>

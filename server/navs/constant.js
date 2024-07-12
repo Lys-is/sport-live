@@ -36,6 +36,18 @@ const nav = {
         },
         'player/id/:id' : {
             'func' : 'get__player'
+        },
+        'judges' : {
+            'func' : 'get__judges'
+        },
+        'judge/id/:id' : {
+            'func' : 'get__judge'
+        },
+        'commentators' : {
+            'func' : 'get__commentators'
+        },
+        'commentator/id/:id' : {
+            'func' : 'get__commentator'
         }
 
     },
@@ -79,6 +91,7 @@ const nav = {
         'profile' : {'func': 'get__profile'},
         'league' : {'func': 'get__league'},
         'put__profile' : {},
+        'put__password' : {},
         'put__league' : {},
         'put__del' : {},
         'team' : {
@@ -115,6 +128,8 @@ const nav = {
             },
             'put__team' : {},
             'delete__team' : {},
+            'put__judge' : {},
+            'delete__judge' : {},
             'id/:id/' : {'func': 'get__template'},
             'id/:id/edit' : {'func': 'get__edit'},
             'id/:id/group' : {
@@ -127,6 +142,7 @@ const nav = {
             'id/:id/team' : {'func': 'get__team'},
             'id/:id/team_in' : {'func': 'get__team_in'},
             'id/:id/judge' : {'func': 'get__judge'},
+            'id/:id/judge_in' : {'func': 'get__judge_in'},
             'id/:id/t_team' : {'func': 'get__t_team'},
             'id/:id/results' : {'func': 'get__results'},
             'id/:id/docs' : {'func': 'get__docs'},

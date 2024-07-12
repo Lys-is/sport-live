@@ -663,6 +663,7 @@ table tr td input{
     background-color: var(--header-bc);
     border: var(--header-borders) 1px solid;
     margin: 0 auto;
+    margin-bottom: 10px;
 }
 
 .profile_header{
@@ -713,15 +714,14 @@ table tr td input{
 }
 
 .profile_block .text_form{
-    width: 300px;
-
+    width: min-content;
 }
 
 .profile_input_block{
     display: flex;
     width: 420px;
     height: 40px;
-    margin-right: 70px;
+    /* margin-right: 70px; */
     margin-top: 50px;
 }
 

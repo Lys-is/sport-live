@@ -174,6 +174,8 @@ let inits = {
     'tournament/id/edit' : init__tournament_edit,
     'tournament/id/team' : init__tournament_team,
     'tournament/id/team_in' : init__tournament_team_in,
+    'tournament/id/judge'   : init__tournament_judge,
+    'tournament/id/judge_in' : init__tournament_judge_in,
     'tournament/id/group' : init__tournament_group,
     'tournament/id/get__group_create' : init__tournament_group_create,
     'tournament/id/get__group_edit' : init__tournament_group_edit,
@@ -315,6 +317,34 @@ function init__tournament_team_in(){
         })
     })
 }
+function init__tournament_judge(){
+    let tourId = get('#tour_body').getAttribute('data-id');
+    let addBtns = getA('.judge_add');
+    addBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            let data = {
+                tournamentId: tourId,
+                teamId: e.target.getAttribute('data-id'),
+                type: e.target.getAttribute('data-type')
+            }
+            sendFetch('/api/lk/tournament/put__judge', JSON.stringify(data), 'PUT')
+        })
+    })
+}
+function init__tournament_judge_in(){
+    let tourId = get('#tour_body').getAttribute('data-id');
+    let addBtns = getA('.judge_add');
+    addBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            let data = {
+                tournamentId: tourId,
+                teamId: e.target.getAttribute('data-id'),
+                type: e.target.getAttribute('data-type')
+            }
+            sendFetch('/api/lk/tournament/delete__judge', JSON.stringify(data), 'DELETE')
+        })
+    })
+}
 function init__tournament_group(href) {
     if(!get('#tour_body')) {
         checkTournament(removeTrailingSlash(href))
@@ -377,6 +407,16 @@ function init__profile() {
         let data = await formGetData(profileForm)
         console.log(data)
         sendFetch("/api/lk/put__profile", JSON.stringify(data), "PUT")
+    })
+    let passwordForm = get("#password__form");
+    passwordForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(passwordForm)
+        if(data.password != data.password_confirm) {
+            alert('Пароли не совпадают')
+            return
+        }
+        sendFetch("/api/lk/put__password", JSON.stringify(data), "PUT")
     })
 }
 function init__match() {

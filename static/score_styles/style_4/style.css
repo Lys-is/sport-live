@@ -64,7 +64,7 @@
 }
 
 .penalties-home, .penalties-away {
-	display: flex !important; 
+	display: flex; 
 	flex-direction: row;
 	height: 20px;
 	background: #ccc;

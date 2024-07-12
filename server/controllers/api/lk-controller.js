@@ -18,7 +18,7 @@ Commentator = require('../../models/commentator-model'),
 Doc = require('../../models/doc-model'),
 Couch = require('../../models/couch-model');
 const dbService = require('../../service/db-service');
-const { default: mongoose } = require('mongoose');
+
 class LkController {
 
     team = require('./team')
@@ -245,6 +245,26 @@ class LkController {
             await User.updateOne({_id: req.user.id}, data);
             await UserD.updateOne({creator: req.user.id}, data);
             return res.json({message: 'Профиль обновлен'});
+        }
+        catch(e){
+            console.log(e);
+            res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async put__password(req, res) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.BadRequest('Ошибка при валидации', errors.array()))
+            }
+            const {...data} = req.body;
+            console.log(data);
+            if(!data.password)
+                return res.json({message: 'Новый пароль не может быть пустым'});
+            
+            await userService.updatePassword(req.user, data.password);
+            return res.json({message: 'Пароль обновлен'});
+            
         }
         catch(e){
             console.log(e);

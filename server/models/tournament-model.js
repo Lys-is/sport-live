@@ -2,10 +2,14 @@ const { application } = require('express');
 const {Schema, model} = require('mongoose');
 const Stage = require('./stage-model');
 const { configDotenv } = require('dotenv');
+const judge = require('../controllers/api/judge');
+const commentator = require('../controllers/api/commentator');
 const Tournament = new Schema({
     creator: {type: Schema.Types.ObjectId, ref: 'User', autopopulate: true},
     admins: [{type: Schema.Types.ObjectId, ref: 'User', autopopulate: true}],
     teams: [{type: Schema.Types.ObjectId, ref: 'Team', autopopulate: true}],
+    judges: [{type: Schema.Types.ObjectId, ref: 'Judge', autopopulate: true}],
+    commentators: [{type: Schema.Types.ObjectId, ref: 'Commentator', autopopulate: true}],
     status_doc: {type: String, default: 'active', enum: ['active', 'deleted']},
     basic: {
         img: {type: String, default: ''},

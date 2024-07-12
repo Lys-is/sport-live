@@ -67,8 +67,18 @@ socket.on('start', (data) => {
 let base_divs = getA('.big, .mid, .little, .little-ploff, .home-roster, .away-roster, .pen, .refs, .weather')
 let n_div = 'little'
 console.log(base_divs)
-
+let first_style_tag = (function() {
+    var executed = false;
+    return function() {
+        if (!executed) {
+            executed = true;
+            let tag = get('#style_start')
+            tag.remove()
+        }
+    };
+})();
 function setData(data) {
+    first_style_tag()
     console.log(data)
     setNames(data)
     if(data.tablo) {
@@ -123,13 +133,14 @@ function setScoreboard(scoreboard) {
 let penaltyHTML = `<div class="penaltie" style="background-color: var(--pen-{{penalty.type}});"></div>`
 function setPenalty(penalty) {
 
-    let team1 = get('.penalties-home') ? get('.penalties-home') : get('#penalties-home')
-    let team2 = get('.penalties-away') ? get('.penalties-away') : get('#penalties-away')
-        team1.innerHTML = ''
-    team2.innerHTML = ''
+    let team1 = getA('.penalties-home')
+    let team2 = getA('.penalties-away')
+
+    team1.forEach(div => div.innerHTML = '')
+    team2.forEach(div => div.innerHTML = '')
     penalty.forEach((el, i) => {
-        team1.innerHTML += penaltyHTML.replace('{{penalty.type}}', el.team1 ? el.team1 : 'clear')
-        team2.innerHTML += penaltyHTML.replace('{{penalty.type}}', el.team2 ? el.team2 : 'clear')
+        team1.forEach(div => { div.innerHTML += penaltyHTML.replace('{{penalty.type}}', el.team1 ? el.team1 : 'clear')})
+        team2.forEach(div => { div.innerHTML += penaltyHTML.replace('{{penalty.type}}', el.team2 ? el.team2 : 'clear')})
     })
     let penDif = 5-penalty.length 
     if(penDif > 0) {

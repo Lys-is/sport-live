@@ -814,7 +814,7 @@ body {
     text-transform: uppercase;
     color: #FFFFFF;
     margin-top: 0px;
-    padding-top: 5px;
+    /* padding-top: 5px; */
     width: 330px;
     height: 25px;
     background-color: #282f32;

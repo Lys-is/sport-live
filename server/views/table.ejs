@@ -53,8 +53,15 @@ if(style_panel.includes('__id')){
 
 <style>
     <%=css%>
-</style>
 
+
+    
+</style>
+<style id="style_start">
+    .big, .mid, .little, .little-ploff, .home-roster, .away-roster, .pen, .refs, .weather {
+        display: none !important;
+    }
+</style>
 <link rel="stylesheet" href="/static/score_styles/<%= style_panel %>/style.css">
 
 <script type="text/javascript" defer  src="/static/pages/table.js"></script>

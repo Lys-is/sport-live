@@ -49,3 +49,7 @@ img[src=""] {
     /* display: none; */
     visibility: hidden;
 }
+.table_img {
+    max-height: 65px;
+    margin: 0 auto;
+}
