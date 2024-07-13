@@ -6,6 +6,8 @@ class CheckAuthMiddleware {
     async isAuth(req, res, next) {
         try {
             if(req.user) {
+                if(!req.user.isActive && !req.user.isAdmin)
+                    return res.redirect('/inactive');
                 let league = await League.findOne({creator: req.user.id});
                 if(league)
                     res.locals.league_href = league.address

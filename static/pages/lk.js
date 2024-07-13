@@ -97,7 +97,7 @@ async function getPage(href, destInHtml = lk_main, history_change = false) {
     const cleanedHref = href.replace(/(\?id=)(.+)/, '^id~$2')
     console.log(cleanedHref, href)
     const pageUrl = `${baseUrl}${href.replace('&', '?')}`;
-    let initHref = cleanedHref.split('?')[0];
+    let initHref = cleanedHref.split('?')[0].split('&')[0];
     console.log(initHref);
     const response = await sendFetch(pageUrl, null, 'GET');
     destInHtml.innerHTML = response ? response : 'Страница не найдена';
@@ -732,10 +732,16 @@ function setImgListener(){
         input = get('.image_input', label)
 
         input.addEventListener('change', async (e) => {
-            input.setAttribute('changed', 'true')
-            console.log(e.target.files[0])
-            let base64 = await getBase64(e.target.files[0])
-            preview.src = base64
+            try {
+                input.setAttribute('changed', 'true')
+                console.log(e.target.files[0])
+                let base64 = await getBase64(e.target.files[0])
+                preview.src = base64
+            } catch (e) {
+                input.setAttribute('changed', '')
+                e.target.value = ''
+            }
+            
         })
     })
 }
@@ -806,13 +812,12 @@ function init__filter() {
     let filter_data = {
         filters: null,
         page: 1,
-        status: 'active'
     }
 
     let filter_div = get(".filter");
     console.log(filter_div)
     if(!filter_div) return
-    let filters = getA("input", filter_div);
+    let filters = getA("input, select", filter_div);
     filter_data.filters = filters
 
     console.log(params.get)
@@ -822,7 +827,7 @@ function init__filter() {
         if(param.includes('filter')) {
             console.log(param)
             console.log(param.replace('filter_', ''))
-            get(`input[name="${param.replace('filter_', '')}"]`, filter_div).value = decodeURI(prms[param])
+            get(`[name="${param.replace('filter_', '')}"]`, filter_div).value = decodeURI(prms[param])
 
         }
 
@@ -858,45 +863,45 @@ function init__filter() {
         filters.forEach(filter => {
             filter.value = "";
         })
-        filter_data.status = 'active'
+
         filter_data.page = 1
         filter_data.filters = filters
         setFilter(filter_data);
     })
 
     let pagination_div = get("#pagination");
-    if(!pagination_div) return
+    if(pagination_div) {
 
-    let pagePlus = get("#page_plus"),
-    pageMinus = get("#page_minus"),
-    pageNum = get("#page_num");
+        let pagePlus = get("#page_plus"),
+        pageMinus = get("#page_minus"),
+        pageNum = get("#page_num");
 
-    if(prms.page_n) {
-        filter_data.page = prms.page_n
-        pageNum.innerHTML = prms.page_n
+        if(prms.page_n) {
+            filter_data.page = prms.page_n
+            pageNum.innerHTML = prms.page_n
+        }
+
+
+        let total = +pagination_div.getAttribute("data-total");
+        console.log(total)
+        let pageSize = +pagination_div.getAttribute("data-page-size") || 10;
+        if((+pageNum.innerHTML) * pageSize >= total ) pagePlus.setAttribute("disabled", "true");
+        if((+pageNum.innerHTML <= 1)) pageMinus.setAttribute("disabled", "true");
+
+        pagePlus.addEventListener("click", (e) => {
+            let page = +pageNum.innerHTML;
+            page++;
+            filter_data.page = page
+            setFilter(filter_data);
+        });
+        pageMinus.addEventListener("click", (e) => {
+            console.log(pageNum.innerHTML)
+            let page = +pageNum.innerHTML;
+            page--;
+            filter_data.page = page
+            setFilter(filter_data);
+        });
     }
-
-
-    let total = +pagination_div.getAttribute("data-total");
-    console.log(total)
-    let pageSize = +pagination_div.getAttribute("data-page-size") || 10;
-    if((+pageNum.innerHTML) * pageSize >= total ) pagePlus.setAttribute("disabled", "true");
-    if((+pageNum.innerHTML <= 1)) pageMinus.setAttribute("disabled", "true");
-
-    pagePlus.addEventListener("click", (e) => {
-        let page = +pageNum.innerHTML;
-        page++;
-        filter_data.page = page
-        setFilter(filter_data);
-    });
-    pageMinus.addEventListener("click", (e) => {
-        console.log(pageNum.innerHTML)
-        let page = +pageNum.innerHTML;
-        page--;
-        filter_data.page = page
-        setFilter(filter_data);
-    });
-
 }    
 function setFilter(data) {
     console.log(data)

@@ -140,7 +140,7 @@ input[type="color"] {
     padding-inline: 10px;
     border: 1px solid black;
     border-radius: 3px;
-    height: 30px;
+    height: 25px;
     -webkit-appearance: none;
     background-color: #363636;
     backdrop-filter: brightness(1.3);
@@ -155,13 +155,14 @@ input[type="color"] {
 }
 
 input[type="button"] {
-    height: 30px;
+    height: 27px;
     border: 1px solid #9d9c9c;
     border-radius: 3px;
     cursor: pointer;
     transition: all ease 0.2s;
     background-color: #ffffff26;
     backdrop-filter: brightness(1.2);
+    position: relative;
 }
 
 input[type="button"]:hover {
@@ -192,10 +193,10 @@ input[type="button"]:hover {
 .block {
     margin: 0;
     width: -webkit-fill-available;
-    padding: 15px;
-    padding-block: 25px;
+    padding: 8px;
+    padding-block: 7px;
     border-bottom: black 1px solid;
-    gap: 10px;
+    gap: 1px;
     display: flex;
     flex-direction: column;
 }
@@ -215,8 +216,8 @@ input[type="button"]:hover {
 }
 
 .square40 {
-    height: 40px !important;
-    width: 40px;
+    height: 35px !important;
+    width: 35px;
 }
 
 .square30{
@@ -234,28 +235,28 @@ input[type="button"]:hover {
 }
 
 .bigger-gap{
-    gap: 20px;
+    gap: 17px;
 }
 
 .play-icon {
-    background: url('icons/play.png') no-repeat !important;
+    background: url('icons/play.png') no-repeat;
     background-position: center;
-    background-position: 10px 8px !important;
-    background-size: 20px 20px !important;
+    /* background-position: 50% 50%; */
+    background-size: 75%;
 }
 
 .redo-icon {
-    background: url('icons/redo.png') no-repeat !important;
+    background: url('icons/redo.png') no-repeat;
     background-position: center;
-    background-position: 10px 8px !important;
-    background-size: 20px 20px !important;
+    background-position: center;
+    background-size: 80%;
 }
 
 .pause-icon {
-    background: url('icons/pause.png') no-repeat !important;
+    background: url('icons/pause.png') no-repeat;
     background-position: center;
-    background-position: 10px 8px !important;
-    background-size: 20px 20px !important;
+    background-position: center;
+    background-size: 80%;
 }
 
 .space-between {
@@ -321,6 +322,7 @@ table th:first-child, table td:first-child {
 #couches h3 {
     width: 100%;
     text-align: center;
+    margin-block: 0px;
 }
 
 .big 

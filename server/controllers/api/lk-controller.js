@@ -2,6 +2,7 @@ const userService = require('../../service/user-service');
 const {validationResult} = require('express-validator');
 const ApiError = require('../../exceptions/api-error');
 const UserD = require('../../models/userD-model'),
+mongoose = require('mongoose'),
 Judge = require('../../models/judge-model'),
 Match = require('../../models/match-model'),
 Player = require('../../models/player-model'),
@@ -198,10 +199,10 @@ class LkController {
         try {
             req.query['creator'] = req.user.id
             console.log(req);
-
+            let allTournaments = await Tournament.find({creator: req.user.id, status_doc: {$ne: 'deleted'}}).select('basic.full_name _id');
             let [tournaments, total] = await dbService.getAggregate(Tournament, req);
             //let total = await Tournament.countDocuments({creator: req.user.id});
-            return sendRes('partials/lk_part/tournament', {tournaments, total}, res);
+            return sendRes('partials/lk_part/tournament', {tournaments,allTournaments, total}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -346,7 +347,12 @@ class LkController {
             if(!req.user.isAdmin)
                 return res.json({message: 'Нет доступа'});
             let [users, total] = await dbService.getAggregate(User, req);
+           // users = users.sort((a, b) => (new Date(b.dateActive).getTime()|| 0) - (new Date(a.dateActive).getTime() || 0));
             //let total = await User.countDocuments({});
+            users = await Promise.all(users.map(async(item) => {
+                let userD = await UserD.findOne({creator: item._id});
+                return {...item._doc, ...userD?._doc}
+            }))
             console.log(users, total);  
             return sendRes('partials/lk_part/user', {users, total}, res);
         } catch (e) {

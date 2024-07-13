@@ -128,6 +128,9 @@ class Constrollers {
             styles
         });
     }
+    async get__inactive(req, res) {
+        return res.send('Ваш аккаунт неактивен, пожалуйста, обратитесь к администратору');
+    }
     async get__table(req, res) {
         try{
             console.log(req);
@@ -136,7 +139,7 @@ class Constrollers {
             let styles = await Style.find({creator: userAd._id});
             res.render('table', {
                 id: req.params.id,
-                title: 'Таблица',
+                title: 'Табло',
                 auth: userAd || false,
                 style: userAd.tablo_style || 'style_1',
                 styles

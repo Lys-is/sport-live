@@ -74,6 +74,9 @@ const nav = {
     'table/:id' : {
         'func' : 'get__table'
     },
+    'inactive' : {
+        'func' : 'get__inactive'
+    },
     'login' : {
         'func' : 'get__login'
     },

@@ -5,14 +5,13 @@
             <p class="page_title">Пользователи</p>
             <div class="filler"></div>
             <input type="button" value="Сбросить фильтры" class="table_button" id="clear_filters">
-
         </div>
     <table class="commands_table">
         <tr id="first-row">
             <td>ФИО</td>
             <td>Email</td>
             <td>Действия</td>
-            <td></td>
+            <td>Дата разблокировки</td>
         </tr>
         <tr class="filter">
             <td><input type="text" name="fio" class="table_input_text"></td>
@@ -25,7 +24,7 @@
 
     <% for (let i = 0; i < users.length; i++) {%>
         <tr>
-            <td><%= users[i].fio %></td>
+            <td><%= users[i].surname %></td>
             <td><%= users[i].email %></td>
             <td>
                 <% if (users[i].isActive) { %>
@@ -34,7 +33,7 @@
                     <span class="table_links table_links_compos" data-type="unblock" data-id="<%= users[i]._id %>">Разблокировать</span>
                 <% } %>
             </td>
-            <td>link</td>
+            <td><%= users[i].dateActive %></td>
         </tr>
 
     
@@ -52,6 +51,7 @@
 
     <h1 class="lk_wrapper__title">Нет игроков</h1>
 <% } %>
+
 <%- include('pagination.ejs') %>
 
 </div>

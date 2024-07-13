@@ -14,6 +14,7 @@
                 </div>
                 <div class="h-group">
                     <select name="match" id="match" class="text-form full-form">
+                        <option selected value="">Выберите матч</option>
                     <% matches.forEach(match => {
                     %>
                         <option value="<%= match._id %>"><%= match.team_1.name %> - <%= match.team_2.name %> | <%= match.date %></option>

@@ -8,13 +8,16 @@
         <div class="tournires_header_block">
             <div class="filter">
                 <input type="text" placeholder="2024" class="text_form text">
-                <input type="text" list="tournaments_list" placeholder="Название" name="basic.full_name"  class="text_form text double_form">
-                <datalist id="tournaments_list">
-                    <% tournaments.forEach((el) => { %><option data-id="<%= el._id %>" value="<%= el.basic.full_name %>"><% }) %>
-                </datalist>
+                <!-- <input type="text" list="tournaments_list" placeholder="Название"  class="text_form text double_form"> -->
+                <select id="tournaments_list" name="basic.full_name" class="text_form text double_form">
+                    <option value="" selected>Все турниры</option>
+                    <% allTournaments.forEach((el) => { %>
+                        <option data-id="<%= el._id %>" value="<%= el.basic.full_name %>"><%= el.basic.full_name %></option>
+                    <% }) %>
+                </select>
             </div>
-            <input type="button" value="Найти" class="button blue_button butt_icon">
-            <input type="button" value="Сбросить фильтры" class="button red_button butt_icon" id="clear_filters">
+            <!-- <input type="button" value="Найти" class="button blue_button butt_icon">
+            <input type="button" value="Сбросить фильтры" class="button red_button butt_icon" id="clear_filters"> -->
         </div>   
     </div>
     

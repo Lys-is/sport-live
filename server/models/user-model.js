@@ -10,7 +10,8 @@ const UserSchema = new Schema({
     roles: [{type: String, ref: 'Role'}],
     tablo_style: {type: String, default: 'style_1'},
     isAdmin: {type: Boolean, default: false},
-    isActive: {type: Boolean, default: false}
+    isActive: {type: Boolean, default: false},
+    dateActive: {type: String},
 })
 
 module.exports = model('User', UserSchema);

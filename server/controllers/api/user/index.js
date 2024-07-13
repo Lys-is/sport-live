@@ -10,11 +10,12 @@ class UserController {
             let user = await User.findOne({_id: userId});
             
             if(!user) return res.json({message: 'Такого пользователя не существует'});
-            if(type == 'unblock')
-                user = await User.updateOne({_id: userId}, {isActive: true});
+            if(type == 'unblock'){
+                user = await User.updateOne({_id: userId}, {isActive: true, dateActive: formatDate()});
+            }
             else if(type == 'block')
-                user = await User.updateOne({_id: userId}, {isActive: false});
-            return res.json({message: 'Пользователь обновлен'});
+                user = await User.updateOne({_id: userId}, {isActive: false, dateActive: ''});
+            return res.json({message: 'Пользователь обновлен', reload: true});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -30,5 +31,15 @@ async function sendRes(path, data, res) {
         res.json(html);
     });
 }
-
+function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  }
+  
+  function formatDate(date = new Date()) {
+    return [
+      date.getFullYear(),
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+    ].join('-');
+  }
 module.exports = new UserController();
