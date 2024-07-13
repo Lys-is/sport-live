@@ -6,7 +6,7 @@ class MailService {
         this.transporter = nodemailer.createTransport({
             host: 'smtp.beget.com',
             port: '2525',
-            secure: false,
+            secure: true,
             auth: {
                 user: 'sporlive@sporlive.ru',
                 pass: 'dgm&RSKB8oHy'

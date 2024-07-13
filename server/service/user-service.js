@@ -45,7 +45,7 @@ class UserService {
             const email = user.email
             const token = uuid.v4()
             let email_token = await emailToken.create({user, email, token})
-            const link = `http://localhost:5001/new_password/?token=${token}`;
+            const link = `https://sporlive.ru/new_password/?token=${token}`;
             await mailService.sendMail(email, link);
         }
         catch (e) {
