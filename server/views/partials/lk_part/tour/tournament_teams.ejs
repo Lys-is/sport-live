@@ -7,8 +7,8 @@
                 <input type="button" value="Добавить команду" class="table_button nav_link top_nav" data-href="team/get__create">
 
                 <div class="filler"></div>
-                <input type="button" value="Незаявленные" class="table_button_radio_active table_radio_active nm def_link" data-href="/lk?page=tournament/id/<%= tournament._id %>/team">
-                <input type="button" value="Подтвержденные" class="table_button_radio_archive middle_tbra nm def_link"  data-href="/lk?page=tournament/id/<%= tournament._id %>/team_in">
+                <input type="button" value="Незаявленные" class="table_button_radio_active table_radio_active nm vector_link" data-dest="tour_body" data-href="tournament/id/<%= tournament._id %>/team">
+                <input type="button" value="Подтвержденные" class="table_button_radio_archive middle_tbra nm vector_link" data-dest="tour_body"  data-href="tournament/id/<%= tournament._id %>/team_in">
 
             </div>
             <table class="commands_table fath">

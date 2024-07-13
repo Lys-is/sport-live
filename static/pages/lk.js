@@ -124,6 +124,18 @@ async function getPage(href, destInHtml = lk_main, history_change = false) {
             });
         }
     });
+    let vectorLinks = getA('.vector_link');
+    vectorLinks.forEach(link => {
+        if (!link.hasEventListener('click')) {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                let destS = e.target.getAttribute('data-dest')
+                let el = get('#'+destS)
+                if(el)
+                    getPage(link.getAttribute('data-href'), el);
+            });
+        }
+    })
     initHref = initHref.replace(/\/id\/[^\/]+(\/[^\/]*)?/, "/id$1").replace(/(get__group_edit).*/, '$1').split('/^id~')[0];
     console.log(initHref)
     inits[removeTrailingSlash(initHref)]?.(href);
