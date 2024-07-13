@@ -54,7 +54,7 @@ if(params.page) {
 }
 else
     getPage('profile')
-async function checkTournament(str) {
+async function checkTournament(str, history_change = false) {
     const regexFormatAny = /^tournament\/id\/[^\/]+$/;
     const regexFormatAny2 = /^tournament\/id\/[^\/]+\/.+$/;
   
@@ -67,11 +67,11 @@ async function checkTournament(str) {
         console.log(str)
         let templateHref =  str.replace(regex, '$1').replace(regex2, '$1');
         console.log(templateHref)
-        await getPage(templateHref)
+        await getPage(templateHref, lk_main, history_change);
         if(containsAny2) {
             console.log('containsAny2', str)
             let tour_body = get('#tour_body');
-            await getPage(str, tour_body);
+            await getPage(str, tour_body, history_change);
             let tour_navs = getA('.sub_nav_link');
             tour_navs.forEach(link => {
                 link.classList.remove('active_t_button');
@@ -85,7 +85,13 @@ async function checkTournament(str) {
     console.log('checkTournament false')
     return false
 }
-async function getPage(href, destInHtml = lk_main) {
+window.addEventListener('popstate', async function(event) {
+    let href = location.href.split('?page=')[1];
+    // The popstate event is fired each time when the current history entry changes.
+    if(!await checkTournament(removeTrailingSlash(href), true))
+        getPage(href, lk_main, true);
+}, false);
+async function getPage(href, destInHtml = lk_main, history_change = false) {
     
     const baseUrl = '/api/lk/';
     const cleanedHref = href.replace(/(\?id=)(.+)/, '^id~$2')
@@ -97,8 +103,11 @@ async function getPage(href, destInHtml = lk_main) {
     destInHtml.innerHTML = response ? response : 'Страница не найдена';
 
     params.subHref = href.split('?')[1] || href;
-    history.replaceState({ page: 1 }, "", `?page=${cleanedHref}`);
-
+    //history.replaceState({ page: 1 }, "", `?page=${cleanedHref}`);
+    if(!history_change){
+        history.pushState({ page: 1 }, "", `?page=${location.search}`);
+        history.replaceState({ page: 1 }, "", `?page=${cleanedHref}`);
+    }
     const navLinks = getA('.nav_link');
     navLinks.forEach(link => {
         if (!link.hasEventListener('click')) {
@@ -686,7 +695,7 @@ function init__tournament_docs_create() {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         let data = await formGetData(form)
-        let html = await readDocxContents(form.doc_file.files[0])
+        let html = await readDocxContents(form.doc.files[0])
         data.doc = html
         data.tournament = tourId
         //get('#tour_body').innerHTML = html

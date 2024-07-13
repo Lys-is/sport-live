@@ -74,7 +74,8 @@
 }
 
 .big .penalties-home, .big .penalties-away {
-	padding-top: 10px;}
+	/* padding-top: 10px; */
+	}
 	
 #bottom-row-2 {
     height: 40px;
@@ -141,7 +142,7 @@ body:after {
 .penalties-home, .penalties-away {
 	display: flex;
 	flex-direction: row;
-	height: 20px;
+	height: auto;
 	background: #ccc;
 	align-items: center;
 	justify-content: center;
@@ -339,8 +340,8 @@ body:after {
 
 #main-big {
 	text-align: center;
-	margin-bottom: 115px;
-	width: 100%;	
+	margin-bottom: 128px;
+	width: 100%;
 }
 #container-big {
 	display: inline-block;

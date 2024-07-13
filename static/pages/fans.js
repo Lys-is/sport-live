@@ -16,8 +16,11 @@ function standartLinkListener(e) {
     getPage(href);
 }
 let member_hrefs = getA('.small_buttons > input');
-
-async function getPage(href) {
+window.addEventListener('popstate', function(event) {
+    // The popstate event is fired each time when the current history entry changes.
+    getPage(location.href.split('?page=')[1], true);
+}, false);
+async function getPage(href, history_change = false) {
     if(!href) location.href = location.pathname;
     let initHref = href.split('?')[0];
     const baseUrl = `/api/fans/${leagueId}/`;
@@ -26,8 +29,11 @@ async function getPage(href) {
     fans_main.innerHTML = response ? response : 'Страница не найдена';
     params.subHref = href.split('?')[1] || href;
     console.log(params)
-    history.replaceState({ page: 1 }, "", `?page=${initHref}`);
-
+    
+    if(!history_change){
+        history.pushState({ page: 1 }, "", `?page=${location.search}`);
+        history.replaceState({ page: 1 }, "", `?page=${initHref}`);
+    }
     const navLinks = getA('.fans_link');
     console.log(navLinks)
     navLinks.forEach(link => {
@@ -52,6 +58,8 @@ const inits = {
     'tables/id' : init__tables,
     'teams/id' : init__teams,
     'team/id' : init__team,
+    'docs/id' : init__docs,
+    'doc/id' : init__docs,
     'calendar_team/id' : init__calendar_team,
     'roster_team/id' : init__roster_team,
     'players' : init__players,
@@ -59,7 +67,7 @@ const inits = {
     'judges' : init__judges,
     'judge/id' : init__judge,
     'commentators' : init__commentators,
-    'commentator/id' : init__commentator
+    'commentator/id' : init__commentator,
 }
 
 
@@ -78,6 +86,9 @@ async function init__teams () {
 }
 async function init__team () {
     changeTourNav('team');
+}
+async function init__docs () {
+    changeTourNav('docs');
 }
 async function init__calendar_team () {
     changeTourNav('calendar_team');

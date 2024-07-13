@@ -51,21 +51,17 @@ replaceBtns?.forEach(btn => {
         let type = e.target.getAttribute('data-type').split('__')
         let player1 = get(`#${type[0]}-replace`),
         player2 = get(`#${type[0]}-replace-by`)
-        
-        let txt = `Замена ${player1.options[player1.selectedIndex].innerHTML}<br> на ${player2.options[player2.selectedIndex].innerHTML}`
-        if(type[1] == 'b') {
-            txt = `<div>{{player_img__${0}}} ${player1.options[player1.selectedIndex].innerHTML} на </div> <div>{{player_img__${1}}} ${player2.options[player2.selectedIndex].innerHTML}</div>`
-        }
-
-
+        let txtArr = [player1.options[player1.selectedIndex].innerHTML, player2.options[player2.selectedIndex].innerHTML]
+        let add_class = ['shadow_red', 'shadow_green']
         let ids = [player1.options[player1.selectedIndex].value, player2.options[player2.selectedIndex].value]
         let data = {
             type: 'change',
             size : type[1],
-            text: txt,
+            text: txtArr,
             title: 'Замена игрока',
             ids: ids,
             model: 'Player',
+            add_class: add_class
         }
         socket.emit('notify', data)
     })
@@ -101,28 +97,25 @@ function playerNotifyListener(e) {
     let player = playerTr.getAttribute('data-name')
     let type = e.target.getAttribute('data-type').split('_')
     let ids = [playerTr.getAttribute('data-id')]
-    let txt = '', title = '', img = ''
+    let txt = [], title = ''
     if(type[0] == 'goal') {
-        txt = 'Игрок ' + player + ' забил гол'
+        txt[0] = 'Игрок ' + player + ' забил гол'
         title = 'Гоооооол'
     }
     else if(type[0] == 'yellow') {
-        txt = 'Игрок ' + player + ' получил жёлтую карту'
+        txt[0] = 'Игрок ' + player + ' получил жёлтую карту'
         title = 'Жёлтая карта'
         type[0] = 'yellow-card'
     }
     else if(type[0] == 'red') {
-        txt = 'Игрок ' + player + ' получил красную карту'
+        txt[0] = 'Игрок ' + player + ' получил красную карту'
         title = 'Красная карта'
         type[0] = 'red-card'
-    }
-    if(type[1] == 'b') {
-        img = `<div>{{player_img__${0}}}`
     }
     let data = {
         type: type[0],
         size : type[1],
-        text: img+txt,
+        text: txt,
         title: title,
         ids,
         model: 'Player',
@@ -255,8 +248,8 @@ function setMatch(data, team) {
 
 function couchNotify(num, team, type, data) {
 
-    let title = 'Тренер команды '+data['team'+team+'_name'] + '</div>'
-    let txt = data['couch_'+team][num].fio
+    let title = 'Тренер команды '+data['team'+team+'_name']
+    let txt = [data['couch_'+team][num].fio]
     let img = ''
     let ids = [data['couch_'+team][num]._id]
 
@@ -266,7 +259,7 @@ function couchNotify(num, team, type, data) {
     let dta = {
         type: 'couch',
         size : type,
-        text: img+txt,
+        text: txt,
         title: title,
         couchId: data['couch_'+team][num]._id,
         ids: ids,
@@ -280,13 +273,13 @@ function couchNotify(num, team, type, data) {
 
 showJudges.addEventListener('click', (e) => {
     let title = 'Судьи матча'
-    let txt = ""
+    let txt = []
     let ids = []
     if(global_data.match){
         let arrJudges = global_data.match.judges
 
-        arrJudges.forEach((commentator, i) => {
-            txt += `<div>{{judge_img__${i}}}Судья ${commentator.fio} </div>`
+        arrJudges.forEach((judge, i) => {
+            txt.push(`Судья ${judge.fio}`)
         })
         ids = arrJudges.map(el => el._id)
         console.log(ids)
@@ -305,13 +298,13 @@ showJudges.addEventListener('click', (e) => {
 
 showCommentators.addEventListener('click', (e) => {
     let title = 'Комментаторы матча'
-    let txt = ""
+    let txt = []
     let ids = []
     if(global_data.match){
         let arrCommentators = global_data.match.commentators
 
         arrCommentators.forEach((commentator, i) => {
-            txt += `<div>{{commentator_img__${i}}}Комментатор ${commentator.fio} </div>`
+            txt.push(`Комментатор ${commentator.fio}`)
         })
         ids = arrCommentators.map(el => el._id)
         console.log(ids)

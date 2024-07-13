@@ -6,7 +6,9 @@ const DocsSchema = new Schema({
     doc: {type: String, default: '', required: true},
     tournament: {type: Schema.Types.ObjectId, ref: 'Tournament'},
     type: {type: String,  enum: ['guide', 'doc'], required: true},
+    date: {type: String},
     status_doc: {type: String, default: 'active', enum: ['active', 'deleted']},
+    is_published: {type: Boolean, default: true},
 
 })
 DocsSchema.plugin(require('mongoose-autopopulate'));

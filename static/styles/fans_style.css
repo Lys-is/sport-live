@@ -1018,3 +1018,16 @@ select.nav-select{
 .grid-match-composition > div:nth-child(n+3) {
     border-top: 0;
 }
+.fans_link  {
+    cursor: pointer;
+}
+.page_title{
+    font-size: x-large;
+    font-weight: 600;
+}
+.back_doc{
+    color: white;
+    background: #345285;
+    border: none;
+    padding: 10px;
+}

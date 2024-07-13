@@ -7,6 +7,7 @@ const Player = require('../../models/player-model');
 const PlayerResult = require('../../models/playerResult-model');
 const Commentator = require('../../models/commentator-model');
 const Judge = require('../../models/judge-model');
+const Doc = require('../../models/doc-model');
 
 class FansController {
     async get__tournament(req, res) {
@@ -49,6 +50,7 @@ class FansController {
         
         }   
     }
+    
     async get__tables(req, res) {
         try {
             const {id} = req.params;
@@ -107,6 +109,35 @@ class FansController {
             return res.json({message: 'Произошла ошибка'});
         
         }   
+    }
+    async get__docs(req, res) {
+        try {
+            const {id} = req.params;
+            const tournament = await Tournament.findById(id);
+            if(!tournament || !tournament.creator.equals(req.fans_league.creator)) {
+                return res.json({message: 'Турнир не найден'});
+            }
+            let docs = await Doc.find({creator: req.user.id, tournament: req.params.id});
+            return sendRes('fans/fans_tour/docs', {docs, tournament, compareDates}, res);
+        
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__doc(req, res) {
+        try {
+            let guide = await Doc.findById(req.params.id);
+            let tournament = await Tournament.findById(guide.tournament);
+            if(!tournament || !tournament.creator.equals(req.fans_league.creator)) {
+                return res.json({message: 'Турнир не найден'});
+            }
+            return sendRes('fans/fans_tour/doc', {guide,tournament, compareDates}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
     }
     async get__calendar_team(req, res) {
         try {

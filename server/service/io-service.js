@@ -146,16 +146,16 @@ function startPanel(controls, socket) {
 
 async function replaceImg(data) {
   try {
+    data.imgArr = [];
     await Promise.all(data.ids.map(async (id, i) => {
       const model = { Player, Couch, Commentator, Judge }[data.model];
       const type = data.model.toLowerCase();
       const dta = await model.findOne({ _id: id }).select('img');
       if (dta.img) {
         console.log('dta.img')
-        data.text = data.text.replace(`{{${type}_img__${i}}}`, `<img src="${dta.img}" class="notify_img">`);
+        data.imgArr.push(dta.img);
       } else {
         console.log('!dta.img', i)
-        data.text = data.text.replace(`{{${type}_img__${i}}}`, '');
       }
     }));
     console.log(data)

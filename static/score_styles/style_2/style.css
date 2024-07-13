@@ -43,27 +43,23 @@
     text-transform: uppercase;
     color: #FFFFFF;
     margin-top: 0px;
-
     width: 330px;
-    height: 25px;
+    height: 26px;
     background-color: var(--pen-goal);
     display: inline-block;
     position: relative;
-
 }
 
 .penalties-home, .penalties-away {
-	display: flex !important; 
+	display: flex !important;
 	flex-direction: row;
-	height: 20px;
+	height: 26px;
 	background: #ccc;
 	align-items: center;
 	justify-content: center;
 	color: #FFFFFF;
 	font-size: 20px;
 	font-weight: 400;
-
-	
 }
 #bottom-row-2 {
     height: 40px;
@@ -79,7 +75,7 @@
 	width: 18px;
 	border-radius: 50%;
 	background: #ff0000;
-	margin-top: 4px;
+	/* margin-top: 4px; */
 	margin-left: 10px;
 	margin-right: 10px;
 }

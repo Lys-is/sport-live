@@ -133,7 +133,7 @@ body {
     margin: auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-top: 5px;
     flex-wrap: nowrap;
@@ -242,7 +242,7 @@ body {
 }
 
 #top-match-info {
-    font-family: 'Exo 2', sans-serif;    
+    font-family: 'Exo 2', sans-serif;
     text-transform: uppercase;
     color: #FFFFFF;
     margin-top: 5px;
@@ -1774,3 +1774,15 @@ video_container{
 	top: 5px;
 }
 
+.pen {
+    
+    background: #b6b0a9;
+        
+    padding: 5px;
+        
+    height: 100%;
+    }
+    .nobg {
+
+        background: none;
+        }

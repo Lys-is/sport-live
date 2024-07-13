@@ -1,0 +1,27 @@
+<%- include('tournament_header.ejs') %>
+<div class="grid-body">
+    <%- include('tournament_nav.ejs') %>
+    <div class="content-body body-background">
+        <table class="nets-table mt">
+            <tbody><tr>
+                <th>#</th>
+                <th>Документ</th>
+                <th>Дата</th>
+            </tr>   
+            <% if(docs && docs.length) {
+                docs.forEach((doc, i) => {
+                    %>
+                    <tr class="fans_link" data-href="doc/id/<%= doc._id %>">
+                        <td><%= i+1 %></td>
+                        <td><%= doc.name %></td>
+                        <td><%= doc.date %></td>
+                    </tr>
+                    <% }) %>
+                <% } else { %>
+                <tr>
+                    <td colspan="3">Нет документов</td>
+                </tr>
+                <% } %>
+            </tbody></table>
+    </div>
+</div>

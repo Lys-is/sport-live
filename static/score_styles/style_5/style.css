@@ -106,8 +106,8 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
     margin-top: 5px;
+    align-items: center;
 }
 
 #top-home-logo {
@@ -206,7 +206,7 @@ body {
 }
 
 #top-match-info {
-    font-family: 'Exo 2', sans-serif;    
+    font-family: 'Exo 2', sans-serif;
     text-transform: uppercase;
     color: #FFFFFF;
     margin-top: 0px;
@@ -216,6 +216,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-inline: 10px;
 }
 
 #fouls {
@@ -1708,4 +1709,16 @@ video_container{
 	left: -10px;
 	position: absolute;
 	top: 5px;
+}
+.pen {
+    
+background: #b6b0a9;
+    
+padding: 5px;
+    
+height: 100%;
+}
+.nobg {
+
+background: none;
 }

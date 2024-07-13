@@ -54,13 +54,14 @@
     text-transform: uppercase;
     color: #FFFFFF;
     margin-top: 0px;
-
     width: 330px;
     height: 25px;
     background-color: #fb6c19;
     display: inline-block;
+    display: flex;
     position: relative;
-
+    justify-content: center;
+    align-items: center;
 }
 
 .penalties-home, .penalties-away {
@@ -79,7 +80,8 @@
 }
 
 .big .penalties-home, .big .penalties-away {
-	padding-top: 10px;}
+	/* padding-top: 10px; */
+	}
 	
 #bottom-row-2 {
     height: 40px;
@@ -293,7 +295,7 @@ sup {
 .penalties-home, .penalties-away {
 	display: flex;
 	flex-direction: row;
-	height: 20px;
+	height: 29px;
 	background: var(--pen-bg);
 	align-items: center;
 	justify-content: center;

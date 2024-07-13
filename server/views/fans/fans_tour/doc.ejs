@@ -1,0 +1,18 @@
+<%- include('tournament_header.ejs') %>
+
+<div class="grid-body">
+    <div class="content-body body-background">
+    <div class="cool_body_header">
+        <div class="tournires_header_header">
+            <input type="button" value="Назад к турниру" class="fans_link back_doc" data-href="docs/id/<%= tournament._id %>">
+            <p class="page_title ">Документ: <%= guide.name %></p>
+        </div>
+
+        
+    </div>
+    
+    <div class="cool_body_content">
+        <%- guide.doc %>
+    </div>
+    </div>
+</div>

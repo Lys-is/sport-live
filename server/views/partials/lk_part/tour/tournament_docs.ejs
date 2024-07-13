@@ -31,9 +31,14 @@
                             <option>Все статусы</option>
                         </select></td>
                 </tr>
-                <tr>
-                    <td colspan="4">ничего не найдено</td>
-                </tr>
+                <% docs.forEach((el, i) => { %>
+                    <tr>
+                        <td><%= i + 1 %></td>
+                        <td><%= el.name %></td>
+                        <td><%= el.date %></td>
+                        <td><%= el.is_published ? 'да' : 'нет' %></td>
+                    </tr>
+                <% }) %>
             </tbody></table>
             
         </div>

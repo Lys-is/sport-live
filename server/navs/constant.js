@@ -25,6 +25,12 @@ const nav = {
         'team/id/:id' : {
             'func' : 'get__team'
         },
+        'docs/id/:id' : {
+            'func' : 'get__docs'
+        },
+        'doc/id/:id' : {
+            'func' : 'get__doc'
+        },
         'calendar_team/id/:id' : {
             'func' : 'get__calendar_team'
         },

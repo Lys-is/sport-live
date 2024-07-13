@@ -138,11 +138,11 @@ body {
 }
 
 #top-row-2 {
-    background-color: transparent;
+    background-color: #aaa1a100;
     margin: auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -548,12 +548,11 @@ body {
 }
 
 #bottom-row-2 {
-    height: 40px;
+    /* height: 40px; */
     width: 1200px;
     margin: auto;
     display: flex;
     justify-content: center;
-
 }
 
 #bottom-row-3 {
@@ -697,10 +696,11 @@ body {
     padding-top: 5px;
     width: 330px;
     height: 25px;
-    background-color: #6d237f;
+    background-color: #b6b0a9;
     display: inline-block;
     position: relative;
     border-radius: 0 0 10px 10px;
+    margin-inline: 20px;
 }
 
 #line {
@@ -1922,3 +1922,9 @@ video_container{
 	top: 5px;
 }
 
+.pen {
+    
+    background: #b6b0a9;
+        
+    border-radius: 10px;
+}

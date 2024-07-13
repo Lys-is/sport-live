@@ -5,6 +5,7 @@ const Tournament = require('../../../models/tournament-model');
 const editController = require('./edit-controller');
 const groupController = require('./group-controller');
 const Commentator = require('../../../models/commentator-model');
+const Doc = require('../../../models/doc-model');
 const dbService = require('../../../service/db-service');
 const mammoth = require("mammoth")
 const fs = require('fs')
@@ -26,7 +27,7 @@ class TournamentController {
             data.creator = req.user.id;
             data.basic = req.body;
             let tournament = await Tournament.create(data);
-            if(!tournament) return res.json({message: 'Команда не создана, ошибка'});
+            if(!tournament) return res.json({message: 'Турнир не создан, ошибка'});
             return res.json({message: 'Турнир создан', redirect: '/lk?page=tournament/id/'+ tournament._id+'/edit'});
         } catch (e) {
             console.log(e);
@@ -206,7 +207,10 @@ class TournamentController {
     }
     async get__docs(req, res) {
         try {
-            return sendRes('partials/lk_part/tour/tournament_docs', {tourId: req.params.id}, res);
+            let tournament = await Tournament.findOne({_id: req.params.id});
+            if(!tournament) return res.json({message: 'Такого турнира не существует'});
+            let docs = await Doc.find({creator: req.user.id, tournament: req.params.id});
+            return sendRes('partials/lk_part/tour/tournament_docs', {docs, tourId: req.params.id}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -228,10 +232,11 @@ class TournamentController {
             let tournament = await Tournament.findOne({_id: tourId});
             if(!tournament) return res.json({message: 'Такого турнира не существует'});
             if(!tournament.creator.equals(req.user.id)) return res.json({message: 'Ошибка доступа'});
-            
-            //tournament.docs.push(data);
-            //await tournament.save();
-            return res.json({message: 'Обновлено'});
+            data.type = 'doc';
+            data.tournament = tourId;
+            let doc = await Doc.create(data);
+            if(!doc) return res.json({message: 'Документ не создан, ошибка'});
+            return res.json({message: 'Документ создан'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

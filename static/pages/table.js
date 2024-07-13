@@ -1,3 +1,13 @@
+const notif = `<div class="notification disabled" id={{id}}>
+        {{img_place}}
+        <div class="content">
+            <div class="name">{{name}}</div>
+            <div class="region">{{description}}</div>
+        </div>
+        <div class="img {{main_class}} {{add_class}}"></div>
+    </div>`
+const notifImg = `<img src="{{img}}">`
+
 let testConnect = setInterval(() => {
     if (socket.connected) {
         clearInterval(testConnect)
@@ -17,35 +27,65 @@ socket.on('update_style', () => {
     location.reload()
 })
 let notifyTimer
-let notifyDivs = {
-    s: get('.mini-notification'),
-    b: get('.notification')
-}
-let notifyParams = {
-    title: getA('.notification_title'),
-    message: getA('.notification_message'),
-    img: getA('.notification_img'),
-}
-socket.on('new_notify', (data) => {
-    Object.keys(notifyDivs).forEach(key => notifyDivs[key].classList.add('disabled'))
-    console.log('fdf')
-    console.log(data)
-    let div
-    if(data.size == 's'){
-        div = notifyDivs.s
-    }
-    else{
-        div = notifyDivs.b
-    }
+let notifyDivs = []
+let notifyBlock = get('.notifications_div')
 
-    notifyParams.title.forEach(el => el.innerHTML = data.title)
-    notifyParams.message.forEach(el => el.innerHTML = data.text)
-    notifyParams.img.forEach(el => el.className = 'notification_img '+data.type)
-    div.classList.remove('disabled')
-    clearTimeout(notifyTimer)
-    notifyTimer = setTimeout(() => {
-        div.classList.add('disabled')
-    }, 4000)
+socket.on('new_notify', (data) => {
+    console.log(data)
+    for (let i = 0; i < data.ids.length; i++) {
+        let newNotify = notif;
+        let id = 'id' + Math.random().toString(36).substr(2, 9)
+        if(data.size == 's'){
+            newNotify = newNotify.replace('{{img_place}}', '')
+        }
+        else{
+            newNotify = newNotify.replace('{{img_place}}', notifImg)
+        }
+        newNotify = newNotify.replace('{{id}}', id)
+        newNotify = newNotify.replace('{{name}}', data.text[i])
+        newNotify = newNotify.replace('{{description}}', data.title)
+        newNotify = newNotify.replace('{{img}}', data.imgArr[i])
+        newNotify = newNotify.replace('{{main_class}}', data.type || '')
+        if(data.add_class && data.add_class[i]) newNotify = newNotify.replace('{{add_class}}', data.add_class[i])
+        else newNotify = newNotify.replace('{{add_class}}', '')
+        console.log(data)
+
+        notifyBlock.innerHTML += newNotify
+        setNotify(id, (i+1)*10)
+        clearNotify(id, (i+1)*100)
+    }
+    function setNotify(id, time) {
+        setTimeout(() => {
+            let notf = get(`#${id}`)
+            notifyDivs.push(notf)
+            notf.classList.remove('disabled')
+            
+        }, 100 + time)
+        
+    }
+    function clearNotify(id,time) {
+        console.log(id)
+        setTimeout(() => {
+            let notf = get(`#${id}`)
+            notf.remove()
+        }, 3000 + time)
+    }
+    // let div
+    // if(data.size == 's'){
+    //     div = notifyDivs.s
+    // }
+    // else{
+    //     div = notifyDivs.b
+    // }
+
+    // notifyParams.title.forEach(el => el.innerHTML = data.title)
+    // notifyParams.message.forEach(el => el.innerHTML = data.text)
+    // notifyParams.img.forEach(el => el.className = 'notification_img '+data.type)
+    // div.classList.remove('disabled')
+    // clearTimeout(notifyTimer)
+    // notifyTimer = setTimeout(() => {
+    //     div.classList.add('disabled')
+    // }, 4000)
 })
 let timerDivs = {
     s: get('#top-timer'),

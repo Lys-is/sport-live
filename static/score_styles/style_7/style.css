@@ -647,10 +647,10 @@ body {
     margin: auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     align-items: center;
     margin-left: 80px;
     margin-top: 80px;
+    gap: 45px;
 }
 
 #penalties-home {
@@ -1498,3 +1498,6 @@ video_container{
 	top: 5px;
 }
 
+.penalties-home, .penalties-away {
+    padding-top: 10px;
+}
