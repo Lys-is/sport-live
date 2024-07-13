@@ -130,6 +130,7 @@ let first_style_tag = (function() {
             executed = true;
             let tag = get('#style_start')
             tag.remove()
+            document.body.style.display = 'block'
         }
     };
 })();
