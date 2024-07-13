@@ -70,22 +70,7 @@ socket.on('new_notify', (data) => {
             notf.remove()
         }, 3000 + time)
     }
-    // let div
-    // if(data.size == 's'){
-    //     div = notifyDivs.s
-    // }
-    // else{
-    //     div = notifyDivs.b
-    // }
 
-    // notifyParams.title.forEach(el => el.innerHTML = data.title)
-    // notifyParams.message.forEach(el => el.innerHTML = data.text)
-    // notifyParams.img.forEach(el => el.className = 'notification_img '+data.type)
-    // div.classList.remove('disabled')
-    // clearTimeout(notifyTimer)
-    // notifyTimer = setTimeout(() => {
-    //     div.classList.add('disabled')
-    // }, 4000)
 })
 let timerDivs = {
     t: getA('.q_time'),

@@ -5,7 +5,8 @@ const getBrightness = require('getbrightness')
 const timestore = require('timestore')
 let timers = new timestore.Timestore()
 function startTimer(io, timer, userId) {
-    
+    if(timer.scenarios == '2')
+        timer.minuts = timer.max_time
     let timerId = timers.setInterval(userId, timerCallback, 1000)
     console.log(timerId)
     function timerCallback() {
@@ -138,6 +139,14 @@ class Timer {
                 toggleTimer(this)
 
         }
+        else if(this.scenarios != 'end') {
+            if(!this.timerId){
+                this.timerId = startTimer(io, this, userId)
+                this.status = 'play'
+            }
+            else 
+                toggleTimer(this)
+        }
     }
     // startTimer(socket) {
     //     this.is_null_start = false
@@ -148,6 +157,7 @@ class Timer {
         this.changed = false
         this.seconds = +this.seconds
         this.minuts = +this.minuts
+        let maxTime = this.max_time
         if(this.seconds < 0) {
             this.minuts += Math.floor(this.seconds / 60)
             this.seconds = Math.abs(60*(Math.floor(this.seconds / 60)) - this.seconds)
@@ -161,7 +171,7 @@ class Timer {
             this.seconds = 0
         }
         if(this.scenarios == '2'){
-            let maxTime = this.max_time * 2
+            maxTime = this.max_time * 2
         }
         if(this.minuts >= this.maxTime) {
             this.minuts = this.maxTime
@@ -193,9 +203,7 @@ class Scoreboard {
     }
 
     changeScore(score) {
-        console.log(score)
-        console.log(this.team2_color)
-        console.log(getBrightness(this.team2_color))
+
         this.team1 = score.team1 ? score.team1 : this.team1
         this.team2 = score.team2 ? score.team2 : this.team2
         this.team1_foll = score.team1_foll ? score.team1_foll : this.team1_foll

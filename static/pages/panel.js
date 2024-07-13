@@ -102,22 +102,9 @@ socket.on('timer', (data) => {
     if(data.changed) {
         socket.emit('get_data')
     }
-    get('.time').innerHTML = data.value
-    let block = play.closest('.block')
-    console.log(block)
-    if(data.status == 'pause') {
-        play.classList.replace('pause-icon', 'play-icon')
-        block.classList = 'block pause'
-    }
-    else if(data.status == 'play') {
-        play.classList.replace('play-icon', 'pause-icon')
-        block.classList = 'block play'
-    }
-    else if(data.status == 'stop') {
-        play.classList.replace('pause-icon', 'play-icon')
-        block.classList = 'block'
-    }
 
+    get('.time').innerHTML = data.value
+    setTimer(data)
 
     console.log(data.value)
 })
@@ -151,8 +138,24 @@ socket.on('update_data', (data) => {
 })
 
 function setTimer(timer) {
-    max_time.value = timer.max_time
+    if(timer.max_time)
+        max_time.value = timer.max_time
     scenarios.value = timer.scenarios
+
+    let block = play.closest('.block')
+    console.log(block)
+    if(timer.status == 'pause') {
+        play.classList.replace('pause-icon', 'play-icon')
+        block.classList = 'block pause'
+    }
+    else if(timer.status == 'play') {
+        play.classList.replace('play-icon', 'pause-icon')
+        block.classList = 'block play'
+    }
+    else if(timer.status == 'stop') {
+        play.classList.replace('pause-icon', 'play-icon')
+        block.classList = 'block'
+    }
 }
 function setScoreboard(scoreboard) {
     get('#score_team1').value = scoreboard.team1
