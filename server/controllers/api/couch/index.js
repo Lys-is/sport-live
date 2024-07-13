@@ -16,6 +16,8 @@ class RepresentativeController {
         try {
             let data = req.body;
             data.creator = req.user.id;
+            let team = await Team.findOne({_id: data.team});
+            if(!team) return res.json({message: 'Такой команды не существует'});
             let couch = await Couch.create(data);
             if(!couch) return res.json({message: 'Тренер не создан, ошибка'});
             return res.json({message: 'Тренер создан'});

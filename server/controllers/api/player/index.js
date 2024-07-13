@@ -16,6 +16,8 @@ class PlayersController {
         try {
             let data = req.body;
             data.creator = req.user.id;
+            let team = await Team.findOne({_id: data.team});
+            if(!team) return res.json({message: 'Такой команды не существует'});
             let player = await Player.create(data);
             if(!player) return res.json({message: 'Игрок не создан, ошибка'});
             return res.json({message: 'Игрок создан'});

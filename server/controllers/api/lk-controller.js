@@ -16,6 +16,7 @@ League = require('../../models/league-model'),
 Style = require('../../models/style-model'),
 Commentator = require('../../models/commentator-model'),
 Doc = require('../../models/doc-model'),
+Global = require('../../models/global-model'),
 Couch = require('../../models/couch-model');
 const dbService = require('../../service/db-service');
 
@@ -228,22 +229,36 @@ class LkController {
             if(!profile)
                 profile = await UserD.create({creator: req.user.id});
             console.log(profile);
-
-            return sendRes('partials/lk_part/profile', {user: req.user, profile: profile}, res);
+            let site_img = await Global.findOne({name: 'site_img'}),
+                site_name = await Global.findOne({name: 'site_name'});
+            return sendRes('partials/lk_part/profile', {user: req.user, profile: profile, isAdmin: req.user.isAdmin, site_img: site_img?.data || '/static/styles/icons/logo.jpg', site_name: site_name?.data || 'Sporlive'}, res);
         } catch (e) {
+            console.log(e);
             return res.json({message: 'Произошла ошибка'});
         }
     }
     async put__profile(req, res) {
         try {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return next(ApiError.BadRequest('Ошибка при валидации', errors.array()))
-            }
+
             const {...data} = req.body;
             console.log(data);
             await User.updateOne({_id: req.user.id}, data);
             await UserD.updateOne({creator: req.user.id}, data);
+            if(req.user.isAdmin){
+                console.log('fsdfs');
+                let site_name = await Global.findOne({name: 'site_name'}),
+                    site_img = await Global.findOne({name: 'site_img'});
+                if(!site_name && data.site_name)
+                    site_name = await Global.create({name: 'site_name', data: data.site_name});
+                if(!site_img && data.site_img)
+                    site_img = await Global.create({name: 'site_img', data: data.site_img});
+
+                console.log(site_name, site_img);
+                if(site_name && data.site_name)
+                    await Global.updateOne({name: 'site_name'}, {data: data.site_name});
+                if(site_img && data.site_img)
+                    await Global.updateOne({name: 'site_img'}, {data: data.site_img});
+            }
             return res.json({message: 'Профиль обновлен'});
         }
         catch(e){

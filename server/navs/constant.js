@@ -80,6 +80,12 @@ const nav = {
     'registration' : {
         'func' : 'get__registration'
     },
+    'reset_password' : {
+        'func' : 'get__reset_password'
+    },
+    'new_password' : {
+        'func' : 'get__new_password'
+    },
     'auth' : {
         
         'qq': checkAuth.isNotAuth,
@@ -89,7 +95,9 @@ const nav = {
         'post__logout' : {},
         'get__activate/:link' : {'func': 'get__activate'},
         'get__refresh' : {},
-        'get__users' : {}
+        'get__users' : {},
+        'post__reset_password' : {},
+        'post__new_password' : {},
     },
     'lk' : {
         'qq': checkAuth.isAuth,
@@ -218,7 +226,7 @@ const nav = {
         },
         'user' : {
             'func' : 'get__user',
-            'put__edit' : {}
+            'put__edit' : {},
         },
         'style' : {
             'func' : 'get__style',

@@ -709,8 +709,7 @@ table tr td input{
 }
 
 .profile_label{
-    width: 120px;
-    
+    width: 147px;
 }
 
 .profile_block .text_form{
@@ -1125,10 +1124,12 @@ input[type=color] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 300px;
+    width: 350px;
     /* height: 300px; */
+    padding-block: 10px;
     background-color: var(--header-bc);
     border: var(--header-borders) 1px solid;
+    align-content: center;
 }
 
 .login_header{
@@ -1146,7 +1147,7 @@ input[type=color] {
     height: 50%;
     flex: 1;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
     justify-content: space-around;
     justify-self: center;
     padding: 30px;
@@ -1155,6 +1156,7 @@ input[type=color] {
 
 .login_body * input{
     width: 240px;
+    margin-right: 0;
 }
 
 .login_body * .form-group{

@@ -1,6 +1,8 @@
 const userService = require('../../service/user-service');
 const {validationResult} = require('express-validator');
 const ApiError = require('../../exceptions/api-error');
+const User = require('../../models/user-model');
+const mailService = require('../../service/mail-service');
 
 class UserController {
 
@@ -74,6 +76,45 @@ class UserController {
             next(e);
         }
     }
+    async post__reset_password(req, res) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.BadRequest('Ошибка при валидации', errors.array()))
+            }
+            const {email} = req.body;
+            let user = await User.findOne({email});
+            if(!user) return res.json({message: 'Такого пользователя не существует'});
+            await userService.resetPassword(user)
+           
+            return res.json({message: 'Ссылка для смены пароля отправлена на почту'});
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async post__new_password(req, res) {
+        try {
+            console.log(req);
+            let data = req.body;
+            const token = data.token;
+            if(!token) return res.json({message: 'Ссылка сброса пароля истекла'});
+            console.log(data);
+            if(!data.password || data.password != data.password_confirm)
+                return res.json({message: 'Новый пароль не может быть пустым или не совпадать с подтверждением'});
+            let user = await userService.verifyEmailToken(token);
+            if(!user) return res.json({message: 'Ссылка сброса пароля истекла'});
+            await userService.updatePassword(user, data.password);
+            await userService.deleteEmailToken(token);
+            return res.json({message: 'Пароль обновлен'});
+            
+        }
+        catch(e){
+            console.log(e);
+            res.json({message: 'Произошла ошибка'});
+        }
+    }
+
 }
 async function sendRes(path, data, res) {
     return res.render(path, data,

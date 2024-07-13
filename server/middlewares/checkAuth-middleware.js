@@ -1,10 +1,15 @@
 const ApiError = require('../exceptions/api-error');
 const tokenService = require('../service/token-service');
+const League = require('../models/league-model');
 
 class CheckAuthMiddleware {
-    isAuth(req, res, next) {
+    async isAuth(req, res, next) {
         try {
             if(req.user) {
+                let league = await League.findOne({creator: req.user.id});
+                if(league)
+                    res.locals.league_href = league.address
+                else res.locals.league_href = false
                 next();
             } else {
                 return res.redirect('/auth');

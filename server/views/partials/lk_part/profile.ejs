@@ -37,16 +37,19 @@
                 </div>
 
                 <div class="profile_input_block"></div>
-
+                <% if (isAdmin) { %>
+                 
+                
                 <div class="profile_input_block">
                     <label class="profile_label" for="site_name">Название сайта</label>
-                    <input type="text" class="text_form text" id="site_name" name="site_name" value="<%= profile.site_name %>">
+                    <input type="text" class="text_form text" id="site_name" name="site_name" value="<%= site_name %>">
                 </div>
                 <label class="image_upload">
                     <input type="file" class="image_input" name="site_img" id="image" accept="image/*">
-                    <img src="<%= profile.site_img %>" class="image_preview" alt="">
+                    <img src="<%= site_img %>" class="image_preview" alt="">
                     <p>Мин. размер: 320 x 320</p>
                 </label>
+                <% } %>
             </div>
             <div class="profile_footer">
                 <input type="submit" value="Сохранить изменения" class="button green_button">

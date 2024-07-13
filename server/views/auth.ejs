@@ -4,6 +4,10 @@
             <%- include('partials/loginForm.ejs') %>
         <% } else if (type === 'registration') { %>
             <%- include('partials/regForm.ejs') %>
+        <% } else if (type === 'reset_password') { %>
+            <%- include('partials/resetForm.ejs') %>
+        <% } else if (type === 'new_password') { %>
+            <%- include('partials/newPasswordForm.ejs') %>
         <% } %>
     </div>
 <script type="text/javascript" src="https://unpkg.com/imask"></script>

@@ -25,8 +25,16 @@ function startTimer(io, timer, userId) {
                 timer.minuts++
                 timer.seconds = 0
             }
-            if(timer.minuts >= timer.max_time) {
-                timer.clearTimer()
+            if(timer.scenarios == '1'){
+                if(timer.minuts >= timer.max_time) {
+                    timer.changeScenarios('pause')
+                }
+            }
+            else if(timer.scenarios == '2'){
+                console.log(timer.minuts, timer.max_time * 2)
+                if(timer.minuts >= timer.max_time * 2) {
+                    timer.changeScenarios('end')
+                }
             }
         }
         timer.send(io, userId)
@@ -34,21 +42,27 @@ function startTimer(io, timer, userId) {
     }
     return userId.toString()
 }
-
-function pauseTimer(timer) {
+function pauseTimer(timerId) {
+    if(timerId)
+        timers.pauseInterval(timerId)
+}
+function resumeTimer(timerId) {
+    if(timerId)
+        timers.resumeInterval(timerId)
+}
+function toggleTimer(timer) {
     if(timer.status == 'pause') {
         timer.status = 'play'
-        timers.resumeInterval(timer.timerId)
+        resumeTimer(timer.timerId)
     }
     else if(timer.status == 'play') {
         timer.status = 'pause'
-        timers.pauseInterval(timer.timerId)
+        pauseTimer(timer.timerId)
     }
-    // let a = timers.toggleInterval(timer.timerId)
-    // console.log(a)
 }
 function deleteTimer(timer) {
-    timers.clearInterval(timer.timerId)
+    if(timer.timerId)
+        timers.clearInterval(timer.timerId)
     timer.timerId = null
 }
 class Timer {
@@ -63,6 +77,10 @@ class Timer {
         this.is_not_display = false
         this.is_null_start = false
         this.status = 'stop'
+        this.name = 'Начало матча'
+        this.scenarios = 'begin'
+        this.changed = false
+
     }
     clearTimer() {
         deleteTimer(this)
@@ -82,23 +100,52 @@ class Timer {
         this.now_time = stages.now_time ? stages.now_time : this.now_time
         this.now_penalty = stages.now_penalty ? stages.now_penalty : this.now_penalty
     }
-
-    playTimer(io, userId) {
-        console.log(this)
-        if(!this.timerId){
-            this.timerId = startTimer(io, this, userId)
-            this.status = 'play'
+    changeScenarios(scenarios) {
+        this.clearTimer()
+        this.changed = true
+        this.scenarios = scenarios
+        if(scenarios == 'begin') {
+            this.name = 'Начало матча'
         }
-        else 
-            pauseTimer(this)
+        else if(scenarios == '1') {
+            this.name = '1Т'
+        }
+        else if(scenarios == 'pause') {
+            this.name = 'Перерыв'
+            this.minuts = this.max_time
+        }
+        else if(scenarios == '2') {
+            this.name = '2Т'
+            this.minuts = this.max_time
+        }
+        else if(scenarios == 'end') {
+            this.name = 'Конец матча'
+            this.status = 'stop'
+            this.minuts = this.max_time * 2
+        }
+    }
+    playTimer(io, userId) {
+        if(this.scenarios == 'begin' || this.scenarios == 'pause') {
+            let nextScenarios = this.scenarios == 'begin' ? '1' : '2'
+            this.changeScenarios(nextScenarios)
+            
+            console.log(this)
+            if(!this.timerId){
+                this.timerId = startTimer(io, this, userId)
+                this.status = 'play'
+            }
+            else 
+                toggleTimer(this)
 
-        
+        }
     }
     // startTimer(socket) {
     //     this.is_null_start = false
     //     this.playTimer(socket)
     // }
     get timeData() {
+        let changed = this.changed
+        this.changed = false
         this.seconds = +this.seconds
         this.minuts = +this.minuts
         if(this.seconds < 0) {
@@ -113,13 +160,16 @@ class Timer {
             this.minuts = 0
             this.seconds = 0
         }
-        if(this.minuts >= this.max_time) {
-            this.minuts = this.max_time
+        if(this.scenarios == '2'){
+            let maxTime = this.max_time * 2
+        }
+        if(this.minuts >= this.maxTime) {
+            this.minuts = this.maxTime
             this.seconds = 0
         }
         let min = this.minuts < 10 ? `0${this.minuts}` : this.minuts
         let sec = this.seconds < 10 ? `0${this.seconds}` : this.seconds
-        return {name: 'timer', value: `${min}:${sec}`, status: this.status}
+        return {name: 'timer', value: `${min}:${sec}`, status: this.status, changed: changed, scenarios: this.scenarios}
     }
     send(io, userId) {
         io.to(userId).emit('timer', this.timeData)
@@ -166,7 +216,7 @@ class Tablo {
 }
 class Control {
 
-    constructor(userId, style) {
+    constructor(userId, style, io) {
         this.team1_name = 'Хозяева'
         this.team2_name = 'Гости'
         this.userId = userId
@@ -199,6 +249,13 @@ class Control {
             switch(key) {
                 case 'time':
                     this.timer.changeTimer(data[key])
+                    break
+                case 'max_time':
+                    this.timer.max_time = data[key]
+                    break
+                case 'scenarios':
+                    this.timer.changeScenarios(data[key])
+
                     break
                 case 'stage':
                     this.timer.changeStage(data[key])

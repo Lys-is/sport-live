@@ -115,8 +115,8 @@ class MatchController {
             console.log(matchId)
             let teams = await Team.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
             let tournaments = await Tournament.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
-            let judges = await Judge.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
-            let commentators = await Commentator.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
+            let judges =  match.tournament.judges
+            let commentators = match.tournament.commentators
             return sendRes('partials/lk_part/match_edit', {match, teams, tournaments, judges, commentators}, res);
         } catch (e) {
             console.log(e);

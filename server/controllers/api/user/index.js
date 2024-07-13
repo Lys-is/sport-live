@@ -1,5 +1,5 @@
 const User = require('../../../models/user-model');
-
+const mailService = require('../../../service/mail-service');
 class UserController {
 
     async put__edit(req, res) {
@@ -20,6 +20,7 @@ class UserController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
+    
    
 }
 async function sendRes(path, data, res) {

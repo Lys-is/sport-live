@@ -20,6 +20,9 @@ class RepresentativeController {
             data.creator = req.user.id;
             let player = await Player.findOne({_id: data.player});
             if(!player) return res.json({message: 'Такого игрока не существует'});
+            let team = await Team.findOne({_id: data.team});
+            let teamTo = await Team.findOne({_id: data.team_to});
+            if(!team || !teamTo) return res.json({message: 'Такой команды не существует'});
             player.team = data.team_to;
             await player.save();
             let transfer = await Transfer.create(data);

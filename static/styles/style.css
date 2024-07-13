@@ -56,3 +56,9 @@ img[src=""] {
 .nav_link {
     cursor: pointer;
 }
+.guide_href {
+    background: var(--nav-bc);
+    color: var(--body-bc) !important;
+    padding: 10px;
+    margin-left: 0 !important;
+}

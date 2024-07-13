@@ -20,9 +20,9 @@
                     <td>
                         <img src="<%=judge.img ? judge.img : '/static/styles/icons/logo.jpg'%>" alt="judge" height="80" width="80" class="ml img_t">
                     </td>
-                    <td><p class="nm"><%=judge.fio%></p></td>
+                    <td><p class="nm"><%=judge.fio %></p></td>
                     <td>            
-                        <input type="button" value="Добавить" data-type="judge" data-id="<%=judge._id%>" class="button green_button judge_add" >
+                        <input type="button" value="Добавить" data-type="judge" data-id="<%=judge._id %>" class="button green_button judge_add" >
                     </td>
                 </tr>
                 <%
@@ -57,7 +57,7 @@
                                         <td>
                                             <img src="<%=commentator.img ? commentator.img : '/static/styles/icons/logo.jpg'%>" alt="commentator" height="80" width="80" class="ml img_t">
                                         </td>
-                                        <td><p class="nm"><%=commentator.name%></p></td>
+                                        <td><p class="nm"><%= commentator.fio %></p></td>
                                         <td>            
                                             <input type="button" value="Добавить" data-type="commentator" data-id="<%=commentator._id%>" class="button green_button judge_add" >
                                         </td>

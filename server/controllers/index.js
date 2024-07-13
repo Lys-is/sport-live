@@ -1,6 +1,7 @@
 let Match = require('../models/match-model');
 let User = require('../models/user-model');
 let League = require('../models/league-model');
+const Global = require('../models/global-model');
 const UserD = require('../models/userD-model');
 let Style = require('../models/style-model');
 const Tournament = require('../models/tournament-model');
@@ -13,24 +14,53 @@ class Constrollers {
             auth: req.user || false
         });
     }
-
-    async lk(req, res, next) {
-        let league = await League.findOne({creator: req.user.id});
-        let profile = await UserD.findOne({creator: req.user.id});
-        res.render('lk', {
-            title: 'ЛК',
-            league: league || false,
-            auth: req.user || false,
-            isAdmin: req.user.isAdmin,
-            profile
-        });
-    }
-    async get__login(req, res, next) {
+    async get__reset_password(req, res, next) {
         res.render('auth', {
-            type: 'login',
-            title: 'Авторизация',
+            type: 'reset_password',
+            title: 'Восстановление пароля',
             auth: req.user || false
         });
+    }
+    async get__new_password(req, res) {
+        try {
+            res.render('auth', {
+                type: 'new_password',
+                title: 'Авторизация',
+                auth: req.user || false
+            });
+        } catch (e) {
+            return res.json({message: 'Произошла ошибка + ' + e.message});
+        }
+    }
+    async lk(req, res, next) {
+        try {
+
+            let league = await League.findOne({creator: req.user.id});
+            let profile = await UserD.findOne({creator: req.user.id});
+            let site_img = await Global.findOne({name: 'site_img'});
+            let site_name = await Global.findOne({name: 'site_name'});
+            res.render('lk', {
+                title: 'ЛК',
+                league: league || false,
+                auth: req.user || false,
+                isAdmin: req.user.isAdmin,
+                site_img: site_img ? site_img.data : '/static/styles/icons/logo.jpg',
+                site_name: site_name ? site_name.data : 'Sporlive',
+            });
+        } catch (e) {
+            return res.json({message: 'Произошла ошибка + ' + e.message});
+        }
+    }
+    async get__login(req, res, next) {
+        try {
+            res.render('auth', {
+                type: 'login',
+                title: 'Авторизация',
+                auth: req.user || false
+            });
+        } catch (e) {
+            return res.json({message: 'Произошла ошибка + ' + e.message});
+        }
     }
     async get__fans(req, res) {
         let league = req.fans_league

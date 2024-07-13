@@ -6,6 +6,7 @@ const mailService = require('./mail-service');
 const tokenService = require('./token-service');
 const UserDto = require('../dtos/user-dto');
 const ApiError = require('../exceptions/api-error');
+const emailToken= require('../models/emailToken-model');
 
 class UserService {
     async registration(data) {
@@ -38,6 +39,36 @@ class UserService {
             console.log(e);
             throw e
         }
+    }
+    async resetPassword(user) {
+        try{
+            const email = user.email
+            const token = uuid.v4()
+            let email_token = await emailToken.create({user, email, token})
+            const link = `http://localhost:5001/new_password/?token=${token}`;
+            await mailService.sendMail(email, link);
+        }
+        catch (e) {
+            console.log(e);
+            throw e
+        }
+    }
+    async verifyEmailToken(token) {
+        try {
+            console.log(token);
+            const tkn = await emailToken.findOne({token});
+            if (!tkn) {
+                throw ApiError.BadRequest('Неккоректная ссылка активации')
+            }
+            let user = await UserModel.findById(tkn.user);
+            return user
+        } catch (e) {
+            console.log(e);
+            return false
+        }
+    }
+    async deleteEmailToken(token) {
+        await emailToken.deleteOne({token})
     }
     async activate(activationLink) {
         const user = await UserModel.findOne({activationLink})

@@ -90,7 +90,7 @@
                                 <td>
                                     <span class="table_links table_links_compos nav_link"  data-href="judge/get__edit/?id=<%= match.judges[i]._id %>">Изменить</span>
                                 </td>
-                                <td>link</td>
+                                <td >link</td>
                             </tr>
                         <% } %>
               
@@ -119,15 +119,11 @@
                         <td></td>
 
                     </tr>
-                    <%= match.commentators.length %>
                     <% if(match.commentators.length > 0)
                         for (let i = 0; i < match.commentators.length; i++) { %>
                             <tr>
                                 <td><%= match.commentators[i].fio %></td>
                                 <td></td>
-                                <td>
-                                    <span class="table_links table_links_compos nav_link"  data-href="judge/get__edit/?id=<%= match.commentators[i]._id %>">Изменить</span>
-                                </td>
                                 <td>link</td>
                             </tr>
                         <% } %>

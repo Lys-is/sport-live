@@ -88,13 +88,44 @@ socket.on('new_notify', (data) => {
     // }, 4000)
 })
 let timerDivs = {
-    s: get('#top-timer'),
-    b: get('#info'),
-    c: get('.var-time')
+    t: getA('.q_time'),
+    r: getA('.q_round'),
+    n: getA('.q_name'),
+    tr: getA('.q_time_round'),
+    trn: getA('.q_time_round_name'),
+    // s: get('#top-timer'),
+    // b: get('#info'),
+    // c: get('.var-time')
+}
+let scenariosA = {
+    'begin': 'Начало матча',
+    '1': '1T',
+    'pause': 'Перерыв',
+    '2': '2T',
+    'end': 'Конец матча'
 }
 socket.on('timer', (data) => {
+    if(data.changed) {
+        socket.emit('get_data')
+    }
     Object.keys(timerDivs).forEach(key => {
-        if(timerDivs[key]) timerDivs[key].innerHTML = data.value
+        if(key == 't'){
+            timerDivs[key]?.forEach(el => el.innerHTML = data.value)
+        }
+        else if(key == 'r'){
+            timerDivs[key]?.forEach(el => el.innerHTML = ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : '')
+        }
+        else if(key == 'tr'){
+            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : '')
+        }
+        else if(key == 'n' && data.scenarios != '1' && data.scenarios != '2'){
+
+            timerDivs[key]?.forEach(el => el.innerHTML = scenariosA[data.scenarios])
+        }
+        else if(key == 'trn'){
+            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : scenariosA[data.scenarios])
+        }
+       // if(timerDivs[key]) timerDivs[key].innerHTML = data.value
     })
     // timerDivs.s.innerHTML = data.value
     // timerDivs.b.innerHTML = data.value

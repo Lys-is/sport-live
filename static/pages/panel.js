@@ -1,3 +1,4 @@
+
 let test = true
 let global_data = {}
 let html = {
@@ -66,25 +67,22 @@ match?.addEventListener('change', (e) => {
 })
 let couchDiv = get('#couches')
 let style = get('#panel-style');
-let replaceBtns = getA('.replace_btn');
-let showJudges = get('#show_judges'),
-showCommentators = get('#show_commentators');
 
-replaceBtns?.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        let type = e.target.getAttribute('data-type').split('__')
-        let player1 = get(`#${type[0]}-replace`),
-        player2 = get(`#${type[0]}-replace-by`)
-        let txt = `Замена ${player1.options[player1.selectedIndex].innerHTML}<br> на ${player2.options[player2.selectedIndex].innerHTML}`
-        let data = {
-            type: 'change',
-            size : type[1],
-            text: txt,
-            title: 'Замена игрока',
-        }
-        socket.emit('notify', data)
-    })
+let max_time = get('#max_time');
+max_time?.addEventListener('change', (e) => {
+    let data = {
+        max_time: e.target.value
+    }
+    socket.emit('new_data', data);
 })
+let scenarios = get('#scenarios');
+scenarios?.addEventListener('change', (e) => {
+    let data = {
+        scenarios: e.target.value
+    }
+    socket.emit('new_data', data);
+})
+
 style?.addEventListener('change', (e) => {
     let data = {
         style: e.target.value
@@ -100,6 +98,10 @@ socket.on('reconnect', () => {
     socket.emit('join_panel', tableId);
 });
 socket.on('timer', (data) => {
+    console.log(data)
+    if(data.changed) {
+        socket.emit('get_data')
+    }
     get('.time').innerHTML = data.value
     let block = play.closest('.block')
     console.log(block)
@@ -115,6 +117,8 @@ socket.on('timer', (data) => {
         play.classList.replace('pause-icon', 'play-icon')
         block.classList = 'block'
     }
+
+
     console.log(data.value)
 })
 let addPen = get('#add-pen'),
@@ -141,7 +145,15 @@ socket.on('update_data', (data) => {
     if(data.scoreboard) {
         setScoreboard(data.scoreboard)
     }
+    if(data.timer){
+        setTimer(data.timer)
+    }
 })
+
+function setTimer(timer) {
+    max_time.value = timer.max_time
+    scenarios.value = timer.scenarios
+}
 function setScoreboard(scoreboard) {
     get('#score_team1').value = scoreboard.team1
     get('#score_team2').value = scoreboard.team2
@@ -153,6 +165,7 @@ function setScoreboard(scoreboard) {
 function setPenalty(penalty) {
     let div = get('#penalty_div')
     div.innerHTML = ''
+    
     penalty.forEach((el, i) => {
         let tempHTML = ''
         tempHTML = `<div class="h-group bigger-gap" data-index="${i}">`

@@ -105,6 +105,8 @@ function startPanel(controls, socket) {
   socket.on('play_timer', () => {
     control.timer.playTimer(io, userId);
     io.to(userId).emit('timer', control.timer.timeData);
+   // io.to(userId).emit('update_data', control.getData);
+
 
   });
 
@@ -140,6 +142,9 @@ function startPanel(controls, socket) {
   socket.on('new_data', (data) => {
     control.setData(data);
 
+    io.to(userId).emit('update_data', control.getData);
+  });
+  socket.on('get_data', () => {
     io.to(userId).emit('update_data', control.getData);
   });
 }

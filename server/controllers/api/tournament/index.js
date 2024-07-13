@@ -58,7 +58,7 @@ class TournamentController {
             if(!team) return res.json({message: 'Такой команды не существует'});
             tournament.teams.push(req.body.teamId);
             await tournament.save();
-            return res.json({message: 'Обновлено'});
+            return res.json({message: 'Обновлено', reload: true});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -75,7 +75,7 @@ class TournamentController {
             if(!team) return res.json({message: 'Такой команды не существует'});
             tournament.teams = tournament.teams.filter(t => t._id != req.body.teamId);
             await tournament.save();
-            return res.json({message: 'Обновлено'});
+            return res.json({message: 'Обновлено', reload: true});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -92,14 +92,14 @@ class TournamentController {
                 if(!judge) return res.json({message: 'Такого судьи не существует'});
                 tournament.judges.push(req.body.teamId);
                 await tournament.save();
-                return res.json({message: 'Обновлено'});
+                return res.json({message: 'Обновлено', reload: true});
             }
             else if(req.body.type == 'commentator'){
                 let commentator = await Commentator.findOne({_id: req.body.teamId});
                 if(!commentator) return res.json({message: 'Такого комментатора не существует'});
                 tournament.commentators.push(req.body.teamId);
                 await tournament.save();
-                return res.json({message: 'Обновлено'});
+                return res.json({message: 'Обновлено', reload: true});
             }
         } catch (e) {
             console.log(e);
@@ -116,14 +116,14 @@ class TournamentController {
                 if(!judge) return res.json({message: 'Такого судьи не существует'});
                 tournament.judges = tournament.judges.filter(t => t._id != req.body.teamId);
                 await tournament.save();
-                return res.json({message: 'Обновлено'});
+                return res.json({message: 'Обновлено', reload: true});
             }
             else if(req.body.type == 'commentator'){
                 let commentator = await Commentator.findOne({_id: req.body.teamId});
                 if(!commentator) return res.json({message: 'Такого комментатора не существует'});
                 tournament.commentators = tournament.commentators.filter(t => t._id != req.body.teamId);
                 await tournament.save();
-                return res.json({message: 'Обновлено'});
+                return res.json({message: 'Обновлено', reload: true});
             }
             else return res.json({message: 'Такого типа команды не существует'});
         } catch (e) {
