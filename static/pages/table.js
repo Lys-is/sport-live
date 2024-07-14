@@ -95,7 +95,8 @@ socket.on('timer', (data) => {
     if(data.timer?.changed) {
         socket.emit('get_data')
     }
-    
+
+    setTime(data)
     
     // timerDivs.s.innerHTML = data.value
     // timerDivs.b.innerHTML = data.value
@@ -167,9 +168,11 @@ function setRoster(players, i) {
     
 }
 function setTime(data) {
+
     let min = data.minuts < 10 ? `0${data.minuts}` : data.minuts
     let sec = data.seconds < 10 ? `0${data.seconds}` : data.seconds
-    data.value = `${min}:${sec}`
+    if(!data.value)
+        data.value = `${min}:${sec}`
     Object.keys(timerDivs).forEach(key => {
         if(key == 't'){
             timerDivs[key]?.forEach(el => el.innerHTML = data.value)
@@ -183,28 +186,37 @@ function setTime(data) {
         else if(key == 'nr'){
             timerDivs[key]?.forEach(el => el.innerHTML = scenariosA[data.scenarios])
         }
-        else if(key == 'n' && data.scenarios != '1' && data.scenarios != '2'){
-
-            timerDivs[key]?.forEach(el => el.innerHTML = scenariosA[data.scenarios])
+        else if(key == 'n'){
+            if( data.scenarios != '1' && data.scenarios != '2')
+                timerDivs[key]?.forEach(el => el.innerHTML = scenariosA[data.scenarios])
+            else
+                timerDivs[key]?.forEach(el => el.innerHTML = '')
         }
         else if(key == 'trn'){
             timerDivs[key]?.forEach(el => el.innerHTML = data.value +  ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : scenariosA[data.scenarios])
         }
        // if(timerDivs[key]) timerDivs[key].innerHTML = data.value
     })
+    let ord = get('.var-ordinal')
+    if(ord) ord.style.display = 'none'
+
 }
 function switchDiv(type) {
     scrollTo(0, 0)
+    let mb = get('#match-info > .q_time_name_round')
+    if(mb) mb.style.display = 'block'
     console.log(type)
     base_divs.forEach(div => {
         div.style.display = 'none'
     })
     if(type == 'pen') {
         getA(`.${n_div}`).forEach(div => div.style.display = 'block')
+        if(mb) mb.style.display = 'none'
     }
     else {
         n_div = type
     }
+    
     console.log(n_div)
     getA(`.${type}`).forEach(div => div.style.display = 'block')
     
@@ -231,13 +243,17 @@ function setPenalty(penalty) {
 
     let team1 = getA('.penalties-home')
     let team2 = getA('.penalties-away')
-
+    let scorePen1 = getA('.var-penalties-home')
+    let scorePen2 = getA('.var-penalties-away')
     team1.forEach(div => div.innerHTML = '')
     team2.forEach(div => div.innerHTML = '')
     penalty.forEach((el, i) => {
         team1.forEach(div => { div.innerHTML += penaltyHTML.replace('{{penalty.type}}', el.team1 ? el.team1 : 'clear')})
         team2.forEach(div => { div.innerHTML += penaltyHTML.replace('{{penalty.type}}', el.team2 ? el.team2 : 'clear')})
     })
+    scorePen1.forEach(div => div.innerHTML = penalty.filter(el => el.team1 == 'goal').length || 0)
+    scorePen2.forEach(div => div.innerHTML = penalty.filter(el => el.team2 == 'goal').length || 0)
+
     let penDif = 5-penalty.length 
     if(penDif > 0) {
         for(let i = 0; i < penDif; i++) {

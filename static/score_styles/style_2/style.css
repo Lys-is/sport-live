@@ -41,6 +41,7 @@
     font-weight: 600;
     font-size: 16px;
     text-transform: uppercase;
+    padding-top: 3px;
     color: #FFFFFF;
     margin-top: 0px;
     width: 330px;
@@ -1127,4 +1128,27 @@ body:after {
     margin-bottom: 0;
     margin-top: 0;
 
+}
+
+.top-anim-1 {
+    animation-name: shutter-in-top;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+@keyframes shutter-in-top {
+        
+    0% {
+        transform:rotateX(-100deg);
+        transform-origin:top;
+        opacity:0;
+    }
+    100% {
+        transform:rotateX(0deg);
+        transform-origin:top;
+        opacity:1;
+    }
 }

@@ -870,6 +870,7 @@ body {
     margin: 0 5px;
     transition-property: background-color;
     transition-duration: 700ms;
+    margin-top: 8px;
 }
 
 
@@ -1714,7 +1715,7 @@ video_container{
     
 background: #b6b0a9;
     
-padding: 5px;
+/* padding: 5px; */
     
 height: 100%;
 }
@@ -1812,4 +1813,28 @@ background: none;
     margin-bottom: 0;
     margin-top: 0;
 
+}
+
+
+.top-anim-1 {
+    animation-name: shutter-in-top;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+@keyframes shutter-in-top {
+        
+    0% {
+        transform:rotateX(-100deg);
+        transform-origin:top;
+        opacity:0;
+    }
+    100% {
+        transform:rotateX(0deg);
+        transform-origin:top;
+        opacity:1;
+    }
 }
