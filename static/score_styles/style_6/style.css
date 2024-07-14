@@ -25,7 +25,7 @@ body {
     margin: 0;
     display: flex;
     justify-content: center;
-    zoom: 1.33;
+
 }
 
 /*.big,
@@ -861,7 +861,7 @@ body {
 #matchid-container {
     text-align: center;
     position: fixed;
-    /* bottom: 245px; */
+    bottom: 245px;
     margin: auto;
     width: 100%;
     min-width: 100%;    
@@ -1875,4 +1875,89 @@ video_container{
             margin-bottom: 0;
             margin-top: 0;
         
+        }
+
+        #matchid-container {
+            text-align: center;
+            position: fixed;
+
+            margin: auto;
+            width: 70%;
+            min-width: 100%;    
+        }
+        
+        #matchid-home-logo,
+        #matchid-away-logo {
+            height: 200px;
+            padding-top: 10px;
+            image-rendering: -webkit-optimize-contrast;
+        }
+        
+        .tournament-name {
+            font-family: 'Exo 2', sans-serif;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 40px;
+            padding: 10px;
+            margin-top: -5px;
+        }
+        
+        .top-margin {
+            position: relative;
+            top: 75px;
+            width: 1016px;
+            margin: auto;
+        }
+        
+        .logo-bg {
+            background: #642063;
+            width: 220px;
+            height: 220px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #main-table {
+            width: 1016px;
+            height: 650px;
+            margin: auto;
+            backdrop-filter: blur(30px)brightness(0.8);
+            border: 4px solid #60006a;
+        }
+        
+        #mid-col,
+        #matchid-home-teamname,
+        #matchid-away-teamname {
+            width: 338px;
+            height: 55px;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 800;
+            font-size: 30px;
+            padding: 10px;
+        
+        }
+        
+        #matchid-date-venue {
+            width: 300px;
+            height: 100px;
+            background-color: #29132b;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 800;
+            font-size: 30px;
+            color: rgba(255, 255, 255, 1.00);
+        }
+        
+        #matchid-time {
+            background-color: #29132b;
+            text-align: center;
+            border: 10px solid #642063;
+            padding: 10px;
+        }
+        
+        #matchid-venue {
+            text-align: center;
+            padding: 10px;
+            display: none;
         }
