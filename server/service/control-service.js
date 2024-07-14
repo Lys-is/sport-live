@@ -95,6 +95,11 @@ class Timer {
         sec = +sec
         this.seconds += sec
     }
+    setTime(data) {
+        let [min, sec] = data.split(':')
+        this.minuts = +min
+        this.seconds = +sec
+    }
     reverse(type) {
         this.is_reverse = type
     }

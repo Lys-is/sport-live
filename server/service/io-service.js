@@ -132,6 +132,10 @@ function startPanel(controls, socket) {
     delete controls[userId]
     io.to(userId).emit('reload');
   })
+  socket.on('set_timer', async (data) => {
+    await control.timer.setTime(data);
+    io.to(userId).emit('update_data', control.getData);
+  });
   socket.on('style', async (data) => {
     control.style = data.style;
     socket.user.tablo_style = data.style;

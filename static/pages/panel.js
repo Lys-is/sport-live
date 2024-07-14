@@ -105,10 +105,31 @@ socket.on('timer', (data) => {
         socket.emit('get_data')
     }
 
-    get('.time').innerHTML = data.value
+    get('.time').value = data.value
+    get('.time').setAttribute('data-status', data.status)
     setTimer(data)
 
     console.log(data.value)
+})
+let timInp = get('.time')
+timInp?.addEventListener('focus', (e) => {
+    if(timInp.getAttribute('data-status') == 'play') {
+        socket.emit('play_timer');
+    }
+    socket.emit('get_data')
+})
+timInp?.addEventListener('change', (e) => {
+    let el = e.target;
+    let input = el.value;
+    input = input.replace(/[^0-9:]/g, '');
+    let parts = input.split(':');
+    parts = parts.map(part => part && (part.length > 2 || isNaN(part) || parseInt(part, 10) < 0 || parseInt(part, 10) > 60) ? '00' : part);
+    if (!parts[0]) parts[0] = '00';
+    if (!parts[1]) parts[1] = '00';
+
+    el.value =  parts[0].padStart(2, '0') + ':' + parts[1].padStart(2, '0');
+
+    socket.emit('set_timer', el.value);
 })
 let addPen = get('#add-pen'),
     resetPen = get('#reset-pen')
@@ -146,6 +167,7 @@ socket.on('update_data', (data) => {
     if(data.timer){
         setTimer(data.timer)
     }
+    timInp.setAttribute('data-status', data.timer.status)
     is_foul.checked = data.is_fouls
     foul_inpts.forEach(inp => inp.disabled = !data.is_fouls)
 })
