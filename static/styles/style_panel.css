@@ -134,6 +134,7 @@ input[type="color"] {
     flex-wrap: nowrap;
     width: 100%;
     margin-bottom: 3px;
+    align-items: center;
 }
 
 .text-form {
@@ -144,8 +145,20 @@ input[type="color"] {
     -webkit-appearance: none;
     background-color: #363636;
     backdrop-filter: brightness(1.3);
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+}
+input.text-form::-webkit-outer-spin-button,
+input.text-form::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
+input.text-form[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+    text-align: center;
+}
 .fixed-half {
     width: 150px;
 }
@@ -216,8 +229,9 @@ input[type="button"]:hover {
 }
 
 .square40 {
-    height: 35px !important;
-    width: 35px;
+    height: 40px !important;
+    width: 47px;
+    margin-block: 4px;
 }
 
 .square30{

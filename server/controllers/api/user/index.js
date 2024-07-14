@@ -34,7 +34,7 @@ class UserController {
             if(!user) return res.json({message: 'Такого пользователя не существует'});
             var models = mongoose.modelNames()
             console.log(models);
-            Promise.all(models.map(async(model) => {
+            await Promise.all(models.map(async(model) => {
                 await mongoose.model(model).deleteMany({creator: userId});
             }))
             user = await User.deleteOne({_id: userId});

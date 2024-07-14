@@ -235,6 +235,7 @@ class Control {
         this.style = style
     }
     async setMatch(matchId) {
+        if(!matchId) return
         console.log(matchId)
         let match = await Match.findOne({_id: matchId})
         let players_1 = await Player.find({team: match.team_1._id}),
@@ -263,7 +264,6 @@ class Control {
                     break
                 case 'scenarios':
                     this.timer.changeScenarios(data[key])
-
                     break
                 case 'stage':
                     this.timer.changeStage(data[key])
@@ -274,16 +274,16 @@ class Control {
                 case 'score':
                     this.scoreboard.changeScore(data[key])
                     break
-                case 'team1':
+                case 'team1_name':
                     this.team1_name = data[key]
+                    console.log(this)
                     break
-                case 'team2':
+                case 'team2_name':
                     this.team2_name = data[key]
                     break
                 
             }
         }
-        return this
     }
 
     get getData() {

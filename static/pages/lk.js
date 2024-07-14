@@ -233,6 +233,8 @@ function init__user() {
     delBtns.forEach(el => {
         el.addEventListener('click', (e) => {
             e.preventDefault()
+            let answer = confirm('Удалить пользователя и все его данные?')
+            if(!answer) return
             let data = {
                 userId: e.target.getAttribute('data-id'),
                 type: e.target.getAttribute('data-type')

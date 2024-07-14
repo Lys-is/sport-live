@@ -368,8 +368,8 @@ function setMatch(data, team) {
     getA('.data_team_'+team).forEach(el => {
         console.log(el)
         if(el.localName == 'input'){
-            el.value = data.match['team_'+team].name
-            el.setAttribute('readonly', true)
+            el.value = data['team'+team+'_name']
+            //el.setAttribute('readonly', true)
         }
         else if(el.getAttribute('data-type') == 'replace')
             el.innerHTML = 'Замена ' + data.match['team_'+team].name

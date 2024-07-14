@@ -4,7 +4,7 @@
     <div class="content-body body-background">
         <div class="grid-player">
             <% tournament.teams.forEach(team => { %>
-            <div class="player-block">
+            <div class="player-block fans_link" data-href="team/id/<%= team._id %>">
                 <img src="<%= team.img || '/static/styles/icons/logo.jpg'%>" class="" width="200" height="200">
                 <p><%= team.name %></p>
             </div>

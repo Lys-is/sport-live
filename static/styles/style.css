@@ -57,8 +57,20 @@ img[src=""] {
     cursor: pointer;
 }
 .guide_href {
-    background: var(--nav-bc);
-    color: var(--body-bc) !important;
-    padding: 10px;
-    margin-left: 0 !important;
+    
+background: var(--nav-bc);
+    
+color: var(--body-bc) !important;
+    
+padding: 10px;
+    
+margin-left: 0 !important;
+}
+.delete_user {
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    padding: 1px;
+    border-radius: 2px;
+    padding-inline: 10px;
 }

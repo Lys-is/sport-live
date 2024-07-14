@@ -13,10 +13,10 @@
         <div class="h_flex white mt pi">
             <p class="p-title">Календарь матчей</p>
             <div class="filler"></div>
-            <select class="big-select">
+            <!-- <select class="big-select">
                 <option>Все время</option>
                 <option>2024</option>
-            </select>
+            </select> -->
         </div>
         <% let setByTour = new Set(matches.map(m => m.tournament ? m.tournament.basic.full_name : 'Без турнира')); 
         setByTour.forEach(tour => {
