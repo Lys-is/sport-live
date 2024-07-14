@@ -52,6 +52,8 @@ socket.on('new_notify', (data) => {
         notifyBlock.innerHTML += newNotify
         setNotify(id, (i+1)*10)
         clearNotify(id, (i+1)*100)
+
+        
     }
     function setNotify(id, time) {
         setTimeout(() => {
@@ -71,6 +73,7 @@ socket.on('new_notify', (data) => {
     }
 
 })
+
 let timerDivs = {
     t: getA('.q_time'),
     r: getA('.q_round'),
@@ -121,6 +124,13 @@ let first_style_tag = (function() {
     };
 })();
 function setData(data) {
+    let foll_divs = getA('.fouls-container')
+    console.log(data.is_fouls)
+    foll_divs.forEach(el => {
+        el.style.display = data.is_fouls ? '' : 'none'
+    })
+    
+
     first_style_tag()
     console.log(data)
     setNames(data)
@@ -230,6 +240,8 @@ function setScoreboard(scoreboard) {
     getA('.var-awayColor').forEach(el => {el.style.background = scoreboard.team2_color; el.style.color = scoreboard.team2_font_color})
     getA('.var-homeTextColor').forEach(el => el.style.color = scoreboard.team1_font_color)
     getA('.var-awayTextColor').forEach(el => el.style.color = scoreboard.team2_font_color)
+    getA('.var-home-fouls').forEach(el => el.innerHTML = scoreboard.team1_foll)
+    getA('.var-away-fouls').forEach(el => el.innerHTML = scoreboard.team2_foll)
     getA('.bgleft').forEach(el => el.style.borderBottomColor = scoreboard.team1_color)
     getA('.bgright').forEach(el => el.style.borderBottomColor = scoreboard.team2_color)
     if(scoreboard.penalty && scoreboard.penalty.length > 0) {
