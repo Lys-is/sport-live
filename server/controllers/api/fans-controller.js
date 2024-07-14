@@ -117,7 +117,7 @@ class FansController {
             if(!tournament || !tournament.creator.equals(req.fans_league.creator)) {
                 return res.json({message: 'Турнир не найден'});
             }
-            let docs = await Doc.find({creator: req.user.id, tournament: req.params.id});
+            let docs = await Doc.find({creator: req.fans_league.creator, tournament: req.params.id});
             return sendRes('fans/fans_tour/docs', {docs, tournament, compareDates}, res);
         
         }
@@ -186,7 +186,6 @@ class FansController {
     }
     async get__players(req, res) {
         try {
-            console.log(req.fans_league)
             let tournaments = await Tournament.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}})
             console.log(tournaments)
             let matches = await Match.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}}).select('results_1 results_2 date time');
@@ -212,6 +211,7 @@ class FansController {
                     })
                 }
             })
+            console.log(req.fans_league, 'fans_league')
 
             console.log(players)
             return sendRes('fans/fans_members/players', {players, playersResult, previusMatches, getTeamData}, res);
@@ -243,7 +243,7 @@ class FansController {
     }
     async get__judges(req, res) {
         try {
-            let judges = await Judge.find({creator: req.user.id})
+            let judges = await Judge.find({creator: req.fans_league.creator})
             return sendRes('fans/fans_members/judges', {judges}, res);
         }
         catch (e) {
@@ -263,7 +263,7 @@ class FansController {
     }
     async get__commentators(req, res) {
         try {
-            let commentators = await Commentator.find({creator: req.user.id})
+            let commentators = await Commentator.find({creator: req.fans_league.creator})
             return sendRes('fans/fans_members/commentators', {commentators}, res);
         }
         catch (e) {
