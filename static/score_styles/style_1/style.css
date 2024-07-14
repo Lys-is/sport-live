@@ -1724,13 +1724,13 @@ video_container{
         
     0% {
         transform:rotateX(-100deg);
-        transform-origin:top;
+        transform-origin:bottom;
         opacity:0;
         visibility: hidden;
     }
     100% {
         transform:rotateX(0deg);
-        transform-origin:top;
+        transform-origin:bottom;
         opacity:1;
         visibility: visible;
     }
@@ -1814,6 +1814,7 @@ video_container{
 		}
 	}
 
+    
 
 .top-anim-logo-a {
         animation-name: scale-in-hor-left;
