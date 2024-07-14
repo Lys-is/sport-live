@@ -230,6 +230,7 @@ const nav = {
         'user' : {
             'func' : 'get__user',
             'put__edit' : {},
+            'delete__user' : {},
         },
         'style' : {
             'func' : 'get__style',

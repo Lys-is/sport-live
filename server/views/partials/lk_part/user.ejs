@@ -32,6 +32,7 @@
                 <% } else { %>
                     <span class="table_links table_links_compos" data-type="unblock" data-id="<%= users[i]._id %>">Разблокировать</span>
                 <% } %>
+                <span  class="delete_user" data-id="<%= users[i]._id %>" data-model="User">Удалить</span>
             </td>
             <td><%= users[i].dateActive %></td>
         </tr>

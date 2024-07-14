@@ -351,7 +351,7 @@ class LkController {
             //let total = await User.countDocuments({});
             users = await Promise.all(users.map(async(item) => {
                 let userD = await UserD.findOne({creator: item._id});
-                return {...item._doc, ...userD?._doc}
+                return {...item._doc, surname: userD?.surname, name: userD?.name, patronymic: userD?.patronymic}
             }))
             console.log(users, total);  
             return sendRes('partials/lk_part/user', {users, total}, res);

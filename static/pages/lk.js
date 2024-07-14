@@ -229,6 +229,17 @@ function init__user() {
             sendFetch('/api/lk/user/put__edit', JSON.stringify(data), 'PUT')
         })
     })
+    let delBtns = getA('.delete_user')
+    delBtns.forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.preventDefault()
+            let data = {
+                userId: e.target.getAttribute('data-id'),
+                type: e.target.getAttribute('data-type')
+            }
+            sendFetch('/api/lk/user/delete__user', JSON.stringify(data), 'DELETE')
+        })
+    })
 }
 function init__tournament() {
 }
