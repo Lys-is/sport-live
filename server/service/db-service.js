@@ -61,7 +61,7 @@ function getFilters(req, schema) {
         if(!filter.status_doc && schema.schema?.paths.status_doc) {
             filter.status_doc = 'active'
         }
-        //console.log(req)
+        ////console.log(req)
         // let page_n
         // if(req.page_n)
         //     page_n = req.page

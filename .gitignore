@@ -2,6 +2,6 @@
 /server/node_modules
 .idea
 .VSCodeCounter
-.env
 /panel-verst
 /kkl
+.env

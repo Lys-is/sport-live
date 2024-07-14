@@ -31,7 +31,7 @@ class IoService {
               var cookies = parseCookies();
               const userToken = await tokenService.validateRefreshToken(cookies['refreshToken'])
               let user
-              console.log(socket.request)
+              //console.log(socket.request)
               if(userToken)
                 user = await User.findOne({_id: userToken.id})
 

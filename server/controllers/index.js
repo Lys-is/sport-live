@@ -105,6 +105,7 @@ class Constrollers {
     async get__panel(req, res) {
         let matches = await Match.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
         let userAd = await User.findById(req.params.id);
+        if(!userAd) return res.send('Панель управления. Пользователь не найден');
         let styles = await Style.find({creator: userAd._id});
 
         res.render('panel', {
@@ -118,6 +119,7 @@ class Constrollers {
     async get__panel_players(req, res) {
         let matches = await Match.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
         let userAd = await User.findById(req.params.id);
+        if(!userAd) return res.send('Панель управления. Пользователь не найден');
         let styles = await Style.find({creator: userAd._id});
 
         res.render('panel_players', {
@@ -133,7 +135,7 @@ class Constrollers {
     }
     async get__table(req, res) {
         try{
-            console.log(req);
+            //console.log(req);
             if(!req.params.id || req.params.id == 'undefined') return
             let userAd = await User.findById(req.params.id);
             let styles = await Style.find({creator: userAd._id});
