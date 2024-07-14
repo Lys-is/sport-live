@@ -56,7 +56,7 @@ class LkController {
         try {
             req.query['creator'] = req.user.id
 
-            console.log(req);
+            //console.log(req);
             let [judges, total] = await dbService.getAggregate(Judge, req);
             //let total = await Judge.countDocuments({creator: req.user.id});
             return sendRes('partials/lk_part/judge', {judges, total}, res);
@@ -69,7 +69,7 @@ class LkController {
         try {
             req.query['creator'] = req.user.id
 
-            console.log(req);
+            //console.log(req);
             let [commentators, total] = await dbService.getAggregate(Commentator, req);
             //let total = await Commentator.countDocuments({creator: req.user.id});
             return sendRes('partials/lk_part/commentator', {commentators, total}, res);
@@ -106,7 +106,7 @@ class LkController {
     }
     async get__season(req, res) {
         try {
-            console.log(req);
+            //console.log(req);
             let seasons = await Season.find({})
             return sendRes('partials/lk_part/season', {seasons}, res);
         } catch (e) {
@@ -116,7 +116,7 @@ class LkController {
     }
     async get__stadium(req, res) {
         try {
-            console.log(req);
+            //console.log(req);
             console.log(await Stadium.find());
             let stadiums = await Stadium.find({})
 
@@ -130,7 +130,7 @@ class LkController {
         try {
             req.query['creator'] = req.user.id
 
-            console.log(req);
+            //console.log(req);
             console.log(await Transfer.find());
             let [transfers, total] = await dbService.getAggregate(Transfer, req);
             //let total = await Transfer.countDocuments({creator: req.user.id});
@@ -165,7 +165,7 @@ class LkController {
         try {
             req.query['creator'] = req.user.id
 
-            console.log(req);
+            //console.log(req);
             console.log(await Player.find());
             let teams = await Team.find({creator: req.user.id, status_doc: {$ne: 'deleted'}}).select('name _id');
             let [players, total] = await dbService.getAggregate(Player, req);
@@ -198,7 +198,7 @@ class LkController {
     async get__tournament(req, res) {
         try {
             req.query['creator'] = req.user.id
-            console.log(req);
+            //console.log(req);
             let allTournaments = await Tournament.find({creator: req.user.id, status_doc: {$ne: 'deleted'}}).select('basic.full_name _id');
             let [tournaments, total] = await dbService.getAggregate(Tournament, req);
             //let total = await Tournament.countDocuments({creator: req.user.id});

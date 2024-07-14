@@ -13,7 +13,7 @@ class FansController {
     async get__tournament(req, res) {
         try {
             const {id} = req.params;
-            console.log(req)
+            //console.log(req)
             const tournament = await Tournament.findById(id);
             if(!tournament || !tournament.creator.equals(req.fans_league.creator)) {
                 return res.json({message: 'Турнир не найден'});
@@ -35,7 +35,7 @@ class FansController {
     async get__calendar(req, res) {
         try {
             const {id} = req.params;
-            console.log(req)
+            //console.log(req)
             const tournament = await Tournament.findById(id);
             if(!tournament || !tournament.creator.equals(req.fans_league.creator)) {
                 return res.json({message: 'Турнир не найден'});
@@ -54,7 +54,7 @@ class FansController {
     async get__tables(req, res) {
         try {
             const {id} = req.params;
-            console.log(req)
+            //console.log(req)
             const tournament = await Tournament.findById(id);
             if(!tournament || !tournament.creator.equals(req.fans_league.creator)) {
                 return res.json({message: 'Турнир не найден'});
@@ -189,14 +189,17 @@ class FansController {
             let tournaments = await Tournament.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}})
             console.log(tournaments)
             let matches = await Match.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}}).select('results_1 results_2 date time');
+            
             // await Promise.all(tournaments.map(async tournament => {
             //     matches.concat(await Match.find({tournament: tournament.id, status_doc: {$ne: 'deleted'}}).select('results_1 results_2 date time'));
             // }))
-            
+
             let previusMatches = await getPreviousMatches(matches);
             let playersResult ={}
+            console.time('time')
 
             let players = await Player.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}}).populate('team creator');
+
             previusMatches.map(match => {
                 if(match.results_1) {
                     match.results_1.map(result => {
@@ -211,9 +214,12 @@ class FansController {
                     })
                 }
             })
+
             console.log(req.fans_league, 'fans_league')
 
             console.log(players)
+            console.timeEnd('time')
+
             return sendRes('fans/fans_members/players', {players, playersResult, previusMatches, getTeamData}, res);
         
         }

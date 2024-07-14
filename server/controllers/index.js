@@ -133,7 +133,7 @@ class Constrollers {
     }
     async get__table(req, res) {
         try{
-            console.log(req);
+            //console.log(req);
             if(!req.params.id || req.params.id == 'undefined') return
             let userAd = await User.findById(req.params.id);
             let styles = await Style.find({creator: userAd._id});

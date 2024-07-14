@@ -95,7 +95,7 @@ class UserController {
     }
     async post__new_password(req, res) {
         try {
-            console.log(req);
+            //console.log(req);
             let data = req.body;
             const token = data.token;
             if(!token) return res.json({message: 'Ссылка сброса пароля истекла'});
