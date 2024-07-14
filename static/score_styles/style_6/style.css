@@ -1785,3 +1785,94 @@ video_container{
 
         background: none;
         }
+
+        .sostav-txt, .sostav-txt-sec {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+         
+            color: #ffffff;
+            font-size: 34px;
+            font-weight: 800;
+            font-family: 'Exo 2', sans-serif;
+            position: relative;
+            text-transform: uppercase;
+            margin-right: 10px;
+        }
+        
+        .sostav-txt-sec {
+            margin-left: 10px;
+        }
+        
+        .roster-container {
+            text-align: center;
+            position: fixed;
+            bottom: 245px;
+            margin: auto;
+            min-width: 100%;
+        }
+        
+        .sostav img {
+            width: 150px;
+            height: 150px;
+        }
+        
+        .roster-main-div {
+            width: 1016px;
+        
+            margin: auto;
+            backdrop-filter: blur(30px)brightness(0.5);
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        
+            border: 4px solid #6d237f;
+            z-index: 10000;
+            padding-bottom: 20px;
+        }
+        
+        .filler {
+            flex: 1;
+        }
+        
+        .sostav {
+            display: flex;
+            flex-direction: row;
+            margin-top: 30px;
+            width: calc(90% - 40px);
+            margin-inline: calc(5% + 20px);
+            overflow: hidden;
+        }
+        
+        .roster-content {
+            display: grid;
+            width: 90%;
+        
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: flex-start;   
+            margin-top: 20px;
+            margin-inline: 5%;
+            column-gap: 50px;
+            row-gap: 20px;
+        }
+        
+        .roster-teamate {
+            display: flex;
+            padding: 10px;
+            padding-inline: 20px;
+            justify-content: space-between;
+        }
+        
+        .roster-teamate-name {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 0;
+            margin-top: 0;
+        
+        }
