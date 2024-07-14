@@ -1081,7 +1081,8 @@ body:after {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    border: 4px solid #2aa45b;
+
+    border: 4px solid #005a03;
     z-index: 10000;
     padding-bottom: 20px;
 }
@@ -1151,4 +1152,343 @@ body:after {
         transform-origin:top;
         opacity:1;
     }
+}
+
+#middle {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	align-content: space-between;
+	margin-top: 120px;
+	width: 100%;
+	height: 700px;
+    font-family: 'Exo 2', sans-serif;
+	position: absolute;
+}
+
+#matchid {
+	display: flex; 
+	flex-direction: column;
+	justify-content: space-around;
+	width: 1024px;
+	height: 683px;
+    backdrop-filter: blur(30px)brightness(0.5);
+	background-size: cover;
+	border-radius: 7px;
+	transform: translateY(-150%);
+  	animation: ani 1s forwards;	
+    border: 4px solid #6d237f;
+}
+
+@keyframes ani {
+  0% {transform: translateY(-150%);}
+  100% {transform: translateY(0);}
+}
+
+.tournament-name {
+	text-transform: uppercase;
+	max-width: 70%;
+    text-align: right;    
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;	
+}
+
+.bg {
+    /* background: #6d237fab;
+    padding: 10px;
+    border-radius: 10px; */
+}
+
+.date-time-tournament {
+	color: #f9b732;
+	font-size: 28px;
+	font-weight: 700;
+	text-align: center;	
+	text-transform: uppercase;
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	align-items: baseline;
+	justify-content: space-between;
+	margin: 40px 100px 0px 100px;
+}
+
+#slash {
+	margin: 0 10px;
+}
+
+.field-tour {
+	color: #f9b732;
+	font-size: 18px;
+	font-weight: 700;
+	text-align: center;	
+	text-transform: uppercase;
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	align-items: center;
+	justify-content: space-between;
+	margin: -50px 100px 0px 100px;
+	
+}
+
+#pointer {
+	background: url("img/pointer-3.svg");
+	width: 22px;
+	height: 29px;
+	margin-right: 10px;
+	
+}
+
+#field {
+	
+}
+
+#tournament {
+	margin-right: 10px;
+}
+
+.teams {
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	align-items: center;
+	justify-content: space-around;
+	margin-top: -50px;
+}
+
+.big-team {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+	margin: 50px 100px;
+	max-width: 220px;
+}
+
+.big-logo {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+  	overflow: hidden;
+	background: #FFFFFF;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.big-logo img {
+	max-width: 175px;
+	margin-top: 0px;
+}
+
+.big-name {
+	color: #f9b732;
+	text-transform: uppercase;
+	font-size: 28px;
+	font-weight: 600;
+	margin-top: 20px;
+	text-align: center;
+    
+}
+
+.divider-x {
+	background: url("img/x-yellow2.svg");
+	width: 150px;
+	height: 150px;
+	background-size: cover;
+	background-position-y: 0px;
+	margin-top: -70px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* MATCH ID CSS */
+
+#matchid-container {
+    text-align: center;
+    position: fixed;
+    /* bottom: 245px; */
+    margin: auto;
+    width: 100%;
+    min-width: 100%;    
+}
+/*
+.tournament-name {
+    text-transform: uppercase;
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+#matchid-home-logo,
+#matchid-away-logo {
+    height: 200px;
+    padding-top: 100px;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.logo-bg {
+    background: #ffffff;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-table {
+    width: 1016px;
+    height: 650px;
+    margin: auto;
+    background: url("img/midbg-4.png") no-repeat;
+}
+
+#mid-col,
+#matchid-home-teamname,
+#matchid-away-teamname {
+    width: 338px;
+    height: 55px;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    padding: 10px;
+    color: rgba(255, 255, 255, 1.00);
+}
+
+#matchid-date-venue {
+    width: 640px;
+    height: 100px;
+    background-color: #340055;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    color: rgba(255, 255, 255, 1.00);
+}
+
+#matchid-time {
+    background-color: #540089;
+    text-align: center;
+    border: 10px solid #340055;
+    padding: 10px;
+}
+
+#matchid-venue {
+    text-align: center;
+    padding: 10px;
+}
+*/
+
+#matchid-container {
+    text-align: center;
+    position: fixed;
+    bottom: 245px;
+    margin: auto;
+    width: 100%;
+    min-width: 100%;    
+}
+
+#matchid-home-logo,
+#matchid-away-logo {
+    height: 200px;
+    padding-top: 10px;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.tournament-name {
+    font-family: 'Exo 2', sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 40px;
+    padding: 10px;
+    margin-top: -5px;
+}
+
+.top-margin {
+    position: relative;
+    top: 75px;
+    width: 1016px;
+    margin: auto;
+}
+
+.logo-bg {
+    background: #085229;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-table {
+    width: 1016px;
+    height: 650px;
+    margin: auto;
+    backdrop-filter: blur(30px)brightness(0.8);
+    border: 4px solid #12361d;
+}
+
+#mid-col,
+#matchid-home-teamname,
+#matchid-away-teamname {
+    width: 338px;
+    height: 55px;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    padding: 10px;
+
+}
+
+#matchid-date-venue {
+    width: 300px;
+    height: 100px;
+    background-color: #085229;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    color: rgba(255, 255, 255, 1.00);
+}
+
+#matchid-time {
+    background-color: #12361d;
+    text-align: center;
+    border: 10px solid #085229;
+    padding: 10px;
+}
+
+#matchid-venue {
+    text-align: center;
+    padding: 10px;
+    display: none;
 }
