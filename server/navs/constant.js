@@ -178,7 +178,8 @@ const nav = {
             'put__edit' : {},
             'put__results':{},
             'put__judge':{},
-            'put__commentator':{}
+            'put__commentator':{},
+            'delete__results':{}
         },
         'couch' : {
             'func' : 'get__couch',

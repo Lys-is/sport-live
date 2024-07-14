@@ -124,7 +124,14 @@ function startPanel(controls, socket) {
     await control.setMatch(data);
     io.to(userId).emit('update_data', control.getData);
   });
-
+  socket.on('reset_score', async (data) => {
+    await control.resetScore();
+    io.to(userId).emit('update_data', control.getData);
+  })
+  socket.on('reset_all', async (data) => {
+    delete controls[userId]
+    io.to(userId).emit('reload');
+  })
   socket.on('style', async (data) => {
     control.style = data.style;
     socket.user.tablo_style = data.style;

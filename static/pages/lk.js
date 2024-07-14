@@ -465,7 +465,10 @@ function init__match_create() {
 }
 function init__match_edit() {
     let matchId = get('#matchId').value
-
+    let reset = get("#match_results__reset");
+    reset.addEventListener("click", async (e) => {
+        sendFetch("/api/lk/match/delete__results", JSON.stringify({matchId: matchId}), "DELETE")
+    })
     let saveBtn = get("#match__submit");
     saveBtn.addEventListener("click", async (e) => {
         sendForm();

@@ -201,7 +201,22 @@ class MatchController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
-    
+    async delete__results(req, res) {
+        try {
+            let matchId = req.body.matchId;
+            let match = await Match.findOne({_id: matchId})
+            console.log(match)
+            if(!match) return res.json({message: 'Такого матча не существует'});
+            console.log(matchId)
+            await match.deleteResults();
+            await match.setPlayerResults();
+            console.log(match)
+            return res.status(200).json({message: 'Результаты удалены', reload: true});
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
 }
 async function sendRes(path, data, res) {
     return res.render(path, data,

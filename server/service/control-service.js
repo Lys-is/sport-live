@@ -1,5 +1,6 @@
 const Match = require('../models/match-model');
 const Player = require('../models/player-model');
+const PlayerResult = require('../models/playerResult-model');
 const Couch = require('../models/couch-model');
 const getBrightness = require('getbrightness')
 const timestore = require('timestore')
@@ -238,11 +239,16 @@ class Control {
     async setMatch(matchId) {
         if(!matchId) return
         console.log(matchId)
+
         let match = await Match.findOne({_id: matchId})
-        let players_1 = await Player.find({team: match.team_1._id}).select('fio _id img'),
-            players_2 = await Player.find({team: match.team_2._id}).select('fio _id img'),
+
+        let activePlayers = await PlayerResult.find({match: matchId, is_active: true}).select('player team')
+        console.log(activePlayers)
+        let players_1 = activePlayers.filter(el => el.team._id.toString() == match.team_1._id.toString()).map(el => ({fio: el.player.fio, _id: el.player._id, img: el.player.img})), //await Player.find({team: match.team_1._id}).select('fio _id img'),
+            players_2 = activePlayers.filter(el => el.team._id.toString() == match.team_2._id.toString()).map(el => ({fio: el.player.fio, _id: el.player._id, img: el.player.img})),//await Player.find({team: match.team_2._id}).select('fio _id img'),
             couch_1 = await Couch.find({team: match.team_1._id}).select('fio _id img'),
             couch_2 = await Couch.find({team: match.team_2._id}).select('fio _id img')
+            console.log(players_1, players_2)
         this.match = match
         this.team1_name = match.team_1.name
         this.team2_name = match.team_2.name
@@ -252,6 +258,10 @@ class Control {
         this.couch_1 = couch_1
         this.couch_2 = couch_2
     }
+    resetScore() {
+        this.scoreboard.changeScore({team1: 0, team2: 0, team1_foll: 0, team2_foll: 0})
+    }
+
     setData(data) {
         console.log(data)
         for(let key in data) {

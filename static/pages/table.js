@@ -18,7 +18,9 @@ socket.on('connect', () => {
     socket.emit('join_table', tableId);
 
 })
-
+socket.on('reload', () => {
+    location.reload();
+})
 socket.on('update_data', (data) => {
     setData(data)
 })

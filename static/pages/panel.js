@@ -42,7 +42,9 @@ let playerTables ={
     select_2: getA('#team2-replace ,#team2-replace-by'),
 }
 let variations_tablo = getA('.tablo_variation > input');
-
+socket.on('reload', () => {
+    location.reload();
+})
 let play = get('#play');
 play?.addEventListener('click', (e) => {
     socket.emit('play_timer');
@@ -322,6 +324,14 @@ textInpts.forEach(input => {
 
 })
 let scoreDivs = getA('.score_div');
+let resetScore = get('#score_reset');
+resetScore?.addEventListener('click', (e) => {
+    socket.emit('reset_score');
+})
+let reset_all = get('#reset_all');
+reset_all?.addEventListener('click', (e) => {
+    socket.emit('reset_all');
+})
 
 scoreDivs.forEach(div => {
     let plus_minus = getA('input[type="button"]', div),

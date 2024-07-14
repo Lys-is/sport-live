@@ -224,6 +224,7 @@ body:after {
 	align-items: center;
 	justify-content: center;
 	margin-top: -25px;
+	transform: translateY(70px);
 }
 
 .line-1 {

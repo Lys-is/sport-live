@@ -25,6 +25,12 @@ const MatchSchema = new Schema({
     circle: {type: Number, default: 1},
 
 })
+MatchSchema.methods.deleteResults = async function() {
+    await PlayerResult.deleteMany({match: this._id})
+    this.results_1 = []
+    this.results_2 = []
+    this.save()
+}
 MatchSchema.methods.setPlayerResults = async function(results) {
 
     if(results){
