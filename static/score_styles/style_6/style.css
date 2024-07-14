@@ -26,6 +26,7 @@ body {
     display: flex;
     justify-content: center;
     zoom: 1.33;
+    overflow: hidden;
 }
 
 /*.big,
@@ -1800,7 +1801,7 @@ video_container{
             margin-right: 10px;
         }
         
-        .sostav-txt-sec {
+        .sostav-txt-sec var-away {
             margin-left: 10px;
         }
         

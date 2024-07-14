@@ -216,14 +216,13 @@ body:after {
 .line-0 {
 	background: #164f58;
 	width: 150px;
-	height: 25px;	
+	height: 25px;
 	display: flex;
 	flex-direction: row;
 	align-content: center;
 	align-items: center;
 	justify-content: center;
 	margin-top: -25px;
-	
 }
 
 .line-1 {
@@ -521,7 +520,7 @@ body:after {
 }
 
 .big-logo img {
-	max-width: 175px;
+	max-width: 200px;
 	margin-top: 0px;
 }
 
@@ -1055,7 +1054,7 @@ body:after {
     margin-right: 10px;
 }
 
-.sostav-txt-sec {
+.sostav-txt-sec var-away {
     margin-left: 10px;
 }
 
@@ -1074,7 +1073,6 @@ body:after {
 
 .roster-main-div {
     width: 1016px;
-
     margin: auto;
     backdrop-filter: blur(30px)brightness(0.5);
     background-size: cover;
@@ -1082,8 +1080,7 @@ body:after {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-
-    border: 4px solid #6d237f;
+    border: 4px solid #2aa45b;
     z-index: 10000;
     padding-bottom: 20px;
 }

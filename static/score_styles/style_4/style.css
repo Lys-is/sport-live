@@ -420,7 +420,7 @@ sup {
 }
 
 .logo img {
-	max-width: 235px;
+	width: 200px;
 }
 
 #tour {
@@ -1259,7 +1259,7 @@ sup {
     margin-right: 10px;
 }
 
-.sostav-txt-sec {
+.sostav-txt-sec var-away {
     margin-left: 10px;
 }
 

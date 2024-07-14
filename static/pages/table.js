@@ -7,7 +7,6 @@ const notif = `<div class="notification disabled" id={{id}}>
         <div class="img {{main_class}} {{add_class}}"></div>
     </div>`
 const notifImg = `<img src="{{img}}">`
-
 let testConnect = setInterval(() => {
     if (socket.connected) {
         clearInterval(testConnect)
@@ -77,11 +76,13 @@ let timerDivs = {
     r: getA('.q_round'),
     n: getA('.q_name'),
     tr: getA('.q_time_round'),
+    nr: getA('.q_name_round'),
     trn: getA('.q_time_round_name'),
     // s: get('#top-timer'),
     // b: get('#info'),
     // c: get('.var-time')
 }
+console.log(timerDivs)
 let scenariosA = {
     'begin': 'Начало матча',
     '1': '1T',
@@ -90,28 +91,12 @@ let scenariosA = {
     'end': 'Конец матча'
 }
 socket.on('timer', (data) => {
-    if(data.changed) {
+    console.log(data)
+    if(data.timer?.changed) {
         socket.emit('get_data')
     }
-    Object.keys(timerDivs).forEach(key => {
-        if(key == 't'){
-            timerDivs[key]?.forEach(el => el.innerHTML = data.value)
-        }
-        else if(key == 'r'){
-            timerDivs[key]?.forEach(el => el.innerHTML = ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : '')
-        }
-        else if(key == 'tr'){
-            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : '')
-        }
-        else if(key == 'n' && data.scenarios != '1' && data.scenarios != '2'){
-
-            timerDivs[key]?.forEach(el => el.innerHTML = scenariosA[data.scenarios])
-        }
-        else if(key == 'trn'){
-            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : scenariosA[data.scenarios])
-        }
-       // if(timerDivs[key]) timerDivs[key].innerHTML = data.value
-    })
+    
+    
     // timerDivs.s.innerHTML = data.value
     // timerDivs.b.innerHTML = data.value
     console.log(data.value)
@@ -138,6 +123,8 @@ function setData(data) {
     first_style_tag()
     console.log(data)
     setNames(data)
+    
+    setTime(data.timer)
     if(data.tablo) {
         switchDiv(data.tablo.type)
     }
@@ -151,9 +138,61 @@ function setData(data) {
         getA('.away-logo').forEach(el => {
             el.src = data.match.team_2.img ? data.match.team_2.img : '/static/styles/icons/logo.jpg'
         })
+
+        let players = [data.players_1, data.players_2]
+        players.forEach((el, i) => {
+            setRoster(el, i+1)
+        })
+
     }
 }
+function setRoster(players, i) {
+    if(!players) 
+        return
+    let rosterDiv
+    if(i == 1) {
+        rosterDiv = get('.roster-container.home-roster')
+    }
+    else {
+        rosterDiv = get('.roster-container.away-roster')
+    }
+    playersDiv = get('.roster-content', rosterDiv)
+    playersDiv.innerHTML = ''
+    players.forEach(el => {
+        playersDiv.innerHTML += `<div class="roster-teamate">
+                                    <p class="roster-teamate-name">${el.fio}</p>
+                                    <img width="40" height="40" src="${el.img || '/static/styles/icons/logo.jpg'}">
+                                </div>`
+                    })
+    
+}
+function setTime(data) {
+    let min = data.minuts < 10 ? `0${data.minuts}` : data.minuts
+    let sec = data.seconds < 10 ? `0${data.seconds}` : data.seconds
+    data.value = `${min}:${sec}`
+    Object.keys(timerDivs).forEach(key => {
+        if(key == 't'){
+            timerDivs[key]?.forEach(el => el.innerHTML = data.value)
+        }
+        else if(key == 'r'){
+            timerDivs[key]?.forEach(el => el.innerHTML = ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : '')
+        }
+        else if(key == 'tr'){
+            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : '')
+        }
+        else if(key == 'nr'){
+            timerDivs[key]?.forEach(el => el.innerHTML = scenariosA[data.scenarios])
+        }
+        else if(key == 'n' && data.scenarios != '1' && data.scenarios != '2'){
 
+            timerDivs[key]?.forEach(el => el.innerHTML = scenariosA[data.scenarios])
+        }
+        else if(key == 'trn'){
+            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : scenariosA[data.scenarios])
+        }
+       // if(timerDivs[key]) timerDivs[key].innerHTML = data.value
+    })
+}
 function switchDiv(type) {
     scrollTo(0, 0)
     console.log(type)
