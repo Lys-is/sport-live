@@ -510,7 +510,7 @@ body:after {
 }
 
 .big-logo img {
-	max-width: 175px;
+	max-width: 200px;
 	margin-top: 0px;
 }
 
@@ -1042,7 +1042,7 @@ body:after {
     margin-right: 10px;
 }
 
-.sostav-txt-sec {
+.sostav-txt-sec var-away {
     margin-left: 10px;
 }
 
@@ -1061,7 +1061,6 @@ body:after {
 
 .roster-main-div {
     width: 1016px;
-
     margin: auto;
     backdrop-filter: blur(30px)brightness(0.5);
     background-size: cover;
@@ -1069,8 +1068,7 @@ body:after {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-
-    border: 4px solid #6d237f;
+    border: 4px solid #151444;
     z-index: 10000;
     padding-bottom: 20px;
 }

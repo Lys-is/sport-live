@@ -238,10 +238,10 @@ class Control {
         if(!matchId) return
         console.log(matchId)
         let match = await Match.findOne({_id: matchId})
-        let players_1 = await Player.find({team: match.team_1._id}),
-            players_2 = await Player.find({team: match.team_2._id}),
-            couch_1 = await Couch.find({team: match.team_1._id}),
-            couch_2 = await Couch.find({team: match.team_2._id})
+        let players_1 = await Player.find({team: match.team_1._id}).select('fio _id img'),
+            players_2 = await Player.find({team: match.team_2._id}).select('fio _id img'),
+            couch_1 = await Couch.find({team: match.team_1._id}).select('fio _id img'),
+            couch_2 = await Couch.find({team: match.team_2._id}).select('fio _id img')
         this.match = match
         this.team1_name = match.team_1.name
         this.team2_name = match.team_2.name

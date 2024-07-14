@@ -877,7 +877,7 @@ body {
 	width: 200px;
 	height: 200px;
 	border-radius: 50%;
-  	overflow: hidden;
+	overflow: hidden;
 	background: #FFFFFF;
 	display: flex;
 	align-content: center;
@@ -887,7 +887,7 @@ body {
 }
 
 .big-logo img {
-	max-width: 175px;
+	max-width: 200px;
 	margin-top: 0px;
 }
 
@@ -1179,7 +1179,7 @@ div.referees .ev-player-img {
     margin-right: 10px;
 }
 
-.sostav-txt-sec {
+.sostav-txt-sec var-away {
     margin-left: 10px;
 }
 

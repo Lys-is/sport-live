@@ -92,7 +92,6 @@ window.addEventListener('popstate', async function(event) {
         getPage(href, lk_main, true);
 }, false);
 async function getPage(href, destInHtml = lk_main, history_change = false) {
-    
     const baseUrl = '/api/lk/';
     const cleanedHref = href.replace(/(\?id=)(.+)/, '^id~$2')
     console.log(cleanedHref, href)
