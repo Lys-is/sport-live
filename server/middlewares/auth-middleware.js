@@ -3,7 +3,7 @@ const tokenService = require('../service/token-service');
 
 module.exports = async function (req, res, next) {
     try {
-
+        console.log(req.url, 'req.url');
 
         const accessToken = req.cookies.refreshToken;//authorizationHeader.split(' ')[1];
         if (!accessToken) {
