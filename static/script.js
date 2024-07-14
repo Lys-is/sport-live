@@ -417,7 +417,7 @@ function getRealValue(ele){
     }
   }
 function getBase64(file) {
-    let max_size = 8*1024*1024
+    let max_size = 4*1024*1024
     if(!file) return ''
     if(file.size > max_size) {
         alert(`Файл слишком большой. Максимальный размер - ${(max_size/(1024 * 1024)).toFixed(3)} МБ`)
