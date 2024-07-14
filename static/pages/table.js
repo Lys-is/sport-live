@@ -156,6 +156,9 @@ function setData(data) {
         players.forEach((el, i) => {
             setRoster(el, i+1)
         })
+        getA('.var-tour').forEach(el => el.innerHTML = data.match.circle || 0) 
+        getA('.var-match-date').forEach(el => {el.innerHTML = data.match.date || '2021-01-01'})
+        getA('.var-match-time').forEach(el => {el.innerHTML = data.match.time || '00:00'})
 
     }
 }
