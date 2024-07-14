@@ -110,7 +110,16 @@ socket.on('timer', (data) => {
 })
 let addPen = get('#add-pen'),
     resetPen = get('#reset-pen')
-
+let is_foul = get('#is_fouls'),
+foul_inpts = getA('.foll_div input');
+console.log(foul_inpts, is_foul)
+is_foul.addEventListener('click', (e) => {
+    let data = {
+        is_fouls: is_foul.checked
+    }
+    console.log(data)
+    socket.emit('new_data', data)
+})
 socket.on('update_data', (data) => {
     global_data = data
     if(style)
@@ -135,6 +144,8 @@ socket.on('update_data', (data) => {
     if(data.timer){
         setTimer(data.timer)
     }
+    is_foul.checked = data.is_fouls
+    foul_inpts.forEach(inp => inp.disabled = !data.is_fouls)
 })
 
 function setTimer(timer) {

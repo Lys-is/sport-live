@@ -339,4 +339,7 @@ table th:first-child, table td:first-child {
     margin-block: 0px;
 }
 
-.big 
+input:disabled {
+    background-color: #363636;
+    cursor: no-drop;
+}

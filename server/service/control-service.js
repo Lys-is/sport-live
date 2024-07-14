@@ -233,6 +233,7 @@ class Control {
         this.scoreboard = new Scoreboard()
         this.tablo = new Tablo()
         this.style = style
+        this.is_fouls = false
     }
     async setMatch(matchId) {
         if(!matchId) return
@@ -281,7 +282,9 @@ class Control {
                 case 'team2_name':
                     this.team2_name = data[key]
                     break
-                
+                case 'is_fouls':
+                    this.is_fouls = data[key]
+                    break
             }
         }
     }

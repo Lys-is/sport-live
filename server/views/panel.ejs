@@ -66,8 +66,26 @@
                         <input type="button" value="+" class="circle-button" name="plus">
                     </div>
                 </div>
+                <div class="h-group centered">
+                    <p class="first">Фолы</p>
+                </div>
+                <input type="checkbox" name="is_fouls" id="is_fouls">
+
+                <div class="h-group foll_div">
+                    <div class="h-group score_div" data-team="1">
+                        <input type="button" value="-" class="circle-button" name="minus">
+                        <input type="number" value="0" class="text-form small-form" name="team1_foll" data-type="score" id="team1_foll">
+                        <input type="button" value="+" class="circle-button" name="plus">
+                    </div>
+
+                    <div class="h-group score_div" data-team="2">
+                        <input type="button" value="-" class="circle-button" name="minus">
+                        <input type="number" value="0" class="text-form small-form" name="team2_foll" data-type="score" id="team2_foll">
+                        <input type="button" value="+" class="circle-button" name="plus">
+                    </div>
+                </div>
                 <div class="h-group">
-                    <input type="button" value="Сбросить" class="full-form" name="reset-teams">
+                    <input type="button" value="Сбросить" class="full-form" name="reset-teams" id="score_reset">
                 </div>
             </div>
             <div class="block">
