@@ -83,6 +83,7 @@ scenarios?.addEventListener('change', (e) => {
         scenarios: e.target.value
     }
     socket.emit('new_data', data);
+    socket.emit('get_time')
 })
 
 style?.addEventListener('change', (e) => {
@@ -123,7 +124,16 @@ timInp?.addEventListener('change', (e) => {
     let input = el.value;
     input = input.replace(/[^0-9:]/g, '');
     let parts = input.split(':');
-    parts = parts.map(part => part && (part.length > 2 || isNaN(part) || parseInt(part, 10) < 0 || parseInt(part, 10) > 60) ? '00' : part);
+    parts = parts.map(part => {
+        if(!part || isNaN(part) || parseInt(part, 10) < 0) {
+            return '00';
+        }
+
+        if(parseInt(part, 10) > 60) {
+            return '60';
+        }
+        return part;
+    })//part && (part.length > 2 || isNaN(part) || parseInt(part, 10) < 0 || parseInt(part, 10) > 60) ? '00' : part);
     if (!parts[0]) parts[0] = '00';
     if (!parts[1]) parts[1] = '00';
 
@@ -134,6 +144,7 @@ timInp?.addEventListener('change', (e) => {
 let addPen = get('#add-pen'),
     resetPen = get('#reset-pen')
 let is_foul = get('#is_fouls'),
+is_reverse = get('#is_reverse');
 foul_inpts = getA('.foll_div input');
 console.log(foul_inpts, is_foul)
 is_foul.addEventListener('click', (e) => {
@@ -142,6 +153,14 @@ is_foul.addEventListener('click', (e) => {
     }
     console.log(data)
     socket.emit('new_data', data)
+})
+is_reverse.addEventListener('click', (e) => {
+    let data = {
+        is_reverse: is_reverse.checked
+    }
+    console.log(data)
+    socket.emit('new_data', data)
+    socket.emit('get_time')
 })
 socket.on('update_data', (data) => {
     global_data = data
@@ -167,8 +186,10 @@ socket.on('update_data', (data) => {
     if(data.timer){
         setTimer(data.timer)
     }
+
     timInp.setAttribute('data-status', data.timer.status)
     is_foul.checked = data.is_fouls
+    is_reverse.checked = data.timer.is_reverse
     foul_inpts.forEach(inp => inp.disabled = !data.is_fouls)
 })
 
@@ -176,7 +197,7 @@ function setTimer(timer) {
     if(timer.max_time)
         max_time.value = timer.max_time
     scenarios.value = timer.scenarios
-
+    is_reverse.checked = timer.is_reverse
     let block = play.closest('.block')
     console.log(block)
     if(timer.status == 'pause') {

@@ -158,6 +158,9 @@ function startPanel(controls, socket) {
   socket.on('get_data', () => {
     io.to(userId).emit('update_data', control.getData);
   });
+  socket.on('get_time', () => {
+    io.to(userId).emit('timer', control.timer.timeData);
+  });
 }
 
 async function replaceImg(data) {

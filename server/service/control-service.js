@@ -13,12 +13,22 @@ function startTimer(io, timer, userId) {
     function timerCallback() {
         if(timer.is_reverse){
             timer.seconds--
-            if(timer.seconds == -1){
-                timer.minuts--
-                timer.seconds = 59
+            // if(timer.seconds == -1){
+            //     timer.minuts--
+            //     timer.seconds = 59
+            // }
+            // if(timer.minuts <= 0) {
+            //     timer.clearTimer()
+            // }
+            if(timer.scenarios == '1'){
+                if(timer.minuts <= timer.max_time && timer.seconds <= 0) {
+                    timer.changeScenarios('pause')
+                }
             }
-            if(timer.minuts <= 0) {
-                timer.clearTimer()
+            else if(timer.scenarios == '2'){
+                if(timer.minuts <= 0 && timer.seconds <= 0) {
+                    timer.changeScenarios('end')
+                }
             }
         }
         else{
@@ -86,7 +96,8 @@ class Timer {
     }
     clearTimer() {
         deleteTimer(this)
-        this.minuts = 0
+
+        this.minuts = this.is_reverse ? this.max_time * 2 : 0
         this.seconds = 0
         this.status = 'stop'
 
@@ -102,6 +113,11 @@ class Timer {
     }
     reverse(type) {
         this.is_reverse = type
+        if(this.status == 'stop') {
+            this.clearTimer()
+        }
+        if(this.scenarios != '1' && this.scenarios != '2') 
+            this.changeScenarios(this.scenarios)
     }
     set changeStage(stages) {
         this.now_time = stages.now_time ? stages.now_time : this.now_time
@@ -128,7 +144,7 @@ class Timer {
         else if(scenarios == 'end') {
             this.name = 'Конец матча'
             this.status = 'stop'
-            this.minuts = this.max_time * 2
+            this.minuts = this.is_reverse ? 0 : this.max_time * 2
         }
     }
     playTimer(io, userId) {
@@ -185,7 +201,7 @@ class Timer {
         }
         let min = this.minuts < 10 ? `0${this.minuts}` : this.minuts
         let sec = this.seconds < 10 ? `0${this.seconds}` : this.seconds
-        return {name: 'timer', value: `${min}:${sec}`, status: this.status, changed: changed, scenarios: this.scenarios}
+        return {name: 'timer', value: `${min}:${sec}`, status: this.status, changed: changed, scenarios: this.scenarios, is_reverse: this.is_reverse}
     }
     send(io, userId) {
         io.to(userId).emit('timer', this.timeData)
@@ -299,6 +315,9 @@ class Control {
                     break
                 case 'is_fouls':
                     this.is_fouls = data[key]
+                    break
+                case 'is_reverse':
+                    this.timer.reverse(data[key])
                     break
             }
         }
