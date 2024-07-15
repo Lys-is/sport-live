@@ -29,10 +29,10 @@ ioService.start(server);
 app.use(bodyParser.json({ limit: "50mb" }))
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(cookieParser());
-app.use(cors({
-    credentials: true,
-    origin: process.env.CLIENT_URL
-}));
+// app.use(cors({
+//     credentials: true,
+//     origin: process.env.CLIENT_URL
+// }));
 // console.log(app.get('views'));
 // app.set('views', path.join(__dirname, '/views'));
 // console.log(app.get('views'));
