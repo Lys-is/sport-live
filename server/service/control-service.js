@@ -21,7 +21,7 @@ function startTimer(io, timer, userId) {
             //     timer.clearTimer()
             // }
             if(timer.scenarios == '1'){
-                if(timer.minuts <= timer.max_time && timer.seconds <= 0) {
+                if(timer.minuts <  timer.max_time || timer.minuts == timer.max_time && timer.seconds <= 0) {
                     timer.changeScenarios('pause')
                 }
             }
