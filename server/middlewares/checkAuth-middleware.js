@@ -9,6 +9,8 @@ class CheckAuthMiddleware {
             if(req.user) {
                 let subscribe = await Subscribe.findOne({creator: req.user.id});
                 req.user.subscribe = subscribe
+                if(subscribe)
+                    req.user.block_date = formatDate(subscribe.createdAt, '.');
                 if(! req.user.subscribe && !req.user.isAdmin)
                     return res.redirect('/inactive');
                 let league = await League.findOne({creator: req.user.id});
@@ -35,5 +37,14 @@ class CheckAuthMiddleware {
         }
     }
 }
-
+function formatDate(date = new Date(), sep = '-') {
+    return [
+        date.getFullYear(),
+        padTo2Digits(date.getMonth() + 1),
+        padTo2Digits(date.getDate()),
+    ].join(sep);
+}
+function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+}
 module.exports = new CheckAuthMiddleware()
