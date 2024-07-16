@@ -418,12 +418,17 @@ function sendTime() {
     }
     socket.emit('new_data', data)
 }
-
+let formSet = get('#variants')
 variations_tablo.forEach(variation => {
     variation.addEventListener('click', (e) => {
+        if(formSet.disabled) return
+        formSet.disabled = true
         let data = {
             'tablo' : e.target.getAttribute('data-type'),
         }
+        setTimeout(() => {
+            formSet.disabled = false
+        },1001)
         socket.emit('new_data', data)
     })
 })

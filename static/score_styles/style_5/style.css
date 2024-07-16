@@ -822,6 +822,7 @@ body {
     display: inline-block;
     position: relative;
     top: 5px;
+    overflow: hidden;
 }
 
 #line {

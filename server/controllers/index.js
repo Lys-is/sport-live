@@ -14,6 +14,13 @@ class Constrollers {
             auth: req.user || false
         });
     }
+    async get__user_agreement(req, res, next) {
+        res.render('user_agreement', {
+            title: 'Пользовательское соглашение',
+            auth: req.user || false
+        })
+
+    }
     async get__reset_password(req, res, next) {
         res.render('auth', {
             type: 'reset_password',

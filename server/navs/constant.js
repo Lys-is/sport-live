@@ -4,6 +4,9 @@ const controllers = require('../controllers');
 const getFans = require('../middlewares/getFans-middleware');
 //qq - middleware
 const nav = {
+    'user_agreement' : {
+        'func' : 'get__user_agreement'
+    },
     'fans' : {
     },
     'fans/:address' : {
@@ -249,6 +252,7 @@ const nav = {
         'post__style' : {},
         'get__style_by_id'  : {},
         'get__tournament_by_id'  : {},
+        
     }
 }
 function start(){

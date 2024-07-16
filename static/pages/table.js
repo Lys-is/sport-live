@@ -70,7 +70,15 @@ socket.on('new_notify', (data) => {
         console.log(id)
         setTimeout(() => {
             let notf = get(`#${id}`)
-            notf.remove()
+            notf.style.opacity = '0'
+            notf.style.transform = 'translateY(-100vh)'
+            
+            setTimeout(() => {
+               console.log(notf.classList)
+                
+            // notf.remove()
+
+            }, 1000)
         }, 3000 + time)
     }
 
@@ -82,7 +90,7 @@ let timerDivs = {
     n: getA('.q_name'),
     tr: getA('.q_time_round'),
     nr: getA('.q_name_round'),
-    trn: getA('.q_time_round_name'),
+    trn: getA('.q_time_name_round'),
     // s: get('#top-timer'),
     // b: get('#info'),
     // c: get('.var-time')
@@ -112,16 +120,18 @@ socket.on('start', (data) => {
   setData(data)
 })
 let base_divs = getA('.big, .mid, .little, .little-ploff, .home-roster, .away-roster, .pen, .refs, .weather')
-let n_div = 'little'
+let n_div = ''
 console.log(base_divs)
-let first_style_tag = (function() {
+let first_style_tag = (function(type) {
     var executed = false;
     return function() {
         if (!executed) {
             executed = true;
-            let tag = get('#style_start')
-            tag.remove()
+
+           // let tag = get('#style_start')
+           // tag.remove()
             document.body.style.display = 'block'
+            switchDiv(type)
         }
     };
 })();
@@ -131,9 +141,8 @@ function setData(data) {
     foll_divs.forEach(el => {
         el.style.display = data.is_fouls ? '' : 'none'
     })
-    
 
-    first_style_tag()
+    first_style_tag(data.tablo.type)
     console.log(data)
     setNames(data)
     
@@ -157,9 +166,9 @@ function setData(data) {
             setRoster(el, i+1)
         })
         getA('.var-tour').forEach(el => el.innerHTML = data.match.circle || 0) 
-        getA('.var-match-date').forEach(el => {el.innerHTML = data.match.date || '2021-01-01'})
-        getA('.var-match-time').forEach(el => {el.innerHTML = data.match.time || '00:00'})
-
+        getA('.var-match-date, .var-match-date-text').forEach(el => {el.innerHTML = data.match.date || '2021-01-01'})
+        getA('.var-match-time, .var-match-time-text').forEach(el => {el.innerHTML = data.match.time || '00:00'})
+        getA('.var-tournament').forEach(el => el.innerHTML = data.match.tournament.basic.full_name || 'Вне турнира')
     }
 }
 function setRoster(players, i) {
@@ -208,7 +217,7 @@ function setTime(data) {
                 timerDivs[key]?.forEach(el => el.innerHTML = '')
         }
         else if(key == 'trn'){
-            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : scenariosA[data.scenarios])
+            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  "  " + (( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : scenariosA[data.scenarios]))
         }
        // if(timerDivs[key]) timerDivs[key].innerHTML = data.value
     })
@@ -217,27 +226,87 @@ function setTime(data) {
 
 }
 function switchDiv(type) {
+    let mb = get('#match-info > .q_name_round')
+
+    console.log(type, n_div)
+    if(type == n_div) {
+        getA('.pen').forEach(el => setAnim(el, 'reverse', 'pen'))
+        if(mb) setAnim(mb, 'normal', 'mb')
+        return
+    }
+    
     scrollTo(0, 0)
-    let mb = get('#match-info > .q_time_name_round')
-    if(mb) mb.style.display = 'block'
-    console.log(type)
-    base_divs.forEach(div => {
-        div.style.display = 'none'
-    })
+    //if(mb) mb.style.display = 'block'
     if(type == 'pen') {
-        getA(`.${n_div}`).forEach(div => div.style.display = 'block')
-        if(mb) mb.style.display = 'none'
+        console.log('fsdfsdfsdf', mb)   
+        if(mb) setAnim(mb, 'reverse', 'mb')
     }
     else {
+        if(mb) setAnim(mb, 'normal', 'mb')
+    }
+    base_divs.forEach(div => {
+        setAnim(div, 'reverse', type)
+
+    })
+
+    getA(`.${type}`).forEach(div => {
+        setAnim(div, 'normal')
+    })
+    if(type != 'pen') {
         n_div = type
     }
-    
-    console.log(n_div)
-    getA(`.${type}`).forEach(div => div.style.display = 'block')
-    
 }
+let animTimouts = {
 
+}
+let mb = get('#match-info > .q_name_round')
 
+function setAnim(div, direct, type) {
+    if(type == 'pen' && !div.className.includes('pen')) return
+    const compStyles = window.getComputedStyle(div);
+    let mb = get('#match-info > .q_name_rofsdfdsund')
+
+    const [prevDisplay, nextDisplay] = (direct == 'normal' ? ['none', 'block'] : ['block', 'none'])
+    console.log(div, prevDisplay, nextDisplay)
+    if(animTimouts[div.className]){
+       //clearTimeout(animTimouts[div.className])
+    }
+
+    if(compStyles.getPropertyValue('display') == prevDisplay){
+        let delay = 100
+        
+        let anim = compStyles.getPropertyValue('animation-name')
+        div.style.animationName = 'none'
+        div.style.animationDirection = direct;
+        div.style.animationDuration = '0.5s';
+        div.style.transitionDuration = '0.5s';
+       // div.style.animationDelay = '0.5s';
+       // div.style.maxHeight = '0px'
+       if(prevDisplay == 'block') {
+        //  div.setAttribute('is_active','block') 
+          //div.style.display = 'block'
+          div.style.animationDelay = '0s';
+          console.log('block_delayyyyyyyyyy', div)
+
+          delay = 1000
+      }
+        setTimeout(() => {
+            div.style.animationName = anim
+
+        },50)
+
+  
+        
+        let tmout =  setTimeout(() => {
+            //div.setAttribute('is_active',nextDisplay) 
+            if(mb) mb.style.display = nextDisplay
+            div.style.display = nextDisplay
+
+            console.log('timeout', div, nextDisplay, delay)
+        }, delay)
+        animTimouts[div.className] = tmout
+   }
+}
 function setScoreboard(scoreboard) {
     getA('.var-home-score').forEach(el => el.innerHTML = scoreboard.team1)
     getA('.var-away-score').forEach(el => el.innerHTML = scoreboard.team2)

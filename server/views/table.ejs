@@ -55,7 +55,9 @@ if(style_panel.includes('__id')){
 
 <style>
     <%=css%>
-
+    body{
+        overflow: hidden;
+    }
 
     img{
         aspect-ratio: 1/1 !important;
@@ -160,9 +162,11 @@ if(style_panel.includes('__id')){
         
     0% {
         opacity:0;
+        max-height: 0;
     }
     100% {
         opacity:1;
+        max-height: 35px;
     }
 }
 
@@ -177,19 +181,36 @@ if(style_panel.includes('__id')){
 }
 
 @keyframes matchid-anim {
-    0% {transform: translateY(-150%);}
-    100% {transform: translateY(0);}
+    0% {
+    opacity: 0;
+    transform: translateY(-500px);
 }
-
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+#matchid {
+    animation: none !important;
+    transform: none !important;
+}
+#middle {
+    position: relative;
+}
 .roster-teamate {
     background: #91919175;
 }
-
-    
+#main {
+    margin-top: unset !important;
+    padding-top: 50px !important;
+}
+    .var-stadium {
+        display: none;
+    }
 </style>
 <style id="style_start">
     .big, .mid, .little, .little-ploff, .home-roster, .away-roster, .pen, .refs, .weather {
-        display: none !important;
+        display: none ;
     }
 </style>
 <link rel="stylesheet" href="/static/score_styles/<%= style_panel %>/style.css">

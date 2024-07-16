@@ -123,8 +123,9 @@ body:after {
 	display: none;
 }
 #main {
-	margin-top: 50px;
+	/* margin-top: 50px; */
 	margin-left: 50px;
+	padding-top: 50px;
 }
 #container {
 	display: inline-block;
@@ -1128,12 +1129,12 @@ body:after {
 @keyframes shutter-in-top {
         
     0% {
-        transform:rotateX(-100deg);
+        transform: rotateX(249deg);
         transform-origin:top;
         opacity:0;
     }
     100% {
-        transform:rotateX(0deg);
+        transform: rotateX(360deg);
         transform-origin:top;
         opacity:1;
     }
