@@ -40,9 +40,9 @@
                     <p class="tournires_status">Статус: Приём заявок</p>
                 </div>
                 <div class="tournires_tabs">
-                    <input type="button" value="Команды" class="tournires_tab_button">
-                    <input type="button" value="Судьи" class="tournires_tab_button">
-                    <input type="button" value="Документы" class="tournires_tab_button">
+                    <input type="button" value="Команды" class="tournires_tab_button def_link" data-href="lk?page=tournament/id/<%= tournaments[i]._id %>/team">
+                    <input type="button" value="Судьи" class="tournires_tab_button def_link" data-href="lk?page=tournament/id/<%= tournaments[i]._id %>/judge">
+                    <input type="button" value="Документы" class="tournires_tab_button def_link" data-href="lk?page=tournament/id/<%= tournaments[i]._id %>/docs">
                 </div>
                 <!-- <div class="tournires_calendar">
                     <h2>Календарь матчей</h2>
