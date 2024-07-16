@@ -1,12 +1,15 @@
 const ApiError = require('../exceptions/api-error');
 const tokenService = require('../service/token-service');
 const League = require('../models/league-model');
+const Subscribe = require('../models/subscribe-model');
 
 class CheckAuthMiddleware {
     async isAuth(req, res, next) {
         try {
             if(req.user) {
-                if(!req.user.isActive && !req.user.isAdmin)
+                let subscribe = await Subscribe.findOne({creator: req.user.id});
+                req.user.subscribe = subscribe
+                if(! req.user.subscribe && !req.user.isAdmin)
                     return res.redirect('/inactive');
                 let league = await League.findOne({creator: req.user.id});
                 if(league)

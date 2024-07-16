@@ -138,7 +138,7 @@ class Constrollers {
         });
     }
     async get__inactive(req, res) {
-        return res.send('Ваш аккаунт неактивен, пожалуйста, обратитесь к администратору');
+        return res.send('Ваш аккаунт неактивен, пожалуйста, обратитесь к администратору <br> <a href="/login">Страница авторизации</a>');
     }
     async get__table(req, res) {
         try{

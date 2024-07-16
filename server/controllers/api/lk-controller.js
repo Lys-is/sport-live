@@ -18,6 +18,7 @@ Style = require('../../models/style-model'),
 Commentator = require('../../models/commentator-model'),
 Doc = require('../../models/doc-model'),
 Global = require('../../models/global-model'),
+Subscribe = require('../../models/subscribe-model'),
 Couch = require('../../models/couch-model');
 const dbService = require('../../service/db-service');
 
@@ -351,7 +352,14 @@ class LkController {
             //let total = await User.countDocuments({});
             users = await Promise.all(users.map(async(item) => {
                 let userD = await UserD.findOne({creator: item._id});
-                return {...item._doc, surname: userD?.surname, name: userD?.name, patronymic: userD?.patronymic}
+                let block_date
+                let subscribe = await Subscribe.findOne({creator: item._id});
+                if(subscribe){
+                    console.log(subscribe.createdAt, typeof subscribe.createdAt);
+                    console.log(formatDate(subscribe.createdAt));
+                    block_date = formatDate(subscribe.createdAt);
+                }
+                return {...item._doc, surname: userD?.surname, name: userD?.name, patronymic: userD?.patronymic, subscribe, block_date}
             }))
             console.log(users, total);  
             return sendRes('partials/lk_part/user', {users, total}, res);
@@ -420,7 +428,15 @@ async function sendRes(path, data, res) {
         res.json(html);
     });
 }
-
-
+function formatDate(date = new Date(), sep = '-') {
+    return [
+      date.getFullYear(),
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+    ].join(sep);
+  }
+  function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  }
 
 module.exports = new LkController();

@@ -1,5 +1,6 @@
 const User = require('../../../models/user-model');
 const mailService = require('../../../service/mail-service');
+const Subscribe = require('../../../models/subscribe-model');
 const mongoose = require('mongoose');
 class UserController {
 
@@ -12,11 +13,28 @@ class UserController {
             let user = await User.findById(userId);
             console.log(user);
             if(!user) return res.json({message: 'Такого пользователя не существует'});
+            if(user.isAdmin) return res.json({message: 'Нельзя изменять администратора'});
+            let subscribe = await Subscribe.findOne({creator: userId});
+            console.log(subscribe);
             if(type == 'unblock'){
+                if(subscribe)
+                    await Subscribe.deleteOne({_id: subscribe._id});
+                subscribe = await Subscribe.create({creator: userId, date: formatDate()});
                 user = await User.updateOne({_id: userId}, {isActive: true, dateActive: formatDate()});
             }
-            else if(type == 'block')
+            else if(type == 'block'){
+                await Subscribe.deleteOne({_id: subscribe._id});
                 user = await User.updateOne({_id: userId}, {isActive: false, dateActive: ''});
+            }
+            else if(type == 'change_block'){
+                if(!req.body.new_date)
+                    return res.json({message: 'Нет даты'});
+                if(subscribe){
+                    subscribe.setExpiryDateValue(req.body.new_date);
+                    
+                }
+            }
+            console.log(await Subscribe.find());
             return res.json({message: 'Пользователь обновлен', reload: true});
         } catch (e) {
             console.log(e);
@@ -32,6 +50,7 @@ class UserController {
             let user = await User.findById(userId);
             console.log(user);
             if(!user) return res.json({message: 'Такого пользователя не существует'});
+            if(user.isAdmin) return res.json({message: 'Нельзя удалить администратора'});
             var models = mongoose.modelNames()
             console.log(models);
             await Promise.all(models.map(async(model) => {
@@ -57,11 +76,11 @@ function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
   }
   
-  function formatDate(date = new Date()) {
+  function formatDate(date = new Date(), sep = '-') {
     return [
       date.getFullYear(),
       padTo2Digits(date.getMonth() + 1),
       padTo2Digits(date.getDate()),
-    ].join('-');
+    ].join(sep);
   }
 module.exports = new UserController();

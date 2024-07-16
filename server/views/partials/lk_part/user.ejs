@@ -12,11 +12,14 @@
             <td>Email</td>
             <td>Действия</td>
             <td>Дата разблокировки</td>
+            <td>Дата блокировки</td>
+
         </tr>
         <tr class="filter">
             <td><input type="text" name="fio" class="table_input_text"></td>
             <td><input type="text" name="email" class="table_input_text"></td>
 
+            <td></td>
             <td></td>
             <td></td>
         </tr>
@@ -27,7 +30,7 @@
             <td><%= users[i].surname %></td>
             <td><%= users[i].email %></td>
             <td>
-                <% if (users[i].isActive) { %>
+                <% if (users[i].subscribe) { %>
                     <span class="table_links red_button" data-type="block" data-id="<%= users[i]._id %>">Заблокировать</span>
                 <% } else { %>
                     <span class="table_links table_links_compos" data-type="unblock" data-id="<%= users[i]._id %>">Разблокировать</span>
@@ -35,6 +38,15 @@
                 <span  class="delete_user" data-id="<%= users[i]._id %>" data-model="User">Удалить</span>
             </td>
             <td><%= users[i].dateActive %></td>
+            <td>
+                
+                <% if (users[i].subscribe) { %>
+                <input type="date" name="date" class="table_input_text" id="new_date" value="<%= users[i].block_date  %>">
+                <span class="table_links table_links_compos" data-type="change_block" data-id="<%= users[i]._id %>"> Изменить дату блокировки</span>
+                <% } else {%>
+                    Не активирован
+                <% } %>
+            </td>
         </tr>
 
     

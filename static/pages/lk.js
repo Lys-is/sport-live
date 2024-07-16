@@ -225,6 +225,9 @@ function init__user() {
                 userId: e.target.getAttribute('data-id'),
                 type: e.target.getAttribute('data-type')
             }
+            if(data.type === 'change_block') {
+                data.new_date = get('#new_date').value
+            }
             sendFetch('/api/lk/user/put__edit', JSON.stringify(data), 'PUT')
         })
     })
