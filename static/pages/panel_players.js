@@ -125,7 +125,21 @@ function playerNotifyListener(e) {
 console.log(socket.id)
 let textInpts = getA('input[type="text"], input[type="color"], input[type="number"]');
 console.log(textInpts)
-
+let show_info = get('#show_info');
+show_info.addEventListener('click', (e) => {
+    let title = get('#useful_title').value,
+        text = get('#useful').value
+    
+    let dta = {
+        type: 'couch',
+        size : 's',
+        text: [text],
+        title: [title],
+        ids: [null],
+    }
+    socket.emit('notify', dta)
+    console.log(dta)
+})
 textInpts.forEach(input => {
         let fTimer;
         function f(e) {
