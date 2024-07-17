@@ -90,6 +90,14 @@ style?.addEventListener('change', (e) => {
     let data = {
         style: e.target.value
     }
+    formSet.disabled = true
+    let data_2 = {
+        'tablo' : 'little',
+    }
+    setTimeout(() => {
+        formSet.disabled = false
+    },1001)
+    socket.emit('new_data', data_2)
     socket.emit('style', data);
 })
 socket.on('connect', () => {
@@ -321,16 +329,16 @@ function playerNotifyListener(e) {
     let ids = [playerTr.getAttribute('data-id')]
     let txt = '', title = '', img = ''
     if(type[0] == 'goal') {
-        txt = 'Игрок ' + player + ' забил гол'
+        txt = player
         title = 'Гоооооол'
     }
     else if(type[0] == 'yellow') {
-        txt = 'Игрок ' + player + ' получил жёлтую карту'
+        txt = player + ' получил жёлтую карту'
         title = 'Жёлтая карта'
         type[0] = 'yellow-card'
     }
     else if(type[0] == 'red') {
-        txt = 'Игрок ' + player + ' получил красную карту'
+        txt = player + ' получил красную карту'
         title = 'Красная карта'
         type[0] = 'red-card'
     }
