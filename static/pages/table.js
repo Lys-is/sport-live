@@ -45,7 +45,7 @@ socket.on('new_notify', (data) => {
         newNotify = newNotify.replace('{{id}}', id)
         newNotify = newNotify.replace('{{name}}', data.text[i])
         newNotify = newNotify.replace('{{description}}', data.title)
-        newNotify = newNotify.replace('{{img}}', data?.imgArr[i] ? data?.imgArr[i] : '/static/styles/icons/logo.jpg')
+        newNotify = newNotify.replace('{{img}}', data?.imgArr[i] ? data?.imgArr[i] : '/static/styles/icons/empty.png')
         newNotify = newNotify.replace('{{main_class}}', data.type || '')
         if(data.add_class && data.add_class[i]) newNotify = newNotify.replace('{{add_class}}', data.add_class[i])
         else newNotify = newNotify.replace('{{add_class}}', '')
@@ -101,7 +101,9 @@ let scenariosA = {
     '1': '1T',
     'pause': 'Перерыв',
     '2': '2T',
-    'end': 'Конец матча'
+    'end': 'Конец матча',
+    'out': 'Тайм-аут',
+    'VAR': 'VAR'
 }
 socket.on('timer', (data) => {
     console.log(data)
@@ -190,7 +192,7 @@ function setRoster(players, i) {
     players.forEach(el => {
         playersDiv.innerHTML += `<div class="roster-teamate">
                                     <p class="roster-teamate-name">${el.fio}</p>
-                                    <img width="40" height="40" src="${el.img || '/static/styles/icons/logo.jpg'}">
+                                    <img width="40" height="40" src="${el.img || '/static/styles/icons/empty.png'}">
                                 </div>`
                     })
     

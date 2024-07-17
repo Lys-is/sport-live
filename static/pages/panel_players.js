@@ -99,7 +99,7 @@ function playerNotifyListener(e) {
     let ids = [playerTr.getAttribute('data-id')]
     let txt = [], title = ''
     if(type[0] == 'goal') {
-        txt[0] = player + ' забил гол'
+        txt[0] = player
         title = 'Гоооооол'
     }
     else if(type[0] == 'yellow') {

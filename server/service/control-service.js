@@ -133,6 +133,12 @@ class Timer {
         else if(scenarios == '1') {
             this.name = '1Т'
         }
+        else if(scenarios == 'VAR') {
+            this.name = 'VAR'
+        }
+        else if(scenarios == 'out') {
+            this.name = 'out'
+        }
         else if(scenarios == 'pause') {
             this.name = 'Перерыв'
             //this.minuts = this.max_time

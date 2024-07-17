@@ -91,15 +91,15 @@ body {
     filter: drop-shadow(1px 0px 6px rgb(0 0 0 / 0.5));
 }
 
-#big-flash {    
+#big-flash {
         background: url(img/flash3.svg) no-repeat;
-        width: 452px;
+        width: 450px;
         height: 81px;
         background-size: cover;
         position: absolute;
         top: 14px;
-        opacity: 0.6;   
-        filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4)); 
+        opacity: 0.6;
+        filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
 }
 
 #top-row-1 {
@@ -635,24 +635,16 @@ body {
 #score-txt {
     font-family: 'Exo 2', sans-serif;
     font-weight: 800;
-    font-size: 120px;
+    font-size: 88px;
     letter-spacing: -12px;
     color: #FFFFFF;
-    margin-top: 8px;
+    margin-top: 21px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.big-logo-rk {
-/*    background: url(img/bamf-u19-logo.png) no-repeat;*/
-    width: 120px;
-    height: 120px;
-    background-size: 120px 120px;
-    background-position: 50%;
-    margin-top: -17px;
-    z-index: 999;
-}
+.big-logo-rk {/*    background: url(img/bamf-u19-logo.png) no-repeat;*/width: 51px;height: 120px;background-size: 120px 120px;background-position: 50%;margin-top: 3px;z-index: 999;}
 
 #big-home-team-name,
 #big-away-team-name {
