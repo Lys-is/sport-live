@@ -77,20 +77,14 @@
                 <table class="commands_table cool_table mb">
                     <tr id="first-row">
                         <td>Cудья</td>
-                        <td></td>
-                        <td>Действие</td>
-                        <td></td>
+
 
                     </tr>
                     <% if(match.judges.length > 0)
                         for (let i = 0; i < match.judges.length; i++) { %>
                             <tr>
                                 <td><%= match.judges[i].fio %></td>
-                                <td></td>
-                                <td>
-                                    <span class="table_links table_links_compos nav_link"  data-href="judge/get__edit/?id=<%= match.judges[i]._id %>">Изменить</span>
-                                </td>
-                                <td >link</td>
+
                             </tr>
                         <% } %>
               
@@ -114,17 +108,14 @@
                 <table class="commands_table cool_table mb">
                     <tr id="first-row">
                         <td>Комментатор</td>
-                        <td></td>
-                        <td>Действие</td>
-                        <td></td>
+
 
                     </tr>
                     <% if(match.commentators.length > 0)
                         for (let i = 0; i < match.commentators.length; i++) { %>
                             <tr>
                                 <td><%= match.commentators[i].fio %></td>
-                                <td></td>
-                                <td>link</td>
+
                             </tr>
                         <% } %>
               
