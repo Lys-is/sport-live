@@ -871,7 +871,7 @@ body {
     margin: 0 5px;
     transition-property: background-color;
     transition-duration: 700ms;
-    margin-top: 8px;
+    margin-top: 3px;
 }
 
 
@@ -1714,12 +1714,9 @@ video_container{
 	top: 5px;
 }
 .pen {
-    
-background: #b6b0a9;
-    
-/* padding: 5px; */
-    
-height: 100%;
+    background: #b6b0a9;
+    /* padding: 5px; */
+    height: 100%;
 }
 .nobg {
 

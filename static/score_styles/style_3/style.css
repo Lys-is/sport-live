@@ -419,8 +419,8 @@ body:after {
 
 .tournament-name {
 	text-transform: uppercase;
-	max-width: 70%;
-    text-align: right;
+	max-width: 100%;
+    text-align: center;  
 }
 
 .flex-row {
@@ -1173,8 +1173,8 @@ body:after {
 
 .tournament-name {
 	text-transform: uppercase;
-	max-width: 70%;
-    text-align: right;    
+	max-width: 100%;
+    text-align: center;   
 }
 
 .flex-row {
