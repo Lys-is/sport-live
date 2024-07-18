@@ -262,7 +262,7 @@ class Control {
         this.tablo = new Tablo()
         this.style = style || 'style_1'
         this.is_fouls = false
-        this.notif_type = 'def'
+        this.notif_type = 'circ'
     }
     async setMatch(matchId) {
         if(!matchId) return

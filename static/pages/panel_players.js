@@ -11,7 +11,7 @@ let html = {
                     <th>мал</th>
                     <th>бол</th>
                 </tr>`,
-    player: `<tr data-id="{{id}}" data-name="{{name}}">
+    player: `<tr data-id="{{id}}" data-name="{{name}}" data-team="{{team}}">
                 <td>{{name}}</td>
                 <td><input type="button" value="1" class="square30" data-type="goal_s" name="pers1_1"></td>
                 <td><input type="button" value="1" class="square30" data-type="goal_b" name="pers1_2"></td>
@@ -96,6 +96,7 @@ function playerNotifyListener(e) {
     let playerTr = e.target.closest('tr')
     let player = playerTr.getAttribute('data-name')
     let type = e.target.getAttribute('data-type').split('_')
+    let team = playerTr.getAttribute('data-team')
     let ids = [playerTr.getAttribute('data-id')]
     let txt = [], title = ''
     if(type[0] == 'goal') {
@@ -103,13 +104,13 @@ function playerNotifyListener(e) {
         title = 'Гоооооол'
     }
     else if(type[0] == 'yellow') {
-        txt[0] = player + ' получил жёлтую карту'
-        title = 'Жёлтая карта'
+        txt[0] = player
+        title = `Жёлтая карта (${team})`
         type[0] = 'yellow-card'
     }
     else if(type[0] == 'red') {
-        txt[0] = player + ' получил красную карту'
-        title = 'Красная карта'
+        txt[0] = player
+        title = `Красная карта (${team})`
         type[0] = 'red-card'
     }
     let data = {
@@ -221,7 +222,7 @@ function setMatch(data, team) {
    
 
     data['players_'+team].forEach(player => {
-        nowTable.innerHTML += html.player.replace('{{id}}', player._id).replaceAll('{{name}}', player.fio)
+        nowTable.innerHTML += html.player.replace('{{id}}', player._id).replaceAll('{{name}}', player.fio).replaceAll('{{team}}', data.match['team_'+team].name)
     })
     nowTable.innerHTML += '</tbody>'
 
@@ -231,7 +232,6 @@ function setMatch(data, team) {
 
     playerTables['select_'+team].forEach(el => {
         el.innerHTML = ''
-
         data['players_'+team].forEach(player => {
             el.innerHTML += `<option value="${player._id}">${player.fio}</option>`
         })
@@ -282,12 +282,15 @@ function couchNotify(num, team, type, data) {
     socket.emit('notify', dta)
 }
 
-let showJudgesBtns = getA('.show_judge');
-let showCommentatorsBtns = getA('.show_commentator');
-showJudgesBtns?.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        let txt = e.target.getAttribute('data-name')
-        let id = e.target.getAttribute('data-value')
+let showJudge = get('.show_judge');
+let showCommentator = get('.show_commentator');
+let judgeSelect = get('#select_judge');
+let commentatorSelect = get('#select_commentator');
+showJudge.addEventListener('click', (e) => {
+        let option = judgeSelect[judgeSelect.selectedIndex]
+        console.log(option)
+        let txt = option.innerHTML
+        let id = option.value
         let dta = {
             type: 'judge',
             size : 'b',
@@ -297,12 +300,14 @@ showJudgesBtns?.forEach(btn => {
             model: 'Judge',
         }
         socket.emit('notify', dta)
-    })
 })
-showCommentatorsBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        let txt = e.target.getAttribute('data-name')
-        let id = e.target.getAttribute('data-value')
+
+showCommentator.addEventListener('click', (e) => {
+        let option = commentatorSelect[commentatorSelect.selectedIndex]
+        console.log(option)
+        let txt = option.innerHTML
+        let id = option.value
+        
         let dta = {
             type: 'commentator',
             size : 'b',
@@ -313,4 +318,4 @@ showCommentatorsBtns.forEach(btn => {
         }
         socket.emit('notify', dta)
     })
-})
+

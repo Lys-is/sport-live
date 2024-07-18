@@ -43,22 +43,29 @@
                     <div id="table_judges" class="full-form">
                         <% if(judges) { %>
                             <p class="first">Судьи</p>
-                        <% for (let i = 0; i < judges.length; i++) { %>
                             <div class="h-group space-between">
-                                <label><%= judges[i].fio %></label>
-                                <input type="button" value="Показать" class="show_judge" data-name="<%= judges[i].fio %>" data-value="<%= judges[i]._id %>">
+                            <select class="text-form full-form" name="judge" id="select_judge">
+                                <% for (let i = 0; i < judges.length; i++) { %>
+                                    <option value="<%= judges[i]._id %>"><%= judges[i].fio %></option>
+                                <% } %>
+                            </select>
+                            <input type="button" value="Показать" class="show_judge" >
                             </div>
-                        <% } } %>
+                        <% } %>
                     </div>
                     <div id="table_commentators" class="full-form">
                         <% if(commentators) { %>
                             <p class="first">Комментаторы</p>
-                        <% for (let i = 0; i < commentators.length; i++) { %>
                             <div class="h-group space-between">
-                                <label><%= commentators[i].fio %></label>
-                                <input type="button" value="Показать" class="show_commentator" data-name="<%= commentators[i].fio %>" data-value="<%= commentators[i]._id %>">
+                            <select class="text-form full-form" name="commentator" id="select_commentator">
+                                <% for (let i = 0; i < commentators.length; i++) { %>
+                                    <option value="<%= commentators[i]._id %>"><%= commentators[i].fio %></option>
+                                <% } %>
+                            </select>
+                            <input type="button" value="Показать" class="show_commentator" >
                             </div>
-                        <% } } %>
+                        <% } %>
+                            
                     </div>
                 </div>
 
