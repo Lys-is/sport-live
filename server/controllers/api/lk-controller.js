@@ -314,9 +314,22 @@ class LkController {
             }
             if(data.style_name_new){
                 let style = await Style.create({...data, name: data.style_name_new ,  creator: req.user.id});
-                return res.json({message: 'Стиль создан', style});
+                return res.json({message: 'Стиль создан', style, reload: true});
             }
             return res.json({message: 'Стиль создан'});
+        }
+        catch(e){
+            console.log(e);
+            res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async del__style(req, res) {
+        try {
+            let style = await Style.findById(req.query.id);
+            if(!style)
+                return res.json({message: 'Такого стиля нет'});
+            await Style.deleteOne({creator: req.user.id, _id: style._id});
+            return res.json({message: 'Стиль удален', reload: true});
         }
         catch(e){
             console.log(e);

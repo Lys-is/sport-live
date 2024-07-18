@@ -250,6 +250,7 @@ const nav = {
             'func' : 'get__guide_admin',
         },
         'post__style' : {},
+        'del__style' : {},
         'get__style_by_id'  : {},
         'get__tournament_by_id'  : {},
         

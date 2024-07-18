@@ -682,6 +682,9 @@ function init__commentator_create() {
 function init__style() {
     let option = get('#style_select');
     let form = get("#style__form");
+    let new_style_inp = get('#new_style_inp');
+    let delBtn = get('#delBtn');
+    let nStyleBtn = get('#newStyleBtn');
     option.addEventListener('change', async (e) => {
         let id = option.value
         let data = await sendFetch(`/api/lk/get__style_by_id?id=${id}`)
@@ -691,6 +694,15 @@ function init__style() {
             if(form[key])
                 form[key].value = data[key]
         }
+        new_style_inp.style.display = 'none'
+        delBtn.style.display = 'block'
+        nStyleBtn.style.display = 'block'
+    })
+    nStyleBtn.addEventListener('click', async (e) => {
+        location.reload()
+    })
+    delBtn.addEventListener('click', async (e) => {
+        sendFetch(`/api/lk/del__style?id=${option.value}`, null, "DELETE")
     })
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
