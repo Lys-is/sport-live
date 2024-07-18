@@ -89,6 +89,8 @@ function startPanel(controls, socket) {
     try {
 
       userId = tableId
+      if(!socket.user)
+        socket.user = await User.findOne({ _id: tableId });
       control = controls[userId] || new controlService(userId, socket.user.tablo_style, io);
       controls[userId] = control;
       socket.join(userId);
@@ -102,6 +104,8 @@ function startPanel(controls, socket) {
     try {
 
       userId = tableId
+      if(!socket.user)
+        socket.user = await User.findOne({ _id: tableId });
       control = controls[userId] || new controlService(userId, socket.user.tablo_style, io);
       controls[userId] = control;
       const user = await User.findOne({ _id: tableId });
