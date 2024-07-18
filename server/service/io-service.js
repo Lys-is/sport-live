@@ -86,74 +86,131 @@ function startPanel(controls, socket) {
   socket.join(userId);
 
   socket.on('join_panel', async (tableId) => {
-    userId = tableId
-    control = controls[userId] || new controlService(userId, socket.user.tablo_style, io);
-    controls[userId] = control;
-    socket.join(userId);
-    socket.emit('update_data', control.getData);
+    try {
+
+      userId = tableId
+      control = controls[userId] || new controlService(userId, socket.user.tablo_style, io);
+      controls[userId] = control;
+      socket.join(userId);
+      socket.emit('update_data', control.getData);
+    } catch (e) {
+      console.log(e)
+    }
   });
 
   socket.on('join_table', async (tableId) => {
-    userId = tableId
-    control = controls[userId] || new controlService(userId, socket.user.tablo_style, io);
-    controls[userId] = control;
-    const user = await User.findOne({ _id: tableId });
-    socket.join(tableId);
-    socket.emit('start', control.getData);
+    try {
+
+      userId = tableId
+      control = controls[userId] || new controlService(userId, socket.user.tablo_style, io);
+      controls[userId] = control;
+      const user = await User.findOne({ _id: tableId });
+      socket.join(tableId);
+      socket.emit('start', control.getData);
+    } catch (e) {
+      console.log(e)
+    }
   });
 
   socket.on('play_timer', () => {
-    control.timer.playTimer(io, userId);
-    io.to(userId).emit('timer', control.timer.timeData);
-   // io.to(userId).emit('update_data', control.getData);
+    try {
 
+      control.timer.playTimer(io, userId);
+      io.to(userId).emit('timer', control.timer.timeData);
+    // io.to(userId).emit('update_data', control.getData);
+    } catch (e) {
+      console.log(e)
+    }
 
   });
 
   socket.on('clear_timer', () => {
-    control.timer.clearTimer();
-    io.to(userId).emit('timer', control.timer.timeData);
+    try {
+
+      control.timer.clearTimer();
+      io.to(userId).emit('timer', control.timer.timeData);
+    } catch (e) {
+      console.log(e)
+    }
   });
 
   socket.on('change_timer', (val) => {
-    control.timer.changeTimer(val);
-    io.to(userId).emit('timer', control.timer.timeData);
+    try {
+
+      control.timer.changeTimer(val);
+      io.to(userId).emit('timer', control.timer.timeData);
+    } catch (e) {
+      console.log(e)
+    }
   });
 
   socket.on('match', async (data) => {
-    await control.setMatch(data);
-    io.to(userId).emit('update_data', control.getData);
+    try {
+      await control.setMatch(data);
+      io.to(userId).emit('update_data', control.getData);
+    } catch (e) {
+      console.log(e)
+    }
   });
   socket.on('reset_score', async (data) => {
-    await control.resetScore();
-    io.to(userId).emit('update_data', control.getData);
+    try {
+      await control.resetScore();
+      io.to(userId).emit('update_data', control.getData);
+    } catch (e) {
+      console.log(e)
+    }
   })
   socket.on('reset_all', async (data) => {
-    delete controls[userId]
-    io.to(userId).emit('reload');
+    try {
+      delete controls[userId]
+      io.to(userId).emit('reload');
+    } catch (e) {
+      console.log(e)
+    }
   })
   socket.on('set_timer', async (data) => {
-    await control.timer.setTime(data);
-    io.to(userId).emit('update_data', control.getData);
+    try {
+
+      await control.timer.setTime(data);
+      io.to(userId).emit('update_data', control.getData);
+    } catch (e) {
+      console.log(e)
+    }
   });
   socket.on('style', async (data) => {
-    control.style = data.style;
-    socket.user.tablo_style = data.style;
-    await socket.user.save();
-    io.to(userId).emit('update_style');
-    io.to(userId).emit('update_data', control.getData);
+      try{
+    
+      control.style = data.style;
+      if(socket.user){
+        socket.user.tablo_style = data.style;
+       await socket.user.save();
+      }
+      
+      io.to(userId).emit('update_style');
+      io.to(userId).emit('update_data', control.getData);
+    } catch (e) {
+      console.log(e)
+    }
   });
 
   socket.on('notify', async (data) => {
+    try {
+
     await replaceImg(data);
     console.log(data)
     await io.to(userId).emit('new_notify', data);
+  } catch (e) {
+    console.log(e)
+  }
   });
 
   socket.on('new_data', (data) => {
-    control.setData(data);
-
-    io.to(userId).emit('update_data', control.getData);
+    try {
+      control.setData(data);
+      io.to(userId).emit('update_data', control.getData);
+    } catch (e) {
+      console.log(e)
+    }
   });
   socket.on('get_data', () => {
     io.to(userId).emit('update_data', control.getData);
