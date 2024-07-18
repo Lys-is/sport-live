@@ -473,7 +473,7 @@ variations_tablo.forEach(variation => {
         }
         setTimeout(() => {
             formSet.disabled = false
-        },1001)
+        },1301)
         socket.emit('new_data', data)
     })
 })
