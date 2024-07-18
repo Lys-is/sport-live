@@ -24,13 +24,14 @@
                 <div class="block">
                     <div class="h-group center">
                         <p class="first">Показать</p>
+                        
                     </div>
-                    <div class="h-group space-between">
+                    <!-- <div class="h-group space-between">
                         <input type="button" value="Судей" name="judges" id="show_judges">
                         <input type="button" value="Комментатор(ов)" name="commentator" id="show_commentators">
-                    </div>
+                    </div> -->
                      <div class="v-group">
-                        <label for="champ-name" class="small-text">Полезная информация</label>
+                        <!-- <label for="champ-name" class="small-text">Полезная информация</label> -->
                         <input type="text" name="useful" id="useful" class="text-form full-form double-height-form" placeholder="Заголовок">
 
                         <input type="text" name="champ" id="useful_title" class="text-form full-form double-height-form" placeholder="Текст">
@@ -38,8 +39,28 @@
 
                     </div> 
                 </div>
-
-                
+                <div class="block">
+                    <div id="table_judges" class="full-form">
+                        <% if(judges) { %>
+                            <p class="first">Судьи</p>
+                        <% for (let i = 0; i < judges.length; i++) { %>
+                            <div class="h-group space-between">
+                                <label><%= judges[i].fio %></label>
+                                <input type="button" value="Показать" class="show_judge" data-name="<%= judges[i].fio %>" data-value="<%= judges[i]._id %>">
+                            </div>
+                        <% } } %>
+                    </div>
+                    <div id="table_commentators" class="full-form">
+                        <% if(commentators) { %>
+                            <p class="first">Комментаторы</p>
+                        <% for (let i = 0; i < commentators.length; i++) { %>
+                            <div class="h-group space-between">
+                                <label><%= commentators[i].fio %></label>
+                                <input type="button" value="Показать" class="show_commentator" data-name="<%= commentators[i].fio %>" data-value="<%= commentators[i]._id %>">
+                            </div>
+                        <% } } %>
+                    </div>
+                </div>
 
             </div>
         <div class="column-container">

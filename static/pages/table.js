@@ -1,12 +1,12 @@
-const notif = `<div class="notification disabled" id={{id}}>
+const notif = `<div class="notification disabled notif_main " id={{id}}>
         {{img_place}}
-        <div class="content">
+        <div class="content ">
             <div class="name">{{name}}</div>
-            <div class="region">{{description}}</div>
+            <div class="region notif_accent notif_text">{{description}} </div>
         </div>
-        <div class="img {{main_class}} {{add_class}}"></div>
+        <div class="img {{main_class}} {{add_class}} notif_accent"></div>
     </div>`
-const notifImg = `<img src="{{img}}">`
+const notifImg = `<img class="notif_border_main" src="{{img}}">`
 let testConnect = setInterval(() => {
     if (socket.connected) {
         clearInterval(testConnect)
@@ -53,7 +53,7 @@ socket.on('new_notify', (data) => {
 
         notifyBlock.innerHTML += newNotify
         setNotify(id, (i+1)*10)
-        clearNotify(id, (i+1)*100)
+        // clearNotify(id, (i+1)*100)
 
         
     }
@@ -76,7 +76,7 @@ socket.on('new_notify', (data) => {
             setTimeout(() => {
                console.log(notf.classList)
                 
-            // notf.remove()
+             notf.remove()
 
             }, 1000)
         }, 3000 + time)
@@ -147,7 +147,7 @@ function setData(data) {
     foll_divs.forEach(el => {
         el.style.display = data.is_fouls ? '' : 'none'
     })
-
+    notifyBlock.classList = 'notifications_div ' + data.notif_type
     first_style_tag(data.tablo.type)
     console.log(data)
     setNames(data)
@@ -208,10 +208,10 @@ function setTime(data) {
             timerDivs[key]?.forEach(el => el.innerHTML = data.value)
         }
         else if(key == 'r'){
-            timerDivs[key]?.forEach(el => el.innerHTML = ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : '')
+            timerDivs[key]?.forEach(el => el.innerHTML = ( data.scenarios == '1' || data.scenarios == '2' ) ? `${data.scenarios}T` : '')
         }
         else if(key == 'tr'){
-            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : '')
+            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  ( data.scenarios == '1' || data.scenarios == '2' ) ? `  ${data.scenarios}T` : '')
         }
         else if(key == 'nr'){
             timerDivs[key]?.forEach(el => el.innerHTML = scenariosA[data.scenarios])
@@ -223,7 +223,7 @@ function setTime(data) {
                 timerDivs[key]?.forEach(el => el.innerHTML = '')
         }
         else if(key == 'trn'){
-            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  "  " + (( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : scenariosA[data.scenarios]))
+            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  "  " + (( data.scenarios == '1' || data.scenarios == '2' ) ? `  ${data.scenarios}T` : scenariosA[data.scenarios]))
         }
        // if(timerDivs[key]) timerDivs[key].innerHTML = data.value
     })
@@ -392,3 +392,4 @@ function setNames(data) {
         getA('.var-away, .away-team, .var-away-short').forEach(el => el.innerHTML = data.team2_name);
     
 }
+

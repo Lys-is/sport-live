@@ -21,11 +21,9 @@
                     <%
                     }); %>
                     </select>
-                </div>
-                <div class="h-group">
-                    <input type="button" value="Обновить список" class="full-form" name="match-button-refresh">
                     <input type="button" value="Применить выделенный" class="full-form" name="match-button-accept" id="match_accept">
                 </div>
+                
             </div>
             <div class="block">
                 <div class="h-group">
@@ -45,7 +43,7 @@
             </div>
             <div class="block">
                 <div class="h-group centered">
-                    <p class="first">Счет</p>
+                    
                 </div>
 
                 <div class="h-group">
@@ -54,18 +52,14 @@
                         <input type="number" value="0" class="text-form small-form" name="team1" data-type="score" id="score_team1">
                         <input type="button" value="+" class="circle-button" name="plus">
                     </div>
-
+                    <p class="first">Счет</p>
                     <div class="h-group score_div" data-team="2">
                         <input type="button" value="-" class="circle-button" name="minus">
                         <input type="number" value="0" class="text-form small-form" name="team2" data-type="score" id="score_team2">
                         <input type="button" value="+" class="circle-button" name="plus">
                     </div>
                 </div>
-                <div class="h-group ">
-                    <p class="">Фолы</p>
-                    <input type="checkbox" name="is_fouls" id="is_fouls">
-
-                </div>
+                
 
                 <div class="h-group foll_div">
                     <div class="h-group score_div" data-team="1">
@@ -73,7 +67,11 @@
                         <input type="number" value="0" class="text-form small-form" name="team1_foll" data-type="score" id="team1_foll">
                         <input type="button" value="+" class="circle-button" name="plus">
                     </div>
-
+                    <div class="h-group ">
+                        <p class="first">Фолы</p>
+                        <input type="checkbox" name="is_fouls" id="is_fouls">
+                    </div>
+                    
                     <div class="h-group score_div" data-team="2">
                         <input type="button" value="-" class="circle-button" name="minus">
                         <input type="number" value="0" class="text-form small-form" name="team2_foll" data-type="score" id="team2_foll">
@@ -153,13 +151,8 @@
                             %>
                         </select>
                 </div>
-            </div>
-           
-            <div class="block">
                 <div class="h-group center">
-                    <p class="first">Сценарий</p>
-                </div>
-                <div class="h-group">
+                    <label for="scenarios" class="inline-form-label small-text nowrap">Сценарий</label>
                     <select name="scenarios" id="scenarios" class="text-form full-form">
                         <option value="begin">Начало матча</option>
                         <option value="1">1 тайм</option>
@@ -170,13 +163,15 @@
                         <option value="out">Тайм-аут</option>
                     </select>
                 </div>
-            </div>
-            
-
-            <div class="block">
                 <div class="h-group center">
-                    <p class="first">Сброс и перезагрузка</p>
+                    <label for="scenarios" class="inline-form-label small-text nowrap">Тип уведомлений</label>
+                    <select name="notif_type" id="notif_type" class="text-form full-form">
+                        <option value="def">Обычный</option>
+                        <option value="circ">Новый</option>
+                    </select>
                 </div>
+            </div>
+            <div class="block">
                 <div class="h-group">
                     <input type="button" value="Сбросить все" class="full-form red" name="reset-all" id="reset_all">
                     <input type="button" value="Перезагрузить табло" class="full-form yellow" name="refresh-all" onclick="window.location.reload();">
@@ -193,6 +188,14 @@
                 <div class="h-group center">
                     <p class="first">Пенальти</p>
                 </div>
+                <div class="h-group">
+                    <label for="penalty_num" class="inline-form-label small-text nowrap">Пенальти №</label>
+                    <div class="h-group score_div">
+                        <input type="button" value="-" class="circle-button" name="minus">
+                        <input type="number" value="1" class="text-form small-form" name="penalty_num" id="penalty_num" min="1">
+                        <input type="button" value="+" class="circle-button" name="plus">
+                    </div>
+                    </div>  
                 <div id="penalty_div">
                     <div class="h-group bigger-gap">
                         <div class="h-group">

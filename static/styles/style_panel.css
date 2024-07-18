@@ -120,8 +120,8 @@ input[type="color"] {
     display: flex;
     flex: 1;
     flex-direction: column;
-    justify-content: center;
-    gap: 10px;
+    justify-content: space-between;
+    /* gap: 10px; */
 }
 
 .h-group{
@@ -135,13 +135,14 @@ input[type="color"] {
     width: 100%;
     margin-bottom: 3px;
     align-items: center;
+    position: relative;
 }
 
 .text-form {
     padding-inline: 10px;
     border: 1px solid black;
     border-radius: 3px;
-    height: 20px;
+    height: 21px;
     font-size: 14px;
     -webkit-appearance: none;
     background-color: #363636;
@@ -193,8 +194,8 @@ input[type="button"]:hover {
 
 
 .circle-button {
-    width: 30px !important;
-    height: 30px !important;
+    width: 25px !important;
+    height: 25px !important;
     border-radius: 100px !important;
 }
 
@@ -253,7 +254,7 @@ input[type="button"]:hover {
 }
 
 .bigger-gap{
-    gap: 17px;
+    gap: 11px;
 }
 
 .play-icon {
@@ -283,6 +284,7 @@ input[type="button"]:hover {
 
 .inline-form-label {
     line-height: 30px;
+    width: 105px;
 }
 
 .wrap {
@@ -351,4 +353,11 @@ table th:first-child, table td:first-child {
 input:disabled {
     background-color: #363636;
     cursor: no-drop;
+}
+.score_div {
+    width: 50%;
+}
+#is_fouls {
+    position: absolute;
+    right: 25px;
 }

@@ -304,7 +304,7 @@ body:after {
 }
 
 .bgright {
-	background: url("img/bgleft.svg") rgba(8,7,58,0.95) no-repeat;
+	background: url(img/bgleft.svg) #08073af2 no-repeat;
 	background-position: right;
 	height: 60px;
 	min-width: 260px;
@@ -1478,3 +1478,23 @@ body:after {
     padding: 10px;
     display: none;
 }
+
+/* .notification {
+	color: white !important;
+}
+.notif_main {
+    background-color: #08073af2 !important;
+}
+.region.notif_accent {
+    background-color: #FF003D !important;
+}
+.notifications_div.circ .notif_accent {  
+    background-color: #FF003D !important;
+}
+
+.notifications_div.circ .notif_border_main {
+    border-color:  #08073af2 !important;
+}
+.notif_text {
+    color: #ffffff !important;
+} */

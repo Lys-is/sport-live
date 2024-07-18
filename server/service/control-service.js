@@ -260,8 +260,9 @@ class Control {
         this.timer = new Timer()
         this.scoreboard = new Scoreboard()
         this.tablo = new Tablo()
-        this.style = style
+        this.style = style || 'style_1'
         this.is_fouls = false
+        this.notif_type = 'def'
     }
     async setMatch(matchId) {
         if(!matchId) return
@@ -324,6 +325,9 @@ class Control {
                     break
                 case 'is_reverse':
                     this.timer.reverse(data[key])
+                    break
+                case 'notif_type':
+                    this.notif_type = data[key]
                     break
             }
         }

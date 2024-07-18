@@ -289,18 +289,18 @@ body {
 
 #timer-round {
     display: flex;
-	flex-direction: row;
-	align-items: center;
-	align-content: center;
+    flex-direction: row;
+    align-items: flex-end;
+    align-content: center;
     font-weight: 700;
     font-size: 23px;
     margin-top: 5px;
 }
 
 #top-timer {
-    margin-right: 20px;
+    /* margin-right: 20px; */
     text-align: left;
-    width: 60px;
+    /* width: 60px; */
 }
 
 /* TOP SCOREBOARD PLAY-OFF CSS */
@@ -403,9 +403,9 @@ body {
 }
 
 .score-value {
-    font-size: 100px;
+    font-size: 65px;
     font-weight: 800;
-    margin-top: -24px;
+    margin-top: -8px;
     z-index: 999;
 }
 
@@ -464,6 +464,7 @@ body {
 #top-timer {
     margin-left: 5px;
     text-align: left;
+    padding-right: 10px;
 }
 
 
@@ -1317,7 +1318,7 @@ div.referees .ev-player-img {
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
-    color: rgba(255, 255, 255, 1.00);
+    color: white;
     text-align: left;
     margin-right: 20px;
     min-width: 215px;
@@ -1974,3 +1975,23 @@ video_container{
     justify-content: center;
 
 }
+/* 
+.notif_main {
+    background-color: #7b398b !important;
+}
+.region.notif_accent {
+    background-color: #f9b732 !important;
+}
+.notifications_div.circ .notif_accent {  
+    background-color: #f9b732 !important;
+}
+.background_text {
+    background-color: #340055 !important;
+}
+
+.notifications_div.circ .notif_border_main {
+    border-color:  #7b398b !important;
+}
+.notif_text {
+    color: #000000 !important;
+} */

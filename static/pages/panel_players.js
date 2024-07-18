@@ -282,77 +282,35 @@ function couchNotify(num, team, type, data) {
     socket.emit('notify', dta)
 }
 
-
-
-
-showJudges.addEventListener('click', (e) => {
-    let title = 'Судьи матча'
-    let txt = []
-    let ids = []
-    if(global_data.match){
-        let arrJudges = global_data.match.judges
-
-        arrJudges.forEach((judge, i) => {
-            txt.push(`Судья ${judge.fio}`)
-        })
-        ids = arrJudges.map(el => el._id)
-        console.log(ids)
-    }
-
-    let dta = {
-        type: 'judge',
-        size : 'b',
-        text: txt,
-        title: title,
-        ids: ids,
-        model: 'Judge',
-    }
-    socket.emit('notify', dta)
+let showJudgesBtns = getA('.show_judge');
+let showCommentatorsBtns = getA('.show_commentator');
+showJudgesBtns?.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        let txt = e.target.getAttribute('data-name')
+        let id = e.target.getAttribute('data-value')
+        let dta = {
+            type: 'judge',
+            size : 'b',
+            text: [txt],
+            title: 'Судья',
+            ids: [id],
+            model: 'Judge',
+        }
+        socket.emit('notify', dta)
+    })
 })
-
-showCommentators.addEventListener('click', (e) => {
-    let title = 'Комментаторы матча'
-    let txt = []
-    let ids = []
-    if(global_data.match){
-        let arrCommentators = global_data.match.commentators
-
-        arrCommentators.forEach((commentator, i) => {
-            txt.push(`Комментатор ${commentator.fio}`)
-        })
-        ids = arrCommentators.map(el => el._id)
-        console.log(ids)
-    }
-
-    let dta = {
-        type: 'commentator',
-        size : 'b',
-        text: txt,
-        title: title,
-        ids: ids,
-        model: 'Commentator',
-    }
-    socket.emit('notify', dta)
-    // let title = ''
-    // let txt = ""
-    // let commentators = [get('#comm1').value, get('#comm2').value].filter(el => el)
-    // if(!commentators.length) return
-    
-    // if(commentators.length == 1) {
-    //     title = 'Комментатор матча'
-    //     txt += `${commentators[0]}`
-    // }
-    // else {
-    //     title = 'Комментаторы матча'
-    //     txt += `${commentators[0]} и ${commentators[1]}`
-    // }
-
-    // let dta = {
-    //     type: 'couch',
-    //     size : 'b',
-    //     text: txt,
-    //     title: title,
-    // }
-    // socket.emit('notify', dta)
-    
+showCommentatorsBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        let txt = e.target.getAttribute('data-name')
+        let id = e.target.getAttribute('data-value')
+        let dta = {
+            type: 'commentator',
+            size : 'b',
+            text: [txt],
+            title: 'Комментатор',
+            ids: [id],
+            model: 'Commentator',
+        }
+        socket.emit('notify', dta)
+    })
 })

@@ -1,6 +1,9 @@
 let Match = require('../models/match-model');
 let User = require('../models/user-model');
 let League = require('../models/league-model');
+const Judge = require('../models/judge-model');
+const Commentator = require('../models/commentator-model');
+const Subscribe = require('../models/subscribe-model');
 const Global = require('../models/global-model');
 const UserD = require('../models/userD-model');
 let Style = require('../models/style-model');
@@ -125,6 +128,8 @@ class Constrollers {
     }
     async get__panel_players(req, res) {
         let matches = await Match.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
+        let judges = await Judge.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
+        let commentators = await Commentator.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
         let userAd = await User.findById(req.params.id);
         if(!userAd) return res.send('Панель управления. Пользователь не найден');
         let styles = await Style.find({creator: userAd._id});
@@ -134,10 +139,18 @@ class Constrollers {
             title: 'Панель управления',
             auth: userAd || false,
             matches,
-            styles
+            styles,
+            judges,
+            commentators
         });
     }
     async get__inactive(req, res) {
+        if(req.user) {
+            console.log(req.user);
+            let subscribe = await Subscribe.findOne({creator: req.user.id});
+            if(subscribe)
+                return res.redirect('/lk');
+        }
         return res.send('Ваш аккаунт неактивен, пожалуйста, обратитесь к администратору <br> <a href="/login">Страница авторизации</a>');
     }
     async get__table(req, res) {
@@ -158,7 +171,7 @@ class Constrollers {
             console.log(e);
             res.send('Произошла ошибка');
         }
-        }
+    }
         
     api = require('./api')
 }

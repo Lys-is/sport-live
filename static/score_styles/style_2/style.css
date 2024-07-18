@@ -313,7 +313,7 @@ body:after {
 }
 
 .bgright {
-	background: url("img/bgright1.svg") rgba(11,44,49,0.95) no-repeat;
+	background: url(img/bgright1.svg) #0b2c31f2 no-repeat;
 	background-position: right;
 	height: 60px;
 	min-width: 260px;
@@ -1494,3 +1494,22 @@ body:after {
     padding: 10px;
     display: none;
 }
+/* .notification {
+	color: white !important;
+}
+.notif_main {
+    background-color: #0b2c31f2 !important;
+}
+.region.notif_accent {
+    background-color: #2aa45b !important;
+}
+.notifications_div.circ .notif_accent {  
+    background-color: #2aa45b !important;
+}
+
+.notifications_div.circ .notif_border_main {
+    border-color:  #0b2c31f2 !important;
+}
+.notif_text {
+    color: #000000 !important;
+} */

@@ -170,6 +170,15 @@ is_reverse.addEventListener('click', (e) => {
     socket.emit('new_data', data)
     socket.emit('get_time')
 })
+let notif_type = get('#notif_type')
+notif_type.addEventListener('change', (e) => {
+    let type = e.target.value
+    let data = {
+        notif_type: type
+    
+    }
+    socket.emit('new_data', data)
+})
 socket.on('update_data', (data) => {
     global_data = data
     if(style)
@@ -199,6 +208,9 @@ socket.on('update_data', (data) => {
     is_foul.checked = data.is_fouls
     is_reverse.checked = data.timer.is_reverse
     foul_inpts.forEach(inp => inp.disabled = !data.is_fouls)
+    is_foul.disabled = false
+
+    notif_type.value = data.notif_type
 })
 
 function setTimer(timer) {
@@ -228,7 +240,31 @@ function setScoreboard(scoreboard) {
     get('#team2_color').value = scoreboard.team2_color
     setPenalty(scoreboard.penalty)
 }
-
+let penalty_num = 0
+penalty_numInput = get('#penalty_num')
+penalty_numInput.addEventListener('input', pen_num)
+function pen_num() {
+    let num = penalty_numInput.value
+    if(num < 1) {
+        penalty_numInput.value = 1
+        num = 1
+    }
+   let penDivs = getA('#penalty_div > .h-group')
+   penDivs.forEach(div => {
+       if(div.getAttribute('data-index') != num - 1) {
+           div.style.display = 'none'
+       }
+       else
+           div.style.display = 'flex'
+   })
+   console.log(penDivs.length, num)
+   if(penDivs.length < num) {
+       for(let i = penDivs.length; i < num; i++) {
+           addPen.click()
+       }
+   }
+  
+}
 function setPenalty(penalty) {
     let div = get('#penalty_div')
     div.innerHTML = ''
@@ -295,6 +331,7 @@ resetPen.addEventListener('click', (e) => {
     socket.emit('new_data', data)
 })
 function startPenaltys() {
+    pen_num()
     getA('.penalty_box > input').forEach(box => {
         box.addEventListener('click', (e) => {
             let index = e.target.closest('.h-group.bigger-gap').getAttribute('data-index')
