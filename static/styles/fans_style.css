@@ -798,6 +798,7 @@ td.no_cell{
     align-items: center;
     background-color: #fafafa;
     cursor: pointer;
+    margin-inline: auto;
 }
 
 .player-block p {
@@ -810,7 +811,7 @@ td.no_cell{
     grid-template-columns: initial;
     gap: 20px;
     padding: 30px;
-    padding-left: 0%;
+    padding-inline: 0%;
     flex-wrap: wrap;
     justify-content: space-between;
 }
