@@ -114,6 +114,8 @@ class Constrollers {
     }
     async get__panel(req, res) {
         let matches = await Match.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
+        matches = await getFutureMatches(matches)
+        console.log(matches)
         let userAd = await User.findById(req.params.id);
         if(!userAd) return res.send('Панель управления. Пользователь не найден');
         let styles = await Style.find({creator: userAd._id});
@@ -196,5 +198,16 @@ let compareDates = (from, to) => {
         return 'Не начат';
     }
     return 'Неопределено';
+}
+async function getFutureMatches(matches) {
+    try {
+        return futureMatches = matches.filter((item) => {
+            //return true
+            return new Date(`${item.date} 23:59`) > Date.now() 
+        })
+    } catch (e) {
+        console.error(e);
+        return matches
+    }
 }
 module.exports = new Constrollers()
