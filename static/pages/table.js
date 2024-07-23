@@ -71,7 +71,7 @@ socket.on('new_notify', (data) => {
         setTimeout(() => {
             let notf = get(`#${id}`)
             notf.style.opacity = '0'
-            notf.style.transform = 'translateX(-600px)'
+            notf.style.transform = 'translateX(800px)'
             
             setTimeout(() => {
                console.log(notf.classList)

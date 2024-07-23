@@ -16,7 +16,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     color: white;
     z-index: 1000;
-    min-width: 400px;
+    min-width: 500px;
     justify-content: space-between;
     transition-duration: 500ms;
     max-height: 199px;
@@ -130,7 +130,7 @@ body {
     display: flex;
     align-items: stretch;
     position: fixed;
-    left: 56px;
+    right: 107px;
     row-gap: 16px;
     bottom: 17%;
     padding: 10px;
