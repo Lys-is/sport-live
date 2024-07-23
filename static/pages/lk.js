@@ -997,13 +997,19 @@ function getHrefPanel() {
 open_panel.addEventListener('click', (e) => {
     e.preventDefault()
     window.open('/panel/' + getHrefPanel(), '_blank')
+    window.focus();
+
 })
 
 open_players.addEventListener('click', (e) => {
     e.preventDefault()
     window.open('/panel_players/' + getHrefPanel() , '_blank')
+    window.focus();
+
 })
 open_table.addEventListener('click', (e) => {
     e.preventDefault()
     window.open('/table/' + getHrefPanel() , '_blank')
+    window.focus();
+
 })
