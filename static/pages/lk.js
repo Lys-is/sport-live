@@ -990,25 +990,21 @@ let open_panel_btn = get('#open_panel'),
 
 function getHrefPanel() {
     let value = panel_select.value == 'default' ? '' : '_' + panel_select.value
-    panel_slot.classList.toggle('active')
     let href = panel_slot.getAttribute('data-id') + value
     return href
 }
 open_panel.addEventListener('click', (e) => {
-    e.preventDefault()
     window.open('/panel/' + getHrefPanel(), '_blank')
     window.focus();
 
 })
 
 open_players.addEventListener('click', (e) => {
-    e.preventDefault()
     window.open('/panel_players/' + getHrefPanel() , '_blank')
     window.focus();
 
 })
 open_table.addEventListener('click', (e) => {
-    e.preventDefault()
     window.open('/table/' + getHrefPanel() , '_blank')
     window.focus();
 
