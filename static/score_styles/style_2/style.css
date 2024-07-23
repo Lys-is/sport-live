@@ -165,7 +165,7 @@ body:after {
 }
 
 .bgleft {
-	background: url("img/bgleft1.svg") rgba(11,44,49,0.95) no-repeat;
+	background: url(img/bgleft1.svg) #0b2c31f2 no-repeat;
 	background-position: left;
 	height: 60px;
 	min-width: 260px;
@@ -1458,6 +1458,8 @@ body:after {
     margin: auto;
     backdrop-filter: blur(30px)brightness(0.8);
     border: 4px solid #12361d;
+    background-color: #0b2c31f2;
+    color: white;
 }
 
 #mid-col,

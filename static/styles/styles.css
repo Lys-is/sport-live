@@ -380,12 +380,12 @@ table tr td {
     /* width: 100%; */
     /* height: 100%; */
     text-align: center;
-    border: var(--nav-bc) 1px solid;
+    border: var(--header-borders) 1px solid;
     padding: 5px;
     padding-block: 10px;
     font-size: small;
-    /* color: #4f4f4f; */
-    /* background-color: var(--header-bc); */
+    color: #4f4f4f;
+    background-color: var(--header-bc);
 }
 
 #first-row td {
