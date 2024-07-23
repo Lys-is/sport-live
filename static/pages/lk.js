@@ -984,31 +984,26 @@ panel_slot_btn.addEventListener('click', (e) => {
 })
 
 let open_panel_btn = get('#open_panel'),
-    open_all = get('#open_panel_all'),
+    open_players = get('#open_panel_players'),
+    open_table = get('#open_table'),
     panel_select = get('#panel_select');
+
+function getHrefPanel() {
+    let value = panel_select.value == 'default' ? '' : '_' + panel_select.value
+    panel_slot.classList.toggle('active')
+    let href = panel_slot.getAttribute('data-id') + value
+    return href
+}
 open_panel.addEventListener('click', (e) => {
     e.preventDefault()
-    let value = panel_select.value == 'default' ? '' : '_' + panel_select.value
-    panel_slot.classList.toggle('active')
-    let href = panel_slot.getAttribute('data-id') + value
-    window.open('/panel/' + href, '_blank')
+    window.open('/panel/' + getHrefPanel(), '_blank')
 })
-open_all.addEventListener('click', (e) => {
+
+open_players.addEventListener('click', (e) => {
     e.preventDefault()
-    let value = panel_select.value == 'default' ? '' : '_' + panel_select.value
-    panel_slot.classList.toggle('active')
-    let href = panel_slot.getAttribute('data-id') + value
-    let b = setInterval(() => {
-        
-    }, 500)
-    let arr = ['panel', 'panel_players', 'table']
-    Promise.all(arr.map((href, i) => {
-         setTimeout(() => {
-            window.open('/' + href + '/' + panel_slot.getAttribute('data-id') + value, '_blank')
-         }, 300 * i)
-    })
-    )
-    // window.open('/panel/' + href, '_blank')
-    // window.open('/panel_players/' + href, '_blank')
-    // window.open('/table/' + href, '_blank')
+    window.open('/panel_players/' + getHrefPanel() , '_blank')
+})
+open_table.addEventListener('click', (e) => {
+    e.preventDefault()
+    window.open('/table/' + getHrefPanel() , '_blank')
 })
