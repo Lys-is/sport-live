@@ -101,18 +101,17 @@ function playerNotifyListener(e) {
     let txt = [], title = ''
     if(type[0] == 'goal') {
         txt[0] = player
-        title = 'Гоооооол'
     }
     else if(type[0] == 'yellow') {
         txt[0] = player
-        title = `Жёлтая карта (${team})`
         type[0] = 'yellow-card'
     }
     else if(type[0] == 'red') {
         txt[0] = player
-        title = `Красная карта (${team})`
         type[0] = 'red-card'
     }
+    title = team
+
     let data = {
         type: type[0],
         size : type[1],

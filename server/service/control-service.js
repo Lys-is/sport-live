@@ -97,7 +97,7 @@ class Timer {
     clearTimer() {
         deleteTimer(this)
 
-        this.minuts = this.is_reverse ? this.max_time * 2 : 0
+        this.minuts = 0
         this.seconds = 0
         this.status = 'stop'
 

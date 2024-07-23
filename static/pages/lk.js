@@ -4,6 +4,8 @@ let lk_main = get('#lk_main')
 let links = getA('p', nav)
 let account_btn = get('#header_account');
 let logout_btn = get('#logout_btn');
+let panel_slot_btn = get('#header_panel'),
+    panel_slot = get('#panel_slot');
 account_btn.addEventListener('click',(e)=>{
     logout_btn.classList.toggle('active');
     }
@@ -974,3 +976,39 @@ function initDel () {
         })
     })
 }
+
+
+panel_slot_btn.addEventListener('click', (e) => {
+    e.preventDefault()
+    panel_slot.classList.toggle('active')
+})
+
+let open_panel_btn = get('#open_panel'),
+    open_all = get('#open_panel_all'),
+    panel_select = get('#panel_select');
+open_panel.addEventListener('click', (e) => {
+    e.preventDefault()
+    let value = panel_select.value == 'default' ? '' : '_' + panel_select.value
+    panel_slot.classList.toggle('active')
+    let href = panel_slot.getAttribute('data-id') + value
+    window.open('/panel/' + href, '_blank')
+})
+open_all.addEventListener('click', (e) => {
+    e.preventDefault()
+    let value = panel_select.value == 'default' ? '' : '_' + panel_select.value
+    panel_slot.classList.toggle('active')
+    let href = panel_slot.getAttribute('data-id') + value
+    let b = setInterval(() => {
+        
+    }, 500)
+    let arr = ['panel', 'panel_players', 'table']
+    Promise.all(arr.map((href, i) => {
+         setTimeout(() => {
+            window.open('/' + href + '/' + panel_slot.getAttribute('data-id') + value, '_blank')
+         }, 300 * i)
+    })
+    )
+    // window.open('/panel/' + href, '_blank')
+    // window.open('/panel_players/' + href, '_blank')
+    // window.open('/table/' + href, '_blank')
+})

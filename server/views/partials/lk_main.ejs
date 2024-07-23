@@ -6,7 +6,21 @@
 
         <div class="filler"></div>
         <div class="header_block">
-            <a target="_blank" href="/panel/<%= auth._id %>" class="header_text">Панель</a>
+            <a target="_blank" href="/panel/<%= auth._id %>" id="header_panel" class="header_text">Панель</a>
+            <div id="panel_slot" data-id="<%= auth._id %>">
+                <div class="form-group">
+                    Слот
+                    <select class="select" id="panel_select">
+                        <option value="default" selected>По умолчанию</option>
+                        <% for(let i = 1; i <= 10; i++) { %>
+                        <option value="<%= i %>">Слот <%= i %></option>
+                        <% } %>
+                    </select>
+                </div>
+                
+                <input type="button" value="Открыть панель" class="button blue_button" id="open_panel">
+                <input type="button" value="Открыть всё" class="button blue_button" id="open_panel_all">
+            </div>
         </div>
         <div class="header_block">
             <a target="_blank" href="/panel_players/<%= auth._id %>" class="header_text">Игроки</a>

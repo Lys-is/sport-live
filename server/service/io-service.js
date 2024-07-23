@@ -32,21 +32,22 @@ class IoService {
               const userToken = await tokenService.validateRefreshToken(cookies['refreshToken'])
               let user
               //console.log(socket.request)
-              if(userToken)
-                user = await User.findOne({_id: userToken.id})
+              // if(userToken)
+              //   user = await User.findOne({_id: userToken.id})
 
-              if (!user) {
-                console.log('no user')
-                socket.user = false
-                startPanel(controls, socket)
-              }
-              else{
-                socket.user = user
-                console.log(socket.user._id.toString())
-                socket.join(socket.user._id.toString())
-                startPanel(controls, socket)
+              // if (!user) {
+              //   console.log('no user')
+              //   socket.user = false
+              //   startPanel(controls, socket)
+              // }
+              // else{
+              //   socket.user = user
+              //   console.log(socket.user._id.toString())
+              //   socket.join(socket.user._id.toString())
+              //   startPanel(controls, socket)
 
-              }
+              // }
+              startPanel(controls, socket)
             }
             catch(e){
               socket.user = false
@@ -87,10 +88,10 @@ function startPanel(controls, socket) {
 
   socket.on('join_panel', async (tableId) => {
     try {
-
+      
       userId = tableId
       if(!socket.user)
-        socket.user = await User.findOne({ _id: tableId });
+        socket.user = await User.findOne({ _id: tableId.split('_')[0] });
       control = controls[userId] || new controlService(userId, socket.user.tablo_style, io);
       controls[userId] = control;
       socket.join(userId);
@@ -105,10 +106,10 @@ function startPanel(controls, socket) {
 
       userId = tableId
       if(!socket.user)
-        socket.user = await User.findOne({ _id: tableId });
+        socket.user = await User.findOne({ _id: tableId.split('_')[0] });
       control = controls[userId] || new controlService(userId, socket.user.tablo_style, io);
       controls[userId] = control;
-      const user = await User.findOne({ _id: tableId });
+      const user = await User.findOne({ _id: tableId.split('_')[0] });
       socket.join(tableId);
       socket.emit('start', control.getData);
     } catch (e) {

@@ -113,32 +113,43 @@ class Constrollers {
         });
     }
     async get__panel(req, res) {
-        let matches = await Match.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
-        matches = await getFutureMatches(matches)
-        console.log(matches)
-        let userAd = await User.findById(req.params.id);
-        if(!userAd) return res.send('Панель управления. Пользователь не найден');
-        let styles = await Style.find({creator: userAd._id});
+        try {
+            let uId = req.params.id.split('_')
+            let userAd = await User.findById(uId[0]);
+            if(!userAd) return res.send('Панель управления. Пользователь не найден');
+            let matches = await Match.find({creator: userAd._id, status_doc: {$ne: 'deleted'}})
+            matches = await getFutureMatches(matches)
+            console.log(matches)
+            
+            let styles = await Style.find({creator: userAd._id});
 
-        res.render('panel', {
-            id: req.params.id,
-            title: 'Панель управления',
-            auth: userAd || false,
-            matches,
-            styles
-        });
+            res.render('panel', {
+                id: req.params.id,
+                title: 'Панель управления ' + (uId[1] || ''),
+                auth: userAd || false,
+                matches,
+                styles
+            });
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+        
     }
     async get__panel_players(req, res) {
-        let matches = await Match.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
-        let judges = await Judge.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
-        let commentators = await Commentator.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
-        let userAd = await User.findById(req.params.id);
+        let uId = req.params.id.split('_')
+        let userAd = await User.findById(uId[0]);
         if(!userAd) return res.send('Панель управления. Пользователь не найден');
+
+        let matches = await Match.find({creator: userAd._id, status_doc: {$ne: 'deleted'}})
+        let judges = await Judge.find({creator: userAd._id, status_doc: {$ne: 'deleted'}})
+        let commentators = await Commentator.find({creator: userAd._id, status_doc: {$ne: 'deleted'}})
         let styles = await Style.find({creator: userAd._id});
 
         res.render('panel_players', {
             id: req.params.id,
-            title: 'Панель управления',
+            title: 'Панель управления ' + (uId[1] || ''),
             auth: userAd || false,
             matches,
             styles,
@@ -159,11 +170,12 @@ class Constrollers {
         try{
             //console.log(req);
             if(!req.params.id || req.params.id == 'undefined') return
-            let userAd = await User.findById(req.params.id);
+            let uId = req.params.id.split('_')
+            let userAd = await User.findById(uId[0]);
             let styles = await Style.find({creator: userAd._id});
             res.render('table', {
                 id: req.params.id,
-                title: 'Табло',
+                title: 'Табло ' + (uId[1] || ''),
                 auth: userAd || false,
                 style: userAd.tablo_style || 'style_1',
                 styles
