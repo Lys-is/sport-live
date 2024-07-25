@@ -891,7 +891,7 @@ function init__filter() {
         }
     }
     let clear_btn = get("#clear_filters");
-    clear_btn.addEventListener("click", (e) => {
+    clear_btn?.addEventListener("click", (e) => {
         filters.forEach(filter => {
             filter.value = "";
         })
