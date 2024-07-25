@@ -8,6 +8,7 @@ const team = require('../team');
 class MatchController {
 
     async get__create(req, res) {
+        await Match.updateMany({}, {circle: '1'});
         try {
             let teams = await Team.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
             let tournaments = await Tournament.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});

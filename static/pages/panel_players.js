@@ -13,12 +13,12 @@ let html = {
                 </tr>`,
     player: `<tr data-id="{{id}}" data-name="{{name}}" data-team="{{team}}">
                 <td>{{name}}</td>
-                <td><input type="button" value="1" class="square30" data-type="goal_s" name="pers1_1"></td>
-                <td><input type="button" value="1" class="square30" data-type="goal_b" name="pers1_2"></td>
-                <td><input type="button" value="1" class="square30 yellow" data-type="yellow_s" name="pers1_3"></td>
-                <td><input type="button" value="1" class="square30 yellow" data-type="yellow_b" name="pers1_4"></td>
-                <td><input type="button" value="1" class="square30 red" data-type="red_s" name="pers1_5"></td>
-                <td><input type="button" value="1" class="square30 red" data-type="red_b" name="pers1_6"></td>
+                <td><input type="button" value="{{num}}" class="square30" data-type="goal_s" name="pers1_1"></td>
+                <td><input type="button" value="{{num}}" class="square30" data-type="goal_b" name="pers1_2"></td>
+                <td><input type="button" value="{{num}}" class="square30 yellow" data-type="yellow_s" name="pers1_3"></td>
+                <td><input type="button" value="{{num}}" class="square30 yellow" data-type="yellow_b" name="pers1_4"></td>
+                <td><input type="button" value="{{num}}" class="square30 red" data-type="red_s" name="pers1_5"></td>
+                <td><input type="button" value="{{num}}" class="square30 red" data-type="red_b" name="pers1_6"></td>
             </tr>`,
     playeOption: `<option value="{{id}}">{{name}}</option>`,
     
@@ -221,7 +221,7 @@ function setMatch(data, team) {
    
 
     data['players_'+team].forEach(player => {
-        nowTable.innerHTML += html.player.replace('{{id}}', player._id).replaceAll('{{name}}', player.fio).replaceAll('{{team}}', data.match['team_'+team].name)
+        nowTable.innerHTML += html.player.replace('{{id}}', player._id).replaceAll('{{name}}', player.fio).replaceAll('{{team}}', data.match['team_'+team].name).replaceAll('{{num}}', player.num || 0)
     })
     nowTable.innerHTML += '</tbody>'
 

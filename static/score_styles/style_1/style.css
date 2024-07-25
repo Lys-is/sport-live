@@ -20,14 +20,7 @@
 
 /* TOP SCOREBOARD CSS */
 
-body {
-/*    background: url("img/foot_bg2.jpg");*/
-    background-color: transparent;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    zoom: 1;
-}
+body {/* background: url("img/foot_bg2.jpg"); */background-color: transparent;margin: 0;display: flex;justify-content: center;zoom: 1;}
 
 /*.big,
 .mid,
@@ -98,13 +91,13 @@ body {
         background-size: cover;
         position: absolute;
         top: 14px;
-        opacity: 0.6;
+        opacity: 1;
         filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
 }
 
 #top-row-1 {
     /* background-color: #340055; */
-    opacity: 0.9;
+    opacity: 1;
     height: 60px;
     margin: auto;
     display: flex;
@@ -531,7 +524,7 @@ body {
     font-family: 'Exo 2', sans-serif;
     font-weight: 600;
     font-size: 15px;
-    opacity: 0.7;
+    opacity: 1;
     vertical-align: bottom;
 }
 

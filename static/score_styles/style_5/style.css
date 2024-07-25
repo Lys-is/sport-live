@@ -661,7 +661,7 @@ body {
     font-family: 'Exo 2', sans-serif;
     font-weight: 600;
     font-size: 15px;
-    opacity: 0.7;
+    opacity:1;
     vertical-align: bottom;
 }
 
@@ -1716,9 +1716,12 @@ video_container{
 	top: 5px;
 }
 .pen {
-    background: #b6b0a9;
-    /* padding: 5px; */
-    height: 100%;
+    
+background: #b6b0a9;
+    
+/* padding: 5px; */
+    
+height: 100%;
 }
 .nobg {
 

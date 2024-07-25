@@ -144,6 +144,7 @@ input[type="color"] {
     border: 1px solid black;
     border-radius: 3px;
     height: 23px;
+    /* margin-bottom: 2px; */
     font-size: 15px;
     -webkit-appearance: none;
     background-color: #363636;
@@ -172,7 +173,7 @@ input.text-form[type=number] {
 
 input[type="button"] {
     height: 24px;
-    border: 1px solid #9d9c9c;
+    border: 1px solid #000000;
     font-size: 15px;
     border-radius: 3px;
     cursor: pointer;

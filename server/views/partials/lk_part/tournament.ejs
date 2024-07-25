@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="tournires_details">
-                    <p>Даты: <span>с <%= tournaments[i].basic.date_start %> до <%= tournaments[i].basic.date_end %></span></p>
+                    <p>Даты: <span>с <%= formatDatePretty(tournaments[i].basic.date_start) %> до <%= formatDatePretty(tournaments[i].basic.date_end) %></span></p>
                     <p class="tournires_status">Статус: Приём заявок</p>
                 </div>
                 <div class="tournires_tabs">

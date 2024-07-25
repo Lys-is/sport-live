@@ -435,12 +435,21 @@ class LkController {
 }
 
 async function sendRes(path, data, res) {
+    data.formatDatePretty = formatDatePretty;
     return res.render(path, data,
     function(err, html) {
         if(err) console.log(err);
         res.json(html);
     });
 }
+function formatDatePretty(date, sep = '.') {
+    date = new Date(date);
+    return [
+        padTo2Digits(date.getDate()),
+        padTo2Digits(date.getMonth() + 1),
+        date.getFullYear(),
+    ].join(sep);
+  }
 function formatDate(date = new Date(), sep = '-') {
     return [
       date.getFullYear(),

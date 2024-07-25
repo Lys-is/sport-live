@@ -12,7 +12,7 @@ const MatchSchema = new Schema({
     is_tech_win: {type: Boolean, default: false},
     team_1: {type: Schema.Types.ObjectId, ref: 'Team', required: true, autopopulate: true},
     team_2: {type: Schema.Types.ObjectId, ref: 'Team', required: true, autopopulate: true},
-
+    stadium: {type: String, default: ''},
     tournament: {type: Schema.Types.ObjectId, ref: 'Tournament', autopopulate: true},
     team_1_score: {type: Number, default: 0},
     team_2_score: {type: Number, default: 0},
@@ -22,7 +22,7 @@ const MatchSchema = new Schema({
     results_1: [{type: Schema.Types.ObjectId, ref: 'PlayerResult', autopopulate: true}],
     results_2: [{type: Schema.Types.ObjectId, ref: 'PlayerResult', autopopulate: true}],
     status_doc: {type: String, default: 'active', enum: ['active', 'deleted']},
-    circle: {type: Number, default: 1},
+    circle: {type: String, default: 1},
 
 })
 MatchSchema.methods.deleteResults = async function() {

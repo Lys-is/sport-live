@@ -32,7 +32,7 @@
         <tr>
             <td><%= i + 1 %></td>
             <td><%= representatives[i].fio %></td>
-            <td><%= representatives[i].birthday %></td>
+            <td><%= formatDatePretty(representatives[i].birthday) %></td>
             <td><%= representatives[i].team.name %></td>
         </tr>
 

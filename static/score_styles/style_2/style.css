@@ -146,7 +146,7 @@ body:after {
 	background-size: 150px 150px;
 	position: relative;
     top: 50px;
-	opacity: 0.6;
+	opacity: 1;
 	
     
 }
@@ -165,7 +165,7 @@ body:after {
 }
 
 .bgleft {
-	background: url(img/bgleft1.svg) #0b2c31f2 no-repeat;
+	background: url(img/bgleft1.svg) #0b2c31 no-repeat;
 	background-position: left;
 	height: 60px;
 	min-width: 260px;
@@ -313,7 +313,7 @@ body:after {
 }
 
 .bgright {
-	background: url(img/bgright1.svg) #0b2c31f2 no-repeat;
+	background: url(img/bgright1.svg) #0b2c31 no-repeat;
 	background-position: right;
 	height: 60px;
 	min-width: 260px;

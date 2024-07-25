@@ -171,10 +171,12 @@ function setData(data) {
         players.forEach((el, i) => {
             setRoster(el, i+1)
         })
+        let date = formatDatePretty(data.match.date || '2021-01-01')
         getA('.var-tour').forEach(el => el.innerHTML = data.match.circle || 0) 
-        getA('.var-match-date, .var-match-date-text').forEach(el => {el.innerHTML = data.match.date || '2021-01-01'})
+        getA('.var-match-date, .var-match-date-text').forEach(el => {el.innerHTML = date})
         getA('.var-match-time, .var-match-time-text').forEach(el => {el.innerHTML = data.match.time || '00:00'})
         getA('.var-tournament').forEach(el => el.innerHTML = data.match.tournament.basic.full_name || 'Вне турнира')
+        getA('.var-stadium').forEach(el => el.innerHTML = data.match.stadium || 'Стадион не указан')
     }
 }
 function setRoster(players, i) {
@@ -393,3 +395,13 @@ function setNames(data) {
     
 }
 
+
+
+function formatDatePretty(date, sep = '.') {
+    date = new Date(date);
+    return [
+        padTo2Digits(date.getDate()),
+        padTo2Digits(date.getMonth() + 1),
+        date.getFullYear(),
+    ].join(sep);
+  }

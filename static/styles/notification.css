@@ -13,10 +13,10 @@ body {
     background-color: #8dabcf;
     border-radius: 10px;
     padding: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
     color: white;
     z-index: 1000;
-    min-width: 500px;
+    min-width: 670px;
     justify-content: space-between;
     transition-duration: 500ms;
     max-height: 199px;
@@ -151,24 +151,7 @@ row-gap: 63px;
     
 padding: 0;
 }
-.notifications_div.circ .notification{
-
-max-height: 100px;
-
-/* box-shadow: 0 0 7px rgba(0, 0, 0, 0.5); */
-
-padding-left: 0;
-
-padding-bottom: 0;
-
-/* align-items: flex-end; */
-
-background-color: #3a2767;
-
-padding: 0;
-
-border-radius: 10px 0 0 10px;
-}
+.notifications_div.circ .notification{max-height: 100px;/* box-shadow: 0 0 7px rgba(0, 0, 0, 0.5); */padding-left: 0;padding-bottom: 0;/* align-items: flex-end; */background-color: #3a2767;padding: 0;border-radius: 10px 0 0 10px;}
 .notifications_div.circ img {
     height: 150px;
     width: 150px;
@@ -212,8 +195,8 @@ border-radius: 10px 0 0 10px;
     background-color: #6e237f;
     position: absolute;
     margin: 0;
-    box-shadow: 2px 0px 6px rgba(0, 0, 0, 0.5);
-    right: -59px;
+    box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.5);
+    right: -61px;
     border-radius: 0 5px 5px 0;
     padding-inline: 5px;
     background-origin: content-box;

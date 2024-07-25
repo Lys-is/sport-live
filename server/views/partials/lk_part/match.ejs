@@ -18,6 +18,7 @@
                 <td>Время</td>
                 <td>Счёт</td>
                 <td>Турнир</td>
+                <td>Тур</td>
                 <td>Действия</td>
             </tr>
             <tr class="filter">
@@ -45,6 +46,7 @@
                         <% tournaments.forEach((el) => { %><option data-id="<%= el._id %>" value="<%= el.basic.full_name %>"><%= el.basic.full_name %></option><% }) %>
                     </select>
                 </td>
+                <td><input type="number" class="table_input_text" name="circle"></td>
                 <td></td>
             </tr>
         <% if (matches.length > 0) { %>
@@ -53,9 +55,10 @@
                 <td><%= i + 1  %></td>
                 <td><%= matches[i].team_1.name %></td>
                 <td><%= matches[i].team_2.name %></td>
-                <td><%= matches[i].date %></td>
+                <td><%= formatDatePretty(matches[i].date) %></td>
                 <td><%= (matches[i].team_1_score || matches[i].team_2_score) ? `${matches[i].team_1_score}:${matches[i].team_2_score}` : '-:-'%></td>
                 <td><%= matches[i].tournament?.basic.full_name %></td>
+                <td><%= matches[i].circle %></td>
                 <td>
                     <% if(matches[i].status_doc == "active") { %>
                         <span class="table_links table_links_compos nav_link"  data-href="match/id/<%= matches[i]._id %>/get__edit/">Изменить</span>

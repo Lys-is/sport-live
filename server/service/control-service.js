@@ -229,7 +229,7 @@ class Scoreboard {
         this.team1_font_color = 'white'
         this.team2_font_color = 'white'
     }
-
+    
     changeScore(score) {
 
         this.team1 = score.team1 ? score.team1 : this.team1
@@ -272,8 +272,8 @@ class Control {
 
         let activePlayers = await PlayerResult.find({match: matchId, is_active: true}).select('player team')
         console.log(activePlayers)
-        let players_1 = activePlayers.filter(el => el.team._id.toString() == match.team_1._id.toString()).map(el => ({fio: el.player.fio, _id: el.player._id, img: el.player.img})), //await Player.find({team: match.team_1._id}).select('fio _id img'),
-            players_2 = activePlayers.filter(el => el.team._id.toString() == match.team_2._id.toString()).map(el => ({fio: el.player.fio, _id: el.player._id, img: el.player.img})),//await Player.find({team: match.team_2._id}).select('fio _id img'),
+        let players_1 = activePlayers.filter(el => el.team._id.toString() == match.team_1._id.toString()).map(el => ({fio: el.player.fio, _id: el.player._id, img: el.player.img, num: el.player.num})), //await Player.find({team: match.team_1._id}).select('fio _id img'),
+            players_2 = activePlayers.filter(el => el.team._id.toString() == match.team_2._id.toString()).map(el => ({fio: el.player.fio, _id: el.player._id, img: el.player.img, num: el.player.num})),//await Player.find({team: match.team_2._id}).select('fio _id img'),
             couch_1 = await Couch.find({team: match.team_1._id}).select('fio _id img'),
             couch_2 = await Couch.find({team: match.team_2._id}).select('fio _id img')
             console.log(players_1, players_2)
