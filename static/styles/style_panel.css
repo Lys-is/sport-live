@@ -162,6 +162,7 @@ input.text-form::-webkit-inner-spin-button {
 input.text-form[type=number] {
     -moz-appearance:textfield; /* Firefox */
     text-align: center;
+    padding: 0;
 }
 .fixed-half {
     width: 150px;

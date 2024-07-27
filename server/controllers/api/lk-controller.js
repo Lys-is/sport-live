@@ -456,9 +456,9 @@ function formatDate(date = new Date(), sep = '-') {
       padTo2Digits(date.getMonth() + 1),
       padTo2Digits(date.getDate()),
     ].join(sep);
-  }
-  function padTo2Digits(num) {
+}
+function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
-  }
+}
 
 module.exports = new LkController();

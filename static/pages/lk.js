@@ -54,8 +54,10 @@ if(params.page) {
             getPage(href)
     })()
 }
-else
+else{
     getPage('profile')
+
+}
 async function checkTournament(str, history_change = false) {
     const regexFormatAny = /^tournament\/id\/[^\/]+$/;
     const regexFormatAny2 = /^tournament\/id\/[^\/]+\/.+$/;
@@ -684,6 +686,7 @@ function init__commentator_create() {
 function init__style() {
     let option = get('#style_select');
     let form = get("#style__form");
+    let colorInputs = getA('input[type="color"]', form)
     let new_style_inp = get('#new_style_inp');
     let delBtn = get('#delBtn');
     let nStyleBtn = get('#newStyleBtn');
@@ -694,11 +697,12 @@ function init__style() {
         for(let key in data){
             console.log(key)
             if(form[key])
-                form[key].value = data[key]
+                form[key].value = String(data[key]).substring(0, 7)
         }
         new_style_inp.style.display = 'none'
         delBtn.style.display = 'block'
         nStyleBtn.style.display = 'block'
+        setBackground(form.opacity.value)
     })
     nStyleBtn.addEventListener('click', async (e) => {
         location.reload()
@@ -706,9 +710,29 @@ function init__style() {
     delBtn.addEventListener('click', async (e) => {
         sendFetch(`/api/lk/del__style?id=${option.value}`, null, "DELETE")
     })
+    form.opacity.addEventListener('change', async (e) => {
+        setBackground(e.target.value)
+    })
+
+    setBackground(255)
+    colorInputs.forEach(inp => {
+        inp.addEventListener('input', async (e) => {
+            setBackground(form.opacity.value)
+        })
+    })
+    function setBackground(opacity) {
+        colorInputs.forEach(inp => {
+            inp.style.backgroundColor = inp.value + (opacity == 255 ? "" : parseInt(opacity).toString(16).padStart(2, "0"));
+        })
+    }
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         let data = await formGetData(form)
+        for(let key in data){
+            if(form[key] && form[key].type == 'color'){
+                data[key] = form[key].value + (form.opacity.value == 255 ? "" : parseInt(form.opacity.value).toString(16).padStart(2, "0"));
+            }
+        }
         sendFetch("/api/lk/post__style", JSON.stringify(data), "POST")
     })
 }
@@ -793,13 +817,9 @@ function setImgListener(){
 
 function hex2text(hex_string)
 {
-    const hex = hex_string.toString(); // конвертируем в строку
+    const hex = hex_string.toString(); 
     let out = '';
-
-    // i += 2 - так в шестнадцатеричном виде число представлено двумя символами
-    for (let i = 0; i < hex.length; i += 2)
-    {
-        // код символа в шестнадцетиричном представлении
+    for (let i = 0; i < hex.length; i += 2){
         const charCode = parseInt(hex.substr(i, 2), 16);
         out += String.fromCharCode(charCode);
     }

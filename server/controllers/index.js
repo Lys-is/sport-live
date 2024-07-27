@@ -172,7 +172,8 @@ class Constrollers {
             if(!req.params.id || req.params.id == 'undefined') return
             let uId = req.params.id.split('_')
             let userAd = await User.findById(uId[0]);
-            let styles = await Style.find({creator: userAd._id});
+            if(!userAd) return res.send('Табло. Пользователь не найден');
+            let styles = await Style.find({creator: uId[0]});
             res.render('table', {
                 id: req.params.id,
                 title: 'Табло ' + (uId[1] || ''),
