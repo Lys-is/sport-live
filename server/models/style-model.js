@@ -8,6 +8,10 @@ const StyleShema = new Schema({
     color_main: {type: String, default: ''},
     color_accent: {type: String, default: ''},
     color_accent_2: {type: String, default: ''},
+    color_notif: {type: String, default: ''},
+    color_notif_accent: {type: String, default: ''},
+    color_text_notif: {type: String, default: '#ffffff'},
+    opacity: {type: Number, default: 1},
 })
 
 module.exports = model('Style', StyleShema);

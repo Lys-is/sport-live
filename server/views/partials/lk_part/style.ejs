@@ -33,6 +33,10 @@
                 <option value="style_7">Стиль 7</option>
             </select>
             <div class="form-group">
+                <label class="label" for="color1">Прозрачность</label>
+                <input name="opacity" type="range" min="0" max="255" step="1" value="255" />
+            </div>
+            <div class="form-group">
                 <label class="label" for="color1">Цвет основной</label>
                 <input type="color" class="input" id="color1" name="color_main">
             </div>
@@ -45,19 +49,33 @@
                 <label class="label" for="accentColor">Цвет акцентный 2</label>
                 <input type="color" class="input" id="accentColor" name="color_accent_2">
             </div>
-
-            <div class="form-group gap">
-                <label class="label" for="fontFile">Загрузить шрифт</label>
-                <input type="file" class="input" id="fontFile">
+            <div class="form-group">
+                <label class="label" for="color2">Цвет фона уведомлений</label>
+                <input type="color" class="input" id="color2" name="color_notif" value="#8dabcf">
             </div>
             <div class="form-group">
-                <label class="label" for="fontName">Сохранить отдельно как:</label>
+                <label class="label" for="accentColor">Цвет уведомлений акцентный</label>
+                <input type="color" class="input" id="accentColor" name="color_notif_accent" value="#0e0a5b">
+            </div>
+            <div class="form-group">
+                <label class="label" for="accentColor">Цвет уведомлений текст</label>
+                <input type="color" class="input" id="accentColor" name="color_text_notif" value="#ffffff">
+            </div>
+
+            <!--<div class="form-group gap">
+                <label class="label" for="fontFile">Загрузить шрифт</label>
+                <input type="file" class="input" id="fontFile">
+            </div>-->
+            <div class="form-group" id="new_style_inp" >
+                <label class="label" for="fontName">Сохранить как новый стиль:</label>
                 <input type="text" class="text_form" id="fontName" placeholder="Название стиля" name="style_name_new">   
             </div>
         </div>
 
         <div class="cool_body_content">
             <div class="form-group">
+                <input type="button" value="Удалить стиль" id="delBtn" class="button red_button" style="display: none;">
+                <input type="button" value="Перейти к созднию" id="newStyleBtn" class="button white_button" style="display: none;">
                 <div class="filler"></div>
                 <input type="submit" value="Сохранить" class="button green_button">
             </div>

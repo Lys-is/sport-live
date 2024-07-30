@@ -4,6 +4,8 @@ let lk_main = get('#lk_main')
 let links = getA('p', nav)
 let account_btn = get('#header_account');
 let logout_btn = get('#logout_btn');
+let panel_slot_btn = get('#header_panel'),
+    panel_slot = get('#panel_slot');
 account_btn.addEventListener('click',(e)=>{
     logout_btn.classList.toggle('active');
     }
@@ -52,8 +54,10 @@ if(params.page) {
             getPage(href)
     })()
 }
-else
+else{
     getPage('profile')
+
+}
 async function checkTournament(str, history_change = false) {
     const regexFormatAny = /^tournament\/id\/[^\/]+$/;
     const regexFormatAny2 = /^tournament\/id\/[^\/]+\/.+$/;
@@ -682,6 +686,10 @@ function init__commentator_create() {
 function init__style() {
     let option = get('#style_select');
     let form = get("#style__form");
+    let colorInputs = getA('input[type="color"]', form)
+    let new_style_inp = get('#new_style_inp');
+    let delBtn = get('#delBtn');
+    let nStyleBtn = get('#newStyleBtn');
     option.addEventListener('change', async (e) => {
         let id = option.value
         let data = await sendFetch(`/api/lk/get__style_by_id?id=${id}`)
@@ -689,12 +697,42 @@ function init__style() {
         for(let key in data){
             console.log(key)
             if(form[key])
-                form[key].value = data[key]
+                form[key].value = String(data[key]).substring(0, 7)
         }
+        new_style_inp.style.display = 'none'
+        delBtn.style.display = 'block'
+        nStyleBtn.style.display = 'block'
+        setBackground(form.opacity.value)
     })
+    nStyleBtn.addEventListener('click', async (e) => {
+        location.reload()
+    })
+    delBtn.addEventListener('click', async (e) => {
+        sendFetch(`/api/lk/del__style?id=${option.value}`, null, "DELETE")
+    })
+    form.opacity.addEventListener('change', async (e) => {
+        setBackground(e.target.value)
+    })
+
+    setBackground(255)
+    colorInputs.forEach(inp => {
+        inp.addEventListener('input', async (e) => {
+            setBackground(form.opacity.value)
+        })
+    })
+    function setBackground(opacity) {
+        colorInputs.forEach(inp => {
+            inp.style.backgroundColor = inp.value + (opacity == 255 ? "" : parseInt(opacity).toString(16).padStart(2, "0"));
+        })
+    }
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         let data = await formGetData(form)
+        for(let key in data){
+            if(form[key] && form[key].type == 'color'){
+                data[key] = form[key].value + (form.opacity.value == 255 ? "" : parseInt(form.opacity.value).toString(16).padStart(2, "0"));
+            }
+        }
         sendFetch("/api/lk/post__style", JSON.stringify(data), "POST")
     })
 }
@@ -779,13 +817,9 @@ function setImgListener(){
 
 function hex2text(hex_string)
 {
-    const hex = hex_string.toString(); // конвертируем в строку
+    const hex = hex_string.toString(); 
     let out = '';
-
-    // i += 2 - так в шестнадцатеричном виде число представлено двумя символами
-    for (let i = 0; i < hex.length; i += 2)
-    {
-        // код символа в шестнадцетиричном представлении
+    for (let i = 0; i < hex.length; i += 2){
         const charCode = parseInt(hex.substr(i, 2), 16);
         out += String.fromCharCode(charCode);
     }
@@ -877,7 +911,7 @@ function init__filter() {
         }
     }
     let clear_btn = get("#clear_filters");
-    clear_btn.addEventListener("click", (e) => {
+    clear_btn?.addEventListener("click", (e) => {
         filters.forEach(filter => {
             filter.value = "";
         })
@@ -962,3 +996,36 @@ function initDel () {
         })
     })
 }
+
+
+panel_slot_btn.addEventListener('click', (e) => {
+    e.preventDefault()
+    panel_slot.classList.toggle('active')
+})
+
+let open_panel_btn = get('#open_panel'),
+    open_players = get('#open_panel_players'),
+    open_table = get('#open_table'),
+    panel_select = get('#panel_select');
+
+function getHrefPanel() {
+    let value = panel_select.value == 'default' ? '' : '_' + panel_select.value
+    let href = panel_slot.getAttribute('data-id') + value
+    return href
+}
+open_panel.addEventListener('click', (e) => {
+    window.open('/panel/' + getHrefPanel(), '_blank')
+    window.focus();
+
+})
+
+open_players.addEventListener('click', (e) => {
+    window.open('/panel_players/' + getHrefPanel() , '_blank')
+    window.focus();
+
+})
+open_table.addEventListener('click', (e) => {
+    window.open('/table/' + getHrefPanel() , '_blank')
+    window.focus();
+
+})

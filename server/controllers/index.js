@@ -1,6 +1,9 @@
 let Match = require('../models/match-model');
 let User = require('../models/user-model');
 let League = require('../models/league-model');
+const Judge = require('../models/judge-model');
+const Commentator = require('../models/commentator-model');
+const Subscribe = require('../models/subscribe-model');
 const Global = require('../models/global-model');
 const UserD = require('../models/userD-model');
 let Style = require('../models/style-model');
@@ -110,45 +113,70 @@ class Constrollers {
         });
     }
     async get__panel(req, res) {
-        let matches = await Match.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
-        let userAd = await User.findById(req.params.id);
-        if(!userAd) return res.send('Панель управления. Пользователь не найден');
-        let styles = await Style.find({creator: userAd._id});
+        try {
+            let uId = req.params.id.split('_')
+            let userAd = await User.findById(uId[0]);
+            if(!userAd) return res.send('Панель управления. Пользователь не найден');
+            let matches = await Match.find({creator: userAd._id, status_doc: {$ne: 'deleted'}})
+            matches = await getFutureMatches(matches)
+            console.log(matches)
+            
+            let styles = await Style.find({creator: userAd._id});
 
-        res.render('panel', {
-            id: req.params.id,
-            title: 'Панель управления',
-            auth: userAd || false,
-            matches,
-            styles
-        });
+            res.render('panel', {
+                id: req.params.id,
+                title: 'Панель управления ' + (uId[1] || ''),
+                auth: userAd || false,
+                matches,
+                styles
+            });
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+        
     }
     async get__panel_players(req, res) {
-        let matches = await Match.find({creator: req.params.id, status_doc: {$ne: 'deleted'}})
-        let userAd = await User.findById(req.params.id);
+        let uId = req.params.id.split('_')
+        let userAd = await User.findById(uId[0]);
         if(!userAd) return res.send('Панель управления. Пользователь не найден');
+
+        let matches = await Match.find({creator: userAd._id, status_doc: {$ne: 'deleted'}})
+        let judges = await Judge.find({creator: userAd._id, status_doc: {$ne: 'deleted'}})
+        let commentators = await Commentator.find({creator: userAd._id, status_doc: {$ne: 'deleted'}})
         let styles = await Style.find({creator: userAd._id});
 
         res.render('panel_players', {
             id: req.params.id,
-            title: 'Панель управления',
+            title: 'Панель управления ' + (uId[1] || ''),
             auth: userAd || false,
             matches,
-            styles
+            styles,
+            judges,
+            commentators
         });
     }
     async get__inactive(req, res) {
+        if(req.user) {
+            console.log(req.user);
+            let subscribe = await Subscribe.findOne({creator: req.user.id});
+            if(subscribe)
+                return res.redirect('/lk');
+        }
         return res.send('Ваш аккаунт неактивен, пожалуйста, обратитесь к администратору <br> <a href="/login">Страница авторизации</a>');
     }
     async get__table(req, res) {
         try{
             //console.log(req);
             if(!req.params.id || req.params.id == 'undefined') return
-            let userAd = await User.findById(req.params.id);
-            let styles = await Style.find({creator: userAd._id});
+            let uId = req.params.id.split('_')
+            let userAd = await User.findById(uId[0]);
+            if(!userAd) return res.send('Табло. Пользователь не найден');
+            let styles = await Style.find({creator: uId[0]});
             res.render('table', {
                 id: req.params.id,
-                title: 'Табло',
+                title: 'Табло ' + (uId[1] || ''),
                 auth: userAd || false,
                 style: userAd.tablo_style || 'style_1',
                 styles
@@ -158,7 +186,7 @@ class Constrollers {
             console.log(e);
             res.send('Произошла ошибка');
         }
-        }
+    }
         
     api = require('./api')
 }
@@ -183,5 +211,16 @@ let compareDates = (from, to) => {
         return 'Не начат';
     }
     return 'Неопределено';
+}
+async function getFutureMatches(matches) {
+    try {
+        return futureMatches = matches.filter((item) => {
+            //return true
+            return new Date(`${item.date} 23:59`) > Date.now() 
+        })
+    } catch (e) {
+        console.error(e);
+        return matches
+    }
 }
 module.exports = new Constrollers()

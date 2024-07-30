@@ -175,8 +175,8 @@ body {
 	align-content: center;
 	justify-content: center;
 	height: 38px;
-    min-width: 85px;
-    background: var(--main-center-color);
+	min-width: 153px;
+	background: var(--main-center-color);
 	margin-left: -8px;
 	padding: 0 15px;
 }
@@ -578,7 +578,7 @@ sup {
 .vsbig {
 	display: flex;
 	flex-direction: row;
-	min-width: 150px;
+	min-width: 190px;
 	background-color: var(--main-color);
 	color: #FFFFFF;
 	font-size: 55px;
@@ -589,12 +589,12 @@ sup {
 	justify-content: center;
 	text-transform: uppercase;
 	height: 0;
-    width: 120px;
-    border-bottom-color: var(--main-center-color);
+	width: 120px;
+	border-bottom-color: var(--main-center-color);
 	border-bottom-style: solid;
 	border-bottom-width: 70px;
-    border-left: 25px solid transparent;
-    border-right: 25px solid transparent;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
 	transform: scale(-1, -1);
 }
 

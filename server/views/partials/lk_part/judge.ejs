@@ -27,7 +27,7 @@
         <tr>
             <td><%= i + 1%></td>
             <td><%= judges[i].fio %></td>
-            <td><%= judges[i].birthday %></td>
+            <td><%= formatDatePretty(judges[i].birthday) %></td>
             <td><a target="_blank" href="/fans_members/<%= league_href %>?page=judge/id/<%= judges[i]._id %>">link</a></td>
         </tr>
 

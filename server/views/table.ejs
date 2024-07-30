@@ -47,6 +47,19 @@ if(style_panel.includes('__id')){
     .roster-main-div {
         border-color: ${ss.color_accent} !important;
     }
+    .notification {
+        color: ${ss.color_text_notif} !important;
+        background-color: ${ss.color_notif} !important;
+    }
+    .notification .region {
+        background-color: ${ss.color_notif_accent} !important;
+    }
+    .notification .name {
+        color: ${ss.color_text_notif} !important;
+    }
+    .notifications_div.circ .img {
+        background-color: ${ss.color_notif_accent} !important;
+    }
     `
 }
 
@@ -202,13 +215,15 @@ if(style_panel.includes('__id')){
 }
 #main {
     margin-top: unset !important;
-    padding-top: 50px !important;
+    padding-top: 50px;
 }
-    .var-stadium {
-        display: none;
-    }
+
 img[src=""] {
     display: none;
+}
+.top-logo-s:has(img[src=""]), .top-logo:has(img[src=""]) {
+    background: transparent !important;
+    max-width: 20px !important;
 }
 </style>
 <style id="style_start">

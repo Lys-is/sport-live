@@ -20,14 +20,7 @@
 
 /* TOP SCOREBOARD CSS */
 
-body {
-/*    background: url("img/foot_bg2.jpg");*/
-    background-color: transparent;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    zoom: 1;
-}
+body {/* background: url("img/foot_bg2.jpg"); */background-color: transparent;margin: 0;display: flex;justify-content: center;zoom: 1;}
 
 /*.big,
 .mid,
@@ -91,20 +84,20 @@ body {
     filter: drop-shadow(1px 0px 6px rgb(0 0 0 / 0.5));
 }
 
-#big-flash {    
+#big-flash {
         background: url(img/flash3.svg) no-repeat;
-        width: 452px;
+        width: 450px;
         height: 81px;
         background-size: cover;
         position: absolute;
         top: 14px;
-        opacity: 0.6;   
-        filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4)); 
+        opacity: 1;
+        filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
 }
 
 #top-row-1 {
     /* background-color: #340055; */
-    opacity: 0.9;
+    opacity: 1;
     height: 60px;
     margin: auto;
     display: flex;
@@ -289,18 +282,18 @@ body {
 
 #timer-round {
     display: flex;
-	flex-direction: row;
-	align-items: center;
-	align-content: center;
+    flex-direction: row;
+    align-items: flex-end;
+    align-content: center;
     font-weight: 700;
     font-size: 23px;
     margin-top: 5px;
 }
 
 #top-timer {
-    margin-right: 20px;
+    /* margin-right: 20px; */
     text-align: left;
-    width: 60px;
+    /* width: 60px; */
 }
 
 /* TOP SCOREBOARD PLAY-OFF CSS */
@@ -403,9 +396,9 @@ body {
 }
 
 .score-value {
-    font-size: 100px;
+    font-size: 65px;
     font-weight: 800;
-    margin-top: -24px;
+    margin-top: -8px;
     z-index: 999;
 }
 
@@ -464,6 +457,7 @@ body {
 #top-timer {
     margin-left: 5px;
     text-align: left;
+    padding-right: 10px;
 }
 
 
@@ -495,16 +489,18 @@ body {
 
 .big-bg-home {
     display: flex;
+    width: 50%;
     flex-direction: row;
     padding-right: 110px;
-    margin-right: -160px 
+    margin-right: -160px
 }
 
 .big-bg-away {
     display: flex;
     flex-direction: row;
     padding-left: 110px;
-    margin-left: -160px 
+    margin-left: -160px;
+    width: 50%;
 }
 
 #goals-container {
@@ -528,7 +524,7 @@ body {
     font-family: 'Exo 2', sans-serif;
     font-weight: 600;
     font-size: 15px;
-    opacity: 0.7;
+    opacity: 1;
     vertical-align: bottom;
 }
 
@@ -633,34 +629,26 @@ body {
 #score-txt {
     font-family: 'Exo 2', sans-serif;
     font-weight: 800;
-    font-size: 120px;
+    font-size: 88px;
     letter-spacing: -12px;
     color: #FFFFFF;
-    margin-top: 8px;
+    margin-top: 21px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.big-logo-rk {
-/*    background: url(img/bamf-u19-logo.png) no-repeat;*/
-    width: 120px;
-    height: 120px;
-    background-size: 120px 120px;
-    background-position: 50%;
-    margin-top: -17px;
-    z-index: 999;
-}
+.big-logo-rk {/*    background: url(img/bamf-u19-logo.png) no-repeat;*/width: 51px;height: 120px;background-size: 120px 120px;background-position: 50%;margin-top: 3px;z-index: 999;}
 
 #big-home-team-name,
 #big-away-team-name {
     display: flex;
     align-content: center;
     align-items: center;
+    flex: 1;
 }
 #big-home-team-name {
-    width: 250px;
-
+    /* width: auto; */
     font-family: 'Exo 2', sans-serif;
     font-weight: 800;
     font-size: 25px;
@@ -668,14 +656,12 @@ body {
     position: relative;
     text-align: center;
     left: -40px;
-
     /* top: -42px; */
-
+    /* flex: 1; */
 }
 
 #big-away-team-name {
-    width: 250px;
-
+    width: auto;
     font-family: 'Exo 2', sans-serif;
     font-weight: 800;
     font-size: 25px;
@@ -779,8 +765,9 @@ body {
 	backdrop-filter: blur(30px)brightness(0.5);
 	background-size: cover;
 	border-radius: 7px;
+	background: #e5e5e575;
 	/* transform: translateY(-150%); */
-	animation: ani 1s forwards;
+	/* animation: ani 1s forwards; */
 	border: 4px solid #6d237f;
 }
 
@@ -791,8 +778,8 @@ body {
 
 .tournament-name {
 	text-transform: uppercase;
-	max-width: 70%;
-    text-align: right;    
+	max-width: 100%;
+    text-align: center;    
 }
 
 .flex-row {
@@ -936,7 +923,7 @@ body {
     /* bottom: 245px; */
     margin: auto;
     width: 100%;
-    min-width: 100%;    
+    min-width: 100%;
 }
 /*
 .tournament-name {
@@ -1324,7 +1311,7 @@ div.referees .ev-player-img {
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
-    color: rgba(255, 255, 255, 1.00);
+    color: white;
     text-align: left;
     margin-right: 20px;
     min-width: 215px;
@@ -1972,3 +1959,32 @@ video_container{
         
     border-radius: 10px;
 }
+
+
+.penalties-home, .penalties-away {
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+/* 
+.notif_main {
+    background-color: #7b398b !important;
+}
+.region.notif_accent {
+    background-color: #f9b732 !important;
+}
+.notifications_div.circ .notif_accent {  
+    background-color: #f9b732 !important;
+}
+.background_text {
+    background-color: #340055 !important;
+}
+
+.notifications_div.circ .notif_border_main {
+    border-color:  #7b398b !important;
+}
+.notif_text {
+    color: #000000 !important;
+} */

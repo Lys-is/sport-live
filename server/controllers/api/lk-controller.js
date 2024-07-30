@@ -314,9 +314,22 @@ class LkController {
             }
             if(data.style_name_new){
                 let style = await Style.create({...data, name: data.style_name_new ,  creator: req.user.id});
-                return res.json({message: 'Стиль создан', style});
+                return res.json({message: 'Стиль создан', style, reload: true});
             }
             return res.json({message: 'Стиль создан'});
+        }
+        catch(e){
+            console.log(e);
+            res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async del__style(req, res) {
+        try {
+            let style = await Style.findById(req.query.id);
+            if(!style)
+                return res.json({message: 'Такого стиля нет'});
+            await Style.deleteOne({creator: req.user.id, _id: style._id});
+            return res.json({message: 'Стиль удален', reload: true});
         }
         catch(e){
             console.log(e);
@@ -422,21 +435,30 @@ class LkController {
 }
 
 async function sendRes(path, data, res) {
+    data.formatDatePretty = formatDatePretty;
     return res.render(path, data,
     function(err, html) {
         if(err) console.log(err);
         res.json(html);
     });
 }
+function formatDatePretty(date, sep = '.') {
+    date = new Date(date);
+    return [
+        padTo2Digits(date.getDate()),
+        padTo2Digits(date.getMonth() + 1),
+        date.getFullYear(),
+    ].join(sep);
+  }
 function formatDate(date = new Date(), sep = '-') {
     return [
       date.getFullYear(),
       padTo2Digits(date.getMonth() + 1),
       padTo2Digits(date.getDate()),
     ].join(sep);
-  }
-  function padTo2Digits(num) {
+}
+function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
-  }
+}
 
 module.exports = new LkController();

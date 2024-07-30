@@ -146,7 +146,7 @@ body:after {
 	background-size: 150px 150px;
 	position: relative;
     top: 50px;
-	opacity: 0.6;
+	opacity: 1;
 	
     
 }
@@ -165,7 +165,7 @@ body:after {
 }
 
 .bgleft {
-	background: url("img/bgleft1.svg") rgba(11,44,49,0.95) no-repeat;
+	background: url(img/bgleft1.svg) #0b2c31 no-repeat;
 	background-position: left;
 	height: 60px;
 	min-width: 260px;
@@ -313,7 +313,7 @@ body:after {
 }
 
 .bgright {
-	background: url("img/bgright1.svg") rgba(11,44,49,0.95) no-repeat;
+	background: url(img/bgright1.svg) #0b2c31 no-repeat;
 	background-position: right;
 	height: 60px;
 	min-width: 260px;
@@ -432,8 +432,8 @@ body:after {
 
 .tournament-name {
 	text-transform: uppercase;
-	max-width: 70%;
-    text-align: right;
+	max-width: 100%;
+    text-align: center;  
 }
 
 .flex-row {
@@ -1189,8 +1189,8 @@ body:after {
 
 .tournament-name {
 	text-transform: uppercase;
-	max-width: 70%;
-    text-align: right;    
+	max-width: 100%;
+	text-align: center;
 }
 
 .flex-row {
@@ -1458,6 +1458,8 @@ body:after {
     margin: auto;
     backdrop-filter: blur(30px)brightness(0.8);
     border: 4px solid #12361d;
+    background-color: #0b2c31f2;
+    color: white;
 }
 
 #mid-col,
@@ -1494,3 +1496,22 @@ body:after {
     padding: 10px;
     display: none;
 }
+/* .notification {
+	color: white !important;
+}
+.notif_main {
+    background-color: #0b2c31f2 !important;
+}
+.region.notif_accent {
+    background-color: #2aa45b !important;
+}
+.notifications_div.circ .notif_accent {  
+    background-color: #2aa45b !important;
+}
+
+.notifications_div.circ .notif_border_main {
+    border-color:  #0b2c31f2 !important;
+}
+.notif_text {
+    color: #000000 !important;
+} */

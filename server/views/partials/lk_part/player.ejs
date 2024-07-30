@@ -44,7 +44,7 @@
                 <% }    %>        
             </td>
             <td><%= players[i].num %></td>
-            <td><%= players[i].birthday %></td>
+            <td><%= formatDatePretty(players[i].birthday) %></td>
             <td><%= players[i].team.name %></td>
             <td>
                 <% if (players[i].status_doc === 'active') { %>

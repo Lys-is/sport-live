@@ -1,12 +1,12 @@
-const notif = `<div class="notification disabled" id={{id}}>
+const notif = `<div class="notification disabled notif_main " id={{id}}>
         {{img_place}}
-        <div class="content">
+        <div class="content ">
             <div class="name">{{name}}</div>
-            <div class="region">{{description}}</div>
+            <div class="region notif_accent notif_text">{{description}} </div>
         </div>
-        <div class="img {{main_class}} {{add_class}}"></div>
+        <div class="img {{main_class}} {{add_class}} notif_accent"></div>
     </div>`
-const notifImg = `<img src="{{img}}">`
+const notifImg = `<img class="notif_border_main" src="{{img}}">`
 let testConnect = setInterval(() => {
     if (socket.connected) {
         clearInterval(testConnect)
@@ -45,7 +45,7 @@ socket.on('new_notify', (data) => {
         newNotify = newNotify.replace('{{id}}', id)
         newNotify = newNotify.replace('{{name}}', data.text[i])
         newNotify = newNotify.replace('{{description}}', data.title)
-        newNotify = newNotify.replace('{{img}}', data.imgArr[i])
+        newNotify = newNotify.replace('{{img}}', data?.imgArr[i] ? data?.imgArr[i] : '/static/styles/icons/empty.png')
         newNotify = newNotify.replace('{{main_class}}', data.type || '')
         if(data.add_class && data.add_class[i]) newNotify = newNotify.replace('{{add_class}}', data.add_class[i])
         else newNotify = newNotify.replace('{{add_class}}', '')
@@ -71,12 +71,12 @@ socket.on('new_notify', (data) => {
         setTimeout(() => {
             let notf = get(`#${id}`)
             notf.style.opacity = '0'
-            notf.style.transform = 'translateY(-100vh)'
+            notf.style.transform = 'translateX(800px)'
             
             setTimeout(() => {
                console.log(notf.classList)
                 
-            // notf.remove()
+             notf.remove()
 
             }, 1000)
         }, 3000 + time)
@@ -101,7 +101,9 @@ let scenariosA = {
     '1': '1T',
     'pause': 'Перерыв',
     '2': '2T',
-    'end': 'Конец матча'
+    'end': 'Конец матча',
+    'out': 'Тайм-аут',
+    'VAR': 'VAR'
 }
 socket.on('timer', (data) => {
     console.log(data)
@@ -127,11 +129,15 @@ let first_style_tag = (function(type) {
     return function() {
         if (!executed) {
             executed = true;
-
+            console.log('sdfsdfsdfdsfsdfsdfsdfdsf')
            // let tag = get('#style_start')
            // tag.remove()
             document.body.style.display = 'block'
-            switchDiv(type)
+            // let ddiv = getA(`.${type}`)
+            // ddiv.forEach(el => {
+            //     el.style.display = 'block'
+            // })
+            //setTimeout(() => { setAnim(type) }, 100)
         }
     };
 })();
@@ -141,7 +147,7 @@ function setData(data) {
     foll_divs.forEach(el => {
         el.style.display = data.is_fouls ? '' : 'none'
     })
-
+    notifyBlock.classList = 'notifications_div ' + data.notif_type
     first_style_tag(data.tablo.type)
     console.log(data)
     setNames(data)
@@ -165,10 +171,12 @@ function setData(data) {
         players.forEach((el, i) => {
             setRoster(el, i+1)
         })
+        let date = formatDatePretty(data.match.date || '2021-01-01')
         getA('.var-tour').forEach(el => el.innerHTML = data.match.circle || 0) 
-        getA('.var-match-date, .var-match-date-text').forEach(el => {el.innerHTML = data.match.date || '2021-01-01'})
+        getA('.var-match-date, .var-match-date-text').forEach(el => {el.innerHTML = date})
         getA('.var-match-time, .var-match-time-text').forEach(el => {el.innerHTML = data.match.time || '00:00'})
         getA('.var-tournament').forEach(el => el.innerHTML = data.match.tournament.basic.full_name || 'Вне турнира')
+        getA('.var-stadium').forEach(el => el.innerHTML = data.match.stadium || 'Стадион не указан')
     }
 }
 function setRoster(players, i) {
@@ -186,7 +194,7 @@ function setRoster(players, i) {
     players.forEach(el => {
         playersDiv.innerHTML += `<div class="roster-teamate">
                                     <p class="roster-teamate-name">${el.fio}</p>
-                                    <img width="40" height="40" src="${el.img || '/static/styles/icons/logo.jpg'}">
+                                    <img width="40" height="40" src="${el.img || '/static/styles/icons/empty.png'}">
                                 </div>`
                     })
     
@@ -202,10 +210,10 @@ function setTime(data) {
             timerDivs[key]?.forEach(el => el.innerHTML = data.value)
         }
         else if(key == 'r'){
-            timerDivs[key]?.forEach(el => el.innerHTML = ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : '')
+            timerDivs[key]?.forEach(el => el.innerHTML = ( data.scenarios == '1' || data.scenarios == '2' ) ? `${data.scenarios}T` : '')
         }
         else if(key == 'tr'){
-            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  ( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : '')
+            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  ( data.scenarios == '1' || data.scenarios == '2' ) ? `  ${data.scenarios}T` : '')
         }
         else if(key == 'nr'){
             timerDivs[key]?.forEach(el => el.innerHTML = scenariosA[data.scenarios])
@@ -217,7 +225,7 @@ function setTime(data) {
                 timerDivs[key]?.forEach(el => el.innerHTML = '')
         }
         else if(key == 'trn'){
-            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  "  " + (( data.scenarios == '1' || data.scenarios == '2' ) ? ` ${data.scenarios}T` : scenariosA[data.scenarios]))
+            timerDivs[key]?.forEach(el => el.innerHTML = data.value +  "  " + (( data.scenarios == '1' || data.scenarios == '2' ) ? `  ${data.scenarios}T` : scenariosA[data.scenarios]))
         }
        // if(timerDivs[key]) timerDivs[key].innerHTML = data.value
     })
@@ -225,32 +233,58 @@ function setTime(data) {
     if(ord) ord.style.display = 'none'
 
 }
+let is_pen_now = false
 function switchDiv(type) {
     let mb = get('#match-info > .q_name_round')
 
-    console.log(type, n_div)
-    if(type == n_div) {
+    console.log(type, n_div, is_pen_now)
+    if(type == n_div && type != 'pen') {
+        is_pen_now = false
         getA('.pen').forEach(el => setAnim(el, 'reverse', 'pen'))
         if(mb) setAnim(mb, 'normal', 'mb')
+            n_div = type
+        return
+    }
+    else if(type != n_div && type != 'pen') {
+            is_pen_now = false
+            if(mb) setAnim(mb, 'normal', 'mb')
+            base_divs.forEach(div => {
+                setAnim(div, 'reverse', type)
+        
+            })
+            getA('.pen').forEach(el => setAnim(el, 'reverse', 'pen'))
+
+
+            getA(`.${type}`).forEach(div => {
+                setAnim(div, 'normal')
+            })
+            n_div = type
         return
     }
     
     scrollTo(0, 0)
     //if(mb) mb.style.display = 'block'
-    if(type == 'pen') {
+    if(type == 'pen' && !is_pen_now) {
+        is_pen_now = true
         console.log('fsdfsdfsdf', mb)   
         if(mb) setAnim(mb, 'reverse', 'mb')
+        getA('.pen').forEach(el => setAnim(el, 'normal', 'pen'))
+            return
+    }
+    else if(type == 'pen' && is_pen_now) {
+        return
     }
     else {
         if(mb) setAnim(mb, 'normal', 'mb')
     }
     base_divs.forEach(div => {
+        if(div.className.includes(type) || div.className == type) return
         setAnim(div, 'reverse', type)
 
     })
 
     getA(`.${type}`).forEach(div => {
-        setAnim(div, 'normal')
+        setAnim(div, 'normal', type)
     })
     if(type != 'pen') {
         n_div = type
@@ -266,8 +300,9 @@ function setAnim(div, direct, type) {
     const compStyles = window.getComputedStyle(div);
     let mb = get('#match-info > .q_name_rofsdfdsund')
 
-    const [prevDisplay, nextDisplay] = (direct == 'normal' ? ['none', 'block'] : ['block', 'none'])
-    console.log(div, prevDisplay, nextDisplay)
+    let [prevDisplay, nextDisplay] = (direct == 'normal' ? ['none', 'block'] : ['block', 'none'])
+    
+   // console.log(div, prevDisplay, nextDisplay)
     if(animTimouts[div.className]){
        //clearTimeout(animTimouts[div.className])
     }
@@ -276,7 +311,12 @@ function setAnim(div, direct, type) {
         let delay = 100
         
         let anim = compStyles.getPropertyValue('animation-name')
+        if(anim == 'none') {
+            div.style.animationName = ''
+        }
+        anim = compStyles.getPropertyValue('animation-name')
         div.style.animationName = 'none'
+        console.log(anim, div, direct, prevDisplay, nextDisplay, type)
         div.style.animationDirection = direct;
         div.style.animationDuration = '0.5s';
         div.style.transitionDuration = '0.5s';
@@ -286,7 +326,7 @@ function setAnim(div, direct, type) {
         //  div.setAttribute('is_active','block') 
           //div.style.display = 'block'
           div.style.animationDelay = '0s';
-          console.log('block_delayyyyyyyyyy', div)
+         // console.log('block_delayyyyyyyyyy', div)
 
           delay = 1000
       }
@@ -302,7 +342,7 @@ function setAnim(div, direct, type) {
             if(mb) mb.style.display = nextDisplay
             div.style.display = nextDisplay
 
-            console.log('timeout', div, nextDisplay, delay)
+            //console.log('timeout', div, nextDisplay, delay)
         }, delay)
         animTimouts[div.className] = tmout
    }
@@ -354,3 +394,14 @@ function setNames(data) {
         getA('.var-away, .away-team, .var-away-short').forEach(el => el.innerHTML = data.team2_name);
     
 }
+
+
+
+function formatDatePretty(date, sep = '.') {
+    date = new Date(date);
+    return [
+        padTo2Digits(date.getDate()),
+        padTo2Digits(date.getMonth() + 1),
+        date.getFullYear(),
+    ].join(sep);
+  }

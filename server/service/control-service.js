@@ -6,8 +6,8 @@ const getBrightness = require('getbrightness')
 const timestore = require('timestore')
 let timers = new timestore.Timestore()
 function startTimer(io, timer, userId) {
-    if(timer.scenarios == '2')
-        timer.minuts = timer.max_time
+    // if(timer.scenarios == '2')
+    //     timer.minuts = timer.max_time
     let timerId = timers.setInterval(userId, timerCallback, 1000)
     console.log(timerId)
     function timerCallback() {
@@ -20,16 +20,16 @@ function startTimer(io, timer, userId) {
             // if(timer.minuts <= 0) {
             //     timer.clearTimer()
             // }
-            if(timer.scenarios == '1'){
-                if(timer.minuts <  timer.max_time || timer.minuts == timer.max_time && timer.seconds <= 0) {
-                    timer.changeScenarios('pause')
-                }
-            }
-            else if(timer.scenarios == '2'){
-                if(timer.minuts <= 0 && timer.seconds <= 0) {
-                    timer.changeScenarios('end')
-                }
-            }
+            // if(timer.scenarios == '1'){
+            //     if(timer.minuts <  timer.max_time || timer.minuts == timer.max_time && timer.seconds <= 0) {
+            //         timer.changeScenarios('pause')
+            //     }
+            // }
+            // else if(timer.scenarios == '2'){
+            //     if(timer.minuts <= 0 && timer.seconds <= 0) {
+            //         timer.changeScenarios('end')
+            //     }
+            // }
         }
         else{
             timer.seconds++
@@ -37,17 +37,17 @@ function startTimer(io, timer, userId) {
                 timer.minuts++
                 timer.seconds = 0
             }
-            if(timer.scenarios == '1'){
-                if(timer.minuts >= timer.max_time) {
-                    timer.changeScenarios('pause')
-                }
-            }
-            else if(timer.scenarios == '2'){
-                console.log(timer.minuts, timer.max_time * 2)
-                if(timer.minuts >= timer.max_time * 2) {
-                    timer.changeScenarios('end')
-                }
-            }
+            // if(timer.scenarios == '1'){
+            //     if(timer.minuts >= timer.max_time) {
+            //         timer.changeScenarios('pause')
+            //     }
+            // }
+            // else if(timer.scenarios == '2'){
+            //     console.log(timer.minuts, timer.max_time * 2)
+            //     if(timer.minuts >= timer.max_time * 2) {
+            //         timer.changeScenarios('end')
+            //     }
+            // }
         }
         timer.send(io, userId)
         //timer.toRoom('new_data', {name: 'timer', value: `${this.minuts}:${this.seconds}`})
@@ -97,7 +97,7 @@ class Timer {
     clearTimer() {
         deleteTimer(this)
 
-        this.minuts = this.is_reverse ? this.max_time * 2 : 0
+        this.minuts = 0
         this.seconds = 0
         this.status = 'stop'
 
@@ -113,18 +113,18 @@ class Timer {
     }
     reverse(type) {
         this.is_reverse = type
-        if(this.status == 'stop') {
-            this.clearTimer()
-        }
-        if(this.scenarios != '1' && this.scenarios != '2') 
-            this.changeScenarios(this.scenarios)
+        // if(this.status == 'stop') {
+        //     this.clearTimer()
+        // }
+        // if(this.scenarios != '1' && this.scenarios != '2') 
+        //     this.changeScenarios(this.scenarios)
     }
     set changeStage(stages) {
         this.now_time = stages.now_time ? stages.now_time : this.now_time
         this.now_penalty = stages.now_penalty ? stages.now_penalty : this.now_penalty
     }
     changeScenarios(scenarios) {
-        this.clearTimer()
+        //this.clearTimer()
         this.changed = true
         this.scenarios = scenarios
         if(scenarios == 'begin') {
@@ -133,24 +133,30 @@ class Timer {
         else if(scenarios == '1') {
             this.name = '1Т'
         }
+        else if(scenarios == 'VAR') {
+            this.name = 'VAR'
+        }
+        else if(scenarios == 'out') {
+            this.name = 'out'
+        }
         else if(scenarios == 'pause') {
             this.name = 'Перерыв'
-            this.minuts = this.max_time
+            //this.minuts = this.max_time
         }
         else if(scenarios == '2') {
             this.name = '2Т'
-            this.minuts = this.max_time
+            //this.minuts = this.max_time
         }
         else if(scenarios == 'end') {
             this.name = 'Конец матча'
-            this.status = 'stop'
-            this.minuts = this.is_reverse ? 0 : this.max_time * 2
+            //this.status = 'stop'
+            //this.minuts = this.is_reverse ? 0 : this.max_time * 2
         }
     }
     playTimer(io, userId) {
-        if(this.scenarios == 'begin' || this.scenarios == 'pause') {
+        //if(this.scenarios == 'begin' || this.scenarios == 'pause') {
             let nextScenarios = this.scenarios == 'begin' ? '1' : '2'
-            this.changeScenarios(nextScenarios)
+            //this.changeScenarios(nextScenarios)
             
             console.log(this)
             if(!this.timerId){
@@ -160,15 +166,15 @@ class Timer {
             else 
                 toggleTimer(this)
 
-        }
-        else if(this.scenarios != 'end') {
-            if(!this.timerId){
-                this.timerId = startTimer(io, this, userId)
-                this.status = 'play'
-            }
-            else 
-                toggleTimer(this)
-        }
+       // }
+        // else if(this.scenarios != 'end') {
+        //     if(!this.timerId){
+        //         this.timerId = startTimer(io, this, userId)
+        //         this.status = 'play'
+        //     }
+        //     else 
+        //         toggleTimer(this)
+        // }
     }
     // startTimer(socket) {
     //     this.is_null_start = false
@@ -223,7 +229,7 @@ class Scoreboard {
         this.team1_font_color = 'white'
         this.team2_font_color = 'white'
     }
-
+    
     changeScore(score) {
 
         this.team1 = score.team1 ? score.team1 : this.team1
@@ -254,8 +260,9 @@ class Control {
         this.timer = new Timer()
         this.scoreboard = new Scoreboard()
         this.tablo = new Tablo()
-        this.style = style
+        this.style = style || 'style_1'
         this.is_fouls = false
+        this.notif_type = 'circ'
     }
     async setMatch(matchId) {
         if(!matchId) return
@@ -265,8 +272,8 @@ class Control {
 
         let activePlayers = await PlayerResult.find({match: matchId, is_active: true}).select('player team')
         console.log(activePlayers)
-        let players_1 = activePlayers.filter(el => el.team._id.toString() == match.team_1._id.toString()).map(el => ({fio: el.player.fio, _id: el.player._id, img: el.player.img})), //await Player.find({team: match.team_1._id}).select('fio _id img'),
-            players_2 = activePlayers.filter(el => el.team._id.toString() == match.team_2._id.toString()).map(el => ({fio: el.player.fio, _id: el.player._id, img: el.player.img})),//await Player.find({team: match.team_2._id}).select('fio _id img'),
+        let players_1 = activePlayers.filter(el => el.team._id.toString() == match.team_1._id.toString()).map(el => ({fio: el.player.fio, _id: el.player._id, img: el.player.img, num: el.player.num})), //await Player.find({team: match.team_1._id}).select('fio _id img'),
+            players_2 = activePlayers.filter(el => el.team._id.toString() == match.team_2._id.toString()).map(el => ({fio: el.player.fio, _id: el.player._id, img: el.player.img, num: el.player.num})),//await Player.find({team: match.team_2._id}).select('fio _id img'),
             couch_1 = await Couch.find({team: match.team_1._id}).select('fio _id img'),
             couch_2 = await Couch.find({team: match.team_2._id}).select('fio _id img')
             console.log(players_1, players_2)
@@ -318,6 +325,9 @@ class Control {
                     break
                 case 'is_reverse':
                     this.timer.reverse(data[key])
+                    break
+                case 'notif_type':
+                    this.notif_type = data[key]
                     break
             }
         }

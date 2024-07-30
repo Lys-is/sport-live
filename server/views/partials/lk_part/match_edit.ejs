@@ -64,6 +64,14 @@
                     <label for="start_time">Время начала</label>
                     <input type="time" class="text_form date" id="start_time" name="time" value="<%= match.time %>">
                 </div>
+                <div class="vert_group">
+                    <label for="circle">Тур</label>
+                    <input type="number" name="circle" class="text_form date" id="circle" value="<%= match.circle %>">
+                </div>
+                <div class="vert_group">
+                    <label for="stadium">Стадион</label>
+                    <input type="text" name="stadium" class="text_form date" id="stadium" value="<%= match.stadium %>">
+                </div>
             </div>
         </div>
     </form>
@@ -77,20 +85,14 @@
                 <table class="commands_table cool_table mb">
                     <tr id="first-row">
                         <td>Cудья</td>
-                        <td></td>
-                        <td>Действие</td>
-                        <td></td>
+
 
                     </tr>
                     <% if(match.judges.length > 0)
                         for (let i = 0; i < match.judges.length; i++) { %>
                             <tr>
                                 <td><%= match.judges[i].fio %></td>
-                                <td></td>
-                                <td>
-                                    <span class="table_links table_links_compos nav_link"  data-href="judge/get__edit/?id=<%= match.judges[i]._id %>">Изменить</span>
-                                </td>
-                                <td >link</td>
+
                             </tr>
                         <% } %>
               
@@ -114,17 +116,14 @@
                 <table class="commands_table cool_table mb">
                     <tr id="first-row">
                         <td>Комментатор</td>
-                        <td></td>
-                        <td>Действие</td>
-                        <td></td>
+
 
                     </tr>
                     <% if(match.commentators.length > 0)
                         for (let i = 0; i < match.commentators.length; i++) { %>
                             <tr>
                                 <td><%= match.commentators[i].fio %></td>
-                                <td></td>
-                                <td>link</td>
+
                             </tr>
                         <% } %>
               

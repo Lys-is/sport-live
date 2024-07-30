@@ -24,54 +24,48 @@
                 <div class="block">
                     <div class="h-group center">
                         <p class="first">Показать</p>
+                        
                     </div>
-                    <div class="h-group space-between">
+                    <!-- <div class="h-group space-between">
                         <input type="button" value="Судей" name="judges" id="show_judges">
                         <input type="button" value="Комментатор(ов)" name="commentator" id="show_commentators">
-                    </div>
-                    <div class="h-group centered">
-                        <label for="champ-name" class="small-text">Название чемпионата</label>
-                        <input type="text" name="champ-name" id="champ-name" class="text-form full-form double-height-form">
-                    </div>
-                </div>
+                    </div> -->
+                     <div class="v-group">
+                        <!-- <label for="champ-name" class="small-text">Полезная информация</label> -->
+                        <input type="text" name="useful" id="useful" class="text-form full-form double-height-form" placeholder="Заголовок">
 
+                        <input type="text" name="champ" id="useful_title" class="text-form full-form double-height-form" placeholder="Текст">
+                        <input type="button" value="Показать информацию" name="commentator" id="show_info">
+
+                    </div> 
+                </div>
                 <div class="block">
-                    <div class="h-group center">
-                        <p class="first">Замены команд</p>
+                    <div id="table_judges" class="full-form">
+                        <% if(judges) { %>
+                            <p class="first">Судьи</p>
+                            <div class="h-group space-between">
+                            <select class="text-form full-form" name="judge" id="select_judge">
+                                <% for (let i = 0; i < judges.length; i++) { %>
+                                    <option value="<%= judges[i]._id %>"><%= judges[i].fio %></option>
+                                <% } %>
+                            </select>
+                            <input type="button" value="Показать" class="show_judge" >
+                            </div>
+                        <% } %>
                     </div>
-                    <div class="h-group">
-                        <div class="v-group">
-                            <lable for="team1-replace" class="small-text data_team_1" data-type="replace">Замена команды 1</lable>
-                            <select id="team1-replace" class="text-form full-form" name="team1-replace">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                    <div id="table_commentators" class="full-form">
+                        <% if(commentators) { %>
+                            <p class="first">Комментаторы</p>
+                            <div class="h-group space-between">
+                            <select class="text-form full-form" name="commentator" id="select_commentator">
+                                <% for (let i = 0; i < commentators.length; i++) { %>
+                                    <option value="<%= commentators[i]._id %>"><%= commentators[i].fio %></option>
+                                <% } %>
                             </select>
-                            <lable for="team1-replace-by" class="small-text">Замена на</lable>
-                            <select id="team1-replace-by" class="text-form full-form" name="team1-replace-by">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <input type="button" value="Показать малое" class="replace_btn" data-type="team1__s" class="full-form" name="team1-replace-button-small">
-                            <input type="button" value="Показать большое" class="replace_btn" data-type="team1__b"  name="team1-replace-button-big">
-                        </div>
-                        <div class="v-group">
-                            <lable for="team2-replace" class="small-text data_team_2" data-type="replace">Замена команды 2</lable>
-                            <select id="team2-replace" class="text-form full-form" name="team2-replace">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <lable for="team2-replace-by" class="small-text">Замена на</lable>
-                            <select id="team2-replace-by" class="text-form full-form" name="team2-replace-by">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <input type="button" value="Показать малое" class="replace_btn" data-type="team2__s" class="full-form" name="team2-replace-button-small">
-                            <input type="button" value="Показать большое" class="replace_btn" data-type="team2__b" class="full-form" name="team2-replace-button-big">
-                        </div>
+                            <input type="button" value="Показать" class="show_commentator" >
+                            </div>
+                        <% } %>
+                            
                     </div>
                 </div>
 
@@ -111,8 +105,47 @@
                     
                 </table>
             </div>
+            <div class="block">
+                <div class="h-group center">
+                    <p class="first">Замены команд</p>
+                </div>
+                <div class="h-group">
+                    <div class="v-group">
+                        <lable for="team1-replace" class="small-text data_team_1" data-type="replace">Замена команды 1</lable>
+                        <select id="team1-replace" class="text-form full-form" name="team1-replace">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <lable for="team1-replace-by" class="small-text">Замена на</lable>
+                        <select id="team1-replace-by" class="text-form full-form" name="team1-replace-by">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <input type="button" value="Показать малое" class="replace_btn" data-type="team1__s" class="full-form" name="team1-replace-button-small">
+                        <input type="button" value="Показать большое" class="replace_btn" data-type="team1__b"  name="team1-replace-button-big">
+                    </div>
+                    <div class="v-group">
+                        <lable for="team2-replace" class="small-text data_team_2" data-type="replace">Замена команды 2</lable>
+                        <select id="team2-replace" class="text-form full-form" name="team2-replace">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <lable for="team2-replace-by" class="small-text">Замена на</lable>
+                        <select id="team2-replace-by" class="text-form full-form" name="team2-replace-by">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <input type="button" value="Показать малое" class="replace_btn" data-type="team2__s" class="full-form" name="team2-replace-button-small">
+                        <input type="button" value="Показать большое" class="replace_btn" data-type="team2__b" class="full-form" name="team2-replace-button-big">
+                    </div>
+                </div>
+            </div>
+
         </div>
-        
     </div>
 <script type="text/javascript" defer src="/static/pages/panel_players.js"></script>
 
