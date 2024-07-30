@@ -203,3 +203,40 @@ padding: 0;
 }
 
 
+.type_3 {
+
+}
+
+.type_3 .notification {
+    background-color: #051A64  !important;
+    border-radius: 0 !important;
+}
+
+.type_3 .name {
+    background-color: #B97800 !important;
+
+    height: 60px;
+    margin-top: -15px;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: #fff;
+    font-weight: 600;
+    padding: 0 10px;
+    padding-top: 10px
+}
+
+.type_3 img {
+    /* filter: invert(1) !important; */
+}
+
+.type_3 .img {
+    filter: invert(1) !important;
+}
+
+.type_3 .red-card, .type_3 .yellow-card {
+    filter: invert(0) !important;}
+
+.type_3 .content {
+    height: 100% !important;
+}
