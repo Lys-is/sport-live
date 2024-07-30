@@ -6,30 +6,11 @@ const getBrightness = require('getbrightness')
 const timestore = require('timestore')
 let timers = new timestore.Timestore()
 function startTimer(io, timer, userId) {
-    // if(timer.scenarios == '2')
-    //     timer.minuts = timer.max_time
     let timerId = timers.setInterval(userId, timerCallback, 1000)
     console.log(timerId)
     function timerCallback() {
         if(timer.is_reverse){
             timer.seconds--
-            // if(timer.seconds == -1){
-            //     timer.minuts--
-            //     timer.seconds = 59
-            // }
-            // if(timer.minuts <= 0) {
-            //     timer.clearTimer()
-            // }
-            // if(timer.scenarios == '1'){
-            //     if(timer.minuts <  timer.max_time || timer.minuts == timer.max_time && timer.seconds <= 0) {
-            //         timer.changeScenarios('pause')
-            //     }
-            // }
-            // else if(timer.scenarios == '2'){
-            //     if(timer.minuts <= 0 && timer.seconds <= 0) {
-            //         timer.changeScenarios('end')
-            //     }
-            // }
         }
         else{
             timer.seconds++
@@ -37,20 +18,8 @@ function startTimer(io, timer, userId) {
                 timer.minuts++
                 timer.seconds = 0
             }
-            // if(timer.scenarios == '1'){
-            //     if(timer.minuts >= timer.max_time) {
-            //         timer.changeScenarios('pause')
-            //     }
-            // }
-            // else if(timer.scenarios == '2'){
-            //     console.log(timer.minuts, timer.max_time * 2)
-            //     if(timer.minuts >= timer.max_time * 2) {
-            //         timer.changeScenarios('end')
-            //     }
-            // }
         }
         timer.send(io, userId)
-        //timer.toRoom('new_data', {name: 'timer', value: `${this.minuts}:${this.seconds}`})
     }
     return userId.toString()
 }
