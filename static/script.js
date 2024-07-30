@@ -370,8 +370,6 @@ async function formGetData(form) {
         alert(e.message || 'Произошла ошибка при получении данных формы');
         return null;
     }
-
-    
 }
 
 
