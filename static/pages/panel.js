@@ -358,40 +358,7 @@ function startPenaltys() {
         })
     })
 }
-function playerNotifyListener(e) {
-    console.log(e.target)
-    let playerTr = e.target.closest('tr')
-    let player = playerTr.getAttribute('data-name')
-    let type = e.target.getAttribute('data-type').split('_')
-    let ids = [playerTr.getAttribute('data-id')]
-    let txt = '', title = '', img = ''
-    if(type[0] == 'goal') {
-        txt = player
-        title = 'Гоооооол'
-    }
-    else if(type[0] == 'yellow') {
-        txt = player + ' получил жёлтую карту'
-        title = 'Жёлтая карта'
-        type[0] = 'yellow-card'
-    }
-    else if(type[0] == 'red') {
-        txt = player + ' получил красную карту'
-        title = 'Красная карта'
-        type[0] = 'red-card'
-    }
-    if(type[1] == 'b') {
-        img = `<div>{{player_img__${0}}}`
-    }
-    let data = {
-        type: type[0],
-        size : type[1],
-        text: img+txt,
-        title: title,
-        ids,
-        model: 'Player',
-    }
-    socket.emit('notify', data)
-}
+
 console.log(socket.id)
 let textInpts = getA('input[type="text"], input[type="color"], input[type="number"]');
 console.log(textInpts)
