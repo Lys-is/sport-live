@@ -208,13 +208,12 @@ padding: 0;
 }
 
 .type_3 .notification {
-    background-color: #051A64  !important;
+    background-color: #051A64;
     border-radius: 0 !important;
 }
 
 .type_3 .name {
-    background-color: #B97800 !important;
-
+    /* background-color: #B97800 !important; */
     height: 60px;
     margin-top: -15px;
     justify-content: center;

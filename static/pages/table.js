@@ -298,7 +298,7 @@ let mb = get('#match-info > .q_name_round')
 function setAnim(div, direct, type) {
     if(type == 'pen' && !div.className.includes('pen')) return
     const compStyles = window.getComputedStyle(div);
-    let mb = get('#match-info > .q_name_rofsdfdsund')
+    let mb = get('#match-info > .q_name_round')
 
     let [prevDisplay, nextDisplay] = (direct == 'normal' ? ['none', 'block'] : ['block', 'none'])
     
