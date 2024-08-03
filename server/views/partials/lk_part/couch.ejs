@@ -16,6 +16,8 @@
             <td>ФИО</td>
             <td>Дата рождения</td>
             <td>Команда</td>
+            <td>Действия</td>
+
         </tr>
         <tr class="filter">
             <td></td>
@@ -25,6 +27,7 @@
                 <% teams.forEach((el) => { %><option data-id="<%= el._id %>" value="<%= el.name %>"><% }) %>
             </datalist>
             <td><input type="text" list="teams" class="table_input_text" name="team.name"></td>
+            <td></td>
         </tr>
      <% if (couches.length > 0) { %>
 
@@ -34,6 +37,14 @@
             <td><%= couches[i].fio %></td>
             <td><%= formatDatePretty(couches[i].birthday) %></td>
             <td><%= couches[i].team.name %></td>
+            <td>
+                <% if (couches[i].status_doc === 'active') { %>
+                <span class="table_links table_links_compos nav_link"  data-href="couch/get__edit/?id=<%= couches[i]._id %>">Изменить</span>
+                <span class="table_links table_links_del" data-id="<%= couches[i]._id %>" data-model="Couch">В архив</span>
+                <% } else { %>
+                <span class="table_links table_links_del" data-id="<%= couches[i]._id %>" data-model="Couch">Из архива</span>
+                <% } %>
+            </td>
         </tr>
 
     

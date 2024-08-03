@@ -13,10 +13,10 @@ let testConnect = setInterval(() => {
         socket.emit('join_table', tableId);
     }
 }, 200)
-socket.on('connect', () => {
+socket.on('connect', async () => {
     console.log(socket.id)
-    socket.emit('join_table', tableId);
-
+    await socket.emit('join_table', tableId);
+    await socket.emit('get_tour_img');
 })
 socket.on('reload', () => {
     location.reload();
@@ -26,6 +26,10 @@ socket.on('update_data', (data) => {
 })
 socket.on('update_style', () => {
     location.reload()
+})
+socket.on('tour_img', (data) => {
+    console.log(data)
+    setTourImg(data)
 })
 let notifyTimer
 let notifyDivs = []
@@ -53,7 +57,7 @@ socket.on('new_notify', (data) => {
 
         notifyBlock.innerHTML += newNotify
         setNotify(id, (i+1)*10)
-        //clearNotify(id, (i+1)*100)
+        clearNotify(id, (i+1)*100)
 
         
     }
@@ -103,7 +107,8 @@ let scenariosA = {
     '2': '2T',
     'end': 'Конец матча',
     'out': 'Тайм-аут',
-    'VAR': 'VAR'
+    'VAR': 'VAR',
+    'pens': 'Пенальти'
 }
 socket.on('timer', (data) => {
     console.log(data)
@@ -143,7 +148,7 @@ let first_style_tag = (function(type) {
 })();
 function setData(data) {
     let foll_divs = getA('.fouls-container')
-    console.log(data.is_fouls)
+    console.log(data.is_fouls, foll_divs)
     foll_divs.forEach(el => {
         el.style.display = data.is_fouls ? '' : 'none'
     })
@@ -299,8 +304,8 @@ function setAnim(div, direct, type) {
     if(type == 'pen' && !div.className.includes('pen')) return
     const compStyles = window.getComputedStyle(div);
     let mb = get('#match-info > .q_name_round')
-
-    let [prevDisplay, nextDisplay] = (direct == 'normal' ? ['none', 'block'] : ['block', 'none'])
+    let visibleType = div.getAttribute('visible_type') || 'block'
+    let [prevDisplay, nextDisplay] = (direct == 'normal' ? ['none', visibleType] : [visibleType, 'none'])
     
    // console.log(div, prevDisplay, nextDisplay)
     if(animTimouts[div.className]){
@@ -322,7 +327,7 @@ function setAnim(div, direct, type) {
         div.style.transitionDuration = '0.5s';
        // div.style.animationDelay = '0.5s';
        // div.style.maxHeight = '0px'
-       if(prevDisplay == 'block') {
+       if(prevDisplay == visibleType) {
         //  div.setAttribute('is_active','block') 
           //div.style.display = 'block'
           div.style.animationDelay = '0s';
@@ -361,10 +366,35 @@ function setScoreboard(scoreboard) {
     if(scoreboard.penalty && scoreboard.penalty.length > 0) {
         setPenalty(scoreboard.penalty)
     }
-    
+    let adv_fouls_home = getA('.var-home-fouls-advenced'),
+        adv_fouls_away = getA('.var-away-fouls-advenced')
+
+        if(adv_fouls_home.length > 0) {
+            setAdvFouls(adv_fouls_home, scoreboard.team1_foll)
+
+        }
+        if(adv_fouls_away.length > 0) {
+            setAdvFouls(adv_fouls_away, scoreboard.team2_foll)
+
+        }
 
 }
 let penaltyHTML = `<div class="penaltie" style="background-color: var(--pen-{{penalty.type}});"></div>`
+
+function setAdvFouls(divs, fouls) {
+
+    divs.forEach(div => {
+        div.innerHTML = ''
+        for(let i = 1; i <= 5; i++) {
+            if(i <= fouls) {
+                div.innerHTML += `<div class="penaltie" style="background-color: var(--pen-defeat);"></div>`
+            }
+            else {
+                div.innerHTML += `<div class="penaltie" style="background-color: var(--pen-clear);"></div>`
+            }
+        }
+    })
+}
 function setPenalty(penalty) {
 
     let team1 = getA('.penalties-home')
@@ -392,10 +422,19 @@ function setPenalty(penalty) {
 function setNames(data) {
         getA('.var-home, .home-team, .var-home-short').forEach(el => el.innerHTML = data.team1_name);
         getA('.var-away, .away-team, .var-away-short').forEach(el => el.innerHTML = data.team2_name);
-    
+
+        getA('.var-home-three').forEach(el => el.innerHTML = data.team1_name.slice(0, 3));
+        getA('.var-away-three').forEach(el => el.innerHTML = data.team2_name.slice(0, 3));
 }
 
-
+function setTourImg(data) {
+    getA('.league_logo').forEach(el => {
+        el.src = data.league_img || ''
+    })
+    getA('.tour_logo').forEach(el => {
+        el.src = data.tour_img || ''
+    })
+}
 
 function formatDatePretty(date, sep = '.') {
     date = new Date(date);

@@ -111,6 +111,7 @@
      Плавный скролл
     */
    scroll-behavior: smooth;
+   width: auto;
  }
  
  body {

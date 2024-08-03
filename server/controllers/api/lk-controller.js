@@ -407,6 +407,7 @@ class LkController {
             let msg = ''
             console.log(data);
             let schema = mongoose.models[data.model];
+            console.log(schema);
             if(!schema)
                 return res.json({message: 'Такой схемы нет'});
             let doc = await schema.findById(data.id);

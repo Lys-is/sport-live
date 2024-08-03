@@ -208,7 +208,9 @@ let inits = {
     'player/get__create' : init__player_create,
     'player/get__edit' : init__player_edit,
     'representative/get__create' : init__representative_create,
+    'representative/get__edit' : init__representative_edit,
     'couch/get__create' : init__couch_create,
+    'couch/get__edit' : init__couch_edit,
     'judge/get__create' : init__judge_create,
     'commentator/get__create' : init__commentator_create,
     'user': init__user,
@@ -658,6 +660,15 @@ function init__representative_create() {
         sendFetch("/api/lk/representative/post__create", JSON.stringify(data), "POST")
     })
 }
+function init__representative_edit() {
+    let form = get("#representative_edit__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        data.representativeId = form.getAttribute('data-id')
+        sendFetch("/api/lk/representative/put__edit", JSON.stringify(data), "PUT")
+    })
+}
 function init__couch_create() {
     let form = get("#couch_create__form");
     form.addEventListener("submit", async (e) => {
@@ -666,7 +677,15 @@ function init__couch_create() {
         sendFetch("/api/lk/couch/post__create", JSON.stringify(data), "POST")
     })
 }
-
+function init__couch_edit() {
+    let form = get("#couch_edit__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        data.couchId = form.getAttribute('data-id')
+        sendFetch("/api/lk/couch/put__edit", JSON.stringify(data), "PUT")
+    })
+}
 function init__judge_create() {
     let form = get("#judge_create__form");
     form.addEventListener("submit", async (e) => {

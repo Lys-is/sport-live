@@ -28,9 +28,9 @@ class RepresentativeController {
     }
     async get__edit(req, res) {
         try {
-            let player = await Couch.findOne({_id: req.query.id})
+            let couch = await Couch.findOne({_id: req.query.id})
             let teams = await Team.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
-            return sendRes('partials/lk_part/player_edit', {player, teams}, res);
+            return sendRes('partials/lk_part/couch_edit', {couch, teams}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -38,11 +38,11 @@ class RepresentativeController {
     }
     async put__edit(req, res) {
         try {
-            const {playerId} = req.body;
-            let player = await Player.findOne({_id: playerId});
-            if(!player) return res.json({message: 'Такого игрока не существует'});
-            player = await Player.updateOne({_id: playerId}, req.body);
-            return res.json({message: 'Игрок обновлен'});
+            const {couchId} = req.body;
+            let couch = await Couch.findOne({_id: couchId});
+            if(!couch) return res.json({message: 'Такого тренера не существует'});
+            couch = await Couch.updateOne({_id: couchId}, req.body);
+            return res.json({message: 'Тренер обновлен'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

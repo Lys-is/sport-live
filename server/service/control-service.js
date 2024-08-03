@@ -200,7 +200,9 @@ class Scoreboard {
     }
     
     changeScore(score) {
-
+        for(let key in score) {
+            score[key] = typeof score[key] == 'object' || !score[key]?.toString ? score[key] : score[key].toString()
+        }
         this.team1 = score.team1 ? score.team1 : this.team1
         this.team2 = score.team2 ? score.team2 : this.team2
         this.team1_foll = score.team1_foll ? score.team1_foll : this.team1_foll
@@ -257,8 +259,11 @@ class Control {
     }
     resetScore() {
         this.scoreboard.changeScore({team1: 0, team2: 0, team1_foll: 0, team2_foll: 0})
+        console.log(this.scoreboard)
     }
-
+    getTourImg() {
+        
+    }
     setData(data) {
         console.log(data)
         for(let key in data) {

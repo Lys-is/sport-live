@@ -208,8 +208,9 @@ socket.on('update_data', (data) => {
     is_foul.checked = data.is_fouls
     is_reverse.checked = data.timer.is_reverse
     foul_inpts.forEach(inp => inp.disabled = !data.is_fouls)
-    is_foul.disabled = false
 
+    is_foul.disabled = false
+    
     notif_type.value = data.notif_type
 })
 
@@ -238,6 +239,8 @@ function setScoreboard(scoreboard) {
     get('#score_team2').value = scoreboard.team2
     get('#team1_color').value = scoreboard.team1_color
     get('#team2_color').value = scoreboard.team2_color
+    get('#team1_foll').value = scoreboard.team1_foll
+    get('#team2_foll').value = scoreboard.team2_foll
     setPenalty(scoreboard.penalty)
 }
 let penalty_num = 0
@@ -268,7 +271,6 @@ function pen_num() {
 function setPenalty(penalty) {
     let div = get('#penalty_div')
     div.innerHTML = ''
-    
     penalty.forEach((el, i) => {
         let tempHTML = ''
         tempHTML = `<div class="h-group bigger-gap" data-index="${i}">`

@@ -13,4 +13,4 @@ const СouchSchema = new Schema({
 
 })
 СouchSchema.plugin(require('mongoose-autopopulate'));
-module.exports = model('Сouch', СouchSchema);
+module.exports = model('Couch', СouchSchema);

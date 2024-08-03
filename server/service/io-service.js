@@ -5,6 +5,8 @@ const Player = require('../models/player-model');
 const Couch = require('../models/couch-model');
 const Commentator = require('../models/commentator-model');
 const Judge = require('../models/judge-model');
+const Tournament = require('../models/tournament-model');
+const League = require('../models/league-model');
 const controlService = require('./control-service');
 let io = null
 let controls = {}
@@ -153,10 +155,30 @@ function startPanel(controls, socket) {
     try {
       await control.setMatch(data);
       io.to(userId).emit('update_data', control.getData);
+      getTourImgs()
     } catch (e) {
       console.log(e)
     }
   });
+  socket.on('get_tour_img', async () => {
+    try {
+      getTourImgs()
+    } catch (e) {
+      console.log(e)
+    }
+  });
+  async function getTourImgs(){
+    console.log(control)
+    let tourImgs = {}
+    let league = await League.findOne({creator: userId});
+      if(league && league.img){
+        tourImgs.league_img = league.img
+      }
+      if(control.match?.tournament && control.match.tournament.basic.img){
+        tourImgs.tour_img = control.match.tournament.basic.img
+      }
+      io.to(userId).emit('tour_img', tourImgs);
+  }
   socket.on('reset_score', async (data) => {
     try {
       await control.resetScore();
