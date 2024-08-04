@@ -6,12 +6,14 @@
 	--pen-clear: #fff;
 	--pen-defeat: #ff0000;
 	--pen-goal: green;
+    --pen-dark: linear-gradient(146.16deg, #0E173F 16.23%, #010920 87.3%);
+
   }
 .little {
     position: absolute;
     width: 790px;
     height: 123px;
-    background-color: #061029;
+    background-color: #061029e6;
     top: 50px;
     left: 100px;
 }
@@ -74,9 +76,8 @@
 .little .score .divider {
     width: 5px;
     height: 20px;
-    background-color: #002368;
+    background-color: #002368e6;
     position: absolute;
-
     left: 60px;
 }
 
@@ -133,7 +134,7 @@
     left: 0;
     top: 0;
     width: 150px;
-    background-color: #E18E06;
+    background-color: #e18e06;
     height: 60px;
     display: flex;
     align-items: center;
@@ -145,7 +146,7 @@
     left: 149px;
     top: 0;
     width: 93.5px;
-    background-color: #ececec;
+    background-color: #ececece6;
     height: 60px;
     display: flex;
     align-items: center;
@@ -162,7 +163,7 @@
 }
 
 .little .body .line1 div:nth-child(3) {
-    background-color: #ececec;
+    background-color: #ececece6;
     left: 241.5PX;
     top: 25px;
     position: absolute;
@@ -175,7 +176,7 @@
     left: 247.5px;
     top: 0;
     width: 93.5px;
-    background-color: #ececec;
+    background-color: #ececece6;
     height: 60px;
     display: flex;
     align-items: center;
@@ -188,7 +189,7 @@
     left: 340px;
     top: 0;
     width: 150px;
-    background-color: #E18E06;
+    background-color: #e18e06;
     height: 60px;
     display: flex;
     align-items: center;
@@ -517,8 +518,8 @@ justify-self: end !important;
 }
 
 .large > div:first-child {
-    background-color: #cacaca;
-    clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%);
+    background-color: #cacacae6;
+    clip-path: polygon(0 0%, 100% 0%, 100% 3%, 27% 2%, 27% 93%, 76% 90%,0% 100%, 0% 0%);
     width: 1000px;
     height: 650px;
     display: flex;
@@ -535,10 +536,10 @@ justify-self: end !important;
 }
 
 .large > div:last-child {
-    background-color: #002368;
+    background-color: #002368e6;
     width: 1300px;
     height: 600px;
-    clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 89%, 0% 100%);
     margin-left: -480px;
     margin-top: 10px;
     display: flex;
@@ -558,7 +559,7 @@ justify-self: end !important;
 
 .large .line {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
 }
 
@@ -590,6 +591,7 @@ justify-self: end !important;
     align-self: center;
     row-gap: 5px;
     min-height: 90px;
+    margin-top: 15px;
 }
 
 .grid img {

@@ -95,6 +95,7 @@ let timerDivs = {
     tr: getA('.q_time_round'),
     nr: getA('.q_name_round'),
     trn: getA('.q_time_name_round'),
+    rs: getA('.q_round_num'),
     // s: get('#top-timer'),
     // b: get('#info'),
     // c: get('.var-time')
@@ -176,6 +177,7 @@ function setData(data) {
         players.forEach((el, i) => {
             setRoster(el, i+1)
         })
+        get('.')
         let date = formatDatePretty(data.match.date || '2021-01-01')
         getA('.var-tour').forEach(el => el.innerHTML = data.match.circle || 0) 
         getA('.var-match-date, .var-match-date-text').forEach(el => {el.innerHTML = date})
@@ -228,6 +230,9 @@ function setTime(data) {
                 timerDivs[key]?.forEach(el => el.innerHTML = scenariosA[data.scenarios])
             else
                 timerDivs[key]?.forEach(el => el.innerHTML = '')
+        }
+        else if(key == 'rs'){
+            timerDivs[key]?.forEach(el => el.innerHTML = ( data.scenarios == '1' || data.scenarios == '2' ) ? `${data.scenarios}` : '')
         }
         else if(key == 'trn'){
             timerDivs[key]?.forEach(el => el.innerHTML = data.value +  "  " + (( data.scenarios == '1' || data.scenarios == '2' ) ? `  ${data.scenarios}T` : scenariosA[data.scenarios]))
@@ -390,7 +395,7 @@ function setAdvFouls(divs, fouls) {
                 div.innerHTML += `<div class="penaltie" style="background-color: var(--pen-defeat);"></div>`
             }
             else {
-                div.innerHTML += `<div class="penaltie" style="background-color: var(--pen-clear);"></div>`
+                div.innerHTML += `<div class="penaltie" style="background-color: var(--pen-dark);"></div>`
             }
         }
     })
