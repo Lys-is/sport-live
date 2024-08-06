@@ -76,7 +76,7 @@
 .little .score .divider {
     width: 5px;
     height: 20px;
-    background-color: #002368e6;
+    /* background-color: #002368e6; */
     position: absolute;
     left: 60px;
 }
