@@ -57,7 +57,7 @@ socket.on('new_notify', (data) => {
 
         notifyBlock.innerHTML += newNotify
         setNotify(id, (i+1)*10)
-        //clearNotify(id, (i+1)*100)
+        clearNotify(id, (i+1)*100)
 
         
     }
