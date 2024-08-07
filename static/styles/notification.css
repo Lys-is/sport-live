@@ -210,6 +210,7 @@ padding: 0;
 .type_3 .notification {
     background-color: #002368e6;
     border-radius: 0 !important;
+    margin-top: 150px;
 }
 
 .type_3 .name {
