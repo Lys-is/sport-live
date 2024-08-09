@@ -236,6 +236,7 @@ function startPanel(controls, socket) {
   socket.on('new_data', (data) => {
     try {
       control.setData(data);
+      console.log(control.getData)
       io.to(userId).emit('update_data', control.getData);
     } catch (e) {
       console.log(e)
