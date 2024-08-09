@@ -2,8 +2,10 @@ const Match = require('../models/match-model');
 const Player = require('../models/player-model');
 const PlayerResult = require('../models/playerResult-model');
 const Couch = require('../models/couch-model');
+const Representative = require('../models/representative-model');
 const getBrightness = require('getbrightness')
-const timestore = require('timestore')
+const timestore = require('timestore');
+const representativeModel = require('../models/representative-model');
 let timers = new timestore.Timestore()
 function startTimer(io, timer, userId) {
     let timerId = timers.setInterval(userId, timerCallback, 1000)
@@ -246,7 +248,9 @@ class Control {
         let players_1 = activePlayers.filter(el => el.team._id.toString() == match.team_1._id.toString()).map(el => ({fio: el.player.fio, _id: el.player._id, img: el.player.img, num: el.player.num})), //await Player.find({team: match.team_1._id}).select('fio _id img'),
             players_2 = activePlayers.filter(el => el.team._id.toString() == match.team_2._id.toString()).map(el => ({fio: el.player.fio, _id: el.player._id, img: el.player.img, num: el.player.num})),//await Player.find({team: match.team_2._id}).select('fio _id img'),
             couch_1 = await Couch.find({team: match.team_1._id}).select('fio _id img'),
-            couch_2 = await Couch.find({team: match.team_2._id}).select('fio _id img')
+            couch_2 = await Couch.find({team: match.team_2._id}).select('fio _id img'),
+            representative_1 = await Representative.find({team: match.team_1._id}),
+            representative_2 = await Representative.find({team: match.team_2._id})
             console.log(players_1, players_2)
         this.match = match
         this.team1_name = match.team_1.name
@@ -256,6 +260,8 @@ class Control {
         this.scoreboard.changeScore({team1_color: match.team_1.color, team2_color: match.team_2.color})
         this.couch_1 = couch_1
         this.couch_2 = couch_2
+        this.representative_1 = representative_1
+        this.representative_2 = representative_2
     }
     resetScore() {
         this.scoreboard.changeScore({team1: 0, team2: 0, team1_foll: 0, team2_foll: 0})

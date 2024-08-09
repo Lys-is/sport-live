@@ -584,6 +584,7 @@ justify-self: end !important;
 }
 
 .grid {
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 80%;
@@ -603,13 +604,14 @@ justify-self: end !important;
 .grid > div {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     gap : 10px;
     /* padding-right: 40px; */
     height: 30px;
     background-color:#09173b;
     /* flex-direction: row-reverse; */
     margin-inline: 10px;
+    padding-inline: 25px;
 }
 
 .grid p {
@@ -644,7 +646,15 @@ justify-self: end !important;
 .large > div:last-child > div:last-child p:last-child {
     font-size: 23px;
 }
-
+.representative-title {
+    color: white;
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 400;
+    font-family: 'Anton', sans-serif;
+    margin: 0;
+    margin-left: 10%;
+}
 .mid .name {
     width: 100% !important;
     font-size: 20px !important;

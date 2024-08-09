@@ -177,13 +177,55 @@ function setData(data) {
         players.forEach((el, i) => {
             setRoster(el, i+1)
         })
-        get('.')
+        setCouch(data)
+        setRepresentative(data)
         let date = formatDatePretty(data.match.date || '2021-01-01')
         getA('.var-tour').forEach(el => el.innerHTML = data.match.circle || 0) 
         getA('.var-match-date, .var-match-date-text').forEach(el => {el.innerHTML = date})
         getA('.var-match-time, .var-match-time-text').forEach(el => {el.innerHTML = data.match.time || '00:00'})
-        getA('.var-tournament').forEach(el => el.innerHTML = data.match.tournament.basic.full_name || 'Вне турнира')
+        getA('.var-tournament').forEach(el => el.innerHTML = data.match.tournament?.basic.full_name || 'Вне турнира')
         getA('.var-stadium').forEach(el => el.innerHTML = data.match.stadium || 'Стадион не указан')
+    }
+}
+function setCouch(data) {
+    if(data.couch_1[0]) {
+        let div = get('.home-couch')
+        setNameCouch(div, data.couch_1[0].fio)
+    }
+    if(data.couch_2[0]) {
+        let div = get('.away-couch')
+        setNameCouch(div, data.couch_2[0].fio)
+    }
+    function setNameCouch(div, name) {
+        if(!div) return
+        let nameEl = get('.couch-name', div)
+        div.style.display = 'block'
+        nameEl.innerHTML = name
+    }
+}
+function setRepresentative(data) {
+    console.log(!!data.representative_1 , data.representative_1.length)
+    if(data.representative_1 && data.representative_1.length > 0) {
+        let div = get('.home-representative')
+        console.log(div, data.representative_1)
+        setNameRepresentative(div, data.representative_1)
+    }
+    if(data.representative_2 && data.representative_2.length > 0) {
+        let div = get('.away-representative')
+        setNameRepresentative(div, data.representative_2)
+    }
+    function setNameRepresentative(div, arr) {
+        let gridDiv = get('.grid', div)
+        console.log(gridDiv, arr)
+        if(!gridDiv) return
+        gridDiv.innerHTML = ''
+        div.style.display = 'block'
+        arr.forEach((el, i) => {
+            gridDiv.innerHTML += `<div class="roster-teamate">
+                                    <p class="roster-teamate-name">${el.fio}</p>
+                                    <img width="40" height="40" src="${el.img || '/static/styles/icons/empty.png'}">
+                                </div>`
+            })
     }
 }
 function setRoster(players, i) {
