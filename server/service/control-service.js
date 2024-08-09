@@ -315,28 +315,9 @@ class Control {
 
     get getData() {
         
-        let data = {}
-        function recurse(data, obj) {
-            console.log(data)
-            for(let key in obj) {
-                console.log(key)
-                if(key.includes('img'))
-                    continue
-                if(typeof obj[key] !== 'function') {
-                    data[key] = obj[key]
-                }
-                else if(typeof obj[key] === 'object') {
-                    recurse(data[key], obj[key])
-                }
-            }
-        }
-        try {
-            //recurse(data, this)
-        } catch (error) {
-            console.log(error)
-        }
-        //recurse(data, this)
-        return JSON.parse(JSON.stringify(this))
+        return JSON.parse(JSON.stringify(this, function replacer(key, value) {
+            return (key.includes('img')) ? undefined : value;
+          }))
     }
     get getDataAll() {
         let data = {}
@@ -345,12 +326,14 @@ class Control {
             for(let key in obj) {
                 console.log(key)
                 if(key.includes('img'))
-                    continue
-                if(typeof obj[key] !== 'function') {
-                    data[key] = obj[key]
-                }
-                else if(typeof obj[key] === 'object') {
-                    recurse(data[key], obj[key])
+                    data[key] ='cached'
+                else{
+                    if(typeof obj[key] !== 'function') {
+                        data[key] = obj[key]
+                    }
+                    else if(typeof obj[key] === 'object') {
+                        recurse(data[key], obj[key])
+                    }
                 }
             }
         }
