@@ -97,7 +97,7 @@ function startPanel(controls, socket) {
       control = controls[userId] || new controlService(userId, socket.user.tablo_style, io);
       controls[userId] = control;
       socket.join(userId);
-      socket.emit('update_data', control.getData);
+      socket.emit('update_data', control.getDataAll);
     } catch (e) {
       console.log(e)
     }
@@ -113,7 +113,7 @@ function startPanel(controls, socket) {
       controls[userId] = control;
       const user = await User.findOne({ _id: tableId.split('_')[0] });
       socket.join(tableId);
-      socket.emit('start', control.getData);
+      socket.emit('start', control.getDataAll);
     } catch (e) {
       console.log(e)
     }
@@ -236,6 +236,7 @@ function startPanel(controls, socket) {
   socket.on('new_data', (data) => {
     try {
       control.setData(data);
+      console.log(control.getData)
       io.to(userId).emit('update_data', control.getData);
     } catch (e) {
       console.log(e)
