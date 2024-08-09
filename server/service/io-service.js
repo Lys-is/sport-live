@@ -154,7 +154,10 @@ function startPanel(controls, socket) {
   socket.on('match', async (data) => {
     try {
       await control.setMatch(data);
+<<<<<<< HEAD
       console.log('ddddd22222')
+=======
+>>>>>>> refs/remotes/origin/main
       io.to(userId).emit('update_data', control.getDataAll);
       getTourImgs()
     } catch (e) {
