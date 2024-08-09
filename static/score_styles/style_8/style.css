@@ -13,7 +13,7 @@
     position: absolute;
     width: 790px;
     height: 123px;
-    background-color: #061029e6;
+    /* background-color: #061029e6; */
     top: 50px;
     left: 100px;
 }
@@ -32,19 +32,23 @@
 
 .little img {
     position: absolute;
-    top: 6px;
+    top: 8px;
     left: 9px;
     border-radius: 100px;
-
     width: 50px;
     height: 50px;
+    /* display: block; */
+    z-index: 5;
 }
 
 .little .score {
     position: absolute;
-    top: 6px;
-    left: 70px;
-    height: 50px;
+    top: 0;
+    left: 0;
+    height: 70px;
+    width: 300px;
+    background-color: #061029e6;
+    z-index: 1;
 }
 
 .little .score p {
@@ -65,12 +69,14 @@
 
 .little .score p:first-child {
     width: 50px;
-    left: 0;
+    left: 80px;
+    top: 8px;
 }
 
 .little .score p:last-child {
     width: 130px;
-    left: 80px;
+    left: 150px;
+    top: 8px;
 }
 
 .little .score .divider {
@@ -91,17 +97,18 @@
 
 .little .info {
     position: absolute;
-    top: 75px;
-    left: 10px;
-    width: 270px;
+    top: 70px;
+    left: 0;
+    width: 300px;
     font-family: 'Anton', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 40px;
-    height: 40px;
+    height: 53px;
     color: #FFFFFF;
     margin: 0;
     text-align: center;
+    /* background: black; */
 }
 
 .little .body {
@@ -109,6 +116,7 @@
     left: 300px;
     width: 490px;
     height: 123px;
+    background-color: #061029e6;
 }
 
 .little .body .line1 {

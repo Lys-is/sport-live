@@ -169,13 +169,13 @@ function startPanel(controls, socket) {
   });
   async function getTourImgs(){
     console.log(control)
-    if(!control || !control.match) return
+    if(!control) return
     let tourImgs = {}
     let league = await League.findOne({creator: userId});
       if(league && league.img){
         tourImgs.league_img = league.img
       }
-      if(control.match?.tournament && control.match.tournament.basic.img){
+      if(control.match?.tournament && control.match?.tournament.basic.img){
         tourImgs.tour_img = control.match.tournament.basic.img
       }
       io.to(userId).emit('tour_img', tourImgs);
