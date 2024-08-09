@@ -154,7 +154,8 @@ function startPanel(controls, socket) {
   socket.on('match', async (data) => {
     try {
       await control.setMatch(data);
-      io.to(userId).emit('update_data', control.getData);
+      console.log('ddddd22222')
+      io.to(userId).emit('update_data', control.getDataAll);
       getTourImgs()
     } catch (e) {
       console.log(e)
