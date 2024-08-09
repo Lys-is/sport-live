@@ -263,7 +263,7 @@
 .big {
     position: absolute;
     display: flex;
-    width: 100%;
+    width: 94%;
     height: 120px;
     bottom: 50px;
     justify-content: center;
@@ -273,10 +273,9 @@
     display: flex;
     height: 120px;
     width: auto;
-    min-width: 1200px;
+    min-width: 1182px;
     background-color: #0a1b46;
     justify-content: space-between;
-
 }
 
 /* .big-content::before{

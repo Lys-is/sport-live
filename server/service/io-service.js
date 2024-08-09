@@ -169,7 +169,7 @@ function startPanel(controls, socket) {
   });
   async function getTourImgs(){
     console.log(control)
-    if(!control?.match) return
+    if(!control || !control.match) return
     let tourImgs = {}
     let league = await League.findOne({creator: userId});
       if(league && league.img){
