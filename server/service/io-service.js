@@ -97,7 +97,9 @@ function startPanel(controls, socket) {
       control = controls[userId] || new controlService(userId, socket.user.tablo_style, io);
       controls[userId] = control;
       socket.join(userId);
-      socket.emit('update_data', control.getDataAll);
+      let dd = control.getDataAll
+      dd.cached = true
+      socket.emit('update_data', dd);
     } catch (e) {
       console.log(e)
     }
@@ -113,7 +115,9 @@ function startPanel(controls, socket) {
       controls[userId] = control;
       const user = await User.findOne({ _id: tableId.split('_')[0] });
       socket.join(tableId);
-      socket.emit('start', control.getDataAll);
+      let dd = control.getDataAll
+      dd.cached = true
+      socket.emit('start', dd);
     } catch (e) {
       console.log(e)
     }
@@ -155,7 +159,9 @@ function startPanel(controls, socket) {
     try {
       await control.setMatch(data);
       console.log('ddddd22222')
-      io.to(userId).emit('update_data', control.getDataAll);
+      let dd = control.getDataAll
+      dd.cached = true
+      io.to(userId).emit('update_data', dd);
       getTourImgs()
     } catch (e) {
       console.log(e)

@@ -165,7 +165,7 @@ function setData(data) {
     if(data.scoreboard) {
         setScoreboard(data.scoreboard)
     }
-    if(data.match) {
+    if(data.match && data.cached) {
         getA('.home-logo').forEach(el => {
             el.src = data.match.team_1.img ? data.match.team_1.img : '/static/styles/icons/logo.jpg'
         })
