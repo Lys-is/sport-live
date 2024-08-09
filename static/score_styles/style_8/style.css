@@ -540,6 +540,7 @@ justify-self: end !important;
 .large > div:first-child img {
     width: 100px;
     height: 100px;
+    border-radius: 50%;
 }
 
 .large > div:last-child {
