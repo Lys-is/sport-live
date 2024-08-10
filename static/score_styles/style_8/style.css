@@ -635,23 +635,23 @@ justify-self: end !important;
 }
 
 .large > div:last-child > div:last-child {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     gap: 5px;
     width: 80%;
     justify-self: center;
     align-self: center;
-    margin-top: 15px;
+    margin-top: 15px; */
     /* display: none; */
 }
 
 .large > div:last-child > div:last-child p {
-    color: white;
+    /* color: white;
     font-size: 13px;
     line-height: 20px;
     font-weight: 400;
     font-family: 'Anton', sans-serif;
-    margin: 0;
+    margin: 0; */
 }
 
 .large > div:last-child > div:last-child p:last-child {
