@@ -188,13 +188,13 @@ function setData(data) {
     }
 }
 function setCouch(data) {
-    if(data.couch_1[0]) {
+    if(data.couch_1 && data.couch_1.length > 0) {
         let div = get('.home-couch')
-        setNameCouch(div, data.couch_1[0].fio)
+        setRosterEl(div, data.couch_1)
     }
-    if(data.couch_2[0]) {
+    if(data.couch_2 && data.couch_2.length > 0) {
         let div = get('.away-couch')
-        setNameCouch(div, data.couch_2[0].fio)
+        setRosterEl(div, data.couch_2)
     }
     function setNameCouch(div, name) {
         if(!div) return
@@ -207,26 +207,26 @@ function setRepresentative(data) {
     console.log(!!data.representative_1 , data.representative_1.length)
     if(data.representative_1 && data.representative_1.length > 0) {
         let div = get('.home-representative')
-        console.log(div, data.representative_1)
-        setNameRepresentative(div, data.representative_1)
+        setRosterEl(div, data.representative_1)
     }
     if(data.representative_2 && data.representative_2.length > 0) {
         let div = get('.away-representative')
-        setNameRepresentative(div, data.representative_2)
+        setRosterEl(div, data.representative_2)
     }
-    function setNameRepresentative(div, arr) {
-        let gridDiv = get('.grid', div)
-        console.log(gridDiv, arr)
-        if(!gridDiv) return
-        gridDiv.innerHTML = ''
-        div.style.display = 'block'
-        arr.forEach((el, i) => {
-            gridDiv.innerHTML += `<div class="roster-teamate">
-                                    <p class="roster-teamate-name">${el.fio}</p>
-                                    <img width="40" height="40" src="${el.img || '/static/styles/icons/empty.png'}">
-                                </div>`
-            })
-    }
+    
+}
+function setRosterEl(div, arr) {
+    let gridDiv = get('.grid', div)
+    console.log(gridDiv, arr)
+    if(!gridDiv) return
+    gridDiv.innerHTML = ''
+    div.style.display = 'block'
+    arr.forEach((el, i) => {
+        gridDiv.innerHTML += `<div class="roster-teamate">
+                                <p class="roster-teamate-name">${el.fio}</p>
+                                <img width="40" height="40" src="${el.img || '/static/styles/icons/empty.png'}">
+                            </div>`
+        })
 }
 function setRoster(players, i) {
     if(!players) 
