@@ -28,7 +28,7 @@ socket.on('update_style', () => {
     location.reload()
 })
 socket.on('tour_img', (data) => {
-    console.log(data)
+    console.log(data, 'fdfdfdfdfdfd')
     setTourImg(data)
 })
 let notifyTimer
@@ -185,6 +185,8 @@ function setData(data) {
         getA('.var-match-time, .var-match-time-text').forEach(el => {el.innerHTML = data.match.time || '00:00'})
         getA('.var-tournament').forEach(el => el.innerHTML = data.match.tournament?.basic.full_name || 'Вне турнира')
         getA('.var-stadium').forEach(el => el.innerHTML = data.match.stadium || 'Стадион не указан')
+        socket.emit('get_tour_img');
+
     }
 }
 function setCouch(data) {
