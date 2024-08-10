@@ -629,6 +629,9 @@ justify-self: end !important;
     font-weight: 400;
     font-family: 'Anton', sans-serif;
     margin: 0;
+    max-width: 220px;
+    text-wrap: nowrap;
+    overflow: hidden;
 }
 
 .large > div:last-child > div:last-child {
