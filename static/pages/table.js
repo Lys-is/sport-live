@@ -259,7 +259,8 @@ function setRepresentative(data) {
     
 }
 function setRosterEl(div, arr) {
-    if(!div) return
+    if(!div) 
+        console.log(div, arr)
     let gridDiv = get('.grid', div)
     console.log(gridDiv, arr)
     if(!gridDiv) return
