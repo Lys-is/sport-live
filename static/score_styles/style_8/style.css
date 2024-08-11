@@ -11,7 +11,7 @@
   }
 .little {
     position: absolute;
-    width: 790px;
+    width: 600px;
     height: 123px;
     /* background-color: #061029e6; */
     top: 50px;
@@ -46,7 +46,7 @@
     top: 0;
     left: 0;
     height: 70px;
-    width: 300px;
+    width: 270px;
     background-color: #061029e6;
     z-index: 1;
 }
@@ -75,7 +75,7 @@
 
 .little .score p:last-child {
     width: 130px;
-    left: 150px;
+    left: 137px;
     top: 8px;
 }
 
@@ -99,7 +99,7 @@
     position: absolute;
     top: 70px;
     left: 0;
-    width: 300px;
+    width: 270px;
     font-family: 'Anton', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -113,25 +113,24 @@
 
 .little .body {
     position: absolute;
-    left: 300px;
-    width: 490px;
+    left: 270px;
+    width: 414px;
     height: 123px;
     background-color: #061029e6;
 }
 
 .little .body .line1 {
-    width: 490px;
+    width: 400px;
     height: 80px;
 }
 
 .little .body .line1 p {
     margin: 0;
     width: 100%;
-    
     font-family: 'Anton', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 45px;
+    font-size: 38px;
     height: 50px;
     color: #FFFFFF;
     text-align: center;
@@ -140,8 +139,8 @@
 .little .body .line1 div:nth-child(1) {
     position: absolute;
     left: 0;
-    top: 0;
-    width: 150px;
+    top: 0px;
+    width: 110px;
     background-color: #e18e06;
     height: 60px;
     display: flex;
@@ -151,7 +150,7 @@
 
 .little .body .line1 div:nth-child(2) {
     position: absolute;
-    left: 149px;
+    left: 110px;
     top: 0;
     width: 93.5px;
     background-color: #ececece6;
@@ -172,7 +171,7 @@
 
 .little .body .line1 div:nth-child(3) {
     background-color: #ececece6;
-    left: 241.5PX;
+    left: 203.5PX;
     top: 25px;
     position: absolute;
     width: 7px;
@@ -181,7 +180,7 @@
 
 .little .body .line1 div:nth-child(4) {
     position: absolute;
-    left: 247.5px;
+    left: 210.5px;
     top: 0;
     width: 93.5px;
     background-color: #ececece6;
@@ -194,9 +193,9 @@
 
 .little .body .line1 div:nth-child(5) {
     position: absolute;
-    left: 340px;
+    left: 304px;
     top: 0;
-    width: 150px;
+    width: 110px;
     background-color: #e18e06;
     height: 60px;
     display: flex;
@@ -207,8 +206,8 @@
 .little .body .line1 .team1-col {
     background-color: red;
     position: absolute;
-    width: 130px;
-    left: 10px;
+    width: 110px;
+    left: 0px;
     height: 10px;
     top: 60px;
     transform: skewY(-4.3deg);
@@ -219,8 +218,8 @@
 .little .body .line1 .team2-col {
     background-color: blue;
     position: absolute;
-    width: 130px;
-    left: 350px;
+    width: 110px;
+    left: 304px;
     height: 10px;
     top: 60px;
     transform: skewY(4.3deg);
@@ -242,17 +241,15 @@
     position: absolute;
     display: flex;
     gap: 10px;
-    width: 235px;
+    width: 181px;
     left: 10px;
     flex-direction: row;
 }
 
 .pens div {
-    width: 33px;
-    height: 33px;
+    width: 28px;
+    height: 28px;
     border-radius: 100%;
-    
-
     box-shadow: 4px 4px 6px -5px rgba(255, 255, 255, 0.522) inset, -5px -7px 10px -5px rgba(0, 0, 0, 0.75) inset;
 }
 
@@ -261,7 +258,7 @@
 }
 
 .little .pens.away, .little .var-away-fouls-advenced {
-    left: 275px !important;
+    left: 227px !important;
     /* flex-direction: row-reverse; */
 }
 
@@ -373,7 +370,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 35px;
-    height: 40px;
+    /* height: 40px; */
     color: #FFFFFF;
     text-align: center;
 }
@@ -518,17 +515,17 @@ justify-self: end !important;
 }
 
 .large {
-    width: 1000px;
-    height: 600px;
+    width: 1199px;
+    height: 750px;
     display: flex;
     /* margin: 0 auto; */
 }
 
 .large > div:first-child {
     background-color: #cacacae6;
-    clip-path: polygon(0 0%, 100% 0%, 100% 3%, 27% 2%, 27% 93%, 76% 90%,0% 100%, 0% 0%);
-    width: 1000px;
-    height: 650px;
+    clip-path: polygon(0 0%, 100% 0%, 100% 2%, 30% 2%, 30% 94%, 102% 90%,0% 100%, 0% 0%);
+    width: 1200px;
+    height: 800px;
     display: flex;
     flex-direction: column;
     padding-left: 40px;
@@ -538,15 +535,15 @@ justify-self: end !important;
 }
 
 .large > div:first-child img {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
 }
 
 .large > div:last-child {
     background-color: #002368e6;
-    width: 1300px;
-    height: 600px;
+    width: 1800px;
+    height: 750px;
     clip-path: polygon(0 0, 100% 0, 100% 89%, 0% 100%);
     margin-left: -480px;
     margin-top: 10px;
@@ -559,7 +556,7 @@ justify-self: end !important;
 .large > div:last-child::before{
     content: "";
     width: 1300px;
-    height: 600px;
+    height: 750px;
     clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
     background: radial-gradient(transparent 25%, #0000004f);
     position: absolute;
@@ -569,6 +566,7 @@ justify-self: end !important;
     display: flex;
     justify-content: flex-start;
     width: 100%;
+    margin-bottom: 30px;
 }
 
 .large .line .name {
@@ -595,18 +593,17 @@ justify-self: end !important;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    width: 80%;
+    width: 85%;
     justify-self: center;
     align-self: center;
     row-gap: 5px;
     min-height: 90px;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .grid img {
-    width: 30px;
-    height: 30px;
-
+    width: 35px;
+    height: 35px;
 }
 
 .grid > div {
@@ -615,7 +612,7 @@ justify-self: end !important;
     justify-content: space-between;
     gap : 10px;
     /* padding-right: 40px; */
-    height: 30px;
+    height: 35px;
     background-color:#09173b;
     /* flex-direction: row-reverse; */
     margin-inline: 10px;
@@ -659,16 +656,16 @@ justify-self: end !important;
 }
 .representative-title {
     color: white;
-    font-size: 13px;
+    font-size: 20px;
     line-height: 20px;
     font-weight: 400;
     font-family: 'Anton', sans-serif;
     margin: 0;
-    margin-left: 10%;
+    margin-left: 7%;
 }
 .mid .name {
     width: 100% !important;
-    font-size: 20px !important;
+    font-size: 22px !important;
 }
 
 .match-logo {
@@ -687,17 +684,16 @@ justify-self: end !important;
 
 .column {
     display: flex;
-    padding-top: 60px;
+    padding-top: 90px;
     flex-direction: column;
     gap: 10px;
     margin: 0;
-
     align-items: center;
-
 }
 .column p {
     margin: 0;
-    font-size: 20px;
+    margin-top: 6px;
+    font-size: 27px;
     font-weight: 400;
     text-wrap: wrap;
     max-width: 300px;
@@ -706,15 +702,14 @@ justify-self: end !important;
 }
 
 .mid .info {
-    margin-top: 60px !important;
+    margin-top: 90px !important;
     justify-content: center;
-
+    color: white;
 }
 
 .mid .info p {
-    font-size: 17px !important;
+    font-size: 20px !important;
     text-align: center;
-
 }
 
 @keyframes pulse {
@@ -756,4 +751,11 @@ justify-self: end !important;
         transform-origin:top;
         opacity:1;
     }
+}
+
+
+.mid img.home-logo, .mid img.away-logo {
+    width: 250px !important;
+    height: 250px !important;
+    max-width: 250px !important;
 }

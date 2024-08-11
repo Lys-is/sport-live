@@ -11,7 +11,7 @@ let html = {
                     <th>мал</th>
                     <th>бол</th>
                 </tr>`,
-    player: `<tr data-id="{{id}}" data-name="{{name}}" data-team="{{team}}">
+    player: `<tr data-id="{{id}}" data-name="{{name}}" data-team="{{team}}" data-num="{{num}}" data-teamD="{{teamD}}">
                 <td>{{name}}</td>
                 <td><input type="button" value="{{num}}" class="square30" data-type="goal_s" name="pers1_1"></td>
                 <td><input type="button" value="{{num}}" class="square30" data-type="goal_b" name="pers1_2"></td>
@@ -20,7 +20,7 @@ let html = {
                 <td><input type="button" value="{{num}}" class="square30 red" data-type="red_s" name="pers1_5"></td>
                 <td><input type="button" value="{{num}}" class="square30 red" data-type="red_b" name="pers1_6"></td>
             </tr>`,
-    playeOption: `<option value="{{id}}">{{name}}</option>`,
+    playeOption: `<option data-team="{{team}}" data-num="{{num}}" value="{{id}}">{{name}}</option>`,
     
     penalty:    `<div class="h-group penalty_box" data-team="{{team}}">
                     <input type="button" value="ГОЛ" class="square40 flex-form  {{selected_goal}}" data-type="goal" name="gol-pen1">
@@ -52,12 +52,16 @@ replaceBtns?.forEach(btn => {
         let player1 = get(`#${type[0]}-replace`),
         player2 = get(`#${type[0]}-replace-by`)
         let txtArr = [player1.options[player1.selectedIndex].innerHTML, player2.options[player2.selectedIndex].innerHTML]
+        let numArr = [player1.options[player1.selectedIndex].getAttribute('data-num'), player2.options[player2.selectedIndex].getAttribute('data-num')]
+        let teamDArr = [player1.options[player1.selectedIndex].getAttribute('data-teamD'), player2.options[player2.selectedIndex].getAttribute('data-teamD')]
         let add_class = ['shadow_red', 'shadow_green']
         let ids = [player1.options[player1.selectedIndex].value, player2.options[player2.selectedIndex].value]
         let data = {
             type: 'change',
             size : type[1],
             text: txtArr,
+            playerNum: numArr,
+            teamD: teamDArr,
             title: 'Замена игрока',
             ids: ids,
             model: 'Player',
@@ -97,8 +101,10 @@ function playerNotifyListener(e) {
     let player = playerTr.getAttribute('data-name')
     let type = e.target.getAttribute('data-type').split('_')
     let team = playerTr.getAttribute('data-team')
+    let num = playerTr.getAttribute('data-num')
     let ids = [playerTr.getAttribute('data-id')]
     let txt = [], title = ''
+    let teamD = playerTr.getAttribute('data-teamD')
     if(type[0] == 'goal') {
         txt[0] = player
     }
@@ -117,6 +123,8 @@ function playerNotifyListener(e) {
         size : type[1],
         text: txt,
         title: title,
+        playerNum: [num],
+        teamD: [teamD],
         ids,
         model: 'Player',
     }
@@ -222,6 +230,7 @@ function setMatch(data, team) {
 
     data['players_'+team].forEach(player => {
         nowTable.innerHTML += html.player.replace('{{id}}', player._id).replaceAll('{{name}}', player.fio).replaceAll('{{team}}', data.match['team_'+team].name).replaceAll('{{num}}', player.num || 0)
+        .replace('{{teamD}}', team == 1 ? 'home' : 'away')
     })
     nowTable.innerHTML += '</tbody>'
 
@@ -232,7 +241,7 @@ function setMatch(data, team) {
     playerTables['select_'+team].forEach(el => {
         el.innerHTML = ''
         data['players_'+team].forEach(player => {
-            el.innerHTML += `<option value="${player._id}">${player.fio}</option>`
+            el.innerHTML += `<option data-num="${player.num}" data-teamD="${team == 1 ? 'home' : 'away'}" value="${player._id}">${player.fio}</option>`
         })
     })
 

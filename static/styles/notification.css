@@ -138,7 +138,9 @@ body {
     z-index: 1000;
     flex-direction: column;
 }
-
+.notif_num {
+    display: none;
+}
 .shadow_green {
     filter: drop-shadow(4px 5px 5px rgb(21, 153, 28));
 }
@@ -211,10 +213,13 @@ padding: 0;
     background-color: #002368e6;
     border-radius: 0 !important;
     margin-top: 150px;
+    width: 772px;
+    padding-left: 50px;
 }
 
 .type_3 .name {
-    background-color: #B97800;
+    background: radial-gradient(transparent 25%, #0000004f);
+    background-color: #e18e06;
     height: 60px;
     margin-top: -15px;
     justify-content: center;
@@ -223,16 +228,27 @@ padding: 0;
     color: #fff;
     font-weight: 600;
     padding: 0 10px;
-    padding-top: 10px
+    padding-top: 14px;
 }
-
+.type_3 .notif_num {
+    display: inline;
+    margin-right: 15px;
+}
+.type_3 .notif_team_logo {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: -34px;
+    top: 14px;
+    background-size: contain;
+}
 .type_3 img {
     /* filter: invert(1) !important; */
     height: 150px;
     width: auto;
     position: absolute;
     top: -155px;
-    left: 70px;
+    left: 114px;
     border: 3px solid #002368;
     border-radius: 0;
 }

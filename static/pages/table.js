@@ -1,12 +1,14 @@
 const notif = `<div class="notification disabled notif_main " id={{id}}>
         {{img_place}}
-        <div class="content ">
-            <div class="name">{{name}}</div>
+        <div class="content">
+            <div class="notif_team_logo {{team_logo}}"></div>
+            <div class="name"><span class="notif_num">{{num}}</span>{{name}}</div>
             <div class="region notif_accent notif_text">{{description}} </div>
         </div>
         <div class="img {{main_class}} {{add_class}} notif_accent"></div>
     </div>`
 const notifImg = `<img class="notif_border_main" src="{{img}}">`
+const notifImgAdd = `<img class="notif_additional_img" src="{{img}}">`
 let testConnect = setInterval(() => {
     if (socket.connected) {
         clearInterval(testConnect)
@@ -49,6 +51,11 @@ socket.on('new_notify', (data) => {
         newNotify = newNotify.replace('{{id}}', id)
         newNotify = newNotify.replace('{{name}}', data.text[i])
         newNotify = newNotify.replace('{{description}}', data.title)
+        if(data.playerNum)
+            newNotify = newNotify.replace('{{num}}', data.playerNum[i] != 'null' ? data.playerNum[i] : '')
+        else
+            newNotify = newNotify.replace('{{num}}', '')
+        newNotify = newNotify.replace('{{team_logo}}', `bg_${data.teamD[i]}_logo`)
         newNotify = newNotify.replace('{{img}}', data?.imgArr[i] ? data?.imgArr[i] : '/static/styles/icons/empty.png')
         newNotify = newNotify.replace('{{main_class}}', data.type || '')
         if(data.add_class && data.add_class[i]) newNotify = newNotify.replace('{{add_class}}', data.add_class[i])
@@ -179,6 +186,7 @@ function setData(data) {
         })
         setCouch(data)
         setRepresentative(data)
+        setStyleEl(data)
         let date = formatDatePretty(data.match.date || '2021-01-01')
         getA('.var-tour').forEach(el => el.innerHTML = data.match.circle || 0) 
         getA('.var-match-date, .var-match-date-text').forEach(el => {el.innerHTML = date})
@@ -188,6 +196,21 @@ function setData(data) {
         socket.emit('get_tour_img');
 
     }
+}
+
+function setStyleEl(data) {
+    let t = get('#style_start')
+    if(t) t.remove()
+    let el = document.createElement('style')
+    el.innerHTML = `
+    .bg_home_logo {
+        background-image: url(${data.match.team_1.img});
+    }
+    .bg_away_logo {
+        background-image: url(${data.match.team_2.img});
+    }`
+    el.id='style_start'
+    document.body.append(el)
 }
 function setCouch(data) {
     if(data.couch_1 && data.couch_1.length > 0) {
