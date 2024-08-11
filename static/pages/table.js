@@ -55,7 +55,10 @@ socket.on('new_notify', (data) => {
             newNotify = newNotify.replace('{{num}}', data.playerNum[i] != 'null' ? data.playerNum[i] : '')
         else
             newNotify = newNotify.replace('{{num}}', '')
-        newNotify = newNotify.replace('{{team_logo}}', `bg_${data.teamD[i]}_logo`)
+        if(data.teamD)
+            newNotify = newNotify.replace('{{team_logo}}', `bg_${data.teamD[i]}_logo`)
+        else
+            newNotify = newNotify.replace('{{team_logo}}', ``)
         newNotify = newNotify.replace('{{img}}', data?.imgArr[i] ? data?.imgArr[i] : '/static/styles/icons/empty.png')
         newNotify = newNotify.replace('{{main_class}}', data.type || '')
         if(data.add_class && data.add_class[i]) newNotify = newNotify.replace('{{add_class}}', data.add_class[i])
