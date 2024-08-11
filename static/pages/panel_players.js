@@ -250,8 +250,8 @@ function setMatch(data, team) {
         couchDiv.innerHTML += '<h3>Тренеры команды '+data['team'+team+'_name']+'</h3>'
         data['couch_'+team].forEach((couch, i) => {
             console.log(couch)
-            couchDiv.innerHTML += `<input type="button" data-number="${i}"  data-type="s_${team}" value="${couch.fio} (маленький)"</input>`
-            couchDiv.innerHTML += `<input type="button"  data-number="${i}"   data-type="b_${team}" value="${couch.fio} (большой)" </input>`
+            couchDiv.innerHTML += `<input type="button" data-number="${i}"  data-type="s_${team}" value="${couch.fio} (маленький)">`
+            couchDiv.innerHTML += `<input type="button"  data-number="${i}"   data-type="b_${team}" value="${couch.fio} (большой)">`
         })
         couchDiv.innerHTML += '</br>'
     }
@@ -273,6 +273,7 @@ function couchNotify(num, team, type, data) {
     let title = 'Тренер команды '+data['team'+team+'_name']
     let txt = [data['couch_'+team][num].fio]
     let img = ''
+    let teamD = team == 1 ? 'home' : 'away'
     let ids = [data['couch_'+team][num]._id]
 
     if(type == 'b') {
@@ -283,6 +284,7 @@ function couchNotify(num, team, type, data) {
         size : type,
         text: txt,
         title: title,
+        teamD: [teamD],
         couchId: data['couch_'+team][num]._id,
         ids: ids,
         model: 'Couch',
