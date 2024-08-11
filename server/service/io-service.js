@@ -231,7 +231,7 @@ function startPanel(controls, socket) {
   socket.on('notify', async (data) => {
     try {
 
-    await replaceImg(data);
+    //await replaceImg(data);
     console.log(data)
     await io.to(userId).emit('new_notify', data);
   } catch (e) {

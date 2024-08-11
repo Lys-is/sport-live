@@ -9,6 +9,8 @@ const notif = `<div class="notification disabled notif_main " id={{id}}>
     </div>`
 const notifImg = `<img class="notif_border_main" src="{{img}}">`
 const notifImgAdd = `<img class="notif_additional_img" src="{{img}}">`
+let globalImgs = new Map()
+
 let testConnect = setInterval(() => {
     if (socket.connected) {
         clearInterval(testConnect)
@@ -59,7 +61,12 @@ socket.on('new_notify', (data) => {
             newNotify = newNotify.replace('{{team_logo}}', `bg_${data.teamD[i]}_logo`)
         else
             newNotify = newNotify.replace('{{team_logo}}', ``)
-        newNotify = newNotify.replace('{{img}}', data?.imgArr[i] ? data?.imgArr[i] : '/static/styles/icons/empty.png')
+        let img = globalImgs.get(data.ids[i])
+
+        if(img)
+            newNotify = newNotify.replace('{{img}}', img)
+        else
+            newNotify = newNotify.replace('{{img}}', '/static/styles/icons/empty.png')
         newNotify = newNotify.replace('{{main_class}}', data.type || '')
         if(data.add_class && data.add_class[i]) newNotify = newNotify.replace('{{add_class}}', data.add_class[i])
         else newNotify = newNotify.replace('{{add_class}}', '')
@@ -197,8 +204,16 @@ function setData(data) {
         getA('.var-tournament').forEach(el => el.innerHTML = data.match.tournament?.basic.full_name || 'Вне турнира')
         getA('.var-stadium').forEach(el => el.innerHTML = data.match.stadium || 'Стадион не указан')
         socket.emit('get_tour_img');
-
-    }
+        let arrAllmodels = data.players_1.concat(...data.players_2, ...data.couch_1, ...data.couch_2, ...data.representative_1, ...data.representative_2, data.match.team_1, data.match.team_2)
+        // .push(data.match.team1, data.match.team2)
+        
+        console.log(arrAllmodels)
+        arrAllmodels.forEach(el => {
+            if(el.img) {
+                globalImgs.set(el._id, el.img)
+            }
+        })
+    }   
 }
 
 function setStyleEl(data) {
