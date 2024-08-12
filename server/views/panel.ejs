@@ -84,6 +84,19 @@
             </div>
             <div class="block">
                 <div class="h-group center">
+                    <label for="scenarios" class="inline-form-label small-text nowrap">Сценарий</label>
+                    <select name="scenarios" id="scenarios" class="text-form full-form">
+                        <option value="begin">Начало матча</option>
+                        <option value="1">1 тайм</option>
+                        <option value="pause">Перерыв</option>
+                        <option value="2">2 тайм</option>
+                        <option value="end">Конец матча</option>
+                        <option value="VAR">VAR</option>
+                        <option value="out">Тайм-аут</option>
+                        <option value="pens">Пенальти</option>
+                    </select>
+                </div>
+                <div class="h-group center">
                     <p class="first">Таймер</p>
                 </div>
                 <div class="h-group">
@@ -145,32 +158,20 @@
                             <option value="style_5">style5</option>
                             <option value="style_6">style6</option>
                             <option value="style_7">style7</option>
-                            <option value="style_8">style8</option>
+                            <option value="style_8">Городская лига</option>
                             <% styles.forEach(style => { %>
                                 <option value="<%= style._id %>__id"><%= style.name %></option>
                             <% })
                             %>
                         </select>
                 </div>
-                <div class="h-group center">
-                    <label for="scenarios" class="inline-form-label small-text nowrap">Сценарий</label>
-                    <select name="scenarios" id="scenarios" class="text-form full-form">
-                        <option value="begin">Начало матча</option>
-                        <option value="1">1 тайм</option>
-                        <option value="pause">Перерыв</option>
-                        <option value="2">2 тайм</option>
-                        <option value="end">Конец матча</option>
-                        <option value="VAR">VAR</option>
-                        <option value="out">Тайм-аут</option>
-                        <option value="pens">Пенальти</option>
-                    </select>
-                </div>
+                
                 <div class="h-group center">
                     <label for="scenarios" class="inline-form-label small-text nowrap">Тип уведомлений</label>
                     <select name="notif_type" id="notif_type" class="text-form full-form">
                         <option value="def">Обычный</option>
                         <option value="circ">Новый</option>
-                        <option value="type_3">3 тип</option>
+                        <option value="type_3">Городская лига</option>
                     </select>
                 </div>
             </div>

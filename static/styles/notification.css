@@ -235,11 +235,11 @@ padding: 0;
     margin-right: 15px;
 }
 .type_3 .notif_team_logo {
-    width: 60px;
-    height: 60px;
+    width: 115px;
+    height: 115px;
     position: absolute;
-    left: -34px;
-    top: 14px;
+    left: -99px;
+    top: -10px;
     background-size: contain;
 }
 .type_3 img {

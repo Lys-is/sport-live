@@ -566,7 +566,7 @@ justify-self: end !important;
     display: flex;
     justify-content: flex-start;
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .large .line .name {
