@@ -221,6 +221,7 @@ function setAutoMainResize(){
 }
 
 function get(selector,  element = document) {
+
     if(!element) return null
     let el = element.querySelector(selector);
     if (el) return el;
@@ -231,6 +232,7 @@ function get(selector,  element = document) {
 }
 
 function getA(selector, element = document) {
+
     if(!element) return null
     let el = element.querySelectorAll(selector);
     if (el) return el;

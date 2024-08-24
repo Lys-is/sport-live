@@ -38,10 +38,7 @@ body {/* background: url("img/foot_bg2.jpg"); */background-color: transparent;ma
 .away-roster,
 .pen,
 .refs,
-.weather {
-
-    /* display: none;  */
-}
+.weather {display: none;}
 
 #container {
     margin-left: auto;

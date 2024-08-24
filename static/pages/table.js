@@ -144,8 +144,11 @@ socket.on('start', (data) => {
   console.log(data)
   setData(data)
 })
+let is_pen_now = false
 let base_divs = getA('.big, .mid, .little, .little-ploff, .home-roster, .away-roster, .pen, .refs, .weather')
 let n_div = ''
+let animTimouts = {}
+let mb = get('#match-info > .q_name_round')
 console.log(base_divs)
 let first_style_tag = (function(type) {
     var executed = false;
@@ -164,6 +167,7 @@ let first_style_tag = (function(type) {
         }
     };
 })();
+
 function setData(data) {
     let foll_divs = getA('.fouls-container')
     console.log(data.is_fouls, foll_divs)
@@ -198,7 +202,15 @@ function setData(data) {
         setRepresentative(data)
         setStyleEl(data)
         let date = formatDatePretty(data.match.date || '2021-01-01')
-        getA('.var-tour').forEach(el => el.innerHTML = data.match.circle || 0) 
+        if(!data.match.circle || data.match.circle == '0'){
+            getA('#tour').forEach(el => el.style.display = 'none')
+
+        }
+        else{
+            getA('.var-tour').forEach(el => el.innerHTML = data.match.circle || 0) 
+            getA('#tour').forEach(el => el.style.display = '')
+
+        }
         getA('.var-match-date, .var-match-date-text').forEach(el => {el.innerHTML = date})
         getA('.var-match-time, .var-match-time-text').forEach(el => {el.innerHTML = data.match.time || '00:00'})
         getA('.var-tournament').forEach(el => el.innerHTML = data.match.tournament?.basic.full_name || 'Вне турнира')
@@ -330,11 +342,11 @@ function setTime(data) {
     if(ord) ord.style.display = 'none'
 
 }
-let is_pen_now = false
 function switchDiv(type) {
     let mb = get('#match-info > .q_name_round')
 
     console.log(type, n_div, is_pen_now)
+    
     if(type == n_div && type != 'pen') {
         is_pen_now = false
         getA('.pen').forEach(el => setAnim(el, 'reverse', 'pen'))
@@ -347,7 +359,6 @@ function switchDiv(type) {
             if(mb) setAnim(mb, 'normal', 'mb')
             base_divs.forEach(div => {
                 setAnim(div, 'reverse', type)
-        
             })
             getA('.pen').forEach(el => setAnim(el, 'reverse', 'pen'))
 
@@ -387,10 +398,7 @@ function switchDiv(type) {
         n_div = type
     }
 }
-let animTimouts = {
 
-}
-let mb = get('#match-info > .q_name_round')
 
 function setAnim(div, direct, type) {
     if(type == 'pen' && !div.className.includes('pen')) return
