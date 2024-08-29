@@ -21,6 +21,7 @@ socket.on('connect', async () => {
     console.log(socket.id)
     await socket.emit('join_table', tableId);
     await socket.emit('get_tour_img');
+    await socket.emit('get_comm_judge_img');
 })
 socket.on('reload', () => {
     location.reload();
@@ -32,8 +33,16 @@ socket.on('update_style', () => {
     location.reload()
 })
 socket.on('tour_img', (data) => {
-    console.log(data, 'fdfdfdfdfdfd')
     setTourImg(data)
+})
+socket.on('comm_judge_img', (data) => {
+    let arrAllmodels = data.commentators.concat(...data.judges)
+    console.log(arrAllmodels)
+    arrAllmodels.forEach(el => {
+        if(el.img) {
+            globalImgs.set(el._id, el.img)
+        }
+    })
 })
 let notifyTimer
 let notifyDivs = []
@@ -444,7 +453,7 @@ function setAnim(div, direct, type) {
         
         let tmout =  setTimeout(() => {
             //div.setAttribute('is_active',nextDisplay) 
-            if(mb) mb.style.display = nextDisplay
+          //  if(mb) mb.style.display = nextDisplay
             div.style.display = nextDisplay
 
             //console.log('timeout', div, nextDisplay, delay)

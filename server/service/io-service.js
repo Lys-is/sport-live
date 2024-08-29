@@ -174,6 +174,17 @@ function startPanel(controls, socket) {
       console.log(e)
     }
   });
+  socket.on('get_comm_judge_img', async () => {
+    try {
+      let data = {}
+      data.commentators = await Commentator.find({creator: userId}) || [];
+      data.judges = await Judge.find({creator: userId}) || [];
+      
+      io.to(userId).emit('comm_judge_img', data);
+    } catch (e) {
+      console.log(e)
+    }
+  })
   async function getTourImgs(){
     console.log(control)
     if(!control) return
@@ -197,6 +208,8 @@ function startPanel(controls, socket) {
   })
   socket.on('reset_all', async (data) => {
     try {
+
+      await control.resetAll();
       delete controls[userId]
       io.to(userId).emit('reload');
     } catch (e) {

@@ -3,6 +3,8 @@ const Player = require('../models/player-model');
 const PlayerResult = require('../models/playerResult-model');
 const Couch = require('../models/couch-model');
 const Representative = require('../models/representative-model');
+const Commentator = require('../models/commentator-model');
+const Judge = require('../models/judge-model');
 const getBrightness = require('getbrightness')
 const timestore = require('timestore');
 const representativeModel = require('../models/representative-model');
@@ -236,7 +238,13 @@ class Control {
         this.style = style || 'style_1'
         this.is_fouls = false
         this.notif_type = 'circ'
+       // this.startParams()
     }
+    async startParams() {
+        this.commentators = await Commentator.find({creator: this.userId})
+        this.judges = await Judge.find({creator: this.userId})
+    }
+    
     async setMatch(matchId) {
         if(!matchId) return
         console.log(matchId)
@@ -266,6 +274,10 @@ class Control {
     resetScore() {
         this.scoreboard.changeScore({team1: 0, team2: 0, team1_foll: 0, team2_foll: 0})
         console.log(this.scoreboard)
+    }
+    resetAll() {
+        this.resetScore()
+        this.timer.clearTimer()
     }
     getTourImg() {
         

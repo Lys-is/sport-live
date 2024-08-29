@@ -148,21 +148,21 @@ show_info.addEventListener('click', (e) => {
     socket.emit('notify', dta)
     console.log(dta)
 })
-textInpts.forEach(input => {
-        let fTimer;
-        function f(e) {
-            if(fTimer) {
-                clearTimeout(fTimer);
-            }
-            fTimer = setTimeout(function() {
-                fTimer = void 0;
-                console.log('dfsdfsdf')
-                standartListener(e);
-            }.bind(this), 500);
-        }
-        input.addEventListener('input', f)
+// textInpts.forEach(input => {
+//         let fTimer;
+//         function f(e) {
+//             if(fTimer) {
+//                 clearTimeout(fTimer);
+//             }
+//             fTimer = setTimeout(function() {
+//                 fTimer = void 0;
+//                 console.log('dfsdfsdf')
+//                 standartListener(e);
+//             }.bind(this), 500);
+//         }
+//         input.addEventListener('input', f)
 
-})
+// })
 let scoreDivs = getA('.score_div');
 
 scoreDivs.forEach(div => {
