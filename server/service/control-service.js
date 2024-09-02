@@ -63,7 +63,7 @@ class Timer {
         this.is_null_start = false
         this.status = 'stop'
         this.name = 'Начало матча'
-        this.scenarios = 'begin'
+        this.scenarios = '1'
         this.changed = false
 
     }

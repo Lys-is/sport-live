@@ -639,7 +639,18 @@ function init__player_create() {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         let data = await formGetData(form)
-        sendFetch("/api/lk/player/post__create", JSON.stringify(data), "POST")
+        let check_data = {fio: data.fio}
+        let check = await sendFetch("/api/lk/player/post__check_duplicate", JSON.stringify(check_data), "POST")
+        console.log(check)
+        if(check && check.data) {
+            let conf = confirm('Такой игрок уже существует. Продолжить создание?')
+            console.log(conf)
+            if(conf) {
+                sendFetch("/api/lk/player/post__create", JSON.stringify(data), "POST")
+            }
+        }
+        else 
+            sendFetch("/api/lk/player/post__create", JSON.stringify(data), "POST")
     })
 }
 

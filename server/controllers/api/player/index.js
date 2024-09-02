@@ -20,7 +20,7 @@ class PlayersController {
             if(!team) return res.json({message: 'Такой команды не существует'});
             let player = await Player.create(data);
             if(!player) return res.json({message: 'Игрок не создан, ошибка'});
-            return res.json({message: 'Игрок создан'});
+            return res.json({message: 'Игрок создан', redirect: 'lk?page=player'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -37,6 +37,17 @@ class PlayersController {
             console.log(players)
 
             return sendRes('partials/lk_part/team_list', {players: players, team: team}, res);
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async post__check_duplicate(req, res) {
+        try {
+            console.log(req.body)
+            let player = await Player.findOne({fio: req.body.fio});
+            if(player) return res.status(203).json({data: true});
+            return res.status(200).json({data: false});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

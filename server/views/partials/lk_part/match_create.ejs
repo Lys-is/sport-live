@@ -50,7 +50,7 @@
                     <input type="text" list="tournament" name="tournament">
                     <datalist id="tournament">
                         <% for (let i = 0; i < tournaments.length; i++) { %>
-                            <option value="<%= tournaments[i].basic.name %>" data-value="<%= tournaments[i]._id %>"></option>
+                            <option value="<%= tournaments[i].basic.full_name %>" data-value="<%= tournaments[i]._id %>"></option>
                         <% } %>
                     </datalist>
                 </div>

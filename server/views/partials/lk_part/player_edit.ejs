@@ -23,7 +23,7 @@
                         </div>
                         <div class="form_group">
                             <label for="ampl">Позиция</label>
-                            <% let options = {'1': 'Вратарь', '2': 'Защитник', '3': 'Полузащитник', '4': 'Нападающий', '5': 'Универсал'} 
+                            <% let options = {'goalkeeper': 'Вратарь', 'defender': 'Защитник', 'midfielder': 'Полузащитник', 'striker': 'Нападающий', 'universal': 'Универсал'}; 
                             let selected = player.ampl
                             %><select class="select" id="ampl" name="ampl"> 
                             <% 

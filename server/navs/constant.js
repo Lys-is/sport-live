@@ -34,6 +34,15 @@ const nav = {
         'doc/id/:id' : {
             'func' : 'get__doc'
         },
+        'goalkeepers/id/:id' : {
+            'func' : 'get__goalkeepers'
+        },
+        'bombers/id/:id' : {
+            'func' : 'get__bombers'
+        },
+        'assistants/id/:id' : {
+            'func' : 'get__assistants'
+        },
         'calendar_team/id/:id' : {
             'func' : 'get__calendar_team'
         },
@@ -132,7 +141,8 @@ const nav = {
             'get__create' : {},
             'post__create' : {},
             'get__edit' : {},
-            'put__edit' : {}
+            'put__edit' : {},
+            'post__check_duplicate' : {},
         },
         'tournament' : {
             'func' : 'get__tournament',

@@ -1,0 +1,50 @@
+<%- include('tournament_header.ejs') %>
+<div class="grid-body">
+    <%- include('tournament_nav.ejs') %>
+    <div class="content-body body-background">
+        <div class="grid-player">
+            <table class="nets-table mt">
+                <tbody><tr>
+                    <th>Место</th>
+                    <th>Игрок</th>
+                    <th>№</th>
+                    <th>Команда</th>
+                    <th>Голы</th>
+
+                </tr>     
+
+                <% players.forEach((player) => {
+                    
+                    player.c_goals = 0;
+                    let reslt = playersResult.get(player.id)
+         
+                    if(reslt && reslt.length) {
+                       
+                        player.c_goals = reslt.reduce((s, p) => s + p.goals, 0);
+
+                    }
+                })
+                let i = 0
+                    let sorted = [...players]
+                    sorted.sort((a, b) => b.c_goals - a.c_goals)
+                    sorted.forEach((player, i) => {
+                    
+                    %>
+                <tr  class="clickable-tr fans_link" data-href="player/id/<%= player.id %>">
+                    <td><%= i + 1 %></td>
+                    <td>
+                        <div class="h_flex">
+                            <img src="<%= player.img || '/static/styles/icons/logo.jpg' %>" class="" width="50" height="50">
+                            <%= player.fio %>
+                        </div>
+                    </td>
+                    <td><%= player.num || '' %></td>
+                    <td><%= player.team.name %></td>
+                    <td><%= player.c_goals %></td>
+                </tr>     
+                <% }) %>
+            </tbody></table>
+
+        </div>
+    </div>
+</div>

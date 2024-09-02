@@ -60,6 +60,9 @@ const inits = {
     'team/id' : init__team,
     'docs/id' : init__docs,
     'doc/id' : init__docs,
+    'goalkeepers/id' : init__goalkeepers,
+    'bombers/id' : init__bombers,
+    'assistants/id' : init__assistants,
     'calendar_team/id' : init__calendar_team,
     'roster_team/id' : init__roster_team,
     'players' : init__players,
@@ -80,6 +83,27 @@ async function init__calendar () {
 }
 async function init__tables () {
     changeTourNav('tables');
+    let tables_nav = getA('.table-header > input');
+    let tables = getA('.table_dest');
+    console.log(tables)
+    tables_nav.forEach(table_nav => {
+        
+        table_nav.addEventListener('click', () => {
+            tables.forEach(table => {
+                table.style.display = 'none';
+            })
+            tables_nav.forEach(table_nav => {
+                table_nav.classList.remove('selected-table-button')
+            })
+            table_nav.classList.add('selected-table-button')
+            let dest = table_nav.getAttribute('data-dest');
+            let tableDest = getA(`.table_dest.${dest}`)
+            console.log(tableDest)
+            tableDest.forEach(table => {
+                table.style.display = '';
+            })
+        })
+    })
 }
 async function init__teams () {
     changeTourNav('teams');
@@ -89,6 +113,15 @@ async function init__team () {
 }
 async function init__docs () {
     changeTourNav('docs');
+}
+async function init__goalkeepers () {
+    changeTourNav('goalkeepers');
+}
+async function init__bombers () {
+    changeTourNav('bombers');
+}
+async function init__assistants () {
+    changeTourNav('assistants');
 }
 async function init__calendar_team () {
     changeTourNav('calendar_team');

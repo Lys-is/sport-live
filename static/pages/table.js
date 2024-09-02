@@ -207,6 +207,7 @@ function setData(data) {
         players.forEach((el, i) => {
             setRoster(el, i+1)
         })
+        clearData()
         setCouch(data)
         setRepresentative(data)
         setStyleEl(data)
@@ -251,6 +252,16 @@ function setStyleEl(data) {
     el.id='style_start'
     document.body.append(el)
 }
+function clearData() {
+    let classes = '.home-couch, .away-couch, .home-representative, .away-representative'
+    getA(classes).forEach(el => {
+        if(el) {
+            get('.grid', el).innerHTML = ''
+            el.style.display = 'none'
+        }
+
+    })
+}
 function setCouch(data) {
     if(data.couch_1 && data.couch_1.length > 0) {
         let div = get('.home-couch')
@@ -259,12 +270,6 @@ function setCouch(data) {
     if(data.couch_2 && data.couch_2.length > 0) {
         let div = get('.away-couch')
         setRosterEl(div, data.couch_2)
-    }
-    function setNameCouch(div, name) {
-        if(!div) return
-        let nameEl = get('.couch-name', div)
-        div.style.display = 'block'
-        nameEl.innerHTML = name
     }
 }
 function setRepresentative(data) {
@@ -308,7 +313,7 @@ function setRoster(players, i) {
     playersDiv.innerHTML = ''
     players.forEach(el => {
         playersDiv.innerHTML += `<div class="roster-teamate">
-                                    <p class="roster-teamate-name">${el.fio}</p>
+                                    <p class="roster-teamate-name">${(el.num) || ''}    ${el.fio}</p>
                                     <img width="40" height="40" src="${el.img || '/static/styles/icons/empty.png'}">
                                 </div>`
                     })

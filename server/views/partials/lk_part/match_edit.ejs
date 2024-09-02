@@ -49,7 +49,7 @@
                 </div>
                 <div class="vert_group">
                     <label for="tour_num">Турнир</label>
-                    <input type="text" list="tournament" name="tournament" value="<%= match.tournament?.basic.name %>">
+                    <input type="text" list="tournament" name="tournament" value="<%= match.tournament?.basic.full_name %>">
                     <datalist id="tournament">
                         <% for (let i = 0; i < tournaments.length; i++) { %>
                             <option value="<%= tournaments[i].basic.name %>" data-value="<%= tournaments[i]._id %>"></option>

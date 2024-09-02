@@ -139,6 +139,154 @@ class FansController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
+    async get__goalkeepers(req, res) {
+        try {
+            const {id} = req.params;
+            const tournament = await Tournament.findById(id);
+            if(!tournament || !tournament.creator.equals(req.fans_league.creator)) {
+                return res.json({message: 'Турнир не найден'});
+            }
+            let matches = await Match.find({tournament: id, status_doc: {$ne: 'deleted'}}).select('results_1 results_2 date time result_1.player result_2.player team_1_score team_2_score');
+
+
+            let previusMatches = await getPreviousMatches(matches);
+            let playersResult = new Map();
+            let goalkeepers = new Set();
+
+
+            previusMatches.map(match => {
+                console.log(match)
+                if(match.results_1) {
+                    match.results_1.map(result => {
+                        if(result.player.ampl == 'goalkeeper'){
+                            result['match'] = match
+                            if(!playersResult.has(result.player.id)) {
+                                playersResult.set(result.player.id, [])
+                                goalkeepers.add(result.player)
+                            }
+                            playersResult.get(result.player.id).push(result)
+                        }
+                    })
+                }
+                if(match.results_2) {
+                    match.results_2.map(result => {
+                        if(result.player.ampl == 'goalkeeper'){
+                            result['match'] = match
+                            if(!playersResult.has(result.player.id)) {
+                                playersResult.set(result.player.id, [])
+                                goalkeepers.add(result.player)
+                            }
+                            playersResult.get(result.player.id).push(result)
+                        }
+                    })
+                }
+            })
+            console.log(playersResult, 'playersResult')
+            console.log(playersResult.keys(), 'playersResult[1]')
+            return sendRes('fans/fans_tour/goalkeepers', {goalkeepers, playersResult, previusMatches, tournament, getTeamData, compareDates}, res);
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+        
+    }
+    async get__bombers(req, res) {
+        try {
+            const {id} = req.params;
+            const tournament = await Tournament.findById(id);
+            if(!tournament || !tournament.creator.equals(req.fans_league.creator)) {
+                return res.json({message: 'Турнир не найден'});
+            }
+            let matches = await Match.find({tournament: id, status_doc: {$ne: 'deleted'}}).select('results_1 results_2 date time result_1.player result_2.player');
+
+            let previusMatches = await getPreviousMatches(matches);
+            let playersResult = new Map();
+            let players = new Set();
+
+            previusMatches.map(match => {
+                console.log(match)
+                if(match.results_1) {
+                    match.results_1.map(result => {
+                        result['match'] = match
+                        if(!playersResult.has(result.player.id)) {
+                            playersResult.set(result.player.id, [])
+                            players.add(result.player)
+                        }
+                        playersResult.get(result.player.id).push(result)
+                        
+                    })
+                }
+                if(match.results_2) {
+                    match.results_2.map(result => {
+                        result['match'] = match
+                        if(!playersResult.has(result.player.id)) {
+                            playersResult.set(result.player.id, [])
+                            players.add(result.player)
+                        }
+                        playersResult.get(result.player.id).push(result)
+                        
+                    })
+                }
+            })
+
+            return sendRes('fans/fans_tour/bombers', {tournament, players, playersResult, previusMatches, compareDates}, res);
+        
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        
+        }   
+    }
+    async get__assistants(req, res) {
+        try {
+            const {id} = req.params;
+            const tournament = await Tournament.findById(id);
+            if(!tournament || !tournament.creator.equals(req.fans_league.creator)) {
+                return res.json({message: 'Турнир не найден'});
+            }
+            let matches = await Match.find({tournament: id, status_doc: {$ne: 'deleted'}}).select('results_1 results_2 date time result_1.player result_2.player');
+
+            let previusMatches = await getPreviousMatches(matches);
+            let playersResult = new Map();
+            let players = new Set();
+
+            previusMatches.map(match => {
+                console.log(match)
+                if(match.results_1) {
+                    match.results_1.map(result => {
+                        result['match'] = match
+                        if(!playersResult.has(result.player.id)) {
+                            playersResult.set(result.player.id, [])
+                            players.add(result.player)
+                        }
+                        playersResult.get(result.player.id).push(result)
+                        
+                    })
+                }
+                if(match.results_2) {
+                    match.results_2.map(result => {
+                        result['match'] = match
+                        if(!playersResult.has(result.player.id)) {
+                            playersResult.set(result.player.id, [])
+                            players.add(result.player)
+                        }
+                        playersResult.get(result.player.id).push(result)
+                        
+                    })
+                }
+            })
+
+            return sendRes('fans/fans_tour/assistants', {tournament, players, playersResult, previusMatches, compareDates}, res);
+        
+        }
+        catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        
+        }   
+    }
     async get__calendar_team(req, res) {
         try {
             const {id} = req.params;
@@ -186,8 +334,6 @@ class FansController {
     }
     async get__players(req, res) {
         try {
-            let tournaments = await Tournament.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}})
-            console.log(tournaments)
             let matches = await Match.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}}).select('results_1 results_2 date time');
             
             // await Promise.all(tournaments.map(async tournament => {
