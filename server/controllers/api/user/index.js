@@ -13,7 +13,7 @@ class UserController {
             let user = await User.findById(userId);
             console.log(user);
             if(!user) return res.json({message: 'Такого пользователя не существует'});
-           // if(user.isAdmin) return res.json({message: 'Нельзя изменять администратора'});
+            if(user.isAdmin) return res.json({message: 'Нельзя изменять администратора'});
             let subscribe = await Subscribe.findOne({creator: userId});
             console.log(subscribe);
             if(type == 'unblock'){
