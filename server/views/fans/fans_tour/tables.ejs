@@ -43,16 +43,15 @@
                     return data
         
                 });
-            let count_matches = team_matches.length,
-                count_wins = team_matches.filter(match => match.team_1_score > match.team_2_score).length,
-                count_draws = team_matches.filter(match => match.team_1_score == match.team_2_score).length,
-                count_losses = team_matches.filter(match => match.team_1_score < match.team_2_score).length,
-                count_goals = team_matches.reduce((acc, match) => acc + match.team_1_score, 0),
-                count_missed = team_matches.reduce((acc, match) => acc + match.team_2_score, 0),
-                count_points = count_wins*tournament.reglament.for_win + count_draws*tournament.reglament.for_tie - count_losses*tournament.reglament.for_lose
-                teams[i].c_points = count_points;
+                teams[i].count_matches = team_matches.length
+                teams[i].count_wins = team_matches.filter(match => match.team_1_score > match.team_2_score).length
+                teams[i].count_draws = team_matches.filter(match => match.team_1_score == match.team_2_score).length
+                teams[i].count_losses = team_matches.filter(match => match.team_1_score < match.team_2_score).length
+                teams[i].count_goals = team_matches.reduce((acc, match) => acc + match.team_1_score, 0)
+                teams[i].count_missed = team_matches.reduce((acc, match) => acc + match.team_2_score, 0)
+                teams[i].count_points = teams[i].count_wins*tournament.reglament.for_win + teams[i].count_draws*tournament.reglament.for_tie - teams[i].count_losses*tournament.reglament.for_lose
             }
-            teams = teams.sort((a, b) => b.c_points - a.c_points);
+            teams = teams.sort((a, b) => b.count_points - a.count_points);
             for(let i = 0; i < teams.length; i++) {
 
             %>
@@ -64,12 +63,12 @@
                         <p><%= teams[i].name %></p>
                     </div>
                 </td>
-                <td><%= count_matches %></td>
-                <td><%= count_wins %></td>
-                <td><%= count_draws %></td></td>
-                <td><%= count_losses %></td>
-                <td><%= count_goals %>-<%= count_missed %></td>
-                <td><%= count_points %></td>
+                <td><%= teams[i].count_matches %></td>
+                <td><%= teams[i].count_wins %></td>
+                <td><%= teams[i].count_draws %></td></td>
+                <td><%= teams[i].count_losses %></td>
+                <td><%= teams[i].count_goals %>-<%= teams[i].count_missed %></td>
+                <td><%= teams[i].count_points %></td>
                 <td></td>
             </tr>
             <% } %>
