@@ -2,7 +2,7 @@
 <div class="tournires_header">
     <div class="tournires_header_header cool_header">
         <p class="page_title ">Турнир: <%= tournament.basic.full_name %></p>
-        <p>Cезон: 2024</p>
+        <p>Cезон: <%= tournament.basic.season ? tournament.basic.season.name : '-' %></p>
     </div>
 
     <div class="cool_header_block">

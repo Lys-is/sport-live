@@ -212,6 +212,9 @@ let inits = {
     'couch/get__edit' : init__couch_edit,
     'judge/get__create' : init__judge_create,
     'commentator/get__create' : init__commentator_create,
+    'season': init__season,
+    'season/get__create' : init__season_create,
+    'season/get__edit' : init__season_edit,
     'user': init__user,
     'style' : init__style,
     'transfer/get__create': init__transfer_create,
@@ -220,7 +223,25 @@ let inits = {
 for(let key in inits) {
     inits[key] = init_decorator(inits[key])
 }
-
+function init__season() {
+}
+function init__season_create() {
+    let form = get("#season_create__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form);
+        sendFetch("/api/lk/season/post__create", JSON.stringify(data), "POST");
+    });
+}
+function init__season_edit() {
+    let form = get("#season_edit__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form);
+        data.playerId = form.getAttribute('data-id')
+        sendFetch("/api/lk/season/put__edit", JSON.stringify(data), "PUT");
+    })
+}
 function init__user() {
     let btns = getA('.table_links')
     btns.forEach(el => {

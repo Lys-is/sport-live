@@ -68,7 +68,7 @@ const start = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
-        if(!await User.findOne({nickname: 'admin'})) {
+        if(!await User.findOne({email: 'admin@admin.com'})) {
             let user = new User({
                 nickname: 'admin',
                 email: 'admin@admin.com',

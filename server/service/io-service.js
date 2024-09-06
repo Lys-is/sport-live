@@ -189,7 +189,7 @@ function startPanel(controls, socket) {
     console.log(control)
     if(!control) return
     let tourImgs = {}
-    let league = await League.findOne({creator: userId});
+    let league = await League.findOne({creator: userId.split('_')[0]});
       if(league && league.img){
         tourImgs.league_img = league.img
       }

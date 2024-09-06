@@ -69,7 +69,7 @@ const nav = {
         }
 
     },
-    'fans_tournaments/:address' : {
+    'fans_tournaments/:address/:season' : {
         'func' : 'get__fans_tournaments',
         'qq': getFans
     },
@@ -218,7 +218,9 @@ const nav = {
         'season' : {
             'func' : 'get__season',
             'get__create' : {},
-            'post__create' : {}
+            'post__create' : {},
+            'get__edit' : {},
+            'put__edit' : {}
         },
         'transfer' : {
             'func' : 'get__transfer',

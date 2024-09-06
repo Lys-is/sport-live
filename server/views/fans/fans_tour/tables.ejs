@@ -50,7 +50,11 @@
                 count_goals = team_matches.reduce((acc, match) => acc + match.team_1_score, 0),
                 count_missed = team_matches.reduce((acc, match) => acc + match.team_2_score, 0),
                 count_points = count_wins*tournament.reglament.for_win + count_draws*tournament.reglament.for_tie - count_losses*tournament.reglament.for_lose
-                
+                teams[i].c_points = count_points;
+            }
+            teams = teams.sort((a, b) => b.c_points - a.c_points);
+            for(let i = 0; i < teams.length; i++) {
+
             %>
             <tr>
                 <td><%= i+1 %></td>

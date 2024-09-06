@@ -30,6 +30,15 @@
 
                 <div class="ct_form">
                     <div class="form_group">
+                        <label for="season">Сезон</label>
+                        <input type="text" list="season" name="season">
+                        <datalist id="season">
+                            <% for (let i = 0; i < seasons.length; i++) { %>
+                                <option value="<%= seasons[i].name %>" data-value="<%= seasons[i]._id %>"></option>
+                            <% } %>
+                        </datalist>
+                    </div>
+                    <div class="form_group">
                         <label for="full_name">Полное название</label>
                         <input type="text" id="full_name" name="full_name">
                     </div>

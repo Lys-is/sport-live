@@ -4,6 +4,7 @@ const Stage = require('./stage-model');
 const { configDotenv } = require('dotenv');
 const judge = require('../controllers/api/judge');
 const commentator = require('../controllers/api/commentator');
+const seasonModel = require('./season-model');
 const Tournament = new Schema({
     creator: {type: Schema.Types.ObjectId, ref: 'User', autopopulate: true},
     admins: [{type: Schema.Types.ObjectId, ref: 'User', autopopulate: true}],
@@ -12,6 +13,7 @@ const Tournament = new Schema({
     commentators: [{type: Schema.Types.ObjectId, ref: 'Commentator', autopopulate: true}],
     status_doc: {type: String, default: 'active', enum: ['active', 'deleted']},
     basic: {
+        season: {type: Schema.Types.ObjectId, ref: 'Season', autopopulate: true},
         img: {type: String, default: ''},
         full_name: {type: String},
         name: {type: String},

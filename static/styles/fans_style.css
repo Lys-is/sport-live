@@ -47,6 +47,7 @@ nav {
     margin-top: 20px;
     width: 900px;
     gap: 20px;
+    position: relative;
 }
 
 .h_flex {
@@ -163,6 +164,7 @@ h2 {
     cursor: pointer;
     color: #fff;
     z-index: 10002;
+    position: relative;
 }
 
 .nav-links:hover {
@@ -191,6 +193,35 @@ a {
 
 .body-background {
     background-color: #efefef;
+}
+.dropdown {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+    /* gap: 20px; */
+    top: 33px;
+    margin-left: -25px;
+    display: none;
+    color: white;
+    background: #22293d;
+    list-style: none;
+    /* padding: 10px; */
+    z-index: 100010;
+    padding-inline: 0;
+    border-radius: 5px;
+}
+.tour_link:hover ~ .dropdown, .dropdown:hover {
+    display: flex;
+}
+.dropdown-content, .dropdown-content > .nav-links {
+    width: 100%;
+    display: block;
+    padding-block: 0;
+}
+.dropdown-content > .nav-links {
+    padding-block: 10px;
 }
 
 .table {
@@ -695,18 +726,19 @@ a {
 .nets-table {
     width: 100%;
     border-collapse: collapse;
-    border: 1px solid #686868;
-    
+    border-top: 1px solid #686868;
+    border: none;
 }
 
 .nets-table th {
     border-bottom: #686868 1px solid;
     padding: 10px;
-    font-size: large;
+    font-size: medium;
 }
 
 .nets-table  td {
     padding-block: 5px;
+    border-left: none;
 }
 
 .nets-table td {
@@ -720,15 +752,19 @@ a {
 }
 
 .nets-table tr:first-child {
-    border-top: 0;
+    /* border-top: 0; */
+    background: #1c253c38;
 }
 
 .nets-table tr:nth-child(2) {
     border-top: 0;
+    background: white;
 }
 
 .nets-table tr {
-    border-top: 1px solid #686868;
+    border-top: 1px solid #b19f9f;
+    /* border-inline: none; */
+    background: #ffffff75;
 }
 
 .table-header input{
@@ -964,7 +1000,7 @@ select.nav-select{
 
 .clickable-tr:hover {
     cursor: pointer;
-    background-color: #d3d3d3;
+    background-color: #d3d3d3 !important;
 }
 
 .clickable-tr{

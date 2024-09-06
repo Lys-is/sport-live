@@ -8,7 +8,7 @@ const Global = require('../models/global-model');
 const UserD = require('../models/userD-model');
 let Style = require('../models/style-model');
 const Tournament = require('../models/tournament-model');
-
+const Season = require('../models/season-model')
 class Constrollers {
     async auth(req, res, next) {
         res.render('auth', {
@@ -74,21 +74,35 @@ class Constrollers {
     }
     async get__fans(req, res) {
         let league = req.fans_league
+
+        let seasons = await Season.find({creator: req.fans_league.creator._id})
+
        // await Tournament.updateMany({}, {'status_doc': 'active'})
         res.render('fans/fans_o_lige', {
             league,
+            seasons,
             title: 'О лиге',
             page_title: 'О лиге'
         })
     }
     async get__fans_tournaments(req, res) {
+        console.log(req)
         let league = req.fans_league;
         let userAd = await User.findById(league.creator);
-        let tournaments = await Tournament.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}})
-
+        let tournaments = []
+        if(req.params.season != 'all'){
+            let season = await Season.findOne({_id: req.params.season})
+            tournaments = await Tournament.find({creator: req.fans_league.creator._id, 'basic.season': season._id,  status_doc: {$ne: 'deleted'}})
+        }
+        else  {
+            tournaments = await Tournament.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}})
+        }
+        
+        let seasons = await Season.find({creator: req.fans_league.creator._id})
         res.render('fans/fans_tournaments', {
             league,
             tournaments,
+            seasons,
             title: 'Турниры',
             page_title: 'Турниры',
             compareDates
@@ -97,10 +111,13 @@ class Constrollers {
     async get__fans_members(req, res) {
         let league = req.fans_league
         let userAd = await User.findById(league.creator);
+        let seasons = await Season.find({creator: req.fans_league.creator._id})
+
         let tournaments = await Tournament.find({creator: userAd._id, status_doc: {$ne: 'deleted'}})
         res.render('fans/fans_members', {
             league,
             tournaments,
+            seasons,
             title: 'Участники',
             page_title: 'Участники'
         })

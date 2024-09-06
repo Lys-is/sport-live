@@ -17,7 +17,15 @@
 	--pen-defeat: #ff0000;
 	--pen-goal: green;
 }
-
+:root {
+	--main-color: #0f0f0f;
+	--main-center-color: #9d2727;
+	--weather-bg: #e7e7e7;
+	--pen-clear: #fff;
+	--pen-defeat: #ff0000;
+	--pen-goal: green;
+	--pen-bg: #ccc;
+}
 /* TOP SCOREBOARD CSS */
 
 body {/* background: url("img/foot_bg2.jpg"); */background-color: transparent;margin: 0;display: flex;justify-content: center;zoom: 1;}
@@ -741,276 +749,152 @@ body {/* background: url("img/foot_bg2.jpg"); */background-color: transparent;ma
 
 /* MID */
 
-#middle {
-	display: flex;
-	flex-direction: column-reverse;
-	align-items: center;
-	align-content: space-between;
-	margin-top: 120px;
-	width: 100%;
-	height: 700px;
-	font-family: 'Exo 2', sans-serif;
-	/* position: absolute; */
-}
-
-#matchid {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	width: 1024px;
-	height: 683px;
-	backdrop-filter: blur(30px)brightness(0.5);
-	background-size: cover;
-	border-radius: 7px;
-	background: #e5e5e575;
-	/* transform: translateY(-150%); */
-	/* animation: ani 1s forwards; */
-	border: 4px solid #6d237f;
-}
-
-@keyframes ani {
-  0% {transform: translateY(-150%);}
-  100% {transform: translateY(0);}
-}
-
-.tournament-name {
-	text-transform: uppercase;
-	max-width: 100%;
-    text-align: center;    
-}
-
-.flex-row {
-	display: flex;
-	flex-direction: row;
-	align-items: center;	
-}
-
-.bg {
-    /* background: #6d237fab;
-    padding: 10px;
-    border-radius: 10px; */
-}
-
-.date-time-tournament {
-	color: #f9b732;
-	font-size: 28px;
-	font-weight: 700;
-	text-align: center;	
-	text-transform: uppercase;
-	display: flex;
-	flex-direction: row;
-	align-content: center;
-	align-items: baseline;
-	justify-content: space-between;
-	margin: 40px 100px 0px 100px;
-}
-
-#slash {
-	margin: 0 10px;
-}
-
-.field-tour {
-	color: #f9b732;
-	font-size: 18px;
-	font-weight: 700;
-	text-align: center;	
-	text-transform: uppercase;
-	display: flex;
-	flex-direction: row;
-	align-content: center;
-	align-items: center;
-	justify-content: space-between;
-	margin: -50px 100px 0px 100px;
-	
-}
-
-#pointer {
-	background: url("img/pointer-3.svg");
-	width: 22px;
-	height: 29px;
-	margin-right: 10px;
-	
-}
-
-#field {
-	
-}
-
-#tournament {
-	margin-right: 10px;
-}
-
-.teams {
-	display: flex;
-	flex-direction: row;
-	align-content: center;
-	align-items: center;
-	justify-content: space-around;
-	margin-top: -50px;
-}
-
-.big-team {
-	display: flex;
-	flex-direction: column;
-	align-content: center;
-	align-items: center;
-	margin: 50px 100px;
-	max-width: 220px;
-}
-
-.big-logo {
-	width: 200px;
-	height: 200px;
-	border-radius: 50%;
-	overflow: hidden;
-	background: #FFFFFF;
-	display: flex;
-	align-content: center;
-	align-items: center;
-	flex-direction: row;
-	justify-content: center;
-}
-
-.big-logo img {
-	max-width: 200px;
-	margin-top: 0px;
-}
-
-.big-name {
-	color: #f9b732;
-	text-transform: uppercase;
-	font-size: 28px;
-	font-weight: 600;
-	margin-top: 20px;
-	text-align: center;
-    
-}
-
-.divider-x {
-	background: url("img/x-yellow2.svg");
-	width: 150px;
-	height: 150px;
-	background-size: cover;
-	background-position-y: 0px;
-	margin-top: -70px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 /* MATCH ID CSS */
 
-#matchid-container {
-    text-align: center;
-    position: fixed;
-    /* bottom: 245px; */
-    margin: auto;
-    width: 100%;
-    min-width: 100%;
-}
-/*
-.tournament-name {
-    text-transform: uppercase;
-    text-align: center;
-    color: #ffffff;
-    font-family: 'Exo 2', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+#middle {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	align-content: space-between;
+	justify-content: center;
+	margin-top: 200px;
+	width: 100%;
+	position: absolute;
+
+	transform: translateY(-150%);
+    animation: ani 1s forwards;
 }
 
-#matchid-home-logo,
-#matchid-away-logo {
-    height: 200px;
-    padding-top: 100px;
-    image-rendering: -webkit-optimize-contrast;
+@keyframes ani {
+	0% {transform: translateY(-150%);}
+	100% {transform: translateY(0);}
+  }
+
+#matchid {
+	display: flex;
+	flex-direction: column;	
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	width: 900px;
+}
+.line-1 {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 10px;
 }
 
-.logo-bg {
-    background: #ffffff;
-    width: 220px;
-    height: 220px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.mid-home-team, .mid-away-team {
+	height: 70px;
+	min-width: 365px;
+	background-color: var(--main-color);
+	color: #FFFFFF;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-size: 26px;
+	font-weight: 700;
+	text-transform: uppercase;
+	width: 365px;
+	z-index: 1;
 }
 
-#main-table {
-    width: 1016px;
-    height: 650px;
-    margin: auto;
-    background: url("img/midbg-4.png") no-repeat;
+.vs {
+	min-width: 100px;
+	background-color: var(--main-color);
+	color: #FFFFFF;
+	font-size: 55px;
+	font-weight: 700;
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	justify-content: center;
+	text-transform: uppercase;
+	height: 0;
+    width: 120px;
+    border-bottom-color: var(--main-center-color);
+	border-bottom-style: solid;
+	border-bottom-width: 70px;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+	transform: scale(-1, -1);
+}
+.vs div {
+	transform: scale(-1, -1);
+	position: absolute;
+	top: 3px;
 }
 
-#mid-col,
-#matchid-home-teamname,
-#matchid-away-teamname {
-    width: 338px;
-    height: 55px;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 800;
-    font-size: 30px;
-    padding: 10px;
-    color: rgba(255, 255, 255, 1.00);
+
+#line-2 {
+	background: rgba(15,15,15,0.60);
+	width: 900px;
+	height: 470px;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+	justify-content: space-evenly;
 }
 
-#matchid-date-venue {
-    width: 640px;
-    height: 100px;
-    background-color: #340055;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 800;
-    font-size: 30px;
-    color: rgba(255, 255, 255, 1.00);
+#line-3 {
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	align-items: center;
+	justify-content: space-around;
+	width: 900px;
 }
 
-#matchid-time {
-    background-color: #540089;
-    text-align: center;
-    border: 10px solid #340055;
-    padding: 10px;
+.logo {
+	margin: 15px;
 }
 
-#matchid-venue {
-    text-align: center;
-    padding: 10px;
+.logo img {
+	width: 200px;
 }
-*/
 
+#tour {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+}
 
+#tour-num {
+	color: #FFFFFF;
+	font-size: 85px;
+	font-weight: 700;
+}
 
+#tour-txt {
+	color: #FFFFFF;
+	font-size: 55px;
+	font-weight: 700;
+	text-transform: uppercase;
+	line-height: 40px;
+}
 
+#line-4 {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	color: #FFFFFF;
+	font-size: 35px;
+	font-weight: 700;
+	line-height: 50px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+#date-time span {
+	margin: 0 20px;
+}
 
 
 

@@ -22,7 +22,18 @@
             </div>
             <nav>
                 <a class="nav-links <%= ((page_title || title) == 'О лиге') ? 'selected' : '' %>" href="/fans/<%= league.address %>">О лиге</a>
-                <a class="nav-links <%= ((page_title || title) == 'Турниры') ? 'selected' : '' %>" href="/fans_tournaments/<%= league.address %>">Турниры</a>
+                <a class="nav-links tour_link <%= ((page_title || title) == 'Турниры') ? 'selected' : '' %>" href="/fans_tournaments/<%= league.address %>/all">Турниры</a>
+                    
+                <ul class="dropdown">
+                    <li class="dropdown-content"><a class="nav-links" href="/fans_tournaments/<%= league.address %>/all ">Все турниры</a></li>
+                    <% for (let i = 0; i < seasons.length; i++) {
+                        seasons[i];
+                    %>
+                         <li class="dropdown-content"><a class="nav-links" href="/fans_tournaments/<%= league.address %>/<%= seasons[i]._id %>"><%= seasons[i].name %></a></li>
+                    <%
+                    }
+                    %>
+                </ul>
                 <a class="nav-links <%= ((page_title || title) == 'Участники') ? 'selected' : '' %>" href="/fans_members/<%= league.address %>">Участники</a>
             </nav>
             </div>

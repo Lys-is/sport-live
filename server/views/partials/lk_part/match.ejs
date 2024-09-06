@@ -25,19 +25,15 @@
                 <datalist id="teams">
                     <% teams.forEach((el) => { %><option data-id="<%= el._id %>" value="<%= el.name %>"><% }) %>
                 </datalist>
-                <td></td>
                 <td>
                     <!-- <input type="text" list="teams" class="table_input_text" name="team_1.name"> -->
-                    <select class="text_form text double_form" name="team_1.name">
+                    <!-- <select class="text_form text double_form" name="team_1.name">
                         <option value="" selected>Все команды</option>
                         <% teams.forEach((el) => { %><option data-id="<%= el._id %>" value="<%= el.name %>"><%= el.name %></option><% }) %>
-                    </select>
+                    </select> -->
+                    <td><input type="text" list="teams" class="table_input_text" name="team_1.name"></td>
                 </td>
-                <td>
-                    <select class="text_form text double_form" name="team_2.name">
-                    <option value="" selected>Все команды</option>
-                    <% teams.forEach((el) => { %><option data-id="<%= el._id %>" value="<%= el.name %>"><%= el.name %></option><% }) %>
-                </select></td>
+                <td><input type="text" list="teams" class="table_input_text" name="team_2.name"></td>
                 <td><input type="date" class="table_input_text" name="date"></td>
                 <td></td>
                  <td><!--<input type="text" list="tournament" class="table_input_text" name="tournament.basic.full_name"> -->

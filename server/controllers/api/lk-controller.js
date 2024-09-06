@@ -35,6 +35,7 @@ class LkController {
     user = require('./user')
     transfer = require('./transfer')
     guide = require('./guide')
+    season = require('./season')
     async get__create(req, res) {
         try {
             return sendRes('partials/lk_part/team_create', {}, res);
@@ -108,8 +109,9 @@ class LkController {
     async get__season(req, res) {
         try {
             //console.log(req);
-            let seasons = await Season.find({})
-            return sendRes('partials/lk_part/season', {seasons}, res);
+            let [seasons, total] = await dbService.getAggregate(Season, req);
+
+            return sendRes('partials/lk_part/season', {seasons, total}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

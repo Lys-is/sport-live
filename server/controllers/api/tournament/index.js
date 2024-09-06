@@ -2,6 +2,7 @@ const Team = require('../../../models/team-model');
 const Player = require('../../../models/player-model');
 const Judge = require('../../../models/judge-model');
 const Tournament = require('../../../models/tournament-model');
+const Season = require('../../../models/season-model');
 const editController = require('./edit-controller');
 const groupController = require('./group-controller');
 const Commentator = require('../../../models/commentator-model');
@@ -15,7 +16,8 @@ class TournamentController {
     group = groupController
     async get__create(req, res) {
         try {
-            return sendRes('partials/lk_part/tour/tournament_create', {}, res);
+            let seasons = await Season.find({creator: req.user.id});
+            return sendRes('partials/lk_part/tour/tournament_create', {seasons}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -135,6 +137,7 @@ class TournamentController {
         try {
             let tourId = req.params.id;
             let tournament = await Tournament.findOne({_id: tourId})
+            let seasons = await Season.find({creator: req.user.id});
             console.log(tournament)
             if(!tournament) return res.json({message: 'Такого турнира не существует'});
             if(!tournament.creator.equals(req.user.id)) return res.json({message: 'Ошибка доступа'});
@@ -142,7 +145,7 @@ class TournamentController {
             // let players = await Player.find({team: teamId}).populate('team creator');
             // console.log(players)
 
-            return sendRes('partials/lk_part/tour/tournament_edit', {tournament}, res);
+            return sendRes('partials/lk_part/tour/tournament_edit', {tournament,seasons}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
