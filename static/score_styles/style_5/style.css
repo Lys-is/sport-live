@@ -39,8 +39,7 @@ body {
 .pen,
 .refs,
 .weather {
-
-    /* display: none;  */
+display: none;
 }
 
 #container {

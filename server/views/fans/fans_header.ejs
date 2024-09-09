@@ -26,10 +26,9 @@
                     
                 <ul class="dropdown">
                     <li class="dropdown-content"><a class="nav-links" href="/fans_tournaments/<%= league.address %>/all ">Все турниры</a></li>
-                    <% for (let i = 0; i < seasons.length; i++) {
-                        seasons[i];
+                    <% for (let i = 0; i < tournaments.length; i++) {
                     %>
-                         <li class="dropdown-content"><a class="nav-links" href="/fans_tournaments/<%= league.address %>/<%= seasons[i]._id %>"><%= seasons[i].name %></a></li>
+                         <li class="dropdown-content"><a class="nav-links" href="/fans_tournaments/<%= league.address %>/all/?page=tournament/id/<%=tournaments[i]._id%>"><%= tournaments[i].basic.full_name %></a></li>
                     <%
                     }
                     %>

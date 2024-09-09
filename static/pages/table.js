@@ -167,12 +167,13 @@ let first_style_tag = (function(type) {
             console.log('sdfsdfsdfdsfsdfsdfsdfdsf')
            // let tag = get('#style_start')
            // tag.remove()
+            //switchDiv(type)
             document.body.style.display = 'block'
             // let ddiv = getA(`.${type}`)
             // ddiv.forEach(el => {
             //     el.style.display = 'block'
             // })
-            //setTimeout(() => { setAnim(type) }, 100)
+           // setTimeout(() => { setAnim(type) }, 100)
         }
     };
 })();
@@ -356,9 +357,11 @@ function setTime(data) {
     if(ord) ord.style.display = 'none'
 
 }
-function switchDiv(type) {
+async function switchDiv(type) {
+    if(!type) return
     let mb = get('#match-info > .q_name_round')
-
+    console.log('1')
+    
     console.log(type, n_div, is_pen_now)
     
     if(type == n_div && type != 'pen') {
@@ -366,7 +369,7 @@ function switchDiv(type) {
         getA('.pen').forEach(el => setAnim(el, 'reverse', 'pen'))
         if(mb) setAnim(mb, 'normal', 'mb')
             n_div = type
-        return
+        
     }
     else if(type != n_div && type != 'pen') {
             is_pen_now = false
@@ -381,9 +384,19 @@ function switchDiv(type) {
                 setAnim(div, 'normal')
             })
             n_div = type
-        return
+        
     }
-    
+    await base_divs.map(async div => {
+        console.log(div, type)
+        console.log(div.className.includes(type), div.className)
+        if(!div.className.includes(type)) {
+            console.log('1.5')
+            setAnim(div, 'reverse', type)
+            console.log('2')
+
+        }
+
+    })
     scrollTo(0, 0)
     //if(mb) mb.style.display = 'block'
     if(type == 'pen' && !is_pen_now) {
@@ -399,11 +412,7 @@ function switchDiv(type) {
     else {
         if(mb) setAnim(mb, 'normal', 'mb')
     }
-    base_divs.forEach(div => {
-        if(div.className.includes(type) || div.className == type) return
-        setAnim(div, 'reverse', type)
-
-    })
+   
 
     getA(`.${type}`).forEach(div => {
         setAnim(div, 'normal', type)
@@ -414,7 +423,7 @@ function switchDiv(type) {
 }
 
 
-function setAnim(div, direct, type) {
+async function setAnim(div, direct, type) {
     if(type == 'pen' && !div.className.includes('pen')) return
     const compStyles = window.getComputedStyle(div);
     let mb = get('#match-info > .q_name_round')
@@ -425,8 +434,10 @@ function setAnim(div, direct, type) {
     if(animTimouts[div.className]){
        //clearTimeout(animTimouts[div.className])
     }
+    console.log(div, direct, prevDisplay, nextDisplay, type)
 
     if(compStyles.getPropertyValue('display') == prevDisplay){
+        console.log('change display', div.classList)
         let delay = 100
         
         let anim = compStyles.getPropertyValue('animation-name')
@@ -435,7 +446,6 @@ function setAnim(div, direct, type) {
         }
         anim = compStyles.getPropertyValue('animation-name')
         div.style.animationName = 'none'
-        console.log(anim, div, direct, prevDisplay, nextDisplay, type)
         div.style.animationDirection = direct;
         div.style.animationDuration = '0.5s';
         div.style.transitionDuration = '0.5s';
@@ -465,6 +475,7 @@ function setAnim(div, direct, type) {
         }, delay)
         animTimouts[div.className] = tmout
    }
+   return
 }
 function setScoreboard(scoreboard) {
     getA('.var-home-score').forEach(el => el.innerHTML = scoreboard.team1)

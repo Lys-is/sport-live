@@ -234,8 +234,10 @@ function get(selector,  element = document) {
 function getA(selector, element = document) {
 
     if(!element) return null
-    let el = element.querySelectorAll(selector);
-    if (el) return el;
+    let elements = element.querySelectorAll(selector);
+    if (elements) {
+        return [...elements]
+    }
     else {
         console.log('no element' + selector)
         return null

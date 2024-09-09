@@ -8,7 +8,8 @@ const Global = require('../models/global-model');
 const UserD = require('../models/userD-model');
 let Style = require('../models/style-model');
 const Tournament = require('../models/tournament-model');
-const Season = require('../models/season-model')
+const Season = require('../models/season-model');
+const tournament = require('./api/tournament');
 class Constrollers {
     async auth(req, res, next) {
         res.render('auth', {
@@ -76,11 +77,13 @@ class Constrollers {
         let league = req.fans_league
 
         let seasons = await Season.find({creator: req.fans_league.creator._id})
-
+        let tournaments = await Tournament.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}})
+        tournaments = sortTour(tournaments)
        // await Tournament.updateMany({}, {'status_doc': 'active'})
         res.render('fans/fans_o_lige', {
             league,
             seasons,
+            tournaments,
             title: 'О лиге',
             page_title: 'О лиге'
         })
@@ -97,7 +100,7 @@ class Constrollers {
         else  {
             tournaments = await Tournament.find({creator: req.fans_league.creator._id, status_doc: {$ne: 'deleted'}})
         }
-        
+        tournaments = sortTour(tournaments)
         let seasons = await Season.find({creator: req.fans_league.creator._id})
         res.render('fans/fans_tournaments', {
             league,
@@ -114,6 +117,7 @@ class Constrollers {
         let seasons = await Season.find({creator: req.fans_league.creator._id})
 
         let tournaments = await Tournament.find({creator: userAd._id, status_doc: {$ne: 'deleted'}})
+        tournaments = sortTour(tournaments)
         res.render('fans/fans_members', {
             league,
             tournaments,
@@ -208,7 +212,15 @@ class Constrollers {
     api = require('./api')
 }
     
-
+const sortTour = (tournaments) => {
+    tournaments = tournaments.map((tour)=>{
+        tour.date_start_format = new Date(tour.basic.date_start || 0)
+        return tour
+    })
+    tournaments = tournaments.sort((a, b) => {return b.date_start_format - a.date_start_format})
+    console.log(tournaments)
+    return tournaments
+}
 
 let compareDates = (from, to) => { 
 
