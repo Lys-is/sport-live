@@ -164,9 +164,12 @@ function changeMembersNav(name) {
 function initNav(nowHref) {
     let nowPage = nowHref.split('/')[0];
     let navs = getA('.content-nav > .nav-menu-item');
+    
     navs.forEach(nav => {
         nav.addEventListener('click', (e) => {
-            let name = e.target.getAttribute('data-name');
+            let target = e.target.closest('.nav-menu-item')
+            if(!target) return
+            let name = target.getAttribute('data-name');
             let page = params.get[`page`];
             let href = page.replace(nowPage, name);
             getPage(href);
