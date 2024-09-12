@@ -19,6 +19,7 @@ const app = express()
 const bcrypt = require('bcrypt');
 const User = require('./models/user-model');
 const server = http.createServer(app);
+
 const router = require('./navs/constant')
 let ejs = require('ejs');
 const { LRUCache } = require('lru-cache')
@@ -26,6 +27,12 @@ const { LRUCache } = require('lru-cache')
 console.log(router._router.stack)
 ioService.start(server);
 //const io = socketio(server);
+const corsOptions = {
+    origin: 'https://sporlive.ru/',
+    optionsSuccessStatus: 200,
+  };
+  app.use(cors(corsOptions));
+
 app.use(bodyParser.json({ limit: "50mb" }))
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(cookieParser());
