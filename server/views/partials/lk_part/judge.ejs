@@ -6,18 +6,23 @@
             <div class="filler"></div>
             <input type="button" value="Сбросить фильтры" class="table_button" id="clear_filters">
             <input type="button" value="Добавить судью" class="table_button nav_link" data-href="judge/get__create">
+            <div class="filler"></div>
+            <input type="button" value="Активные" class="table_status table_button_radio_active table_radio_active" data-name="active">
+            <input type="button" value="Архивные" class="table_status table_button_radio_archive" data-name="deleted">
         </div>
     <table class="commands_table">
         <tr id="first-row">
             <td>№</td>
             <td>ФИО</td>
             <td>Дата рождения</td>
+            <td>Действия</td>
             <td></td>
         </tr>
         <tr class="filter">
             <td></td>
             <td><input type="text" class="table_input_text" name="fio"></td>
             <td><input type="text" class="table_input_text" name="birthday"></td>
+            <td></td>
             <td></td>
 
         </tr>
@@ -28,6 +33,14 @@
             <td><%= i + 1%></td>
             <td><%= judges[i].fio %></td>
             <td><%= formatDatePretty(judges[i].birthday) %></td>
+            <td>
+                <% if (judges[i].status_doc === 'active') { %>
+                <span class="table_links table_links_compos nav_link"  data-href="judge/get__edit/?id=<%= judges[i]._id %>">Изменить</span>
+                <span class="table_links table_links_del" data-id="<%= judges[i]._id %>" data-model="Judge">В архив</span>
+                <% } else { %>
+                <span class="table_links table_links_del" data-id="<%= judges[i]._id %>" data-model="Judge">Из архива</span>
+                <% } %>
+            </td>
             <td><a target="_blank" href="/fans_members/<%= league_href %>?page=judge/id/<%= judges[i]._id %>">link</a></td>
         </tr>
 

@@ -1,7 +1,7 @@
 const Team = require('../../../models/team-model');
 const Judge = require('../../../models/judge-model');
 
-class RepresentativeController {
+class JudgeController {
 
     async get__create(req, res) {
         try {
@@ -26,9 +26,8 @@ class RepresentativeController {
     }
     async get__edit(req, res) {
         try {
-            let player = await Representative.findOne({_id: req.query.id})
-            let teams = await Team.find({creator: req.user.id, status_doc: {$ne: 'deleted'}});
-            return sendRes('partials/lk_part/player_edit', {player, teams}, res);
+            let judge = await Judge.findOne({_id: req.query.id})
+            return sendRes('partials/lk_part/judge_edit', {judge}, res);
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -36,11 +35,11 @@ class RepresentativeController {
     }
     async put__edit(req, res) {
         try {
-            const {playerId} = req.body;
-            let player = await Player.findOne({_id: playerId});
-            if(!player) return res.json({message: 'Такого игрока не существует'});
-            player = await Player.updateOne({_id: playerId}, req.body);
-            return res.json({message: 'Игрок обновлен'});
+            const {judgeId} = req.body;
+            let judge = await Judge.findOne({_id: judgeId});
+            if(!judge) return res.json({message: 'Такого судьи не существует'});
+            judge = await Judge.updateOne({_id: judgeId}, req.body);
+            return res.json({message: 'Судья обновлен'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -56,4 +55,4 @@ async function sendRes(path, data, res) {
     });
 }
 
-module.exports = new RepresentativeController();
+module.exports = new JudgeController();

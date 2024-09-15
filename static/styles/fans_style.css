@@ -290,8 +290,9 @@ thead {
 @media (max-width: 800px) {
     .grid-body {
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-        grid-template-areas: "b"
+        /* grid-template-rows: 1fr 1fr; */
+        grid-template-areas:
+            "b"
             "a";
         padding-inline: 5%;
         justify-content: center;
@@ -339,6 +340,7 @@ thead {
 
     .naming {
         /* align-self: flex-start; */
+        margin-top: 10px;
     }
 
     nav {

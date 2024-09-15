@@ -211,7 +211,9 @@ let inits = {
     'couch/get__create' : init__couch_create,
     'couch/get__edit' : init__couch_edit,
     'judge/get__create' : init__judge_create,
+    'judge/get__edit': init__judge_edit,
     'commentator/get__create' : init__commentator_create,
+    'commentator/get__edit': init__commentator_edit,
     'season': init__season,
     'season/get__create' : init__season_create,
     'season/get__edit' : init__season_edit,
@@ -725,12 +727,30 @@ function init__judge_create() {
         sendFetch("/api/lk/judge/post__create", JSON.stringify(data), "POST")
     })
 }
+function init__judge_edit() {
+    let form = get("#judge_edit__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        data.judgeId = form.getAttribute('data-id')
+        sendFetch("/api/lk/judge/put__edit", JSON.stringify(data), "PUT")
+    })
+}
 function init__commentator_create() {
     let form = get("#commentator_create__form");
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         let data = await formGetData(form)
         sendFetch("/api/lk/commentator/post__create", JSON.stringify(data), "POST")
+    })
+}
+function init__commentator_edit() {
+    let form = get("#commentator_edit__form");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let data = await formGetData(form)
+        data.commentatorId = form.getAttribute('data-id')
+        sendFetch("/api/lk/commentator/put__edit", JSON.stringify(data), "PUT")
     })
 }
 function init__style() {

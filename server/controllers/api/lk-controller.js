@@ -430,7 +430,7 @@ class LkController {
                 msg = 'Документ восстановлен';
             }
             await doc.save();
-            return res.json({message: msg});
+            return res.json({message: msg, reload: true});
         }
         catch(e){
             console.log(e);
