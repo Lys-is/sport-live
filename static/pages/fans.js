@@ -51,7 +51,7 @@ async function getPage(href, history_change = false) {
         history.replaceState({ page: 1 }, "", `?page=${initHref}`);
     }
     const navLinks = getA('.fans_link');
-    console.log(navLinks)
+    // console.log(navLinks)
     navLinks.forEach(link => {
         if (!link.hasEventListener('click')) {
             link.addEventListener('click', standartLinkListener);
