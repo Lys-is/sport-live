@@ -21,9 +21,11 @@ window.addEventListener('popstate', function(event) {
     getPage(location.href.split('?page=')[1], true);
 }, false);
 function openLoader() {
+    console.log('open')
     get('.loader').classList.remove('closed');
 }
 function closeLoader() {
+    console.log('close')
     get('.loader').classList.add('closed');
 }
 closeLoader()
