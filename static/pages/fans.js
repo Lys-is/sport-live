@@ -37,7 +37,9 @@ async function getPage(href, history_change = false) {
     const baseUrl = `/api/fans/${leagueId}/`;
     const pageUrl = `${baseUrl}${href.replace('&', '?')}`;
     openLoader();
+    console.log('before', href)
     const response = await sendFetch(pageUrl, null, 'GET');
+    console.log('after', href)
     closeLoader();
     fans_main.innerHTML = response ? response : 'Страница не найдена';
     params.subHref = href.split('?')[1] || href;
