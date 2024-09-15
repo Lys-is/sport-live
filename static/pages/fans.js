@@ -26,8 +26,9 @@ function openLoader() {
 function closeLoader() {
     get('.loader').classList.add('closed');
 }
+closeLoader()
 async function getPage(href, history_change = false) {
-    closeLoader()
+    
     if(!href) location.href = location.pathname;
     let initHref = href.split('?')[0];
     const baseUrl = `/api/fans/${leagueId}/`;
