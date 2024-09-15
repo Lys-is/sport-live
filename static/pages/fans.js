@@ -1,3 +1,5 @@
+closeLoader()
+
 let links = getA('.fans_link')
 links.forEach(link => {
     link.addEventListener('click', standartLinkListener)
@@ -29,15 +31,14 @@ function closeLoader() {
     get('.loader').classList.add('closed');
     window.scrollTo(0,0)
 }
-closeLoader()
 async function getPage(href, history_change = false) {
     
     if(!href) location.href = location.pathname;
     let initHref = href.split('?')[0];
     const baseUrl = `/api/fans/${leagueId}/`;
     const pageUrl = `${baseUrl}${href.replace('&', '?')}`;
-    openLoader();
     console.log('before', href)
+    openLoader();
     const response = await sendFetch(pageUrl, null, 'GET');
     console.log('after', href)
     closeLoader();
