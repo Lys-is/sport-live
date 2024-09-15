@@ -473,6 +473,7 @@ table tr td input{
 }
 
 .table_links{
+    min-height: 20px;
     text-decoration: none;
     margin: 0 auto;
     color: var(--font-color);

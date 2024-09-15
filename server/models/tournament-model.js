@@ -93,6 +93,9 @@ Tournament.statics.createGroup = async function (data) {
     let group = new Stage(data);
     return group.save();
 }
+Tournament.statics.deleteTeam = async function (teamId) {
+    await this.updateMany({teams: teamId}, {$pull: {teams: teamId}});
+}
 Tournament.methods.getGroups = async function () {
     let groups = await Stage.find({tournament: this._id});
     return groups;

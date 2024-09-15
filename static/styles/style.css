@@ -51,7 +51,10 @@ img[src=""] {
 }
 .table_img {
     max-height: 65px;
+    max-width: 65px;
+    aspect-ratio: 1/1;
     margin: 0 auto;
+    object-fit: cover;
 }
 .nav_link {
     cursor: pointer;

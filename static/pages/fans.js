@@ -27,6 +27,7 @@ function openLoader() {
 function closeLoader() {
     console.log('close')
     get('.loader').classList.add('closed');
+    window.scrollTo(0,0)
 }
 closeLoader()
 async function getPage(href, history_change = false) {

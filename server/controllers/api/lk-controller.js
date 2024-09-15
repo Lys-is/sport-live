@@ -421,6 +421,9 @@ class LkController {
             if(doc.status_doc === 'active'){
                 doc.status_doc = 'deleted';
                 msg = 'Документ архивирован';
+                if(data.model == 'Team'){
+                    await Tournament.deleteTeam(doc._id)
+                }
             }
             else if(doc.status_doc === 'deleted'){
                 doc.status_doc = 'active';
