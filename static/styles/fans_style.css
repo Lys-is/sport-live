@@ -1074,3 +1074,18 @@ select.nav-select{
     border: none;
     padding: 10px;
 }
+
+.loader {
+    position:fixed;
+    z-index:10000000;
+    background: #81818169;
+    width:100vw;
+    height:100vw;
+    top:0;
+    left:0;
+    transition-duration: 500ms;
+}
+.loader.closed {
+    opacity:0;
+    z-index: -1;
+}

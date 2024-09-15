@@ -20,12 +20,20 @@ window.addEventListener('popstate', function(event) {
     // The popstate event is fired each time when the current history entry changes.
     getPage(location.href.split('?page=')[1], true);
 }, false);
+function openLoader() {
+    get('.loader').classList.remove('closed');
+}
+function closeLoader() {
+    get('.loader').classList.add('closed');
+}
 async function getPage(href, history_change = false) {
     if(!href) location.href = location.pathname;
     let initHref = href.split('?')[0];
     const baseUrl = `/api/fans/${leagueId}/`;
     const pageUrl = `${baseUrl}${href.replace('&', '?')}`;
+    openLoader();
     const response = await sendFetch(pageUrl, null, 'GET');
+    closeLoader();
     fans_main.innerHTML = response ? response : 'Страница не найдена';
     params.subHref = href.split('?')[1] || href;
     console.log(params)
