@@ -1,10 +1,10 @@
 <div class="cool_body">
                         
-    <form>
+    <div>
         <div class="cool_body_content wbt">
             <div class="table_header">
                 <p class="page_title nm">Команды</p>
-                <input type="button" value="Добавить команду" class="table_button nav_link top_nav" data-href="team/get__create">
+                <input type="button" value="Добавить команду" class="table_button nav_link top_nav" new_tab="true" data-href="team/get__create">
 
                 <div class="filler"></div>
                 <input type="button" value="Незаявленные" class="table_button_radio_active  nm vector_link" data-dest="tour_body" data-href="tournament/id/<%= tournament._id %>/team">
@@ -14,12 +14,11 @@
             <table class="commands_table fath">
                 <tr id="first-row">
                     <td colspan="4">
-                        <div class="form-group">
-                            <input type="text" class="text_form text ml" placeholder="Название команды" >
-                            <input type="button" value="Найти" class="button blue_button">
-
+                        <div class="form-group filter" data-dest="tour_body">
+                            <input type="text" class="text_form text ml" name="name" placeholder="Название команды" >
+                            <input type="button" value="Сбросить фильтры" class="button red_button" id="clear_filters">
                         </div>
-                        </td>
+                    </td>
                 </tr>
                 <% if (teams) {
                     teams.forEach((team) => {
@@ -41,5 +40,5 @@
             
         </div>
 
-    </form>
+    </div>
 </div>

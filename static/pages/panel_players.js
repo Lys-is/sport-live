@@ -91,7 +91,9 @@ socket.on('update_data', (data) => {
 
 })
 
-
+socket.on('reload', () => {
+    location.reload();
+})
 
 
 

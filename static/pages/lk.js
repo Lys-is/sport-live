@@ -122,7 +122,6 @@ async function getPage(href, destInHtml = lk_main, history_change = false) {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 location.href = e.target.getAttribute('data-href')
-
             });
         }
     });
@@ -155,7 +154,13 @@ async function linkListener(e) {
         let nav = e.target.closest('*[data-href]')
         let href = nav.getAttribute('data-href')
         console.log(href)
-        getPage(href)
+        if(nav.getAttribute('new_tab')){
+            const baseUrl = '/lk?page=';
+            const pageUrl = `${baseUrl}${href.replace('&', '?')}`;
+            window.open(pageUrl, '_blank')
+        }
+        else
+            getPage(href)
 }
 let hidNav = get('.header_hide_navbar')
 let navDiv = get('.navbar')
@@ -939,9 +944,9 @@ function init__filter() {
     let filter_div = get(".filter");
     console.log(filter_div)
     if(!filter_div) return
-    let filters = getA("input, select", filter_div);
+    let filters = getA("input:not([type='button']), select", filter_div);
     filter_data.filters = filters
-
+    let dest = filter_div.getAttribute('data-dest')
     console.log(params.get)
     let prms = params.get
     for(let param in prms) {
@@ -958,7 +963,7 @@ function init__filter() {
         
         filter.addEventListener("change", (e) => {
             filter_data['filters'] = filters
-            setFilter(filter_data);
+            setFilter(filter_data, dest);
         });
     });
     let status_btns = getA(".table_status");
@@ -988,7 +993,7 @@ function init__filter() {
 
         filter_data.page = 1
         filter_data.filters = filters
-        setFilter(filter_data);
+        setFilter(filter_data, dest);
     })
 
     let pagination_div = get("#pagination");
@@ -1025,7 +1030,7 @@ function init__filter() {
         });
     }
 }    
-function setFilter(data) {
+function setFilter(data, dest) {
     console.log(data)
     let {filters, page, status} = data
     let currHref = location.href
@@ -1048,8 +1053,15 @@ function setFilter(data) {
     console.log({currHref, indx})
     history.replaceState({ page: 1 }, "", newHref);
     //location.reload()
-
-    getPage(newHref.split('?page=')[1])
+    let dest_div
+    if(dest){
+        dest_div = get(`#${dest}`)
+    }
+    console.log(dest, dest_div)
+    if(dest_div)
+        getPage(newHref.split('?page=')[1], dest_div)
+    else
+        getPage(newHref.split('?page=')[1])
 }
 
 

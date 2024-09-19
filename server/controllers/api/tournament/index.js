@@ -252,7 +252,9 @@ class TournamentController {
             let chooseTeams = tournament.teams;
             console.log(chooseTeams)
             let teams = await Team.find( {creator: req.user.id, $nor: [{_id: {$in: chooseTeams}}] });
-
+            if(req.query?.filter_name){
+                teams = teams.filter((el) => el.name.includes(req.query?.filter_name))
+            }
             return sendRes('partials/lk_part/tour/tournament_teams', {tournament, teams}, res);
         } catch (e) {
             console.log(e);
@@ -261,9 +263,13 @@ class TournamentController {
     }
     async get__team_in(req, res) {
         try {
+            console.log(req)
             let tourId = req.params.id;
             let tournament = await Tournament.findOne({_id: tourId})
             let teams = tournament.teams;
+            if(req.query?.filter_name){
+                teams = teams.filter((el) => el.name.includes(req.query?.filter_name))
+            }
             console.log(teams)
             return sendRes('partials/lk_part/tour/tournament_teams_in', {tournament, teams}, res);
         } catch (e) {

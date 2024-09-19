@@ -206,6 +206,14 @@ function startPanel(controls, socket) {
       console.log(e)
     }
   })
+  socket.on('reload_all', async (data) => {
+    try {
+
+      io.to(userId).emit('reload');
+    } catch (e) {
+      console.log(e)
+    }
+  })
   socket.on('reset_all', async (data) => {
     try {
 

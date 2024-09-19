@@ -10,13 +10,35 @@ if(regForm){
     })
 }
 else if(loginForm){
+    let em = localStorage.getItem('em'),
+    ps = localStorage.getItem('ps')
+    if(em && ps){
+        loginForm.email.value = em
+        loginForm.password.value = ps
+        loginForm.remember_me.checked = true
+    }
+    else {
+        localStorage.removeItem('em')
+        localStorage.removeItem('ps')
+        loginForm.remember_me.checked = false
+    }
     loginForm.addEventListener('submit', async(e) => {
         e.preventDefault();
         let data = await formGetData(loginForm)
+
         let res = await sendFetch('/api/auth/post__login', JSON.stringify(data), 'POST')
-        console.log(res)
+        console.log(data)
+        
         if(res.accessToken){
             createCookie('token', res.accessToken, 1)
+        }
+        if(data.remember_me){
+            localStorage.setItem('em', data.email)
+            localStorage.setItem('ps', data.password)
+        }
+        else {
+            localStorage.removeItem('em')
+            localStorage.removeItem('ps')
         }
         window.location.href = '/lk?page=profile';
     })

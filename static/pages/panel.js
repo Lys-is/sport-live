@@ -91,13 +91,13 @@ style?.addEventListener('change', (e) => {
         style: e.target.value
     }
     formSet.disabled = true
-    let data_2 = {
-        'tablo' : 'little',
-    }
+    // let data_2 = {
+    //     'tablo' : 'little',
+    // }
     setTimeout(() => {
         formSet.disabled = false
     },1001)
-    socket.emit('new_data', data_2)
+   // socket.emit('new_data', data_2)
     socket.emit('style', data);
 })
 socket.on('connect', () => {
@@ -389,7 +389,10 @@ let reset_all = get('#reset_all');
 reset_all?.addEventListener('click', (e) => {
     socket.emit('reset_all');
 })
-
+let reload_all = get('#reload_all');
+reload_all?.addEventListener('click', (e) => {
+    socket.emit('reload_all');
+})
 scoreDivs.forEach(div => {
     let plus_minus = getA('input[type="button"]', div),
     score = get('input[type="number"]', div);

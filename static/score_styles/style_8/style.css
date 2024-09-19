@@ -373,6 +373,7 @@
     /* height: 40px; */
     color: #FFFFFF;
     text-align: center;
+    overflow-wrap: anywhere;
 }
 .big .divider {
     width: 5px;
