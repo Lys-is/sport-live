@@ -3,7 +3,7 @@
     <%- include('team_nav.ejs') %>
     <div class="content-body body-background">
         <div class="h_flex white">
-            <img src="<%= team.img || '/static/styles/icons/logo.jpg'%>" class="" width="200" height="200">
+            <img src="<%= '/images/Team/' + team.id %>" class="" width="200" height="200">
             <div class="v_flex left">
                 <h2 class="nm-top"><%= team.name %></h2>
                 <p class="">Последние матчи:</p>
@@ -38,14 +38,14 @@
                 <td>
                     <div class="h_flex">
                         <p><%= match.team_1.name %></p>
-                        <img src="<%= match.team_1.img || '/static/styles/icons/logo.jpg' %>" class="" width="70" height="70">
+                        <img src="<%= '/images/Team/'+ match.team_1.id %>" class="" width="70" height="70">
                     </div>
                 </td>  
                 
                 <td><%= (match.team_1_score || match.team_2_score) ? `${match.team_1_score}:${match.team_2_score}` : '-:-' %></td>  
                 <td>                          
                     <div class="h_flex">
-                        <img src="<%= match.team_2.img || '/static/styles/icons/logo.jpg' %>" class="" width="70" height="70">
+                        <img src="<%= '/images/Team/'+ match.team_2.id %>" class="" width="70" height="70">
                         <p><%= match.team_2.name %></p>
                     </div>
                 </td>

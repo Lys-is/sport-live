@@ -9,7 +9,8 @@ const UserD = require('../models/userD-model');
 let Style = require('../models/style-model');
 const Tournament = require('../models/tournament-model');
 const Season = require('../models/season-model');
-const tournament = require('./api/tournament');
+const mongoose = require('mongoose');
+const path = require('path');
 class Constrollers {
     async auth(req, res, next) {
         res.render('auth', {
@@ -208,7 +209,29 @@ class Constrollers {
             res.send('Произошла ошибка');
         }
     }
-        
+    async get__image(req, res) {
+        let models = mongoose.modelNames()
+        const {model, id} = req.params
+        // console.log(model, id, models)
+        if(models.includes(model)) {
+            let obj = await mongoose.model(model).findById(id).select('img')
+            if(obj && obj.img) {
+                let mimeType = obj.img.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
+                const im = obj.img.split(",")[1];
+                const img = Buffer.from(im, 'base64');
+                res.writeHead(200, {
+                   'Content-Type': mimeType,
+                   'Content-Length': img.length
+                });
+                res.end(img); 
+            }
+            else{
+                res.sendFile(path.join(path.dirname(__dirname), '../static/styles/icons/logo.jpg'))
+            }
+        }
+        else
+            res.sendFile(path.join(path.dirname(__dirname), '../static/styles/icons/logo.jpg'))
+    }
     api = require('./api')
 }
     

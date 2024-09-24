@@ -3,7 +3,16 @@ const Router = require('express');
 const controllers = require('../controllers');
 const getFans = require('../middlewares/getFans-middleware');
 //qq - middleware
+/*
+ в nav можно добавлять маршруты, первого уровня добавляются как обычно, перед остальными идёт /api/
+
+ 'func' - для своего названия функции в контроллере, по умолчанию совпадает с названием маршрута
+ 'qq' - middleware для маршрута, qqRecurs - вызывать ли рекурсивно, по умолчанию false
+*/
 const nav = {
+    'images/:model/:id' : {
+        'func' : 'get__image'
+    },
     'user_agreement' : {
         'func' : 'get__user_agreement'
     },

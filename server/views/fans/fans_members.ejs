@@ -18,7 +18,7 @@
                         teamsSet.add(team._id.toString())
                         %>
                         <div class="player-block fans_link" data-href="team/id/<%= team._id %>">
-                            <img src="<%= team.img || '/static/styles/icons/logo.jpg'%>" class="" width="200" height="200">
+                            <img src="<%= '/images/Team/' + team.id %>" class="" width="200" height="200">
                             <p><%= team.name %></p>
                         </div>
                         <% }

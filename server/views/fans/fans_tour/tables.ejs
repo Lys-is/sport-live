@@ -59,7 +59,8 @@
                 <td><%= i+1 %></td>
                 <td>
                     <div class="h_flex">
-                        <img src="<%= teams[i].img || '/static/styles/icons/logo.jpg'%>" class="" width="70" height="70">
+                        
+                        <img src="<%= '/images/Team/'+teams[i].id %>" class="" width="70" height="70">
                         <p><%= teams[i].name %></p>
                     </div>
                 </td>
@@ -97,7 +98,7 @@
                         <td><%= i+1 %></td>
                         <td>
                             <div class="h_flex">
-                                <img src="<%= teams[i].img || '/static/styles/icons/logo.jpg'%>" class="" width="70" height="70">
+                                <img src="<%= '/images/Team/'+teams[i].id %>" class="" width="70" height="70">
                                 <p><%= teams[i].name %></p>
                             </div>
                         </td>
@@ -139,7 +140,7 @@
                 <td><%= i+1 %></td>
                 <td>
                     <div class="h_flex">
-                        <img src="<%= team.img || '/static/styles/icons/logo.jpg'%>" class="" width="70" height="70">
+                        <img src="<%= '/images/Team/'+team.id %>" class="" width="70" height="70">
                         <p><%= team.name %></p>
                     </div>
                 </td>

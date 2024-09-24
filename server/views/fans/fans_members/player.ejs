@@ -1,7 +1,7 @@
 <%- include('members_header.ejs') %>
 <div class="content-body body-background members-body">
     <div class="h_flex white">
-        <img src="<%= player.img || '/static/styles/icons/logo.jpg' %>" class="" width="250" height="250">
+        <img src="<%= '/images/Player/'+player.id %>" class="" width="250" height="250">
         <div class="v_flex left">
             <h2 class="nm-top"><%= player.fio %></h2>
             <p class="">Дата рождения: <span> <%= player.birthday %></span></p>
