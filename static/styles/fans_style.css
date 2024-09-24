@@ -880,9 +880,16 @@ select.nav-select{
     padding-inline: 20px;
 }
 .wraped {
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    grid-gap: 0px;
+    /* grid-auto-rows: 1fr; */
+    justify-items: center;
+}
+.wraped > * {
+    /* text-align: center; */
+    /* grid-column: 1/-1; */
+    /* grid-row: 1; */
 }
 #tovarishki_match_title {
     align-self: flex-start;
