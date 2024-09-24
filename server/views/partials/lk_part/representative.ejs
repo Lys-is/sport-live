@@ -25,7 +25,7 @@
             <datalist id="teams">
                 <% teams.forEach((el) => { %><option data-id="<%= el._id %>" value="<%= el.name %>"><% }) %>
             </datalist>
-            <td><input type="text" list="teams" class="table_input_text" name="team.name"></td>
+            <td><input type="text" list="teams" class="table_input_text" name="team?.name"></td>
             <td></td>
         </tr>
      <% if (representatives.length > 0) { %>
@@ -35,7 +35,7 @@
             <td><%= i + 1 %></td>
             <td><%= representatives[i].fio %></td>
             <td><%= formatDatePretty(representatives[i].birthday) %></td>
-            <td><%= representatives[i].team.name %></td>
+            <td><%= representatives[i].team?.name %></td>
             <td>
                 <% if (representatives[i].status_doc === 'active') { %>
                 <span class="table_links table_links_compos nav_link"  data-href="representative/get__edit/?id=<%= representatives[i]._id %>">Изменить</span>

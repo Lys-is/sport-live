@@ -9,7 +9,7 @@
         </div>
         
     </div> 
-    <div class="h_flex white mt">
+    <div class="h_flex white mt wraped">
         <% 
             let count_matches = 0,
             count_goals = 0,
@@ -25,17 +25,11 @@
                 count_reds += result.red;
             })
             %>
-        <div class="filler"></div>
         <p>Игры: </p><div class="dark-blue circle"><%= count_matches %></div><p></p>
-        <div class="filler"></div>
         <p>Голы: </p><div class="dark-blue circle"><%= count_goals %></div><p></p>
-        <div class="filler"></div>
         <p>Передачи: </p><div class="dark-blue circle"><%= count_transits %></div><p></p>
-        <div class="filler"></div>
         <p>Жк: </p><div class="dark-blue circle"><%= count_yellows %></div><p></p>
-        <div class="filler"></div>
         <p>Кк: </p><div class="dark-blue circle"><%= count_reds %></div><p></p>
-        <div class="filler"></div>
     </div>
 
     <div class="h_flex white mt pi">

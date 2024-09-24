@@ -202,7 +202,9 @@ a {
     width: auto;
     /* gap: 20px; */
     top: 33px;
-    margin-left: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    /* margin-left: -25px; */
     display: none;
     color: white;
     background: #22293d;
@@ -877,7 +879,11 @@ select.nav-select{
 .pi {
     padding-inline: 20px;
 }
-
+.wraped {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-evenly;
+}
 #tovarishki_match_title {
     align-self: flex-start;
     text-align: start;

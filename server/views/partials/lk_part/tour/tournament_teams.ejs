@@ -27,7 +27,7 @@
                     <td>
                         <img src="<%=team.img ? team.img : '/static/styles/icons/logo.jpg'%>" alt="team" height="80" width="80" class="ml img_t">
                     </td>
-                    <td><p class="nm"><%=team.name%></p></td>
+                    <td><p class="nm"><%=team?.name%></p></td>
                     <td>            
                         <input type="button" value="Выбрать команду" data-id="<%=team._id%>" class="button green_button team_add" >
                     </td>

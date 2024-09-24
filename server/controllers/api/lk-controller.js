@@ -424,6 +424,9 @@ class LkController {
                 if(data.model == 'Team'){
                     await Tournament.deleteTeam(doc._id)
                 }
+                else if(data.model == 'Player'){
+                    doc.team = null;
+                }
             }
             else if(doc.status_doc === 'deleted'){
                 doc.status_doc = 'active';

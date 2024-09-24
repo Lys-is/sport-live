@@ -54,10 +54,10 @@
                     </div>
                     <div class="form_group">
                         <label for="team">Команда</label>
-                        <input type="text" list="team" name="team" value="<%= player.team.name %>">
+                        <input type="text" list="team" name="team" value="<%= player.team?.name %>">
                         <datalist id="team">
                             <% for (let i = 0; i < teams.length; i++) { %>
-                                <option value="<%= teams[i].name %>" data-value="<%= teams[i]._id %>" <%= ( teams[i]._id == player.team._id ) ? "selected" : "gg" %>></option>
+                                <option value="<%= teams[i].name %>" data-value="<%= teams[i]._id %>" <%= ( teams[i]._id == player.team?._id ) ? "selected" : "gg" %>></option>
                             <% } %>
                         </datalist>
                     </div>

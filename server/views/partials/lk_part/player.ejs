@@ -28,7 +28,7 @@
             <datalist id="teams">
                 <% teams.forEach((el) => { %><option data-id="<%= el._id %>" value="<%= el.name %>"><% }) %>
             </datalist>
-            <td><input type="text" list="teams" class="table_input_text" name="team.name"></td>
+            <td><input type="text" list="teams" class="table_input_text" name="team?.name"></td>
             <td></td>
             <td></td>
         </tr>
@@ -45,7 +45,7 @@
             </td>
             <td><%= players[i].num %></td>
             <td><%= formatDatePretty(players[i].birthday) %></td>
-            <td><%= players[i].team.name %></td>
+            <td><%= players[i].team?.name %></td>
             <td>
                 <% if (players[i].status_doc === 'active') { %>
                 <span class="table_links table_links_compos nav_link"  data-href="player/get__edit/?id=<%= players[i]._id %>">Изменить</span>

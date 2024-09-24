@@ -31,7 +31,7 @@
         <tr>
             <td><%= couches[i].fio %></td>
             <td><%= couches[i].birthday %></td>
-            <td><%= couches[i].team.name %></td>
+            <td><%= couches[i].team?.name %></td>
             <td>
                 <span class="table_links table_links_compos nav_link"  data-href="couch/get__edit/?id=<%= couches[i]._id %>">Изменить</span>
             </td>

@@ -42,7 +42,7 @@
             </td>
             <td><%= players[i].num %></td>
             <td><%= players[i].birthday %></td>
-            <td><%= players[i].team.name %></td>
+            <td><%= players[i].team?.name %></td>
             <td>
                 <span class="table_links table_links_compos nav_link"  data-href="player/get__edit/?id=<%= players[i]._id %>">Изменить</span>
             </td>

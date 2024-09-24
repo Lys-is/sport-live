@@ -6,7 +6,7 @@
             <% tournament.teams.forEach(team => { %>
             <div class="player-block fans_link" data-href="team/id/<%= team._id %>">
                 <img src="<%= '/images/Team/'+team.id %>" class="" width="200" height="200">
-                <p><%= team.name %></p>
+                <p><%= team?.name %></p>
             </div>
             <% }) %>
 
