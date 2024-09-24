@@ -465,5 +465,4 @@ function setMatch(data, team) {
     match.value = data.match._id
     console.log(data)
     
-}      
-
+}

@@ -220,7 +220,6 @@ class Scoreboard {
     
 }
 class Tablo {
-    // type = little | mid | big  | wheater | penalty | off
     constructor() {
         this.type = 'little'
     }

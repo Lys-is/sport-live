@@ -1,0 +1,2 @@
+server\views\score_styles - лежат html/ejs стили табло
+static\score_styles - css для них
