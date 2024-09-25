@@ -221,6 +221,35 @@ class MatchController {
             return res.json({message: 'Произошла ошибка'});
         }
     }
+    async get__teams(req, res) {
+        try {
+            let teams = await Team.find({creator: req.user.id, status_doc: {$ne: 'deleted'}}).select('name _id');
+            return res.json({teams: teams});
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
+    async get__teams_by_tournament(req, res) {
+        try {
+            let tournamentId = req.query.id;
+            let tournament = await Tournament.findOne({_id: tournamentId}).select('teams');
+            console.log(tournament)
+            if(!tournament) return res.json({message: 'Такого турнира не существует'});
+            console.log(tournamentId)
+            let teams = tournament.teams
+            teams = teams.map((team) => {
+                return {name: team.name, id: team._id}
+            })
+            console.log(teams)
+            
+            
+            return res.json({teams: teams});
+        } catch (e) {
+            console.log(e);
+            return res.json({message: 'Произошла ошибка'});
+        }
+    }
 }
 async function sendRes(path, data, res) {
     return res.render(path, data,

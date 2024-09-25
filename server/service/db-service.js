@@ -5,7 +5,7 @@ const { ObjectId } = require('mongodb');
 
 class DbService {
    async getAggregate(schema, req) {
-    console.log(schema)
+    //console.log(schema)
       if(!schema)
         return [[], 0]
        // await schema.updateMany({}, {status_doc: 'active'})
