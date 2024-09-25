@@ -1095,7 +1095,7 @@ select.nav-select{
     z-index:10000000;
     background: #81818169;
     width:100vw;
-    height:100vw;
+    height:300vw;
     top:0;
     left:0;
     transition-duration: 500ms;
