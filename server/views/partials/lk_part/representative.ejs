@@ -14,6 +14,7 @@
         <tr id="first-row">
             <td>№</td>
             <td>ФИО</td>
+            <td></td>
             <td>Дата рождения</td>
             <td>Команда</td>
             <td>Действия</td>
@@ -21,11 +22,12 @@
         <tr class="filter">
             <td></td>
             <td><input type="text" name="fio" class="table_input_text"></td>
+            <td></td>
             <td><input type="date" name="birthday" class="table_input_text"></td>
             <datalist id="teams">
                 <% teams.forEach((el) => { %><option data-id="<%= el._id %>" value="<%= el.name %>"><% }) %>
             </datalist>
-            <td><input type="text" list="teams" class="table_input_text" name="team?.name"></td>
+            <td><input type="text" list="teams" class="table_input_text" name="team.name"></td>
             <td></td>
         </tr>
      <% if (representatives.length > 0) { %>
@@ -34,6 +36,12 @@
         <tr>
             <td><%= i + 1 %></td>
             <td><%= representatives[i].fio %></td>
+            <td><% if(representatives[i].img){
+                %>
+                <img class="table_img" src="<%= representatives[i].img %>" alt="Фото">
+                
+                <% }    %>        
+            </td>
             <td><%= formatDatePretty(representatives[i].birthday) %></td>
             <td><%= representatives[i].team?.name %></td>
             <td>

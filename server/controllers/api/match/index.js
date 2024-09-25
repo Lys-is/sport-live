@@ -136,7 +136,7 @@ class MatchController {
             console.log(matchId)
             await Match.updateOne({_id: matchId}, req.body);
             console.log(req.body)
-            return res.json({message: 'Матч обновлен'});
+            return res.json({message: 'Матч обновлен', redirect: `lk?page=match`});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

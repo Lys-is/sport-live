@@ -42,7 +42,7 @@ class RepresentativeController {
             let representativ = await Representative.findOne({_id: representativeId});
             if(!representativ) return res.json({message: 'Такого игрока не существует'});
             representativ = await Representative.updateOne({_id: representativeId}, req.body);
-            return res.json({message: 'Представитель обновлен'});
+            return res.json({message: 'Представитель обновлен', redirect: `lk?page=representative`});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

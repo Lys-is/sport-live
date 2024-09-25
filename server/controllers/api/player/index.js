@@ -69,7 +69,7 @@ class PlayersController {
             let player = await Player.findOne({_id: playerId});
             if(!player) return res.json({message: 'Такого игрока не существует'});
             player = await Player.updateOne({_id: playerId}, req.body);
-            return res.json({message: 'Игрок обновлен'});
+            return res.json({message: 'Игрок обновлен', redirect: `lk?page=player`});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

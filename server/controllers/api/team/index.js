@@ -39,7 +39,7 @@ class TeamsController {
             let team = await Team.findOne({_id: teamId});
             if(!team) return res.json({message: 'Такой команды не существует'});
             await Team.updateOne({_id: teamId}, req.body);
-            return res.json({message: 'Команда обновлена'});
+            return res.json({message: 'Команда обновлена', redirect: `lk?page=team`});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

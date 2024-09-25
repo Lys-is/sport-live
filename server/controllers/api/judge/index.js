@@ -39,7 +39,7 @@ class JudgeController {
             let judge = await Judge.findOne({_id: judgeId});
             if(!judge) return res.json({message: 'Такого судьи не существует'});
             judge = await Judge.updateOne({_id: judgeId}, req.body);
-            return res.json({message: 'Судья обновлен'});
+            return res.json({message: 'Судья обновлен', redirect: `lk?page=judge`});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

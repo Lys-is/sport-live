@@ -55,7 +55,7 @@ class Timer {
         this.timerId = null
         this.minuts = 0
         this.seconds = 0
-        this.is_reverse = false
+        this.is_reverse = true
         this.now_time = 0
         this.now_penalty = 0
         this.max_time = 20
@@ -235,7 +235,7 @@ class Control {
         this.scoreboard = new Scoreboard()
         this.tablo = new Tablo()
         this.style = style || 'style_1'
-        this.is_fouls = false
+        this.is_fouls = true
         this.notif_type = 'circ'
        // this.startParams()
     }

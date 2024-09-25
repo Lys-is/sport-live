@@ -427,6 +427,9 @@ class LkController {
                 else if(data.model == 'Player'){
                     doc.team = null;
                 }
+                else if(data.model == 'Match'){
+                    
+                }
             }
             else if(doc.status_doc === 'deleted'){
                 doc.status_doc = 'active';

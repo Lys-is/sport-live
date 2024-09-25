@@ -14,6 +14,7 @@
         <tr id="first-row">
             <td>№</td>
             <td>ФИО</td>
+            <td></td>
             <td>Дата рождения</td>
             <td>Действия</td>
             <td></td>
@@ -21,6 +22,7 @@
         <tr class="filter">
             <td></td>
             <td><input type="text" class="table_input_text" name="fio"></td>
+            <td></td>
             <td><input type="text" class="table_input_text" name="birthday"></td>
             <td></td>
             <td></td>
@@ -32,6 +34,12 @@
         <tr>
             <td><%= i + 1%></td>
             <td><%= judges[i].fio %></td>
+            <td><% if(judges[i].img){
+                %>
+                <img class="table_img" src="<%= judges[i].img %>" alt="Фото">
+                
+                <% }    %>        
+            </td>
             <td><%= formatDatePretty(judges[i].birthday) %></td>
             <td>
                 <% if (judges[i].status_doc === 'active') { %>

@@ -40,7 +40,7 @@ class RepresentativeController {
             let season = await Season.findOne({_id: playerId});
             if(!season) return res.json({message: 'Такого сезона не существует'});
             season = await Season.updateOne({_id: playerId}, req.body);
-            return res.json({message: 'Сезон обновлен'});
+            return res.json({message: 'Сезон обновлен', redirect: `lk?page=season`});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
