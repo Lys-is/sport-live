@@ -39,7 +39,7 @@ class CommentatorController {
             let commentator = await Commentator.findOne({_id: commentatorId});
             if(!commentator) return res.json({message: 'Такого комментатора не существует'});
             commentator = await Commentator.updateOne({_id: commentatorId}, req.body);
-            return res.json({message: 'Комментатор обновлен'});
+            return res.json({message: 'Комментатор обновлен', redirect: `lk?page=commentator`});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

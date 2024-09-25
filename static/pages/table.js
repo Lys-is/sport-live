@@ -386,7 +386,7 @@ async function switchDiv(type) {
                 setAnim(div, 'normal')
             })
             n_div = type
-        
+        return
     }
     await base_divs.map(async div => {
         console.log(div, type)

@@ -75,10 +75,10 @@
 
         <% 
             let setByCircle = new Set(previusMatches.map(m => m.circle || 'Вне круга'));
-            setByCircle.forEach(circle => {
-                let matchesByCircle = previusMatches.filter(match => match.circle ? match.circle == circle : circle == 'Вне круга');
+            //setByCircle.forEach(circle => {
+             //   let matchesByCircle = previusMatches.filter(match => match.circle ? match.circle == circle : circle == 'Вне круга');
                 %>
-                    <p class="table_dest chahmatka" style="display: none;"> Круг: <%= circle %></p>
+                    <p class="table_dest chahmatka" style="display: none;"> Круг: <%= //circle %></p>
                 
         <table class="nets-table table_dest chahmatka chahmatka-effect" style="display: none;">
             <tr>
@@ -90,7 +90,7 @@
             </tr>
             <%
                 for(let i = 0; i < teams.length; i++) { 
-                    let matches = filter(teams[i].id, matchesByCircle);
+                    
                     %>
                     <tr>
                         <td><%= i+1 %></td>
@@ -102,30 +102,42 @@
                         </td>
                         <% for(let j = 0; j < teams.length; j++) { %>
 
-                            <% let match = filter(teams[j].id, matches)[0];
-                            //let match = previusMatches.find(match => ((match.team_1.id == teams[i].id) && (match.team_2.id == teams[j].id)) || ((match.team_2.id == teams[i].id) && (match.team_1.id == teams[j].id)))
-                            if(i == j) { %>
-                                <td class="no_cell"></td>
-                            <% }
-                            else if(!match) {
-                                %>
-
-                                <td><%= '-:-' %></td>
                             <%
-                            }
-                            else {
                             
-                            let team_1 = teams[i].id == match.team_1.id ? 'team_1' : 'team_2'
-                            let team_2 = teams[i].id == match.team_1.id ? 'team_2' : 'team_1'
-                            %>
+                                //let matchesByCircle = previusMatches.filter(match => match.circle ? match.circle == circle : circle == 'Вне круга');
+                                let matchesA = filter(teams[i].id, previusMatches);
+                                let matches = filter(teams[j].id, matchesA);
+                                //let match = previusMatches.find(match => ((match.team_1.id == teams[i].id) && (match.team_2.id == teams[j].id)) || ((match.team_2.id == teams[i].id) && (match.team_1.id == teams[j].id)))
+                                if(i == j) { %>
+                                    <td class="no_cell"></td>
+                                <% }
+                                else if(!matches || !matches.length) {
+                                    %>
 
-                                <td><%= match[`${team_1}_score`] || match[`${team_2}_score`] ? `${match[`${team_1}_score`]}:${match[`${team_2}_score`]}`: '-:-' %></td>
-                            <% }
+                                    <td><%= '-:-' %></td>
+                                <%
+                                }
+                                else { %>
+                                    <td>
+                                        <%
+                                    matches.forEach(match => {
+                                        
+                                    
+                                    let team_1 = teams[i].id == match.team_1.id ? 'team_1' : 'team_2'
+                                    let team_2 = teams[i].id == match.team_1.id ? 'team_2' : 'team_1'
+                                    %>
+                             
+                                    <%= match[`${team_1}_score`] || match[`${team_2}_score`] ? `${match[`${team_1}_score`]}:${match[`${team_2}_score`]}`: '-:-' %>
+                                    <br>
+                                <% }) %>
+                                    </td>
+                                <% }
+                            
                         } %>
                     </tr>
                     <% } %>      
         </table>
-        <% }) %>      
+        <%// }) %>      
         <table class="nets-table table_dest forma" style="display: none;">
             <tr>
                 <th>#</th>

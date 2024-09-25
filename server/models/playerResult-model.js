@@ -13,6 +13,7 @@ const PlayerResultSchema = new Schema({
     yellow: {type: Number, default: 0},
     transits: {type: Number, default: 0},
     goals: {type: Number, default: 0},
+    status_doc: {type: String, default: 'active', enum: ['active', 'deleted']},
 })
 PlayerResultSchema.plugin(require('mongoose-autopopulate'));
 

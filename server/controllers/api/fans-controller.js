@@ -381,7 +381,27 @@ class FansController {
             if(!player || !player.creator.equals(req.fans_league.creator)) {
                 return res.json({message: 'Игрок не найден'});
             }
-            let results = await PlayerResult.find({player: req.params.id, is_active: true}).populate('player team match');
+            //let results = await PlayerResult.find({player: req.params.id, is_active: true, match: { $exists: true, $ne: null }, 'match.status_doc': { $ne: 'deleted' }}).populate('player team match');
+            let results = await PlayerResult.aggregate([
+                {
+                  "$lookup": {
+                    "from": "matches",
+                    "localField": "match",
+                    "foreignField": "_id",
+                    "as": "match"
+                  }
+                },
+                {
+                  "$unwind": "$match"
+                },
+                {
+                  "$match": {
+                    "player": req.params.id,
+                    "is_active": true,
+                  }
+                }
+              ])
+              
             console.log(results)
             return sendRes('fans/fans_members/player', {player, results}, res);
         
@@ -448,7 +468,8 @@ async function getPlayersResult(players) {
     try {
         let results = {};
         await Promise.all(players.map(async(item) => {
-                results[item._id] = await PlayerResult.find({player: item._id, is_active: true}).populate('player team match');
+                results[item._id] = await PlayerResult.find({player: item._id, is_active: true, 'match.status_doc': 'active'}).populate('player team match')
+
             })
         )
         return results

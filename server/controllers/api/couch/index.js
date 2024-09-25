@@ -42,7 +42,7 @@ class RepresentativeController {
             let couch = await Couch.findOne({_id: couchId});
             if(!couch) return res.json({message: 'Такого тренера не существует'});
             couch = await Couch.updateOne({_id: couchId}, req.body);
-            return res.json({message: 'Тренер обновлен'});
+            return res.json({message: 'Тренер обновлен', redirect: `lk?page=couch`});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});

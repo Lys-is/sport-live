@@ -123,7 +123,7 @@ function buildAggregatePipeline(filters, pageNumber = 1, pageSize = process.env.
     pipeline.push(skipStage);
     pipeline.push(limitStage);
   
-    //console.log(JSON.stringify(pipeline, null, 2));
+    console.log(JSON.stringify(pipeline, null, 2));
     return pipeline;
   }
 function buildCountPipeline(filters) {

@@ -13,6 +13,7 @@
                 <tr id="first-row" >
                     <td>№</td>
                     <td>Название команды</td>
+                    <td></td>
                     <td>Дата создания</td>
                     <td>Создатель</td>
                     <td></td>
@@ -21,6 +22,7 @@
                 <tr class="filter">
                     <td></td>
                     <td><input type="text" name="name" class="table_input_text"></td>
+                    <td></td>
                     <td><input type="date" name="date" class="table_input_text"></td>
                     <td></td>
                     <td></td>
@@ -33,6 +35,12 @@
                 <tr>
                     <td><%= i + 1 %></td>
                     <td><%= teams[i].name %></td>
+                    <td><% if(teams[i].img){
+                        %>
+                        <img class="table_img" src="<%= teams[i].img %>" alt="Фото">
+                        
+                        <% }    %>        
+                    </td>
                     <td><%= teams[i].date %></td>
                     <td><%= teams[i].creator.email %></td>
                     <td>
