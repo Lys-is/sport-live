@@ -236,7 +236,9 @@ function setData(data) {
                 globalImgs.set(el._id, el.img)
             }
         })
-    }   
+    }
+    
+
 }
 
 function setStyleEl(data) {
@@ -589,11 +591,12 @@ async function setAnim(div, direct, type) {
             //div.setAttribute('is_active',nextDisplay) 
           //  if(mb) mb.style.display = nextDisplay
             div.style.display = nextDisplay
-
+            window.dispatchEvent(new Event('resize'));
             //console.log('timeout', div, nextDisplay, delay)
         }, delay)
         animTimouts[div.className] = tmout
    }
+   
    return
 }
 function setScoreboard(scoreboard) {

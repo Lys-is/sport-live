@@ -201,7 +201,9 @@ const nav = {
             'put__results':{},
             'put__judge':{},
             'put__commentator':{},
-            'delete__results':{}
+            'delete__results':{},
+            'get__teams' : {},
+            'get__teams_by_tournament' : {},
         },
         'couch' : {
             'func' : 'get__couch',

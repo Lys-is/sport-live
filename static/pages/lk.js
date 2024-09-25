@@ -492,6 +492,33 @@ function init__match() {
 }
 function init__match_create() {
     let form = get("#match_create__form");
+    let team_1 = get('#team'), team_2 = get('#team_2');
+    form.tournament.addEventListener('change', async (e)=>{
+        let data = await formGetData(form)
+        let teams
+        if(data.tournament){
+            teams = await sendFetch(`/api/lk/match/get__teams_by_tournament?id=${data.tournament}`, null, "GET")
+            console.log(teams)
+            
+        }
+        else {
+            teams = await sendFetch(`/api/lk/match/get__teams`, null, "GET")
+            console.log(teams)
+        }
+        pushTeams(team_1, teams.teams)
+        pushTeams(team_2, teams.teams)
+        
+    })
+    function pushTeams(datalist, teams) {
+        datalist.innerHTML = ''
+        teams.forEach(team => {
+            let option = document.createElement('option')
+            option.value = team.name
+            option.setAttribute('data-value', team.id)
+            option.innerText = team.name
+            datalist.appendChild(option)
+        })
+    }
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         let data = await formGetData(form)
