@@ -11,7 +11,7 @@
     <div class="little top-anim-1" id="flexstart">
       <div id="top-container">
         <div id="scor-container">
- 
+        <div class="glare"></div>
           <div id="top-row-1">
             <div class="bgleft-apl var-homeColor" style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);">
               <div id="top-home-logo"><img class="home-logo" src="" width="87px" height="87px"></div>
@@ -88,7 +88,7 @@
     </div>
     <div id="bottom-row-0"></div>
     <div id="bottom-row-1">
-
+        <div class="glare"></div>
       <div class="var-homeColor big-bg-home" style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);">
         <div id="home-logo"><img class="home-logo" src="" width="87px" height="87px"></div>
         <div class="var-home" id="big-home-team-name">Cборная Минска</div>
@@ -136,7 +136,7 @@
       </div> -->
   </div>
 
-  <div class="roster-container home-roster home-anim">
+  <div class="roster-container home-roster home-anim" style="display: none" visible_type="flex">
     <div class="roster-main-div color_main border_color_accent">
       <div class="sostav">
         <div class="sostav-txt">Состав: </div>
@@ -179,18 +179,22 @@
         </div>
       </div>
       <div class="representative">
-        <div style="display: none;" class="away-representative">
+        <div style="display: none;" class="home-representative">
           <p class="representative-title">Представители</p>
           <div class="grid"></div>
         </div>
-        <div style="display: none;" class="away-couch">
+        <div style="display: none;" class="home-couch">
             <p class="representative-title">Тренеры</p>
             <div class="grid"></div>
         </div>    
       </div>
+        <div id="particles-1" class="particles"></div>
     </div>
+    <script>
+        addParticles("particles-1")
+    </script>
   </div>
-  <div class="roster-container away-roster away-anim">
+  <div class="roster-container away-roster away-anim" style="display: none" visible_type="flex">
     <div class="roster-main-div color_main border_color_accent">
       <div class="sostav">
         <div class="sostav-txt">Состав: </div>
@@ -236,7 +240,22 @@
 
 
       </div>
+      <div class="representative">
+        <div style="display: none;" class="away-representative">
+          <p class="representative-title">Представители</p>
+          <div class="grid"></div>
+        </div>
+        <div style="display: none;" class="away-couch">
+            <p class="representative-title">Тренеры</p>
+            <div class="grid"></div>
+        </div>    
+      </div>    
+       <div id="particles-2" class="particles"></div>
     </div>
+   
+    <script>
+        addParticles("particles-2")
+    </script>    
   </div>
 
 <!--     <div class="large-container mid matchid-anim test" style="display: none" visible_type="flex">
@@ -266,8 +285,8 @@
         </div>
     </div>
 </div> -->
-    
-    <main class="main mid matchid-anim" style="display: none" visible_type="grid">
+    <div class="main_container mid matchid-anim" style="display: none" visible_type="flex">
+    <main class="main">
       <div class="header">
         <div class="title var-tournament">СпортмастерPRO Городская лига</div>
         <div class="subtitle"><span class="var-tour">5</span> тур / <span class="var-stadium">ФОК Оружейник</span></div>
@@ -288,8 +307,12 @@
         </div>
       </div>
       <div class="date"><span class="var-match-date">30.12.2025</span> / <span class="var-match-time">10:00</span></div>
-      <div id="particles"></div>
+      <div id="particles-3" class="particles"></div>
+        <script>
+            addParticles("particles-3")
+        </script>      
     </main>
+    </div>
 
   
 <!--NOTIFICATIONS-->
