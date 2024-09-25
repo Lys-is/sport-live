@@ -7,203 +7,405 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="little top-anim-1" id="match-info" style="display: none;">
-        <img src="" class="tour_logo">
-        <div class="score color_main">
-            <p class="q_round_num">3</p>
-            <div class="divider color_accent_2"></div>
-            <div class="divider sec color_accent_2"></div>
-            <p class="q_time">33:32</p>
+  <div class="flexstart">
+    <div class="little top-anim-1" id="flexstart">
+      <div id="top-container">
+        <div id="scor-container">
+ 
+          <div id="top-row-1">
+            <div class="bgleft-apl var-homeColor" style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);">
+              <div id="top-home-logo"><img class="home-logo" src="" width="87px" height="87px"></div>
+              <div class="var-home-short" id="top-home-team-name">Cборная Минска</div>
+              <div class="score-value var-home-score">0</div>
+            </div>
+            <div class="top-center-container">
+
+              <div id="top-score">
+                <div id="top-score-txt">
+                  <div id="flash"></div>
+                  <div class="logo-rk"></div>
+                </div>
+                <div id="top-series">
+                  <!-- <div class="var-home-series" id="top-series-home">0</div> -->
+                  <div id="top-series-txt" style="display: none;">в серии</div>
+                  <!-- <div class="var-away-series" id="top-series-away">0</div> -->
+                </div>
+              </div>
+              <div id="top-match-info" class="color_accent">
+                <div id="fouls" class="fouls-container color_accent_2" style="display: none;">
+                  <div class="var-home-fouls" id="home-fouls">0</div>
+                  <div id="txt-fouls">Фолы</div>
+                  <div class="var-away-fouls" id="away-fouls">0</div>
+                </div>
+                <div id="timer-round">
+                  <div class="var-time q_time" id="top-timer">00:00</div>
+                  <div id="time-no" class="roundnum q_round"><span>1</span> <span>Т</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="bgright-apl var-awayColor" style="background-color: rgb(255, 17, 153); color: rgb(255, 255, 255);">
+              <div class="score-value var-away-score">0</div>
+              <div class="var-away-short" id="top-away-team-name">Могилевская область</div>
+              <div id="top-away-logo"><img class="away-logo" src="" width="87px" height="87px"></div>
+            </div>
+          </div>
+
+
+
+          <div id="top-row-2" >
+
+            <div class="pen fade-anim color_accent">
+              <div class="penalties-home" >
+              </div>
+            </div>
+
+            <div class="pen fade-anim color_accent">
+              <div class="penalties-away">
+              </div>
+            </div>
+
+          </div>
+
+
+
         </div>
-        <p class="info"></p>
+      </div>
+    </div> 
+  </div>
 
-        <div class="body color_main">
-            <div class="line1">
-                <div class="color_accent">
-                    <p class="var-home-three">ГАЗ</p>
-                </div>
-                <div>
-                    <p class="var-home-score">5</p>
-                </div>
-                <div></div>
-                <div>
-                    <p class="var-away-score">1</p>
-                </div>
-                <div class="color_accent">
-                    <p class="var-away-three">TOP</p>
-                </div>
+  <div class="big butt-anim-big" id="bottom-scor-container" >
+    <div id="goals-container">
+      <table cellpadding="0" cellspacing="0" border="0" id="goals-table">
+        <tbody><tr>
+          <td style="width: 600px;" valign="bottom">
+            <div class="goals-home color_main"></div>
+          </td>
+          <td style="width: 600px;" valign="bottom">
+            <div class="goals-away color_main"></div>
+          </td>
+        </tr>
+      </tbody></table>
+    </div>
+    <div id="bottom-row-0"></div>
+    <div id="bottom-row-1">
 
-                <div class="team1-col var-homeColor"></div>
-                <div class="team2-col var-awayColor"></div>
-            
+      <div class="var-homeColor big-bg-home" style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);">
+        <div id="home-logo"><img class="home-logo" src="" width="87px" height="87px"></div>
+        <div class="var-home" id="big-home-team-name">Cборная Минска</div>
+      </div>
+      <div id="big-score">
+        <div id="score-txt">
+          <span class="var-home-score var-homeTextColor" style="color: rgb(255, 255, 255);">0</span>
+          <div id="big-flash"></div>
+          <div class="big-logo-rk"></div>
+          <span class="var-away-score var-awayTextColor" style="color: rgb(255, 255, 255);">0</span>
+        </div>
+        <div id="big-series">
+          <!-- <div class="var-home-series" id="big-series-home">0</div> -->
+          <div id="big-series-txt" style="display: none;">в серии</div>
+          <!-- <div class="var-away-series" id="big-series-away">0</div> -->
+        </div>
+      </div>
+      <div class="var-awayColor big-bg-away" style="background-color: rgb(255, 17, 153); color: rgb(255, 255, 255);">
+        <div class="var-away" id="big-away-team-name">Могилевская область</div>
+        <div id="away-logo"><img class="away-logo" src="" width="87px" height="87px"></div>
+      </div>
+    </div>
+    <div id="bottom-row-2">
+      <div class="pen fade-anim">
+        <div class="penalties-home">
+        </div>
+      </div>
+      <div id="match-info" class="color_accent">
+        <div class="var-label q_name_round fade-anim">Начало матча</div>
+        <div class="pen fade-anim" >
+          <div class="var-penalties-home" style="display: inline-block;margin-right: 90px;">0</div>Пенальти<div style="display: inline-block;margin-left: 90px;" class="var-penalties-away">0</div>
+        </div>
+      </div>
+      <div class="pen fade-anim">
+        <div class="penalties-away">
+        </div>
+      </div>
+    </div>
+    <!--    <div id="bottom-row-3">
+
+
+      <div id="additional-txt">Счет в серии 0-2</div>
+
+
+      </div> -->
+  </div>
+
+  <div class="roster-container home-roster home-anim">
+    <div class="roster-main-div color_main border_color_accent">
+      <div class="sostav">
+        <div class="sostav-txt">Состав: </div>
+        <div class="roster-teamname var-home">Cборная Минска</div>
+        <div class="filler"></div>
+        <img class="home-logo" width="150px" height="150px" alt="logo" src="">
+      </div>
+      <div class="roster-content">
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+      </div>
+      <div class="representative">
+        <div style="display: none;" class="away-representative">
+          <p class="representative-title">Представители</p>
+          <div class="grid"></div>
+        </div>
+        <div style="display: none;" class="away-couch">
+            <p class="representative-title">Тренеры</p>
+            <div class="grid"></div>
+        </div>    
+      </div>
+    </div>
+  </div>
+  <div class="roster-container away-roster away-anim">
+    <div class="roster-main-div color_main border_color_accent">
+      <div class="sostav">
+        <div class="sostav-txt">Состав: </div>
+        <div class="sostav-txt-sec var-away">Cборная Минска</div>
+        <div class="filler"></div>
+        <img class="away-logo" width="150px" height="150px" alt="logo" src="">
+
+      </div>
+      <div class="roster-content">
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="">
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+<!--     <div class="large-container mid matchid-anim test" style="display: none" visible_type="flex">
+    <div class="large">
+        <div>
+            <img src="" style="border-radius: 100px;" class="league_logo">
+            <img src="" class="tour_logo">
+        </div>
+        <div class="color_main">
+            <div class="line">
+                <p class="name color_accent var-tournament">СПОРТМАСТЕРPRO - ГОРОДСКАЯ ЛИГА. ВСЕРОССИЙСКИЙ ФИНАЛ.</p>
             </div>
-            <div class="line2 fouls-container">
-                <div class="var-home-fouls-advenced pens">
-
+            <div class="line">
+                <div class="column">
+                    <img src="" class="home-logo pulse-anim">
+                    <p class="var-home">ВНИИА им. Н.Л. Духова</p>
                 </div>
-                <div class="var-away-fouls-advenced pens">
-                </div>
-            </div>
-            <div class="line2 pen fade-anim" style="display: none;">
-
-                <div class="pens penalties-home">
-                    <div class="active"></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-
-                </div>
-                <div class="pens away penalties-away">
-                    <div class="active"></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                <div class="column">
+                    <img src="" class="away-logo pulse-anim">
+                    <p class="var-away">ВНИИА им. Н.Л. Духова</p>
                 </div>
             </div>
-            
+            <div class="info">
+                <p><span class="var-stadium">Б/О “ИЗУМРУДНОЕ”. НИЖЕГОРОДСКАЯ ОБЛ. </span> <span class="var-match-date">15 МАЯ 2024 ГОД </span> <span class="var-match-time">10:00</span> <span id="tour"><span class="var-tour">2</span>-<span>й</span> тур</span></p>
+            </div>
+
         </div>
     </div>
-
-    <div class="big butt-anim-big" style="display: none;" visible_type="flex">
-        <div class="big-content">
+</div> -->
+    
+    <main class="main mid matchid-anim" style="display: none" visible_type="grid">
+      <div class="header">
+        <div class="title var-tournament">СпортмастерPRO Городская лига</div>
+        <div class="subtitle"><span class="var-tour">5</span> тур / <span class="var-stadium">ФОК Оружейник</span></div>
+      </div>
+      <div class="teams">
+        <div class="team">
+          <div class="team__logo">
             <img src="" class="home-logo">
-            <div>
-                <div>
-                    <div class="name color_accent"><p class="var-home">Газпром</p></div>
-                    <div class="score"><p class="var-home-score">4</p></div>
-                    <div class="divider"></div>
-                    <div class="divider sec color_main"></div> <!--Cюда цвет фона !!!!-->
-                    <div class="score"><p class="var-away-score">3</p></div>
-                    <div class="name color_accent"><p class="var-away">Not a gasprom</p></div>
-                </div>
-                <div>
-                    <div class="pen fade-anim">
-                    <div class="pens penalties-home">
-                        <div class="active "></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-
-                    </div>
-                    </div>
-                    <p class="info q_name_round">ПОСЛЕ ПЕРВОГО ТАЙМА</p>
-                    <div class="pen fade-anim">
-                    <div class="pens away penalties-away">
-                        <div class="active"></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                    </div>
-                </div>
-                <div>    
-                    <div class="team1-col var-homeColor"></div>
-                    <div class="team2-col var-awayColor"></div>
-                </div>
-            </div>
+          </div>
+          <div class="team__name var-home"></div>
+        </div>
+        <div class="team__divider"></div>
+        <div class="team">
+          <div class="team__logo">
             <img src="" class="away-logo">
+          </div>
+          <div class="team__name var-away"></div>
         </div>
-
-    </div>
-
-    <div class="large-container roster roster-container home-roster home-anim" style="display: none" visible_type="flex">
-        <div class="large">
-            <div>
-                <img src=""  style="border-radius: 50%;" class="league_logo">
-                <img src="" style="border-radius: 50%;" class="tour_logo">
-
-            </div>
-            <div class="color_main">
-                <div class="line">
-                    <p class="name color_accent var-home">ГАЗПРОМ. CОСТАВ</p>
-                    <img src="" class="home-logo" style="height: 120px;margin-left: 9%;transform: translateY(15px);">
-                </div>
-                <div class="grid roster-content">
-                    <div class="color_accent_2">
-                        <p>1</p>
-                        <p>Газпром Газпромович</p>
-                        <img src="">
-                    </div>
-                    
-                </div>
-                <div style="display: none;" class="home-representative">
-                    <p class="representative-title">Представители</p>
-                    <div class="grid"></div>
-                </div>
-                <div style="display: none;" class="home-couch">
-                    <p class="representative-title">Тренеры</p>
-                    <div class="grid"></div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="large-container roster roster-container away-roster home-anim" style="display: none" visible_type="flex">
-        <div class="large">
-            <div>
-                <img src=""  style="border-radius: 50%;" class="league_logo">
-                <img src="" style="border-radius: 50%;" class="tour_logo">
-            </div>
-            <div class="color_main">
-                <div class="line">
-                    <p class="name color_accent var-away">ГАЗПРОМ. CОСТАВ</p>
-                    <img src="" class="away-logo" style="height: 120px;margin-left: 9%;transform: translateY(15px);">
-                </div>
-                <div class="grid roster-content">
-                    <div class="color_accent_2">
-                        <p>1</p>
-                        <p>Газпром Газпромович</p>
-                        <img src="" >
-                    </div>
-                    
-                </div>
-                <div style="display: none;" class="away-representative">
-                    <p class="representative-title">Представители</p>
-                    <div class="grid"></div>
-                </div>
-                <div style="display: none;" class="away-couch">
-                    <p class="representative-title">Тренеры</p>
-                    <div class="grid"></div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="large-container mid matchid-anim" style="display: none" visible_type="flex">
-        <div class="large">
-            <div>
-                <img src="" style="border-radius: 100px;" class="league_logo">
-                <img src="" class="tour_logo">
-            </div>
-            <div class="color_main">
-                <div class="line">
-                    <p class="name color_accent var-tournament">СПОРТМАСТЕРPRO - ГОРОДСКАЯ ЛИГА. ВСЕРОССИЙСКИЙ ФИНАЛ.</p>
-                </div>
-                <div class="line">
-                    <div class="column">
-                        <img src="" class="home-logo pulse-anim">
-                        <p class="var-home">ВНИИА им. Н.Л. Духова</p>
-                    </div>
-                    <div class="column">
-                        <img src="" class="away-logo pulse-anim">
-                        <p class="var-away">ВНИИА им. Н.Л. Духова</p>
-                    </div>
-                </div>
-                <div class="info">
-                    <p><span class="var-stadium">Б/О “ИЗУМРУДНОЕ”. НИЖЕГОРОДСКАЯ ОБЛ. </span> <span class="var-match-date">15 МАЯ 2024 ГОД </span> <span class="var-match-time">10:00</span> <span id="tour"><span class="var-tour">2</span>-<span>й</span> тур</span></p>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-
+      </div>
+      <div class="date"><span class="var-match-date">30.12.2025</span> / <span class="var-match-time">10:00</span></div>
+      <div id="particles"></div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        particlesJS("particles", {
+          "particles": {
+            "number": {
+              "value": 6,
+              "density": {
+                "enable": true,
+                "value_area": 800
+              }
+            },
+            "color": {
+              "value": "#ffffff"
+            },
+            "shape": {
+              "type": "polygon",
+              "stroke": {
+                "width": 0,
+                "color": "#000"
+              },
+              "polygon": {
+                "nb_sides": 6
+              },
+              "image": {
+                "src": "img/github.svg",
+                "width": 100,
+                "height": 100
+              }
+            },
+            "opacity": {
+              "value": 0.05,
+              "random": true,
+              "anim": {
+                "enable": false,
+                "speed": 1,
+                "opacity_min": 0.1,
+                "sync": false
+              }
+            },
+            "size": {
+              "value": 160,
+              "random": false,
+              "anim": {
+                "enable": true,
+                "speed": 10,
+                "size_min": 40,
+                "sync": false
+              }
+            },
+            "line_linked": {
+              "enable": false,
+              "distance": 200,
+              "color": "#ffffff",
+              "opacity": 1,
+              "width": 2
+            },
+            "move": {
+              "enable": true,
+              "speed": 8,
+              "direction": "none",
+              "random": false,
+              "straight": false,
+              "out_mode": "out",
+              "bounce": false,
+              "attract": {
+                "enable": false,
+                "rotateX": 600,
+                "rotateY": 1200
+              }
+            }
+          },
+          "interactivity": {
+            "detect_on": "window",
+            "events": {
+              "onhover": {
+                "enable": false,
+                "mode": "grab"
+              },
+              "onclick": {
+                "enable": false,
+                "mode": "push"
+              },
+              "resize": true
+            },
+            "modes": {
+              "grab": {
+                "distance": 400,
+                "line_linked": {
+                  "opacity": 1
+                }
+              },
+              "bubble": {
+                "distance": 400,
+                "size": 40,
+                "duration": 2,
+                "opacity": 8,
+                "speed": 3
+              },
+              "repulse": {
+                "distance": 200,
+                "duration": 0.4
+              },
+              "push": {
+                "particles_nb": 4
+              },
+              "remove": {
+                "particles_nb": 2
+              }
+            }
+          },
+          "retina_detect": true
+        });
+        window.dispatchEvent(new Event('resize'));
+      });
+    </script>    
 <!--NOTIFICATIONS-->
 
     <!-- <div class="notif" style="display: none">
