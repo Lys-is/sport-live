@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="flexstart">
+  <!-- <div class="flexstart">
     <div class="little top-anim-1" id="flexstart">
       <div id="top-container">
         <div id="scor-container">
@@ -26,9 +26,7 @@
                   <div class="logo-rk"></div>
                 </div>
                 <div id="top-series">
-                  <!-- <div class="var-home-series" id="top-series-home">0</div> -->
                   <div id="top-series-txt" style="display: none;">в серии</div>
-                  <!-- <div class="var-away-series" id="top-series-away">0</div> -->
                 </div>
               </div>
               <div id="top-match-info" class="color_accent">
@@ -71,9 +69,69 @@
         </div>
       </div>
     </div> 
+  </div> -->
+
+  <div class="panel__container little" style="display: none" visible_type="flex">
+    <div class="panel-top">
+      <div class="panel-top__item panel-top__item_small panel-top__item_top">
+        <div class="counter counter_small">
+          <div class="counter__val var-home-fouls">0</div>
+          <div class="counter__name">фолы</div>
+          <div class="counter__val var-away-fouls">0</div>
+        </div>
+      </div>
+      <div class="panel-top__body">
+        <div class="panel-top__team-color var-homeColor"></div>
+        <div class="panel-top__team-logo">
+          <img src="" class="home-logo">
+        </div>
+        <div class="panel-top__team-name var-home-short">Мехмаш</div>
+        <div class="panel-top__team-count var-home-score">0</div>
+        <div class="panel-top__team-divider"></div>
+        <div class="panel-top__team-count var-away-score">2</div>
+        <div class="panel-top__team-name var-away-short">ФК Феликс</div>
+        <div class="panel-top__team-logo">
+          <img src="" class="away-logo">
+        </div>
+        <div class="panel-top__team-color var-awayColor"></div>
+      </div>
+      <div class="panel-top__item panel-top__item_small panel-top__item_bottom">
+        <div class="panel-top__time">
+          <div class="q_round"><span>1</span>T</div>
+          <div class="panel-top__time-div">|</div>
+          <span class="q_time">12:32</span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="big butt-anim-big" id="bottom-scor-container" >
+
+  <div class="panel__container big" style="display: none" visible_type="flex">
+    <div class="panel-bottom">
+      <div class="panel-bottom__body">
+        <div class="panel-bottom__team-logo">
+          <img src="" class="home-logo">
+        </div>
+        <div class="panel-bottom__team-name var-home-short">Мехмаш</div>
+        <div class="panel-bottom__team-count var-home-score">0</div>
+        <div class="panel-bottom__team-divider"></div>
+        <div class="panel-bottom__team-count var-away-score">2</div>
+        <div class="panel-bottom__team-name right var-away-short">Инженерные решения Тула</div>
+        <div class="panel-bottom__team-logo panel-bottom__team-logo_right">
+          <img src="" class="away-logo">
+        </div>
+      </div>
+      <div class="panel-bottom__item panel-bottom__item_small panel-bottom__item_bottom">
+        <div class="panel-bottom__time">
+          <div class="q_round"><span>1</span> тайм</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!--   <div class="big butt-anim-big" id="bottom-scor-container" >
     <div id="goals-container">
       <table cellpadding="0" cellspacing="0" border="0" id="goals-table">
         <tbody><tr>
@@ -101,9 +159,7 @@
           <span class="var-away-score var-awayTextColor" style="color: rgb(255, 255, 255);">0</span>
         </div>
         <div id="big-series">
-          <!-- <div class="var-home-series" id="big-series-home">0</div> -->
           <div id="big-series-txt" style="display: none;">в серии</div>
-          <!-- <div class="var-away-series" id="big-series-away">0</div> -->
         </div>
       </div>
       <div class="var-awayColor big-bg-away" style="background-color: rgb(255, 17, 153); color: rgb(255, 255, 255);">
@@ -127,14 +183,7 @@
         </div>
       </div>
     </div>
-    <!--    <div id="bottom-row-3">
-
-
-      <div id="additional-txt">Счет в серии 0-2</div>
-
-
-      </div> -->
-  </div>
+  </div> -->
 
   <div class="roster-container home-roster home-anim" style="display: none" visible_type="flex">
     <div class="roster-main-div color_main border_color_accent">
