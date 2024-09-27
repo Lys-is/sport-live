@@ -60,7 +60,7 @@ class TournamentController {
             if(!team) return res.json({message: 'Такой команды не существует'});
             tournament.teams.push(req.body.teamId);
             await tournament.save();
-            return res.json({message: 'Обновлено', reload: true});
+            return res.json({message: 'Обновлено'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
@@ -77,7 +77,7 @@ class TournamentController {
             if(!team) return res.json({message: 'Такой команды не существует'});
             tournament.teams = tournament.teams.filter(t => t._id != req.body.teamId);
             await tournament.save();
-            return res.json({message: 'Обновлено', reload: true});
+            return res.json({message: 'Обновлено'});
         } catch (e) {
             console.log(e);
             return res.json({message: 'Произошла ошибка'});
