@@ -355,6 +355,8 @@ async function formGetData(form) {
                     let selectedEl = options.filter(el => field.value == el.value)[0];
                     if(selectedEl)
                         data[name] = selectedEl.getAttribute('data-value')
+                    else
+                        data[name] = null
                 }
                 else if(isCheckboxOrRadio(type)) {
                     data[name] = checked
