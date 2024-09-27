@@ -2090,9 +2090,9 @@ Panels
   flex-direction: column;
   position: relative;
   align-self: end;
-  margin-bottom: 40px;
+  margin-bottom: 80px;
   animation: 1s forwards slideUp;
-  max-width: 1080px;
+  width: 1080px;
 }
 
 .panel-bottom__item {
@@ -2118,7 +2118,7 @@ Panels
   height: 96px;
   grid-template-columns: 50px 1fr 40px 1px 40px 1fr 50px;
   align-items: center;
-  background: linear-gradient(0deg, rgba(28, 29, 31, 0.9) 0%, rgba(35, 37, 40, 0.8) 100%);
+  background: linear-gradient(0deg, rgba(28, 29, 31, 0.95) 0%, rgba(35, 37, 40, 0.9) 100%);
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.15), 1px 1px 0px rgba(0, 0, 0, 0.15), inset 1px 1px 0px rgba(255, 255, 255, 0.1);
   border-radius: 5px;
   position: relative;
