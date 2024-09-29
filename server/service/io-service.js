@@ -270,10 +270,18 @@ function startPanel(controls, socket) {
     }
   });
   socket.on('get_data', () => {
-    io.to(userId).emit('update_data', control.getData);
+    try {
+      io.to(userId).emit('update_data', control.getData);
+    } catch (e) {
+      console.log(e)
+    }
   });
   socket.on('get_time', () => {
-    io.to(userId).emit('timer', control.timer.timeData);
+    try {
+      io.to(userId).emit('timer', control.timer.timeData);
+    } catch (e) {
+      console.log(e)
+    }
   });
 }
 
