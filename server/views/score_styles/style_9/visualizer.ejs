@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--   <div class="flexstart">
+    <div class="little top-anim-1" id="flexstart">
+      <div id="top-container">
+        <div id="scor-container">
+        <div class="glare"></div>
+          <div id="top-row-1">
+            <div class="bgleft-apl var-homeColor" style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);">
+              <div id="top-home-logo"><img class="home-logo" src="" width="87px" height="87px"></div>
+              <div class="var-home-short" id="top-home-team-name">Cборная Минска</div>
+              <div class="score-value var-home-score">0</div>
+            </div>
+            <div class="top-center-container">
+
+              <div id="top-score">
+                <div id="top-score-txt">
+                  <div id="flash"></div>
+                  <div class="logo-rk"></div>
+                </div>
+                <div id="top-series">
+                  <div id="top-series-txt" style="display: none;">в серии</div>
+                </div>
+              </div>
+              <div id="top-match-info" class="color_accent">
+                <div id="fouls" class="fouls-container color_accent_2" style="display: none;">
+                  <div class="var-home-fouls" id="home-fouls">0</div>
+                  <div id="txt-fouls">Фолы</div>
+                  <div class="var-away-fouls" id="away-fouls">0</div>
+                </div>
+                <div id="timer-round">
+                  <div class="var-time q_time" id="top-timer">00:00</div>
+                  <div id="time-no" class="roundnum q_round"><span>1</span> <span>Т</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="bgright-apl var-awayColor" style="background-color: rgb(255, 17, 153); color: rgb(255, 255, 255);">
+              <div class="score-value var-away-score">0</div>
+              <div class="var-away-short" id="top-away-team-name">Могилевская область</div>
+              <div id="top-away-logo"><img class="away-logo" src="" width="87px" height="87px"></div>
+            </div>
+          </div>
+
+
+
+          <div id="top-row-2" >
+
+            <div class="pen fade-anim color_accent">
+              <div class="penalties-home" >
+              </div>
+            </div>
+
+            <div class="pen fade-anim color_accent">
+              <div class="penalties-away">
+              </div>
+            </div>
+
+          </div>
+
+
+
+        </div>
+      </div>
+    </div> 
+  </div> -->
+
+  <div class="panel__container little" style="display: none" visible_type="flex">
+
+        <div class="panel-top">
+          <div class="panel-top__item panel-top__item_small panel-top__item_top fouls-container" style="display: none">
+            <div class="counter counter_small">
+              <div class="counter__val var-home-fouls">0</div>
+              <div class="counter__name">фолы</div>
+              <div class="counter__val var-away-fouls">0</div>
+            </div>
+          </div>
+          <div class="panel-top__body">
+            <div class="panel-top__team panel-top__team_left">
+              <div class="panel-top__team-color var-homeColor"></div>
+              <div class="panel-top__team-logo">
+                <img class="home-logo" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+              </div>
+              <div class="panel-top__team-name var-home-short">Мехмаш</div>
+              <div class="panel-top__team-count var-home-score">0</div>
+            </div>
+            <div class="panel-top__team-divider"></div>
+            <div class="panel-top__team panel-top__team_right">
+              <div class="panel-top__team-count var-away-score">2</div>
+              <div class="panel-top__team-name right var-away-short">Инженерные решения Тула</div>
+              <div class="panel-top__team-logo">
+                <img class="away-logo" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+              </div>
+              <div class="panel-top__team-color var-awayColor"></div>
+            </div>
+            <div class="panel-top__glare"></div>
+          </div>
+          <div class="panel-top__item panel-top__item_small panel-top__item_bottom">
+            <div class="panel-top__time">
+              <div class="q_round roundnum">
+                <span>1</span>T
+              </div>
+              <div class="panel-top__time-div">|</div>
+              <span class="q_time">12:32</span>
+            </div>
+          </div>
+        </div>
+
+
+
+  </div>
+
+
+  <div class="panel__container big" style="display: none" visible_type="flex">
+        <div class="panel-bottom">
+          <div class="panel-bottom__body">
+            <div class="panel-bottom__team-logo">
+              <img class="home-logo" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+            </div>
+            <div class="panel-bottom__team-name var-home-short">Мехмаш</div>
+            <div class="panel-bottom__team-count var-home-score">0</div>
+            <div class="panel-bottom__team-divider"></div>
+            <div class="panel-bottom__team-count var-away-score">2</div>
+            <div class="panel-bottom__team-name right var-away-short">Инженерные решения Тула</div>
+            <div class="panel-bottom__team-logo panel-bottom__team-logo_right">
+              <img class="away-logo" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+            </div>
+            <div class="panel-bottom__glare"></div>
+          </div>
+          <div class="panel-bottom__item panel-bottom__item_small panel-bottom__item_bottom">
+            <div class="panel-bottom__time">
+              <div class="q_name_round info"></div>
+            </div>
+          </div>
+        </div>
+  </div>
+
+
+
+<!--   <div class="big butt-anim-big" id="bottom-scor-container" >
+    <div id="goals-container">
+      <table cellpadding="0" cellspacing="0" border="0" id="goals-table">
+        <tbody><tr>
+          <td style="width: 600px;" valign="bottom">
+            <div class="goals-home color_main"></div>
+          </td>
+          <td style="width: 600px;" valign="bottom">
+            <div class="goals-away color_main"></div>
+          </td>
+        </tr>
+      </tbody></table>
+    </div>
+    <div id="bottom-row-0"></div>
+    <div id="bottom-row-1">
+        <div class="glare"></div>
+      <div class="var-homeColor big-bg-home" style="background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);">
+        <div id="home-logo"><img class="home-logo" src="" width="87px" height="87px"></div>
+        <div class="var-home" id="big-home-team-name">Cборная Минска</div>
+      </div>
+      <div id="big-score">
+        <div id="score-txt">
+          <span class="var-home-score var-homeTextColor" style="color: rgb(255, 255, 255);">0</span>
+          <div id="big-flash"></div>
+          <div class="big-logo-rk"></div>
+          <span class="var-away-score var-awayTextColor" style="color: rgb(255, 255, 255);">0</span>
+        </div>
+        <div id="big-series">
+          <div id="big-series-txt" style="display: none;">в серии</div>
+        </div>
+      </div>
+      <div class="var-awayColor big-bg-away" style="background-color: rgb(255, 17, 153); color: rgb(255, 255, 255);">
+        <div class="var-away" id="big-away-team-name">Могилевская область</div>
+        <div id="away-logo"><img class="away-logo" src="" width="87px" height="87px"></div>
+      </div>
+    </div>
+    <div id="bottom-row-2">
+      <div class="pen fade-anim">
+        <div class="penalties-home">
+        </div>
+      </div>
+      <div id="match-info" class="color_accent">
+        <div class="var-label q_name_round fade-anim">Начало матча</div>
+        <div class="pen fade-anim" >
+          <div class="var-penalties-home" style="display: inline-block;margin-right: 90px;">0</div>Пенальти<div style="display: inline-block;margin-left: 90px;" class="var-penalties-away">0</div>
+        </div>
+      </div>
+      <div class="pen fade-anim">
+        <div class="penalties-away">
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="roster-container home-roster home-anim" style="display: none" visible_type="flex">
+    <div class="roster-main-div color_main border_color_accent">
+      <div class="sostav">
+        <div class="sostav-txt">Состав: </div>
+        <div class="roster-teamname var-home">Cборная Минска</div>
+        <div class="filler"></div>
+        <img class="home-logo" width="150px" height="150px" alt="logo" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+      </div>
+      <div class="roster-content">
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+      </div>
+      <div class="representative">
+        <div style="display: none;" class="home-representative">
+          <p class="representative-title">Представители</p>
+          <div class="grid"></div>
+        </div>
+        <div style="display: none;" class="home-couch">
+            <p class="representative-title">Тренеры</p>
+            <div class="grid"></div>
+        </div>    
+      </div>
+        <div id="particles-1" class="particles"></div>
+    </div>
+    <script>
+        addParticles("particles-1")
+    </script>
+  </div>
+  <div class="roster-container away-roster away-anim" style="display: none" visible_type="flex">
+    <div class="roster-main-div color_main border_color_accent">
+      <div class="sostav">
+        <div class="sostav-txt">Состав: </div>
+        <div class="sostav-txt-sec var-away">Cборная Минска</div>
+        <div class="filler"></div>
+        <img class="away-logo" width="150px" height="150px" alt="logo" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+
+      </div>
+      <div class="roster-content">
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <div class="roster-teamate">
+          <p class="roster-teamate-name">Name Nonamovich</p>
+          <img width="40" height="40" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+
+
+
+      </div>
+      <div class="representative">
+        <div style="display: none;" class="away-representative">
+          <p class="representative-title">Представители</p>
+          <div class="grid"></div>
+        </div>
+        <div style="display: none;" class="away-couch">
+            <p class="representative-title">Тренеры</p>
+            <div class="grid"></div>
+        </div>    
+      </div>    
+       <div id="particles-2" class="particles"></div>
+    </div>
+   
+    <script>
+        addParticles("particles-2")
+    </script>    
+  </div>
+
+<!--     <div class="large-container mid matchid-anim test" style="display: none" visible_type="flex">
+    <div class="large">
+        <div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="border-radius: 100px;" class="league_logo">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="tour_logo">
+        </div>
+        <div class="color_main">
+            <div class="line">
+                <p class="name color_accent var-tournament">СПОРТМАСТЕРPRO - ГОРОДСКАЯ ЛИГА. ВСЕРОССИЙСКИЙ ФИНАЛ.</p>
+            </div>
+            <div class="line">
+                <div class="column">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="home-logo pulse-anim">
+                    <p class="var-home">ВНИИА им. Н.Л. Духова</p>
+                </div>
+                <div class="column">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="away-logo pulse-anim">
+                    <p class="var-away">ВНИИА им. Н.Л. Духова</p>
+                </div>
+            </div>
+            <div class="info">
+                <p><span class="var-stadium">Б/О “ИЗУМРУДНОЕ”. НИЖЕГОРОДСКАЯ ОБЛ. </span> <span class="var-match-date">15 МАЯ 2024 ГОД </span> <span class="var-match-time">10:00</span> <span id="tour"><span class="var-tour">2</span>-<span>й</span> тур</span></p>
+            </div>
+
+        </div>
+    </div>
+</div> -->
+    <div class="main_container mid matchid-anim" style="display: none" visible_type="flex">
+    <main class="main">
+      <div class="header">
+        <div class="title var-tournament">СпортмастерPRO Городская лига</div>
+        <div class="subtitle"><span class="var-tour">5</span> <span class="var-stadium">ФОК Оружейник</span></div>
+      </div>
+      <div class="teams">
+        <div class="team">
+          <div class="team__logo">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="home-logo">
+          </div>
+          <div class="team__name var-home"></div>
+        </div>
+        <div class="team__divider"></div>
+        <div class="team">
+          <div class="team__logo">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="away-logo">
+          </div>
+          <div class="team__name var-away"></div>
+        </div>
+      </div>
+      <div class="date"><span class="var-match-date">30.12.2025</span> / <span class="var-match-time">10:00</span></div>
+      <div id="particles-3" class="particles"></div>
+        <script>
+            addParticles("particles-3")
+        </script>      
+    </main>
+    </div>
+
+  
+<!--NOTIFICATIONS-->
+
+    <!-- <div class="notif" style="display: none">
+        <div class="big-content">
+            <img src="logo.png">
+            <div>
+                <div>
+                    <div class="name"><p>32</p><p>Газпром Газпромович</p></div>
+                </div>
+                <div>
+                    <p class="info">8 мячей в 19 играх</p>
+                </div>
+                <div>    
+                    <div class="team1-col"></div>
+                </div>
+            </div>
+            <svg width="79" height="42" viewBox="0 0 79 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M78.6016 0.500366L48.0938 3.55115V41.686L78.6016 37.1098V0.500366Z" fill="#B72020"/>
+                <path d="M31.4043 0.500366L0.896484 3.55115V41.686L31.4043 37.1098V0.500366Z" fill="#EEC810"/>
+            </svg>
+        </div>
+
+    </div>
+
+    <div class="notif" style="display: none">
+        <div class="big-content">
+            <img src="logo.png">
+            <div>
+                <div>
+                    <div class="name"><p>32</p><p>Газпром Газпромович</p></div>
+                </div>
+                <div>
+                    <p class="info">8 мячей в 19 играх</p>
+                </div>
+                <div>    
+                    <div class="team1-col"></div>
+                </div>
+                
+            </div>
+            <img src="Face.jpeg" class="face">
+        </div>
+
+    </div> -->
+
+</body>
+</html>

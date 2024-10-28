@@ -4,7 +4,7 @@
             <p class="page_title">Игроки</p>
             <div class="filler"></div>
             <input type="button" value="Сбросить фильтры" class="table_button">
-            <input type="button" value="Добавить игрока" class="table_button nav_link" data-href="player/get__create">
+            <input type="button" value="Добавить игрока" class="table_button nav_link" new_tab="true" data-href="player/get__create">
             <div class="filler"></div>
             <input type="button" value="Активные" class="table_button_radio_active table_radio_active">
             <input type="button" value="Архивные" class="table_button_radio_archive">
@@ -42,7 +42,7 @@
             </td>
             <td><%= players[i].num %></td>
             <td><%= players[i].birthday %></td>
-            <td><%= players[i].team.name %></td>
+            <td><%= players[i].team?.name %></td>
             <td>
                 <span class="table_links table_links_compos nav_link"  data-href="player/get__edit/?id=<%= players[i]._id %>">Изменить</span>
             </td>

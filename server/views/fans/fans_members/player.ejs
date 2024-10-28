@@ -1,53 +1,48 @@
 <%- include('members_header.ejs') %>
 <div class="content-body body-background members-body">
-    <div class="h_flex white">
-        <img src="<%= player.img || '/static/styles/icons/logo.jpg' %>" class="" width="250" height="250">
-        <div class="v_flex left">
-            <h2 class="nm-top"><%= player.fio %></h2>
-            <p class="">Дата рождения: <span> <%= player.birthday %></span></p>
-            <!-- <p class="">Клуб: <span> ГСС</span></p> -->
-        </div>
-        
-    </div> 
-    <div class="h_flex white mt">
-        <% 
-            let count_matches = 0,
-            count_goals = 0,
-            count_transits = 0,
-            count_yellows = 0,
-            count_reds = 0;
+   <div class="h_flex white">
+      <img
+         src="<%= '/images/Player/'+player.id %>"
+         onerror="this.src = leagueImg;"
+         class=""
+         width="250"
+         height="250"
+      />
+      <div class="v_flex left">
+         <h2 class="nm-top"><%= player.fio %></h2>
+         <p class="">Дата рождения: <span> <%= player.birthday %></span></p>
+         <!-- <p class="">Клуб: <span> ГСС</span></p> -->
+      </div>
+   </div>
+   <div class="h_flex white mt wraped">
+      <% let count_matches = 0, count_goals = 0, count_transits = 0,
+      count_yellows = 0, count_reds = 0; results.map(result => {
+      count_matches++; count_goals += result.goals; count_transits +=
+      result.transits; count_yellows += result.yellow; count_reds += result.red;
+      }) %>
+      <p>Игры:</p>
+      <div class="dark-blue circle"><%= count_matches %></div>
+      <p>Голы:</p>
+      <div class="dark-blue circle"><%= count_goals %></div>
+      <p>Передачи:</p>
+      <div class="dark-blue circle"><%= count_transits %></div>
+      <p>Жк:</p>
+      <div class="dark-blue circle"><%= count_yellows %></div>
+      <p>Кк:</p>
+      <div class="dark-blue circle"><%= count_reds %></div>
+   </div>
 
-            results.map(result => {
-                count_matches++;
-                count_goals += result.goals;
-                count_transits += result.transits;
-                count_yellows += result.yellow;
-                count_reds += result.red;
-            })
-            %>
-        <div class="filler"></div>
-        <p>Игры: </p><div class="dark-blue circle"><%= count_matches %></div><p></p>
-        <div class="filler"></div>
-        <p>Голы: </p><div class="dark-blue circle"><%= count_goals %></div><p></p>
-        <div class="filler"></div>
-        <p>Передачи: </p><div class="dark-blue circle"><%= count_transits %></div><p></p>
-        <div class="filler"></div>
-        <p>Жк: </p><div class="dark-blue circle"><%= count_yellows %></div><p></p>
-        <div class="filler"></div>
-        <p>Кк: </p><div class="dark-blue circle"><%= count_reds %></div><p></p>
-        <div class="filler"></div>
-    </div>
-
-    <div class="h_flex white mt pi">
-        <p class="p-title">Статистика</p>
-        <div class="filler"></div>
-        <!-- <select class="big-select">
+   <div class="h_flex white mt pi">
+      <p class="p-title">Статистика</p>
+      <div class="filler"></div>
+      <!-- <select class="big-select">
             <option>Все время</option>
             <option>2024</option>
         </select> -->
-    </div>
-    <table class="nets-table mt">
-        <tbody><tr>
+   </div>
+   <table class="nets-table mt">
+      <tbody>
+         <tr>
             <th>Матч</th>
             <th></th>
             <th>И</th>
@@ -55,31 +50,30 @@
             <th>Пас</th>
             <th>ЖК</th>
             <th>КК</th>
-        </tr>    
-        <% results.forEach((result, i) => {
-            %>
-            <tr>
+         </tr>
+         <% results.forEach((result, i) => { %>
+         <tr>
             <td><%= result.match.tournament.basic.full_name %></td>
             <td>
-                <div class="h_flex wrap mb">
-                    <div class="v_flex left nm-block">
-                        <%= result.match.team_1.name %> <%= result.match.team_1_score %> : <%= result.match.team_2_score %> <%= result.match.team_2.name %>
-                    </div>
-                    <div class="v_flex left">
-                        <p class="p-small nm-block"><%= result.match.date %></p>
-                    </div>
-
-                </div>
+               <div class="h_flex wrap mb">
+                  <div class="v_flex left nm-block">
+                     <%= result.match.team_1.name %> <%=
+                     result.match.team_1_score %> : <%=
+                     result.match.team_2_score %> <%= result.match.team_2.name
+                     %>
+                  </div>
+                  <div class="v_flex left">
+                     <p class="p-small nm-block"><%= result.match.date %></p>
+                  </div>
+               </div>
             </td>
             <td>1</td>
             <td><%= result.goals %></td>
             <td><%= result.transits %></td>
             <td><%= result.yellow %></td>
             <td><%= result.red %></td>
-        </tr>   
-        <%
-        }) %>
-        
-    </tbody></table>
-
+         </tr>
+         <% }) %>
+      </tbody>
+   </table>
 </div>

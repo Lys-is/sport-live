@@ -1,11 +1,10 @@
-const authController = require('./auth-controller');
-const lkController = require('./lk-controller');
-const fansController = require('./fans-controller');
-const { team } = require('./team');
+import authController from "./auth-controller.js";
+import lkController from "./lk-controller.js";
+import fansController from "./fans-controller.js";
+import team from "./team/index.js";
 
-module.exports = {
-    'auth': authController,
-    'lk': lkController,
-    'fans/:address': fansController,
-    
-}
+export default {
+   auth: authController,
+   lk: lkController,
+   "fans/:address": fansController,
+};

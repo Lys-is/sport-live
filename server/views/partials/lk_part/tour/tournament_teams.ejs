@@ -1,45 +1,76 @@
+<div data-tour-id="<%= tournament._id %>"></div>
+
 <div class="cool_body">
-                        
-    <form>
-        <div class="cool_body_content wbt">
-            <div class="table_header">
-                <p class="page_title nm">Команды</p>
-                <input type="button" value="Добавить команду" class="table_button nav_link top_nav" data-href="team/get__create">
+   <div>
+      <div class="cool_body_content wbt">
+         <div class="table_header">
+            <p class="page_title nm">Команды</p>
+            <input
+               type="button"
+               value="Добавить команду"
+               class="table_button nav_link top_nav"
+               new_tab="true"
+               data-href="team/get__create"
+            />
 
-                <div class="filler"></div>
-                <input type="button" value="Незаявленные" class="table_button_radio_active table_radio_active nm vector_link" data-dest="tour_body" data-href="tournament/id/<%= tournament._id %>/team">
-                <input type="button" value="Подтвержденные" class="table_button_radio_archive middle_tbra nm vector_link" data-dest="tour_body"  data-href="tournament/id/<%= tournament._id %>/team_in">
-
-            </div>
-            <table class="commands_table fath">
-                <tr id="first-row">
-                    <td colspan="4">
-                        <div class="form-group">
-                            <input type="text" class="text_form text ml" placeholder="Название команды" >
-                            <input type="button" value="Найти" class="button blue_button">
-
-                        </div>
-                        </td>
-                </tr>
-                <% if (teams) {
-                    teams.forEach((team) => {
-                        %>
-                        <tr>
-                    <td>
-                        <img src="<%=team.img ? team.img : '/static/styles/icons/logo.jpg'%>" alt="team" height="80" width="80" class="ml img_t">
-                    </td>
-                    <td><p class="nm"><%=team.name%></p></td>
-                    <td>            
-                        <input type="button" value="Выбрать команду" data-id="<%=team._id%>" class="button green_button team_add" >
-                    </td>
-                </tr>
-                <%
-                    })
-                } %>
-                
-            </table>
-            
-        </div>
-
-    </form>
+            <div class="filler"></div>
+            <!-- <input
+               type="button"
+               value="Незаявленные"
+               class="table_button_radio_active table_radio_active nm vector_link"
+               data-dest="tour_body"
+               data-href="tournament/id/<%= tournament._id %>/team"
+            />
+            <input
+               type="button"
+               value="Подтвержденные"
+               class="table_button_radio_archive middle_tbra nm vector_link"
+               data-dest="tour_body"
+               data-href="tournament/id/<%= tournament._id %>/team_in"
+            /> -->
+         </div>
+         <table class="commands_table">
+            <tr id="first-row">
+               <td colspan="4">
+                  <div class="form-group filter" data-dest="tour_body">
+                     <input
+                        type="text"
+                        class="text_form text ml"
+                        name="name"
+                        placeholder="Название команды"
+                     />
+                     <input
+                        type="button"
+                        value="Сбросить фильтры"
+                        class="button red_button"
+                        id="clear_filters"
+                     />
+                  </div>
+               </td>
+            </tr>
+            <% if (teams) { teams.forEach((team) => { %>
+            <tr>
+               <td style="width: 1%">
+                  <input type="checkbox" data-id="<%=team._id%>"
+                  class="team_checkbox" <%= chooseTeams.some(chosenTeam =>
+                  chosenTeam._id.toString() === team._id.toString()) ? 'checked'
+                  : '' %> />
+               </td>
+               <td>
+                  <div style="display: flex; align-items: center">
+                     <img
+                        src="<%=team.img ? team.img : '/static/styles/icons/logo.jpg'%>"
+                        alt="team"
+                        height="80"
+                        width="80"
+                        class="ml img_t"
+                     />
+                     <p class="nm"><%=team?.name%></p>
+                  </div>
+               </td>
+            </tr>
+            <% }) } %>
+         </table>
+      </div>
+   </div>
 </div>

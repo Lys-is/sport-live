@@ -1,111 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="visualizer.css">
-</head>
-<body>
-	<div class="little top-anim-1 psev_top" id="main" style="display: none;">
-		<div id="container">
-			<div id="scoreboard">
-				<div class="left">
-					<div class="bgleft" style="border-bottom-color: rgb(255, 17, 153);">
-						<div class="top-logo"><img class="home-logo" src=""></div>
-						<div class="home-team var-home-short">Cборная Минска</div>
-					</div>
-					<div class="pen fade-anim" style="display: none;">
-						<div class="penalties-home">
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-						</div>
-					</div>
-				</div>
-				<div class="center">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <link rel="stylesheet" href="visualizer.css" />
+   </head>
+   <body>
+      <div class="little top-anim-1 psev_top" id="main" style="display: none">
+         <div id="container">
+            <div id="scoreboard">
+               <div class="left">
+                  <div
+                     class="bgleft"
+                     style="border-bottom-color: rgb(255, 17, 153)"
+                  >
+                     <div class="top-logo">
+                        <img class="home-logo" src="" />
+                     </div>
+                     <div class="home-team var-home-short">Cборная Минска</div>
+                  </div>
+                  <div class="pen fade-anim" style="display: none">
+                     <div class="penalties-home">
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                     </div>
+                  </div>
+               </div>
+               <div class="center">
+                  <div
+                     class="line-0 fouls-container color_accent_2"
+                     style="display: none"
+                  >
+                     <div id="fouls">
+                        <div class="var-home-fouls" id="home-fouls">0</div>
+                        <div id="txt-fouls">Фолы</div>
+                        <div class="var-away-fouls" id="away-fouls">0</div>
+                     </div>
+                  </div>
 
-					<div class="line-0 fouls-container color_accent_2" style="display: none;">
-						<div id="fouls">
-							<div class="var-home-fouls" id="home-fouls">0</div>
-							<div id="txt-fouls">Фолы</div>
-							<div class="var-away-fouls" id="away-fouls">0</div>
-						</div>
-					</div>
+                  <div class="line-1 color_accent">
+                     <table
+                        cellspacing="0"
+                        cellpadding="0"
+                        border="0"
+                        align="center"
+                     >
+                        <tbody>
+                           <tr>
+                              <td class="score var-home-score" align="right">
+                                 0
+                              </td>
+                              <td class="divider" align="center">:</td>
+                              <td class="score var-away-score" align="left">
+                                 5
+                              </td>
+                           </tr>
+                           <tr style="display: none">
+                              <td align="right" class="penalties">( 2</td>
+                              <td align="center" class="penalties">:</td>
+                              <td align="left" class="penalties">3 )</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="line-2 color_accent_2">
+                     <table
+                        cellspacing="0"
+                        cellpadding="0"
+                        border="0"
+                        align="center"
+                        width="100%"
+                     >
+                        <tbody>
+                           <tr>
+                              <td align="left" width="40px">
+                                 <div id="time-no" class="roundnum q_round">
+                                    <span>1</span> <span>Т</span>
+                                 </div>
+                              </td>
+                              <td align="center" width="120px">
+                                 <div class="var-time q_time" id="top-timer">
+                                    09:57
+                                 </div>
+                              </td>
+                              <td align="right" width="40px">
+                                 <div id="additional" style="display: none">
+                                    <span>+</span><span>2</span>
+                                 </div>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
 
-
-					<div class="line-1 color_accent">
-						<table cellspacing="0" cellpadding="0" border="0" align="center">
-							<tbody><tr>
-								<td class="score var-home-score" align="right">0</td>
-								<td class="divider" align="center">:</td>
-								<td class="score var-away-score" align="left">5</td>
-							</tr>
-							<tr style="display: none;">
-								<td align="right" class="penalties">( 2</td>
-								<td align="center" class="penalties">:</td>
-								<td align="left" class="penalties">3 )</td>
-							</tr>
-						</tbody></table>
-					</div>
-					<div class="line-2 color_accent_2">
-						<table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
-							<tbody><tr>
-								<td align="left" width="40px">
-									<div id="time-no" class="roundnum q_round"><span>1</span> <span>Т</span></div>
-								</td>
-								<td align="center" width="120px">
-									<div class="var-time q_time" id="top-timer">09:57</div>
-								</td>
-								<td align="right" width="40px">
-									<div id="additional" style="display: none;"><span>+</span><span>2</span></div>
-								</td>
-							</tr>
-						</tbody></table>
-					</div>
-				</div>
-
-
-				<div class="right">
-					<div class="bgright" style="border-bottom-color: rgb(0, 0, 0);">
-						<div class="away-team var-away-short">Могилевская область</div>
-						<div class="top-logo"><img class="away-logo" src=""></div>
-					</div>
-					<div class="pen fade-anim" style="display: none;">
-						<div class="penalties-away">
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="bottom">
-		<div class="big butt-anim-big" id="main-big" >
-			<div id="container-big">
-				<div id="scoreboard-big">
-					<div class="bgleft bigwidth" style="border-bottom-color: rgb(255, 17, 153);">
-						<div class="top-logo"><img class="home-logo" src=""></div>
-						<div class="home-team bigfont var-home">Cборная Минска</div>
-					</div>
-					<div class="center" id="center-big">
-						<div class="line-2 color_accent_2">
-							<div id="info" class="var-label var-time q_time">09:57</div>
-						</div>
-						<div class="line-1 color_accent">
-							<table cellspacing="0" cellpadding="0" border="0" align="center">
-								<tbody><tr>
-									<td class="score var-home-score" align="right">0</td>
-									<td class="divider" align="center">:</td>
-									<td class="score var-away-score" align="left">5</td>
-								</tr>
-								<!--	<tr>
+               <div class="right">
+                  <div
+                     class="bgright"
+                     style="border-bottom-color: rgb(0, 0, 0)"
+                  >
+                     <div class="away-team var-away-short">
+                        Могилевская область
+                     </div>
+                     <div class="top-logo">
+                        <img class="away-logo" src="" />
+                     </div>
+                  </div>
+                  <div class="pen fade-anim" style="display: none">
+                     <div class="penalties-away">
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="bottom">
+         <div class="big butt-anim-big" id="main-big">
+            <div id="container-big">
+               <div id="scoreboard-big">
+                  <div
+                     class="bgleft bigwidth"
+                     style="border-bottom-color: rgb(255, 17, 153)"
+                  >
+                     <div class="top-logo">
+                        <img class="home-logo" src="" />
+                     </div>
+                     <div class="home-team bigfont var-home">
+                        Cборная Минска
+                     </div>
+                  </div>
+                  <div class="center" id="center-big">
+                     <div class="line-2 color_accent_2">
+                        <div id="info" class="var-label var-time q_time">
+                           09:57
+                        </div>
+                     </div>
+                     <div class="line-1 color_accent">
+                        <table
+                           cellspacing="0"
+                           cellpadding="0"
+                           border="0"
+                           align="center"
+                        >
+                           <tbody>
+                              <tr>
+                                 <td class="score var-home-score" align="right">
+                                    0
+                                 </td>
+                                 <td class="divider" align="center">:</td>
+                                 <td class="score var-away-score" align="left">
+                                    5
+                                 </td>
+                              </tr>
+                              <!--	<tr>
 
 								<td align="right" class="penalties">( 2</td>
 
@@ -116,60 +202,129 @@
 							</tr>
 
 						-->
-							</tbody></table>
-						</div>
-					</div>
-					<div class="bgright bigwidth" style="border-bottom-color: rgb(0, 0, 0);">
-						<div class="away-team bigfont var-away">Могилевская область</div>
-						<div class="top-logo"><img class="away-logo" src=""></div>
-					</div>
-				</div>
-				<div id="bottom-row-2">
-					<div class="pen fade-anim">
-						<div class=" penalties-home" >
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-						</div>
-					</div>
-					<div id="match-info" class="color_accent">
-						<div class="var-label q_name_round fade-anim">Начало матча</div>
-						<div class="pen fade-anim" >
-							<div class="var-penalties-home" style="display: inline-block;margin-right: 90px;">0</div>Пенальти<div style="display: inline-block;margin-left: 90px;" class="var-penalties-away">0</div>
-						</div>
-					</div>
-					<div class="pen fade-anim">
-						<div class="penalties-away" >
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-							<div class="penaltie" style="background-color: var(--pen-clear);"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="big-2">
-		<div class="live" id="main-big-2">
-			<div id="container-big-2">
-				<div id="scoreboard-big-2">
-					<div class="bgleft bigwidth" style="border-bottom-color: rgb(255, 17, 153);">
-						<div class="top-logo"><img class="home-logo" src=""></div>
-						<div class="home-team bigfont var-home">Cборная Минска</div>
-					</div>
-					<div class="center" id="center-big-2">
-						<div class="line-1">
-							<table cellspacing="0" cellpadding="0" border="0" align="center">
-								<tbody><tr>
-									<td class="score var-home-score" align="right">0</td>
-									<td class="divider" align="center">:</td>
-									<td class="score var-away-score" align="left">5</td>
-								</tr>
-								<!--	<tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div
+                     class="bgright bigwidth"
+                     style="border-bottom-color: rgb(0, 0, 0)"
+                  >
+                     <div class="away-team bigfont var-away">
+                        Могилевская область
+                     </div>
+                     <div class="top-logo">
+                        <img class="away-logo" src="" />
+                     </div>
+                  </div>
+               </div>
+               <div id="bottom-row-2">
+                  <div class="pen fade-anim">
+                     <div class="penalties-home">
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                     </div>
+                  </div>
+                  <div id="match-info" class="color_accent">
+                     <div class="var-label q_name_round fade-anim">
+                        Начало матча
+                     </div>
+                     <div class="pen fade-anim">
+                        <div
+                           class="var-penalties-home"
+                           style="display: inline-block; margin-right: 90px"
+                        >
+                           0
+                        </div>
+                        Пенальти
+                        <div
+                           style="display: inline-block; margin-left: 90px"
+                           class="var-penalties-away"
+                        >
+                           0
+                        </div>
+                     </div>
+                  </div>
+                  <div class="pen fade-anim">
+                     <div class="penalties-away">
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                        <div
+                           class="penaltie"
+                           style="background-color: var(--pen-clear)"
+                        ></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="big-2">
+         <div class="live" id="main-big-2">
+            <div id="container-big-2">
+               <div id="scoreboard-big-2">
+                  <div
+                     class="bgleft bigwidth"
+                     style="border-bottom-color: rgb(255, 17, 153)"
+                  >
+                     <div class="top-logo">
+                        <img class="home-logo" src="" />
+                     </div>
+                     <div class="home-team bigfont var-home">
+                        Cборная Минска
+                     </div>
+                  </div>
+                  <div class="center" id="center-big-2">
+                     <div class="line-1">
+                        <table
+                           cellspacing="0"
+                           cellpadding="0"
+                           border="0"
+                           align="center"
+                        >
+                           <tbody>
+                              <tr>
+                                 <td class="score var-home-score" align="right">
+                                    0
+                                 </td>
+                                 <td class="divider" align="center">:</td>
+                                 <td class="score var-away-score" align="left">
+                                    5
+                                 </td>
+                              </tr>
+                              <!--	<tr>
 
 								<td align="right" class="penalties">( 2</td>
 
@@ -180,306 +335,350 @@
 							</tr>
 
 						-->
-							</tbody></table>
-						</div>
-					</div>
-					<div class="bgright bigwidth" style="border-bottom-color: rgb(0, 0, 0);">
-						<div class="away-team bigfont var-away">Могилевская область</div>
-						<div class="top-logo"><img class="away-logo" src=""></div>
-					</div>
-				</div>
-				<div class="stats">
-					<div class="stats-row-home">
-						<div class="icon"><img src=""></div>
-						<div class="minute-home">15'</div>
-						<div class="player-home">Дмитрий Никитенко</div>
-					</div>
-					<div class="center-line"></div>
-					<div class="stats-row-away">
-						<div class="icon"><img class="ev_type" src=""></div>
-						<div class="minute-away">15'</div>
-						<div class="player-away">Дмитрий Никитенко</div>
-					</div>
-				</div>
-				<div class="stats">
-					<div class="stats-row-home">
-						<div class="icon"><img src="img/goal.svg"></div>
-						<div class="minute-home">15'</div>
-						<div class="player-home">Дмитрий Никитенко</div>
-					</div>
-					<div class="center-line"></div>
-					<div class="stats-row-away">
-						<div class="icon"><img src=""></div>
-						<div class="minute-away">15'</div>
-						<div class="player-away">Дмитрий Никитенко</div>
-					</div>
-				</div>
-				<div class="stats">
-					<div class="stats-row-home">
-						<div class="icon"><img src=""></div>
-						<div class="minute-home">15'</div>
-						<div class="player-home">Дмитрий Никитенко</div>
-					</div>
-					<div class="center-line"></div>
-					<div class="stats-row-away">
-						<div class="icon"><img src=""></div>
-						<div class="minute-away">15'</div>
-						<div class="player-away">Дмитрий Никитенко</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="mid matchid-anim" id="matchid-container">
-		<table cellpadding="0" cellspacing="0" border="0" id="main-table" class="color_main">
-			<tbody><tr>
-				<td colspan="3">
-					<div class="tournament-name var-tournament">Cпартакиада 2024</div>
-				</td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td id="matchid-home-logo" align="center">
-					<div class="logo-bg color_accent">
-						<img class="home-logo" src="" width="195px" height="195px">
-					</div>
-				</td>
-				<td></td>
-				<td id="matchid-away-logo" align="center">
-					<div class="logo-bg color_accent">
-						<img class="away-logo" src="" width="195px" height="195px">
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td id="matchid-home-teamname" class="var-home">Cборная Минска</td>
-				<td id="mid-col"><span id="tour"><span class="var-tour">2</span>-<span>й</span> тур</span><p class="var-stadium">Стадион</p></td>
-				<td id="matchid-away-teamname" class="var-away">Могилевская область</td>
-			</tr>
-			<tr>
-				<td colspan="3" align="center">
-					<table cellpadding="0" cellspacing="0" border="0" id="matchid-date-venue" class="color_accent">
-						<tbody><tr>
-							<td id="matchid-time" class="color_accent border_color_accent_2"><span class="var-match-date">20.06.2024</span><br><span class="var-match-time">10:00</span></td>
-							<td id="matchid-venue" class="var-stadium">Спорткомплекс «Виктория» (Гродно)</td>
-						</tr>
-					</tbody></table>
-				</td>
-			</tr>
-		</tbody></table>
-	</div>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div
+                     class="bgright bigwidth"
+                     style="border-bottom-color: rgb(0, 0, 0)"
+                  >
+                     <div class="away-team bigfont var-away">
+                        Могилевская область
+                     </div>
+                     <div class="top-logo">
+                        <img class="away-logo" src="" />
+                     </div>
+                  </div>
+               </div>
+               <div class="stats">
+                  <div class="stats-row-home">
+                     <div class="icon"><img src="" /></div>
+                     <div class="minute-home">15'</div>
+                     <div class="player-home">Дмитрий Никитенко</div>
+                  </div>
+                  <div class="center-line"></div>
+                  <div class="stats-row-away">
+                     <div class="icon"><img class="ev_type" src="" /></div>
+                     <div class="minute-away">15'</div>
+                     <div class="player-away">Дмитрий Никитенко</div>
+                  </div>
+               </div>
+               <div class="stats">
+                  <div class="stats-row-home">
+                     <div class="icon"><img src="img/goal.svg" /></div>
+                     <div class="minute-home">15'</div>
+                     <div class="player-home">Дмитрий Никитенко</div>
+                  </div>
+                  <div class="center-line"></div>
+                  <div class="stats-row-away">
+                     <div class="icon"><img src="" /></div>
+                     <div class="minute-away">15'</div>
+                     <div class="player-away">Дмитрий Никитенко</div>
+                  </div>
+               </div>
+               <div class="stats">
+                  <div class="stats-row-home">
+                     <div class="icon"><img src="" /></div>
+                     <div class="minute-home">15'</div>
+                     <div class="player-home">Дмитрий Никитенко</div>
+                  </div>
+                  <div class="center-line"></div>
+                  <div class="stats-row-away">
+                     <div class="icon"><img src="" /></div>
+                     <div class="minute-away">15'</div>
+                     <div class="player-away">Дмитрий Никитенко</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="mid matchid-anim" id="matchid-container">
+         <table
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            id="main-table"
+            class="color_main"
+         >
+            <tbody>
+               <tr>
+                  <td colspan="3">
+                     <div class="tournament-name var-tournament">
+                        Cпартакиада 2024
+                     </div>
+                  </td>
+                  <td></td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td id="matchid-home-logo" align="center">
+                     <div class="logo-bg color_accent">
+                        <img
+                           class="home-logo"
+                           src=""
+                           width="195px"
+                           height="195px"
+                        />
+                     </div>
+                  </td>
+                  <td></td>
+                  <td id="matchid-away-logo" align="center">
+                     <div class="logo-bg color_accent">
+                        <img
+                           class="away-logo"
+                           src=""
+                           width="195px"
+                           height="195px"
+                        />
+                     </div>
+                  </td>
+               </tr>
+               <tr>
+                  <td id="matchid-home-teamname" class="var-home">
+                     Cборная Минска
+                  </td>
+                  <td id="mid-col">
+                     <span id="tour"><span class="var-tour">2</span></span>
+                     <p class="var-stadium">Стадион</p>
+                  </td>
+                  <td id="matchid-away-teamname" class="var-away">
+                     Могилевская область
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="3" align="center">
+                     <table
+                        cellpadding="0"
+                        cellspacing="0"
+                        border="0"
+                        id="matchid-date-venue"
+                        class="color_accent"
+                     >
+                        <tbody>
+                           <tr>
+                              <td
+                                 id="matchid-time"
+                                 class="color_accent border_color_accent_2"
+                              >
+                                 <span class="var-match-date">20.06.2024</span
+                                 ><br /><span class="var-match-time"
+                                    >10:00</span
+                                 >
+                              </td>
+                              <td id="matchid-venue" class="var-stadium">
+                                 Спорткомплекс «Виктория»
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
 
+      <div class="roster-container home-roster home-anim">
+         <div class="roster-main-div color_main border_color_accent">
+            <div class="sostav">
+               <div class="sostav-txt">Состав:</div>
+               <div class="sostav-txt-sec var-home">Cборная Минска</div>
+               <div class="filler"></div>
+               <img
+                  class="home-logo"
+                  width="150px"
+                  height="150px"
+                  alt="logo"
+                  src=""
+               />
+            </div>
+            <div class="roster-content">
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="roster-container away-roster away-anim">
+         <div class="roster-main-div color_main border_color_accent">
+            <div class="sostav">
+               <div class="sostav-txt">Состав:</div>
+               <div class="sostav-txt-sec var-away">Cборная Минска</div>
+               <div class="filler"></div>
+               <img
+                  class="away-logo"
+                  width="150px"
+                  height="150px"
+                  alt="logo"
+                  src=""
+               />
+            </div>
+            <div class="roster-content">
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+               <div class="roster-teamate">
+                  <p class="roster-teamate-name">Name Nonamovich</p>
+                  <img width="40" height="40" src="" />
+               </div>
+            </div>
+         </div>
+      </div>
 
-	<div class="roster-container home-roster home-anim">
-		<div class="roster-main-div color_main border_color_accent">
-			<div class="sostav">
-				<div class="sostav-txt">Состав: </div>
-				<div class="sostav-txt-sec var-home">Cборная Минска</div>
-				<div class="filler"></div>
-				<img class="home-logo" width="150px" height="150px" alt="logo" src="">
+      <div class="balloon-container">
+         <div class="balloon" style="display: none">
+            <div class="balloonbg">
+               <div class="balloon-logo">
+                  <!-- <img src="../img/home-logo-big.png"> -->
+               </div>
+               <div class="balloon-info">
+                  <div id="balloon-line">
+                     <div class="balloon-line-1">
+                        <div class="player-balloon">Дмитрий Никитенко</div>
+                     </div>
+                     <div class="balloon-line-2">
+                        <div id="balloon-team-name">Команда</div>
+                        <!--	<div class="minute-balloon"></div> -->
+                     </div>
+                  </div>
+                  <div class="icon-balloon"><img class="ev_type" /></div>
+               </div>
+            </div>
+         </div>
+      </div>
 
-			</div>
-			<div class="roster-content">
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
+      <div class="ref-container">
+         <div class="balloon ref-1" style="display: none">
+            <div class="balloonbg ref-bg">
+               <div class="balloon-logo">
+                  <img src="/img/ref.svg" />
+               </div>
+               <div class="balloon-info">
+                  <div id="balloon-line">
+                     <div class="balloon-line-1">
+                        <div class="player-balloon">Андрей Дубицкий</div>
+                     </div>
+                     <div class="balloon-line-2">
+                        <div id="balloon-team-name">Первый судья</div>
+                        <!--	<div class="minute-balloon"></div> -->
+                     </div>
+                  </div>
+                  <!-- <div class="icon-balloon"><img class="ev_type"></div> -->
+               </div>
+            </div>
+         </div>
 
+         <div class="balloon ref-2" style="display: none">
+            <div class="balloonbg ref-bg">
+               <div class="balloon-logo">
+                  <img src="/img/ref.svg" />
+               </div>
+               <div class="balloon-info">
+                  <div id="balloon-line">
+                     <div class="balloon-line-1">
+                        <div class="player-balloon">Павел Шупилов</div>
+                     </div>
+                     <div class="balloon-line-2">
+                        <div id="balloon-team-name">Второй судья</div>
+                        <!--	<div class="minute-balloon"></div> -->
+                     </div>
+                  </div>
+                  <!-- <div class="icon-balloon"><img class="ev_type"></div> -->
+               </div>
+            </div>
+         </div>
 
+         <div class="balloon ref-3" style="display: none">
+            <div class="balloonbg ref-bg">
+               <div class="balloon-logo">
+                  <img src="/img/ref.svg" />
+               </div>
+               <div class="balloon-info">
+                  <div id="balloon-line">
+                     <div class="balloon-line-1">
+                        <div class="player-balloon">Денис Шарабуро</div>
+                     </div>
+                     <div class="balloon-line-2">
+                        <div id="balloon-team-name">Третий судья</div>
+                        <!--	<div class="minute-balloon"></div> -->
+                     </div>
+                  </div>
+                  <!-- <div class="icon-balloon"><img class="ev_type"></div> -->
+               </div>
+            </div>
+         </div>
+      </div>
 
-			</div>
-		</div>
-	</div>
-	<div class="roster-container away-roster away-anim">
-		<div class="roster-main-div color_main border_color_accent">
-			<div class="sostav">
-				<div class="sostav-txt">Состав: </div>
-				<div class="sostav-txt-sec var-away">Cборная Минска</div>
-				<div class="filler"></div>
-				<img class="away-logo" width="150px" height="150px" alt="logo" src="">
-
-			</div>
-			<div class="roster-content">
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-				<div class="roster-teamate">
-					<p class="roster-teamate-name">Name Nonamovich</p>
-					<img width="40" height="40" src="">
-				</div>
-
-
-
-			</div>
-		</div>
-	</div>
-
-
-	<div class="balloon-container">
-		<div class="balloon" style="display:none;">
-			<div class="balloonbg">
-				<div class="balloon-logo">
-					<!-- <img src="../img/home-logo-big.png"> -->
-				</div>
-				<div class="balloon-info">
-					<div id="balloon-line">
-						<div class="balloon-line-1">
-							<div class="player-balloon">Дмитрий Никитенко</div>
-						</div>
-						<div class="balloon-line-2">
-							<div id="balloon-team-name">Команда</div>
-							<!--	<div class="minute-balloon"></div> -->
-						</div>
-					</div>
-					<div class="icon-balloon"><img class="ev_type"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-	<div class="ref-container">
-		<div class="balloon ref-1" style="display: none;">
-			<div class="balloonbg ref-bg">
-				<div class="balloon-logo">
-					<img src="/img/ref.svg">
-				</div>
-				<div class="balloon-info">
-					<div id="balloon-line">
-						<div class="balloon-line-1">
-							<div class="player-balloon">Андрей Дубицкий</div>
-						</div>
-						<div class="balloon-line-2">
-							<div id="balloon-team-name">Первый судья</div>
-							<!--	<div class="minute-balloon"></div> -->
-						</div>
-					</div>
-					<!-- <div class="icon-balloon"><img class="ev_type"></div> -->
-				</div>
-			</div>
-		</div>
-
-
-		<div class="balloon ref-2" style="display: none;">
-			<div class="balloonbg ref-bg">
-				<div class="balloon-logo">
-					<img src="/img/ref.svg">
-				</div>
-				<div class="balloon-info">
-					<div id="balloon-line">
-						<div class="balloon-line-1">
-							<div class="player-balloon">Павел Шупилов</div>
-						</div>
-						<div class="balloon-line-2">
-							<div id="balloon-team-name">Второй судья</div>
-							<!--	<div class="minute-balloon"></div> -->
-						</div>
-					</div>
-					<!-- <div class="icon-balloon"><img class="ev_type"></div> -->
-				</div>
-			</div>
-		</div>
-
-
-		<div class="balloon ref-3" style="display: none;">
-			<div class="balloonbg ref-bg">
-				<div class="balloon-logo">
-					<img src="/img/ref.svg">
-				</div>
-				<div class="balloon-info">
-					<div id="balloon-line">
-						<div class="balloon-line-1">
-							<div class="player-balloon">Денис Шарабуро</div>
-						</div>
-						<div class="balloon-line-2">
-							<div id="balloon-team-name">Третий судья</div>
-							<!--	<div class="minute-balloon"></div> -->
-						</div>
-					</div>
-					<!-- <div class="icon-balloon"><img class="ev_type"></div> -->
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div id="weather_wrapper">
-		<div class="weather">
-			<div class="weatherCard">
-				<div class="currentTemp">
-					<span class="temp"></span>
-					<span class="location var-town"></span>
-				</div>
-				<div class="currentWeather">
-					<span class="conditions"></span>
-					<div class="info">
-						<span class="rain"></span>
-						<span class="wind"></span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-
-
-</body>
+      <div id="weather_wrapper">
+         <div class="weather">
+            <div class="weatherCard">
+               <div class="currentTemp">
+                  <span class="temp"></span>
+                  <span class="location var-town"></span>
+               </div>
+               <div class="currentWeather">
+                  <span class="conditions"></span>
+                  <div class="info">
+                     <span class="rain"></span>
+                     <span class="wind"></span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
 </html>

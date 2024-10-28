@@ -32,7 +32,7 @@
 
                         <a class="nav_link" data-href="tournament/id/<%= tournaments[i]._id %>/edit">Редактировать</a>
                         <a class="table_links_del" data-id="<%= tournaments[i]._id %>" data-model="Tournament" style="background-color: unset">Удалить</a>
-                        <a target="_blank" href="/fans_tournaments/<%= league_href %>?page=tournament/id/<%= tournaments[i]._id %>">Смотреть на сайте</a>
+                        <a target="_blank" href="/fans_tournaments/<%= league_href %>/all?page=tournament/id/<%= tournaments[i]._id %>">Смотреть на сайте</a>
                     </div>
                 </div>
                 <div class="tournires_details">
@@ -41,7 +41,7 @@
                 </div>
                 <div class="tournires_tabs">
                     <input type="button" value="Команды" class="tournires_tab_button def_link" data-href="lk?page=tournament/id/<%= tournaments[i]._id %>/team">
-                    <input type="button" value="Судьи" class="tournires_tab_button def_link" data-href="lk?page=tournament/id/<%= tournaments[i]._id %>/judge">
+                    <input type="button" value="Расписание" class="tournires_tab_button def_link" data-href="lk?page=tournament/id/<%= tournaments[i]._id %>/matches">
                     <input type="button" value="Документы" class="tournires_tab_button def_link" data-href="lk?page=tournament/id/<%= tournaments[i]._id %>/docs">
                 </div>
                 <!-- <div class="tournires_calendar">

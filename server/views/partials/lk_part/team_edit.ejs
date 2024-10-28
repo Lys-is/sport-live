@@ -19,7 +19,7 @@
     <p class="content_navtext">Главная &gt; Команды &gt; Изменить</p>
     <div class="create_tournire_content">
         <div class="create_tournire_header">
-            <p class="page_title"><%= team.name  %></p>
+            <p class="page_title"><%= team?.name  %></p>
         </div>
         <div class="create_tournire_body">
             <div class="form_container">
@@ -36,7 +36,7 @@
                 <div class="ct_form">
                     <div class="form_group">
                         <label for="name">Название</label>
-                        <input type="text" id="name" name="name" value="<%= team.name %>">
+                        <input type="text" id="name" name="name" value="<%= team?.name %>">
                     </div>
                     <div class="form_group">
                         <label for="appearence_color">Цвет формы</label>

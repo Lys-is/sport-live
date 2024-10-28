@@ -1,248 +1,539 @@
 <%- include('global/header.ejs') %>
-<link rel="stylesheet" href="/static/styles/style_panel.css">
-<script >
-    let tableId = '<%= id %>'
+<link rel="stylesheet" href="/static/styles/style_panel.css" />
+<script>
+   let tableId = "<%= id %>";
 </script>
 
-
-
-    <div class="content-container">
-        <div class="column-container">
-            <div class="block">
-                <!-- <div class="h-group center">
+<div class="content-container">
+   <div class="column-container">
+      <div class="block">
+         <!-- <div class="h-group center">
                     <p class="first">Матч</p>
                 </div> -->
-                <div class="h-group">
-                    <select name="match" id="match" class="text-form full-form">
-                        <option selected value="">Выберите матч</option>
-                    <% matches.forEach(match => {
-                    %>
-                        <option value="<%= match._id %>"><%= match.team_1.name %> - <%= match.team_2.name %> | <%= match.date %></option>
-                    <%
-                    }); %>
-                    </select>
-                    <input type="button" value="Применить выделенный" class="full-form" name="match-button-accept" id="match_accept">
-                </div>
-                
-            </div>
-            <div class="block">
-                <div class="h-group">
-                    <div class="v-group">
-                        <input type="text" id="team1" class="text-form full-form data_team_1" name="team1_name" value="Хозяева">
-                        <input type="color" id="team1_color" class="full-form" name="team1_color" value="#ee7733" data-type="score">
-                    </div>
-
-                    <div class="v-group">
-                        <input type="text" id="team2" class="text-form full-form data_team_2" name="team2_name" value="Гости">
-                        <input type="color" id="team2_color" class=" full-form" name="team2_color" value="#3333ff" data-type="score">
-                    </div>
-                </div>
-
-               
-
-            </div>
-            <div class="block">
-                <div class="h-group centered">
-                    
-                </div>
-
-                <div class="h-group">
-                    <div class="h-group score_div" data-team="1">
-                        <input type="button" value="-" class="circle-button" name="minus">
-                        <input type="number" value="0" class="text-form small-form" name="team1" data-type="score" id="score_team1">
-                        <input type="button" value="+" class="circle-button" name="plus">
-                    </div>
-                    <p class="first h-group ">Счет</p>
-                    <div class="h-group score_div" data-team="2">
-                        <input type="button" value="-" class="circle-button" name="minus">
-                        <input type="number" value="0" class="text-form small-form" name="team2" data-type="score" id="score_team2">
-                        <input type="button" value="+" class="circle-button" name="plus">
-                    </div>
-                </div>
-                
-
-                <div class="h-group foll_div">
-                    <div class="h-group score_div" data-team="1">
-                        <input type="button" value="-" class="circle-button" name="minus">
-                        <input type="number" value="0" class="text-form small-form" name="team1_foll" data-type="score" id="team1_foll">
-                        <input type="button" value="+" class="circle-button" name="plus">
-                    </div>
-                    <div class="h-group ">
-                        <p class="first">Фолы</p>
-                        <input type="checkbox" name="is_fouls" id="is_fouls">
-                    </div>
-                    
-                    <div class="h-group score_div" data-team="2">
-                        <input type="button" value="-" class="circle-button" name="minus">
-                        <input type="number" value="0" class="text-form small-form" name="team2_foll" data-type="score" id="team2_foll">
-                        <input type="button" value="+" class="circle-button" name="plus">
-                    </div>
-                </div>
-                <div class="h-group">
-                    <input type="button" value="Сбросить" class="full-form" name="reset-teams" id="score_reset">
-                </div>
-            </div>
-            <div class="block">
-                <div class="h-group center">
-                    <label for="scenarios" class="inline-form-label small-text nowrap">Сценарий</label>
-                    <select name="scenarios" id="scenarios" class="text-form full-form">
-                        <option value="begin">Начало матча</option>
-                        <option value="1" >1 тайм</option>
-                        <option value="pause">Перерыв</option>
-                        <option value="2">2 тайм</option>
-                        <option value="end">Конец матча</option>
-                        <option value="VAR">VAR</option>
-                        <option value="out">Тайм-аут</option>
-                        <option value="pens">Пенальти</option>
-                    </select>
-                </div>
-                <div class="h-group center">
-                    <p class="first">Таймер</p>
-                </div>
-                <div class="h-group">
-                    <!-- для иконки паузы поменять класс на pause-icon -->
-                    <input type="button" value="" class="square40 play-icon" id="play" name="play-timer">
-                    <input type="text" class="time text-form small-form" value="00:00">
-                    <input type="button" value="" class="square40 redo-icon" id="clear_timer" name="play-timer">
-                </div>
-
-                <div class="h-group" id="change_timer">
-                    <input type="button" value="-10" class="square40" name="timer-minus10">
-                    <input type="button" value="-5" class="square40" name="timer-minus5">
-                    <input type="button" value="-1" class="square40" name="timer-minus1">
-                    <input type="button" value="1" class="square40" name="timer-plus1">
-                    <input type="button" value="5" class="square40" name="timer-plus5">
-                    <input type="button" value="10" class="square40" name="timer-plus10">
-                </div>
-                <div class="h-group" style="display: none;">
-                    <label for="panel-style" class="inline-form-label small-text nowrap">Время тайма</label>
-                    <select name="max_time" id="max_time" class="text-form full-form">
-                        <option value="10">10 минут</option>
-                        <option value="15">15 минут</option>
-                        <option value="20">20 минут</option>
-                        <option value="25">25 минут</option>
-                        <option value="30">30 минут</option>
-                        <option value="45">45 минут</option>
-                    </select>
-                </div>
-                <div class="h-group">
-                    <p class="">Обратный отсчёт</p>
-                    <input type="checkbox" name="is_reverse" id="is_reverse">
-
-                </div>
-
+         <div class="h-group">
+            <select name="match" id="match" class="text-form full-form">
+               <option selected value="">Выберите матч</option>
+               <% matches.forEach(match => { %>
+               <option value="<%= match._id %>">
+                  <%= match.team_1.name %> - <%= match.team_2.name %> | <%=
+                  match.date %>
+               </option>
+               <% }); %>
+            </select>
+            <input
+               type="button"
+               value="Применить выделенный"
+               class="full-form"
+               name="match-button-accept"
+               id="match_accept"
+            />
+         </div>
+      </div>
+      <div class="block">
+         <div class="h-group">
+            <div class="v-group">
+               <input
+                  type="text"
+                  id="team1"
+                  class="text-form full-form data_team_1"
+                  name="team1_name"
+                  value="Хозяева"
+               />
+               <input
+                  type="color"
+                  id="team1_color"
+                  class="full-form"
+                  name="team1_color"
+                  value="#ee7733"
+                  data-type="score"
+               />
             </div>
 
-            <div class="block">
-                <div class="h-group centered">
-                    <p class="first">Вариация табло</p>
-                </div>
-                <fieldset id="variants">
-                <div class="h-group wrap half-form-container tablo_variation" >
-                    <input type="button" value="Малое" data-type="little" class="selected" name="small-vis">
-                    <input type="button" value="Большое" class="" data-type="big" name="big-vis">
-                    <input type="button" value="Матч" class="" data-type="mid" name="match-vis">
-                    <input type="button" value="Сборная 1" class="" data-type="home-roster" name="group-vis">
-                    <input type="button" value="Сборная 2" class="" data-type="away-roster" name="mog-vis">
-                    <input type="button" value="Пенальти" class="" data-type="pen" name="pen-vis">
-                    <input type="button" value="Выкл" class="" data-type="off" name="off-vis">
-                </div>
-            </fieldset>
-                <div class="h-group">
-                        <label for="panel-style" class="inline-form-label small-text nowrap">Стиль табло</label>
-                        <select name="panel-style" id="panel-style" class="text-form full-form">
-                            <option value="style_1">style1</option>
-                            <option value="style_2">style2</option>
-                            <option value="style_3">style3</option>
-                            <option value="style_4">style4</option>
-                            <option value="style_5">style5</option>
-                            <option value="style_6">style6</option>
-                            <option value="style_7">style7</option>
-                            <option value="style_8">Городская лига</option>
-                            <% styles.forEach(style => { %>
-                                <option value="<%= style._id %>__id"><%= style.name %></option>
-                            <% })
-                            %>
-                        </select>
-                </div>
-                
-                <div class="h-group center">
-                    <label for="scenarios" class="inline-form-label small-text nowrap">Тип уведомлений</label>
-                    <select name="notif_type" id="notif_type" class="text-form full-form">
-                        <option value="def">Обычный</option>
-                        <option value="circ">Новый</option>
-                        <option value="type_3">Городская лига</option>
-                    </select>
-                </div>
+            <div class="v-group">
+               <input
+                  type="text"
+                  id="team2"
+                  class="text-form full-form data_team_2"
+                  name="team2_name"
+                  value="Гости"
+               />
+               <input
+                  type="color"
+                  id="team2_color"
+                  class="full-form"
+                  name="team2_color"
+                  value="#3333ff"
+                  data-type="score"
+               />
             </div>
-            <div class="block">
-                <div class="h-group">
-                    <input type="button" value="Сбросить все" class="full-form red" name="reset-all" id="reset_all">
-                    <input type="button" value="Перезагрузить табло" class="full-form yellow" name="refresh-all" onclick="window.location.reload();">
-                </div>
+         </div>
+      </div>
+      <div class="block">
+         <div class="h-group centered"></div>
+
+         <div class="h-group">
+            <div class="h-group score_div" data-team="1">
+               <input
+                  type="button"
+                  value="-"
+                  class="circle-button"
+                  name="minus"
+               />
+               <input
+                  type="number"
+                  value="0"
+                  class="text-form small-form"
+                  name="team1"
+                  data-type="score"
+                  id="score_team1"
+               />
+               <input
+                  type="button"
+                  value="+"
+                  class="circle-button"
+                  name="plus"
+               />
             </div>
-            
-        </div>
-        <div class="column-container">
-            
+            <p class="first h-group">Счет</p>
+            <div class="h-group score_div" data-team="2">
+               <input
+                  type="button"
+                  value="-"
+                  class="circle-button"
+                  name="minus"
+               />
+               <input
+                  type="number"
+                  value="0"
+                  class="text-form small-form"
+                  name="team2"
+                  data-type="score"
+                  id="score_team2"
+               />
+               <input
+                  type="button"
+                  value="+"
+                  class="circle-button"
+                  name="plus"
+               />
+            </div>
+         </div>
 
-            
-
-            <div class="block">
-                <div class="h-group center">
-                    <p class="first">Пенальти</p>
-                </div>
-                <div class="h-group">
-                    <label for="penalty_num" class="inline-form-label small-text nowrap">Пенальти №</label>
-                    <div class="h-group score_div">
-                        <input type="button" value="-" class="circle-button" name="minus">
-                        <input type="number" value="1" class="text-form small-form" name="penalty_num" id="penalty_num" min="1">
-                        <input type="button" value="+" class="circle-button" name="plus">
-                    </div>
-                    </div>  
-                <div id="penalty_div">
-                    <div class="h-group bigger-gap">
-                        <div class="h-group">
-                            <input type="button" value="ГОЛ" class="square40 flex-form" name="gol-pen1">
-                            <input type="button" value="" class="square40 redo-icon" name="pass-pen1">
-                            <input type="button" value="CЭЙВ" class="square40 flex-form" name="save-pen1">
-                        </div>
-
-                        <div class="h-group">
-                            <input type="button" value="ГОЛ" class="square40 flex-form" name="gol-pen1">
-                            <input type="button" value="" class="square40 redo-icon" name="pass-pen1">
-                            <input type="button" value="CЭЙВ" class="square40 flex-form" name="save-pen1">
-                        </div>
-                    </div>
-
-                    <div class="h-group bigger-gap">
-                        <div class="h-group ">
-                            <input type="button" value="ГОЛ" class="square40 flex-form" name="gol-pen1">
-                            <input type="button" value="" class="square40 redo-icon" name="pass-pen1">
-                            <input type="button" value="CЭЙВ" class="square40 flex-form" name="save-pen1">
-                        </div>
-
-                        <div class="h-group">
-                            <input type="button" value="ГОЛ" class="square40 flex-form" name="gol-pen1">
-                            <input type="button" value="" class="square40 redo-icon" name="pass-pen1">
-                            <input type="button" value="CЭЙВ" class="square40 flex-form" name="save-pen1">
-                        </div>
-                    </div>
-                </div>
-                <div class="h-group bigger-gap">
-                    <input type="button" value="Сбросить" class="full-form" name="reset-pen" id="reset-pen">
-                    <input type="button" value="Добавить пенальти" id="add-pen" class="full-form" name="add-pen">
-                </div>
+         <div class="h-group foll_div">
+            <div class="h-group score_div" data-team="1">
+               <input
+                  type="button"
+                  value="-"
+                  class="circle-button"
+                  name="minus"
+               />
+               <input
+                  type="number"
+                  value="0"
+                  class="text-form small-form"
+                  name="team1_foll"
+                  data-type="score"
+                  id="team1_foll"
+               />
+               <input
+                  type="button"
+                  value="+"
+                  class="circle-button"
+                  name="plus"
+               />
+            </div>
+            <div class="h-group">
+               <p class="first">Фолы</p>
+               <input type="checkbox" name="is_fouls" id="is_fouls" />
             </div>
 
-           
+            <div class="h-group score_div" data-team="2">
+               <input
+                  type="button"
+                  value="-"
+                  class="circle-button"
+                  name="minus"
+               />
+               <input
+                  type="number"
+                  value="0"
+                  class="text-form small-form"
+                  name="team2_foll"
+                  data-type="score"
+                  id="team2_foll"
+               />
+               <input
+                  type="button"
+                  value="+"
+                  class="circle-button"
+                  name="plus"
+               />
+            </div>
+         </div>
+         <div class="h-group">
+            <input
+               type="button"
+               value="Сбросить"
+               class="full-form"
+               name="reset-teams"
+               id="score_reset"
+            />
+         </div>
+      </div>
+      <div class="block">
+         <div class="h-group center">
+            <label for="scenarios" class="inline-form-label small-text nowrap"
+               >Сценарий</label
+            >
+            <select name="scenarios" id="scenarios" class="text-form full-form">
+               <option value="begin">Начало матча</option>
+               <option value="1">1 тайм</option>
+               <option value="pause">Перерыв</option>
+               <option value="2">2 тайм</option>
+               <option value="end">Конец матча</option>
+               <option value="VAR">VAR</option>
+               <option value="out">Тайм-аут</option>
+               <option value="pens">Пенальти</option>
+            </select>
+         </div>
+         <div class="h-group center">
+            <p class="first">Таймер</p>
+         </div>
+         <div class="h-group">
+            <!-- для иконки паузы поменять класс на pause-icon -->
+            <input
+               type="button"
+               value=""
+               class="square40 play-icon"
+               id="play"
+               name="play-timer"
+            />
+            <input
+               type="text"
+               class="time text-form small-form"
+               value="00:00"
+            />
+            <input
+               type="button"
+               value=""
+               class="square40 redo-icon"
+               id="clear_timer"
+               name="play-timer"
+            />
+         </div>
 
+         <div class="h-group" id="change_timer">
+            <input
+               type="button"
+               value="-10"
+               class="square40"
+               name="timer-minus10"
+            />
+            <input
+               type="button"
+               value="-5"
+               class="square40"
+               name="timer-minus5"
+            />
+            <input
+               type="button"
+               value="-1"
+               class="square40"
+               name="timer-minus1"
+            />
+            <input
+               type="button"
+               value="1"
+               class="square40"
+               name="timer-plus1"
+            />
+            <input
+               type="button"
+               value="5"
+               class="square40"
+               name="timer-plus5"
+            />
+            <input
+               type="button"
+               value="10"
+               class="square40"
+               name="timer-plus10"
+            />
+         </div>
+         <div class="h-group" style="display: none">
+            <label for="panel-style" class="inline-form-label small-text nowrap"
+               >Время тайма</label
+            >
+            <select name="max_time" id="max_time" class="text-form full-form">
+               <option value="10">10 минут</option>
+               <option value="15">15 минут</option>
+               <option value="20">20 минут</option>
+               <option value="25">25 минут</option>
+               <option value="30">30 минут</option>
+               <option value="45">45 минут</option>
+            </select>
+         </div>
+         <div class="h-group">
+            <p class="">Обратный отсчёт</p>
+            <input type="checkbox" name="is_reverse" id="is_reverse" />
+         </div>
+      </div>
 
-        </div>
+      <div class="block">
+         <div class="h-group centered">
+            <p class="first">Вариация табло</p>
+         </div>
+         <fieldset id="variants">
+            <div class="h-group wrap half-form-container tablo_variation">
+               <input
+                  type="button"
+                  value="Малое"
+                  data-type="little"
+                  class="selected"
+                  name="small-vis"
+               />
+               <input
+                  type="button"
+                  value="Большое"
+                  class=""
+                  data-type="big"
+                  name="big-vis"
+               />
+               <input
+                  type="button"
+                  value="Матч"
+                  class=""
+                  data-type="mid"
+                  name="match-vis"
+               />
+               <input
+                  type="button"
+                  value="Сборная 1"
+                  class=""
+                  data-type="home-roster"
+                  name="group-vis"
+               />
+               <input
+                  type="button"
+                  value="Сборная 2"
+                  class=""
+                  data-type="away-roster"
+                  name="mog-vis"
+               />
+               <input
+                  type="button"
+                  value="Пенальти"
+                  class=""
+                  data-type="pen"
+                  name="pen-vis"
+               />
+               <input
+                  type="button"
+                  value="Выкл"
+                  class=""
+                  data-type="off"
+                  name="off-vis"
+               />
+            </div>
+         </fieldset>
+         <div class="h-group">
+            <label for="panel-style" class="inline-form-label small-text nowrap"
+               >Стиль табло</label
+            >
+            <select
+               name="panel-style"
+               id="panel-style"
+               class="text-form full-form"
+            >
+               <option value="style_1">style1</option>
+               <option value="style_2">style2</option>
+               <option value="style_3">style3</option>
+               <option value="style_4">style4</option>
+               <option value="style_5">style5</option>
+               <option value="style_6">style6</option>
+               <option value="style_7">style7</option>
+               <option value="style_8">Городская лига</option>
+               <option value="style_9">АМФТО</option>
+               <% styles.forEach(style => { %>
+               <option value="<%= style._id %>__id"><%= style.name %></option>
+               <% }) %>
+            </select>
+         </div>
 
-        
-        
-    </div>
+         <div class="h-group center">
+            <label for="scenarios" class="inline-form-label small-text nowrap"
+               >Тип уведомлений</label
+            >
+            <select
+               name="notif_type"
+               id="notif_type"
+               class="text-form full-form"
+            >
+               <option value="def">Обычный</option>
+               <option value="circ">Новый</option>
+               <option value="type_3">Городская лига</option>
+            </select>
+         </div>
+      </div>
+      <div class="block">
+         <div class="h-group">
+            <input
+               type="button"
+               value="Сбросить все"
+               class="full-form red"
+               name="reset-all"
+               id="reset_all"
+            />
+            <input
+               type="button"
+               value="Перезагрузить табло"
+               class="full-form yellow"
+               name="refresh-all"
+               id="reload_all"
+            />
+         </div>
+      </div>
+   </div>
+   <div class="column-container">
+      <div class="block">
+         <div class="h-group center">
+            <p class="first">Пенальти</p>
+         </div>
+         <div class="h-group">
+            <label for="penalty_num" class="inline-form-label small-text nowrap"
+               >Пенальти №</label
+            >
+            <div class="h-group score_div">
+               <input
+                  type="button"
+                  value="-"
+                  class="circle-button"
+                  name="minus"
+               />
+               <input
+                  type="number"
+                  value="1"
+                  class="text-form small-form"
+                  name="penalty_num"
+                  id="penalty_num"
+                  min="1"
+               />
+               <input
+                  type="button"
+                  value="+"
+                  class="circle-button"
+                  name="plus"
+               />
+            </div>
+         </div>
+         <div id="penalty_div">
+            <div class="h-group bigger-gap">
+               <div class="h-group">
+                  <input
+                     type="button"
+                     value="ГОЛ"
+                     class="square40 flex-form"
+                     name="gol-pen1"
+                  />
+                  <input
+                     type="button"
+                     value=""
+                     class="square40 redo-icon"
+                     name="pass-pen1"
+                  />
+                  <input
+                     type="button"
+                     value="CЭЙВ"
+                     class="square40 flex-form"
+                     name="save-pen1"
+                  />
+               </div>
+
+               <div class="h-group">
+                  <input
+                     type="button"
+                     value="ГОЛ"
+                     class="square40 flex-form"
+                     name="gol-pen1"
+                  />
+                  <input
+                     type="button"
+                     value=""
+                     class="square40 redo-icon"
+                     name="pass-pen1"
+                  />
+                  <input
+                     type="button"
+                     value="CЭЙВ"
+                     class="square40 flex-form"
+                     name="save-pen1"
+                  />
+               </div>
+            </div>
+
+            <div class="h-group bigger-gap">
+               <div class="h-group">
+                  <input
+                     type="button"
+                     value="ГОЛ"
+                     class="square40 flex-form"
+                     name="gol-pen1"
+                  />
+                  <input
+                     type="button"
+                     value=""
+                     class="square40 redo-icon"
+                     name="pass-pen1"
+                  />
+                  <input
+                     type="button"
+                     value="CЭЙВ"
+                     class="square40 flex-form"
+                     name="save-pen1"
+                  />
+               </div>
+
+               <div class="h-group">
+                  <input
+                     type="button"
+                     value="ГОЛ"
+                     class="square40 flex-form"
+                     name="gol-pen1"
+                  />
+                  <input
+                     type="button"
+                     value=""
+                     class="square40 redo-icon"
+                     name="pass-pen1"
+                  />
+                  <input
+                     type="button"
+                     value="CЭЙВ"
+                     class="square40 flex-form"
+                     name="save-pen1"
+                  />
+               </div>
+            </div>
+         </div>
+         <div class="h-group bigger-gap">
+            <input
+               type="button"
+               value="Сбросить"
+               class="full-form"
+               name="reset-pen"
+               id="reset-pen"
+            />
+            <input
+               type="button"
+               value="Добавить пенальти"
+               id="add-pen"
+               class="full-form"
+               name="add-pen"
+            />
+         </div>
+      </div>
+   </div>
+</div>
 <script type="text/javascript" defer src="/static/pages/panel.js"></script>
 
 <%- include('global/footer.ejs') %>

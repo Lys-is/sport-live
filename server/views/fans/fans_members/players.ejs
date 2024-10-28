@@ -1,59 +1,54 @@
 <%- include('members_header.ejs') %>
-    <div class="content-body body-background members-body">
-        <!-- <div class="h_flex">
-            <input type="text" class="search-form" placeholder="Поиск по названию">
-            <input type="button" class="search-button" value="Найти">
-            <div class="filler"></div>
-            <input type="button" class="search-button" value="Сбросить">
-        </div> -->
+<div class="content-body body-background members-body">
+   <table class="nets-table mt">
+      <tbody>
+         <tr>
+            <th>#</th>
+            <th>Игрок</th>
+            <th>И</th>
+            <th>Г (ПН.)</th>
+            <th>СР.</th>
+            <th>П</th>
+            <th>ЖК</th>
+            <th>КК</th>
+         </tr>
+         <% players.forEach((player, i) => { %> <% let c_matches = 0, c_goals =
+         0, c_delta = 0, c_pass = 0, c_yellow = 0, c_red = 0; if
+         (playersResult[player._id] && playersResult[player._id].length) {
+         c_matches = playersResult[player._id].length; c_goals =
+         playersResult[player._id].reduce((s, p) => s + p.goals, 0); c_delta =
+         c_matches > 0 ? (c_goals / c_matches) : 0; c_pass =
+         playersResult[player._id].reduce((s, p) => s + p.transits, 0); c_yellow
+         = playersResult[player._id].reduce((s, p) => s + p.yellow, 0); c_red =
+         playersResult[player._id].reduce((s, p) => s + p.red, 0); } %>
 
+         <tr
+            class="clickable-tr fans_link"
+            data-href="player/id/<%= player._id %>"
+         >
+            <td><%= i + 1 %></td>
+            <td>
+               <div class="h_flex">
+                  <img
+                     src="<%= player.img %>"
+                     id="player_image"
+                     width="50"
+                     height="50"
+                     loading="lazy"
+                     onerror="this.src = leagueImg;"
+                  />
+                  <%= player.fio %>
+               </div>
+            </td>
+            <td><%= c_matches %></td>
+            <td><%= c_goals %></td>
+            <td><%= c_delta.toFixed(2) %></td>
+            <td><%= c_pass %></td>
+            <td><%= c_yellow %></td>
+            <td><%= c_red %></td>
+         </tr>
 
-        <table class="nets-table mt">
-            <tbody><tr>
-                <th>#</th>
-                <th>Игрок</th>
-                <th>И</th>
-                <th>Г (ПН.)</th>
-                <th>СР.</th>
-                <th>П</th>
-                <th>ЖК</th>
-                <th>КК</th>
-            </tr>     
-            <% players.forEach((player, i) => {
-                let c_matches = 0,
-                    c_goals = 0,
-                    c_delta = 0,
-                    c_pass = 0,
-                    c_yellow = 0,
-                    c_red = 0;
-                if(playersResult[player._id] && playersResult[player._id].length) {
-                    c_matches = playersResult[player._id].length;
-                    c_goals = playersResult[player._id].reduce((s, p) => s + p.goals, 0);
-                    c_delta = c_goals / c_matches
-                    c_pass = playersResult[player._id].reduce((s, p) => s + p.transits, 0);
-                    c_yellow = playersResult[player._id].reduce((s, p) => s + p.yellow, 0);
-                    c_red = playersResult[player._id].reduce((s, p) => s + p.red, 0);
-                }
-                
-                
-                %>
-
-            <tr class="clickable-tr fans_link" data-href="player/id/<%= player._id %>">
-                <td><%= i + 1 %></td>
-                <td>
-                    <div class="h_flex">
-                        <img src="<%= player.img || '/static/styles/icons/logo.jpg' %>" class="" width="50" height="50">
-                        <%= player.fio %>
-                    </div>
-                </td>
-                <td><%= c_matches %></td>
-                <td><%= c_goals %></td>
-                <td><%= c_delta.toFixed(2) %></td>
-                <td><%= c_pass %></td>
-                <td><%= c_yellow %></td>
-                <td><%= c_red %></td>
-            </tr>     
-            <% }) %>
-        </tbody></table>
-
-    </div>
+         <% }); %>
+      </tbody>
+   </table>
+</div>

@@ -3,9 +3,9 @@
     <%- include('team_nav.ejs') %>
     <div class="content-body body-background">
         <div class="h_flex white">
-            <img src="<%= team.img || '/static/styles/icons/logo.jpg' %>" class="" width="200" height="200">
+            <img src="<%= '/images/Team/' + team.id %>" class="" width="200" height="200">
             <div class="v_flex left">
-                <h2 class="nm-top"><%= team.name %></h2>
+                <h2 class="nm-top"><%= team?.name %></h2>
                 <p class="">Последние матчи:</p>
                 
                 <%- include('../last_matches.ejs') %>
@@ -15,16 +15,11 @@
                 %>
             </div>
         </div>
-        <div class="h_flex white mt">
-            <div class="filler"></div>
+        <div class="h_flex white mt wraped">
             <p>Игры: <div class="dark-blue circle"><%= teamData.count_matches %></div></p>
-            <div class="filler"></div>
             <p>Победы: <div class="dark-blue circle"><%= teamData.count_wins %></div></p>
-            <div class="filler"></div>
             <p>Голы: <div class="dark-blue circle"><%= teamData.count_goals %></div></p>
-            <div class="filler"></div>
             <p>Турниры: <div class="dark-blue circle"><%= teamData.count_tournaments_set.size %></div></p>
-            <div class="filler"></div>
         </div>
         <h3 class="bmt">Прошедшие матчи</h3>
         <div class="grid-player match">

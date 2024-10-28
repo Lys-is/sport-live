@@ -4,7 +4,7 @@
             <p class="page_title">Представители</p>
             <div class="filler"></div>
             <input type="button" value="Сбросить фильтры" class="table_button">
-            <input type="button" value="Добавить представителя" class="table_button nav_link" data-href="representative/get__create">
+            <input type="button" value="Добавить представителя" class="table_button nav_link" new_tab="true" data-href="representative/get__create">
             <div class="filler"></div>
             <input type="button" value="Активные" class="table_button_radio_active table_radio_active">
             <input type="button" value="Архивные" class="table_button_radio_archive">
@@ -31,7 +31,7 @@
         <tr>
             <td><%= representatives[i].fio %></td>
             <td><%= representatives[i].birthday %></td>
-            <td><%= representatives[i].team.name %></td>
+            <td><%= representatives[i].team?.name %></td>
             <td>
                 <span class="table_links table_links_compos nav_link"  data-href="representative/get__edit/?id=<%= representatives[i]._id %>">Изменить</span>
             </td>

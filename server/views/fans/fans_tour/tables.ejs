@@ -18,7 +18,6 @@
                 <th>П</th>
                 <th>МЗ-МП</th>
                 <th>О</th>
-                <th>Форма</th>
             </tr>
             <% 
             let filter = (teamId, matches) => matches.filter(match => match.team_1.id == teamId || match.team_2.id == teamId);
@@ -43,16 +42,15 @@
                     return data
         
                 });
-            let count_matches = team_matches.length || 0,
-                count_wins = team_matches.filter(match => match.team_1_score > match.team_2_score).length,
-                count_draws = team_matches.filter(match => match.team_1_score == match.team_2_score).length,
-                count_losses = team_matches.filter(match => match.team_1_score < match.team_2_score).length,
-                count_goals = team_matches.reduce((acc, match) => acc + match.team_1_score, 0),
-                count_missed = team_matches.reduce((acc, match) => acc + match.team_2_score, 0),
-                count_points = count_wins*tournament.reglament.for_win + count_draws*tournament.reglament.for_tie - count_losses*tournament.reglament.for_lose
-                teams[i].c_points = count_points;
+                teams[i].count_matches = team_matches.length
+                teams[i].count_wins = team_matches.filter(match => match.team_1_score > match.team_2_score).length
+                teams[i].count_draws = team_matches.filter(match => match.team_1_score == match.team_2_score).length
+                teams[i].count_losses = team_matches.filter(match => match.team_1_score < match.team_2_score).length
+                teams[i].count_goals = team_matches.reduce((acc, match) => acc + match.team_1_score, 0)
+                teams[i].count_missed = team_matches.reduce((acc, match) => acc + match.team_2_score, 0)
+                teams[i].count_points = teams[i].count_wins*tournament.reglament.for_win + teams[i].count_draws*tournament.reglament.for_tie - teams[i].count_losses*tournament.reglament.for_lose
             }
-            teams = teams.sort((a, b) => b.c_points - a.c_points);
+            teams = teams.sort((a, b) => b.count_points - a.count_points || b.count_goals - a.count_goals || a.count_missed - b.count_missed);
             for(let i = 0; i < teams.length; i++) {
 
             %>
@@ -60,27 +58,27 @@
                 <td><%= i+1 %></td>
                 <td>
                     <div class="h_flex">
-                        <img src="<%= teams[i].img || '/static/styles/icons/logo.jpg'%>" class="" width="70" height="70">
+                        
+                        <img src="<%= '/images/Team/'+teams[i].id %>" class="" width="70" height="70">
                         <p><%= teams[i].name %></p>
                     </div>
                 </td>
-                <td><%= count_matches %></td>
-                <td><%= count_wins %></td>
-                <td><%= count_draws %></td></td>
-                <td><%= count_losses %></td>
-                <td><%= count_goals %>-<%= count_missed %></td>
-                <td><%= count_points %></td>
-                <td></td>
+                <td><%= teams[i].count_matches %></td>
+                <td><%= teams[i].count_wins %></td>
+                <td><%= teams[i].count_draws %></td></td>
+                <td><%= teams[i].count_losses %></td>
+                <td><%= teams[i].count_goals %>-<%= teams[i].count_missed %></td>
+                <td><%= teams[i].count_points %></td>
             </tr>
             <% } %>
         </table>
 
         <% 
             let setByCircle = new Set(previusMatches.map(m => m.circle || 'Вне круга'));
-            setByCircle.forEach(circle => {
-                let matchesByCircle = previusMatches.filter(match => match.circle ? match.circle == circle : circle == 'Вне круга');
+            //setByCircle.forEach(circle => {
+             //   let matchesByCircle = previusMatches.filter(match => match.circle ? match.circle == circle : circle == 'Вне круга');
                 %>
-                    <p class="table_dest chahmatka" style="display: none;"> Круг: <%= circle %></p>
+                    <p class="table_dest chahmatka" style="display: none;"> Круг: <%= //circle %></p>
                 
         <table class="nets-table table_dest chahmatka chahmatka-effect" style="display: none;">
             <tr>
@@ -92,42 +90,54 @@
             </tr>
             <%
                 for(let i = 0; i < teams.length; i++) { 
-                    let matches = filter(teams[i].id, matchesByCircle);
+                    
                     %>
                     <tr>
                         <td><%= i+1 %></td>
                         <td>
                             <div class="h_flex">
-                                <img src="<%= teams[i].img || '/static/styles/icons/logo.jpg'%>" class="" width="70" height="70">
+                                <img src="<%= '/images/Team/'+teams[i].id %>" class="" width="70" height="70">
                                 <p><%= teams[i].name %></p>
                             </div>
                         </td>
                         <% for(let j = 0; j < teams.length; j++) { %>
 
-                            <% let match = filter(teams[j].id, matches)[0];
-                            //let match = previusMatches.find(match => ((match.team_1.id == teams[i].id) && (match.team_2.id == teams[j].id)) || ((match.team_2.id == teams[i].id) && (match.team_1.id == teams[j].id)))
-                            if(i == j) { %>
-                                <td class="no_cell"></td>
-                            <% }
-                            else if(!match) {
-                                %>
-
-                                <td><%= '-:-' %></td>
                             <%
-                            }
-                            else {
                             
-                            let team_1 = teams[i].id == match.team_1.id ? 'team_1' : 'team_2'
-                            let team_2 = teams[i].id == match.team_1.id ? 'team_2' : 'team_1'
-                            %>
+                                //let matchesByCircle = previusMatches.filter(match => match.circle ? match.circle == circle : circle == 'Вне круга');
+                                let matchesA = filter(teams[i].id, previusMatches);
+                                let matches = filter(teams[j].id, matchesA);
+                                //let match = previusMatches.find(match => ((match.team_1.id == teams[i].id) && (match.team_2.id == teams[j].id)) || ((match.team_2.id == teams[i].id) && (match.team_1.id == teams[j].id)))
+                                if(i == j) { %>
+                                    <td class="no_cell"></td>
+                                <% }
+                                else if(!matches || !matches.length) {
+                                    %>
 
-                                <td><%= match[`${team_1}_score`] || match[`${team_2}_score`] ? `${match[`${team_1}_score`]}:${match[`${team_2}_score`]}`: '-:-' %></td>
-                            <% }
+                                    <td><%= '-:-' %></td>
+                                <%
+                                }
+                                else { %>
+                                    <td>
+                                        <%
+                                    matches.forEach(match => {
+                                        
+                                    
+                                    let team_1 = teams[i].id == match.team_1.id ? 'team_1' : 'team_2'
+                                    let team_2 = teams[i].id == match.team_1.id ? 'team_2' : 'team_1'
+                                    %>
+                             
+                                    <%= match[`${team_1}_score`] || match[`${team_2}_score`] ? `${match[`${team_1}_score`]}:${match[`${team_2}_score`]}`: '-:-' %>
+                                    <br>
+                                <% }) %>
+                                    </td>
+                                <% }
+                            
                         } %>
                     </tr>
                     <% } %>      
         </table>
-        <% }) %>      
+        <%// }) %>      
         <table class="nets-table table_dest forma" style="display: none;">
             <tr>
                 <th>#</th>
@@ -140,8 +150,8 @@
                 <td><%= i+1 %></td>
                 <td>
                     <div class="h_flex">
-                        <img src="<%= team.img || '/static/styles/icons/logo.jpg'%>" class="" width="70" height="70">
-                        <p><%= team.name %></p>
+                        <img src="<%= '/images/Team/'+team.id %>" class="" width="70" height="70">
+                        <p><%= team?.name %></p>
                     </div>
                 </td>
                 <td><div class="h_flex">

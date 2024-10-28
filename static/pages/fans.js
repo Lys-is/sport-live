@@ -1,3 +1,5 @@
+closeLoader()
+
 let links = getA('.fans_link')
 links.forEach(link => {
     link.addEventListener('click', standartLinkListener)
@@ -20,12 +22,26 @@ window.addEventListener('popstate', function(event) {
     // The popstate event is fired each time when the current history entry changes.
     getPage(location.href.split('?page=')[1], true);
 }, false);
+function openLoader() {
+    console.log('open')
+    get('.loader').classList.remove('closed');
+}
+function closeLoader() {
+    console.log('close')
+    get('.loader').classList.add('closed');
+    window.scrollTo(0,0)
+}
 async function getPage(href, history_change = false) {
+    
     if(!href) location.href = location.pathname;
     let initHref = href.split('?')[0];
     const baseUrl = `/api/fans/${leagueId}/`;
     const pageUrl = `${baseUrl}${href.replace('&', '?')}`;
+    console.log('before', href)
+    openLoader();
     const response = await sendFetch(pageUrl, null, 'GET');
+    console.log('after', href)
+    closeLoader();
     fans_main.innerHTML = response ? response : 'Страница не найдена';
     params.subHref = href.split('?')[1] || href;
     console.log(params)
@@ -35,7 +51,7 @@ async function getPage(href, history_change = false) {
         history.replaceState({ page: 1 }, "", `?page=${initHref}`);
     }
     const navLinks = getA('.fans_link');
-    console.log(navLinks)
+    // console.log(navLinks)
     navLinks.forEach(link => {
         if (!link.hasEventListener('click')) {
             link.addEventListener('click', standartLinkListener);
@@ -164,9 +180,12 @@ function changeMembersNav(name) {
 function initNav(nowHref) {
     let nowPage = nowHref.split('/')[0];
     let navs = getA('.content-nav > .nav-menu-item');
+    
     navs.forEach(nav => {
         nav.addEventListener('click', (e) => {
-            let name = e.target.getAttribute('data-name');
+            let target = e.target.closest('.nav-menu-item')
+            if(!target) return
+            let name = target.getAttribute('data-name');
             let page = params.get[`page`];
             let href = page.replace(nowPage, name);
             getPage(href);

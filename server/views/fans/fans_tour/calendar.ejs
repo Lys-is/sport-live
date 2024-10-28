@@ -1,43 +1,55 @@
 <%- include('tournament_header.ejs') %>
 <div class="grid-body">
-    <%- include('tournament_nav.ejs') %>
-    <div class="content-body body-background">
-        <% let setByDay = new Set(matches.map(m => m.format_only_day));
-         
-        setByDay.forEach(day => { %>
-        <table class="calendar-match-table">
-            <tr>
-                <th colspan="5"><%= day %></th>
-            </tr>
-            <% let dayMatches = matches.filter(m => m.format_only_day == day);
-            dayMatches = dayMatches.sort((a, b) => a.time.localeCompare(b.time));
-            dayMatches.forEach(match => { %>
-            <tr>
-                <td>
-                    <div class="v_flex">
-                        <p><%= match.time || '00:00' %></p>
-                        <!--<p>ФОК ТУЛГУ</p>-->
-                    </div>
-                </td>  
-                <td>
-                    <div class="h_flex">
-                        <p><%= match.team_1.name %></p>
-                        <img src="<%= match.team_1.img || '/static/styles/icons/logo.jpg' %>" class="" width="70" height="70">
-                    </div>
-                </td>  
-                
-                <td><%= (match.team_1_score || match.team_2_score) ? `${match.team_1_score}:${match.team_2_score}` : '-:-' %></td>  
-                <td>                          
-                    <div class="h_flex">
-                        <img src="<%= match.team_2.img || '/static/styles/icons/logo.jpg' %>" class="" width="70" height="70">
-                        <p><%= match.team_2.name %></p>
-                    </div>
-                </td>
+   <%- include('tournament_nav.ejs') %>
+   <div class="content-body body-background">
+      <% let setByDay = new Set(matches.map(m => m.format_only_day));
+      setByDay.forEach(day => { %>
+      <table class="calendar-match-table">
+         <tr>
+            <th colspan="5"><%= day %></th>
+         </tr>
+         <% let dayMatches = matches.filter(m => m.format_only_day == day);
+         dayMatches = dayMatches.sort((a, b) => a.time.localeCompare(b.time));
+         dayMatches.forEach(match => { %>
+         <tr>
+            <td>
+               <div class="v_flex">
+                  <p><%= match.time || '00:00' %></p>
+                  <!--<p>ФОК ТУЛГУ</p>-->
+               </div>
+            </td>
+            <td>
+               <div class="h_flex">
+                  <p><%= match.team_1?.name %></p>
+                  <img
+                     src="<%= '/images/Team/'+ match.team_1.id %>"
+                     class=""
+                     width="70"
+                     height="70"
+                  />
+               </div>
+            </td>
 
-                <td> <%= match.circle || 1 %> тур </td>
-            </tr>
-            <% }) %>
-        </table>
-        <% }) %>
-    </div>
+            <td>
+               <%= (match?.team_1_score || match?.team_2_score) ?
+               `${match?.team_1_score}:${match?.team_2_score}` : '-:-' %>
+            </td>
+            <td>
+               <div class="h_flex">
+                  <img
+                     src="<%= '/images/Team/'+ match.team_2.id %>"
+                     class=""
+                     width="70"
+                     height="70"
+                  />
+                  <p><%= match.team_2?.name %></p>
+               </div>
+            </td>
+
+            <td><%= match.circle || 1 %></td>
+         </tr>
+         <% }) %>
+      </table>
+      <% }) %>
+   </div>
 </div>

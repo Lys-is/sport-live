@@ -1,8 +1,8 @@
-const {Schema, model} = require('mongoose');
+import { Schema, model } from "mongoose";
 
 const GlobalSchema = new Schema({
-    name: {type: String, default: '', unique: true},
-    data: {type: String, default: ''}
-})
+   name: { type: String, default: "", unique: true },
+   data: { type: String, default: "" },
+});
 
-module.exports = model('Global', GlobalSchema);
+export default model("Global", GlobalSchema);
