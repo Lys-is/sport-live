@@ -18,6 +18,6 @@ SubscribeSchema.methods.setExpiryDateValue = function(date) {
 }
 
 SubscribeSchema.methods.setExpiryDate = function(days) {
-    this.createdAt = new Date(Date.now() + days * 1000 * 60) //days * 1000 * 60 * 60 * 24);
+    this.createdAt = new Date(Date.now() + days * 1000 * 60)
 };
 module.exports = model('Subscribe', SubscribeSchema);

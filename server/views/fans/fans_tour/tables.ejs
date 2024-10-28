@@ -43,7 +43,7 @@
                     return data
         
                 });
-            let count_matches = team_matches.length,
+            let count_matches = team_matches.length || 0,
                 count_wins = team_matches.filter(match => match.team_1_score > match.team_2_score).length,
                 count_draws = team_matches.filter(match => match.team_1_score == match.team_2_score).length,
                 count_losses = team_matches.filter(match => match.team_1_score < match.team_2_score).length,

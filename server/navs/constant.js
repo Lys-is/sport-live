@@ -336,7 +336,4 @@ function start(){
     return router
 }
 
-function getRouter() {
-    return router
-}
 module.exports = start()
