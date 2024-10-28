@@ -49,8 +49,8 @@
         <% for (let i = 0; i < matches.length; i++) {%>
             <tr>
                 <td><%= i + 1  %></td>
-                <td><%= matches[i].team_1.name %></td>
-                <td><%= matches[i].team_2.name %></td>
+                <td><%= matches[i].team_1?.name %></td>
+                <td><%= matches[i].team_2?.name %></td>
                 <td><%= formatDatePretty(matches[i].date) %></td>
                 <td><%= (matches[i].team_1_score || matches[i].team_2_score) ? `${matches[i].team_1_score}:${matches[i].team_2_score}` : '-:-'%></td>
                 <td><%= matches[i].tournament?.basic.full_name %></td>

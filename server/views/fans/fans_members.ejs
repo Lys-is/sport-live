@@ -1,38 +1,31 @@
 <%- include('fans_header.ejs') %>
-    <div class="content">
-        <%- include('fans_members/members_header.ejs') %>
-        <div class="content-body body-background members-body">
-            <!-- <div class="h_flex">
-                <input type="text" class="search-form" placeholder="Поиск по названию">
-                <input type="button" class="search-button" value="Найти">
-                <div class="filler"></div>
-                <input type="button" class="search-button" value="Сбросить">
-            </div> -->
-            <div class="grid-player">
-                <% let teamsSet = new Set()
-                    tournaments.forEach(tournament => {
-                        tournament.teams.forEach(team => { 
-                        let s = teamsSet.has(team._id.toString())
-                        if(!s) {
-
-                        teamsSet.add(team._id.toString())
-                        %>
-                        <div class="player-block fans_link" data-href="team/id/<%= team._id %>">
-                            <img src="<%= '/images/Team/' + team.id %>" class="" width="200" height="200">
-                            <p><%= team.name %></p>
-                        </div>
-                        <% }
-                    }) %>
-
-                <% }) %>
-            </div>
-        </div>
-
-        
-       
-
-
-
-        
-    </div>
-    <%- include('fans_footer.ejs') %>
+<div class="content">
+   <%- include('fans_members/members_header.ejs') %>
+   <div class="content-body body-background members-body">
+      <div class="grid-player">
+         <% let teamsSet = new Set(); %>
+         <!-- Correctly initialize Set -->
+         <% tournaments.forEach(tournament => { %> <%
+         tournament.teams.forEach(team => { %> <% if
+         (!teamsSet.has(team._id.toString())) { %> <%
+         teamsSet.add(team._id.toString()); %>
+         <!-- Add team ID to Set -->
+         <div
+            class="player-block fans_link"
+            data-href="team/id/<%= team._id %>"
+         >
+            <img
+               src="<%= '/images/Team/' + team.id %>"
+               width="200px"
+               height="200px"
+               loading="lazy"
+               alt="Лого команды"
+               onerror="this.src = leagueImg;"
+            />
+            <p><%= team.name %></p>
+         </div>
+         <% } %> <% }); %> <% }); %>
+      </div>
+   </div>
+</div>
+<%- include('fans_footer.ejs') %>

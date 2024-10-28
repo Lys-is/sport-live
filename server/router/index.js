@@ -1,11 +1,12 @@
-const Router = require('express').Router;
-const userController = require('../controllers/api/auth-controller');
+import { Router } from "express";
+import userController from "../controllers/api/auth-controller.js";
 const router = new Router();
-const {body} = require('express-validator');
-const authMiddleware = require('../middlewares/auth-middleware');
-const lkRouter = require('./lk-router');
-const authRouter = require('./auth-router');
-router.use('/lk', lkRouter);
-router.use('/auth', authRouter);
+const { body } = require("express-validator");
+import authMiddleware from "../middlewares/auth-middleware.js";
+import lkRouter from "./lk-router.js";
+import authRouter from "./auth-router.js";
 
-module.exports = router
+router.use("/lk", lkRouter);
+router.use("/auth", authRouter);
+
+export default router;

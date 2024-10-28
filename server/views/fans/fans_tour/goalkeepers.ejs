@@ -1,63 +1,48 @@
 <%- include('tournament_header.ejs') %>
 <div class="grid-body">
-    <%- include('tournament_nav.ejs') %>
-    <div class="content-body body-background">
-        <div class="grid-player">
-            <table class="nets-table mt">
-                <tbody><tr>
-                    <th>Место</th>
-                    <th>ФИО</th>
-                    <th>Команда</th>
-                    <th>Пропущено голов</th>
-                    <th>Матчи</th>
-                    <th>Коэф</th>
-    
-                </tr>     
-                <% let i = 0
-                goalkeepers.forEach((goalkeeper) => {
-                    let c_matches = 0,
-                        c_goals_lose = 0,
-                        c_koef = 0;
-                        let reslt = playersResult.get(goalkeeper.id)
-                    if(reslt && reslt.length) {
-                        goalkeeper.c_matches = reslt.length;
-                        goalkeeper.c_goals_lose = reslt.reduce((s, b) => {
-                            if(b.match.team_1.id == goalkeeper.team.id) {
-                                let goals = isNaN(+b.match.team_2_score) ? 0 : +b.match.team_2_score
-                                return s + goals
-                            }
-                            else if (b.match.team_2.id == goalkeeper.team.id){
-                                let goals = isNaN(+b.match.team_1_score) ? 0 : +b.match.team_1_score
-                                return s + goals
-                            }
-                        }, 0)
-                        goalkeeper.c_koef = (goalkeeper.c_goals_lose / goalkeeper.c_matches).toFixed(2)
-                    }
-                    })
-                    let sorted_goalkeepers = [...goalkeepers]
-                    sorted_goalkeepers.sort((a, b) => a.c_koef - b.c_koef)
-                    sorted_goalkeepers.forEach((goalkeeper) => {
+   <%- include('tournament_nav.ejs') %>
+   <div class="content-body body-background">
+      <div class="grid-player">
+         <table class="nets-table mt">
+            <tbody>
+               <tr>
+                  <th>Место</th>
+                  <th>Игрок</th>
+                  <th>№</th>
+                  <th>Команда</th>
+                  <th>Голы</th>
+               </tr>
 
-                    %>
-    
-                <tr class="clickable-tr fans_link" data-href="player/id/<%= goalkeeper._id %>">
-                    <td><%= i + 1 %></td>
-                    <td>
-                        <div class="h_flex">
-                            <img src="<%= '/images/Player/'+goalkeeper.id %>" class="" width="50" height="50">
-                            <%= goalkeeper.fio %>
-                        </div>
-                    </td>
-                    <td><%= goalkeeper.team?.name %></td>
-                    <td><%= goalkeeper.c_goals_lose %></td>
-                    <td><%= goalkeeper.c_matches %></td>
-                    <td><%= goalkeeper.c_koef %></td>
-                </tr>     
-                <%
-                i++
-                 }) %>
-            </tbody></table>
-
-        </div>
-    </div>
+               <% goalkeepers.forEach((player) => { player.c_goals = 0; let
+               reslt = playersResult.get(player.id); if (reslt && reslt.length)
+               { player.c_goals = reslt.reduce((s, p) => s + p.goals, 0); } });
+               %> <% let i = 0; %> <% let sorted = [...goalkeepers]; %> <%
+               sorted.sort((a, b) => b.c_goals - a.c_goals); %> <%
+               sorted.forEach((player, index) => { %>
+               <tr
+                  class="clickable-tr fans_link"
+                  data-href="player/id/<%= player.id %>"
+               >
+                  <td><%= index + 1 %></td>
+                  <td>
+                     <div class="h_flex">
+                        <img
+                           src="<%= '/images/Player/'+player.id %>"
+                           class=""
+                           width="50"
+                           height="50"
+                           onerror="this.src = leagueImg;"
+                        />
+                        <%= player.fio %>
+                     </div>
+                  </td>
+                  <td><%= player.num || '' %></td>
+                  <td><%= player.team?.name %></td>
+                  <td><%= player.c_goals %></td>
+               </tr>
+               <% }); %>
+            </tbody>
+         </table>
+      </div>
+   </div>
 </div>

@@ -1,224 +1,394 @@
 <div class="tournires_container">
-    <p class="content_navtext">Главная > Календарь матчей > Добавление матча</p>
-    <div class = "tournires_content">
-
-        <form id="match_edit__form">
-            <input type="hidden" name="matchId" value="<%= match._id %>" id="matchId">
-        <div class="cool_body">
+   <p class="content_navtext">Главная > Календарь матчей > Добавление матча</p>
+   <div class="tournires_content">
+      <form id="match_edit__form">
+         <input
+            type="hidden"
+            name="matchId"
+            value="<%= match._id %>"
+            id="matchId"
+         />
+         <div class="cool_body">
             <div class="cool_header_block green create_match_header">
-                    <p class="page_title ">Протокол матча</p>
+               <p class="page_title">Протокол матча</p>
             </div>
             <div class="cool_body_content">
-                <div class="form-group">
-                    <input type="text" list="team" name="team" value="<%= match.team_1.name %>" placeholder="Выберите команду">
-                    <datalist id="team">
-                        <% for (let i = 0; i < teams.length; i++) { %>
-                            <option value="<%= teams[i].name %>" data-value="<%= teams[i]._id %>"></option>
-                        <% } %>
-                    </datalist>
-                    <input type="number" name="team_1_score" placeholder="Счёт" value="<%= match.team_1_score %>">
+               <div class="form-group">
+                  <input
+                     type="text"
+                     list="team"
+                     name="team"
+                     value="<%= match.team_1?.name %>"
+                     placeholder="Выберите команду"
+                  />
+                  <datalist id="team">
+                     <% for (let i = 0; i < teams.length; i++) { %>
+                     <option
+                        value="<%= teams[i].name %>"
+                        data-value="<%= teams[i]._id %>"
+                     ></option>
+                     <% } %>
+                  </datalist>
+                  <input
+                     type="number"
+                     name="team_1_score"
+                     placeholder="Счёт"
+                     value="<%= match?.team_1_score %>"
+                  />
 
-                    <div class="filler"></div>
-                    <input type="button" value="vs" class="button white_button square">
-                    <div class="filler"></div>
-                    <input type="number" name="team_2_score" placeholder="Счёт" value="<%= match.team_2_score %>">
-                    <input type="text" list="team_2" name="team_2" value="<%= match.team_2.name %>" placeholder="Выберите команду">
-                    <datalist id="team_2">
-                        <% for (let i = 0; i < teams.length; i++) { %>
-                            <option value="<%= teams[i].name %>" data-value="<%= teams[i]._id %>"></option>
-                        <% } %>
-                    </datalist>
-                    
-                </div>
-                <div class="form-group form_group_checkbox mt">
-                    <div class="filler"></div>
-                    <label>
-                        <input type="checkbox" name="is_overtime" <% match.is_overtime ? 'checked' : '' %>> Дополнительное время
-                    </label>
-                    <label>
-                        <input type="checkbox" name="is_penalty" <% match.is_penalty ? 'checked' : '' %>> Пенальти
-                    </label>
-                    <label>
-                        <input type="checkbox" name="is_tech_win" <% match.is_tech_win ? 'checked' : '' %>> Техническая победа
-                    </label>
-                    <div class="filler"></div>
-                </div>
+                  <div class="filler"></div>
+                  <input
+                     type="button"
+                     value="vs"
+                     class="button white_button square"
+                  />
+                  <div class="filler"></div>
+                  <input
+                     type="number"
+                     name="team_2_score"
+                     placeholder="Счёт"
+                     value="<%= match?.team_2_score %>"
+                  />
+                  <input
+                     type="text"
+                     list="team_2"
+                     name="team_2"
+                     value="<%= match.team_2?.name %>"
+                     placeholder="Выберите команду"
+                  />
+                  <datalist id="team_2">
+                     <% for (let i = 0; i < teams.length; i++) { %>
+                     <option
+                        value="<%= teams[i].name %>"
+                        data-value="<%= teams[i]._id %>"
+                     ></option>
+                     <% } %>
+                  </datalist>
+               </div>
+               <div class="form-group form_group_checkbox mt">
+                  <div class="filler"></div>
+                  <label>
+                     <input type="checkbox" name="is_overtime" <%
+                     match.is_overtime ? 'checked' : '' %>> Дополнительное время
+                  </label>
+                  <label>
+                     <input type="checkbox" name="is_penalty" <%
+                     match.is_penalty ? 'checked' : '' %>> Пенальти
+                  </label>
+                  <label>
+                     <input type="checkbox" name="is_tech_win" <%
+                     match.is_tech_win ? 'checked' : '' %>> Техническая победа
+                  </label>
+                  <div class="filler"></div>
+               </div>
             </div>
             <div class="create_tournire_footer">
-                <div class="form-group">
-                </div>
-                <div class="vert_group">
-                    <label for="tour_num">Турнир</label>
-                    <input type="text" list="tournament" name="tournament" value="<%= match.tournament?.basic.full_name %>">
-                    <datalist id="tournament">
-                        <% for (let i = 0; i < tournaments.length; i++) { %>
-                            <option value="<%= tournaments[i].basic.name %>" data-value="<%= tournaments[i]._id %>"></option>
-                        <% } %>
-                    </datalist>
-                </div>
-                <div class="vert_group">
-                    <label for="start_date">Дата</label>
-                    <input type="date" class="text_form date" id="start_date" name="date" value="<%= match.date %>">
-                </div>
-                <div class="vert_group">
-                    <label for="start_time">Время начала</label>
-                    <input type="time" class="text_form date" id="start_time" name="time" value="<%= match.time %>">
-                </div>
-                <div class="vert_group">
-                    <label for="circle">Тур</label>
-                    <input type="text" name="circle" class="text_form date" id="circle" value="<%= match.circle %>">
-                </div>
-                <div class="vert_group">
-                    <label for="stadium">Стадион</label>
-                    <input type="text" name="stadium" class="text_form date" id="stadium" value="<%= match.stadium %>">
-                </div>
+               <div class="form-group"></div>
+               <div class="vert_group">
+                  <label for="tour_num">Турнир</label>
+                  <!-- <select
+                     name="tournament"
+                     value="<%= match.tournament?._id %>"
+                  >
+                     <option value="" disabled>Выберите турнир</option>
+                     <% for (let i = 0; i < tournaments.length; i++) { %>
+                     <option value="<%= tournaments[i]._id %>">
+                        <%= tournaments[i].basic.name %>
+                     </option>
+                     <% } %>
+                  </select> -->
+                  <select name="tournament">
+                    <option value="" <%= !match.tournament ? 'selected' : '' %>>Выберите турнир</option>
+                    <% for (let i = 0; i < tournaments.length; i++) { %>
+                       <option value="<%= tournaments[i]._id %>" <%= String(match.tournament._id) === String(tournaments[i]._id) ? 'selected' : '' %>>
+                          <%= tournaments[i].basic.name %>
+                       </option>
+                    <% } %>
+                 </select>
+
+                  <!-- <input
+                     type="text"
+                     list="tournament"
+                     name="tournament"
+                     value="<%= match.tournament?.basic.full_name %>"
+                  /> -->
+                  <!-- <datalist id="tournament">
+                     <% for (let i = 0; i < tournaments.length; i++) { %>
+                     <option
+                        value="<%= tournaments[i].basic.name %>"
+                        data-value="<%= tournaments[i]._id %>"
+                     ></option>
+                     <% } %>
+                  </datalist> -->
+               </div>
+               <div class="vert_group">
+                  <label for="start_date">Дата</label>
+                  <input
+                     type="date"
+                     class="text_form date"
+                     id="start_date"
+                     name="date"
+                     value="<%= match.date %>"
+                  />
+               </div>
+               <div class="vert_group">
+                  <label for="start_time">Время начала</label>
+                  <input
+                     type="time"
+                     class="text_form date"
+                     id="start_time"
+                     name="time"
+                     value="<%= match.time %>"
+                  />
+               </div>
+               <div class="vert_group">
+                  <label for="circle">Тур</label>
+                  <input
+                     type="text"
+                     name="circle"
+                     class="text_form date"
+                     id="circle"
+                     value="<%= match.circle %>"
+                  />
+               </div>
+               <div class="vert_group">
+                  <label for="stadium">Стадион</label>
+                  <input
+                     type="text"
+                     name="stadium"
+                     class="text_form date"
+                     id="stadium"
+                     value="<%= match.stadium %>"
+                  />
+               </div>
             </div>
-        </div>
-    </form>
-        <div class="cool_body">
-            <div class="cool_header_block create_match_header ">
-                    <p class="page_title">Cостав судей и комментаторов</p>
-                    
-                    
-            </div>
-            <div class="cool_body_content">
-                <table class="commands_table cool_table mb">
-                    <tr id="first-row">
-                        <td>Cудья</td>
+         </div>
+      </form>
+      <div class="cool_body">
+         <div class="cool_header_block create_match_header">
+            <p class="page_title">Cостав судей и комментаторов</p>
+         </div>
+         <div class="cool_body_content">
+            <table class="commands_table cool_table mb">
+               <tr id="first-row">
+                  <td>Cудья</td>
+               </tr>
+               <% if(match.judges.length > 0) for (let i = 0; i <
+               match.judges.length; i++) { %>
+               <tr>
+                  <td><%= match.judges[i].fio %></td>
+               </tr>
+               <% } %>
+            </table>
+            <form id="match_judges__form">
+               <div class="form-group">
+                  <input
+                     type="hidden"
+                     name="judgeId"
+                     value="<%= match._id %>"
+                  />
+                  <input type="text" list="couch" class="nm" name="judgeId" />
+                  <datalist id="couch">
+                     <% for (let i = 0; i < judges.length; i++) { %>
+                     <option
+                        value="<%= judges[i].fio %>"
+                        data-value="<%= judges[i]._id %>"
+                     ></option>
+                     <% } %>
+                  </datalist>
+                  <div class="filler"></div>
+                  <p class="nm"></p>
+                  <div class="filler"></div>
+                  <input
+                     type="submit"
+                     value="Добавить"
+                     class="button green_button double_form nm"
+                     id="match_judges__submit"
+                  />
+               </div>
+            </form>
+            <div style="margin-block: 20px"></div>
+            <table class="commands_table cool_table mb">
+               <tr id="first-row">
+                  <td>Комментатор</td>
+               </tr>
+               <% if(match.commentators.length > 0) for (let i = 0; i <
+               match.commentators.length; i++) { %>
+               <tr>
+                  <td><%= match.commentators[i].fio %></td>
+               </tr>
+               <% } %>
+            </table>
+            <form id="match_commentators__form">
+               <div class="form-group">
+                  <input
+                     type="hidden"
+                     name="matchId"
+                     value="<%= match._id %>"
+                  />
+                  <input
+                     type="text"
+                     list="commentators"
+                     class="nm"
+                     name="commentatorId"
+                  />
+                  <datalist id="commentators">
+                     <% for (let i = 0; i < commentators.length; i++) { %>
+                     <option
+                        value="<%= commentators[i].fio %>"
+                        data-value="<%= commentators[i]._id %>"
+                     ></option>
+                     <% } %>
+                  </datalist>
+                  <div class="filler"></div>
+                  <p class="nm"></p>
+                  <div class="filler"></div>
+                  <input
+                     type="submit"
+                     value="Добавить"
+                     class="button green_button double_form nm"
+                  />
+               </div>
+            </form>
+         </div>
+      </div>
 
-
-                    </tr>
-                    <% if(match.judges.length > 0)
-                        for (let i = 0; i < match.judges.length; i++) { %>
-                            <tr>
-                                <td><%= match.judges[i].fio %></td>
-
-                            </tr>
-                        <% } %>
-              
-                </table>
-                <form id="match_judges__form">
-                    <div class="form-group">
-                        <input type="hidden" name="judgeId" value="<%= match._id %>">
-                        <input type="text" list="couch" class="nm" name="judgeId">
-                        <datalist id="couch">
-                            <% for (let i = 0; i < judges.length; i++) { %>
-                                <option value="<%= judges[i].fio %>" data-value="<%= judges[i]._id %>"></option>
-                            <% } %>
-                        </datalist>
-                        <div class="filler"></div>
-                        <p class="nm"></p>
-                        <div class="filler"></div>
-                        <input type="submit" value="Добавить" class="button green_button double_form nm" id="match_judges__submit">
-                    </div>
-                </form>
-                <div style="margin-block: 20px;"></div>
-                <table class="commands_table cool_table mb">
-                    <tr id="first-row">
-                        <td>Комментатор</td>
-
-
-                    </tr>
-                    <% if(match.commentators.length > 0)
-                        for (let i = 0; i < match.commentators.length; i++) { %>
-                            <tr>
-                                <td><%= match.commentators[i].fio %></td>
-
-                            </tr>
-                        <% } %>
-              
-                </table>
-                <form id="match_commentators__form">
-                    <div class="form-group">
-                        <input type="hidden" name="matchId" value="<%= match._id %>">
-                        <input type="text" list="commentators" class="nm" name="commentatorId">
-                        <datalist id="commentators">
-                            <% for (let i = 0; i < commentators.length; i++) { %>
-                                <option value="<%= commentators[i].fio %>" data-value="<%= commentators[i]._id %>"></option>
-                            <% } %>
-                        </datalist>
-                        <div class="filler"></div>
-                        <p class="nm"></p>
-                        <div class="filler"></div>
-                        <input type="submit" value="Добавить" class="button green_button double_form nm">
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="cool_body">
-            <form id="match_results__form">
-            <div class="cool_header_block create_match_header ">
-            <p class="page_title">Отчет о матче</p>
-            <div class="filler"></div>
-                <span class="table_button red_button" style="width: auto;" id="match_results__reset">Сбросить и обновить текущих игроков</span>
-            </div>
-            <div class="cool_body_content">
-                <p class="nm">Команда <%= match.team_1.name %></p>
-                <table class="commands_table players-create-match mt" id="team_1_results">
-                    <tr>
-                        <th>#</th>
-                        <th>ФИО</th>
-                        <th>Активный</th>
-                        <th>Красные карточки</th>
-                        <th>Желтые карточки</th>
-                        <th>Передачи</th>
-                        <th>Голы</th>
-                    </tr>
-                    <% if(match.results_1.length > 0) {
-                        for (let i = 0; i < match.results_1.length; i++) { %>
-                            <tr data-index="<%= i %>" class="res_row">
-                                <td><%= i+1 %></td>
-                                <td><%= match.results_1[i].player_fio %></td>
-                                <td><input type="checkbox" name="is_active" <%= match.results_1[i].is_active  ? 'checked' : '' %>></td>
-                                <td><input type="number" name="red" value="<%= match.results_1[i].red %>"></td>
-                                <td><input type="number" name="yellow" value="<%= match.results_1[i].yellow %>"></td>
-                                <td><input type="number" name="transits" value="<%= match.results_1[i].transits %>"></td>
-                                <td><input type="number" name="goals" value="<%= match.results_1[i].goals %>"></td>
-                            </tr>
-                        <% }
-                     } %>
-                </table>
-                <p class="">Команда <%= match.team_2.name %></p>
-                <table class="commands_table players-create-match mt" id="team_2_results">
-                    <tr>
-                        <th>#</th>
-                        <th>ФИО</th>
-                        <th>Активный</th>
-                        <th>Красные карточки</th>
-                        <th>Желтые карточки</th>
-                        <th>Передачи</th>
-                        <th>Голы</th>
-                    </tr>
-                    <% if(match.results_2.length > 0) {
-                        for (let i = 0; i < match.results_2.length; i++) { %>
-                            <tr data-index="<%= i %>" class="res_row">
-                                <td><%= i+1 %></td>
-                                <td><%= match.results_2[i].player_fio %></td>
-                                <td><input type="checkbox" name="is_active" <%= match.results_2[i].is_active ? 'checked' : '' %>> </td>
-                                <td><input type="number" name="red" value="<%= match.results_2[i].red %>"></td>
-                                <td><input type="number" name="yellow" value="<%= match.results_2[i].yellow %>"></td>
-                                <td><input type="number" name="transits" value="<%= match.results_2[i].transits %>"></td>
-                                <td><input type="number" name="goals" value="<%= match.results_2[i].goals %>"></td>
-                            </tr>
-                            <%
-                     } 
-                    }%>
-            
-                </table>
-            </div>
-        </form>
-
-        </div>
-        <div class="cool_body">
+      <div class="cool_body">
+         <form id="match_results__form">
             <div class="cool_header_block create_match_header">
-            <input type="button" value="Отменить" class="button red_button">
+               <p class="page_title">Отчет о матче</p>
+               <div class="filler"></div>
+               <span
+                  class="table_button red_button"
+                  style="width: auto"
+                  id="match_results__reset"
+                  >Сбросить и обновить текущих игроков</span
+               >
+            </div>
+            <div class="cool_body_content">
+               <p class="nm">Команда <%= match.team_1?.name %></p>
+               <table
+                  class="commands_table players-create-match mt"
+                  id="team_1_results"
+               >
+                  <tr>
+                     <th>#</th>
+                     <th>ФИО</th>
+                     <th>Активный</th>
+                     <th>Красные карточки</th>
+                     <th>Желтые карточки</th>
+                     <th>Передачи</th>
+                     <th>Голы</th>
+                  </tr>
+                  <% if(match.results_1.length > 0) { for (let i = 0; i <
+                  match.results_1.length; i++) { %>
+                  <tr data-index="<%= i %>" class="res_row">
+                     <td><%= i+1 %></td>
+                     <td><%= match.results_1[i].player_fio %></td>
+                     <td>
+                        <input type="checkbox" name="is_active" <%=
+                        match.results_1[i].is_active ? 'checked' : '' %>>
+                     </td>
+                     <td>
+                        <input
+                           type="number"
+                           name="red"
+                           value="<%= match.results_1[i].red %>"
+                        />
+                     </td>
+                     <td>
+                        <input
+                           type="number"
+                           name="yellow"
+                           value="<%= match.results_1[i].yellow %>"
+                        />
+                     </td>
+                     <td>
+                        <input
+                           type="number"
+                           name="transits"
+                           value="<%= match.results_1[i].transits %>"
+                        />
+                     </td>
+                     <td>
+                        <input
+                           type="number"
+                           name="goals"
+                           value="<%= match.results_1[i].goals %>"
+                        />
+                     </td>
+                  </tr>
+                  <% } } %>
+               </table>
+               <p class="">Команда <%= match.team_2?.name %></p>
+               <table
+                  class="commands_table players-create-match mt"
+                  id="team_2_results"
+               >
+                  <tr>
+                     <th>#</th>
+                     <th>ФИО</th>
+                     <th>Активный</th>
+                     <th>Красные карточки</th>
+                     <th>Желтые карточки</th>
+                     <th>Передачи</th>
+                     <th>Голы</th>
+                  </tr>
+                  <% if(match.results_2.length > 0) { for (let i = 0; i <
+                  match.results_2.length; i++) { %>
+                  <tr data-index="<%= i %>" class="res_row">
+                     <td><%= i+1 %></td>
+                     <td><%= match.results_2[i].player_fio %></td>
+                     <td>
+                        <input type="checkbox" name="is_active" <%=
+                        match.results_2[i].is_active ? 'checked' : '' %>>
+                     </td>
+                     <td>
+                        <input
+                           type="number"
+                           name="red"
+                           value="<%= match.results_2[i].red %>"
+                        />
+                     </td>
+                     <td>
+                        <input
+                           type="number"
+                           name="yellow"
+                           value="<%= match.results_2[i].yellow %>"
+                        />
+                     </td>
+                     <td>
+                        <input
+                           type="number"
+                           name="transits"
+                           value="<%= match.results_2[i].transits %>"
+                        />
+                     </td>
+                     <td>
+                        <input
+                           type="number"
+                           name="goals"
+                           value="<%= match.results_2[i].goals %>"
+                        />
+                     </td>
+                  </tr>
+                  <% } }%>
+               </table>
+            </div>
+         </form>
+      </div>
+      <div class="cool_body">
+         <div class="cool_header_block create_match_header">
+            <input type="button" value="Отменить" class="button red_button" />
             <div class="filler"></div>
 
-            <input type="submit" value="Сохранить" class="button green_button" id="match__submit">
-            </div>
-        </div>
-        </div>
-
-        
-    </div>
+            <input
+               type="submit"
+               value="Сохранить"
+               class="button green_button"
+               id="match__submit"
+            />
+         </div>
+      </div>
+   </div>
+</div>

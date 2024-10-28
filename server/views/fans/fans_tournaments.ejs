@@ -1,8 +1,7 @@
 <%- include('fans_header.ejs') %>
-    <div class="content">
-        <div class="content-header">
-            
-            <!-- <div class="h_flex">
+<div class="content">
+   <div class="content-header">
+      <!-- <div class="h_flex">
                 <h2>Все турниры</h2>
                 <div class="filler"></div>
                 <select class="big-select">
@@ -10,24 +9,38 @@
                     <option>2023</option>
                 </select>
             </div> -->
-        </div>
-        <div class="content-body body-background">
-            <div class="grid-block">
-                <% for (let i = 0; i < tournaments.length; i++) { %>
-                <div class="tournament-block fans_link" data-href="tournament/id/<%= tournaments[i]._id %>">
-                    <img src="<%= tournaments[i].basic.img || '/static/styles/icons/logo.jpg'%>" alt="logo" class="logo" width="200" height="200">
-                    <p class="p-title"><%= tournaments[i].basic.full_name %></p>
-                    <div class="h_flex space-between">
-                        <p class="p-small"><%= tournaments[i].basic.date_start %> - <%= tournaments[i].basic.date_end %></p>
-                        <p class="p-small">Команд: <%= tournaments[i].teams.length %></p>
-                        <p class="p-small"><%= compareDates(tournaments[i].basic.date_start ,tournaments[i].basic.date_end) %></p>
-                    </div>
-                </div>
-                <% } %>
+   </div>
+   <div class="content-body body-background members-body">
+      <div class="grid-block">
+         <% for (let i = 0; i < tournaments.length; i++) { %>
+         <div
+            class="tournament-block fans_link"
+            data-href="tournament/id/<%= tournaments[i]._id %>"
+         >
+            <img
+               src="<%= '/images/Tournament/' + tournaments[i].id %>"
+               alt="logo"
+               class="logo"
+               width="200"
+               height="200"
+               loading="lazy"
+               onerror="this.src = leagueImg;"
+            />
+            <p class="p-title"><%= tournaments[i].basic.full_name %></p>
+            <div class="h_flex space-between">
+               <p class="p-small">
+                  <%= tournaments[i].basic.date_start %> - <%=
+                  tournaments[i].basic.date_end %>
+               </p>
+               <p class="p-small">Команд: <%= tournaments[i].teams.length %></p>
+               <p class="p-small">
+                  <%= compareDates(tournaments[i].basic.date_start
+                  ,tournaments[i].basic.date_end) %>
+               </p>
             </div>
-        </div>
-      
-
-
-    </div>
-    <%- include('fans_footer.ejs') %>
+         </div>
+         <% } %>
+      </div>
+   </div>
+</div>
+<%- include('fans_footer.ejs') %>

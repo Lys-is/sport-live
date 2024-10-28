@@ -1,14 +1,42 @@
-
 <div class="tournires_header">
-    <div class="tournires_header_header cool_header">
-        <p class="page_title ">Турнир: <%= tournament.basic.full_name %></p>
-        <p>Cезон: <%= tournament.basic.season ? tournament.basic.season.name : '-' %></p>
-    </div>
+   <div class="tournires_header_header cool_header">
+      <p class="page_title">Турнир: <%= tournament.basic.full_name %></p>
+      <p>
+         Cезон: <%= tournament.basic.season ? tournament.basic.season.name : '-'
+         %>
+      </p>
+   </div>
 
-    <div class="cool_header_block">
-        <input type="button" value="Редактировать" class="t_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/edit">
-        <input type="button" value="Команды" class="t_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/team">
-        <input type="button" value="Судьи/Комментаторы" class="t_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/judge">
-        <input type="button" value="Документы" class="t_button sub_nav_link" data-href="tournament/id/<%= tournament._id %>/docs">
-    </div>   
+   <div class="cool_header_block">
+      <input
+         type="button"
+         value="Редактировать"
+         class="t_button sub_nav_link"
+         data-href="tournament/id/<%= tournament._id %>/edit"
+      />
+      <input
+         type="button"
+         value="Команды"
+         class="t_button sub_nav_link"
+         data-href="tournament/id/<%= tournament._id %>/team"
+      />
+      <input
+         type="button"
+         value="Расписание"
+         class="t_button sub_nav_link"
+         data-href="tournament/id/<%= tournament._id %>/matches"
+      />
+      <!-- <input
+         type="button"
+         value="Судьи/Комментаторы"
+         class="t_button sub_nav_link"
+         data-href="tournament/id/<%= tournament._id %>/judge"
+      /> -->
+      <input
+         type="button"
+         value="Документы"
+         class="t_button sub_nav_link"
+         data-href="tournament/id/<%= tournament._id %>/docs"
+      />
+   </div>
 </div>

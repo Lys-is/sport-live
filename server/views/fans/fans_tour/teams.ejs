@@ -1,15 +1,23 @@
 <%- include('tournament_header.ejs') %>
 <div class="grid-body">
-    <%- include('tournament_nav.ejs') %>
-    <div class="content-body body-background">
-        <div class="grid-player">
-            <% tournament.teams.forEach(team => { %>
-            <div class="player-block fans_link" data-href="team/id/<%= team._id %>">
-                <img src="<%= '/images/Team/'+team.id %>" class="" width="200" height="200">
-                <p><%= team?.name %></p>
-            </div>
-            <% }) %>
-
-        </div>
-    </div>
+   <%- include('tournament_nav.ejs') %>
+   <div class="content-body body-background">
+      <div class="grid-player">
+         <% tournament.teams.forEach(team => { %>
+         <div
+            class="player-block fans_link"
+            data-href="team/id/<%= team._id %>"
+         >
+            <img
+               src="<%= '/images/Team/'+team.id %>"
+               onerror="this.src = leagueImg;"
+               class=""
+               width="200"
+               height="200"
+            />
+            <p><%= team?.name %></p>
+         </div>
+         <% }) %>
+      </div>
+   </div>
 </div>
