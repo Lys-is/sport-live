@@ -11,7 +11,7 @@ class MailService {
          },
          auth: {
             user: "sporlive@sporlive.ru",
-            pass: "dgm&RSKB8oHy",
+            pass: "pass",
          },
       });
    }
